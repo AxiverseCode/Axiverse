@@ -4,5 +4,34 @@
         <name>Axiverse</name>
     </assembly>
     <members>
+        <member name="T:Axiverse.Optional`1">
+            <summary>
+            An optional value.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Axiverse.Optional`1.NullableValue">
+            <summary>
+            Gets the optional value is present or null if not.
+            </summary>
+        </member>
+        <member name="P:Axiverse.Optional`1.Value">
+            <summary>
+            Gets the present value.
+            </summary>
+            <exception cref="T:System.NullReferenceException">Thrown when the value is not defined.</exception>
+        </member>
+        <member name="P:Axiverse.Optional`1.IsPresent">
+            <summary>
+            Gets whether a value is present.
+            </summary>
+        </member>
+        <member name="M:Axiverse.Optional`1.#ctor(`0)">
+            <summary>
+            Constructs an Optional with the defined value.
+            </summary>
+            <param name="value">The defined non-null value.</param>
+            <exception cref="T:System.NullReferenceException">Thrown if the value is null.</exception>
+        </member>
     </members>
 </doc>

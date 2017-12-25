@@ -1,0 +1,556 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Axiverse.Mathematics</name>
+    </assembly>
+    <members>
+        <member name="T:Axiverse.Matrix3">
+            <summary>
+            Represents a 3 by 3 matrix.
+            </summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M11">
+            <summary>Gets or sets the component in the 1st row and 1st column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M12">
+            <summary>Gets or sets the component in the 1st row and 2nd column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M13">
+            <summary>Gets or sets the component in the 1st row and 3rd column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M21">
+            <summary>Gets or sets the component in the 2nd row and 1st column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M22">
+            <summary>Gets or sets the component in the 2nd row and 2nd column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M23">
+            <summary>Gets or sets the component in the 2nd row and 3rd column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M31">
+            <summary>Gets or sets the component in the 3rd row and 1st column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M32">
+            <summary>Gets or sets the component in the 3rd row and 2nd column.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.M33">
+            <summary>Gets or sets the component in the 3rd row and 3rd column.</summary>
+        </member>
+        <member name="M:Axiverse.Matrix3.Add(Axiverse.Matrix3)">
+            <summary>
+            Adds another matrix to this matrix.
+            </summary>
+            <param name="matrix"></param>
+        </member>
+        <member name="M:Axiverse.Matrix3.Subtract(Axiverse.Matrix3)">
+            <summary>
+            Subtracts another matrix from this matrix.
+            </summary>
+            <param name="matrix"></param>
+        </member>
+        <member name="M:Axiverse.Matrix3.Multiply(Axiverse.Matrix3)">
+            <summary>
+            Multiplies this matrix with another matrix.
+            </summary>
+            <param name="matrix"></param>
+        </member>
+        <member name="M:Axiverse.Matrix3.Invert">
+            <summary>
+            Inverts the matrix.
+            </summary>
+        </member>
+        <member name="M:Axiverse.Matrix3.Transpose">
+            <summary>
+            Transposes the matrix.
+            </summary>
+        </member>
+        <member name="M:Axiverse.Matrix3.Inverse">
+            <summary>
+            Computes the inverse of this matrix.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Matrix3.Transposition">
+            <summary>
+            Computes a transposition of this matrix.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Matrix3.Determinant">
+            <summary>
+            Computes the determinant of the matrix. The determinant is the factor at which the matrix expands or contracts space.
+            </summary>
+            <returns>The determinant of the matrix.</returns>
+        </member>
+        <member name="F:Axiverse.Matrix3.Zero">
+            <summary>The zero matrix.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.Identity">
+            <summary>The identity matrix.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.NaN">
+            <summary>The not-a-number matrix.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.NegativeInfinity">
+            <summary>The negative infinity matrix.</summary>
+        </member>
+        <member name="F:Axiverse.Matrix3.PositiveInfinity">
+            <summary>The positive infinity matrix.</summary>
+        </member>
+        <member name="T:Axiverse.Quaternion">
+            <summary>
+            Represents a three dimensional rotation.
+            </summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.X">
+            <summary>The X component of the quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.Y">
+            <summary>The Y component of the quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.Z">
+            <summary>The Z component of the quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.W">
+            <summary>The W component of the quaternion.</summary>
+        </member>
+        <member name="P:Axiverse.Quaternion.Item(System.Int32)">
+            <summary>
+            Gets or sets the component at the given index.
+            </summary>
+            <param name="index">The index of the component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Quaternion.#ctor(System.Single)">
+            <summary>
+            Constructs a quaternion with all components set to the given value.
+            </summary>
+            <param name="value">The value to set all components.</param>
+        </member>
+        <member name="M:Axiverse.Quaternion.#ctor(Axiverse.Vector4)">
+            <summary>
+            Constructs a quaternion from a <see cref="T:Axiverse.Vector4"/>.
+            </summary>
+            <param name="value">The vector to set the components from.</param>
+        </member>
+        <member name="M:Axiverse.Quaternion.#ctor(Axiverse.Vector3,System.Single)">
+            <summary>
+            Constructs a quaternion from a <see cref="T:Axiverse.Vector3"/>.
+            </summary>
+            <param name="value">The vector to set the components from.</param>
+            <param name="w">The value to set the W component.</param>
+        </member>
+        <member name="M:Axiverse.Quaternion.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a quaternion from the given values.
+            </summary>
+            <param name="x">The value to set the X component.</param>
+            <param name="y">The value to set the Y component.</param>
+            <param name="z">The value to set the Z component.</param>
+            <param name="w">The value to set the W component.</param>
+        </member>
+        <member name="M:Axiverse.Quaternion.Distance(Axiverse.Quaternion,Axiverse.Quaternion)">
+            <summary>
+            Gets the angular distance between two quaternions.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns>The angle in radians.</returns>
+        </member>
+        <member name="M:Axiverse.Quaternion.Transform(Axiverse.Vector3)">
+            <summary>
+            Rotates a direction vector by the rotation represented by this quaternion.
+            </summary>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Quaternion.InverseTransform(Axiverse.Vector3)">
+            <summary>
+            Rotates a direction vector by the inverse rotation represented by this quaternion.
+            </summary>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Quaternion.FromEuler(System.Single,System.Single,System.Single)">
+            <summary>
+            From Euler in degrees
+            </summary>
+            <param name="yaw"></param>
+            <param name="pitch"></param>
+            <param name="roll"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Quaternion.Parse(System.String)">
+            <summary>
+            Parses a string representation of a quaternion.
+            </summary>
+            <param name="s">The string representation to parse.</param>
+        </member>
+        <member name="F:Axiverse.Quaternion.Zero">
+            <summary>The zero quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.One">
+            <summary>The one quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.Identity">
+            <summary>The identity quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.NaN">
+            <summary>The not-a-number quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.NegativeInfinity">
+            <summary>The negative infinity quaternion.</summary>
+        </member>
+        <member name="F:Axiverse.Quaternion.PositiveInfinity">
+            <summary>The positive infinity quaternion.</summary>
+        </member>
+        <member name="T:Axiverse.Mathematics.Transform3">
+            <summary>
+            Represents a 4x3 matrix with rotational and positional components
+            </summary>
+        </member>
+        <member name="T:Axiverse.Vector2">
+            <summary>
+            Represents a 2-dimensional Cartesian vector
+            </summary>
+        </member>
+        <member name="F:Axiverse.Vector2.X">
+            <summary>Gets or sets the X component.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.Y">
+            <summary>Gets or sets the Y component.</summary>
+        </member>
+        <member name="P:Axiverse.Vector2.Item(System.Int32)">
+            <summary>
+            Gets or sets the component at the given index.
+            </summary>
+            <param name="index">The index of the component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Vector2.Normalize">
+            <summary>
+            Returns this vector after normalizing. The length of the vector
+            will be 1.
+            </summary>
+        </member>
+        <member name="M:Axiverse.Vector2.Dot(Axiverse.Vector2)">
+            <summary>
+            Returns the dot product between this and the target vector.
+            </summary>
+            <param name="v">A vector to calculate the dot product with</param>
+        </member>
+        <member name="M:Axiverse.Vector2.Length">
+            <summary>
+            Returns the length of the vector. For length comparisons, use
+            LengthSquared for better performance.
+            </summary>
+            <see cref="!:Axiverse.Mathematics.Vector2.LengthSquared"/>
+        </member>
+        <member name="M:Axiverse.Vector2.LengthSquared">
+            <summary>
+            Returns the square of the length of the vector. Runs faster than
+            computing the length.
+            </summary>
+            <returns>The square.</returns>
+        </member>
+        <member name="M:Axiverse.Vector2.ManhattanLength">
+            <summary>
+            Returns the manhatten length of the vector.
+            </summary>
+            <returns>The length.</returns>
+        </member>
+        <member name="M:Axiverse.Vector2.DistanceTo(Axiverse.Vector2)">
+            <summary>
+            Returns the distance between this and the specified vector.
+            </summary>
+            <returns>The to.</returns>
+            <param name="v">V.</param>
+        </member>
+        <member name="M:Axiverse.Vector2.DistanceToSquared(Axiverse.Vector2)">
+            <summary>
+            Returns the square of the distance between this and the specified
+            vector.
+            </summary>
+            <returns>The to squared.</returns>
+            <param name="v">V.</param>
+        </member>
+        <member name="M:Axiverse.Vector2.IsZero">
+            <summary>
+            Determines whether this instance is zero.
+            </summary>
+            <returns><c>true</c> if this instance is zero; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Axiverse.Vector2.Max(System.Collections.Generic.IEnumerable{Axiverse.Vector2})">
+            <summary>
+            Returns this vector with each component set to the maximum value of that
+            component in the given list of vectors.
+            </summary>
+            <param name="a">The alpha component.</param>
+        </member>
+        <member name="M:Axiverse.Vector2.Min(System.Collections.Generic.IEnumerable{Axiverse.Vector2})">
+            <summary>
+            Returns this vector with each component set to the minimum value of that
+            component in the given list of vectors.
+            </summary>
+            <param name="a">The alpha component.</param>
+        </member>
+        <member name="M:Axiverse.Vector2.Parse(System.String)">
+            <summary>
+            Converts a string representation of a 2 dimensional vector to a Vector2
+            </summary>
+            <param name="s">S.</param>
+        </member>
+        <member name="F:Axiverse.Vector2.Zero">
+            <summary>The zero vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.One">
+            <summary>The one vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.UnitX">
+            <summary>The X unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.UnitY">
+            <summary>The Y unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.NaN">
+            <summary>The not-a-number vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.NegativeInfinity">
+            <summary>The negative infinity vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector2.PositiveInfinity">
+            <summary>The positive infinity vector.</summary>
+        </member>
+        <member name="T:Axiverse.Vector3">
+            <summary>
+            Represents a 3-dimensional Cartesian vector
+            </summary>
+        </member>
+        <member name="F:Axiverse.Vector3.X">
+            <summary>Gets or sets the X component.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.Y">
+            <summary>Gets or sets the Y component.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.Z">
+            <summary>Gets or sets the Z component.</summary>
+        </member>
+        <member name="P:Axiverse.Vector3.Item(System.Int32)">
+            <summary>
+            Gets or sets the component at the given index.
+            </summary>
+            <param name="index">The index of the component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Vector3.Dot(Axiverse.Vector3)">
+            <summary>
+            Returns the dot product between this and the target vector.
+            </summary>
+            <param name="v">A vector to calculate the dot product with</param>
+        </member>
+        <member name="M:Axiverse.Vector3.Length">
+            <summary>
+            Returns the length of the vector. For length comparisons, use
+            LengthSquared for better performance.
+            </summary>
+            <see cref="M:Axiverse.Vector3.LengthSquared"/>
+        </member>
+        <member name="M:Axiverse.Vector3.LengthSquared">
+            <summary>
+            Returns the square of the length of the vector. Runs faster than
+            computing the length.
+            </summary>
+            <returns>The square.</returns>
+        </member>
+        <member name="M:Axiverse.Vector3.ManhattanLength">
+            <summary>
+            Returns the manhatten length of the vector.
+            </summary>
+            <returns>The length.</returns>
+        </member>
+        <member name="M:Axiverse.Vector3.Normalize">
+            <summary>
+            Returns this vector after normalizing. The length of the vector
+            will be 1.
+            </summary>
+        </member>
+        <member name="M:Axiverse.Vector3.Cross(Axiverse.Vector3)">
+            <summary>
+            Returns this vector set to the cross product of this and the
+            specified vector.
+            </summary>
+            <param name="v">V.</param>
+        </member>
+        <member name="M:Axiverse.Vector3.DistanceTo(Axiverse.Vector3)">
+            <summary>
+            Returns the distance between this and the specified vector.
+            </summary>
+            <returns>The to.</returns>
+            <param name="v">V.</param>
+        </member>
+        <member name="M:Axiverse.Vector3.DistanceToSquared(Axiverse.Vector3)">
+            <summary>
+            Returns the square of the distance between this and the specified
+            vector.
+            </summary>
+            <returns>The to squared.</returns>
+            <param name="v">V.</param>
+        </member>
+        <member name="M:Axiverse.Vector3.IsZero">
+            <summary>
+            Determines whether this instance is zero.
+            </summary>
+            <returns><c>true</c> if this instance is zero; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Axiverse.Vector3.Max(System.Collections.Generic.IEnumerable{Axiverse.Vector3})">
+            <summary>
+            Returns this vector with each component set to the maximum value of that
+            component in the given list of vectors.
+            </summary>
+            <param name="a">The alpha component.</param>
+        </member>
+        <member name="M:Axiverse.Vector3.Min(System.Collections.Generic.IEnumerable{Axiverse.Vector3})">
+            <summary>
+            Returns this vector with each component set to the minimum value of that
+            component in the given list of vectors.
+            </summary>
+            <param name="a">The alpha component.</param>
+        </member>
+        <member name="M:Axiverse.Vector3.OrthroNormalize(Axiverse.Vector3@,Axiverse.Vector3@)">
+            <summary>
+            Gram-Schmidt orthonormalization
+            </summary>
+            <param name="normal"></param>
+            <param name="tangent"></param>
+        </member>
+        <member name="M:Axiverse.Vector3.op_Modulus(Axiverse.Vector3,Axiverse.Vector3)">
+            <summary>
+            Cross product
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Vector3.Parse(System.String)">
+            <summary>
+            Parses a string representation of a 3-dimmensional vector.
+            </summary>
+            <param name="s">The string representation to parse.</param>
+        </member>
+        <member name="F:Axiverse.Vector3.Zero">
+            <summary>The zero vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.One">
+            <summary>The one vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.UnitX">
+            <summary>The X unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.UnitY">
+            <summary>The Y unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.UnitZ">
+            <summary>The Z unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.NaN">
+            <summary>The not-a-number vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.NegativeInfinity">
+            <summary>The negative infinity vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector3.PositiveInfinity">
+            <summary>The positive infinity vector.</summary>
+        </member>
+        <member name="T:Axiverse.Vector4">
+            <summary>
+            Represents a 3-dimensional Cartesian vector
+            </summary>
+        </member>
+        <member name="F:Axiverse.Vector4.X">
+            <summary>Gets or sets the X component.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.Y">
+            <summary>Gets or sets the Y component.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.Z">
+            <summary>Gets or sets the Z component.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.W">
+            <summary>Gets or sets the W component.s</summary>
+        </member>
+        <member name="P:Axiverse.Vector4.Item(System.Int32)">
+            <summary>
+            Gets or sets the component at the given index.
+            </summary>
+            <param name="index">The index of the component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Vector4.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a quaternion from the given values.
+            </summary>
+            <param name="x">The value to set the X component.</param>
+            <param name="y">The value to set the Y component.</param>
+            <param name="z">The value to set the Z component.</param>
+            <param name="w">The value to set the W component.</param>
+        </member>
+        <member name="M:Axiverse.Vector4.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a quaternion from the given values and a default W value of 0.
+            </summary>
+            <param name="x">The value to set the X component.</param>
+            <param name="y">The value to set the Y component.</param>
+            <param name="z">The value to set the Z component.</param>
+        </member>
+        <member name="M:Axiverse.Vector4.#ctor(System.Single,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:Axiverse.Vector4.Set(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the components of the vector to the given values.
+            </summary>
+            <param name="x">The value to set the X component.</param>
+            <param name="y">The value to set the Y component.</param>
+            <param name="z">The value to set the Z component.</param>
+            <param name="w">The value to set the W component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Vector4.Parse(System.String)">
+            <summary>
+            Parses a string representation of a 4 dimensional vector.
+            </summary>
+            <param name="s">The string representation to parse.</param>
+        </member>
+        <member name="F:Axiverse.Vector4.Zero">
+            <summary>The zero vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.One">
+            <summary>The one vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.UnitX">
+            <summary>The X unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.UnitY">
+            <summary>The Y unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.UnitZ">
+            <summary>The Z unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.UnitW">
+            <summary>The W unit vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.NaN">
+            <summary>The not-a-number vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.NegativeInfinity">
+            <summary>The negative infinity vector.</summary>
+        </member>
+        <member name="F:Axiverse.Vector4.PositiveInfinity">
+            <summary>The positive infinity vector.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Axiverse.IO</name>
+    </assembly>
+    <members>
+        <member name="M:Axiverse.Resources.Cache`1.Exists(System.String)">
+            <summary>
+            Checks if a path exists as a loaded resource or if it exists in any of the registered loaders.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Axiverse.Resources.Cache`1.Register(Axiverse.Resources.Loader{`0})">
+            <summary>
+            Registers a resource loader.
+            </summary>
+            <param name="loader"></param>
+        </member>
+        <member name="M:Axiverse.Resources.Cache`1.Unregister(Axiverse.Resources.Loader{`0})">
+            <summary>
+            Unregisters a resource loader.
+            </summary>
+            <param name="loader"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Axiverse.Resources.Library">
+            <summary>
+            Virtual file system for resources.
+            </summary>
+        </member>
+    </members>
+</doc>
