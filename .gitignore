@@ -132,3 +132,14 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+
+# =========================
+# Repository
+# =========================
+
+# Allow builds to distributable
+!/Distributable/[Dd]ebug/
+!/Distributable/[Rr]elease/
+
+# Allow wavefront obj files
+!/Resources/**/*.obj
