@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Simulation", "Axiv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics", "Axiverse.Mathematics\Axiverse.Mathematics.csproj", "{700D5AB7-622F-443E-AE55-D51556EC88BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface", "Axiverse.Interface\Axiverse.Interface.csproj", "{A95E24EB-7271-460A-A49D-A56F71F44B5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Computing", "Axiverse.Computing\Axiverse.Computing.csproj", "{3C0724AB-B232-44D0-A265-FBD4A36754DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{700D5AB7-622F-443E-AE55-D51556EC88BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700D5AB7-622F-443E-AE55-D51556EC88BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{700D5AB7-622F-443E-AE55-D51556EC88BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95E24EB-7271-460A-A49D-A56F71F44B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95E24EB-7271-460A-A49D-A56F71F44B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95E24EB-7271-460A-A49D-A56F71F44B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95E24EB-7271-460A-A49D-A56F71F44B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0724AB-B232-44D0-A265-FBD4A36754DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0724AB-B232-44D0-A265-FBD4A36754DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0724AB-B232-44D0-A265-FBD4A36754DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0724AB-B232-44D0-A265-FBD4A36754DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
