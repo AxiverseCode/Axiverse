@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse
+namespace Axiverse.Simulation
 {
-    public class Class1
+    public class Entity
     {
     }
 }
