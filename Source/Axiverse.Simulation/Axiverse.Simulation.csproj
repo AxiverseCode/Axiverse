@@ -32,6 +32,9 @@
     <DocumentationFile>..\bin\Release\Axiverse.Simulation.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +45,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute.cs" />
+    <Compile Include="AutoValue.cs" />
+    <Compile Include="Body.cs" />
+    <Compile Include="Components\CollectionComponent.cs" />
+    <Compile Include="Components\CollectionModel.cs" />
+    <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\ComponentAttribute.cs" />
+    <Compile Include="Components\Entity.cs" />
+    <Compile Include="Components\Message.cs" />
+    <Compile Include="Components\Model.cs" />
+    <Compile Include="Components\ProcessorAttribute.cs" />
+    <Compile Include="Components\ReaderAttribute.cs" />
+    <Compile Include="Components\SpatialComponent.cs" />
+    <Compile Include="Components\Universe.cs" />
+    <Compile Include="Components\WriterAttribute.cs" />
+    <Compile Include="DynamicList.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="EntityDynamicList.cs" />
+    <Compile Include="Equiptment.cs" />
+    <Compile Include="IDynamic.cs" />
+    <Compile Include="IEntityDynamic.cs" />
+    <Compile Include="Impulse.cs" />
+    <Compile Include="InertialTensors.cs" />
+    <Compile Include="Modifier.cs" />
+    <Compile Include="NavigationEquiptment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Prototypes\EntityPrototype.cs" />
+    <Compile Include="Prototypes\EquiptmentPrototype.cs" />
+    <Compile Include="Prototypes\NavigationPrototype.cs" />
+    <Compile Include="Prototypes\PresetPrototype.cs" />
+    <Compile Include="Prototypes\Prototypes.cs" />
+    <Compile Include="Prototypes\ThrustPrototype.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="ThrustEquiptment.cs" />
+    <Compile Include="Universe.cs" />
+    <Compile Include="Voxel\Block.cs" />
+    <Compile Include="Voxel\Chunk.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
