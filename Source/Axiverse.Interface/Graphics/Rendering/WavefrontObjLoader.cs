@@ -34,7 +34,7 @@ namespace Axiverse.Interface.Graphics
 
         public void LoadObj(string path)
         {
-            LoadObj(FileSystem.Default.Open(path, FileMode.Open));
+            LoadObj(Store.Default.Open(path, FileMode.Open));
         }
 
         public void LoadObj(Stream data)

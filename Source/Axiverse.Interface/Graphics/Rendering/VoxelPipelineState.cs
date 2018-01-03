@@ -85,7 +85,7 @@ namespace Axiverse.Interface.Graphics
             var shaderFlags = SharpDX.D3DCompiler.ShaderFlags.Debug;
             byte[] shaderBuffer;
 
-            using (var fileStream = FileSystem.Default.Open(path, FileMode.Open))
+            using (var fileStream = Store.Default.Open(path, FileMode.Open))
             using (var memoryStream = new MemoryStream())
             {
                 fileStream.CopyTo(memoryStream);

@@ -11,6 +11,11 @@ namespace Axiverse.Resources
     {
         public string BasePath { get; set; }
 
+        public string[] GetFiles(string path)
+        {
+            return Node.GetFiles(Path.Combine(BasePath, path));
+        }
+
         public bool Exists(string path)
         {
             return File.Exists(Path.Combine(BasePath, path));

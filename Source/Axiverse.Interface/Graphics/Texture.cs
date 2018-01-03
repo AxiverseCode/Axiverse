@@ -54,7 +54,7 @@ namespace Axiverse.Interface.Graphics
         public void Load(string filename)
         {
             Bitmap bitmap;
-            using (var stream = FileSystem.Default.Open(filename, System.IO.FileMode.Open))
+            using (var stream = Store.Default.Open(filename, System.IO.FileMode.Open))
             {
                 bitmap = new Bitmap(stream);
             }

@@ -27,10 +27,10 @@ namespace Axiverse.Interface.Graphics
             Scene = scene;
 
             PipelineState = new VoxelPipelineState(Renderer);
-            PipelineState.Load(@"Assets\color.hlsl", PositionColorTextureMaterial.Description);
+            PipelineState.Load(@"Engine\Forward\Standard.hlsl", PositionColorTextureMaterial.Description);
 
             Texture = new Texture(Renderer);
-            Texture.Load(@"Assets/uvgrid.jpg");
+            Texture.Load(@"Textures\Placeholder Grid.jpg");
 
             Mesh = Primitives<PositionColorTextureMaterial>.CreateCube(renderer);
 

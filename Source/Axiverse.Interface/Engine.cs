@@ -36,7 +36,7 @@ namespace Axiverse.Interface
                 Width = 1200,
                 Height = 1000,
                 BackColor = System.Drawing.Color.Black,
-                Icon = new System.Drawing.Icon("../../Assets/cake1.ico"),
+                // Icon = new System.Drawing.Icon("../../Assets/cake1.ico"),
                 Text = "Axiverse | Interface",
             };
             Window.Bind(Target);

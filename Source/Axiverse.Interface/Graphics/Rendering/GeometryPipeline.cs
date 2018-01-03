@@ -25,7 +25,7 @@ namespace Axiverse.Interface.Graphics
             Scene = scene;
 
             PipelineState = new StandardPipelineState(Renderer);
-            PipelineState.Load(@"Assets\color.hlsl", PositionColorTexture.Description);
+            PipelineState.Load(@"Engine\Forward\standard.hlsl", PositionColorTexture.Description);
         }
 
         public override void Execute()
