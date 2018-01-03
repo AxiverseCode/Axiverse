@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Axiverse.Resources;
 using SharpDX.DXGI;
 
+using Axiverse.Resources;
+
 namespace Axiverse.Interface.Graphics
 {
     using SharpDX.Direct3D12;

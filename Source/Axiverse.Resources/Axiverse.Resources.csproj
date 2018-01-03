@@ -50,14 +50,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="Blob.cs" />
+    <Compile Include="FileSystemBlob.cs" />
+    <Compile Include="FileSystemMount.cs" />
+    <Compile Include="FileSystemNode.cs" />
+    <Compile Include="IStoreNode.cs" />
+    <Compile Include="IStoreBlob.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="IResource.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Mount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VirtualBlob.cs" />
+    <Compile Include="VirtualNode.cs" />
     <Compile Include="ZipMount.cs" />
   </ItemGroup>
   <ItemGroup>

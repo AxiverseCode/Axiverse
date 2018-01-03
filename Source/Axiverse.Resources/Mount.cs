@@ -13,7 +13,7 @@ namespace Axiverse.Resources
 
         public string[] GetFiles(string path)
         {
-            return Node.GetFiles(Path.Combine(BasePath, path));
+            return Directory.GetFiles(Path.Combine(BasePath, path));
         }
 
         public bool Exists(string path)

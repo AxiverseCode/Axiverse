@@ -9,6 +9,8 @@ using Axiverse.Resources;
 using SharpDX;
 using SharpDX.DXGI;
 
+using Axiverse.Resources;
+
 namespace Axiverse.Interface.Graphics
 {
     using SharpDX.Direct3D12;

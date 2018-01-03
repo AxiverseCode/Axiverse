@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Axiverse.Resources
 {
     /// <summary>
-    /// A store mount backed by a zip archive.
+    /// A store mount backed by the local file system.
     /// </summary>
-    class ZipMount
+    public class FileSystemMount
     {
     }
 }

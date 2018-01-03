@@ -9,56 +9,66 @@ namespace Axiverse.Resources
     /// <summary>
     /// A virtual directory or node in the virtual file system.
     /// </summary>
-    public class Node
+    public interface IStoreNode
     {
         /// <summary>
         /// Gets the owning store for this blob.
         /// </summary>
-        public Store Store { get; private set; }
+        Store Store { get; }
 
         /// <summary>
         /// Gets the parent node containing this blobl.
         /// </summary>
-        public Node Parent { get; set; }
+        IStoreNode Parent { get; }
+
+        /// <summary>
+        /// Gets the collection of child nodes under this node.
+        /// </summary>
+        ICollection<IStoreNode> Children { get; }
+
+        /// <summary>
+        /// Gets the collection of blobs under this node.
+        /// </summary>
+        ICollection<IStoreBlob> Blobs { get; }
 
         /// <summary>
         /// Gets the full path of this blob.
         /// </summary>
-        public string FullPath { get; set; }
+        string FullPath { get; }
 
         /// <summary>
         /// Gets the name of this node.
         /// </summary>
-        public string Name { get; set; }
+        string Name { get; }
 
         /// <summary>
         /// Gets whether this node exists.
         /// </summary>
-        public bool Exists { get; set; }
+        bool Exists { get; }
 
         /// <summary>
         /// Gets whether this node can be read.
         /// </summary>
-        public bool CanRead { get; set; }
+        bool CanRead { get; }
 
         /// <summary>
         /// Gets whether this node can be written.
         /// </summary>
-        public bool CanWrite { get; set; }
+        bool CanWrite { get; }
 
         /// <summary>
         /// Gets the time when this node was created.
         /// </summary>
-        public DateTime CreatedTime { get; set; }
+        DateTime CreatedTime { get; }
 
         /// <summary>
         /// Gets the time when this node was last update.
         /// </summary>
-        public DateTime UpdatedTime { get; set; }
+        DateTime UpdatedTime { get; }
 
         /// <summary>
         /// Gets the time when this node was last update.
         /// </summary>
-        public DateTime AccessedTime { get; set; }
+        DateTime AccessedTime { get; }
     }
 }

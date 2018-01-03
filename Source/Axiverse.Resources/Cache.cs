@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Resources
 {
+    /// <summary>
+    /// An object cache backed for loaded objects.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Cache<T> where T : class, IResource
     {
         public T this[string path]

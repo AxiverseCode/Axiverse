@@ -9,61 +9,61 @@ namespace Axiverse.Resources
     /// <summary>
     /// A virtual file or blob in the virtual file system
     /// </summary>
-    public class Blob
+    public interface IStoreBlob
     {
         /// <summary>
         /// Gets the owning store for this blob.
         /// </summary>
-        public Store Store { get; private set; }
+        Store Store { get; }
 
         /// <summary>
         /// Gets the parent node containing this blobl.
         /// </summary>
-        public Node Node { get; set; }
+        IStoreNode Node { get; }
 
         /// <summary>
         /// Gets the full path of this blob.
         /// </summary>
-        public string FullPath { get; set; }
+        string FullPath { get; }
 
         /// <summary>
         /// Gets the name of this blob with the extension.
         /// </summary>
-        public string Name { get; set; }
+        string Name { get; }
 
         /// <summary>
         /// Gets the extension of this blob.
         /// </summary>
-        public string Extension { get; set; }
+        string Extension { get; }
 
         /// <summary>
         /// Gets whether this blob exists.
         /// </summary>
-        public bool Exists { get; set; }
+        bool Exists { get; }
 
         /// <summary>
         /// Gets whether this blob can be read.
         /// </summary>
-        public bool CanRead { get; set; }
+        bool CanRead { get; }
 
         /// <summary>
         /// Gets whether this blob can be written.
         /// </summary>
-        public bool CanWrite { get; set; }
+        bool CanWrite { get; }
 
         /// <summary>
         /// Gets the time when this blob was created.
         /// </summary>
-        public DateTime CreatedTime { get; set; }
+        DateTime CreatedTime { get; }
 
         /// <summary>
         /// Gets the time when this blob was last update.
         /// </summary>
-        public DateTime UpdatedTime { get; set; }
+        DateTime UpdatedTime { get; }
 
         /// <summary>
         /// Gets the time when this blob was last update.
         /// </summary>
-        public DateTime AccessedTime { get; set; }
+        DateTime AccessedTime { get; }
     }
 }

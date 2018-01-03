@@ -19,7 +19,7 @@ namespace Axiverse.Resources
         /// <summary>
         /// Gets the root node in the store.
         /// </summary>
-        public Node Root { get; set; }
+        public IStoreNode Root { get; set; }
 
         // GetFiles
         // GetDirectory
