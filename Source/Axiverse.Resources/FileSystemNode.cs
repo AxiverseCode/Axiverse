@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,28 +12,90 @@ namespace Axiverse.Resources
     /// </summary>
     public class FileSystemNode : IStoreNode
     {
-        public Store Store => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the mount.
+        /// </summary>
+        public FileSystemMount Mount { get; }
 
+        /// <summary>
+        /// Gets the relative path to the mount root.
+        /// </summary>
+        public string MountPath { get; }
+
+        /// <summary>
+        /// Gets the local file system path of this blob.
+        /// </summary>
+        public string SystemPath => Mount.GetSystemPath(MountPath);
+
+        /// <summary>
+        /// Gets the owning store for this blob.
+        /// </summary>
+        public Store Store => Mount.MountRoot.Store;
+
+        /// <summary>
+        /// Gets the parent node containing this blob.
+        /// </summary>
         public IStoreNode Parent => throw new NotImplementedException();
 
-        public ICollection<IStoreNode> Children => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the collection of child nodes under this node.
+        /// </summary>
+        public ICollection<IStoreNode> Children => Mount.GetDirectories(MountPath);
 
-        public ICollection<IStoreBlob> Blobs => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the collection of blobs under this node.
+        /// </summary>
+        public ICollection<IStoreBlob> Blobs => Mount.GetFiles(MountPath);
 
-        public string FullPath => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the full path of this blob.
+        /// </summary>
+        public string FullPath => Mount.GetFullPath(MountPath);
 
-        public string Name => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the name of this node.
+        /// </summary>
+        public string Name => Path.GetFileName(SystemPath);
 
-        public bool Exists => throw new NotImplementedException();
+        /// <summary>
+        /// Gets whether this node exists.
+        /// </summary>
+        public bool Exists => File.Exists(SystemPath);
 
-        public bool CanRead => throw new NotImplementedException();
+        /// <summary>
+        /// Gets whether this node can be read.
+        /// </summary>
+        public bool CanRead => true;
 
-        public bool CanWrite => throw new NotImplementedException();
+        /// <summary>
+        /// Gets whether this node can be written.
+        /// </summary>
+        public bool CanWrite => true;
 
-        public DateTime CreatedTime => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the time when this node was created.
+        /// </summary>
+        public DateTime CreatedTime => File.GetCreationTime(SystemPath);
 
-        public DateTime UpdatedTime => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the time when this node was last update.
+        /// </summary>
+        public DateTime UpdatedTime => File.GetLastWriteTime(SystemPath);
 
-        public DateTime AccessedTime => throw new NotImplementedException();
+        /// <summary>
+        /// Gets the time when this node was last update.
+        /// </summary>
+        public DateTime AccessedTime => File.GetLastAccessTime(SystemPath);
+
+        /// <summary>
+        /// Creates a node based on a local file system file.
+        /// </summary>
+        /// <param name="mount">The mount.</param>
+        /// <param name="mountPath">Relative path to the mount root.</param>
+        public FileSystemNode(FileSystemMount mount, string mountPath)
+        {
+            Mount = mount;
+            MountPath = mountPath;
+        }
     }
 }

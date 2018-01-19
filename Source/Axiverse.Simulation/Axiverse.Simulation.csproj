@@ -46,6 +46,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribute.cs" />
+    <Compile Include="Autos\Auditor.cs" />
+    <Compile Include="Autos\Conflict.cs" />
+    <Compile Include="Autos\DependencyAttribute.cs" />
+    <Compile Include="Autos\Entity.cs" />
+    <Compile Include="Autos\Catalyst.cs" />
+    <Compile Include="Autos\Context.cs" />
+    <Compile Include="Autos\Event.cs" />
+    <Compile Include="Autos\Reconciler.cs" />
+    <Compile Include="Autos\Simulation.cs" />
+    <Compile Include="Autos\SpatialDomain.cs" />
+    <Compile Include="Autos\TemporalCatalyst.cs" />
+    <Compile Include="Autos\TemporalEvent.cs" />
+    <Compile Include="Autos\Universe.cs" />
     <Compile Include="AutoValue.cs" />
     <Compile Include="Body.cs" />
     <Compile Include="Components\CollectionComponent.cs" />

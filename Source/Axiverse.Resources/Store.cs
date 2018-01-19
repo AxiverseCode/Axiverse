@@ -39,12 +39,27 @@ namespace Axiverse.Resources
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public string[] GetFiles(string path)
+        public string[] GetFiles(string path, string blob)
         {
             List<String> files = new List<string>();
             foreach (var mount in mountList)
             {
-                files.AddRange(mount.GetFiles(path));
+                files.AddRange(mount.GetFiles(path, blob));
+            }
+            return files.ToArray();
+        }
+
+        /// <summary>
+        /// Gets all the entries within a node.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public string[] GetDirectories(string path)
+        {
+            List<String> files = new List<string>();
+            foreach (var mount in mountList)
+            {
+                files.AddRange(mount.GetDirectories(path));
             }
             return files.ToArray();
         }
@@ -92,6 +107,20 @@ namespace Axiverse.Resources
                 {
                     var reader = new StreamReader(stream);
                     return reader.ReadToEnd();
+                }
+            }
+            return null;
+        }
+
+        public byte[] ReadAllBytes(string path)
+        {
+            using (var stream = Open(path, FileMode.Open))
+            {
+                if (stream != null)
+                {
+                    byte[] buffer = new byte[stream.Length];
+                    stream.Read(buffer, 0, (int)stream.Length);
+                    return buffer;
                 }
             }
             return null;

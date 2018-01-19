@@ -49,11 +49,11 @@ namespace Axiverse.Interface
             Target.Resize += (s, e) => Renderer.RenderTarget.Resize(Target);
 
             var mesh = new ObjMesh(Renderer);
-            mesh.Load(@"Assets/Drones/Drone V2.obj");
+            mesh.Load(@"Models/ship.obj");
             //mesh.Populate(Primitives<PositionColorTexture>.Cube());
 
             var texture = new Texture(Renderer);
-            texture.Load(@"Assets/Drones/CyberTech_Diffuse.png");
+            texture.Load(@"Textures/Placeholder Grid.jpg");
 
             entity = new Entity();
             entity.AddComponent(new ModelComponent()
@@ -78,9 +78,9 @@ namespace Axiverse.Interface
             Trackball.MaximumDistance = 50;
 
 
-            Prototypes = new Prototypes(@"..\..\Data");
-            Universe = new Universe();
-            Universe.Entitites.Add(ship = Prototypes.Presets["Auto Shuttle"].Create());
+            //Prototypes = new Prototypes(@"..\..\Data");
+            //Universe = new Universe();
+            //Universe.Entitites.Add(ship = Prototypes.Presets["Auto Shuttle"].Create());
         }
 
         public void Start()
@@ -94,12 +94,12 @@ namespace Axiverse.Interface
             {
                 while (loop.NextFrame())
                 {
-                    Universe.OnStep(0.01f);
-                    var q = ship.AngularPosition;
-                    var x = ship.LinearPosition;
-                    entity.Transform.Transformation = Matrix.RotationQuaternion(new SharpDX.Quaternion(q.X, q.Y, q.Z, q.W)) * Matrix.Translation(x.X, x.Y, x.Z);
+                    //Universe.OnStep(0.01f);
+                    //var q = ship.AngularPosition;
+                    //var x = ship.LinearPosition;
+                    //entity.Transform.Transformation = Matrix.RotationQuaternion(new SharpDX.Quaternion(q.X, q.Y, q.Z, q.W)) * Matrix.Translation(x.X, x.Y, x.Z);
                     //Camera.Target = new SharpDX.Vector3(x.X, x.Y, x.Z);
-                    Window.Children[0].Text = $"{x.ToString(0)} -> {q.ToString(2)}";
+                    //Window.Children[0].Text = $"{x.ToString(0)} -> {q.ToString(2)}";
 
                     Trackball.Update();
                     Renderer.Execute();

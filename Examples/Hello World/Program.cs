@@ -18,7 +18,7 @@ namespace Axiverse.Examples.HelloWorld
         static void Main()
         {
             // setup resource filesystem.
-            FileSystem.Default.Mount(new Mount() { BasePath = @"..\..\..\..\Resources" });
+            Store.Default.Mount(new Mount(@"..\..\..\..\Resources" ));
 
             // initialize the engine.
             var engine = new Engine();

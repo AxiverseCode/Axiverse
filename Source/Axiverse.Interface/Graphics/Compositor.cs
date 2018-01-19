@@ -35,7 +35,7 @@ namespace Axiverse.Interface.Graphics
             // initialize directwrite
 
             FactoryDW = new FactoryDW(SharpDX.DirectWrite.FactoryType.Shared);
-            FontLoader = new ResourceFontLoader(FactoryDW, @"../../Assets/Fonts");
+            FontLoader = new ResourceFontLoader(FactoryDW, @"Fonts");
             FontCollection = new FontCollection(FactoryDW, FontLoader, FontLoader.Key);
 
             DeviceContext = deviceContext;

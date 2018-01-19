@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Axiverse.Resources;
 using SharpDX;
 using SharpDX.DirectWrite;
 
@@ -31,12 +32,12 @@ namespace Axiverse.Interface.Graphics.Fonts
         public ResourceFontLoader(Factory factory, string path)
         {
             _factory = factory;
-            foreach (var directory in Directory.GetDirectories(path))
+            foreach (var directory in Store.Default.GetDirectories(path))
             {
                 // look in the font directory
-                foreach (var file in Directory.GetFiles(directory, "*.ttf"))
+                foreach (var file in Store.Default.GetFiles(directory, "*.ttf"))
                 {
-                    var fontBytes = File.ReadAllBytes(file);
+                    var fontBytes = Store.Default.ReadAllBytes(file);
                     var stream = new DataStream(fontBytes.Length, true, true);
                     stream.Write(fontBytes, 0, fontBytes.Length);
                     stream.Position = 0;
