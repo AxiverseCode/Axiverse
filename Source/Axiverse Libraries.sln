@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Resources", "Axive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Simulation.Physics", "Axiverse.Simulation.Physics\Axiverse.Simulation.Physics.csproj", "{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{927FED4B-50ED-4FFB-A790-5624F5519777}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello World", "..\Examples\Hello World\Hello World.csproj", "{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,9 +55,16 @@ Global
 		{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

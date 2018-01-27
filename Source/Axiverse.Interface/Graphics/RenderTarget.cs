@@ -15,6 +15,8 @@ namespace Axiverse.Interface.Graphics
 
     public class RenderTarget
     {
+
+
         public static int FrameCount = 2;
         public SwapChain3 SwapChain;
 
@@ -29,18 +31,17 @@ namespace Axiverse.Interface.Graphics
         public DescriptorHeap DepthStencilViewDescriptorHeap;
         public SharpDX.Direct3D12.Resource DepthTarget;
 
-        public CommandAllocator CommandAllocator;
-        public CommandQueue CommandQueue;
-
+        public Renderer Renderer;
         public Device Device;
 
         public int Width;
         public int Height;
         public bool NeedsBufferResize;
 
-        public RenderTarget(Device device)
+        public RenderTarget(Renderer renderer)
         {
-            Device = device;
+            Renderer = renderer;
+            Device = renderer.Device;
         }
 
         public void Initialize(RenderForm form)
@@ -57,9 +58,6 @@ namespace Axiverse.Interface.Graphics
 
             using (var factory = new Factory4())
             {
-                // command queue
-                var commandQueueDescription = new CommandQueueDescription(CommandListType.Direct);
-                CommandQueue = Device.CreateCommandQueue(commandQueueDescription);
 
                 var format = Format.R8G8B8A8_UNorm;
                 format = Format.B8G8R8A8_UNorm;
@@ -77,7 +75,7 @@ namespace Axiverse.Interface.Graphics
                     IsWindowed = true,
                 };
 
-                using (var tempSwapChain = new SwapChain(factory, CommandQueue, swapChainDescription))
+                using (var tempSwapChain = new SwapChain(factory, Renderer.CommandQueue, swapChainDescription))
                 {
                     SwapChain = tempSwapChain.QueryInterface<SwapChain3>();
                     FrameIndex = SwapChain.CurrentBackBufferIndex;
@@ -128,9 +126,6 @@ namespace Axiverse.Interface.Graphics
                 ResourceStates.DepthWrite, depthOptimizedClearValue);
 
             Device.CreateDepthStencilView(DepthTarget, null, DepthStencilViewDescriptorHeap.CPUDescriptorHandleForHeapStart);
-
-            // command allocator
-            CommandAllocator = Device.CreateCommandAllocator(CommandListType.Direct);
 
             // fence
             Fence = Device.CreateFence(0, FenceFlags.None);
@@ -207,27 +202,6 @@ namespace Axiverse.Interface.Graphics
             FrameIndex = SwapChain.CurrentBackBufferIndex;
         }
 
-        public void ExecuteCommandList(CommandList commandList)
-        {
-            CommandQueue.ExecuteCommandList(commandList);
-        }
-
-
-
-        public void SignalBlock()
-        {
-            var fenceSignal = FenceValue;
-
-            CommandQueue.Signal(Fence, fenceSignal);
-            FenceValue++;
-
-            if (Fence.CompletedValue < fenceSignal)
-            {
-                Fence.SetEventOnCompletion(fenceSignal, FenceEvent.SafeWaitHandle.DangerousGetHandle());
-                FenceEvent.WaitOne();
-            }
-        }
-
         public void Dispose()
         {
             Fence.Dispose();
@@ -236,9 +210,6 @@ namespace Axiverse.Interface.Graphics
             {
                 target.Dispose();
             }
-
-            CommandAllocator.Dispose();
-            CommandQueue.Dispose();
 
             RenderTargetViewDescriptorHeap.Dispose();
 

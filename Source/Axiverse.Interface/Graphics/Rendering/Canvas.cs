@@ -29,6 +29,8 @@ namespace Axiverse.Interface.Graphics
     // TODO: Merge code into WindowsPipeline
     public class Canvas
     {
+        public Renderer Renderer;
+
         private Dictionary<string, FontCollection> m_fontCollections = new Dictionary<string, FontCollection>();
         private Dictionary<Windows.Font, TextFormat> m_fonts = new Dictionary<Windows.Font, TextFormat>();
 
@@ -63,16 +65,17 @@ namespace Axiverse.Interface.Graphics
 
         public RoundedRectangleGeometry RoundedRectangleGeometry;
 
-        public void Initialize(Device3D12 device3D12, RenderTarget renderTarget)
+        public void Initialize(Renderer renderer)
         {
             // https://msdn.microsoft.com/en-us/library/windows/desktop/mt186590(v=vs.85).aspx
-            RenderTarget = renderTarget;
+            Renderer = renderer;
+            RenderTarget = Renderer.RenderTarget;
             Device3D11 = Device3D11.CreateFromDirect3D12(
-                device3D12,
+                Renderer.Device,
                 DeviceCreationFlags.BgraSupport,// | DeviceCreationFlags.Debug,
                 null,
                 null,
-                renderTarget.CommandQueue);
+                Renderer.CommandQueue);
 
             DeviceContext3D = Device3D11.ImmediateContext;
             Device3D = Device3D11.QueryInterface<Device3D>();
@@ -120,7 +123,7 @@ namespace Axiverse.Interface.Graphics
             }
 
             DesktopDpi = Factory.DesktopDpi;
-            InitializeFrames(device3D12, renderTarget);
+            InitializeFrames(Renderer.Device, Renderer.RenderTarget);
         }
 
         public void InitializeFrames(Device3D12 device3D12, RenderTarget renderTarget)

@@ -43,19 +43,19 @@ namespace Axiverse.Interface.Graphics
 
             if (commandList == null)
             {
-                commandList = Renderer.Device.CreateCommandList(CommandListType.Direct, Renderer.RenderTarget.CommandAllocator, null);
+                commandList = Renderer.Device.CreateCommandList(CommandListType.Direct, Renderer.CommandAllocator, null);
                 commandList.Close();
             }
 
-            commandList.Reset(Renderer.RenderTarget.CommandAllocator, null);
+            commandList.Reset(Renderer.CommandAllocator, null);
 
             // prepare the resources
             Resources.ForEach(r => r.Prepare(commandList));
 
             // close, execute, and wait for the commands to execute
             commandList.Close();
-            Renderer.RenderTarget.CommandQueue.ExecuteCommandList(commandList);
-            Renderer.RenderTarget.SignalBlock();
+            Renderer.CommandQueue.ExecuteCommandList(commandList);
+            Renderer.SignalBlock();
 
             // collect any resources
             Resources.ForEach(r => r.Collect());

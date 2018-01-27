@@ -40,11 +40,11 @@ namespace Axiverse.Interface.Graphics
         {
             if (commandList == null)
             {
-                commandList = Renderer.Device.CreateCommandList(CommandListType.Direct, RenderTarget.CommandAllocator, null);
+                commandList = Renderer.Device.CreateCommandList(CommandListType.Direct, Renderer.CommandAllocator, null);
                 commandList.Close();
             }
 
-            commandList.Reset(RenderTarget.CommandAllocator, null);
+            commandList.Reset(Renderer.CommandAllocator, null);
             commandList.PipelineState = PipelineState.PipelineState;
             commandList.SetViewport(RenderTarget.Viewport);
             commandList.SetScissorRectangles(RenderTarget.ScissorRectangle);
@@ -87,7 +87,7 @@ namespace Axiverse.Interface.Graphics
             // commandList.ResourceBarrierTransition(RenderTarget.RenderTargets[RenderTarget.FrameIndex], ResourceStates.RenderTarget, ResourceStates.Present);
 
             commandList.Close();
-            RenderTarget.ExecuteCommandList(commandList);
+            Renderer.ExecuteCommandList(commandList);
         }
 
         public override void Dispose()
