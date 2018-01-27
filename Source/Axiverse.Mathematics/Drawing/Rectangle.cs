@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Axiverse
 {
     /// <summary>
-    /// Represents a drawing space rectangle.
+    /// Represents a screen space rectangle.
     /// </summary>
     public struct Rectangle
     {

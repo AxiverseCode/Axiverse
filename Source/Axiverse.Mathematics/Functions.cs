@@ -13,14 +13,29 @@ namespace Axiverse
             return (float)Math.Sin(value);
         }
 
+        public static double Sin(double value)
+        {
+            return Math.Sin(value);
+        }
+
         public static float Cos(float value)
         {
             return (float)Math.Cos(value);
         }
 
+        public static double Cos(double value)
+        {
+            return Math.Cos(value);
+        }
+
         public static float Sqrt(float value)
         {
             return (float)Math.Sqrt(value);
+        }
+
+        public static double Sqrt(double value)
+        {
+            return Math.Sqrt(value);
         }
 
         public static float Clamp(float value, float minimum, float maximum)

@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boolean3.cs" />
+    <Compile Include="Bounds.cs" />
     <Compile Include="Bounds3.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Functions.cs" />
