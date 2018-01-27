@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics.Models
 {
-    public class Track<T>
+    public class Clip<T>
     {
-        public object Interpolator { get; set; }
-
-        public List<Clip<T>> Clips;
+        public List<uint> Keys;
+        public List<T> Values;
     }
 }

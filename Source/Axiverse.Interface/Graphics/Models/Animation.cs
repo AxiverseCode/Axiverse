@@ -8,5 +8,6 @@ namespace Axiverse.Interface.Graphics.Models
 {
     public class Animation
     {
+        public List<Sequence> Sequences;
     }
 }
