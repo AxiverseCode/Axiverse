@@ -21,7 +21,7 @@ namespace Axiverse.Interface.Graphics
             Window = window;
 
             canvas = new Canvas(Window);
-            canvas.Initialize(renderer);
+            canvas.Initialize(Renderer);
         }
 
         public override void Execute()

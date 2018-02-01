@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine.cs" />
+    <Compile Include="Engine\Rendering\Buffer.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Graphics\Compositor.cs" />
     <Compile Include="Graphics\Fonts\ResourceFontFileEnumerator.cs" />
@@ -94,11 +95,15 @@
     <Compile Include="Graphics\Fonts\ResourceFontLoader.cs" />
     <Compile Include="Graphics\Geometry.cs" />
     <Compile Include="Graphics\IVertex.cs" />
+    <Compile Include="Graphics\Loaders\M3Loader.cs" />
     <Compile Include="Graphics\Mesh.cs" />
+    <Compile Include="Graphics\Models\Anchor.cs" />
     <Compile Include="Graphics\Models\Animation.cs" />
     <Compile Include="Graphics\Models\Bone.cs" />
+    <Compile Include="Graphics\Models\Clip.cs" />
     <Compile Include="Graphics\Models\KeyFrame.cs" />
     <Compile Include="Graphics\Models\Model.cs" />
+    <Compile Include="Graphics\Models\Sequence.cs" />
     <Compile Include="Graphics\Models\Track.cs" />
     <Compile Include="Graphics\Models\Vertex.cs" />
     <Compile Include="Graphics\ObjMesh.cs" />
@@ -161,5 +166,6 @@
       <Name>Axiverse.Simulation</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -29,5 +29,10 @@ namespace Axiverse.Interface.Graphics.Models
          *          Paths
          *      Sequences
          */
+
+
+        List<Vertex> Vertices;
+        List<Sequence> Sequences;
+        List<Bone> Bones;
     }
 }
