@@ -10,6 +10,6 @@ namespace Axiverse.Interface.Graphics.Models
     {
         public object Interpolator { get; set; }
 
-        public List<Clip<T>> Clips;
+        ///public List<Clip<T>> Clips;
     }
 }
