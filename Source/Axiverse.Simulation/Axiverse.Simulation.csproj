@@ -91,6 +91,11 @@
     <Compile Include="Prototypes\Prototypes.cs" />
     <Compile Include="Prototypes\ThrustPrototype.cs" />
     <Compile Include="Resource.cs" />
+    <Compile Include="SimpleEntity\Component.cs" />
+    <Compile Include="SimpleEntity\ComponentCollection.cs" />
+    <Compile Include="SimpleEntity\Entity.cs" />
+    <Compile Include="SimpleEntity\EntityCollection.cs" />
+    <Compile Include="SimpleEntity\System.cs" />
     <Compile Include="ThrustEquiptment.cs" />
     <Compile Include="Universe.cs" />
     <Compile Include="Voxel\Block.cs" />
