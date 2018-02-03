@@ -15,12 +15,12 @@ namespace Axiverse.Interface.Engine.Rendering
         private Resource mGPUHeap;
 
         private IndexBufferView mIndexBufferView;
-        public VertexBufferView mVertexBufferView;
+        private VertexBufferView mVertexBufferView;
 
-        void InitAsIndexBuffer(ref Device device,IntPtr data,int dataSize)
+        void InitAsIndexBuffer(RenderDevice device,IntPtr data,int dataSize)
         {
             // Upload Heap, CPU can write to it. 
-            mUploadHeap = device.CreateCommittedResource
+            mUploadHeap = device.NativeDevice.CreateCommittedResource
             (
                 new HeapProperties(HeapType.Upload),
                 HeapFlags.None,

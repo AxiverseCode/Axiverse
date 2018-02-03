@@ -14,7 +14,7 @@ using Axiverse.Simulation.Prototypes;
 
 namespace Axiverse.Interface
 {
-    public class Engine
+    public class Engine2
     {
         public RenderForm Target { get; private set; }
         public Renderer Renderer { get; private set; }

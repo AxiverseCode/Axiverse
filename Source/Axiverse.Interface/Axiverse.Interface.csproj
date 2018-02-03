@@ -88,6 +88,9 @@
   <ItemGroup>
     <Compile Include="Engine.cs" />
     <Compile Include="Engine\Rendering\Buffer.cs" />
+    <Compile Include="Engine\Rendering\RenderContext.cs" />
+    <Compile Include="Engine\Rendering\RenderDevice.cs" />
+    <Compile Include="Engine\Rendering\SwapChain.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Graphics\Compositor.cs" />
     <Compile Include="Graphics\Fonts\ResourceFontFileEnumerator.cs" />
