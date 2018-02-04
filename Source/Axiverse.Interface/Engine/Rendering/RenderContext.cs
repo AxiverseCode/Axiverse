@@ -14,20 +14,36 @@ namespace Axiverse.Interface.Engine.Rendering
     public class RenderContext
     {
         private GraphicsCommandList mCmdList;
-        private CommandAllocator mCmdAllocator;
+        private CommandAllocator[] mCmdAllocator;
+        private Fence[] mFences;
+        private long[] mFenceValues;
 
-        public void Init(Device device)
+        public void Init(Device device,int numBuffers)
         {
-            mCmdAllocator = device.CreateCommandAllocator(CommandListType.Direct);
-            mCmdList = device.CreateCommandList(CommandListType.Direct, mCmdAllocator, null);
+            mCmdAllocator   = new CommandAllocator[numBuffers];
+            mFences         = new Fence[numBuffers];
+            mFenceValues    = new long[numBuffers];
+            for (int i = 0; i < numBuffers; i++)
+            {
+                mCmdAllocator[i]    = device.CreateCommandAllocator(CommandListType.Direct);
+                mFenceValues[i]     = 0;
+                mFences[i]          = device.CreateFence(mFenceValues[i], FenceFlags.None);
+            }
+            mCmdList = device.CreateCommandList(CommandListType.Direct, mCmdAllocator[0], null);
             // We close it as it starts in open state
             mCmdList.Close();
         }
 
-        public void Reset()
+        public void Reset(SwapChain chain)
         {
-            mCmdAllocator.Reset();
-            mCmdList.Reset(mCmdAllocator, null);
+            int idx = chain.CurBufferIdx;
+            while (mFences[idx].CompletedValue < mFenceValues[idx])
+            {
+                // ...wait...
+            }
+            Console.Write("Reset: " + idx + "," + mFences[idx].CompletedValue + "," + mFenceValues[idx] + "\n");
+            mCmdAllocator[idx].Reset();
+            mCmdList.Reset(mCmdAllocator[idx], null);
         }
 
         public GraphicsCommandList GetNativeContext()
@@ -38,6 +54,15 @@ namespace Axiverse.Interface.Engine.Rendering
         public void Close()
         {
             mCmdList.Close();
+        }
+
+        public void FinishFrame(SwapChain chain)
+        {
+            int idx = chain.CurBufferIdx;
+            mFenceValues[idx]++;
+            chain.GetNativeQueue().Signal(mFences[idx], mFenceValues[idx]);
+
+            Console.Write("FinishFrame: " + idx + "," + mFences[idx].CompletedValue + "," + mFenceValues[idx] + "\n");
         }
 
         public void SetViewport(int x,int y,int w,int h)

@@ -102,6 +102,11 @@ namespace Axiverse.Interface.Engine.Rendering
             mPresentQueue.ExecuteCommandList(list);
         }
 
+        public CommandQueue GetNativeQueue()
+        {
+            return mPresentQueue;
+        }
+
         /// <summary>
         /// 
         /// </summary>

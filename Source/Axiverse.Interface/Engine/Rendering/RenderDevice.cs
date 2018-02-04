@@ -7,6 +7,28 @@ using SharpDX.Direct3D12;
 
 namespace Axiverse.Interface.Engine.Rendering
 {
+    public enum ResourceFrequency
+    {
+        kStatic,
+        kDynamic
+    };
+
+    public enum BufferType
+    {
+        kIndexBuffer,
+        kVertexBuffer,
+        kConstantBuffer,
+        kStructuredBuffer
+    };
+
+    public struct BufferDesc
+    {
+        public ResourceFrequency Frequency;
+        public BufferType Type;
+        public int Size;
+        public String Name;
+    }
+
     /// <summary>
     /// Is responsible for creating all other objects (textures, buffers, shaders, pipeline states, etc.)
     /// </summary>
@@ -27,5 +49,6 @@ namespace Axiverse.Interface.Engine.Rendering
 #endif
             NativeDevice = new Device(null, SharpDX.Direct3D.FeatureLevel.Level_11_0);
         }
+
     }
 }
