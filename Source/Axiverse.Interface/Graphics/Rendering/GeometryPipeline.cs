@@ -13,12 +13,12 @@ namespace Axiverse.Interface.Graphics
     {
         public Renderer Renderer { get; private set; }
         public RenderTarget RenderTarget { get; set; }
-        public Scene Scene { get; private set; }
+        public SceneGraph Scene { get; private set; }
 
         private GraphicsCommandList commandList;
         public StandardPipelineState PipelineState { get; set; }
 
-        public GeometryPipeline(Renderer renderer, Scene scene)
+        public GeometryPipeline(Renderer renderer, SceneGraph scene)
         {
             Renderer = renderer;
             RenderTarget = renderer.RenderTarget;

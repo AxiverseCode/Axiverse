@@ -13,14 +13,14 @@ namespace Axiverse.Interface.Graphics
     {
         public Renderer Renderer { get; private set; }
         public RenderTarget RenderTarget { get; set; }
-        public Scene Scene { get; private set; }
+        public SceneGraph Scene { get; private set; }
 
         public Mesh<PositionColorTextureMaterial> Mesh;
         public Texture Texture;
         private GraphicsCommandList commandList;
         public VoxelPipelineState PipelineState { get; set; }
 
-        public VoxelPipeline(Renderer renderer, Scene scene)
+        public VoxelPipeline(Renderer renderer, SceneGraph scene)
         {
             Renderer = renderer;
             RenderTarget = renderer.RenderTarget;

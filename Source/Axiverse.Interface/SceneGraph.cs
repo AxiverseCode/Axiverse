@@ -8,7 +8,7 @@ using Axiverse.Interface.Graphics;
 
 namespace Axiverse.Interface
 {
-    public class Scene
+    public class SceneGraph
     {
         public List<Entity> Entities { get; } = new List<Entity>();
         public Camera Camera { get; set; }

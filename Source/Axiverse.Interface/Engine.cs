@@ -19,7 +19,7 @@ namespace Axiverse.Interface
         public RenderForm Target { get; private set; }
         public Renderer Renderer { get; private set; }
 
-        public Scene Scene { get; } = new Scene();
+        public SceneGraph Scene { get; } = new SceneGraph();
         public Window Window { get; set; } = new Window();
         public Camera Camera;
         public TrackballController Trackball;

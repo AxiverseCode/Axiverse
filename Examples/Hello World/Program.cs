@@ -21,7 +21,7 @@ namespace Axiverse.Examples.HelloWorld
             Store.Default.Mount(new Mount(@"..\..\..\..\Resources" ));
 
             // initialize the engine.
-            var engine = new Engine();
+            var engine = new Engine2();
 
             engine.Initialize();
             engine.Start();
