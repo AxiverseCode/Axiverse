@@ -27,5 +27,6 @@ namespace Axiverse.Interface.Engine.Rendering
 #endif
             NativeDevice = new Device(null, SharpDX.Direct3D.FeatureLevel.Level_11_0);
         }
+
     }
 }

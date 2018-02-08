@@ -9,55 +9,66 @@ using SharpDX.Direct3D12;
 
 namespace Axiverse.Interface.Engine.Rendering
 {
-    class Buffer
+    public class Buffer
     {
         private Resource mUploadHeap;
-        private Resource mGPUHeap;
 
         private IndexBufferView mIndexBufferView;
         private VertexBufferView mVertexBufferView;
 
-        void InitAsIndexBuffer(RenderDevice device,IntPtr data,int dataSize)
+        private void InitHeaps(Device device, GraphicsCommandList list, int size, IntPtr data, bool dataStatic = true)
         {
-            // Upload Heap, CPU can write to it. 
-            mUploadHeap = device.NativeDevice.CreateCommittedResource
+            mUploadHeap = device.CreateCommittedResource
             (
                 new HeapProperties(HeapType.Upload),
                 HeapFlags.None,
-                ResourceDescription.Buffer(dataSize),
+                ResourceDescription.Buffer(size),
                 ResourceStates.GenericRead
             );
 
-            // Copy data
-            Range mapRange = new Range
+            // Here we map the upload heap. Note the ranges, the first (0,0) indicates that we wont read 
+            // any memory and the second (null) that we wrote the entire resource
+            Range range = new Range();
+            range.Begin = 0;
+            range.End = 0;
+            IntPtr pData = mUploadHeap.Map(0, range);
             {
-                Begin = 0,
-                End = 0
-            };
-            IntPtr pData = mUploadHeap.Map(0,mapRange);
-            Utilities.CopyMemory(pData, data, dataSize);
-            mUploadHeap.Unmap(0,null);
+                Utilities.CopyMemory(pData, data, size);
+            }
+            mUploadHeap.Unmap(0, null);
 
-            // Create a view
-            mIndexBufferView = new IndexBufferView
+            // If it is static, we can upload it to a GPU heap.
+            // NOTE: For now we only have dynamic stuff.
+            if (dataStatic)
             {
-                Format = SharpDX.DXGI.Format.Unknown,
-                SizeInBytes = dataSize,
-                BufferLocation = mUploadHeap.GPUVirtualAddress
-            };
+
+            }
         }
-           
-        void InitAsVertexBuffer()
+
+        public void InitAsIndexBuffer(Device device,GraphicsCommandList list,int size,IntPtr data,bool dataStatic = true)
         {
+            InitHeaps(device, list, size, data, dataStatic);
 
+            mIndexBufferView.BufferLocation = mUploadHeap.GPUVirtualAddress; // check if its static
+            mIndexBufferView.Format         = SharpDX.DXGI.Format.R32_UInt;
+            mIndexBufferView.SizeInBytes    = size;
         }
 
-        IndexBufferView AsIndexBuffer()
+        public void InitAsVertexBuffer(Device device, GraphicsCommandList list, int size,int vertexSize, IntPtr data, bool dataStatic = true)
+        {
+            InitHeaps(device, list, size, data, dataStatic);
+
+            mVertexBufferView.BufferLocation    = mUploadHeap.GPUVirtualAddress; // check if its static
+            mVertexBufferView.SizeInBytes       = size;
+            mVertexBufferView.StrideInBytes     = vertexSize;
+        }
+
+        public IndexBufferView AsIndexBuffer()
         {
             return mIndexBufferView;
         }
 
-        VertexBufferView AsVertexBuffer()
+        public VertexBufferView AsVertexBuffer()
         {
             return mVertexBufferView;
         }
