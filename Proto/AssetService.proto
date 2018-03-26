@@ -1,0 +1,42 @@
+// Asset Service
+//
+// Consumer service on the management of assets.
+syntax = "proto3";
+
+message Asset
+{
+
+	// Owning identity.
+	string identity = 1;
+
+	// Identifier of the class of the asset.
+	string asset_class = 2;
+
+	int64 quantity = 2;
+
+}
+
+message AssetClass
+{
+	string identifier = 1;
+
+	bool fungible = 2;
+}
+
+service AssetService
+{
+
+	rpc CreateAssetClass (CreateAssetClassRequest) returns (CreateAssetClassResponse);
+
+	rpc DeleteAssetClass (DeleteAssetClassRequest) returns (DeleteAssetClassResponse);
+
+
+	rpc CreateAsset(CreateAssetRequest) returns (CreateAssetResponse);
+
+	rpc DeleteAsset(DeleteAssetRequest) returns (DeleteAssetResponse);
+
+	rpc TransferAsset(TransferAssetRequest) returns (TransferAssetResponse);
+
+	rpc ExecuteTransaction(ExecuteTransactionRequest) returns (ExecuteTransactionResponse);
+
+}

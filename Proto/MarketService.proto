@@ -1,0 +1,31 @@
+//
+//
+//
+syntax = "proto3";
+
+
+service MarketService {
+
+	rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse);
+
+}
+
+message PlaceOrderRequest {
+
+	OrderType type = 1;
+
+	string asset_class = 2;
+
+	int64 quantity = 3;
+
+	int64 price = 4;
+
+}
+
+
+enum OrderType {
+	BUY = 1;
+	SELL = 2;
+	LIMIT = 3;
+	STOP = 4;
+}

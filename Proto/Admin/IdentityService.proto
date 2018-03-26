@@ -1,0 +1,64 @@
+//
+//
+//
+syntax = "proto3";
+
+// An identity.
+message Identity {
+
+	// The Uuid identifier.
+	string identifier = 1;
+
+	// The display name which is unique in conjunction with the display number.
+	string display_name = 2;
+
+	// The display number which is unique in conjunction with the display name.
+	int64 display_number = 3;
+
+}
+
+service IdentityService {
+
+	rpc ValidateIdentity(ValidateIdentityRequest) returns (ValidateIdentityResponse);
+
+	rpc CreateIdentity(CreateIdentityRequest) returns (CreateIdentityResponse);
+
+	rpc DeleteIdentity(DeleteIdentityRequest) returns (DeleteIdentityResponse);
+
+	rpc GetIdentity(GetIdentityRequest) returns (GetIdentityResponse);
+
+}
+
+// Request for validating identity.
+message ValidateIdentityRequest {
+
+	// The key used to identify an identity.
+	string key = 1;
+
+	// The secret used to identify an identity.
+	string secret = 2;
+
+}
+
+// Response for validating identity.
+message ValidateIdentityResponse {
+
+	string session = 1;
+
+}
+
+message CreateIdentityRequest {
+
+}
+
+message CreateIdentityResponse {
+
+}
+
+message DeleteIdentityRequest {
+
+}
+
+message DeleteIdentityResponse {
+
+}

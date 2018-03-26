@@ -1,0 +1,22 @@
+// EntityService
+//
+//
+syntax = "proto3"
+
+message Entity {
+
+}
+
+message EntityClass {
+
+}
+
+service EntityService {
+
+	rpc CreateEntity(CreateEntityRequest) returns (CreateEntityResponse);
+
+	rpc DeleteEntity(DeleteEntityRequest) returns (DeleteEntityResponse);
+
+	rpc GetEntity(GetEntityRequest) returns (GetEntityResponse);
+
+}

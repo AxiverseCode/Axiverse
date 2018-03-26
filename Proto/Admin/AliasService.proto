@@ -1,0 +1,42 @@
+// Alias Service
+//
+// Administrative service for resolving aliases to addresses.
+syntax = "proto3";
+
+service AliasService {
+
+	rpc ResolveAlias(ResolveAliasRequest) returns (ResolveAliasResponse);
+
+	rpc CreateAlias(CreateAliasRequest) returns (CreateAliasResponse);
+
+	rpc DeleteAlias(DeleteAliasRequest) returns (DeleteAliasResponse);
+
+}
+
+message ResolveAliasRequest {
+	string alias = 1;
+}
+
+message ResolveAliasResponse {
+	string target = 1;
+}
+
+message CreateAliasRequest {
+	string alias = 1;
+
+	string target = 2;
+}
+
+message CreateAliasResponse {
+	bool succeeded = 1;
+}
+
+message DeleteAliasRequest {
+	string alias = 1;
+}
+
+message DeleteAliasResponse {
+	bool succeeded = 1;
+}
+
+

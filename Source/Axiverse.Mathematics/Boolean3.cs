@@ -70,6 +70,30 @@ namespace Axiverse.Mathematics
         }
 
         /// <summary>
+        /// Gets the signed unit vector based on each boolean component.
+        /// </summary>
+        /// <returns>Signed unit vector.</returns>
+        public Vector3 ToVector3()
+        {
+            return new Vector3(
+                X ? 1 : -1,
+                Y ? 1 : -1,
+                Z ? 1 : -1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerator<Boolean3> All()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                yield return (Boolean3)i;
+            }
+        }
+
+        /// <summary>
         /// Performs a boolean and between two Boolean3 structures.
         /// </summary>
         /// <param name="left"></param>
@@ -93,6 +117,36 @@ namespace Axiverse.Mathematics
             return new Boolean3(left.X || right.X,
                                 left.Y || right.Y,
                                 left.Z || right.Z);
+        }
+
+        /// <summary>
+        /// Returns the negation of a Boolean3 structure.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Boolean3 operator !(Boolean3 value)
+        {
+            return new Boolean3(!value.X, !value.Y, !value.Z);
+        }
+
+        /// <summary>
+        /// Casts a Boolean3 into a integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public static explicit operator int(Boolean3 value)
+        {
+            return (value.X ? 4 : 0)
+                | (value.Y ? 2 : 0)
+                | (value.Z ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Casts an integer into a Boolean3.
+        /// </summary>
+        /// <param name="value"></param>
+        public static explicit operator Boolean3(int value)
+        {
+            return new Boolean3((value & 4) != 0, (value & 2) != 0, (value & 1) != 0);
         }
     }
 }

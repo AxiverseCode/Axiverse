@@ -22,6 +22,16 @@ namespace Axiverse.Mathematics
         public Vector3 Maximum;
 
         /// <summary>
+        /// Gets the size of the bounding box.
+        /// </summary>
+        public Vector3 Size => Maximum - Minimum;
+
+        /// <summary>
+        /// Gets the center of the bounding box.
+        /// </summary>
+        public Vector3 Center => (Maximum + Minimum) / 2;
+
+        /// <summary>
         /// Initializes a new instance of the Bounds3 class with the specified minimum and maximum vertices.
         /// </summary>
         /// <param name="minimum">The minimum vertex.</param>
@@ -52,23 +62,54 @@ namespace Axiverse.Mathematics
         /// </summary>
         /// <param name="vector"></param>
         /// <returns></returns>
-        public bool Contains(Vector3 vector)
-        {
-            return (vector.X >= Minimum.X && vector.Y >= Minimum.Y && vector.Z >= Minimum.Z)
-                && (vector.X <= Maximum.X && vector.Y <= Maximum.Y && vector.Z <= Maximum.Z);
-        }
+        public bool Contains(Vector3 vector) => Contains(ref this, ref vector);
 
         /// <summary>
         /// Determines if the specified bounds intersects with this Bounds3 structure.
         /// </summary>
         /// <param name="bounds"></param>
         /// <returns></returns>
-        public bool Intersects(Bounds3 bounds)
+        public bool Intersects(Bounds3 bounds) => Intersects(ref this, ref bounds);
+
+        /// <summary>
+        /// Creates a bounding box from two vectors regardless of ordering.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Bounds3 FromVectors(Vector3 left, Vector3 right)
         {
-            // TODO: this is probably wrong
-            throw new NotImplementedException();
-            return (Minimum.X <= bounds.Maximum.X && Minimum.Y <= bounds.Maximum.Y && Minimum.Z <= bounds.Maximum.Z)
-                && (Maximum.X >= bounds.Minimum.X && Maximum.Y >= bounds.Minimum.Y && Maximum.Z >= bounds.Minimum.Z);
+            return new Bounds3(
+                Math.Min(left.X, right.X), Math.Max(left.X, right.X),
+                Math.Min(left.Y, right.Y), Math.Max(left.Y, right.Y),
+                Math.Min(left.Z, right.Z), Math.Max(left.Z, right.Z));
+        }
+
+        /// <summary>
+        /// Normalizes the bounds and ensures that the maximum values and minimum values are in the right place.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Bounds3 Normalize(Bounds3 value)
+        {
+            return new Bounds3(
+                Math.Min(value.Minimum.X, value.Maximum.X), Math.Max(value.Minimum.X, value.Maximum.X),
+                Math.Min(value.Minimum.Y, value.Maximum.Y), Math.Max(value.Minimum.Y, value.Maximum.Y),
+                Math.Min(value.Minimum.Z, value.Maximum.Z), Math.Max(value.Minimum.Z, value.Maximum.Z));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bounds"></param>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public static bool Contains(ref Bounds3 bounds, ref Vector3 vector)
+        {
+            return
+                (vector.X >= bounds.Minimum.X && vector.X <= bounds.Maximum.X) &&
+                (vector.Y >= bounds.Minimum.Y && vector.Y <= bounds.Maximum.Y) &&
+                (vector.Z >= bounds.Minimum.Z && vector.Z <= bounds.Maximum.Z);
         }
 
         /// <summary>
@@ -81,9 +122,18 @@ namespace Axiverse.Mathematics
             return sphere.Intersects(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool Intersects(ref Bounds3 left, ref Bounds3 right)
         {
-            return left.Intersects(right);
+            return
+                (left.Maximum.X >= right.Minimum.X && left.Minimum.X >= right.Maximum.X) &&
+                (left.Maximum.Y >= right.Minimum.Y && left.Minimum.Y >= right.Maximum.Y) &&
+                (left.Maximum.Z >= right.Minimum.Z && left.Minimum.Z >= right.Maximum.Z);
         }
     }
 }
