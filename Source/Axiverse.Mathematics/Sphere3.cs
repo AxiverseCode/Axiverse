@@ -30,7 +30,7 @@ namespace Axiverse.Mathematics
         {
             var distanceSquared = Vector3.DistanceSquared(ref Position, ref sphere.Position);
             var jointRadius = (Radius + sphere.Radius);
-            return distanceSquared < jointRadius;
+            return distanceSquared <= jointRadius * jointRadius;
         }
 
         public bool Intersects(Bounds3 bounds)

@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Spatial\OctreeTest.cs" />
+    <Compile Include="Spatial\Spatial3.cs" />
+    <Compile Include="Sphere3Test.cs" />
     <Compile Include="Vector3Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
