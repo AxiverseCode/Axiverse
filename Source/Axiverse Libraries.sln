@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Persona", "Axivers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Mathematics", "..\Tests\Axiverse.Tests.Mathematics\Axiverse.Tests.Mathematics.csproj", "{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{3C361219-E4EE-4D0A-8756-50A6DF16B6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C361219-E4EE-4D0A-8756-50A6DF16B6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C361219-E4EE-4D0A-8756-50A6DF16B6A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 		{B79A989D-F5BA-441D-91BD-AF6AE025D30D} = {927FED4B-50ED-4FFB-A790-5624F5519777}
+		{F6C19E0D-E14B-49D2-B292-5618BD9B6A12} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

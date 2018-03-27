@@ -85,6 +85,12 @@ namespace Axiverse.Mathematics
                 Math.Min(left.Z, right.Z), Math.Max(left.Z, right.Z));
         }
 
+        public static Bounds3 FromCenter(Vector3 center, Vector3 size)
+        {
+            Vector3 extent = size / 2;
+            return new Bounds3(center - size, center + size);
+        }
+
         /// <summary>
         /// Normalizes the bounds and ensures that the maximum values and minimum values are in the right place.
         /// </summary>

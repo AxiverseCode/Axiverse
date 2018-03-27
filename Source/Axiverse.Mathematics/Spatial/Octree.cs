@@ -6,64 +6,57 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.Spatial
 {
-    public class Octree
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class Octree<T> where T : class, ISpatial3
     {
+        public Bounds3 Bounds { get; }
 
-    
-    }
+        public Octant<T> Root { get; }
 
-    public class OctreeNode
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public Bounds3 Bounds { get; private set; }
-
-        OctreeNode[] children = new OctreeNode[8];
-        OctreeNode[] neigbors = new OctreeNode[8];
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public OctreeNode(OctreeNode parent, Bounds3 bounds)
+        public Octree(Vector3 center, float side)
         {
-            Bounds = bounds;
+            Bounds = Bounds3.FromCenter(center, new Vector3(side));
+            Root = new Octant<T>(null, Bounds);
         }
 
-        private void CreateChild(Boolean3 octant)
+        public void Add(T item)
         {
-            OctreeNode node = new OctreeNode(this, GetChildBounds(Bounds, octant));
-            
+            item.PositionChanged += HandlePositionChanged;
+            var octant = Root.Add(item);
+            items.Add(item, octant);
         }
 
-        private void Detach()
+        public void Remove(T item)
         {
-            for (int i = 0; i < 8; i++)
-            {
-                Boolean3 direction = (Boolean3)i;
-                if (neigbors[i] != null)
-                {
-                    // remove this from the neighbor
-                    neigbors[i].neigbors[(int)!direction] = null;
-                    neigbors[i] = null;
-                }
-            }
+            item.PositionChanged -= HandlePositionChanged;
+            items[item].Remove(item);
         }
 
-        /// <summary>
-        /// Creates the bounding box for the specified octant.
-        /// </summary>
-        /// <param name="bounds"></param>
-        /// <param name="octant"></param>
-        /// <returns></returns>
-        private static Bounds3 GetChildBounds(Bounds3 bounds, Boolean3 octant)
+        public List<T> GetIntersecting(Sphere3 sphere)
         {
-            Vector3 center = bounds.Center;
-            Vector3 half = bounds.Size / 2;
-            Vector3 corner = center + (half * octant.ToVector3());
-
-            return Bounds3.FromVectors(center, corner);
+            var list = new List<T>();
+            Root.AppendIntersecting(list, sphere);
+            return list;
         }
+
+        public List<T> GetContaining(Bounds3 bounds)
+        {
+            var list = new List<T>();
+            Root.AppendContaining(list, bounds);
+            return list;
+        }
+
+        private void HandlePositionChanged(object sender, EventArgs args)
+        {
+            var item = sender as T;
+            items[item].Remove(item);
+            var octant = Root.Add(item);
+            items.Add(item, octant);
+        }
+
+        private readonly Dictionary<T, Octant<T>> items = new Dictionary<T, Octant<T>>();
     }
 }

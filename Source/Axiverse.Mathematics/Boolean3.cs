@@ -82,18 +82,6 @@ namespace Axiverse.Mathematics
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerator<Boolean3> All()
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                yield return (Boolean3)i;
-            }
-        }
-
-        /// <summary>
         /// Performs a boolean and between two Boolean3 structures.
         /// </summary>
         /// <param name="left"></param>
@@ -117,6 +105,26 @@ namespace Axiverse.Mathematics
             return new Boolean3(left.X || right.X,
                                 left.Y || right.Y,
                                 left.Z || right.Z);
+        }
+
+        /// <summary>
+        /// Performs a boolean exclusive or between two Boolean3 structures.
+        /// 
+        /// A | B | A ^ B
+        /// --+---+------
+        /// 0 | 0 |   0
+        /// 0 | 1 |   1
+        /// 1 | 0 |   1
+        /// 1 | 1 |   0
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Boolean3 operator ^(Boolean3 left, Boolean3 right)
+        {
+            return new Boolean3(left.X ^ right.X,
+                                left.Y ^ right.Y,
+                                left.Z ^ right.Z);
         }
 
         /// <summary>
@@ -148,5 +156,12 @@ namespace Axiverse.Mathematics
         {
             return new Boolean3((value & 4) != 0, (value & 2) != 0, (value & 1) != 0);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly Boolean3[] Complete = new Boolean3[] {
+            (Boolean3)0, (Boolean3)1, (Boolean3)2, (Boolean3)3,
+            (Boolean3)4, (Boolean3)5, (Boolean3)6, (Boolean3)7};
     }
 }
