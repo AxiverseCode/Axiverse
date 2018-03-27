@@ -1,6 +1,0 @@
-..\packages\Grpc.Tools.1.10.0\tools\windows_x86\protoc.exe ^
-	-I../../protos ^
-	--csharp_out Greeter ^
-	--grpc_out Greeter ^
-	../../Proto/*.proto ^
-	--plugin=protoc-gen-grpc=packages/Grpc.Tools.1.10.x/tools/windows_x86/grpc_csharp_plugin.exe

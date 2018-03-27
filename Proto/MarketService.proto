@@ -3,6 +3,13 @@
 //
 syntax = "proto3";
 
+enum OrderType {
+	UNKNOWN = 0;
+	BUY = 1;
+	SELL = 2;
+	LIMIT = 3;
+	STOP = 4;
+}
 
 service MarketService {
 
@@ -22,10 +29,6 @@ message PlaceOrderRequest {
 
 }
 
+message PlaceOrderResponse {
 
-enum OrderType {
-	BUY = 1;
-	SELL = 2;
-	LIMIT = 3;
-	STOP = 4;
 }

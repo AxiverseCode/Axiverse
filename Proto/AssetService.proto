@@ -12,7 +12,7 @@ message Asset
 	// Identifier of the class of the asset.
 	string asset_class = 2;
 
-	int64 quantity = 2;
+	int64 quantity = 3;
 
 }
 
@@ -38,5 +38,53 @@ service AssetService
 	rpc TransferAsset(TransferAssetRequest) returns (TransferAssetResponse);
 
 	rpc ExecuteTransaction(ExecuteTransactionRequest) returns (ExecuteTransactionResponse);
+
+}
+
+message CreateAssetClassRequest {
+
+}
+
+message CreateAssetClassResponse {
+
+}
+
+message DeleteAssetClassRequest {
+
+}
+
+message DeleteAssetClassResponse {
+
+}
+
+message CreateAssetRequest {
+
+}
+
+message CreateAssetResponse {
+
+}
+
+message DeleteAssetRequest {
+
+}
+
+message DeleteAssetResponse {
+
+}
+
+message TransferAssetRequest {
+
+}
+
+message TransferAssetResponse {
+
+}
+
+message ExecuteTransactionRequest {
+
+}
+
+message ExecuteTransactionResponse {
 
 }

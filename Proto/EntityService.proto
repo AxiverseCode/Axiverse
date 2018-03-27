@@ -1,7 +1,7 @@
 // EntityService
 //
 //
-syntax = "proto3"
+syntax = "proto3";
 
 message Entity {
 
@@ -19,4 +19,28 @@ service EntityService {
 
 	rpc GetEntity(GetEntityRequest) returns (GetEntityResponse);
 
+}
+
+message CreateEntityRequest {
+
+}
+
+message CreateEntityResponse {
+
+}
+
+message DeleteEntityRequest {
+
+}
+
+message DeleteEntityResponse {
+
+}
+
+message GetEntityRequest {
+
+}
+
+message GetEntityResponse {
+	
 }
