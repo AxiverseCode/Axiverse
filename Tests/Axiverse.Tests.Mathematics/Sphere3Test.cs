@@ -24,5 +24,17 @@ namespace Axiverse.Tests.Mathematics
 
             Assert.IsTrue(left.Intersects(right));
         }
+
+        [TestMethod]
+        public void Constructs()
+        {
+            var position = new Vector3(1, 2, 3);
+            var radius = 4f;
+
+            var value = new Sphere3(position, radius);
+
+            Assert.AreEqual(value.Position, position);
+            Assert.AreEqual(value.Radius, radius);
+        }
     }
 }
