@@ -7,26 +7,30 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-/// <summary>Holder for reflection information generated from ModelService.proto</summary>
-public static partial class ModelServiceReflection {
+namespace Axiverse.Services.Proto {
 
-  #region Descriptor
-  /// <summary>File descriptor for ModelService.proto</summary>
-  public static pbr::FileDescriptor Descriptor {
-    get { return descriptor; }
+  /// <summary>Holder for reflection information generated from ModelService.proto</summary>
+  public static partial class ModelServiceReflection {
+
+    #region Descriptor
+    /// <summary>File descriptor for ModelService.proto</summary>
+    public static pbr::FileDescriptor Descriptor {
+      get { return descriptor; }
+    }
+    private static pbr::FileDescriptor descriptor;
+
+    static ModelServiceReflection() {
+      byte[] descriptorData = global::System.Convert.FromBase64String(
+          string.Concat(
+            "ChJNb2RlbFNlcnZpY2UucHJvdG9CGqoCF0F4aXZlcnNlLlNlcnZpY2VzLlBy",
+            "b3RvYgZwcm90bzM="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
+          new pbr::FileDescriptor[] { },
+          new pbr::GeneratedClrTypeInfo(null, null));
+    }
+    #endregion
+
   }
-  private static pbr::FileDescriptor descriptor;
-
-  static ModelServiceReflection() {
-    byte[] descriptorData = global::System.Convert.FromBase64String(
-        string.Concat(
-          "ChJNb2RlbFNlcnZpY2UucHJvdG9iBnByb3RvMw=="));
-    descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { },
-        new pbr::GeneratedClrTypeInfo(null, null));
-  }
-  #endregion
-
 }
 
 #endregion Designer generated code

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
       <HintPath>..\packages\Grpc.Core.1.10.0\lib\net45\Grpc.Core.dll</HintPath>
     </Reference>
@@ -48,11 +51,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AliasService.cs" />
+    <Compile Include="AliasServiceGrpc.cs" />
+    <Compile Include="AssetService.cs" />
+    <Compile Include="AssetServiceGrpc.cs" />
+    <Compile Include="EntityService.cs" />
+    <Compile Include="EntityServiceGrpc.cs" />
+    <Compile Include="IdentityService.cs" />
+    <Compile Include="IdentityServiceGrpc.cs" />
+    <Compile Include="MarketService.cs" />
+    <Compile Include="MarketServiceGrpc.cs" />
+    <Compile Include="ModelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Generate.bat" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,1046 +7,1050 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-/// <summary>Holder for reflection information generated from Admin/IdentityService.proto</summary>
-public static partial class IdentityServiceReflection {
+namespace Axiverse.Services.Proto {
 
-  #region Descriptor
-  /// <summary>File descriptor for Admin/IdentityService.proto</summary>
-  public static pbr::FileDescriptor Descriptor {
-    get { return descriptor; }
-  }
-  private static pbr::FileDescriptor descriptor;
+  /// <summary>Holder for reflection information generated from Admin/IdentityService.proto</summary>
+  public static partial class IdentityServiceReflection {
 
-  static IdentityServiceReflection() {
-    byte[] descriptorData = global::System.Convert.FromBase64String(
-        string.Concat(
-          "ChtBZG1pbi9JZGVudGl0eVNlcnZpY2UucHJvdG8iTAoISWRlbnRpdHkSEgoK",
-          "aWRlbnRpZmllchgBIAEoCRIUCgxkaXNwbGF5X25hbWUYAiABKAkSFgoOZGlz",
-          "cGxheV9udW1iZXIYAyABKAMiNgoXVmFsaWRhdGVJZGVudGl0eVJlcXVlc3QS",
-          "CwoDa2V5GAEgASgJEg4KBnNlY3JldBgCIAEoCSIrChhWYWxpZGF0ZUlkZW50",
-          "aXR5UmVzcG9uc2USDwoHc2Vzc2lvbhgBIAEoCSIXChVDcmVhdGVJZGVudGl0",
-          "eVJlcXVlc3QiGAoWQ3JlYXRlSWRlbnRpdHlSZXNwb25zZSIXChVEZWxldGVJ",
-          "ZGVudGl0eVJlcXVlc3QiGAoWRGVsZXRlSWRlbnRpdHlSZXNwb25zZSIUChJH",
-          "ZXRJZGVudGl0eVJlcXVlc3QiFQoTR2V0SWRlbnRpdHlSZXNwb25zZTKaAgoP",
-          "SWRlbnRpdHlTZXJ2aWNlEkcKEFZhbGlkYXRlSWRlbnRpdHkSGC5WYWxpZGF0",
-          "ZUlkZW50aXR5UmVxdWVzdBoZLlZhbGlkYXRlSWRlbnRpdHlSZXNwb25zZRJB",
-          "Cg5DcmVhdGVJZGVudGl0eRIWLkNyZWF0ZUlkZW50aXR5UmVxdWVzdBoXLkNy",
-          "ZWF0ZUlkZW50aXR5UmVzcG9uc2USQQoORGVsZXRlSWRlbnRpdHkSFi5EZWxl",
-          "dGVJZGVudGl0eVJlcXVlc3QaFy5EZWxldGVJZGVudGl0eVJlc3BvbnNlEjgK",
-          "C0dldElkZW50aXR5EhMuR2V0SWRlbnRpdHlSZXF1ZXN0GhQuR2V0SWRlbnRp",
-          "dHlSZXNwb25zZWIGcHJvdG8z"));
-    descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { },
-        new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Identity), global::Identity.Parser, new[]{ "Identifier", "DisplayName", "DisplayNumber" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::ValidateIdentityRequest), global::ValidateIdentityRequest.Parser, new[]{ "Key", "Secret" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::ValidateIdentityResponse), global::ValidateIdentityResponse.Parser, new[]{ "Session" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::CreateIdentityRequest), global::CreateIdentityRequest.Parser, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::CreateIdentityResponse), global::CreateIdentityResponse.Parser, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::DeleteIdentityRequest), global::DeleteIdentityRequest.Parser, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::DeleteIdentityResponse), global::DeleteIdentityResponse.Parser, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::GetIdentityRequest), global::GetIdentityRequest.Parser, null, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::GetIdentityResponse), global::GetIdentityResponse.Parser, null, null, null, null)
-        }));
+    #region Descriptor
+    /// <summary>File descriptor for Admin/IdentityService.proto</summary>
+    public static pbr::FileDescriptor Descriptor {
+      get { return descriptor; }
+    }
+    private static pbr::FileDescriptor descriptor;
+
+    static IdentityServiceReflection() {
+      byte[] descriptorData = global::System.Convert.FromBase64String(
+          string.Concat(
+            "ChtBZG1pbi9JZGVudGl0eVNlcnZpY2UucHJvdG8iTAoISWRlbnRpdHkSEgoK",
+            "aWRlbnRpZmllchgBIAEoCRIUCgxkaXNwbGF5X25hbWUYAiABKAkSFgoOZGlz",
+            "cGxheV9udW1iZXIYAyABKAMiNgoXVmFsaWRhdGVJZGVudGl0eVJlcXVlc3QS",
+            "CwoDa2V5GAEgASgJEg4KBnNlY3JldBgCIAEoCSIrChhWYWxpZGF0ZUlkZW50",
+            "aXR5UmVzcG9uc2USDwoHc2Vzc2lvbhgBIAEoCSIXChVDcmVhdGVJZGVudGl0",
+            "eVJlcXVlc3QiGAoWQ3JlYXRlSWRlbnRpdHlSZXNwb25zZSIXChVEZWxldGVJ",
+            "ZGVudGl0eVJlcXVlc3QiGAoWRGVsZXRlSWRlbnRpdHlSZXNwb25zZSIUChJH",
+            "ZXRJZGVudGl0eVJlcXVlc3QiFQoTR2V0SWRlbnRpdHlSZXNwb25zZTKaAgoP",
+            "SWRlbnRpdHlTZXJ2aWNlEkcKEFZhbGlkYXRlSWRlbnRpdHkSGC5WYWxpZGF0",
+            "ZUlkZW50aXR5UmVxdWVzdBoZLlZhbGlkYXRlSWRlbnRpdHlSZXNwb25zZRJB",
+            "Cg5DcmVhdGVJZGVudGl0eRIWLkNyZWF0ZUlkZW50aXR5UmVxdWVzdBoXLkNy",
+            "ZWF0ZUlkZW50aXR5UmVzcG9uc2USQQoORGVsZXRlSWRlbnRpdHkSFi5EZWxl",
+            "dGVJZGVudGl0eVJlcXVlc3QaFy5EZWxldGVJZGVudGl0eVJlc3BvbnNlEjgK",
+            "C0dldElkZW50aXR5EhMuR2V0SWRlbnRpdHlSZXF1ZXN0GhQuR2V0SWRlbnRp",
+            "dHlSZXNwb25zZUIaqgIXQXhpdmVyc2UuU2VydmljZXMuUHJvdG9iBnByb3Rv",
+            "Mw=="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
+          new pbr::FileDescriptor[] { },
+          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Identity), global::Axiverse.Services.Proto.Identity.Parser, new[]{ "Identifier", "DisplayName", "DisplayNumber" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ValidateIdentityRequest), global::Axiverse.Services.Proto.ValidateIdentityRequest.Parser, new[]{ "Key", "Secret" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ValidateIdentityResponse), global::Axiverse.Services.Proto.ValidateIdentityResponse.Parser, new[]{ "Session" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateIdentityRequest), global::Axiverse.Services.Proto.CreateIdentityRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateIdentityResponse), global::Axiverse.Services.Proto.CreateIdentityResponse.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteIdentityRequest), global::Axiverse.Services.Proto.DeleteIdentityRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteIdentityResponse), global::Axiverse.Services.Proto.DeleteIdentityResponse.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetIdentityRequest), global::Axiverse.Services.Proto.GetIdentityRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetIdentityResponse), global::Axiverse.Services.Proto.GetIdentityResponse.Parser, null, null, null, null)
+          }));
+    }
+    #endregion
+
   }
+  #region Messages
+  /// <summary>
+  /// An identity.
+  /// </summary>
+  public sealed partial class Identity : pb::IMessage<Identity> {
+    private static readonly pb::MessageParser<Identity> _parser = new pb::MessageParser<Identity>(() => new Identity());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Identity> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Identity() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Identity(Identity other) : this() {
+      identifier_ = other.identifier_;
+      displayName_ = other.displayName_;
+      displayNumber_ = other.displayNumber_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Identity Clone() {
+      return new Identity(this);
+    }
+
+    /// <summary>Field number for the "identifier" field.</summary>
+    public const int IdentifierFieldNumber = 1;
+    private string identifier_ = "";
+    /// <summary>
+    /// The Uuid identifier.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Identifier {
+      get { return identifier_; }
+      set {
+        identifier_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "display_name" field.</summary>
+    public const int DisplayNameFieldNumber = 2;
+    private string displayName_ = "";
+    /// <summary>
+    /// The display name which is unique in conjunction with the display number.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string DisplayName {
+      get { return displayName_; }
+      set {
+        displayName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "display_number" field.</summary>
+    public const int DisplayNumberFieldNumber = 3;
+    private long displayNumber_;
+    /// <summary>
+    /// The display number which is unique in conjunction with the display name.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long DisplayNumber {
+      get { return displayNumber_; }
+      set {
+        displayNumber_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Identity);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Identity other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Identifier != other.Identifier) return false;
+      if (DisplayName != other.DisplayName) return false;
+      if (DisplayNumber != other.DisplayNumber) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Identifier.Length != 0) hash ^= Identifier.GetHashCode();
+      if (DisplayName.Length != 0) hash ^= DisplayName.GetHashCode();
+      if (DisplayNumber != 0L) hash ^= DisplayNumber.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Identifier.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Identifier);
+      }
+      if (DisplayName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(DisplayName);
+      }
+      if (DisplayNumber != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(DisplayNumber);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Identifier.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Identifier);
+      }
+      if (DisplayName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DisplayName);
+      }
+      if (DisplayNumber != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(DisplayNumber);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Identity other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Identifier.Length != 0) {
+        Identifier = other.Identifier;
+      }
+      if (other.DisplayName.Length != 0) {
+        DisplayName = other.DisplayName;
+      }
+      if (other.DisplayNumber != 0L) {
+        DisplayNumber = other.DisplayNumber;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Identifier = input.ReadString();
+            break;
+          }
+          case 18: {
+            DisplayName = input.ReadString();
+            break;
+          }
+          case 24: {
+            DisplayNumber = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// Request for validating identity.
+  /// </summary>
+  public sealed partial class ValidateIdentityRequest : pb::IMessage<ValidateIdentityRequest> {
+    private static readonly pb::MessageParser<ValidateIdentityRequest> _parser = new pb::MessageParser<ValidateIdentityRequest>(() => new ValidateIdentityRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ValidateIdentityRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ValidateIdentityRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ValidateIdentityRequest(ValidateIdentityRequest other) : this() {
+      key_ = other.key_;
+      secret_ = other.secret_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ValidateIdentityRequest Clone() {
+      return new ValidateIdentityRequest(this);
+    }
+
+    /// <summary>Field number for the "key" field.</summary>
+    public const int KeyFieldNumber = 1;
+    private string key_ = "";
+    /// <summary>
+    /// The key used to identify an identity.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Key {
+      get { return key_; }
+      set {
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "secret" field.</summary>
+    public const int SecretFieldNumber = 2;
+    private string secret_ = "";
+    /// <summary>
+    /// The secret used to identify an identity.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Secret {
+      get { return secret_; }
+      set {
+        secret_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ValidateIdentityRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ValidateIdentityRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Key != other.Key) return false;
+      if (Secret != other.Secret) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (Secret.Length != 0) hash ^= Secret.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Key.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Key);
+      }
+      if (Secret.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Secret);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Key.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (Secret.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Secret);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ValidateIdentityRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Key.Length != 0) {
+        Key = other.Key;
+      }
+      if (other.Secret.Length != 0) {
+        Secret = other.Secret;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Key = input.ReadString();
+            break;
+          }
+          case 18: {
+            Secret = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// Response for validating identity.
+  /// </summary>
+  public sealed partial class ValidateIdentityResponse : pb::IMessage<ValidateIdentityResponse> {
+    private static readonly pb::MessageParser<ValidateIdentityResponse> _parser = new pb::MessageParser<ValidateIdentityResponse>(() => new ValidateIdentityResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ValidateIdentityResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ValidateIdentityResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ValidateIdentityResponse(ValidateIdentityResponse other) : this() {
+      session_ = other.session_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ValidateIdentityResponse Clone() {
+      return new ValidateIdentityResponse(this);
+    }
+
+    /// <summary>Field number for the "session" field.</summary>
+    public const int SessionFieldNumber = 1;
+    private string session_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Session {
+      get { return session_; }
+      set {
+        session_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ValidateIdentityResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ValidateIdentityResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Session != other.Session) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Session.Length != 0) hash ^= Session.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Session.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Session);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Session.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Session);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ValidateIdentityResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Session.Length != 0) {
+        Session = other.Session;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Session = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CreateIdentityRequest : pb::IMessage<CreateIdentityRequest> {
+    private static readonly pb::MessageParser<CreateIdentityRequest> _parser = new pb::MessageParser<CreateIdentityRequest>(() => new CreateIdentityRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CreateIdentityRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateIdentityRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateIdentityRequest(CreateIdentityRequest other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateIdentityRequest Clone() {
+      return new CreateIdentityRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CreateIdentityRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CreateIdentityRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CreateIdentityRequest other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CreateIdentityResponse : pb::IMessage<CreateIdentityResponse> {
+    private static readonly pb::MessageParser<CreateIdentityResponse> _parser = new pb::MessageParser<CreateIdentityResponse>(() => new CreateIdentityResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CreateIdentityResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateIdentityResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateIdentityResponse(CreateIdentityResponse other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateIdentityResponse Clone() {
+      return new CreateIdentityResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CreateIdentityResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CreateIdentityResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CreateIdentityResponse other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeleteIdentityRequest : pb::IMessage<DeleteIdentityRequest> {
+    private static readonly pb::MessageParser<DeleteIdentityRequest> _parser = new pb::MessageParser<DeleteIdentityRequest>(() => new DeleteIdentityRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeleteIdentityRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteIdentityRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteIdentityRequest(DeleteIdentityRequest other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteIdentityRequest Clone() {
+      return new DeleteIdentityRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeleteIdentityRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeleteIdentityRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeleteIdentityRequest other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeleteIdentityResponse : pb::IMessage<DeleteIdentityResponse> {
+    private static readonly pb::MessageParser<DeleteIdentityResponse> _parser = new pb::MessageParser<DeleteIdentityResponse>(() => new DeleteIdentityResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeleteIdentityResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteIdentityResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteIdentityResponse(DeleteIdentityResponse other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteIdentityResponse Clone() {
+      return new DeleteIdentityResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeleteIdentityResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeleteIdentityResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeleteIdentityResponse other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetIdentityRequest : pb::IMessage<GetIdentityRequest> {
+    private static readonly pb::MessageParser<GetIdentityRequest> _parser = new pb::MessageParser<GetIdentityRequest>(() => new GetIdentityRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetIdentityRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIdentityRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIdentityRequest(GetIdentityRequest other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIdentityRequest Clone() {
+      return new GetIdentityRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetIdentityRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetIdentityRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetIdentityRequest other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetIdentityResponse : pb::IMessage<GetIdentityResponse> {
+    private static readonly pb::MessageParser<GetIdentityResponse> _parser = new pb::MessageParser<GetIdentityResponse>(() => new GetIdentityResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetIdentityResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIdentityResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIdentityResponse(GetIdentityResponse other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIdentityResponse Clone() {
+      return new GetIdentityResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetIdentityResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetIdentityResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetIdentityResponse other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
   #endregion
 
 }
-#region Messages
-/// <summary>
-/// An identity.
-/// </summary>
-public sealed partial class Identity : pb::IMessage<Identity> {
-  private static readonly pb::MessageParser<Identity> _parser = new pb::MessageParser<Identity>(() => new Identity());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<Identity> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[0]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Identity() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Identity(Identity other) : this() {
-    identifier_ = other.identifier_;
-    displayName_ = other.displayName_;
-    displayNumber_ = other.displayNumber_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Identity Clone() {
-    return new Identity(this);
-  }
-
-  /// <summary>Field number for the "identifier" field.</summary>
-  public const int IdentifierFieldNumber = 1;
-  private string identifier_ = "";
-  /// <summary>
-  /// The Uuid identifier.
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Identifier {
-    get { return identifier_; }
-    set {
-      identifier_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "display_name" field.</summary>
-  public const int DisplayNameFieldNumber = 2;
-  private string displayName_ = "";
-  /// <summary>
-  /// The display name which is unique in conjunction with the display number.
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string DisplayName {
-    get { return displayName_; }
-    set {
-      displayName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "display_number" field.</summary>
-  public const int DisplayNumberFieldNumber = 3;
-  private long displayNumber_;
-  /// <summary>
-  /// The display number which is unique in conjunction with the display name.
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public long DisplayNumber {
-    get { return displayNumber_; }
-    set {
-      displayNumber_ = value;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as Identity);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(Identity other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Identifier != other.Identifier) return false;
-    if (DisplayName != other.DisplayName) return false;
-    if (DisplayNumber != other.DisplayNumber) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Identifier.Length != 0) hash ^= Identifier.GetHashCode();
-    if (DisplayName.Length != 0) hash ^= DisplayName.GetHashCode();
-    if (DisplayNumber != 0L) hash ^= DisplayNumber.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Identifier.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Identifier);
-    }
-    if (DisplayName.Length != 0) {
-      output.WriteRawTag(18);
-      output.WriteString(DisplayName);
-    }
-    if (DisplayNumber != 0L) {
-      output.WriteRawTag(24);
-      output.WriteInt64(DisplayNumber);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Identifier.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Identifier);
-    }
-    if (DisplayName.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(DisplayName);
-    }
-    if (DisplayNumber != 0L) {
-      size += 1 + pb::CodedOutputStream.ComputeInt64Size(DisplayNumber);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(Identity other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Identifier.Length != 0) {
-      Identifier = other.Identifier;
-    }
-    if (other.DisplayName.Length != 0) {
-      DisplayName = other.DisplayName;
-    }
-    if (other.DisplayNumber != 0L) {
-      DisplayNumber = other.DisplayNumber;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Identifier = input.ReadString();
-          break;
-        }
-        case 18: {
-          DisplayName = input.ReadString();
-          break;
-        }
-        case 24: {
-          DisplayNumber = input.ReadInt64();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-/// <summary>
-/// Request for validating identity.
-/// </summary>
-public sealed partial class ValidateIdentityRequest : pb::IMessage<ValidateIdentityRequest> {
-  private static readonly pb::MessageParser<ValidateIdentityRequest> _parser = new pb::MessageParser<ValidateIdentityRequest>(() => new ValidateIdentityRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<ValidateIdentityRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[1]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ValidateIdentityRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ValidateIdentityRequest(ValidateIdentityRequest other) : this() {
-    key_ = other.key_;
-    secret_ = other.secret_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ValidateIdentityRequest Clone() {
-    return new ValidateIdentityRequest(this);
-  }
-
-  /// <summary>Field number for the "key" field.</summary>
-  public const int KeyFieldNumber = 1;
-  private string key_ = "";
-  /// <summary>
-  /// The key used to identify an identity.
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Key {
-    get { return key_; }
-    set {
-      key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "secret" field.</summary>
-  public const int SecretFieldNumber = 2;
-  private string secret_ = "";
-  /// <summary>
-  /// The secret used to identify an identity.
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Secret {
-    get { return secret_; }
-    set {
-      secret_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as ValidateIdentityRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(ValidateIdentityRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Key != other.Key) return false;
-    if (Secret != other.Secret) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Key.Length != 0) hash ^= Key.GetHashCode();
-    if (Secret.Length != 0) hash ^= Secret.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Key.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Key);
-    }
-    if (Secret.Length != 0) {
-      output.WriteRawTag(18);
-      output.WriteString(Secret);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Key.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
-    }
-    if (Secret.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Secret);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(ValidateIdentityRequest other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Key.Length != 0) {
-      Key = other.Key;
-    }
-    if (other.Secret.Length != 0) {
-      Secret = other.Secret;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Key = input.ReadString();
-          break;
-        }
-        case 18: {
-          Secret = input.ReadString();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-/// <summary>
-/// Response for validating identity.
-/// </summary>
-public sealed partial class ValidateIdentityResponse : pb::IMessage<ValidateIdentityResponse> {
-  private static readonly pb::MessageParser<ValidateIdentityResponse> _parser = new pb::MessageParser<ValidateIdentityResponse>(() => new ValidateIdentityResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<ValidateIdentityResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[2]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ValidateIdentityResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ValidateIdentityResponse(ValidateIdentityResponse other) : this() {
-    session_ = other.session_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ValidateIdentityResponse Clone() {
-    return new ValidateIdentityResponse(this);
-  }
-
-  /// <summary>Field number for the "session" field.</summary>
-  public const int SessionFieldNumber = 1;
-  private string session_ = "";
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Session {
-    get { return session_; }
-    set {
-      session_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as ValidateIdentityResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(ValidateIdentityResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Session != other.Session) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Session.Length != 0) hash ^= Session.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Session.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Session);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Session.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Session);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(ValidateIdentityResponse other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Session.Length != 0) {
-      Session = other.Session;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Session = input.ReadString();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class CreateIdentityRequest : pb::IMessage<CreateIdentityRequest> {
-  private static readonly pb::MessageParser<CreateIdentityRequest> _parser = new pb::MessageParser<CreateIdentityRequest>(() => new CreateIdentityRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<CreateIdentityRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[3]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateIdentityRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateIdentityRequest(CreateIdentityRequest other) : this() {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateIdentityRequest Clone() {
-    return new CreateIdentityRequest(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as CreateIdentityRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(CreateIdentityRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(CreateIdentityRequest other) {
-    if (other == null) {
-      return;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-      }
-    }
-  }
-
-}
-
-public sealed partial class CreateIdentityResponse : pb::IMessage<CreateIdentityResponse> {
-  private static readonly pb::MessageParser<CreateIdentityResponse> _parser = new pb::MessageParser<CreateIdentityResponse>(() => new CreateIdentityResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<CreateIdentityResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[4]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateIdentityResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateIdentityResponse(CreateIdentityResponse other) : this() {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateIdentityResponse Clone() {
-    return new CreateIdentityResponse(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as CreateIdentityResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(CreateIdentityResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(CreateIdentityResponse other) {
-    if (other == null) {
-      return;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-      }
-    }
-  }
-
-}
-
-public sealed partial class DeleteIdentityRequest : pb::IMessage<DeleteIdentityRequest> {
-  private static readonly pb::MessageParser<DeleteIdentityRequest> _parser = new pb::MessageParser<DeleteIdentityRequest>(() => new DeleteIdentityRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<DeleteIdentityRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[5]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteIdentityRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteIdentityRequest(DeleteIdentityRequest other) : this() {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteIdentityRequest Clone() {
-    return new DeleteIdentityRequest(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as DeleteIdentityRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(DeleteIdentityRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(DeleteIdentityRequest other) {
-    if (other == null) {
-      return;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-      }
-    }
-  }
-
-}
-
-public sealed partial class DeleteIdentityResponse : pb::IMessage<DeleteIdentityResponse> {
-  private static readonly pb::MessageParser<DeleteIdentityResponse> _parser = new pb::MessageParser<DeleteIdentityResponse>(() => new DeleteIdentityResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<DeleteIdentityResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[6]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteIdentityResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteIdentityResponse(DeleteIdentityResponse other) : this() {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteIdentityResponse Clone() {
-    return new DeleteIdentityResponse(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as DeleteIdentityResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(DeleteIdentityResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(DeleteIdentityResponse other) {
-    if (other == null) {
-      return;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-      }
-    }
-  }
-
-}
-
-public sealed partial class GetIdentityRequest : pb::IMessage<GetIdentityRequest> {
-  private static readonly pb::MessageParser<GetIdentityRequest> _parser = new pb::MessageParser<GetIdentityRequest>(() => new GetIdentityRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<GetIdentityRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[7]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public GetIdentityRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public GetIdentityRequest(GetIdentityRequest other) : this() {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public GetIdentityRequest Clone() {
-    return new GetIdentityRequest(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as GetIdentityRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(GetIdentityRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(GetIdentityRequest other) {
-    if (other == null) {
-      return;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-      }
-    }
-  }
-
-}
-
-public sealed partial class GetIdentityResponse : pb::IMessage<GetIdentityResponse> {
-  private static readonly pb::MessageParser<GetIdentityResponse> _parser = new pb::MessageParser<GetIdentityResponse>(() => new GetIdentityResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<GetIdentityResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::IdentityServiceReflection.Descriptor.MessageTypes[8]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public GetIdentityResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public GetIdentityResponse(GetIdentityResponse other) : this() {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public GetIdentityResponse Clone() {
-    return new GetIdentityResponse(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as GetIdentityResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(GetIdentityResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(GetIdentityResponse other) {
-    if (other == null) {
-      return;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-      }
-    }
-  }
-
-}
-
-#endregion
-
 
 #endregion Designer generated code

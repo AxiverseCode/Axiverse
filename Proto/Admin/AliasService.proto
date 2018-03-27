@@ -3,6 +3,8 @@
 // Administrative service for resolving aliases to addresses.
 syntax = "proto3";
 
+option csharp_namespace = "Axiverse.Services.Proto";
+
 service AliasService {
 
 	rpc ResolveAlias(ResolveAliasRequest) returns (ResolveAliasResponse);

@@ -3,6 +3,8 @@
 //
 syntax = "proto3";
 
+option csharp_namespace = "Axiverse.Services.Proto";
+
 enum OrderType {
 	UNKNOWN = 0;
 	BUY = 1;

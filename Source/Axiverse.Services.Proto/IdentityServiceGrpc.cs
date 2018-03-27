@@ -14,42 +14,42 @@ using System.Threading;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace  {
+namespace Axiverse.Services.Proto {
   public static partial class IdentityService
   {
     static readonly string __ServiceName = "IdentityService";
 
-    static readonly grpc::Marshaller<global::ValidateIdentityRequest> __Marshaller_ValidateIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ValidateIdentityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::ValidateIdentityResponse> __Marshaller_ValidateIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ValidateIdentityResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateIdentityRequest> __Marshaller_CreateIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateIdentityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateIdentityResponse> __Marshaller_CreateIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateIdentityResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteIdentityRequest> __Marshaller_DeleteIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteIdentityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteIdentityResponse> __Marshaller_DeleteIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteIdentityResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GetIdentityRequest> __Marshaller_GetIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GetIdentityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GetIdentityResponse> __Marshaller_GetIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GetIdentityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ValidateIdentityRequest> __Marshaller_ValidateIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ValidateIdentityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ValidateIdentityResponse> __Marshaller_ValidateIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ValidateIdentityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateIdentityRequest> __Marshaller_CreateIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateIdentityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateIdentityResponse> __Marshaller_CreateIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateIdentityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteIdentityRequest> __Marshaller_DeleteIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteIdentityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteIdentityResponse> __Marshaller_DeleteIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteIdentityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.GetIdentityRequest> __Marshaller_GetIdentityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.GetIdentityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.GetIdentityResponse> __Marshaller_GetIdentityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.GetIdentityResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::ValidateIdentityRequest, global::ValidateIdentityResponse> __Method_ValidateIdentity = new grpc::Method<global::ValidateIdentityRequest, global::ValidateIdentityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.ValidateIdentityRequest, global::Axiverse.Services.Proto.ValidateIdentityResponse> __Method_ValidateIdentity = new grpc::Method<global::Axiverse.Services.Proto.ValidateIdentityRequest, global::Axiverse.Services.Proto.ValidateIdentityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "ValidateIdentity",
         __Marshaller_ValidateIdentityRequest,
         __Marshaller_ValidateIdentityResponse);
 
-    static readonly grpc::Method<global::CreateIdentityRequest, global::CreateIdentityResponse> __Method_CreateIdentity = new grpc::Method<global::CreateIdentityRequest, global::CreateIdentityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.CreateIdentityRequest, global::Axiverse.Services.Proto.CreateIdentityResponse> __Method_CreateIdentity = new grpc::Method<global::Axiverse.Services.Proto.CreateIdentityRequest, global::Axiverse.Services.Proto.CreateIdentityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateIdentity",
         __Marshaller_CreateIdentityRequest,
         __Marshaller_CreateIdentityResponse);
 
-    static readonly grpc::Method<global::DeleteIdentityRequest, global::DeleteIdentityResponse> __Method_DeleteIdentity = new grpc::Method<global::DeleteIdentityRequest, global::DeleteIdentityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.DeleteIdentityRequest, global::Axiverse.Services.Proto.DeleteIdentityResponse> __Method_DeleteIdentity = new grpc::Method<global::Axiverse.Services.Proto.DeleteIdentityRequest, global::Axiverse.Services.Proto.DeleteIdentityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteIdentity",
         __Marshaller_DeleteIdentityRequest,
         __Marshaller_DeleteIdentityResponse);
 
-    static readonly grpc::Method<global::GetIdentityRequest, global::GetIdentityResponse> __Method_GetIdentity = new grpc::Method<global::GetIdentityRequest, global::GetIdentityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.GetIdentityRequest, global::Axiverse.Services.Proto.GetIdentityResponse> __Method_GetIdentity = new grpc::Method<global::Axiverse.Services.Proto.GetIdentityRequest, global::Axiverse.Services.Proto.GetIdentityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetIdentity",
@@ -59,28 +59,28 @@ namespace  {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::IdentityServiceReflection.Descriptor.Services[0]; }
+      get { return global::Axiverse.Services.Proto.IdentityServiceReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of IdentityService</summary>
     public abstract partial class IdentityServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::ValidateIdentityResponse> ValidateIdentity(global::ValidateIdentityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.ValidateIdentityResponse> ValidateIdentity(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::CreateIdentityResponse> CreateIdentity(global::CreateIdentityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.CreateIdentityResponse> CreateIdentity(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::DeleteIdentityResponse> DeleteIdentity(global::DeleteIdentityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.DeleteIdentityResponse> DeleteIdentity(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::GetIdentityResponse> GetIdentity(global::GetIdentityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.GetIdentityResponse> GetIdentity(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -110,67 +110,67 @@ namespace  {
       {
       }
 
-      public virtual global::ValidateIdentityResponse ValidateIdentity(global::ValidateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.ValidateIdentityResponse ValidateIdentity(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return ValidateIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::ValidateIdentityResponse ValidateIdentity(global::ValidateIdentityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.ValidateIdentityResponse ValidateIdentity(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ValidateIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::ValidateIdentityResponse> ValidateIdentityAsync(global::ValidateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ValidateIdentityResponse> ValidateIdentityAsync(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return ValidateIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::ValidateIdentityResponse> ValidateIdentityAsync(global::ValidateIdentityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ValidateIdentityResponse> ValidateIdentityAsync(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ValidateIdentity, null, options, request);
       }
-      public virtual global::CreateIdentityResponse CreateIdentity(global::CreateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateIdentityResponse CreateIdentity(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::CreateIdentityResponse CreateIdentity(global::CreateIdentityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.CreateIdentityResponse CreateIdentity(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateIdentityResponse> CreateIdentityAsync(global::CreateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateIdentityResponse> CreateIdentityAsync(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateIdentityResponse> CreateIdentityAsync(global::CreateIdentityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateIdentityResponse> CreateIdentityAsync(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateIdentity, null, options, request);
       }
-      public virtual global::DeleteIdentityResponse DeleteIdentity(global::DeleteIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteIdentityResponse DeleteIdentity(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::DeleteIdentityResponse DeleteIdentity(global::DeleteIdentityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.DeleteIdentityResponse DeleteIdentity(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteIdentityResponse> DeleteIdentityAsync(global::DeleteIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteIdentityResponse> DeleteIdentityAsync(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteIdentityResponse> DeleteIdentityAsync(global::DeleteIdentityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteIdentityResponse> DeleteIdentityAsync(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteIdentity, null, options, request);
       }
-      public virtual global::GetIdentityResponse GetIdentity(global::GetIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.GetIdentityResponse GetIdentity(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::GetIdentityResponse GetIdentity(global::GetIdentityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.GetIdentityResponse GetIdentity(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::GetIdentityResponse> GetIdentityAsync(global::GetIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.GetIdentityResponse> GetIdentityAsync(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::GetIdentityResponse> GetIdentityAsync(global::GetIdentityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.GetIdentityResponse> GetIdentityAsync(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetIdentity, null, options, request);
       }

@@ -3,6 +3,8 @@
 // Consumer service on the management of assets.
 syntax = "proto3";
 
+option csharp_namespace = "Axiverse.Services.Proto";
+
 message Asset
 {
 

@@ -14,33 +14,33 @@ using System.Threading;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace  {
+namespace Axiverse.Services.Proto {
   public static partial class EntityService
   {
     static readonly string __ServiceName = "EntityService";
 
-    static readonly grpc::Marshaller<global::CreateEntityRequest> __Marshaller_CreateEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateEntityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateEntityResponse> __Marshaller_CreateEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateEntityResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteEntityRequest> __Marshaller_DeleteEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteEntityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteEntityResponse> __Marshaller_DeleteEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteEntityResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GetEntityRequest> __Marshaller_GetEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GetEntityRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GetEntityResponse> __Marshaller_GetEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GetEntityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateEntityRequest> __Marshaller_CreateEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateEntityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateEntityResponse> __Marshaller_CreateEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateEntityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteEntityRequest> __Marshaller_DeleteEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteEntityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteEntityResponse> __Marshaller_DeleteEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteEntityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.GetEntityRequest> __Marshaller_GetEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.GetEntityRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.GetEntityResponse> __Marshaller_GetEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.GetEntityResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::CreateEntityRequest, global::CreateEntityResponse> __Method_CreateEntity = new grpc::Method<global::CreateEntityRequest, global::CreateEntityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.CreateEntityRequest, global::Axiverse.Services.Proto.CreateEntityResponse> __Method_CreateEntity = new grpc::Method<global::Axiverse.Services.Proto.CreateEntityRequest, global::Axiverse.Services.Proto.CreateEntityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateEntity",
         __Marshaller_CreateEntityRequest,
         __Marshaller_CreateEntityResponse);
 
-    static readonly grpc::Method<global::DeleteEntityRequest, global::DeleteEntityResponse> __Method_DeleteEntity = new grpc::Method<global::DeleteEntityRequest, global::DeleteEntityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.DeleteEntityRequest, global::Axiverse.Services.Proto.DeleteEntityResponse> __Method_DeleteEntity = new grpc::Method<global::Axiverse.Services.Proto.DeleteEntityRequest, global::Axiverse.Services.Proto.DeleteEntityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteEntity",
         __Marshaller_DeleteEntityRequest,
         __Marshaller_DeleteEntityResponse);
 
-    static readonly grpc::Method<global::GetEntityRequest, global::GetEntityResponse> __Method_GetEntity = new grpc::Method<global::GetEntityRequest, global::GetEntityResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.GetEntityRequest, global::Axiverse.Services.Proto.GetEntityResponse> __Method_GetEntity = new grpc::Method<global::Axiverse.Services.Proto.GetEntityRequest, global::Axiverse.Services.Proto.GetEntityResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetEntity",
@@ -50,23 +50,23 @@ namespace  {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::EntityServiceReflection.Descriptor.Services[0]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of EntityService</summary>
     public abstract partial class EntityServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::CreateEntityResponse> CreateEntity(global::CreateEntityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.CreateEntityResponse> CreateEntity(global::Axiverse.Services.Proto.CreateEntityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::DeleteEntityResponse> DeleteEntity(global::DeleteEntityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.DeleteEntityResponse> DeleteEntity(global::Axiverse.Services.Proto.DeleteEntityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::GetEntityResponse> GetEntity(global::GetEntityRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.GetEntityResponse> GetEntity(global::Axiverse.Services.Proto.GetEntityRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -96,51 +96,51 @@ namespace  {
       {
       }
 
-      public virtual global::CreateEntityResponse CreateEntity(global::CreateEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateEntityResponse CreateEntity(global::Axiverse.Services.Proto.CreateEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateEntity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::CreateEntityResponse CreateEntity(global::CreateEntityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.CreateEntityResponse CreateEntity(global::Axiverse.Services.Proto.CreateEntityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateEntity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateEntityResponse> CreateEntityAsync(global::CreateEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateEntityResponse> CreateEntityAsync(global::Axiverse.Services.Proto.CreateEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateEntityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateEntityResponse> CreateEntityAsync(global::CreateEntityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateEntityResponse> CreateEntityAsync(global::Axiverse.Services.Proto.CreateEntityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateEntity, null, options, request);
       }
-      public virtual global::DeleteEntityResponse DeleteEntity(global::DeleteEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteEntityResponse DeleteEntity(global::Axiverse.Services.Proto.DeleteEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteEntity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::DeleteEntityResponse DeleteEntity(global::DeleteEntityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.DeleteEntityResponse DeleteEntity(global::Axiverse.Services.Proto.DeleteEntityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteEntity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteEntityResponse> DeleteEntityAsync(global::DeleteEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteEntityResponse> DeleteEntityAsync(global::Axiverse.Services.Proto.DeleteEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteEntityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteEntityResponse> DeleteEntityAsync(global::DeleteEntityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteEntityResponse> DeleteEntityAsync(global::Axiverse.Services.Proto.DeleteEntityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteEntity, null, options, request);
       }
-      public virtual global::GetEntityResponse GetEntity(global::GetEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.GetEntityResponse GetEntity(global::Axiverse.Services.Proto.GetEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetEntity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::GetEntityResponse GetEntity(global::GetEntityRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.GetEntityResponse GetEntity(global::Axiverse.Services.Proto.GetEntityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetEntity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::GetEntityResponse> GetEntityAsync(global::GetEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.GetEntityResponse> GetEntityAsync(global::Axiverse.Services.Proto.GetEntityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetEntityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::GetEntityResponse> GetEntityAsync(global::GetEntityRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.GetEntityResponse> GetEntityAsync(global::Axiverse.Services.Proto.GetEntityRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetEntity, null, options, request);
       }

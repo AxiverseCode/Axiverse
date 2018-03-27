@@ -14,60 +14,60 @@ using System.Threading;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace  {
+namespace Axiverse.Services.Proto {
   public static partial class AssetService
   {
     static readonly string __ServiceName = "AssetService";
 
-    static readonly grpc::Marshaller<global::CreateAssetClassRequest> __Marshaller_CreateAssetClassRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateAssetClassRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateAssetClassResponse> __Marshaller_CreateAssetClassResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateAssetClassResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteAssetClassRequest> __Marshaller_DeleteAssetClassRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteAssetClassRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteAssetClassResponse> __Marshaller_DeleteAssetClassResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteAssetClassResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateAssetRequest> __Marshaller_CreateAssetRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateAssetRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateAssetResponse> __Marshaller_CreateAssetResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateAssetResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteAssetRequest> __Marshaller_DeleteAssetRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteAssetRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteAssetResponse> __Marshaller_DeleteAssetResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteAssetResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::TransferAssetRequest> __Marshaller_TransferAssetRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::TransferAssetRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::TransferAssetResponse> __Marshaller_TransferAssetResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::TransferAssetResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::ExecuteTransactionRequest> __Marshaller_ExecuteTransactionRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ExecuteTransactionRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::ExecuteTransactionResponse> __Marshaller_ExecuteTransactionResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ExecuteTransactionResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateAssetClassRequest> __Marshaller_CreateAssetClassRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateAssetClassRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateAssetClassResponse> __Marshaller_CreateAssetClassResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateAssetClassResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteAssetClassRequest> __Marshaller_DeleteAssetClassRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteAssetClassRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteAssetClassResponse> __Marshaller_DeleteAssetClassResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteAssetClassResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateAssetRequest> __Marshaller_CreateAssetRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateAssetRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateAssetResponse> __Marshaller_CreateAssetResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateAssetResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteAssetRequest> __Marshaller_DeleteAssetRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteAssetRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteAssetResponse> __Marshaller_DeleteAssetResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteAssetResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.TransferAssetRequest> __Marshaller_TransferAssetRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.TransferAssetRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.TransferAssetResponse> __Marshaller_TransferAssetResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.TransferAssetResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ExecuteTransactionRequest> __Marshaller_ExecuteTransactionRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ExecuteTransactionRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ExecuteTransactionResponse> __Marshaller_ExecuteTransactionResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ExecuteTransactionResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::CreateAssetClassRequest, global::CreateAssetClassResponse> __Method_CreateAssetClass = new grpc::Method<global::CreateAssetClassRequest, global::CreateAssetClassResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.CreateAssetClassRequest, global::Axiverse.Services.Proto.CreateAssetClassResponse> __Method_CreateAssetClass = new grpc::Method<global::Axiverse.Services.Proto.CreateAssetClassRequest, global::Axiverse.Services.Proto.CreateAssetClassResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateAssetClass",
         __Marshaller_CreateAssetClassRequest,
         __Marshaller_CreateAssetClassResponse);
 
-    static readonly grpc::Method<global::DeleteAssetClassRequest, global::DeleteAssetClassResponse> __Method_DeleteAssetClass = new grpc::Method<global::DeleteAssetClassRequest, global::DeleteAssetClassResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.DeleteAssetClassRequest, global::Axiverse.Services.Proto.DeleteAssetClassResponse> __Method_DeleteAssetClass = new grpc::Method<global::Axiverse.Services.Proto.DeleteAssetClassRequest, global::Axiverse.Services.Proto.DeleteAssetClassResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteAssetClass",
         __Marshaller_DeleteAssetClassRequest,
         __Marshaller_DeleteAssetClassResponse);
 
-    static readonly grpc::Method<global::CreateAssetRequest, global::CreateAssetResponse> __Method_CreateAsset = new grpc::Method<global::CreateAssetRequest, global::CreateAssetResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.CreateAssetRequest, global::Axiverse.Services.Proto.CreateAssetResponse> __Method_CreateAsset = new grpc::Method<global::Axiverse.Services.Proto.CreateAssetRequest, global::Axiverse.Services.Proto.CreateAssetResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateAsset",
         __Marshaller_CreateAssetRequest,
         __Marshaller_CreateAssetResponse);
 
-    static readonly grpc::Method<global::DeleteAssetRequest, global::DeleteAssetResponse> __Method_DeleteAsset = new grpc::Method<global::DeleteAssetRequest, global::DeleteAssetResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.DeleteAssetRequest, global::Axiverse.Services.Proto.DeleteAssetResponse> __Method_DeleteAsset = new grpc::Method<global::Axiverse.Services.Proto.DeleteAssetRequest, global::Axiverse.Services.Proto.DeleteAssetResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteAsset",
         __Marshaller_DeleteAssetRequest,
         __Marshaller_DeleteAssetResponse);
 
-    static readonly grpc::Method<global::TransferAssetRequest, global::TransferAssetResponse> __Method_TransferAsset = new grpc::Method<global::TransferAssetRequest, global::TransferAssetResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.TransferAssetRequest, global::Axiverse.Services.Proto.TransferAssetResponse> __Method_TransferAsset = new grpc::Method<global::Axiverse.Services.Proto.TransferAssetRequest, global::Axiverse.Services.Proto.TransferAssetResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "TransferAsset",
         __Marshaller_TransferAssetRequest,
         __Marshaller_TransferAssetResponse);
 
-    static readonly grpc::Method<global::ExecuteTransactionRequest, global::ExecuteTransactionResponse> __Method_ExecuteTransaction = new grpc::Method<global::ExecuteTransactionRequest, global::ExecuteTransactionResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.ExecuteTransactionRequest, global::Axiverse.Services.Proto.ExecuteTransactionResponse> __Method_ExecuteTransaction = new grpc::Method<global::Axiverse.Services.Proto.ExecuteTransactionRequest, global::Axiverse.Services.Proto.ExecuteTransactionResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "ExecuteTransaction",
@@ -77,38 +77,38 @@ namespace  {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::AssetServiceReflection.Descriptor.Services[0]; }
+      get { return global::Axiverse.Services.Proto.AssetServiceReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of AssetService</summary>
     public abstract partial class AssetServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::CreateAssetClassResponse> CreateAssetClass(global::CreateAssetClassRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.CreateAssetClassResponse> CreateAssetClass(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::DeleteAssetClassResponse> DeleteAssetClass(global::DeleteAssetClassRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.DeleteAssetClassResponse> DeleteAssetClass(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::CreateAssetResponse> CreateAsset(global::CreateAssetRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.CreateAssetResponse> CreateAsset(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::DeleteAssetResponse> DeleteAsset(global::DeleteAssetRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.DeleteAssetResponse> DeleteAsset(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::TransferAssetResponse> TransferAsset(global::TransferAssetRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.TransferAssetResponse> TransferAsset(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::ExecuteTransactionResponse> ExecuteTransaction(global::ExecuteTransactionRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.ExecuteTransactionResponse> ExecuteTransaction(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -138,99 +138,99 @@ namespace  {
       {
       }
 
-      public virtual global::CreateAssetClassResponse CreateAssetClass(global::CreateAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateAssetClassResponse CreateAssetClass(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateAssetClass(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::CreateAssetClassResponse CreateAssetClass(global::CreateAssetClassRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.CreateAssetClassResponse CreateAssetClass(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAssetClass, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateAssetClassResponse> CreateAssetClassAsync(global::CreateAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetClassResponse> CreateAssetClassAsync(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateAssetClassAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateAssetClassResponse> CreateAssetClassAsync(global::CreateAssetClassRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetClassResponse> CreateAssetClassAsync(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAssetClass, null, options, request);
       }
-      public virtual global::DeleteAssetClassResponse DeleteAssetClass(global::DeleteAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteAssetClassResponse DeleteAssetClass(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteAssetClass(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::DeleteAssetClassResponse DeleteAssetClass(global::DeleteAssetClassRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.DeleteAssetClassResponse DeleteAssetClass(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteAssetClass, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteAssetClassResponse> DeleteAssetClassAsync(global::DeleteAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetClassResponse> DeleteAssetClassAsync(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteAssetClassAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteAssetClassResponse> DeleteAssetClassAsync(global::DeleteAssetClassRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetClassResponse> DeleteAssetClassAsync(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteAssetClass, null, options, request);
       }
-      public virtual global::CreateAssetResponse CreateAsset(global::CreateAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateAssetResponse CreateAsset(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateAsset(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::CreateAssetResponse CreateAsset(global::CreateAssetRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.CreateAssetResponse CreateAsset(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAsset, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateAssetResponse> CreateAssetAsync(global::CreateAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetResponse> CreateAssetAsync(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateAssetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateAssetResponse> CreateAssetAsync(global::CreateAssetRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetResponse> CreateAssetAsync(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAsset, null, options, request);
       }
-      public virtual global::DeleteAssetResponse DeleteAsset(global::DeleteAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteAssetResponse DeleteAsset(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteAsset(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::DeleteAssetResponse DeleteAsset(global::DeleteAssetRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.DeleteAssetResponse DeleteAsset(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteAsset, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteAssetResponse> DeleteAssetAsync(global::DeleteAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetResponse> DeleteAssetAsync(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteAssetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteAssetResponse> DeleteAssetAsync(global::DeleteAssetRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetResponse> DeleteAssetAsync(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteAsset, null, options, request);
       }
-      public virtual global::TransferAssetResponse TransferAsset(global::TransferAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.TransferAssetResponse TransferAsset(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return TransferAsset(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::TransferAssetResponse TransferAsset(global::TransferAssetRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.TransferAssetResponse TransferAsset(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_TransferAsset, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::TransferAssetResponse> TransferAssetAsync(global::TransferAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.TransferAssetResponse> TransferAssetAsync(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return TransferAssetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::TransferAssetResponse> TransferAssetAsync(global::TransferAssetRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.TransferAssetResponse> TransferAssetAsync(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_TransferAsset, null, options, request);
       }
-      public virtual global::ExecuteTransactionResponse ExecuteTransaction(global::ExecuteTransactionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.ExecuteTransactionResponse ExecuteTransaction(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return ExecuteTransaction(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::ExecuteTransactionResponse ExecuteTransaction(global::ExecuteTransactionRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.ExecuteTransactionResponse ExecuteTransaction(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ExecuteTransaction, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::ExecuteTransactionResponse> ExecuteTransactionAsync(global::ExecuteTransactionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ExecuteTransactionResponse> ExecuteTransactionAsync(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return ExecuteTransactionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::ExecuteTransactionResponse> ExecuteTransactionAsync(global::ExecuteTransactionRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ExecuteTransactionResponse> ExecuteTransactionAsync(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ExecuteTransaction, null, options, request);
       }

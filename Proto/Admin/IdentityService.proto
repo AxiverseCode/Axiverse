@@ -3,6 +3,8 @@
 //
 syntax = "proto3";
 
+option csharp_namespace = "Axiverse.Services.Proto";
+
 // An identity.
 message Identity {
 
@@ -68,5 +70,5 @@ message GetIdentityRequest {
 }
 
 message GetIdentityResponse {
-	
+
 }

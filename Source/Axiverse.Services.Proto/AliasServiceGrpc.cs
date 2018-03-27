@@ -14,33 +14,33 @@ using System.Threading;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace  {
+namespace Axiverse.Services.Proto {
   public static partial class AliasService
   {
     static readonly string __ServiceName = "AliasService";
 
-    static readonly grpc::Marshaller<global::ResolveAliasRequest> __Marshaller_ResolveAliasRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ResolveAliasRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::ResolveAliasResponse> __Marshaller_ResolveAliasResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ResolveAliasResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateAliasRequest> __Marshaller_CreateAliasRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateAliasRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CreateAliasResponse> __Marshaller_CreateAliasResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CreateAliasResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteAliasRequest> __Marshaller_DeleteAliasRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteAliasRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::DeleteAliasResponse> __Marshaller_DeleteAliasResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::DeleteAliasResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ResolveAliasRequest> __Marshaller_ResolveAliasRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ResolveAliasRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ResolveAliasResponse> __Marshaller_ResolveAliasResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ResolveAliasResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateAliasRequest> __Marshaller_CreateAliasRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateAliasRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateAliasResponse> __Marshaller_CreateAliasResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateAliasResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteAliasRequest> __Marshaller_DeleteAliasRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteAliasRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteAliasResponse> __Marshaller_DeleteAliasResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteAliasResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::ResolveAliasRequest, global::ResolveAliasResponse> __Method_ResolveAlias = new grpc::Method<global::ResolveAliasRequest, global::ResolveAliasResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.ResolveAliasRequest, global::Axiverse.Services.Proto.ResolveAliasResponse> __Method_ResolveAlias = new grpc::Method<global::Axiverse.Services.Proto.ResolveAliasRequest, global::Axiverse.Services.Proto.ResolveAliasResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "ResolveAlias",
         __Marshaller_ResolveAliasRequest,
         __Marshaller_ResolveAliasResponse);
 
-    static readonly grpc::Method<global::CreateAliasRequest, global::CreateAliasResponse> __Method_CreateAlias = new grpc::Method<global::CreateAliasRequest, global::CreateAliasResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.CreateAliasRequest, global::Axiverse.Services.Proto.CreateAliasResponse> __Method_CreateAlias = new grpc::Method<global::Axiverse.Services.Proto.CreateAliasRequest, global::Axiverse.Services.Proto.CreateAliasResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateAlias",
         __Marshaller_CreateAliasRequest,
         __Marshaller_CreateAliasResponse);
 
-    static readonly grpc::Method<global::DeleteAliasRequest, global::DeleteAliasResponse> __Method_DeleteAlias = new grpc::Method<global::DeleteAliasRequest, global::DeleteAliasResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.DeleteAliasRequest, global::Axiverse.Services.Proto.DeleteAliasResponse> __Method_DeleteAlias = new grpc::Method<global::Axiverse.Services.Proto.DeleteAliasRequest, global::Axiverse.Services.Proto.DeleteAliasResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteAlias",
@@ -50,23 +50,23 @@ namespace  {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::AliasServiceReflection.Descriptor.Services[0]; }
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of AliasService</summary>
     public abstract partial class AliasServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::ResolveAliasResponse> ResolveAlias(global::ResolveAliasRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.ResolveAliasResponse> ResolveAlias(global::Axiverse.Services.Proto.ResolveAliasRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::CreateAliasResponse> CreateAlias(global::CreateAliasRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.CreateAliasResponse> CreateAlias(global::Axiverse.Services.Proto.CreateAliasRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::DeleteAliasResponse> DeleteAlias(global::DeleteAliasRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.DeleteAliasResponse> DeleteAlias(global::Axiverse.Services.Proto.DeleteAliasRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -96,51 +96,51 @@ namespace  {
       {
       }
 
-      public virtual global::ResolveAliasResponse ResolveAlias(global::ResolveAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.ResolveAliasResponse ResolveAlias(global::Axiverse.Services.Proto.ResolveAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return ResolveAlias(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::ResolveAliasResponse ResolveAlias(global::ResolveAliasRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.ResolveAliasResponse ResolveAlias(global::Axiverse.Services.Proto.ResolveAliasRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ResolveAlias, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::ResolveAliasResponse> ResolveAliasAsync(global::ResolveAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ResolveAliasResponse> ResolveAliasAsync(global::Axiverse.Services.Proto.ResolveAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return ResolveAliasAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::ResolveAliasResponse> ResolveAliasAsync(global::ResolveAliasRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ResolveAliasResponse> ResolveAliasAsync(global::Axiverse.Services.Proto.ResolveAliasRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ResolveAlias, null, options, request);
       }
-      public virtual global::CreateAliasResponse CreateAlias(global::CreateAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateAliasResponse CreateAlias(global::Axiverse.Services.Proto.CreateAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateAlias(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::CreateAliasResponse CreateAlias(global::CreateAliasRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.CreateAliasResponse CreateAlias(global::Axiverse.Services.Proto.CreateAliasRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAlias, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateAliasResponse> CreateAliasAsync(global::CreateAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAliasResponse> CreateAliasAsync(global::Axiverse.Services.Proto.CreateAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return CreateAliasAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::CreateAliasResponse> CreateAliasAsync(global::CreateAliasRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAliasResponse> CreateAliasAsync(global::Axiverse.Services.Proto.CreateAliasRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAlias, null, options, request);
       }
-      public virtual global::DeleteAliasResponse DeleteAlias(global::DeleteAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteAliasResponse DeleteAlias(global::Axiverse.Services.Proto.DeleteAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteAlias(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::DeleteAliasResponse DeleteAlias(global::DeleteAliasRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.DeleteAliasResponse DeleteAlias(global::Axiverse.Services.Proto.DeleteAliasRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteAlias, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteAliasResponse> DeleteAliasAsync(global::DeleteAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAliasResponse> DeleteAliasAsync(global::Axiverse.Services.Proto.DeleteAliasRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DeleteAliasAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::DeleteAliasResponse> DeleteAliasAsync(global::DeleteAliasRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAliasResponse> DeleteAliasAsync(global::Axiverse.Services.Proto.DeleteAliasRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteAlias, null, options, request);
       }

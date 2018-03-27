@@ -14,15 +14,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
-namespace  {
+namespace Axiverse.Services.Proto {
   public static partial class MarketService
   {
     static readonly string __ServiceName = "MarketService";
 
-    static readonly grpc::Marshaller<global::PlaceOrderRequest> __Marshaller_PlaceOrderRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::PlaceOrderRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::PlaceOrderResponse> __Marshaller_PlaceOrderResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::PlaceOrderResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.PlaceOrderRequest> __Marshaller_PlaceOrderRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.PlaceOrderRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.PlaceOrderResponse> __Marshaller_PlaceOrderResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.PlaceOrderResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::PlaceOrderRequest, global::PlaceOrderResponse> __Method_PlaceOrder = new grpc::Method<global::PlaceOrderRequest, global::PlaceOrderResponse>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.PlaceOrderRequest, global::Axiverse.Services.Proto.PlaceOrderResponse> __Method_PlaceOrder = new grpc::Method<global::Axiverse.Services.Proto.PlaceOrderRequest, global::Axiverse.Services.Proto.PlaceOrderResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "PlaceOrder",
@@ -32,13 +32,13 @@ namespace  {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::MarketServiceReflection.Descriptor.Services[0]; }
+      get { return global::Axiverse.Services.Proto.MarketServiceReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of MarketService</summary>
     public abstract partial class MarketServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::PlaceOrderResponse> PlaceOrder(global::PlaceOrderRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.PlaceOrderResponse> PlaceOrder(global::Axiverse.Services.Proto.PlaceOrderRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -68,19 +68,19 @@ namespace  {
       {
       }
 
-      public virtual global::PlaceOrderResponse PlaceOrder(global::PlaceOrderRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.PlaceOrderResponse PlaceOrder(global::Axiverse.Services.Proto.PlaceOrderRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return PlaceOrder(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::PlaceOrderResponse PlaceOrder(global::PlaceOrderRequest request, grpc::CallOptions options)
+      public virtual global::Axiverse.Services.Proto.PlaceOrderResponse PlaceOrder(global::Axiverse.Services.Proto.PlaceOrderRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_PlaceOrder, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::PlaceOrderResponse> PlaceOrderAsync(global::PlaceOrderRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.PlaceOrderResponse> PlaceOrderAsync(global::Axiverse.Services.Proto.PlaceOrderRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return PlaceOrderAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::PlaceOrderResponse> PlaceOrderAsync(global::PlaceOrderRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.PlaceOrderResponse> PlaceOrderAsync(global::Axiverse.Services.Proto.PlaceOrderRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_PlaceOrder, null, options, request);
       }

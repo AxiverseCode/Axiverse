@@ -7,776 +7,780 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-/// <summary>Holder for reflection information generated from Admin/AliasService.proto</summary>
-public static partial class AliasServiceReflection {
+namespace Axiverse.Services.Proto {
 
-  #region Descriptor
-  /// <summary>File descriptor for Admin/AliasService.proto</summary>
-  public static pbr::FileDescriptor Descriptor {
-    get { return descriptor; }
-  }
-  private static pbr::FileDescriptor descriptor;
+  /// <summary>Holder for reflection information generated from Admin/AliasService.proto</summary>
+  public static partial class AliasServiceReflection {
 
-  static AliasServiceReflection() {
-    byte[] descriptorData = global::System.Convert.FromBase64String(
-        string.Concat(
-          "ChhBZG1pbi9BbGlhc1NlcnZpY2UucHJvdG8iJAoTUmVzb2x2ZUFsaWFzUmVx",
-          "dWVzdBINCgVhbGlhcxgBIAEoCSImChRSZXNvbHZlQWxpYXNSZXNwb25zZRIO",
-          "CgZ0YXJnZXQYASABKAkiMwoSQ3JlYXRlQWxpYXNSZXF1ZXN0Eg0KBWFsaWFz",
-          "GAEgASgJEg4KBnRhcmdldBgCIAEoCSIoChNDcmVhdGVBbGlhc1Jlc3BvbnNl",
-          "EhEKCXN1Y2NlZWRlZBgBIAEoCCIjChJEZWxldGVBbGlhc1JlcXVlc3QSDQoF",
-          "YWxpYXMYASABKAkiKAoTRGVsZXRlQWxpYXNSZXNwb25zZRIRCglzdWNjZWVk",
-          "ZWQYASABKAgyvwEKDEFsaWFzU2VydmljZRI7CgxSZXNvbHZlQWxpYXMSFC5S",
-          "ZXNvbHZlQWxpYXNSZXF1ZXN0GhUuUmVzb2x2ZUFsaWFzUmVzcG9uc2USOAoL",
-          "Q3JlYXRlQWxpYXMSEy5DcmVhdGVBbGlhc1JlcXVlc3QaFC5DcmVhdGVBbGlh",
-          "c1Jlc3BvbnNlEjgKC0RlbGV0ZUFsaWFzEhMuRGVsZXRlQWxpYXNSZXF1ZXN0",
-          "GhQuRGVsZXRlQWxpYXNSZXNwb25zZWIGcHJvdG8z"));
-    descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { },
-        new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::ResolveAliasRequest), global::ResolveAliasRequest.Parser, new[]{ "Alias" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::ResolveAliasResponse), global::ResolveAliasResponse.Parser, new[]{ "Target" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::CreateAliasRequest), global::CreateAliasRequest.Parser, new[]{ "Alias", "Target" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::CreateAliasResponse), global::CreateAliasResponse.Parser, new[]{ "Succeeded" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::DeleteAliasRequest), global::DeleteAliasRequest.Parser, new[]{ "Alias" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::DeleteAliasResponse), global::DeleteAliasResponse.Parser, new[]{ "Succeeded" }, null, null, null)
-        }));
+    #region Descriptor
+    /// <summary>File descriptor for Admin/AliasService.proto</summary>
+    public static pbr::FileDescriptor Descriptor {
+      get { return descriptor; }
+    }
+    private static pbr::FileDescriptor descriptor;
+
+    static AliasServiceReflection() {
+      byte[] descriptorData = global::System.Convert.FromBase64String(
+          string.Concat(
+            "ChhBZG1pbi9BbGlhc1NlcnZpY2UucHJvdG8iJAoTUmVzb2x2ZUFsaWFzUmVx",
+            "dWVzdBINCgVhbGlhcxgBIAEoCSImChRSZXNvbHZlQWxpYXNSZXNwb25zZRIO",
+            "CgZ0YXJnZXQYASABKAkiMwoSQ3JlYXRlQWxpYXNSZXF1ZXN0Eg0KBWFsaWFz",
+            "GAEgASgJEg4KBnRhcmdldBgCIAEoCSIoChNDcmVhdGVBbGlhc1Jlc3BvbnNl",
+            "EhEKCXN1Y2NlZWRlZBgBIAEoCCIjChJEZWxldGVBbGlhc1JlcXVlc3QSDQoF",
+            "YWxpYXMYASABKAkiKAoTRGVsZXRlQWxpYXNSZXNwb25zZRIRCglzdWNjZWVk",
+            "ZWQYASABKAgyvwEKDEFsaWFzU2VydmljZRI7CgxSZXNvbHZlQWxpYXMSFC5S",
+            "ZXNvbHZlQWxpYXNSZXF1ZXN0GhUuUmVzb2x2ZUFsaWFzUmVzcG9uc2USOAoL",
+            "Q3JlYXRlQWxpYXMSEy5DcmVhdGVBbGlhc1JlcXVlc3QaFC5DcmVhdGVBbGlh",
+            "c1Jlc3BvbnNlEjgKC0RlbGV0ZUFsaWFzEhMuRGVsZXRlQWxpYXNSZXF1ZXN0",
+            "GhQuRGVsZXRlQWxpYXNSZXNwb25zZUIaqgIXQXhpdmVyc2UuU2VydmljZXMu",
+            "UHJvdG9iBnByb3RvMw=="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
+          new pbr::FileDescriptor[] { },
+          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ResolveAliasRequest), global::Axiverse.Services.Proto.ResolveAliasRequest.Parser, new[]{ "Alias" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ResolveAliasResponse), global::Axiverse.Services.Proto.ResolveAliasResponse.Parser, new[]{ "Target" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateAliasRequest), global::Axiverse.Services.Proto.CreateAliasRequest.Parser, new[]{ "Alias", "Target" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateAliasResponse), global::Axiverse.Services.Proto.CreateAliasResponse.Parser, new[]{ "Succeeded" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteAliasRequest), global::Axiverse.Services.Proto.DeleteAliasRequest.Parser, new[]{ "Alias" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteAliasResponse), global::Axiverse.Services.Proto.DeleteAliasResponse.Parser, new[]{ "Succeeded" }, null, null, null)
+          }));
+    }
+    #endregion
+
   }
+  #region Messages
+  public sealed partial class ResolveAliasRequest : pb::IMessage<ResolveAliasRequest> {
+    private static readonly pb::MessageParser<ResolveAliasRequest> _parser = new pb::MessageParser<ResolveAliasRequest>(() => new ResolveAliasRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ResolveAliasRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResolveAliasRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResolveAliasRequest(ResolveAliasRequest other) : this() {
+      alias_ = other.alias_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResolveAliasRequest Clone() {
+      return new ResolveAliasRequest(this);
+    }
+
+    /// <summary>Field number for the "alias" field.</summary>
+    public const int AliasFieldNumber = 1;
+    private string alias_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Alias {
+      get { return alias_; }
+      set {
+        alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ResolveAliasRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ResolveAliasRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Alias != other.Alias) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Alias.Length != 0) hash ^= Alias.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Alias.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Alias);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Alias.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ResolveAliasRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Alias.Length != 0) {
+        Alias = other.Alias;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Alias = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ResolveAliasResponse : pb::IMessage<ResolveAliasResponse> {
+    private static readonly pb::MessageParser<ResolveAliasResponse> _parser = new pb::MessageParser<ResolveAliasResponse>(() => new ResolveAliasResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ResolveAliasResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResolveAliasResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResolveAliasResponse(ResolveAliasResponse other) : this() {
+      target_ = other.target_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ResolveAliasResponse Clone() {
+      return new ResolveAliasResponse(this);
+    }
+
+    /// <summary>Field number for the "target" field.</summary>
+    public const int TargetFieldNumber = 1;
+    private string target_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Target {
+      get { return target_; }
+      set {
+        target_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ResolveAliasResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ResolveAliasResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Target != other.Target) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Target.Length != 0) hash ^= Target.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Target.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Target);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Target.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Target);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ResolveAliasResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Target.Length != 0) {
+        Target = other.Target;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Target = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CreateAliasRequest : pb::IMessage<CreateAliasRequest> {
+    private static readonly pb::MessageParser<CreateAliasRequest> _parser = new pb::MessageParser<CreateAliasRequest>(() => new CreateAliasRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CreateAliasRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateAliasRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateAliasRequest(CreateAliasRequest other) : this() {
+      alias_ = other.alias_;
+      target_ = other.target_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateAliasRequest Clone() {
+      return new CreateAliasRequest(this);
+    }
+
+    /// <summary>Field number for the "alias" field.</summary>
+    public const int AliasFieldNumber = 1;
+    private string alias_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Alias {
+      get { return alias_; }
+      set {
+        alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target" field.</summary>
+    public const int TargetFieldNumber = 2;
+    private string target_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Target {
+      get { return target_; }
+      set {
+        target_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CreateAliasRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CreateAliasRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Alias != other.Alias) return false;
+      if (Target != other.Target) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Alias.Length != 0) hash ^= Alias.GetHashCode();
+      if (Target.Length != 0) hash ^= Target.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Alias.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Alias);
+      }
+      if (Target.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Target);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Alias.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
+      }
+      if (Target.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Target);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CreateAliasRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Alias.Length != 0) {
+        Alias = other.Alias;
+      }
+      if (other.Target.Length != 0) {
+        Target = other.Target;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Alias = input.ReadString();
+            break;
+          }
+          case 18: {
+            Target = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CreateAliasResponse : pb::IMessage<CreateAliasResponse> {
+    private static readonly pb::MessageParser<CreateAliasResponse> _parser = new pb::MessageParser<CreateAliasResponse>(() => new CreateAliasResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CreateAliasResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateAliasResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateAliasResponse(CreateAliasResponse other) : this() {
+      succeeded_ = other.succeeded_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreateAliasResponse Clone() {
+      return new CreateAliasResponse(this);
+    }
+
+    /// <summary>Field number for the "succeeded" field.</summary>
+    public const int SucceededFieldNumber = 1;
+    private bool succeeded_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Succeeded {
+      get { return succeeded_; }
+      set {
+        succeeded_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CreateAliasResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CreateAliasResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Succeeded != other.Succeeded) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Succeeded != false) hash ^= Succeeded.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Succeeded != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Succeeded);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Succeeded != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CreateAliasResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Succeeded != false) {
+        Succeeded = other.Succeeded;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Succeeded = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeleteAliasRequest : pb::IMessage<DeleteAliasRequest> {
+    private static readonly pb::MessageParser<DeleteAliasRequest> _parser = new pb::MessageParser<DeleteAliasRequest>(() => new DeleteAliasRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeleteAliasRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteAliasRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteAliasRequest(DeleteAliasRequest other) : this() {
+      alias_ = other.alias_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteAliasRequest Clone() {
+      return new DeleteAliasRequest(this);
+    }
+
+    /// <summary>Field number for the "alias" field.</summary>
+    public const int AliasFieldNumber = 1;
+    private string alias_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Alias {
+      get { return alias_; }
+      set {
+        alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeleteAliasRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeleteAliasRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Alias != other.Alias) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Alias.Length != 0) hash ^= Alias.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Alias.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Alias);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Alias.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeleteAliasRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Alias.Length != 0) {
+        Alias = other.Alias;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Alias = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeleteAliasResponse : pb::IMessage<DeleteAliasResponse> {
+    private static readonly pb::MessageParser<DeleteAliasResponse> _parser = new pb::MessageParser<DeleteAliasResponse>(() => new DeleteAliasResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeleteAliasResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.AliasServiceReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteAliasResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteAliasResponse(DeleteAliasResponse other) : this() {
+      succeeded_ = other.succeeded_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteAliasResponse Clone() {
+      return new DeleteAliasResponse(this);
+    }
+
+    /// <summary>Field number for the "succeeded" field.</summary>
+    public const int SucceededFieldNumber = 1;
+    private bool succeeded_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Succeeded {
+      get { return succeeded_; }
+      set {
+        succeeded_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeleteAliasResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeleteAliasResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Succeeded != other.Succeeded) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Succeeded != false) hash ^= Succeeded.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Succeeded != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Succeeded);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Succeeded != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeleteAliasResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Succeeded != false) {
+        Succeeded = other.Succeeded;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Succeeded = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   #endregion
 
 }
-#region Messages
-public sealed partial class ResolveAliasRequest : pb::IMessage<ResolveAliasRequest> {
-  private static readonly pb::MessageParser<ResolveAliasRequest> _parser = new pb::MessageParser<ResolveAliasRequest>(() => new ResolveAliasRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<ResolveAliasRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::AliasServiceReflection.Descriptor.MessageTypes[0]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ResolveAliasRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ResolveAliasRequest(ResolveAliasRequest other) : this() {
-    alias_ = other.alias_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ResolveAliasRequest Clone() {
-    return new ResolveAliasRequest(this);
-  }
-
-  /// <summary>Field number for the "alias" field.</summary>
-  public const int AliasFieldNumber = 1;
-  private string alias_ = "";
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Alias {
-    get { return alias_; }
-    set {
-      alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as ResolveAliasRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(ResolveAliasRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Alias != other.Alias) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Alias.Length != 0) hash ^= Alias.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Alias.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Alias);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Alias.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(ResolveAliasRequest other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Alias.Length != 0) {
-      Alias = other.Alias;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Alias = input.ReadString();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class ResolveAliasResponse : pb::IMessage<ResolveAliasResponse> {
-  private static readonly pb::MessageParser<ResolveAliasResponse> _parser = new pb::MessageParser<ResolveAliasResponse>(() => new ResolveAliasResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<ResolveAliasResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::AliasServiceReflection.Descriptor.MessageTypes[1]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ResolveAliasResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ResolveAliasResponse(ResolveAliasResponse other) : this() {
-    target_ = other.target_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ResolveAliasResponse Clone() {
-    return new ResolveAliasResponse(this);
-  }
-
-  /// <summary>Field number for the "target" field.</summary>
-  public const int TargetFieldNumber = 1;
-  private string target_ = "";
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Target {
-    get { return target_; }
-    set {
-      target_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as ResolveAliasResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(ResolveAliasResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Target != other.Target) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Target.Length != 0) hash ^= Target.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Target.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Target);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Target.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Target);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(ResolveAliasResponse other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Target.Length != 0) {
-      Target = other.Target;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Target = input.ReadString();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class CreateAliasRequest : pb::IMessage<CreateAliasRequest> {
-  private static readonly pb::MessageParser<CreateAliasRequest> _parser = new pb::MessageParser<CreateAliasRequest>(() => new CreateAliasRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<CreateAliasRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::AliasServiceReflection.Descriptor.MessageTypes[2]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateAliasRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateAliasRequest(CreateAliasRequest other) : this() {
-    alias_ = other.alias_;
-    target_ = other.target_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateAliasRequest Clone() {
-    return new CreateAliasRequest(this);
-  }
-
-  /// <summary>Field number for the "alias" field.</summary>
-  public const int AliasFieldNumber = 1;
-  private string alias_ = "";
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Alias {
-    get { return alias_; }
-    set {
-      alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  /// <summary>Field number for the "target" field.</summary>
-  public const int TargetFieldNumber = 2;
-  private string target_ = "";
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Target {
-    get { return target_; }
-    set {
-      target_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as CreateAliasRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(CreateAliasRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Alias != other.Alias) return false;
-    if (Target != other.Target) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Alias.Length != 0) hash ^= Alias.GetHashCode();
-    if (Target.Length != 0) hash ^= Target.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Alias.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Alias);
-    }
-    if (Target.Length != 0) {
-      output.WriteRawTag(18);
-      output.WriteString(Target);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Alias.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
-    }
-    if (Target.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Target);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(CreateAliasRequest other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Alias.Length != 0) {
-      Alias = other.Alias;
-    }
-    if (other.Target.Length != 0) {
-      Target = other.Target;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Alias = input.ReadString();
-          break;
-        }
-        case 18: {
-          Target = input.ReadString();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class CreateAliasResponse : pb::IMessage<CreateAliasResponse> {
-  private static readonly pb::MessageParser<CreateAliasResponse> _parser = new pb::MessageParser<CreateAliasResponse>(() => new CreateAliasResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<CreateAliasResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::AliasServiceReflection.Descriptor.MessageTypes[3]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateAliasResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateAliasResponse(CreateAliasResponse other) : this() {
-    succeeded_ = other.succeeded_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public CreateAliasResponse Clone() {
-    return new CreateAliasResponse(this);
-  }
-
-  /// <summary>Field number for the "succeeded" field.</summary>
-  public const int SucceededFieldNumber = 1;
-  private bool succeeded_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Succeeded {
-    get { return succeeded_; }
-    set {
-      succeeded_ = value;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as CreateAliasResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(CreateAliasResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Succeeded != other.Succeeded) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Succeeded != false) hash ^= Succeeded.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Succeeded != false) {
-      output.WriteRawTag(8);
-      output.WriteBool(Succeeded);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Succeeded != false) {
-      size += 1 + 1;
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(CreateAliasResponse other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Succeeded != false) {
-      Succeeded = other.Succeeded;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 8: {
-          Succeeded = input.ReadBool();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class DeleteAliasRequest : pb::IMessage<DeleteAliasRequest> {
-  private static readonly pb::MessageParser<DeleteAliasRequest> _parser = new pb::MessageParser<DeleteAliasRequest>(() => new DeleteAliasRequest());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<DeleteAliasRequest> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::AliasServiceReflection.Descriptor.MessageTypes[4]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteAliasRequest() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteAliasRequest(DeleteAliasRequest other) : this() {
-    alias_ = other.alias_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteAliasRequest Clone() {
-    return new DeleteAliasRequest(this);
-  }
-
-  /// <summary>Field number for the "alias" field.</summary>
-  public const int AliasFieldNumber = 1;
-  private string alias_ = "";
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Alias {
-    get { return alias_; }
-    set {
-      alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as DeleteAliasRequest);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(DeleteAliasRequest other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Alias != other.Alias) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Alias.Length != 0) hash ^= Alias.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Alias.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(Alias);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Alias.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(DeleteAliasRequest other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Alias.Length != 0) {
-      Alias = other.Alias;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 10: {
-          Alias = input.ReadString();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class DeleteAliasResponse : pb::IMessage<DeleteAliasResponse> {
-  private static readonly pb::MessageParser<DeleteAliasResponse> _parser = new pb::MessageParser<DeleteAliasResponse>(() => new DeleteAliasResponse());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<DeleteAliasResponse> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::AliasServiceReflection.Descriptor.MessageTypes[5]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteAliasResponse() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteAliasResponse(DeleteAliasResponse other) : this() {
-    succeeded_ = other.succeeded_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public DeleteAliasResponse Clone() {
-    return new DeleteAliasResponse(this);
-  }
-
-  /// <summary>Field number for the "succeeded" field.</summary>
-  public const int SucceededFieldNumber = 1;
-  private bool succeeded_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Succeeded {
-    get { return succeeded_; }
-    set {
-      succeeded_ = value;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as DeleteAliasResponse);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(DeleteAliasResponse other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (Succeeded != other.Succeeded) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (Succeeded != false) hash ^= Succeeded.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (Succeeded != false) {
-      output.WriteRawTag(8);
-      output.WriteBool(Succeeded);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (Succeeded != false) {
-      size += 1 + 1;
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(DeleteAliasResponse other) {
-    if (other == null) {
-      return;
-    }
-    if (other.Succeeded != false) {
-      Succeeded = other.Succeeded;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 8: {
-          Succeeded = input.ReadBool();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-#endregion
-
 
 #endregion Designer generated code
