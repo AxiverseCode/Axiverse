@@ -4,6 +4,7 @@
 	--grpc_out . ^
 	..\..\Proto\Admin\AliasService.proto ^
 	..\..\Proto\Admin\IdentityService.proto ^
+	..\..\Proto\Interface\MetricService.proto ^
 	..\..\Proto\AssetService.proto ^
 	..\..\Proto\EntityService.proto ^
 	..\..\Proto\MarketService.proto ^

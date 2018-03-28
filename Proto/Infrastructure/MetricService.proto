@@ -1,0 +1,20 @@
+// Metric Service
+//
+//
+syntax = "proto3";
+
+option csharp_namespace = "Axiverse.Services.Proto";
+
+service MetricService {
+
+	rpc RecordCounter(RecordCounterRequest) returns (RecordCounterResponse);
+
+}
+
+message RecordCounterRequest {
+
+}
+
+message RecordCounterResponse {
+
+}

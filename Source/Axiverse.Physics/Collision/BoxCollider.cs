@@ -78,17 +78,17 @@ namespace Axiverse.Simulation.Physics.Collision
             if (TrackFaceAxis(ref aAxis, 2, s, ref aMax, formerTransform.Row(2), ref nA))
                 return null;
 
-            // letter's X axis
+            // latter's X axis
             s = Math.Abs(Vector3.Dot(difference, C.Row(0))) - (latterSize.X + Vector3.Dot(absoluteC.Row(0), formerSize));
             if (TrackFaceAxis(ref bAxis, 3, s, ref bMax, latterTransform.Row(0), ref nB))
                 return null;
 
-            // letter's Y axis
+            // latter's Y axis
             s = Math.Abs(Vector3.Dot(difference, C.Row(1))) - (latterSize.Y + Vector3.Dot(absoluteC.Row(1), formerSize));
             if (TrackFaceAxis(ref bAxis, 4, s, ref bMax, latterTransform.Row(1), ref nB))
                 return null;
 
-            // letter's Z axis
+            // latter's Z axis
             s = Math.Abs(Vector3.Dot(difference, C.Row(2))) - (latterSize.Z + Vector3.Dot(absoluteC.Row(2), formerSize));
             if (TrackFaceAxis(ref bAxis, 5, s, ref bMax, latterTransform.Row(2), ref nB))
                 return null;
