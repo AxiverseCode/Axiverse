@@ -47,6 +47,7 @@
     <Compile Include="Collision\BoxCollider.cs" />
     <Compile Include="Collision\ICollider.cs" />
     <Compile Include="Collision\ManifoldContact.cs" />
+    <Compile Include="Dynamics\InertialTensors.cs" />
     <Compile Include="Filters\BruteForceFilter.cs" />
     <Compile Include="Collision\Collider.cs" />
     <Compile Include="Collision\ContactPair.cs" />
@@ -62,7 +63,6 @@
     <Compile Include="Dynamics\IConstraint.cs" />
     <Compile Include="Dynamics\Solvers\ContactSolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RigidBody.cs" />
     <Compile Include="Shapes\Box.cs" />
     <Compile Include="Shapes\Shape.cs" />
     <Compile Include="Shapes\Sphere.cs" />
