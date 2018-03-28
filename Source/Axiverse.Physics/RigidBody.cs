@@ -9,7 +9,7 @@ using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics
 {
-    public class RigidBody
+    public class Body2
     {
         public float Mass; // kg
 

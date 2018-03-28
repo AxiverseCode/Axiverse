@@ -14,14 +14,14 @@ namespace Axiverse.Physics.Collision
     public class Manifold
     {
         /// <summary>
-        /// Gets or sets the former <see cref="RigidBody"/> in contact.
+        /// Gets or sets the former <see cref="Body"/> in contact.
         /// </summary>
-        public RigidBody Former { get; set; }
+        public Body Former { get; set; }
 
         /// <summary>
-        /// Gets or sets latter <see cref="RigidBody"/> in contact.
+        /// Gets or sets latter <see cref="Body"/> in contact.
         /// </summary>
-        public RigidBody Latter { get; set; }
+        public Body Latter { get; set; }
 
         /// <summary>
         /// Gets the list of contacts in the manifold.

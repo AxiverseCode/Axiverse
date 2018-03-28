@@ -10,19 +10,35 @@ using Axiverse.Physics.Filters;
 
 namespace Axiverse.Physics
 {
+    /// <summary>
+    /// A physics simulation world.
+    /// </summary>
     public class World
     {
-        public List<RigidBody> RigidBodies { get; }
-        private readonly List<RigidBody> m_rigidBodies = new List<RigidBody>();
+        /// <summary>
+        /// Gets the list of bodies in this world.
+        /// </summary>
+        public List<Body> Bodies { get; }
+        private readonly List<Body> m_rigidBodies = new List<Body>();
 
+        /// <summary>
+        /// Gets or sets the board phase filter.
+        /// </summary>
         public BruteForceFilter BroadPhase { get; set; }
+
+        /// <summary>
+        /// Gets or sets the narrow phase collision dispatcher.
+        /// </summary>
         public CollisionDispatcher NarrowPhase { get; set; }
 
+        /// <summary>
+        /// Gets or sets the default timestep.
+        /// </summary>
         private float Timestep { get; set; }
 
         public World()
         {
-            RigidBodies = m_rigidBodies;
+            Bodies = m_rigidBodies;
             BroadPhase = new BruteForceFilter();
         }
 
@@ -34,7 +50,7 @@ namespace Axiverse.Physics
             if (timestep == 0.0f) return;
             if (timestep < 0.0f) throw new ArgumentException("Timestep must be positive.", "timestep");
             
-            m_rigidBodies.ForEach(rigidBody => rigidBody.OnStepping());
+            //m_rigidBodies.ForEach(rigidBody => rigidBody.OnStepping());
 
             // update contacts
             {
@@ -60,10 +76,12 @@ namespace Axiverse.Physics
 
                 // preserve contacts so that waking up is stable
             }
-
-            IntegrateForces();
-
-            Integrate();
+            
+            foreach (var body in m_rigidBodies)
+            {
+                body.Integrate(timestep);
+            }
+            
             // n-body gravitation calculation
 
             // handle arbiter
@@ -74,61 +92,8 @@ namespace Axiverse.Physics
             }
 
             // integrate
-            m_rigidBodies.ForEach(rigidBody => rigidBody.OnStepped());
+            // m_rigidBodies.ForEach(rigidBody => rigidBody.OnStepped());
 
         }
-
-
-
-        private void IntegrateForces()
-        {
-            foreach (var body in m_rigidBodies)
-            {
-                if (!body.IsStatic && body.IsActive)
-                {
-                    // linear integration
-                    body.LinearVelocity += body.Force * body.InverseMass;
-
-                    // angular integration
-                    if (!body.IsParticle)
-                    {
-                        body.AngularVelocity += body.Torque * Timestep * body.InverseInertiaWorld;
-                    }
-                }
-
-                body.Force = Vector3.Zero;
-                body.Torque = Vector3.Zero;
-            }
-        }
-
-        private void Integrate()
-        {
-            foreach (var body in m_rigidBodies)
-            {
-                if (body.IsStatic || !body.IsActive) continue;
-                
-                // linear integraion
-                body.Position += body.LinearVelocity * Timestep;
-
-                // angular integration
-                if (!body.IsParticle)
-                {
-                    Vector3 axis;
-                    float angle = body.AngularVelocity.Length();
-
-                    axis = body.AngularVelocity * (float)Math.Sin(angle * Timestep / 2);
-                    Quaternion dorn = new Quaternion(axis, (float)Math.Cos(angle * Timestep / 2));
-                    Quaternion ornA = Quaternion.FromMatrix(body.Orientation);
-
-                    dorn = dorn * ornA;
-                    dorn.Normalize();
-
-                    body.Orientation = Matrix3.FromQuaternion(dorn);
-                }
-
-                body.DeriveProperties();
-            }
-        }
-
     }
 }

@@ -9,16 +9,29 @@ using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics.Filters
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BruteForceFilter : IFilter
     {
-        public List<IBoundedBody> Bodies { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<IBoundedBody> Bodies { get; } = new List<IBoundedBody>();
         // single phase brute force collider
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BruteForceFilter()
         {
             Bodies = new List<IBoundedBody>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<ContactPair> Detect()
         {
             var pairs = new List<ContactPair>();
@@ -34,7 +47,7 @@ namespace Axiverse.Physics.Filters
                     if (Detect(former, latter))
                     {
                         // generate collision pair for narrow-phase
-                        pairs.Add(new ContactPair((RigidBody)former, (RigidBody)latter));
+                        pairs.Add(new ContactPair((Body)former, (Body)latter));
                     }
                 }
             }
@@ -42,6 +55,12 @@ namespace Axiverse.Physics.Filters
             return pairs;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public bool Detect(IBoundedBody left, IBoundedBody right)
         {
             if (left.IsUnaffected && right.IsUnaffected)

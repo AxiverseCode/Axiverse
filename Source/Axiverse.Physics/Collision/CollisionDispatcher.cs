@@ -26,7 +26,9 @@ namespace Axiverse.Physics.Collision
             foreach (var pair in pairs)
             {
                 if (m_colliders.TryGetValue(
-                    new Tuple<Type, Type>(pair.Former.Shape.GetType(), pair.Latter.Shape.GetType()),
+                    new Tuple<Type, Type>(
+                        pair.Former.CollisionShape.GetType(),
+                        pair.Latter.CollisionShape.GetType()),
                     out var collider))
                 {
 

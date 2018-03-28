@@ -8,8 +8,8 @@ namespace Axiverse.Physics.Dynamics
 {
     public interface IConstraint
     {
-        RigidBody BodyA { get; }
-        RigidBody BodyB { get; }
+        Body BodyA { get; }
+        Body BodyB { get; }
 
         void Step(float timestep);
 

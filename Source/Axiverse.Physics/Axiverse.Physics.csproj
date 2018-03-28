@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Body.cs" />
     <Compile Include="Collision\BoxCollider.cs" />
     <Compile Include="Collision\ICollider.cs" />
     <Compile Include="Collision\ManifoldContact.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Collision\ConvexHullCollider.cs" />
     <Compile Include="Collision\CollisionDispatcher.cs" />
     <Compile Include="Filters\IFilter.cs" />
+    <Compile Include="Filters\OctreeFilter.cs" />
     <Compile Include="Shapes\IBoundedBody.cs" />
     <Compile Include="Collision\Manifold.cs" />
     <Compile Include="Collision\SeparatingAxisCollider.cs" />

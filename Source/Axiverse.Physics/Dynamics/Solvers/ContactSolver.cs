@@ -12,10 +12,10 @@ namespace Axiverse.Physics.Dynamics.Solvers
     {
         // https://github.com/bulletphysics/bullet3/blob/master/src/BulletDynamics/ConstraintSolver/btContactConstraint.cpp
 
-        public static float Resolve(RigidBody former, RigidBody latter, Vector3 contact, Vector3 normal, float distance, SolverContext context)
+        public static float Resolve(Body former, Body latter, Vector3 contact, Vector3 normal, float distance, SolverContext context)
         {
-            Vector3 formerLocalPosition = contact - former.Position;
-            Vector3 latterLocalPosition = contact - latter.Position;
+            Vector3 formerLocalPosition = contact - former.LinearPosition;
+            Vector3 latterLocalPosition = contact - latter.LinearPosition;
 
             Vector3 formerVelocity = former.GetLocalPointVelocity(formerLocalPosition);
             Vector3 latterVelocity = latter.GetLocalPointVelocity(latterLocalPosition);
