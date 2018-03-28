@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 
 using Axiverse.Simulation.Physics.Shapes;
 
-namespace Axiverse.Simulation.Physics.Collision
+namespace Axiverse.Physics.Collision
 {
     /// <summary>
     /// Computes the collision between two objects
     /// </summary>
-    public class Dispatcher
+    public class CollisionDispatcher
     {
-        public Dispatcher()
+        public CollisionDispatcher()
         {
             Add(typeof(Sphere), typeof(Sphere), new SphereCollider());
+        }
+
+        public List<Manifold> Collide(List<ContactPair> pairs)
+        {
+            var manifolds = new List<Manifold>();
+
+            return manifolds;
         }
 
         public void Add(Type left, Type right, ICollider collider)

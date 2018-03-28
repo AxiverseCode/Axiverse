@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Simulation.Physics.Dynamics
+namespace Axiverse.Physics.Dynamics
 {
 
     /*

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Axiverse.Mathematics;
 using Axiverse.Simulation.Physics.Shapes;
 
-namespace Axiverse.Simulation.Physics.Collision
+namespace Axiverse.Physics.Collision
 {
     public abstract class SeparatingAxisCollider<T, U> : Collider<T, U>
         where T : Shape

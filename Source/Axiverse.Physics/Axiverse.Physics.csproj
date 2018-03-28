@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collision\BoxCollider.cs" />
-    <Compile Include="Collision\BruteForceFilter.cs" />
+    <Compile Include="Filters\BruteForceFilter.cs" />
     <Compile Include="Collision\Collider.cs" />
     <Compile Include="Collision\ContactPair.cs" />
     <Compile Include="Collision\ConvexHullCollider.cs" />
@@ -52,7 +52,6 @@
     <Compile Include="Collision\Filter.cs" />
     <Compile Include="Collision\IBoundedBody.cs" />
     <Compile Include="Collision\Manifold.cs" />
-    <Compile Include="Collision\NarrowPhaseCollider.cs" />
     <Compile Include="Collision\SeparatingAxisCollider.cs" />
     <Compile Include="Collision\SphereCollider.cs" />
     <Compile Include="Dynamics\Contact.cs" />

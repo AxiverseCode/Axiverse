@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Axiverse.Simulation.Physics.Shapes;
 
-namespace Axiverse.Simulation.Physics.Collision
+namespace Axiverse.Physics.Collision
 {
     public abstract class Collider<T, U> : ICollider
         where T : Shape

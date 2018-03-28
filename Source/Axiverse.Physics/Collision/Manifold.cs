@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
 
-namespace Axiverse.Simulation.Physics.Collision
+namespace Axiverse.Physics.Collision
 {
     public class Manifold
     {

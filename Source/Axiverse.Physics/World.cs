@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
-using Axiverse.Simulation.Physics.Collision;
+using Axiverse.Physics.Collision;
+using Axiverse.Physics.Filters;
 
-namespace Axiverse.Simulation.Physics
+namespace Axiverse.Physics
 {
     public class World
     {
@@ -15,7 +16,7 @@ namespace Axiverse.Simulation.Physics
         private readonly List<RigidBody> m_rigidBodies = new List<RigidBody>();
 
         public BruteForceFilter BroadPhase { get; set; }
-        public NarrowPhaseCollider NarrowPhase { get; set; }
+        public CollisionDispatcher NarrowPhase { get; set; }
 
         private float Timestep { get; set; }
 

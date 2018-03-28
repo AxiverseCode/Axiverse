@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Simulation.Physics.Collision
+using Axiverse.Physics.Collision;
+
+namespace Axiverse.Physics.Filters
 {
     public class BruteForceFilter
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
 
-namespace Axiverse.Simulation.Physics.Dynamics.Solvers
+namespace Axiverse.Physics.Dynamics.Solvers
 {
     public class ContactSolver
     {
