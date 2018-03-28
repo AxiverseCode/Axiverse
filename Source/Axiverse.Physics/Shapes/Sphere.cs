@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
 
-namespace Axiverse.Simulation.Physics.Shapes
+namespace Axiverse.Physics.Shapes
 {
+    /// <summary>
+    /// A sphere collision shape.
+    /// </summary>
     public class Sphere : Shape
     {
         public float Radius;

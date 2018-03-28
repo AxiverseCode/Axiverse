@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
 
-namespace Axiverse.Physics.Collision
+namespace Axiverse.Physics.Shapes
 {
     public interface IBoundedBody
     {

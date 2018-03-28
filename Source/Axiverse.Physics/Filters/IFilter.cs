@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Physics.Collision
 {
-    public class Filter
+    public interface IFilter
     {
     }
 }

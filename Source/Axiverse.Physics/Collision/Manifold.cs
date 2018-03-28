@@ -8,32 +8,25 @@ using Axiverse.Mathematics;
 
 namespace Axiverse.Physics.Collision
 {
+    /// <summary>
+    /// A collision manifold which describes the contact between two bodies.
+    /// </summary>
     public class Manifold
     {
+        /// <summary>
+        /// Gets or sets the former <see cref="RigidBody"/> in contact.
+        /// </summary>
         public RigidBody Former { get; set; }
+
+        /// <summary>
+        /// Gets or sets latter <see cref="RigidBody"/> in contact.
+        /// </summary>
         public RigidBody Latter { get; set; }
 
-        public List<ManifoldContact> Contacts { get; set; }
-
-        public Manifold()
-        {
-            Contacts = new List<ManifoldContact>();
-        }
-    }
-
-    public class ManifoldContact
-    {
-        public Vector3 FormerLocalPoint;
-        public Vector3 LatterLocalPoint;
-
-        public Vector3 Position;
-        public Vector3 Normal;
-
-        public float Distance;
-        public float CombinedFriction;
-        public float CombinedAngularFriction;
-        public float CombinedSpinningFriction;
-        public float CombinedRestitution;
+        /// <summary>
+        /// Gets the list of contacts in the manifold.
+        /// </summary>
+        public List<ManifoldContact> Contacts { get; } = new List<ManifoldContact>();
     }
 
 }

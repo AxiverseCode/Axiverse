@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
+using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics
 {
@@ -32,6 +33,8 @@ namespace Axiverse.Physics
         internal Vector3 Torque;
 
         internal bool IsParticle { get; set; }
+
+        public Shape Shape { get; set; }
 
         public void OnStepping()
         {

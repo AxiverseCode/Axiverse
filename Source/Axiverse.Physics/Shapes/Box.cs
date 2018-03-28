@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
 
-namespace Axiverse.Simulation.Physics.Shapes
+namespace Axiverse.Physics.Shapes
 {
+    /// <summary>
+    /// A oriented box collision shape.
+    /// </summary>
     public class Box : Shape
     {
         public Matrix3 transform;

@@ -44,18 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collision\BoxCollider.cs" />
+    <Compile Include="Collision\ICollider.cs" />
+    <Compile Include="Collision\ManifoldContact.cs" />
     <Compile Include="Filters\BruteForceFilter.cs" />
     <Compile Include="Collision\Collider.cs" />
     <Compile Include="Collision\ContactPair.cs" />
     <Compile Include="Collision\ConvexHullCollider.cs" />
-    <Compile Include="Collision\Dispatcher.cs" />
-    <Compile Include="Collision\Filter.cs" />
-    <Compile Include="Collision\IBoundedBody.cs" />
+    <Compile Include="Collision\CollisionDispatcher.cs" />
+    <Compile Include="Filters\IFilter.cs" />
+    <Compile Include="Shapes\IBoundedBody.cs" />
     <Compile Include="Collision\Manifold.cs" />
     <Compile Include="Collision\SeparatingAxisCollider.cs" />
     <Compile Include="Collision\SphereCollider.cs" />
     <Compile Include="Dynamics\Contact.cs" />
-    <Compile Include="Dynamics\Contact2.cs" />
     <Compile Include="Dynamics\IConstraint.cs" />
     <Compile Include="Dynamics\Solvers\ContactSolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

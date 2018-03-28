@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
-using Axiverse.Simulation.Physics.Shapes;
+using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics.Collision
 {

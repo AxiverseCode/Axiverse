@@ -5,17 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Axiverse.Mathematics;
-using Axiverse.Simulation.Physics.Shapes;
+using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics.Collision
 {
+    /// <summary>
+    /// Collider to create a <see cref="Manifold"/> from the potential collision of two spheres.
+    /// </summary>
     public class SphereCollider : Collider<Sphere, Sphere>
     {
-        public float CalculateImpactTime()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Detects if the two spheres collide and if they do create a manifold.
+        /// </summary>
+        /// <param name="former">The former sphere to collide.</param>
+        /// <param name="latter">The latter sphere to collide.</param>
+        /// <returns>The manifold of the collision.</returns>
         public override Manifold Collide(Sphere former, Sphere latter)
         {
             Vector3 difference = former.Position - latter.Position;

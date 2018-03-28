@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Axiverse.Physics.Collision;
+using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics.Filters
 {
-    public class BruteForceFilter
+    public class BruteForceFilter : IFilter
     {
         public List<IBoundedBody> Bodies { get; }
         // single phase brute force collider
@@ -33,7 +34,7 @@ namespace Axiverse.Physics.Filters
                     if (Detect(former, latter))
                     {
                         // generate collision pair for narrow-phase
-                        pairs.Add(new ContactPair { Former = (RigidBody)former, Latter = (RigidBody)latter });
+                        pairs.Add(new ContactPair((RigidBody)former, (RigidBody)latter));
                     }
                 }
             }
