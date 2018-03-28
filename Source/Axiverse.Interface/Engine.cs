@@ -10,7 +10,6 @@ using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Windows;
 
 using Axiverse.Simulation;
-using Axiverse.Simulation.Prototypes;
 
 namespace Axiverse.Interface
 {
@@ -26,8 +25,6 @@ namespace Axiverse.Interface
 
         public Entity entity;
         public Simulation.Entity ship;
-        public Universe Universe;
-        public Prototypes Prototypes;
 
         public void Initialize()
         {

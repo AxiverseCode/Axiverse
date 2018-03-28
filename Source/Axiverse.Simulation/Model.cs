@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Simulation
 {
-    public class Resource
+    /// <summary>
+    /// Template for a computation model to advance the state of the components of an entity.
+    /// </summary>
+    public class Model
     {
-
     }
 }

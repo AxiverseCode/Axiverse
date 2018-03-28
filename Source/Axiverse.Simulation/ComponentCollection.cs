@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Simulation.SimpleEntity
+namespace Axiverse.Simulation
 {
     /// <summary>
     /// Represents a collection of components bound to an entity.

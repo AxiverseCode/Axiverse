@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Simulation
 {
-    public class Impulse
+    /// <summary>
+    /// Component which represents a set of related attributes in an entity.
+    /// </summary>
+    public class Component
     {
-        public void Apply(Entity entity)
-        {
-
-        }
     }
 }

@@ -4,74 +4,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Axiverse.Mathematics;
-using Axiverse.Simulation.Prototypes;
-
 namespace Axiverse.Simulation
 {
-    public class Entity : Body, IDynamic
+    /// <summary>
+    /// An entity defined by the attributes in its set of components.
+    /// </summary>
+    public class Entity
     {
-        public DynamicList<IDynamic> Dynamics { get; } = new DynamicList<IDynamic>();
+        /// <summary>
+        /// Gets the identifier for this entity.
+        /// </summary>
+        public Guid Identifier { get; }
 
-        public DynamicList<AutoValue> Values { get; } = new DynamicList<AutoValue>();
+        /// <summary>
+        /// Gets or sets the name for this entity.
+        /// </summary>
+        public string Name { get; set; }
 
-        public EntityDynamicList<Equiptment> Equiptment { get; }
+        /// <summary>
+        /// Gets the collection of components in this entity.
+        /// </summary>
+        public ComponentCollection Components { get; }
 
-        public EntityDynamicList<Modifier> Modifiers { get; }
-
-        public Guid Identifier { get; private set; }
-
-        public EntityPrototype Prototype { get; set; }
-
-        public AutoValue Structure { get; } = new AutoValue();
-
-        public AutoValue Shields { get; } = new AutoValue();
-
-        public AutoValue Energy { get; } = new AutoValue();
-
-
-        public Entity()
+        /// <summary>
+        /// Constructs an entity with a new identifier.
+        /// </summary>
+        public Entity() : this(Guid.NewGuid())
         {
-            Identifier = Guid.NewGuid();
-            Equiptment = new EntityDynamicList<Equiptment>(this);
-            Modifiers = new EntityDynamicList<Modifier>(this);
-
-            Register(Values);
-            Register(Equiptment);
-            Register(Modifiers);
-
-            RegisterValue(Structure);
-            RegisterValue(Shields);
-            RegisterValue(Energy);
         }
 
         /// <summary>
-        /// Registers a dynamic model for automatic simulation when this entity gets simulated.
+        /// Constructs an entity with the given identifier.
         /// </summary>
-        /// <param name="dynamic"></param>
-        protected void Register(IDynamic dynamic)
+        /// <param name="identifier"></param>
+        public Entity(Guid identifier)
         {
-            Dynamics.Add(dynamic);
+            Identifier =identifier;
+            Components = new ComponentCollection();
         }
 
         /// <summary>
-        /// Registers an value to be simulated during the value pass.
+        /// Sets the component bound to the specified type.
         /// </summary>
-        /// <param name="value"></param>
-        protected void RegisterValue(AutoValue value)
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T Get<T>() where T : Component
         {
-            Values.Add(value);
+            return Components[typeof(T)] as T;
         }
 
-        public void Step(float delta)
+        /// <summary>
+        /// Gets a component bound to the specified type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="component"></param>
+        public void Set<T>(T component) where T : Component
         {
-            //Console.WriteLine($"{Prototype.Name} : {Identifier}");
-
-            Dynamics.Step(delta);
-
-            Integrate(delta);
+            Components[typeof(T)] = component;
         }
-
-
     }
 }

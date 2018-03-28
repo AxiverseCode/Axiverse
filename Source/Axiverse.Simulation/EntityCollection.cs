@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 namespace Axiverse.Simulation
 {
     /// <summary>
-    /// 
+    /// Represents a collection of entities.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class Attribute<T>
+    public class EntityCollection : List<Entity>
     {
-        public string Name { get; set; }
 
-        public T Value { get; set; }
     }
 }
