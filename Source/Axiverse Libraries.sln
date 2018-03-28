@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello World", "..\Examples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Graphics", "Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj", "{CAB0BBC2-A6EB-4065-9E71-FD86746696C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloGraphics", "..\Examples\HelloGraphics\HelloGraphics.csproj", "{B79A989D-F5BA-441D-91BD-AF6AE025D30D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Graphics", "..\Examples\HelloGraphics\Hello Graphics.csproj", "{B79A989D-F5BA-441D-91BD-AF6AE025D30D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Persona", "Axiverse.Persona\Axiverse.Persona.csproj", "{3C361219-E4EE-4D0A-8756-50A6DF16B6A9}"
 EndProject
