@@ -11,5 +11,20 @@ namespace Axiverse.Simulation
     /// </summary>
     public class Model
     {
+        // outputs
+
+
+        // inputs
+
+
+        // intermediates
+
+
+        // installs different producers in different slots. Advance attributed keys represent the
+        // components in the next step of the entity. The model can output various things of which
+        // a client can choose to compute or not compute depending on their needs.
+        //
+        // current components must be available on the component. I don't know if we want to auto-
+        // generate default values. I suppose not.
     }
 }

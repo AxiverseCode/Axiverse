@@ -26,6 +26,8 @@ namespace Axiverse.Simulation
         /// </summary>
         public ComponentCollection Components { get; }
 
+        public SpatialComponent Spatial { get; }
+
         /// <summary>
         /// Constructs an entity with a new identifier.
         /// </summary>
@@ -41,6 +43,9 @@ namespace Axiverse.Simulation
         {
             Identifier =identifier;
             Components = new ComponentCollection();
+            Spatial = new SpatialComponent();
+
+            Components[typeof(SpatialComponent)] = Spatial;
         }
 
         /// <summary>

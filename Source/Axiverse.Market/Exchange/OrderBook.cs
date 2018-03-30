@@ -10,7 +10,6 @@ namespace Axiverse.Market.Exchange
 {
     public class OrderBook
     {
-
         public virtual bool Add(Order order, OrderConditions conditions = OrderConditions.None)
         {
             ++Transaction;

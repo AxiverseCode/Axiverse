@@ -43,7 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Injection\BindingAttribute.cs" />
+    <Compile Include="Injection\Injector.cs" />
+    <Compile Include="Injection\AttributedKey.cs" />
+    <Compile Include="Injection\BindingCollection.cs" />
+    <Compile Include="Injection\Key.cs" />
+    <Compile Include="Injection\SyntheticKey.cs" />
     <Compile Include="Optional.cs" />
+    <Compile Include="Producers\NodeAttribute.cs" />
+    <Compile Include="Producers\NodeInjector.cs" />
+    <Compile Include="Producers\PartialAttribute.cs" />
+    <Compile Include="Producers\ProducesAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbol.cs" />
   </ItemGroup>

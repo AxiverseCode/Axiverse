@@ -31,6 +31,11 @@ namespace Axiverse.Mathematics
             Z = z;
         }
 
+        public bool Any()
+        {
+            return X || Y || Z;
+        }
+
         /// <summary>
         /// Determines if any of the components are equal to the given value.
         /// </summary>
@@ -39,6 +44,11 @@ namespace Axiverse.Mathematics
         public bool Any(bool value)
         {
             return (X == value) || (Y == value) || (Z == value);
+        }
+
+        public bool All()
+        {
+            return X && Y && Z;
         }
 
         /// <summary>
@@ -160,7 +170,7 @@ namespace Axiverse.Mathematics
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Boolean3[] Complete = new Boolean3[] {
+        public static readonly Boolean3[] Domain = new Boolean3[] {
             (Boolean3)0, (Boolean3)1, (Boolean3)2, (Boolean3)3,
             (Boolean3)4, (Boolean3)5, (Boolean3)6, (Boolean3)7};
     }
