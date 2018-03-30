@@ -331,7 +331,7 @@ namespace Axiverse
 
         public override int GetHashCode()
         {
-            return X.GetHashCode() ^ Y.GetHashCode();
+            return new { X, Y }.GetHashCode();
         }
         
         public override string ToString()
