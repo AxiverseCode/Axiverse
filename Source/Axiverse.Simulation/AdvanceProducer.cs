@@ -15,18 +15,16 @@ namespace Axiverse.Simulation
     public class AdvanceProducer
     {
         [Produces]
-        SpatialComponent ProduceSpatialComponent([Current]SpatialComponent spatial)
+        SpatialComponent ProduceSpatialComponent(
+            [StepTime]float delta,
+            [Current]SpatialComponent spatial,
+            [Current]PhysicsComponent physics)
         {
-            var next = new SpatialComponent();
-            next.Position = spatial.Position + new Vector3(0, 0, 1);
-            return next;
-        }
+            physics.Body.Integrate(delta);
 
-        [Produces]
-        [Partial]
-        List<Entity> ProduceNewEntites()
-        {
-            return null;
+            var next = new SpatialComponent();
+            next.Position = physics.Body.LinearPosition;
+            return next;
         }
     }
 }

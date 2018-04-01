@@ -11,6 +11,8 @@ namespace Axiverse.Simulation
     /// </summary>
     public class Model
     {
+        // This is similar to a module, but for a specific line of computation.
+
         // outputs
 
 

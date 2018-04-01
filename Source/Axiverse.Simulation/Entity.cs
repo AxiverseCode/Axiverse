@@ -26,6 +26,9 @@ namespace Axiverse.Simulation
         /// </summary>
         public ComponentCollection Components { get; }
 
+        /// <summary>
+        /// Gets the spatial component of this entity.
+        /// </summary>
         public SpatialComponent Spatial { get; }
 
         /// <summary>
