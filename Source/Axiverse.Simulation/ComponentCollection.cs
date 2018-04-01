@@ -18,12 +18,13 @@ namespace Axiverse.Simulation
         {
             get
             {
-                return components[type];
+                return components[Key.From(type)];
             }
             set
             {
-                Contract.Requires<InvalidCastException>(type.IsAssignableFrom(value.GetType()));
-                components[type] = value;
+                var key = Key.From(type);
+                Contract.Requires<InvalidCastException>(key.IsAssignableFrom(value));
+                components[key] = value;
             }
         }
 
@@ -32,6 +33,18 @@ namespace Axiverse.Simulation
         /// </summary>
         public int Count => components.Count;
 
-        private readonly Dictionary<Type, Component> components = new Dictionary<Type, Component>();
+        public ComponentCollection Clone()
+        {
+            var collection = new ComponentCollection();
+            foreach (var pair in components)
+            {
+                var clone = pair.Value.Clone();
+                Contract.Requires<InvalidCastException>(pair.Key.IsAssignableFrom(clone));
+                collection.components.Add(pair.Key, clone);
+            }
+            return collection;
+        }
+
+        private readonly Dictionary<Key, Component> components = new Dictionary<Key, Component>();
     }
 }

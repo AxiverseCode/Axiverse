@@ -32,6 +32,11 @@ namespace Axiverse.Simulation
         public SpatialComponent Spatial { get; }
 
         /// <summary>
+        /// Gets or sets the model of this entity.
+        /// </summary>
+        public Model Model { get; set; }
+
+        /// <summary>
         /// Constructs an entity with a new identifier.
         /// </summary>
         public Entity() : this(Guid.NewGuid())
@@ -44,7 +49,7 @@ namespace Axiverse.Simulation
         /// <param name="identifier"></param>
         public Entity(Guid identifier)
         {
-            Identifier =identifier;
+            Identifier = identifier;
             Components = new ComponentCollection();
             Spatial = new SpatialComponent();
 
@@ -69,6 +74,15 @@ namespace Axiverse.Simulation
         public void Set<T>(T component) where T : Component
         {
             Components[typeof(T)] = component;
+        }
+
+        public Entity Clone() => Clone(Guid.NewGuid());
+
+        public Entity Clone(Guid identifier)
+        {
+            var entity = new Entity(identifier);
+
+            return entity;
         }
     }
 }

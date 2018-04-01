@@ -9,7 +9,8 @@ namespace Axiverse.Simulation
     /// <summary>
     /// Component which represents a set of related attributes in an entity.
     /// </summary>
-    public class Component
+    public abstract class Component
     {
+        public abstract Component Clone();
     }
 }

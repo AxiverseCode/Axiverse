@@ -17,7 +17,10 @@ namespace Axiverse.Simulation
 
 
         // inputs
+        public void Process(Entity entity)
+        {
 
+        }
 
         // intermediates
 

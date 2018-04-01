@@ -26,6 +26,16 @@ namespace Axiverse.Injection
             Type = type;
         }
 
+        public bool IsAssignableFrom(Type type)
+        {
+            return Type.IsAssignableFrom(type);
+        }
+
+        public bool IsAssignableFrom(object value)
+        {
+            return Type.IsAssignableFrom(value.GetType());
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Key key)

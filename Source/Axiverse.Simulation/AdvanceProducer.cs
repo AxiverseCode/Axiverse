@@ -16,6 +16,7 @@ namespace Axiverse.Simulation
     {
         [Produces]
         SpatialComponent ProduceSpatialComponent(
+            // player inputs as well
             [StepTime]float delta,
             [Current]SpatialComponent spatial,
             [Current]PhysicsComponent physics)

@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Axiverse.Physics;
-
 namespace Axiverse.Simulation
 {
-    public class PhysicsComponent
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Message
     {
-        public Body Body { get; set; }
-
-        
     }
 }

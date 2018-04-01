@@ -15,5 +15,13 @@ namespace Axiverse.Simulation
         /// 
         /// </summary>
         public Vector3 Position { get; set; }
+
+        public override Component Clone()
+        {
+            return new SpatialComponent
+            {
+                Position = Position,
+            };
+        }
     }
 }
