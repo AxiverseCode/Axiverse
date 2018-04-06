@@ -46,18 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvanceProducer.cs" />
+    <Compile Include="CurrentAttribute.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Model.cs" />
+    <Compile Include="ParameterComponent.cs" />
+    <Compile Include="PhysicsComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentCollection.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityCollection.cs" />
+    <Compile Include="SpatialComponent.cs" />
+    <Compile Include="StepTimeAttribute.cs" />
     <Compile Include="System.cs" />
+    <Compile Include="Universe.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Physics\Axiverse.Physics.csproj">
+      <Project>{8509bdc3-c3be-424d-a027-c7b50afc5bfa}</Project>
+      <Name>Axiverse.Physics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse\Axiverse.csproj">
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
+      <Name>Axiverse</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
