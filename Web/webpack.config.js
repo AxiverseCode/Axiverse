@@ -1,7 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/services/identity/index.ts',
+  entry: './src/client/index.tsx',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {

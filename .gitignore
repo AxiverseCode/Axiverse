@@ -199,6 +199,9 @@ typings/
 # next.js build output
 .next
 
+# distributable
+Web/dist
+
 # =========================
 # Repository
 # =========================
