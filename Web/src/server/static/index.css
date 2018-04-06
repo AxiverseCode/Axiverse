@@ -42,6 +42,6 @@ table {
 	border-spacing: 0;
 }
 
-body, input, textarea {
+body, button, input, textarea {
     font-family: 'Roboto', sans-serif;
 }
