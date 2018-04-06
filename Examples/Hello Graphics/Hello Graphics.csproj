@@ -72,9 +72,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Axiverse.Interface\Axiverse.Interface.csproj">
-      <Project>{a95e24eb-7271-460a-a49d-a56f71f44b5f}</Project>
-      <Name>Axiverse.Interface</Name>
+    <ProjectReference Include="..\..\Source\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
+      <Project>{cab0bbc2-a6eb-4065-9e71-fd86746696c2}</Project>
+      <Name>Axiverse.Interface.Graphics</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,7 +9,7 @@ using SharpDX.Windows;
 using SharpDX.Direct3D12;
 using SharpDX.D3DCompiler;
 
-using Axiverse.Interface.Engine.Rendering;
+using Axiverse.Interface.Graphics;
 using System.Runtime.InteropServices;
 
 namespace HelloGraphics
@@ -82,7 +82,7 @@ namespace HelloGraphics
 
             // Lets create some resources
             int[] indices = new int[] { 0, 2, 1 };
-            Axiverse.Interface.Engine.Rendering.Buffer indexBuff = new Axiverse.Interface.Engine.Rendering.Buffer();
+            Axiverse.Interface.Graphics.Buffer indexBuff = new Axiverse.Interface.Graphics.Buffer();
             indexBuff.InitAsIndexBuffer
             (
                 device.NativeDevice, 
@@ -93,7 +93,7 @@ namespace HelloGraphics
             );
 
             float[] vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
-            Axiverse.Interface.Engine.Rendering.Buffer vtxBuffer = new Axiverse.Interface.Engine.Rendering.Buffer();
+            Axiverse.Interface.Graphics.Buffer vtxBuffer = new Axiverse.Interface.Graphics.Buffer();
             vtxBuffer.InitAsVertexBuffer
             (
                 device.NativeDevice, 
