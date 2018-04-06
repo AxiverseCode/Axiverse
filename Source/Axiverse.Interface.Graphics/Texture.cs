@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface.Engine
+namespace Axiverse.Interface.Graphics
 {
-    class Engine
+    class Texture
     {
     }
 }
