@@ -1,0 +1,5 @@
+- TODO(axiverse):
+    - development database setup
+    - serialize/deserialize simulation state
+    - load components
+    - initial view into the simulated world (dx or js?)
