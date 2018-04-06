@@ -9,7 +9,21 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              localIdentName: "[name]__[local]___[hash:base64:5]",
+            },
+          }
+        ]
+      },
     ]
   },
   resolve: {
@@ -18,5 +32,5 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
 };
