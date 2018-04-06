@@ -5,8 +5,6 @@ export interface Props {
   title: string;
 }
 
-console.log(styles);
-
 function Header({ title }: Props) {
   return (
     <div className={styles.header}>
