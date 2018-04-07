@@ -12,27 +12,34 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Used to perform rendering operations.
     /// </summary>
-    public class RenderContext
+    public class CommandList : GraphicsResource
     {
-        private GraphicsCommandList mCmdList;
+        private GraphicsCommandList nativeCommandList;
+        public GraphicsCommandList NativeCommandList => nativeCommandList;
+
         private CommandAllocator[] mCmdAllocator;
         private Fence[] mFences;
         private long[] mFenceValues;
 
-        public void Init(GraphicsDevice device,int numBuffers)
+        public CommandList(GraphicsDevice device) : base(device)
+        {
+
+        }
+
+        public void Initialize(int numBuffers)
         {
             mCmdAllocator   = new CommandAllocator[numBuffers];
             mFences         = new Fence[numBuffers];
             mFenceValues    = new long[numBuffers];
             for (int i = 0; i < numBuffers; i++)
             {
-                mCmdAllocator[i]    = device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
+                mCmdAllocator[i]    = Device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
                 mFenceValues[i]     = 0;
-                mFences[i]          = device.NativeDevice.CreateFence(mFenceValues[i], FenceFlags.None);
+                mFences[i]          = Device.NativeDevice.CreateFence(mFenceValues[i], FenceFlags.None);
             }
-            mCmdList = device.NativeDevice.CreateCommandList(CommandListType.Direct, mCmdAllocator[0], null);
+            nativeCommandList = Device.NativeDevice.CreateCommandList(CommandListType.Direct, mCmdAllocator[0], null);
             // We close it as it starts in open state
-            mCmdList.Close();
+            NativeCommandList.Close();
         }
 
         /// <summary>
@@ -41,7 +48,7 @@ namespace Axiverse.Interface.Graphics
         /// <param name="chain"></param>
         public void Reset(SwapChain chain)
         {
-            int idx     = chain.CurBufferIdx;
+            int idx     = chain.CurrentBufferIndex;
             int waits   = 0;
             int start   = Environment.TickCount;
             while (mFences[idx].CompletedValue < mFenceValues[idx])
@@ -62,17 +69,17 @@ namespace Axiverse.Interface.Graphics
             }
 
             mCmdAllocator[idx].Reset();
-            mCmdList.Reset(mCmdAllocator[idx], null);
+            NativeCommandList.Reset(mCmdAllocator[idx], null);
         }
 
         public GraphicsCommandList GetNativeContext()
         {
-            return mCmdList;
+            return NativeCommandList;
         }
 
         public void Close()
         {
-            mCmdList.Close();
+            NativeCommandList.Close();
         }
 
         /// <summary>
@@ -82,7 +89,7 @@ namespace Axiverse.Interface.Graphics
         /// <param name="chain"></param>
         public void FinishFrame(SwapChain chain)
         {
-            int idx = chain.CurBufferIdx;
+            int idx = chain.CurrentBufferIndex;
             mFenceValues[idx]++;
             chain.GetNativeQueue().Signal(mFences[idx], mFenceValues[idx]);
         }
@@ -98,43 +105,43 @@ namespace Axiverse.Interface.Graphics
                 MaxDepth    = 1.0f,
                 MinDepth    = 0.0f
             };
-            mCmdList.SetViewport(viewport);
+            NativeCommandList.SetViewport(viewport);
         }
 
         public void SetScissor(int x, int y, int w, int h)
         {
             SharpDX.Rectangle rectangle = new SharpDX.Rectangle(x, y, w, h);
-            mCmdList.SetScissorRectangles(rectangle);
+            NativeCommandList.SetScissorRectangles(rectangle);
         }
 
         public void SetColorTarget(CpuDescriptorHandle view)
         {
-            mCmdList.SetRenderTargets(1, view, null);
+            NativeCommandList.SetRenderTargets(1, view, null);
         }
 
         public void ClearTargetColor(CpuDescriptorHandle handle,float r,float g, float b, float a)
         {
-            mCmdList.ClearRenderTargetView(handle, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
+            NativeCommandList.ClearRenderTargetView(handle, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
         }
 
         public void ResourceTransition(SharpDX.Direct3D12.Resource resource,ResourceStates before, ResourceStates after)
         {
-            mCmdList.ResourceBarrierTransition(resource, before, after);
+            NativeCommandList.ResourceBarrierTransition(resource, before, after);
         }
 
         public void SetIndexBuffer(IndexBufferView view)
         {
-            mCmdList.SetIndexBuffer(view);
+            NativeCommandList.SetIndexBuffer(view);
         }
 
         public void SetVertexBuffer(VertexBufferView view)
         {
-            mCmdList.SetVertexBuffer(0, view);
+            NativeCommandList.SetVertexBuffer(0, view);
         }
 
         public void DrawIndexed(int idxCnt)
         {
-            mCmdList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
+            NativeCommandList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
         }
     }
 }

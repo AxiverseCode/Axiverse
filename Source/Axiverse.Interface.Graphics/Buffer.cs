@@ -24,7 +24,7 @@ namespace Axiverse.Interface.Graphics
 
         }
 
-        private void InitHeaps(GraphicsCommandList list, int size, IntPtr data, bool dataStatic = true)
+        private void InitializeHeaps(GraphicsCommandList list, int size, IntPtr data, bool dataStatic = true)
         {
             mUploadHeap = Device.NativeDevice.CreateCommittedResource
             (
@@ -53,18 +53,18 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
-        public void InitAsIndexBuffer(GraphicsCommandList list,int size,IntPtr data,bool dataStatic = true)
+        public void InitializeAsIndexBuffer(GraphicsCommandList list,int size,IntPtr data,bool dataStatic = true)
         {
-            InitHeaps(list, size, data, dataStatic);
+            InitializeHeaps(list, size, data, dataStatic);
 
             nativeIndexBufferView.BufferLocation = mUploadHeap.GPUVirtualAddress; // check if its static
             nativeIndexBufferView.Format         = SharpDX.DXGI.Format.R32_UInt;
             nativeIndexBufferView.SizeInBytes    = size;
         }
 
-        public void InitAsVertexBuffer(GraphicsCommandList list, int size,int vertexSize, IntPtr data, bool dataStatic = true)
+        public void InitializeAsVertexBuffer(GraphicsCommandList list, int size,int vertexSize, IntPtr data, bool dataStatic = true)
         {
-            InitHeaps(list, size, data, dataStatic);
+            InitializeHeaps(list, size, data, dataStatic);
 
             nativeVertexBufferView.BufferLocation    = mUploadHeap.GPUVirtualAddress; // check if its static
             nativeVertexBufferView.SizeInBytes       = size;

@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Examples", "..\Exa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Simulation", "..\Tests\Axiverse.Tests.Simulation\Axiverse.Tests.Simulation.csproj", "{9B5FC6EB-9E9B-4713-A137-B704CDC0338A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Audio", "Axiverse.Interface.Audio\Axiverse.Interface.Audio.csproj", "{F4783BB9-02A3-4FB7-864F-3B94219519E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,10 @@ Global
 		{9B5FC6EB-9E9B-4713-A137-B704CDC0338A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B5FC6EB-9E9B-4713-A137-B704CDC0338A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B5FC6EB-9E9B-4713-A137-B704CDC0338A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4783BB9-02A3-4FB7-864F-3B94219519E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4783BB9-02A3-4FB7-864F-3B94219519E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4783BB9-02A3-4FB7-864F-3B94219519E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4783BB9-02A3-4FB7-864F-3B94219519E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +152,7 @@ Global
 		{64A4BB2E-67F7-4BAE-AAFE-747B660CD3D1} = {76EE8D49-2A27-4BB6-B2ED-2D6D6A350AA5}
 		{C5C53AF6-787F-4544-B919-B458FD11686D} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 		{9B5FC6EB-9E9B-4713-A137-B704CDC0338A} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
+		{F4783BB9-02A3-4FB7-864F-3B94219519E3} = {76EE8D49-2A27-4BB6-B2ED-2D6D6A350AA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

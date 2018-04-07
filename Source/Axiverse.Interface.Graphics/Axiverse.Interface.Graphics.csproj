@@ -72,8 +72,9 @@
     <Compile Include="Buffer.cs" />
     <Compile Include="GraphicsResource.cs" />
     <Compile Include="PipelineState.cs" />
+    <Compile Include="PipelineStateDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderContext.cs" />
+    <Compile Include="CommandList.cs" />
     <Compile Include="GraphicsDevice.cs" />
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />

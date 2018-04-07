@@ -15,13 +15,13 @@ namespace Axiverse.Interface.Graphics
     /// Represents a chain of back buffers and is responsible 
     /// for showing the final rendered image on the screen.
     /// </summary>
-    public class SwapChain
+    public class SwapChain : GraphicsResource
     {
         /// <summary>
         /// The size of the back buffer chain
         /// </summary>
         public static int BufferCount = 3;
-        public int CurBufferIdx;
+        public int CurrentBufferIndex;
 
         private CommandQueue mPresentQueue;
         private SwapChain3 mPresentChain;
@@ -32,16 +32,21 @@ namespace Axiverse.Interface.Graphics
         private SharpDX.Direct3D12.Resource[] mBackBuffers;
         private CpuDescriptorHandle[] mBackbufferHandles;
 
+        public SwapChain(GraphicsDevice device) : base(device)
+        {
+
+        }
+
         /// <summary>
         /// Initializes this present chain and retrieves the backbuffers
         /// </summary>
         /// <param name="window">The output window</param>
         /// <param name="device"></param>
-        public void Init(RenderForm window, GraphicsDevice device)
+        public void Initialize(RenderForm window)
         {
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);
-            mPresentQueue = device.NativeDevice.CreateCommandQueue(queueDesc);
+            mPresentQueue = Device.NativeDevice.CreateCommandQueue(queueDesc);
 
             // Descirbe and create the swap chain
             using (var factory = new Factory4())
@@ -62,7 +67,7 @@ namespace Axiverse.Interface.Graphics
                 using (var tempSwapChain = new SharpDX.DXGI.SwapChain(factory, mPresentQueue, swapChainDescription))
                 {
                     mPresentChain   = tempSwapChain.QueryInterface<SwapChain3>();
-                    CurBufferIdx    = mPresentChain.CurrentBackBufferIndex;
+                    CurrentBufferIndex    = mPresentChain.CurrentBackBufferIndex;
                 }
             }
             // We need now to retrieve the back buffers:
@@ -73,28 +78,28 @@ namespace Axiverse.Interface.Graphics
                 Flags           = DescriptorHeapFlags.None,
                 Type            = DescriptorHeapType.RenderTargetView,
             };
-            mBackBufferHeap = device.NativeDevice.CreateDescriptorHeap(renderTargetViewHeapDescription);
+            mBackBufferHeap = Device.NativeDevice.CreateDescriptorHeap(renderTargetViewHeapDescription);
             // 2) Now we create the views
             mBackbufferHandles = new CpuDescriptorHandle[BufferCount];
-            int rtHandleSize    = device.NativeDevice.GetDescriptorHandleIncrementSize(DescriptorHeapType.RenderTargetView);
+            int rtHandleSize    = Device.NativeDevice.GetDescriptorHandleIncrementSize(DescriptorHeapType.RenderTargetView);
             mBackBuffers        = new SharpDX.Direct3D12.Resource[BufferCount];
             var handle          = mBackBufferHeap.CPUDescriptorHandleForHeapStart;
             for (int i = 0; i < BufferCount; i++)
             {
                 mBackBuffers[i]         = mPresentChain.GetBackBuffer<SharpDX.Direct3D12.Resource>(i);
                 mBackbufferHandles[i]   = handle + (rtHandleSize * i);
-                device.NativeDevice.CreateRenderTargetView(mBackBuffers[i], null, mBackbufferHandles[i]);
+                Device.NativeDevice.CreateRenderTargetView(mBackBuffers[i], null, mBackbufferHandles[i]);
             }
         }
 
         public CpuDescriptorHandle GetCurrentColorHandle()
         {
-            return mBackbufferHandles[CurBufferIdx];
+            return mBackbufferHandles[CurrentBufferIndex];
         }
 
         public SharpDX.Direct3D12.Resource StartFrame()
         {
-            return mBackBuffers[CurBufferIdx];
+            return mBackBuffers[CurrentBufferIndex];
         }
 
         public void ExecuteCommandList(GraphicsCommandList list)
@@ -113,7 +118,7 @@ namespace Axiverse.Interface.Graphics
         public void Present()
         {
             mPresentChain.Present(0, PresentFlags.None);
-            CurBufferIdx = mPresentChain.CurrentBackBufferIndex;
+            CurrentBufferIndex = mPresentChain.CurrentBackBufferIndex;
         }
 
 

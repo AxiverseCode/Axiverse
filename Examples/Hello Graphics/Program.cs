@@ -33,11 +33,11 @@ namespace HelloGraphics
             GraphicsDevice device = new GraphicsDevice();
             device.Init();
             // Init a swap chain
-            SwapChain chain = new SwapChain();
-            chain.Init(form, device);
+            SwapChain chain = new SwapChain(device);
+            chain.Initialize(form);
             // Init a graphics context
-            RenderContext context = new RenderContext();
-            context.Init(device,SwapChain.BufferCount);
+            Axiverse.Interface.Graphics.CommandList context = new Axiverse.Interface.Graphics.CommandList(device);
+            context.Initialize(SwapChain.BufferCount);
 
             // NOTE: I think we could work with prebaked root signatures (we can define it
             // as an HLSL shader and then use it for all of our PSOs. 
@@ -83,7 +83,7 @@ namespace HelloGraphics
             // Lets create some resources
             int[] indices = new int[] { 0, 2, 1 };
             Axiverse.Interface.Graphics.Buffer indexBuff = new Axiverse.Interface.Graphics.Buffer(device);
-            indexBuff.InitAsIndexBuffer
+            indexBuff.InitializeAsIndexBuffer
             (
                 context.GetNativeContext(), 
                 Utilities.SizeOf(indices),
@@ -93,7 +93,7 @@ namespace HelloGraphics
 
             float[] vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
             Axiverse.Interface.Graphics.Buffer vtxBuffer = new Axiverse.Interface.Graphics.Buffer(device);
-            vtxBuffer.InitAsVertexBuffer
+            vtxBuffer.InitializeAsVertexBuffer
             ( 
                 context.GetNativeContext(), 
                 Utilities.SizeOf(vertices),
