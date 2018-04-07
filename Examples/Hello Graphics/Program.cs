@@ -29,11 +29,11 @@ namespace HelloGraphics
             var device = GraphicsDevice.Create();
             var chain = SwapChain.Create(device, form);
             var commandList = CommandList.Create(device, SwapChain.BufferCount);
-            
+
             // Define the vertex input layout.
             var inputElementDescs = new[]
             {
-                new SharpDX.Direct3D12.InputElement("POSITION",0,SharpDX.DXGI.Format.R32G32B32_Float,0,0)
+                new SharpDX.Direct3D12.InputElement("POSITION", 0, SharpDX.DXGI.Format.R32G32B32_Float, 0, 0)
             };
 
             // Shaders
@@ -75,7 +75,7 @@ namespace HelloGraphics
                     var backBufferHandle = chain.GetCurrentColorHandle();
                     commandList.Reset(chain);
 
-                    commandList.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.Present, SharpDX.Direct3D12.ResourceStates.RenderTarget);
+                    commandList.ResourceTransition(backBuffer, ResourceState.Present, ResourceState.RenderTarget);
                     {
                         commandList.SetColorTarget(backBufferHandle);
                         commandList.SetViewport(0, 0, 1024, 720);
@@ -90,7 +90,7 @@ namespace HelloGraphics
                         commandList.SetVertexBuffer(vertexBuffer);
                         commandList.DrawIndexed(3);
                     }
-                    commandList.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.RenderTarget, SharpDX.Direct3D12.ResourceStates.Present);
+                    commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
                     commandList.Close();
                     chain.ExecuteCommandList(commandList.GetNativeContext());

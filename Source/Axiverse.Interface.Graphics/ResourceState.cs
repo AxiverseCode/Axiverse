@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SharpDX.Direct3D12;
+
 namespace Axiverse.Interface.Graphics
 {
     [Flags]
     public enum ResourceState
     {
-        Common = 0,
-        Present = 0,
+        Common = ResourceStates.Common,
+        Present = ResourceStates.Present,
         VertexAndConstantBuffer = 1,
         IndexBuffer = 2,
-        RenderTarget = 4,
+        RenderTarget = ResourceStates.RenderTarget,
         UnorderedAccess = 8,
         DepthWrite = 16,
         DepthRead = 32,

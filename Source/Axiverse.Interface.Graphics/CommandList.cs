@@ -135,9 +135,9 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.ClearRenderTargetView(handle, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
         }
 
-        public void ResourceTransition(SharpDX.Direct3D12.Resource resource,ResourceStates before, ResourceStates after)
+        public void ResourceTransition(SharpDX.Direct3D12.Resource resource,ResourceState before, ResourceState after)
         {
-            NativeCommandList.ResourceBarrierTransition(resource, before, after);
+            NativeCommandList.ResourceBarrierTransition(resource, (ResourceStates)before, (ResourceStates)after);
         }
 
         public void SetRootSignature(RootSignature rootSignature)
