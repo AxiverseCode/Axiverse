@@ -17,6 +17,17 @@ namespace Axiverse.Interface.Graphics
         private GraphicsCommandList nativeCommandList;
         public GraphicsCommandList NativeCommandList => nativeCommandList;
 
+        private PipelineState pipelineState;
+        public PipelineState PipelineState
+        {
+            get => pipelineState;
+            set
+            {
+                pipelineState = value;
+                NativeCommandList.PipelineState = value.NativePipelineState;
+            }
+        }
+
         private CommandAllocator[] mCmdAllocator;
         private Fence[] mFences;
         private long[] mFenceValues;
@@ -129,14 +140,14 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.ResourceBarrierTransition(resource, before, after);
         }
 
-        public void SetIndexBuffer(IndexBufferView view)
+        public void SetIndexBuffer(GraphicsBuffer view)
         {
-            NativeCommandList.SetIndexBuffer(view);
+            NativeCommandList.SetIndexBuffer(view.NativeIndexBufferView);
         }
 
-        public void SetVertexBuffer(VertexBufferView view)
+        public void SetVertexBuffer(GraphicsBuffer view)
         {
-            NativeCommandList.SetVertexBuffer(0, view);
+            NativeCommandList.SetVertexBuffer(0, view.NativeVertexBufferView);
         }
 
         public void DrawIndexed(int idxCnt)

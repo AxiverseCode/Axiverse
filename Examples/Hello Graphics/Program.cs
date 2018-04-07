@@ -33,14 +33,8 @@ namespace HelloGraphics
             SwapChain chain = new SwapChain(device);
             chain.Initialize(form);
             // Init a graphics context
-            Axiverse.Interface.Graphics.CommandList context = new Axiverse.Interface.Graphics.CommandList(device);
-            context.Initialize(SwapChain.BufferCount);
-
-            // NOTE: I think we could work with prebaked root signatures (we can define it
-            // as an HLSL shader and then use it for all of our PSOs. 
-            // Root signature
-            var rootSignatureDesc = new SharpDX.Direct3D12.RootSignatureDescription(SharpDX.Direct3D12.RootSignatureFlags.AllowInputAssemblerInputLayout);
-            var rootSignature = device.NativeDevice.CreateRootSignature(rootSignatureDesc.Serialize());
+            CommandList commandList = new CommandList(device);
+            commandList.Initialize(SwapChain.BufferCount);
             
             // Define the vertex input layout.
             var inputElementDescs = new[]
@@ -50,36 +44,36 @@ namespace HelloGraphics
 
             // Shaders
             var testShaderPath = "../../../../Resources/Engine/Test/test.hlsl";
-            var vbyte = ShaderBytecode.CompileFromFile(testShaderPath, "VSMain", "vs_5_0");
-            var pbyte = ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "ps_5_0");
+            var vertexBytecode = ShaderBytecode.CompileFromFile(testShaderPath, "VSMain", "vs_5_0");
+            var pixelBytecode = ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "ps_5_0");
 
-            var psDesc = new PipelineStateDescription()
+            var pipelineStateDescription = new PipelineStateDescription()
             {
                 InputLayout = new SharpDX.Direct3D12.InputLayoutDescription(inputElementDescs),
-                RootSignature = rootSignature,
-                VertexShader = vbyte,
-                PixelShader = pbyte,
+                RootSignature = RootSignature.Create(device),
+                VertexShader = vertexBytecode,
+                PixelShader = pixelBytecode,
             };
 
             var pipelineState = new PipelineState(device);
-            pipelineState.Initialize(psDesc);
+            pipelineState.Initialize(pipelineStateDescription);
 
             // Lets create some resources
             int[] indices = new int[] { 0, 2, 1 };
-            GraphicsBuffer indexBuff = new GraphicsBuffer(device);
-            indexBuff.InitializeAsIndexBuffer
+            GraphicsBuffer indexBuffer = new GraphicsBuffer(device);
+            indexBuffer.InitializeAsIndexBuffer
             (
-                context.GetNativeContext(), 
+                commandList.GetNativeContext(), 
                 Utilities.SizeOf(indices),
                 Marshal.UnsafeAddrOfPinnedArrayElement(indices, 0), 
                 false
             );
 
             float[] vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
-            GraphicsBuffer vtxBuffer = new GraphicsBuffer(device);
-            vtxBuffer.InitializeAsVertexBuffer
+            GraphicsBuffer vertexBuffer = new GraphicsBuffer(device);
+            vertexBuffer.InitializeAsVertexBuffer
             ( 
-                context.GetNativeContext(), 
+                commandList.GetNativeContext(), 
                 Utilities.SizeOf(vertices),
                 sizeof(float) * 3,
                 Marshal.UnsafeAddrOfPinnedArrayElement(vertices, 0), 
@@ -93,28 +87,28 @@ namespace HelloGraphics
                 {
                     var backBuffer = chain.StartFrame();
                     var backBufferHandle = chain.GetCurrentColorHandle();
-                    context.Reset(chain);
+                    commandList.Reset(chain);
 
-                    context.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.Present, SharpDX.Direct3D12.ResourceStates.RenderTarget);
+                    commandList.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.Present, SharpDX.Direct3D12.ResourceStates.RenderTarget);
                     {
-                        context.SetColorTarget(backBufferHandle);
-                        context.SetViewport(0, 0, 1024, 720);
-                        context.SetScissor(0, 0, 1024, 720);
-                        context.ClearTargetColor(backBufferHandle, 1.0f, 0.0f, 1.0f, 1.0f);
+                        commandList.SetColorTarget(backBufferHandle);
+                        commandList.SetViewport(0, 0, 1024, 720);
+                        commandList.SetScissor(0, 0, 1024, 720);
+                        commandList.ClearTargetColor(backBufferHandle, 1.0f, 0.0f, 1.0f, 1.0f);
 
-                        context.GetNativeContext().SetGraphicsRootSignature(rootSignature);
-                        context.GetNativeContext().PipelineState = pipelineState.NativePipelineState;
-                        context.GetNativeContext().PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
+                        commandList.GetNativeContext().SetGraphicsRootSignature(rootSignature);
+                        commandList.PipelineState = pipelineState;
+                        commandList.GetNativeContext().PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
 
-                        context.SetIndexBuffer(indexBuff.NativeIndexBufferView);
-                        context.SetVertexBuffer(vtxBuffer.NativeVertexBufferView);
-                        context.DrawIndexed(3);
+                        commandList.SetIndexBuffer(indexBuffer);
+                        commandList.SetVertexBuffer(vertexBuffer);
+                        commandList.DrawIndexed(3);
                     }
-                    context.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.RenderTarget, SharpDX.Direct3D12.ResourceStates.Present);
+                    commandList.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.RenderTarget, SharpDX.Direct3D12.ResourceStates.Present);
 
-                    context.Close();
-                    chain.ExecuteCommandList(context.GetNativeContext());
-                    context.FinishFrame(chain);
+                    commandList.Close();
+                    chain.ExecuteCommandList(commandList.GetNativeContext());
+                    commandList.FinishFrame(chain);
                     chain.Present();
                 }
             }
