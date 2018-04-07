@@ -159,5 +159,12 @@ namespace Axiverse.Interface.Graphics
         {
             NativeCommandList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
         }
+
+        public static CommandList Create(GraphicsDevice device, int bufferCount)
+        {
+            var commandList = new CommandList(device);
+            commandList.Initialize(bufferCount);
+            return commandList;
+        }
     }
 }

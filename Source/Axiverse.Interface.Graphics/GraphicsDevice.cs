@@ -25,7 +25,7 @@ namespace Axiverse.Interface.Graphics
         /// <summary>
         /// Initializes the GPU device
         /// </summary>
-        public void Init()
+        public void Initialize()
         {
 #if DEBUG
             DebugInterface.Get().EnableDebugLayer();
@@ -33,5 +33,11 @@ namespace Axiverse.Interface.Graphics
             NativeDevice = new Device(null, SharpDX.Direct3D.FeatureLevel.Level_11_0);
         }
 
+        public static GraphicsDevice Create()
+        {
+            var graphicsDevice = new GraphicsDevice();
+            graphicsDevice.Initialize();
+            return graphicsDevice;
+        }
     }
 }

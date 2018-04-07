@@ -33,7 +33,7 @@ namespace Axiverse.Interface.Graphics
         private SharpDX.Direct3D12.Resource[] mBackBuffers;
         private CpuDescriptorHandle[] mBackbufferHandles;
 
-        public SwapChain(GraphicsDevice device) : base(device)
+        private SwapChain(GraphicsDevice device) : base(device)
         {
 
         }
@@ -42,7 +42,7 @@ namespace Axiverse.Interface.Graphics
         /// Initializes this present chain and retrieves the backbuffers
         /// </summary>
         /// <param name="target">The output window</param>
-        public void Initialize(Control target)
+        private void Initialize(Control target)
         {
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);
@@ -130,6 +130,13 @@ namespace Axiverse.Interface.Graphics
         void Dispose()
         {
 
+        }
+
+        public static SwapChain Create(GraphicsDevice device, Control target)
+        {
+            var swapChain = new SwapChain(device);
+            swapChain.Initialize(target);
+            return swapChain;
         }
 
     }

@@ -19,7 +19,7 @@ namespace Axiverse.Interface.Graphics
         public IndexBufferView NativeIndexBufferView => nativeIndexBufferView;
         public VertexBufferView NativeVertexBufferView => nativeVertexBufferView;
 
-        public GraphicsBuffer(GraphicsDevice device) : base(device)
+        private GraphicsBuffer(GraphicsDevice device) : base(device)
         {
 
         }
@@ -53,22 +53,36 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
-        public void InitializeAsIndexBuffer(GraphicsCommandList list,int size,IntPtr data,bool dataStatic = true)
+        private void InitializeAsIndexBuffer(GraphicsCommandList list, int size, IntPtr data, bool dataStatic = true)
         {
             InitializeHeaps(list, size, data, dataStatic);
 
             nativeIndexBufferView.BufferLocation = mUploadHeap.GPUVirtualAddress; // check if its static
-            nativeIndexBufferView.Format         = SharpDX.DXGI.Format.R32_UInt;
-            nativeIndexBufferView.SizeInBytes    = size;
+            nativeIndexBufferView.Format = SharpDX.DXGI.Format.R32_UInt;
+            nativeIndexBufferView.SizeInBytes = size;
         }
 
-        public void InitializeAsVertexBuffer(GraphicsCommandList list, int size,int vertexSize, IntPtr data, bool dataStatic = true)
+        private void InitializeAsVertexBuffer(GraphicsCommandList list, int size, int vertexSize, IntPtr data, bool dataStatic = true)
         {
             InitializeHeaps(list, size, data, dataStatic);
 
-            nativeVertexBufferView.BufferLocation    = mUploadHeap.GPUVirtualAddress; // check if its static
-            nativeVertexBufferView.SizeInBytes       = size;
-            nativeVertexBufferView.StrideInBytes     = vertexSize;
+            nativeVertexBufferView.BufferLocation = mUploadHeap.GPUVirtualAddress; // check if its static
+            nativeVertexBufferView.SizeInBytes = size;
+            nativeVertexBufferView.StrideInBytes = vertexSize;
+        }
+
+        public static GraphicsBuffer CreateIndexBuffer(GraphicsDevice device, GraphicsCommandList list, int size, IntPtr data, bool dataStatic = true)
+        {
+            var buffer = new GraphicsBuffer(device);
+            buffer.InitializeAsIndexBuffer(list, size, data, dataStatic);
+            return buffer;
+        }
+
+        public static GraphicsBuffer CreateVertexBuffer(GraphicsDevice device, GraphicsCommandList list, int size, int vertexSize, IntPtr data, bool dataStatic = true)
+        {
+            var buffer = new GraphicsBuffer(device);
+            buffer.InitializeAsVertexBuffer(list, size, vertexSize, data, dataStatic);
+            return buffer;
         }
     }
 }

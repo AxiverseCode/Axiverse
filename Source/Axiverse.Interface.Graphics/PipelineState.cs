@@ -14,12 +14,12 @@ namespace Axiverse.Interface.Graphics
     {
         public SharpDX.Direct3D12.PipelineState NativePipelineState;
 
-        public PipelineState(GraphicsDevice device) : base(device)
+        protected PipelineState(GraphicsDevice device) : base(device)
         {
 
         }
 
-        public void Initialize(PipelineStateDescription description)
+        protected void Initialize(PipelineStateDescription description)
         {
             var psoDesc = new SharpDX.Direct3D12.GraphicsPipelineStateDescription()
             {
@@ -40,6 +40,13 @@ namespace Axiverse.Interface.Graphics
             };
             psoDesc.RenderTargetFormats[0] = SharpDX.DXGI.Format.R8G8B8A8_UNorm;
             NativePipelineState = Device.NativeDevice.CreateGraphicsPipelineState(psoDesc);
+        }
+
+        public static PipelineState Create(GraphicsDevice device, PipelineStateDescription description)
+        {
+            var pipelineState = new PipelineState(device);
+            pipelineState.Initialize(description);
+            return pipelineState;
         }
     }
 }
