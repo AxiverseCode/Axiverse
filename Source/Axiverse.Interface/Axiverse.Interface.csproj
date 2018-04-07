@@ -87,17 +87,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compositing\CompositingSelector.cs" />
-    <Compile Include="Compositing\CompositingStage.cs" />
-    <Compile Include="Compositing\CompositingSystem.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="Game\Game.cs" />
-    <Compile Include="Game\GameContext.cs" />
-    <Compile Include="Game\GameSystem.cs" />
-    <Compile Include="Game\GameSystemCollection.cs" />
-    <Compile Include="Game\GameTime.cs" />
-    <Compile Include="Game\IProcess.cs" />
     <Compile Include="Graphics\Compositor.cs" />
     <Compile Include="Graphics\Fonts\ResourceFontFileEnumerator.cs" />
     <Compile Include="Graphics\Fonts\ResourceFontFileStream.cs" />
