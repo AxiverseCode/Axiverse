@@ -19,18 +19,18 @@ namespace Axiverse.Interface.Graphics
         private Fence[] mFences;
         private long[] mFenceValues;
 
-        public void Init(Device device,int numBuffers)
+        public void Init(GraphicsDevice device,int numBuffers)
         {
             mCmdAllocator   = new CommandAllocator[numBuffers];
             mFences         = new Fence[numBuffers];
             mFenceValues    = new long[numBuffers];
             for (int i = 0; i < numBuffers; i++)
             {
-                mCmdAllocator[i]    = device.CreateCommandAllocator(CommandListType.Direct);
+                mCmdAllocator[i]    = device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
                 mFenceValues[i]     = 0;
-                mFences[i]          = device.CreateFence(mFenceValues[i], FenceFlags.None);
+                mFences[i]          = device.NativeDevice.CreateFence(mFenceValues[i], FenceFlags.None);
             }
-            mCmdList = device.CreateCommandList(CommandListType.Direct, mCmdAllocator[0], null);
+            mCmdList = device.NativeDevice.CreateCommandList(CommandListType.Direct, mCmdAllocator[0], null);
             // We close it as it starts in open state
             mCmdList.Close();
         }

@@ -30,21 +30,21 @@ namespace HelloGraphics
             form.Show();
 
             // Init the rendering device
-            RenderDevice device = new RenderDevice();
+            GraphicsDevice device = new GraphicsDevice();
             device.Init();
             // Init a swap chain
             SwapChain chain = new SwapChain();
             chain.Init(form, device);
             // Init a graphics context
             RenderContext context = new RenderContext();
-            context.Init(device.NativeDevice,SwapChain.BufferCount);
+            context.Init(device,SwapChain.BufferCount);
 
             // NOTE: I think we could work with prebaked root signatures (we can define it
             // as an HLSL shader and then use it for all of our PSOs. 
             // Root signature
             var rootSignatureDesc = new RootSignatureDescription(RootSignatureFlags.AllowInputAssemblerInputLayout);
             var rootSignature = device.NativeDevice.CreateRootSignature(rootSignatureDesc.Serialize());
-
+            
             // Define the vertex input layout.
             var inputElementDescs = new[]
             {
@@ -82,10 +82,9 @@ namespace HelloGraphics
 
             // Lets create some resources
             int[] indices = new int[] { 0, 2, 1 };
-            Axiverse.Interface.Graphics.Buffer indexBuff = new Axiverse.Interface.Graphics.Buffer();
+            Axiverse.Interface.Graphics.Buffer indexBuff = new Axiverse.Interface.Graphics.Buffer(device);
             indexBuff.InitAsIndexBuffer
             (
-                device.NativeDevice, 
                 context.GetNativeContext(), 
                 Utilities.SizeOf(indices),
                 Marshal.UnsafeAddrOfPinnedArrayElement(indices, 0), 
@@ -93,10 +92,9 @@ namespace HelloGraphics
             );
 
             float[] vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
-            Axiverse.Interface.Graphics.Buffer vtxBuffer = new Axiverse.Interface.Graphics.Buffer();
+            Axiverse.Interface.Graphics.Buffer vtxBuffer = new Axiverse.Interface.Graphics.Buffer(device);
             vtxBuffer.InitAsVertexBuffer
-            (
-                device.NativeDevice, 
+            ( 
                 context.GetNativeContext(), 
                 Utilities.SizeOf(vertices),
                 sizeof(float) * 3,
@@ -124,8 +122,8 @@ namespace HelloGraphics
                         context.GetNativeContext().PipelineState = pipelineState;
                         context.GetNativeContext().PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
 
-                        context.SetIndexBuffer(indexBuff.AsIndexBuffer());
-                        context.SetVertexBuffer(vtxBuffer.AsVertexBuffer());
+                        context.SetIndexBuffer(indexBuff.NativeIndexBufferView);
+                        context.SetVertexBuffer(vtxBuffer.NativeVertexBufferView);
                         context.DrawIndexed(3);
                     }
                     context.ResourceTransition(backBuffer, SharpDX.Direct3D12.ResourceStates.RenderTarget, SharpDX.Direct3D12.ResourceStates.Present);

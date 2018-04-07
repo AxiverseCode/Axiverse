@@ -37,7 +37,7 @@ namespace Axiverse.Interface.Graphics
         /// </summary>
         /// <param name="window">The output window</param>
         /// <param name="device"></param>
-        public void Init(RenderForm window, RenderDevice device)
+        public void Init(RenderForm window, GraphicsDevice device)
         {
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);

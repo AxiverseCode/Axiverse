@@ -10,12 +10,17 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Is responsible for creating all other objects (textures, buffers, shaders, pipeline states, etc.)
     /// </summary>
-    public class RenderDevice
+    public class GraphicsDevice
     {
         /// <summary>
         /// Gets the native d3d device
         /// </summary>
         public Device NativeDevice { get; private set; }
+
+        /// <summary>
+        /// Gets the list of resources bound to this device.
+        /// </summary>
+        public List<GraphicsResource> Resources { get; } = new List<GraphicsResource>();
 
         /// <summary>
         /// Initializes the GPU device
