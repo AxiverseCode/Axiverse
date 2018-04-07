@@ -97,15 +97,15 @@
     <Compile Include="Graphics\IVertex.cs" />
     <Compile Include="Graphics\Loaders\M3Loader.cs" />
     <Compile Include="Graphics\Mesh.cs" />
-    <Compile Include="Graphics\Models\Anchor.cs" />
-    <Compile Include="Graphics\Models\Animation.cs" />
-    <Compile Include="Graphics\Models\Bone.cs" />
-    <Compile Include="Graphics\Models\Clip.cs" />
-    <Compile Include="Graphics\Models\KeyFrame.cs" />
-    <Compile Include="Graphics\Models\Model.cs" />
-    <Compile Include="Graphics\Models\Sequence.cs" />
-    <Compile Include="Graphics\Models\Track.cs" />
-    <Compile Include="Graphics\Models\Vertex.cs" />
+    <Compile Include="Rendering\Anchor.cs" />
+    <Compile Include="Rendering\Animation.cs" />
+    <Compile Include="Rendering\Bone.cs" />
+    <Compile Include="Rendering\Clip.cs" />
+    <Compile Include="Rendering\KeyFrame.cs" />
+    <Compile Include="Rendering\Model.cs" />
+    <Compile Include="Rendering\Sequence.cs" />
+    <Compile Include="Rendering\Track.cs" />
+    <Compile Include="Rendering\Vertex.cs" />
     <Compile Include="Graphics\ObjMesh.cs" />
     <Compile Include="Graphics\Primitives.cs" />
     <Compile Include="Graphics\Renderer.cs" />
@@ -128,31 +128,15 @@
     <Compile Include="SceneGraph.cs" />
     <Compile Include="TrackballController.cs" />
     <Compile Include="TransformComponent.cs" />
-    <Compile Include="Windows\Button.cs" />
-    <Compile Include="Windows\Color.cs" />
-    <Compile Include="Windows\Compositor.cs" />
-    <Compile Include="Windows\Control.cs" />
-    <Compile Include="Windows\Control.draw.cs" />
-    <Compile Include="Windows\Control.input.cs" />
-    <Compile Include="Windows\Control.properties.cs" />
-    <Compile Include="Windows\Control.spatial.cs" />
-    <Compile Include="Windows\ControlCollection.cs" />
-    <Compile Include="Windows\Dialog.cs" />
-    <Compile Include="Windows\Font.cs" />
-    <Compile Include="Windows\FontWeight.cs" />
-    <Compile Include="Windows\HorizontalAlign.cs" />
-    <Compile Include="Windows\Label.cs" />
-    <Compile Include="Windows\MouseButtons.cs" />
-    <Compile Include="Windows\MouseEventArgs.cs" />
-    <Compile Include="Windows\MouseMoveEventArgs.cs" />
-    <Compile Include="Windows\TextLayout.cs" />
-    <Compile Include="Windows\VerticalAlign.cs" />
-    <Compile Include="Windows\Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
+      <Project>{4ced344e-8bac-48cb-ac37-a2c4ad7ffe02}</Project>
+      <Name>Axiverse.Interface.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>

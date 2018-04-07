@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface.Graphics.Models
+namespace Axiverse.Interface.Rendering
 {
     public class Bone
     {

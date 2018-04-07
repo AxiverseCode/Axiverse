@@ -72,7 +72,7 @@ namespace Axiverse.Interface.Windows
 
         public virtual void DrawChildren(Vector2 parentOffset, Compositor compositor)
         {
-            var canvas = compositor as Graphics.Compositor;
+            var canvas = compositor;// as Graphics.Compositor;
             // apply my transform
 
             // could be optimized as transforms affects axis aligned clips

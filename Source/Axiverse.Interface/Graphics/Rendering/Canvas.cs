@@ -23,11 +23,12 @@ using Axiverse.Interface.Graphics.Fonts;
 
 namespace Axiverse.Interface.Graphics
 {
+    using Axiverse.Interface.Windows;
     using Axiverse.Mathematics;
     using SharpDX.Direct2D1;
 
     // TODO: Merge code into WindowsPipeline
-    public class Canvas
+    public class Canvas : Windows.Canvas
     {
         public Renderer Renderer;
 
@@ -60,7 +61,8 @@ namespace Axiverse.Interface.Graphics
             public Bitmap1 Bitmap;
         }
 
-        public Compositor Compositor;
+        public Compositor compositor;
+        public override Windows.Compositor Compositor => compositor;
         public SolidColorBrush Brush;
 
         public RoundedRectangleGeometry RoundedRectangleGeometry;
@@ -106,7 +108,7 @@ namespace Axiverse.Interface.Graphics
                 FactoryDW,
                 "Material-Design-Iconic-Font",
                 FontCollection,
-                FontWeight.Normal,
+                SharpDX.DirectWrite.FontWeight.Normal,
                 FontStyle.Normal,
                 FontStretch.Normal,
                 30)
@@ -128,9 +130,9 @@ namespace Axiverse.Interface.Graphics
 
         public void InitializeFrames(Device3D12 device3D12, RenderTarget renderTarget)
         {
-            Compositor = new Compositor(DeviceContext);
+            compositor = new Compositor(DeviceContext);
 
-            Brush = new SolidColorBrush(DeviceContext, Color.White);
+            Brush = new SolidColorBrush(DeviceContext, SharpDX.Color.White);
 
             var properties = new BitmapProperties1(
                 new PixelFormat(Format.B8G8R8A8_UNorm, AlphaMode.Premultiplied),

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface.Graphics.Models
+namespace Axiverse.Interface.Windows
 {
-    public class Sequence
+    public abstract class Canvas
     {
-        public int Index;
-        // key
-        // values
+        public abstract Compositor Compositor { get; }
     }
 }

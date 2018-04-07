@@ -20,14 +20,16 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Graphics class for drawing to the canvas.
     /// </summary>
-    public class Compositor : CompositorUI, IDisposable
+    public class Compositor : CompositorUI
     {
         public FactoryDW FactoryDW;
         public ResourceFontLoader FontLoader;
         public FontCollection FontCollection;
         public Dictionary<Font, TextFormat> TextFormats { get; } = new Dictionary<Font, TextFormat>();
 
-        public DeviceContext DeviceContext;
+        public DeviceContext deviceContext;
+        public override DeviceContext DeviceContext => deviceContext;
+
         public SolidColorBrush SolidColorBrush;
 
         public Compositor(DeviceContext deviceContext)
@@ -38,7 +40,7 @@ namespace Axiverse.Interface.Graphics
             FontLoader = new ResourceFontLoader(FactoryDW, @"Fonts");
             FontCollection = new FontCollection(FactoryDW, FontLoader, FontLoader.Key);
 
-            DeviceContext = deviceContext;
+            this.deviceContext = deviceContext;
 
             // load font collection
 
