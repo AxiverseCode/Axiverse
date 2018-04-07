@@ -9,7 +9,7 @@ using SharpDX.Direct3D12;
 
 namespace Axiverse.Interface.Graphics
 {
-    public class Buffer : GraphicsResource
+    public class GraphicsBuffer : GraphicsResource
     {
         private Resource mUploadHeap;
 
@@ -19,7 +19,7 @@ namespace Axiverse.Interface.Graphics
         public IndexBufferView NativeIndexBufferView => nativeIndexBufferView;
         public VertexBufferView NativeVertexBufferView => nativeVertexBufferView;
 
-        public Buffer(GraphicsDevice device) : base(device)
+        public GraphicsBuffer(GraphicsDevice device) : base(device)
         {
 
         }

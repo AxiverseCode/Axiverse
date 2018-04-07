@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 using SharpDX;
 using SharpDX.Windows;
 
-using SharpDX.Direct3D12;
-using SharpDX.D3DCompiler;
-
 using Axiverse.Interface.Graphics;
 using System.Runtime.InteropServices;
 
@@ -42,47 +39,34 @@ namespace HelloGraphics
             // NOTE: I think we could work with prebaked root signatures (we can define it
             // as an HLSL shader and then use it for all of our PSOs. 
             // Root signature
-            var rootSignatureDesc = new RootSignatureDescription(RootSignatureFlags.AllowInputAssemblerInputLayout);
+            var rootSignatureDesc = new SharpDX.Direct3D12.RootSignatureDescription(SharpDX.Direct3D12.RootSignatureFlags.AllowInputAssemblerInputLayout);
             var rootSignature = device.NativeDevice.CreateRootSignature(rootSignatureDesc.Serialize());
             
             // Define the vertex input layout.
             var inputElementDescs = new[]
             {
-                new InputElement("POSITION",0,SharpDX.DXGI.Format.R32G32B32_Float,0,0)
+                new SharpDX.Direct3D12.InputElement("POSITION",0,SharpDX.DXGI.Format.R32G32B32_Float,0,0)
             };
 
             // Shaders
             var testShaderPath = "../../../../Resources/Engine/Test/test.hlsl";
-            var vbyte = SharpDX.D3DCompiler.ShaderBytecode.CompileFromFile(testShaderPath, "VSMain", "vs_5_0",ShaderFlags.Debug);
-            var vertexShader = new SharpDX.Direct3D12.ShaderBytecode(vbyte);
-            var pbyte = SharpDX.D3DCompiler.ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "ps_5_0");
-            var pixelShader = new SharpDX.Direct3D12.ShaderBytecode(pbyte);
+            var vbyte = ShaderBytecode.CompileFromFile(testShaderPath, "VSMain", "vs_5_0");
+            var pbyte = ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "ps_5_0");
 
-            // NOTE: This should be an Object 
-            // Describe and create the graphics pipeline state object (PSO).
-            var psoDesc = new GraphicsPipelineStateDescription()
+            var psDesc = new PipelineStateDescription()
             {
-                InputLayout             = new InputLayoutDescription(inputElementDescs),
-                RootSignature           = rootSignature,
-                VertexShader            = vertexShader,
-                PixelShader             = pixelShader,
-                RasterizerState         = RasterizerStateDescription.Default(),
-                BlendState              = BlendStateDescription.Default(),
-                DepthStencilFormat      = SharpDX.DXGI.Format.D32_Float,
-                DepthStencilState       = new DepthStencilStateDescription() { IsDepthEnabled = false, IsStencilEnabled = false },
-                SampleMask              = int.MaxValue,
-                PrimitiveTopologyType   = PrimitiveTopologyType.Triangle,
-                RenderTargetCount       = 1,
-                Flags                   = PipelineStateFlags.None,
-                SampleDescription       = new SharpDX.DXGI.SampleDescription(1, 0),
-                StreamOutput            = new StreamOutputDescription()
+                InputLayout = new SharpDX.Direct3D12.InputLayoutDescription(inputElementDescs),
+                RootSignature = rootSignature,
+                VertexShader = vbyte,
+                PixelShader = pbyte,
             };
-            psoDesc.RenderTargetFormats[0] = SharpDX.DXGI.Format.R8G8B8A8_UNorm;
-            var pipelineState = device.NativeDevice.CreateGraphicsPipelineState(psoDesc);
+
+            var pipelineState = new PipelineState(device);
+            pipelineState.Initialize(psDesc);
 
             // Lets create some resources
             int[] indices = new int[] { 0, 2, 1 };
-            Axiverse.Interface.Graphics.Buffer indexBuff = new Axiverse.Interface.Graphics.Buffer(device);
+            GraphicsBuffer indexBuff = new GraphicsBuffer(device);
             indexBuff.InitializeAsIndexBuffer
             (
                 context.GetNativeContext(), 
@@ -92,7 +76,7 @@ namespace HelloGraphics
             );
 
             float[] vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
-            Axiverse.Interface.Graphics.Buffer vtxBuffer = new Axiverse.Interface.Graphics.Buffer(device);
+            GraphicsBuffer vtxBuffer = new GraphicsBuffer(device);
             vtxBuffer.InitializeAsVertexBuffer
             ( 
                 context.GetNativeContext(), 
@@ -119,7 +103,7 @@ namespace HelloGraphics
                         context.ClearTargetColor(backBufferHandle, 1.0f, 0.0f, 1.0f, 1.0f);
 
                         context.GetNativeContext().SetGraphicsRootSignature(rootSignature);
-                        context.GetNativeContext().PipelineState = pipelineState;
+                        context.GetNativeContext().PipelineState = pipelineState.NativePipelineState;
                         context.GetNativeContext().PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
 
                         context.SetIndexBuffer(indexBuff.NativeIndexBufferView);

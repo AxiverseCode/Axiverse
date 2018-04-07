@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using SharpDX;
 using SharpDX.DXGI;
@@ -40,26 +41,25 @@ namespace Axiverse.Interface.Graphics
         /// <summary>
         /// Initializes this present chain and retrieves the backbuffers
         /// </summary>
-        /// <param name="window">The output window</param>
-        /// <param name="device"></param>
-        public void Initialize(RenderForm window)
+        /// <param name="target">The output window</param>
+        public void Initialize(Control target)
         {
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);
             mPresentQueue = Device.NativeDevice.CreateCommandQueue(queueDesc);
-
+            
             // Descirbe and create the swap chain
             using (var factory = new Factory4())
             {
-                mWidth  = window.ClientSize.Width;
-                mHeight = window.ClientSize.Height;
+                mWidth  = target.ClientSize.Width;
+                mHeight = target.ClientSize.Height;
                 var swapChainDescription = new SwapChainDescription
                 {
                     BufferCount         = BufferCount,
                     ModeDescription     = new ModeDescription(mWidth, mHeight, new Rational(60, 1), Format.R8G8B8A8_UNorm),
                     Usage               = Usage.RenderTargetOutput,
                     SwapEffect          = SwapEffect.FlipDiscard,
-                    OutputHandle        = window.Handle,
+                    OutputHandle        = target.Handle,
                     Flags               = SwapChainFlags.None,
                     SampleDescription   = new SampleDescription(1, 0),
                     IsWindowed          = true
