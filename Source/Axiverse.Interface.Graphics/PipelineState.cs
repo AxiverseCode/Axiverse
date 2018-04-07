@@ -24,7 +24,7 @@ namespace Axiverse.Interface.Graphics
             var psoDesc = new SharpDX.Direct3D12.GraphicsPipelineStateDescription()
             {
                 InputLayout = description.InputLayout,
-                RootSignature = description.RootSignature,
+                RootSignature = description.RootSignature.NativeRootSignature,
                 VertexShader = new SharpDX.Direct3D12.ShaderBytecode(description.VertexShader),
                 PixelShader = new SharpDX.Direct3D12.ShaderBytecode(description.PixelShader),
                 RasterizerState = SharpDX.Direct3D12.RasterizerStateDescription.Default(),

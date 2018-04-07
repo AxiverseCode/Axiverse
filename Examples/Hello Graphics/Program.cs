@@ -96,7 +96,7 @@ namespace HelloGraphics
                         commandList.SetScissor(0, 0, 1024, 720);
                         commandList.ClearTargetColor(backBufferHandle, 1.0f, 0.0f, 1.0f, 1.0f);
 
-                        commandList.GetNativeContext().SetGraphicsRootSignature(rootSignature);
+                        commandList.SetRootSignature(pipelineStateDescription.RootSignature);
                         commandList.PipelineState = pipelineState;
                         commandList.GetNativeContext().PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
 

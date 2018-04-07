@@ -140,6 +140,11 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.ResourceBarrierTransition(resource, before, after);
         }
 
+        public void SetRootSignature(RootSignature rootSignature)
+        {
+            NativeCommandList.SetGraphicsRootSignature(rootSignature.NativeRootSignature);
+        }
+
         public void SetIndexBuffer(GraphicsBuffer view)
         {
             NativeCommandList.SetIndexBuffer(view.NativeIndexBufferView);

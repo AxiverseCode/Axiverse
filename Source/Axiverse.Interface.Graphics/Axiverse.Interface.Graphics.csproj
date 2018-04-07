@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandList.cs" />
     <Compile Include="GraphicsDevice.cs" />
+    <Compile Include="RootSignature.cs" />
     <Compile Include="ShaderBytecode.cs" />
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />
