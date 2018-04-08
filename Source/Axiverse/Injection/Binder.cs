@@ -11,7 +11,7 @@ namespace Axiverse.Injection
     /// <summary>
     /// Represents a binding between a <see cref="Type"/> and a <see cref="IBindingProvider"/>.
     /// </summary>
-    public class ObjectBinding
+    public class Binder
     {
         /// <summary>
         /// Creates on object binding to the given type. All public properties with a setter and
@@ -21,12 +21,13 @@ namespace Axiverse.Injection
         /// type.
         /// </summary>
         /// <param name="type"></param>
-        public ObjectBinding(Type type)
+        public Binder(Type type)
         {
             var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
             foreach (var property in properties)
             {
                 var key = Key.From(property.PropertyType, property.Name);
+                this.properties.Add(key, property);
             }
             
             var fields = type.GetFields(BindingFlags.Public);
@@ -35,6 +36,7 @@ namespace Axiverse.Injection
                 if (!field.IsInitOnly)
                 {
                     var key = Key.From(field.FieldType, field.Name);
+                    this.fields.Add(key, field);
                 }
             }
         }
@@ -44,7 +46,7 @@ namespace Axiverse.Injection
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="bindings"></param>
-        public void Bind(object obj, IBindingProvider bindings)
+        public void SetValues(object obj, IBindingProvider bindings)
         {
             Contract.Requires<InvalidCastException>(obj.GetType().IsValueType == false);
 
@@ -70,7 +72,8 @@ namespace Axiverse.Injection
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="bindings"></param>
-        public void Bind(ref object obj, IBindingProvider bindings)
+        public void SetValues<T>(ref T obj, IBindingProvider bindings)
+            where T : struct
         {
             foreach (var property in properties)
             {
@@ -80,12 +83,74 @@ namespace Axiverse.Injection
                 }
             }
 
-            TypedReference reference = __makeref(obj);
+            var reference = __makeref(obj);
             foreach (var field in fields)
             {
                 if (bindings.TryGetValue(field.Key, out var value))
                 {
                     field.Value.SetValueDirect(reference, value);
+                }
+            }
+        }
+
+        public static void Bind(object obj, IBindingProvider bindings)
+        {
+            var type = obj.GetType();
+            Contract.Requires<InvalidCastException>(obj.GetType().IsValueType == false);
+
+            var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
+            foreach (var property in properties)
+            {
+                var key = Key.From(property.PropertyType, property.Name);
+                if (!bindings.TryGetValue(key, out var value))
+                {
+                    throw new MissingFieldException($"Missing binding for {key}.");
+                }
+                property.SetValue(obj, value);
+            }
+
+            var fields = type.GetFields(BindingFlags.Public);
+            foreach (var field in fields)
+            {
+                if (!field.IsInitOnly)
+                {
+                    var key = Key.From(field.FieldType, field.Name);
+                    if (bindings.TryGetValue(key, out var value))
+                    {
+                        throw new MissingFieldException($"Missing binding for {key}.");
+                    }
+                    field.SetValue(obj, value);
+                }
+            }
+        }
+
+        public static void Bind(ref object obj, IBindingProvider bindings)
+        {
+            var type = obj.GetType();
+
+            var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
+            foreach (var property in properties)
+            {
+                var key = Key.From(property.PropertyType, property.Name);
+                if (!bindings.TryGetValue(key, out var value))
+                {
+                    throw new MissingFieldException($"Missing binding for {key}.");
+                }
+                property.SetValue(obj, value);
+            }
+
+            var reference = __makeref(obj);
+            var fields = type.GetFields(BindingFlags.Public);
+            foreach (var field in fields)
+            {
+                if (!field.IsInitOnly)
+                {
+                    var key = Key.From(field.FieldType, field.Name);
+                    if (bindings.TryGetValue(key, out var value))
+                    {
+                        throw new MissingFieldException($"Missing binding for {key}.");
+                    }
+                    field.SetValueDirect(reference, value);
                 }
             }
         }

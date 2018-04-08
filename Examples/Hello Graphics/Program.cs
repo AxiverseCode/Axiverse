@@ -51,6 +51,19 @@ namespace HelloGraphics
             var vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
             var indexBuffer = GraphicsBuffer.CreateIndexBuffer(device, indices, false);
             var vertexBuffer = GraphicsBuffer.CreateVertexBuffer(device, vertices, 3, false);
+            var indexBinding = new IndexBufferBinding
+            {
+                Buffer = indexBuffer,
+                Count = indices.Length,
+                Offset = 0,
+            };
+            var vertexBinding = new VertexBufferBinding
+            {
+                Buffer = vertexBuffer,
+                Count = 3,
+                Offset = 0,
+            };
+
 
             // Into the loop we go!
             using (var loop = new RenderLoop(form))
@@ -70,10 +83,8 @@ namespace HelloGraphics
 
                         commandList.SetRootSignature(pipelineStateDescription.RootSignature);
                         commandList.PipelineState = pipelineState;
-
-                        commandList.SetIndexBuffer(indexBuffer);
-                        commandList.SetVertexBuffer(vertexBuffer);
-                        commandList.DrawIndexed(3);
+                        
+                        commandList.Draw(indexBinding, vertexBinding);
                     }
                     commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
 

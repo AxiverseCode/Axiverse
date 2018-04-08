@@ -85,7 +85,11 @@
     <Compile Include="GraphicsDevice.cs" />
     <Compile Include="ResourceState.cs" />
     <Compile Include="RootSignature.cs" />
+    <Compile Include="SamplerState.cs" />
+    <Compile Include="SamplerStateDescription.cs" />
     <Compile Include="ShaderBytecode.cs" />
+    <Compile Include="Shaders\GeometryShader.cs" />
+    <Compile Include="Shaders\Shader.cs" />
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="VertexBufferBinding.cs" />
@@ -105,6 +109,10 @@
     <ProjectReference Include="..\Axiverse.Resources\Axiverse.Resources.csproj">
       <Project>{db2fcc23-befb-44cd-8f9b-ec1702aedf57}</Project>
       <Name>Axiverse.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse\Axiverse.csproj">
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
+      <Name>Axiverse</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

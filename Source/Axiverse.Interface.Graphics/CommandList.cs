@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -160,6 +161,29 @@ namespace Axiverse.Interface.Graphics
         public void DrawIndexed(int idxCnt)
         {
             NativeCommandList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
+        }
+
+        public void Draw(IndexBufferBinding index, VertexBufferBinding vertex)
+        {
+            NativeCommandList.SetIndexBuffer(index.Buffer.NativeIndexBufferView);
+            NativeCommandList.SetVertexBuffer(0, vertex.Buffer.NativeVertexBufferView);
+            NativeCommandList.DrawIndexedInstanced(index.Count, 1, index.Offset, vertex.Offset, 0);
+        }
+
+        public void Draw(IndexBufferBinding index, VertexBufferBinding[] vertices)
+        {
+            Contract.Requires<IndexOutOfRangeException>(vertices.Length > 0);
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                Contract.Requires(vertices[i].Offset == vertices[0].Offset);
+            }
+
+            NativeCommandList.SetIndexBuffer(index.Buffer.NativeIndexBufferView);
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                NativeCommandList.SetVertexBuffer(i, vertices[i].Buffer.NativeVertexBufferView);
+            }
+            NativeCommandList.DrawIndexedInstanced(index.Count, 1, index.Offset, vertices[0].Offset, 0);
         }
 
         public static CommandList Create(GraphicsDevice device, int bufferCount)

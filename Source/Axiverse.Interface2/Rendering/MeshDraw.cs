@@ -18,6 +18,6 @@ namespace Axiverse.Interface.Rendering
 
         public VertexBufferBinding[] VertexBuffers;
 
-        public IndexBufferBinding[] IndexBuffers;
+        public IndexBufferBinding IndexBuffer;
     }
 }

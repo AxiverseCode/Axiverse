@@ -55,7 +55,7 @@
     <Compile Include="Injection\Key.cs" />
     <Compile Include="Injection\NamedAttribute.cs" />
     <Compile Include="Injection\NamedKey.cs" />
-    <Compile Include="Injection\ObjectBinding.cs" />
+    <Compile Include="Injection\Binder.cs" />
     <Compile Include="Injection\SyntheticKey.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Modules\MainModuleAttribute.cs" />

@@ -11,7 +11,6 @@ namespace Axiverse.Interface.Graphics
         public GraphicsBuffer Buffer;
         public int Offset;
         public int Count;
-        public int Stride;
 
         // declaration
     }
