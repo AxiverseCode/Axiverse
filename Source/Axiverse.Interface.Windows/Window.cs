@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 using SharpDX.Windows;
 
-using Axiverse.Interface.Graphics;
-
 namespace Axiverse.Interface.Windows
 {
     public class Window : Control
@@ -100,14 +98,9 @@ namespace Axiverse.Interface.Windows
             }
         }
 
-        public override void Draw(Compositor compositor)
+        public override void Draw(Canvas compositor)
         {
 
-        }
-
-        public void Draw(Canvas canvas)
-        {
-            DrawChildren(Vector2.Zero, canvas.Compositor);
         }
     }
 }

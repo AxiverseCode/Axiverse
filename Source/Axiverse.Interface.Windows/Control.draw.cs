@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using SharpDX;
 using SharpDX.Direct2D1;
 
-using Axiverse.Interface.Graphics;
-
 namespace Axiverse.Interface.Windows
 {
     public partial class Control
@@ -64,13 +62,18 @@ namespace Axiverse.Interface.Windows
 
         }
 
-        public virtual void Draw(Compositor compositor)
+        public virtual void Draw(Canvas compositor)
         {
             compositor.FillRoundedRectangle(new Rectangle(0, 0, Width, Height), new Vector2(0, 0), BackgroundColor);
             compositor.DrawText(Text, Font, new TextLayout(), new Rectangle(0, 0, Width, Height), ForegroundColor);
         }
 
-        public virtual void DrawChildren(Vector2 parentOffset, Compositor compositor)
+        public virtual void DrawChildren(Canvas compositor)
+        {
+            DrawChildren(Vector2.Zero, compositor);
+        }
+
+        public virtual void DrawChildren(Vector2 parentOffset, Canvas compositor)
         {
             var canvas = compositor;// as Graphics.Compositor;
             // apply my transform

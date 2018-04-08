@@ -19,7 +19,7 @@ namespace Axiverse.Interface
         public Renderer Renderer { get; private set; }
 
         public SceneGraph Scene { get; } = new SceneGraph();
-        public Window Window { get; set; } = new Window();
+        public Window Window { get; set; }
         public Camera Camera;
         public TrackballController Trackball;
 
@@ -36,14 +36,19 @@ namespace Axiverse.Interface
                 // Icon = new System.Drawing.Icon("../../Assets/cake1.ico"),
                 Text = "Axiverse | Interface",
             };
-            Window.Bind(Target);
             
             Renderer = new Renderer();
             Renderer.Initialize(Target/*, Interface*/);
+
+            Window = new Window();
+            Window.Bind(Target);
+
             Renderer.Pipelines.Add(new GeometryPipeline(Renderer, Scene));
             Renderer.Pipelines.Add(new VoxelPipeline(Renderer, Scene));
             Renderer.Pipelines.Add(new WindowsPipeline(Renderer, Window));
             Target.Resize += (s, e) => Renderer.RenderTarget.Resize(Target);
+
+
 
             var mesh = new ObjMesh(Renderer);
             mesh.Load(@"Models/ship.obj");

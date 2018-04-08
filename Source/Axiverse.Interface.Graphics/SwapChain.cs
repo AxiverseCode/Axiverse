@@ -21,16 +21,16 @@ namespace Axiverse.Interface.Graphics
         /// <summary>
         /// The size of the back buffer chain
         /// </summary>
-        public static int BufferCount = 3;
+        public int BufferCount = 3;
         public int CurrentBufferIndex;
 
-        private CommandQueue mPresentQueue;
+        internal CommandQueue NativeCommandQueue;
         private SwapChain3 mPresentChain;
         private int mWidth;
         private int mHeight;
 
         private DescriptorHeap mBackBufferHeap;
-        private SharpDX.Direct3D12.Resource[] mBackBuffers;
+        internal SharpDX.Direct3D12.Resource[] NativeBackBuffers;
         private CpuDescriptorHandle[] mBackbufferHandles;
 
         private SwapChain(GraphicsDevice device) : base(device)
@@ -46,7 +46,7 @@ namespace Axiverse.Interface.Graphics
         {
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);
-            mPresentQueue = Device.NativeDevice.CreateCommandQueue(queueDesc);
+            NativeCommandQueue = Device.NativeDevice.CreateCommandQueue(queueDesc);
             
             // Descirbe and create the swap chain
             using (var factory = new Factory4())
@@ -64,7 +64,7 @@ namespace Axiverse.Interface.Graphics
                     SampleDescription   = new SampleDescription(1, 0),
                     IsWindowed          = true
                 };
-                using (var tempSwapChain = new SharpDX.DXGI.SwapChain(factory, mPresentQueue, swapChainDescription))
+                using (var tempSwapChain = new SharpDX.DXGI.SwapChain(factory, NativeCommandQueue, swapChainDescription))
                 {
                     mPresentChain   = tempSwapChain.QueryInterface<SwapChain3>();
                     CurrentBufferIndex    = mPresentChain.CurrentBackBufferIndex;
@@ -82,13 +82,13 @@ namespace Axiverse.Interface.Graphics
             // 2) Now we create the views
             mBackbufferHandles = new CpuDescriptorHandle[BufferCount];
             int rtHandleSize    = Device.NativeDevice.GetDescriptorHandleIncrementSize(DescriptorHeapType.RenderTargetView);
-            mBackBuffers        = new SharpDX.Direct3D12.Resource[BufferCount];
+            NativeBackBuffers        = new SharpDX.Direct3D12.Resource[BufferCount];
             var handle          = mBackBufferHeap.CPUDescriptorHandleForHeapStart;
             for (int i = 0; i < BufferCount; i++)
             {
-                mBackBuffers[i]         = mPresentChain.GetBackBuffer<SharpDX.Direct3D12.Resource>(i);
+                NativeBackBuffers[i]         = mPresentChain.GetBackBuffer<SharpDX.Direct3D12.Resource>(i);
                 mBackbufferHandles[i]   = handle + (rtHandleSize * i);
-                Device.NativeDevice.CreateRenderTargetView(mBackBuffers[i], null, mBackbufferHandles[i]);
+                Device.NativeDevice.CreateRenderTargetView(NativeBackBuffers[i], null, mBackbufferHandles[i]);
             }
         }
 
@@ -99,17 +99,17 @@ namespace Axiverse.Interface.Graphics
 
         public SharpDX.Direct3D12.Resource StartFrame()
         {
-            return mBackBuffers[CurrentBufferIndex];
+            return NativeBackBuffers[CurrentBufferIndex];
         }
 
         public void ExecuteCommandList(GraphicsCommandList list)
         {
-            mPresentQueue.ExecuteCommandList(list);
+            NativeCommandQueue.ExecuteCommandList(list);
         }
 
         public CommandQueue GetNativeQueue()
         {
-            return mPresentQueue;
+            return NativeCommandQueue;
         }
 
         /// <summary>

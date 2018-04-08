@@ -11,7 +11,7 @@ using SharpDX.DirectWrite;
 using Axiverse.Interface.Graphics.Fonts;
 using FactoryDW = SharpDX.DirectWrite.Factory;
 using FontWeightDW = SharpDX.DirectWrite.FontWeight;
-using CompositorUI = Axiverse.Interface.Windows.Canvas;
+using CanvasUI = Axiverse.Interface.Windows.Canvas;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -20,7 +20,7 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Graphics class for drawing to the canvas.
     /// </summary>
-    public class Compositor : CompositorUI
+    public class Canvas : CanvasUI
     {
         public FactoryDW FactoryDW;
         public ResourceFontLoader FontLoader;
@@ -32,7 +32,7 @@ namespace Axiverse.Interface.Graphics
 
         public SolidColorBrush SolidColorBrush;
 
-        public Compositor(DeviceContext deviceContext)
+        public Canvas(DeviceContext deviceContext)
         {
             // initialize directwrite
 
@@ -141,7 +141,7 @@ namespace Axiverse.Interface.Graphics
         {
             var format = QueryFont(font);
 
-            switch(layout.HorizontalAlignment)
+            switch (layout.HorizontalAlignment)
             {
                 case HorizontalAlign.Near:
                     format.TextAlignment = TextAlignment.Leading;
@@ -154,7 +154,7 @@ namespace Axiverse.Interface.Graphics
                     break;
             }
 
-            switch(layout.VerticalAlignment)
+            switch (layout.VerticalAlignment)
             {
                 case VerticalAlign.Leading:
                     format.ParagraphAlignment = ParagraphAlignment.Near;
@@ -169,17 +169,5 @@ namespace Axiverse.Interface.Graphics
 
             return format;
         }
-    }
-
-    public static class SharpDXExtensions
-    {
-        public static RectangleF ToRectangleF(this Rectangle rectangle)
-        {
-            return new RectangleF(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height);
-        }
-
-        public static Color4 ToColor4(this Color color) => new Color4(color.Red, color.Green, color.Blue, color.Opacity);
-
-        public static SharpDX.Vector2 ToVector2(this Vector2 vector) => new SharpDX.Vector2(vector.X, vector.Y);
     }
 }

@@ -36,19 +36,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Axiverse">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.dll</HintPath>
-    </Reference>
-    <Reference Include="Axiverse.Interface">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Axiverse.Mathematics">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Axiverse.Resources, Version=0.0.1.30145, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Resources.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -89,6 +76,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Axiverse.Interface\Axiverse.Interface.csproj">
+      <Project>{a95e24eb-7271-460a-a49d-a56f71f44b5f}</Project>
+      <Name>Axiverse.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Axiverse.Resources\Axiverse.Resources.csproj">
+      <Project>{db2fcc23-befb-44cd-8f9b-ec1702aedf57}</Project>
+      <Name>Axiverse.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Axiverse\Axiverse.csproj">
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
+      <Name>Axiverse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Examples\Axiverse.Examples.csproj">
       <Project>{c5c53af6-787f-4544-b919-b458fd11686d}</Project>
       <Name>Axiverse.Examples</Name>

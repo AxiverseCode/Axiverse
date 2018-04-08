@@ -57,7 +57,7 @@ namespace Axiverse.Interface.Windows
 
         public Font Font { get; set; }
 
-        public static Font DefaultFont { get; set; }
+        public static Font DefaultFont { get; set; } = new Font("Open Sans", 16, FontWeight.Normal);
 
         public static Color DefaultForegroundColor => new Color(0, 0, 0, 1);
 

@@ -57,9 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
-    <Compile Include="Canvas.cs" />
     <Compile Include="Color.cs" />
-    <Compile Include="Compositor.cs" />
+    <Compile Include="Canvas.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="Control.draw.cs" />
     <Compile Include="Control.input.cs" />
@@ -81,10 +80,6 @@
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
-      <Project>{cab0bbc2-a6eb-4065-9e71-fd86746696c2}</Project>
-      <Name>Axiverse.Interface.Graphics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>

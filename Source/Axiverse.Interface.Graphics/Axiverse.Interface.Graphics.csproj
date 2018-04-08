@@ -69,7 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Canvas.cs" />
+    <Compile Include="Fonts\ResourceFontFileEnumerator.cs" />
+    <Compile Include="Fonts\ResourceFontFileStream.cs" />
+    <Compile Include="Fonts\ResourceFontLoader.cs" />
     <Compile Include="GraphicsBuffer.cs" />
+    <Compile Include="GraphicsDevice2D.cs" />
     <Compile Include="GraphicsResource.cs" />
     <Compile Include="PipelineState.cs" />
     <Compile Include="PipelineStateDescription.cs" />
@@ -85,6 +90,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
+      <Project>{4ced344e-8bac-48cb-ac37-a2c4ad7ffe02}</Project>
+      <Name>Axiverse.Interface.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Resources\Axiverse.Resources.csproj">
+      <Project>{db2fcc23-befb-44cd-8f9b-ec1702aedf57}</Project>
+      <Name>Axiverse.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

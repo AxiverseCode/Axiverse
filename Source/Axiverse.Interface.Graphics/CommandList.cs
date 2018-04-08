@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDX;
+using SharpDX.Direct3D;
 using SharpDX.Direct3D12;
 
 
@@ -25,6 +26,7 @@ namespace Axiverse.Interface.Graphics
             {
                 pipelineState = value;
                 NativeCommandList.PipelineState = value.NativePipelineState;
+                NativeCommandList.PrimitiveTopology = (PrimitiveTopology)value.PrimitiveType;
             }
         }
 

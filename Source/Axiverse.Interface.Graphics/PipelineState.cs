@@ -14,6 +14,8 @@ namespace Axiverse.Interface.Graphics
     {
         public SharpDX.Direct3D12.PipelineState NativePipelineState;
 
+        public PrimitiveType PrimitiveType = PrimitiveType.TriangleList;
+
         protected PipelineState(GraphicsDevice device) : base(device)
         {
 

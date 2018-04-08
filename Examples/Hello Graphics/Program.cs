@@ -27,8 +27,8 @@ namespace HelloGraphics
 
             // Init the rendering device
             var device = GraphicsDevice.Create();
-            var chain = SwapChain.Create(device, form);
-            var commandList = CommandList.Create(device, SwapChain.BufferCount);
+            var swapChain = SwapChain.Create(device, form);
+            var commandList = CommandList.Create(device, swapChain.BufferCount);
 
             // Define the vertex input layout.
             var inputElementDescs = new[]
@@ -55,7 +55,7 @@ namespace HelloGraphics
                 device,
                 commandList.GetNativeContext(), 
                 Utilities.SizeOf(indices),
-                Marshal.UnsafeAddrOfPinnedArrayElement(indices, 0), 
+                Marshal.UnsafeAddrOfPinnedArrayElement(indices, 0),
                 false);
 
             var vertexBuffer = GraphicsBuffer.CreateVertexBuffer(
@@ -71,9 +71,9 @@ namespace HelloGraphics
             {
                 while (loop.NextFrame())
                 {
-                    var backBuffer = chain.StartFrame();
-                    var backBufferHandle = chain.GetCurrentColorHandle();
-                    commandList.Reset(chain);
+                    var backBuffer = swapChain.StartFrame();
+                    var backBufferHandle = swapChain.GetCurrentColorHandle();
+                    commandList.Reset(swapChain);
 
                     commandList.ResourceTransition(backBuffer, ResourceState.Present, ResourceState.RenderTarget);
                     {
@@ -84,7 +84,6 @@ namespace HelloGraphics
 
                         commandList.SetRootSignature(pipelineStateDescription.RootSignature);
                         commandList.PipelineState = pipelineState;
-                        commandList.GetNativeContext().PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
 
                         commandList.SetIndexBuffer(indexBuffer);
                         commandList.SetVertexBuffer(vertexBuffer);
@@ -93,9 +92,9 @@ namespace HelloGraphics
                     commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
                     commandList.Close();
-                    chain.ExecuteCommandList(commandList.GetNativeContext());
-                    commandList.FinishFrame(chain);
-                    chain.Present();
+                    swapChain.ExecuteCommandList(commandList.GetNativeContext());
+                    commandList.FinishFrame(swapChain);
+                    swapChain.Present();
                 }
             }
         }
