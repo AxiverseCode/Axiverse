@@ -21,6 +21,12 @@ namespace Axiverse.Interface.Graphics
 
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            NativePipelineState.Dispose();
+            base.Dispose(disposing);
+        }
+
         protected void Initialize(PipelineStateDescription description)
         {
             var psoDesc = new SharpDX.Direct3D12.GraphicsPipelineStateDescription()

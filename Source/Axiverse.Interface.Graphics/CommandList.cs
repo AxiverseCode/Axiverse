@@ -31,27 +31,27 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
-        private CommandAllocator[] mCmdAllocator;
-        private Fence[] mFences;
-        private long[] mFenceValues;
+        private CommandAllocator[] commandAllocators;
+        private Fence[] fences;
+        private long[] fenceValues;
 
         public CommandList(GraphicsDevice device) : base(device)
         {
 
         }
 
-        public void Initialize(int numBuffers)
+        public void Initialize(int bufferCount)
         {
-            mCmdAllocator   = new CommandAllocator[numBuffers];
-            mFences         = new Fence[numBuffers];
-            mFenceValues    = new long[numBuffers];
-            for (int i = 0; i < numBuffers; i++)
+            commandAllocators = new CommandAllocator[bufferCount];
+            fences = new Fence[bufferCount];
+            fenceValues = new long[bufferCount];
+            for (int i = 0; i < bufferCount; i++)
             {
-                mCmdAllocator[i]    = Device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
-                mFenceValues[i]     = 0;
-                mFences[i]          = Device.NativeDevice.CreateFence(mFenceValues[i], FenceFlags.None);
+                commandAllocators[i] = Device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
+                fenceValues[i] = 0;
+                fences[i] = Device.NativeDevice.CreateFence(fenceValues[i], FenceFlags.None);
             }
-            nativeCommandList = Device.NativeDevice.CreateCommandList(CommandListType.Direct, mCmdAllocator[0], null);
+            nativeCommandList = Device.NativeDevice.CreateCommandList(CommandListType.Direct, commandAllocators[0], null);
             // We close it as it starts in open state
             NativeCommandList.Close();
         }
@@ -59,36 +59,32 @@ namespace Axiverse.Interface.Graphics
         /// <summary>
         /// Should be called at the start of the frame. This method waits if needed for the GPU
         /// </summary>
-        /// <param name="chain"></param>
-        public void Reset(SwapChain chain)
+        /// <param name="swapChain"></param>
+        public void Reset(SwapChain swapChain)
         {
-            int idx     = chain.CurrentBufferIndex;
-            int waits   = 0;
-            int start   = Environment.TickCount;
-            while (mFences[idx].CompletedValue < mFenceValues[idx])
+            int index = swapChain.CurrentBufferIndex;
+            int waits = 0;
+            int start = Environment.TickCount;
+            while (fences[index].CompletedValue < fenceValues[index])
             {
                 // ...wait...
                 waits++;
             }
+
             int end = Environment.TickCount;
-            if(waits > 0)
+            if (waits > 0)
             {
                 // We just have 1ms res with Environment.TickCount, we need a hires timer for accurate results
                 int waitedMs = end - start;
-                if(waitedMs >= 1)
+                if (waitedMs >= 1)
                 {
                     Console.WriteLine("Waited:" + waitedMs + "ms!");
                 }
 
             }
 
-            mCmdAllocator[idx].Reset();
-            NativeCommandList.Reset(mCmdAllocator[idx], null);
-        }
-
-        public GraphicsCommandList GetNativeContext()
-        {
-            return NativeCommandList;
+            commandAllocators[index].Reset();
+            NativeCommandList.Reset(commandAllocators[index], null);
         }
 
         public void Close()
@@ -100,12 +96,12 @@ namespace Axiverse.Interface.Graphics
         /// This should be called after this context is executed. This way we will add
         /// sync commands at the end of the queue
         /// </summary>
-        /// <param name="chain"></param>
-        public void FinishFrame(SwapChain chain)
+        /// <param name="swapChain"></param>
+        public void FinishFrame(SwapChain swapChain)
         {
-            int idx = chain.CurrentBufferIndex;
-            mFenceValues[idx]++;
-            chain.GetNativeQueue().Signal(mFences[idx], mFenceValues[idx]);
+            int index = swapChain.CurrentBufferIndex;
+            fenceValues[index]++;
+            swapChain.NativeCommandQueue.Signal(fences[index], fenceValues[index]);
         }
 
         public void SetViewport(int x,int y,int w,int h)

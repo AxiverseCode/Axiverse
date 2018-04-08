@@ -35,5 +35,10 @@ namespace Axiverse.Interface.Graphics
         /// Gets the depth of the texture. This will always be 1 for 1D and 2D textures.
         /// </summary>
         public int Depth { get; private set; }
+
+        public Texture(GraphicsDevice device) : base(device)
+        {
+
+        }
     }
 }

@@ -23,10 +23,19 @@ namespace Axiverse.Interface.Graphics
         {
             var nativeDescription = new NativeSamplerStateDescription
             {
-
+                Filter = Filter.ComparisonAnisotropic,
+                AddressU = TextureAddressMode.Wrap,
+                AddressV = TextureAddressMode.Wrap,
+                AddressW = TextureAddressMode.Wrap,
+                MinimumLod = float.MinValue,
+                MaximumLod = float.MaxValue,
+                MipLodBias = 0,
+                MaximumAnisotropy = 16,
+                ComparisonFunction = Comparison.Never
             };
-            
 
+            NativeSampler = Device.SamplerAllocator.Allocate(1);
+            Device.NativeDevice.CreateSampler(nativeDescription, NativeSampler);
         }
 
         public static SamplerState Create(GraphicsDevice device, SamplerStateDescription description)

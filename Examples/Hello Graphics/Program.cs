@@ -89,7 +89,7 @@ namespace HelloGraphics
                     commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
                     commandList.Close();
-                    swapChain.ExecuteCommandList(commandList.GetNativeContext());
+                    swapChain.ExecuteCommandList(commandList);
                     commandList.FinishFrame(swapChain);
                     swapChain.Present();
                 }

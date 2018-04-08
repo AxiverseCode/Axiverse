@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using SharpDX;
+using SharpDX.Direct3D12;
 using Axiverse.Injection;
 
 namespace Axiverse.Interface.Graphics.Shaders
@@ -15,6 +16,9 @@ namespace Axiverse.Interface.Graphics.Shaders
         {
 
         }
+
+        // cbufferview
+        // samplers
 
         public GeometryShader(GraphicsDevice device) : base(device)
         {

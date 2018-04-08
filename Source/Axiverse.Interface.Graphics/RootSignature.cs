@@ -4,15 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SharpDX.Direct3D12;
+using NativeRootSignature = SharpDX.Direct3D12.RootSignature;
+
 namespace Axiverse.Interface.Graphics
 {
     public class RootSignature : GraphicsResource
     {
-        public SharpDX.Direct3D12.RootSignature NativeRootSignature;
+        public NativeRootSignature NativeRootSignature;
 
-        public RootSignature(GraphicsDevice device, SharpDX.Direct3D12.RootSignature rootSignature) : base(device)
+        internal RootSignature(GraphicsDevice device, NativeRootSignature rootSignature) : base(device)
         {
             NativeRootSignature = rootSignature;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            NativeRootSignature.Dispose();
+            base.Dispose(disposing);
         }
 
         public static RootSignature Create(GraphicsDevice device)
@@ -20,9 +29,16 @@ namespace Axiverse.Interface.Graphics
             // NOTE: I think we could work with prebaked root signatures (we can define it
             // as an HLSL shader and then use it for all of our PSOs. 
             // Root signature
-            var rootSignatureDesc = new SharpDX.Direct3D12.RootSignatureDescription(SharpDX.Direct3D12.RootSignatureFlags.AllowInputAssemblerInputLayout);
-            var rootSignature = device.NativeDevice.CreateRootSignature(rootSignatureDesc.Serialize());
+            var description = new RootSignatureDescription(RootSignatureFlags.AllowInputAssemblerInputLayout);
+            var rootSignature = device.NativeDevice.CreateRootSignature(description.Serialize());
 
+            return new RootSignature(device, rootSignature);
+        }
+
+        [Obsolete]
+        internal static RootSignature Create(GraphicsDevice device, RootSignatureDescription description)
+        {
+            var rootSignature = device.NativeDevice.CreateRootSignature(description.Serialize());
             return new RootSignature(device, rootSignature);
         }
     }
