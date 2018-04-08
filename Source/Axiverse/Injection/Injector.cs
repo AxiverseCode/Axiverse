@@ -10,7 +10,7 @@ namespace Axiverse.Injection
 {
     public class Injector
     {
-        public BindingCollection Bindings { get; } = new BindingCollection();
+        public BindingDictionary Bindings { get; } = new BindingDictionary();
         
         /// <summary>
         /// Gets or sets whether injects should automatically cascade into creating other injects.

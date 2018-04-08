@@ -66,9 +66,19 @@ namespace Axiverse.Injection
         /// <param name="type"></param>
         /// <param name="attribute"></param>
         /// <returns></returns>
-        public static Key From(Type type, Type attribute)
+        public static Key From(Type type, Attribute attribute)
         {
+            if (attribute is NamedAttribute named)
+            {
+                return new NamedKey(type, named.Name);
+            }
+
             return new AttributedKey(type, attribute);
+        }
+
+        public static Key From(Type type, string name)
+        {
+            return new NamedKey(type, name);
         }
 
         /// <summary>

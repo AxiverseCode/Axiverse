@@ -10,7 +10,7 @@ namespace Axiverse.Injection
     /// <summary>
     /// 
     /// </summary>
-    public class BindingCollection
+    public class BindingDictionary : IBindingProvider
     {
         public void Add<T>(T value)
         {
@@ -31,6 +31,11 @@ namespace Axiverse.Injection
         public bool TryGetValue(Key key, out object value)
         {
             return bindings.TryGetValue(key, out value);
+        }
+
+        public bool ContainsKey(Key key)
+        {
+            return bindings.ContainsKey(key);
         }
 
         private readonly Dictionary<Key, object> bindings = new Dictionary<Key, object>();

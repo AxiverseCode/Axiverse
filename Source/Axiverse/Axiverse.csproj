@@ -45,11 +45,17 @@
   <ItemGroup>
     <Compile Include="Flag.cs" />
     <Compile Include="Flags.cs" />
+    <Compile Include="Injection\BindAttribute.cs" />
     <Compile Include="Injection\BindingAttribute.cs" />
+    <Compile Include="Injection\BindingHierarchy.cs" />
+    <Compile Include="Injection\IBindingProvider.cs" />
     <Compile Include="Injection\Injector.cs" />
     <Compile Include="Injection\AttributedKey.cs" />
-    <Compile Include="Injection\BindingCollection.cs" />
+    <Compile Include="Injection\BindingDictionary.cs" />
     <Compile Include="Injection\Key.cs" />
+    <Compile Include="Injection\NamedAttribute.cs" />
+    <Compile Include="Injection\NamedKey.cs" />
+    <Compile Include="Injection\ObjectBinding.cs" />
     <Compile Include="Injection\SyntheticKey.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Modules\MainModuleAttribute.cs" />

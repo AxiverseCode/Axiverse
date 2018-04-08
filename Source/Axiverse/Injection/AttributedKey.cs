@@ -15,11 +15,10 @@ namespace Axiverse.Injection
         /// <summary>
         /// Gets the attribute associated with the key.
         /// </summary>
-        public Type Attribute { get; }
+        public Attribute Attribute { get; }
 
-        internal AttributedKey(Type type, Type attribute) : base(type)
+        internal AttributedKey(Type type, Attribute attribute) : base(type)
         {
-            Contract.Requires<InvalidCastException>(typeof(Attribute).IsAssignableFrom(attribute));
             Attribute = attribute;
         }
 
