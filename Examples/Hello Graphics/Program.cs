@@ -7,7 +7,6 @@ using SharpDX;
 using SharpDX.Windows;
 
 using Axiverse.Interface.Graphics;
-using System.Runtime.InteropServices;
 
 namespace HelloGraphics
 {
@@ -50,21 +49,8 @@ namespace HelloGraphics
             // Lets create some resources
             var indices = new int[] { 0, 2, 1 };
             var vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
-
-            var indexBuffer = GraphicsBuffer.CreateIndexBuffer(
-                device,
-                commandList.GetNativeContext(), 
-                Utilities.SizeOf(indices),
-                Marshal.UnsafeAddrOfPinnedArrayElement(indices, 0),
-                false);
-
-            var vertexBuffer = GraphicsBuffer.CreateVertexBuffer(
-                device,
-                commandList.GetNativeContext(),
-                Utilities.SizeOf(vertices),
-                sizeof(float) * 3,
-                Marshal.UnsafeAddrOfPinnedArrayElement(vertices, 0),
-                false);
+            var indexBuffer = GraphicsBuffer.CreateIndexBuffer(device, indices, false);
+            var vertexBuffer = GraphicsBuffer.CreateVertexBuffer(device, vertices, 3, false);
 
             // Into the loop we go!
             using (var loop = new RenderLoop(form))

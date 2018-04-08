@@ -15,8 +15,6 @@ namespace Axiverse.Interface.Graphics
 
     public class RenderTarget
     {
-
-
         public static int FrameCount = 2;
         public SwapChain3 SwapChain;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics
 {
-    public class GraphicsResource
+    public class GraphicsResource : IDisposable
     {
         public GraphicsDevice Device { get; }
 
@@ -23,6 +23,11 @@ namespace Axiverse.Interface.Graphics
             {
                 device.Resources.Add(this);
             }
+        }
+
+        public void Dispose()
+        {
+            Device.Resources.Remove(this);
         }
     }
 }
