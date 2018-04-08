@@ -97,15 +97,6 @@
     <Compile Include="Graphics\IVertex.cs" />
     <Compile Include="Graphics\Loaders\M3Loader.cs" />
     <Compile Include="Graphics\Mesh.cs" />
-    <Compile Include="Rendering\Anchor.cs" />
-    <Compile Include="Rendering\Animation.cs" />
-    <Compile Include="Rendering\Bone.cs" />
-    <Compile Include="Rendering\Clip.cs" />
-    <Compile Include="Rendering\KeyFrame.cs" />
-    <Compile Include="Rendering\Model.cs" />
-    <Compile Include="Rendering\Sequence.cs" />
-    <Compile Include="Rendering\Track.cs" />
-    <Compile Include="Rendering\Vertex.cs" />
     <Compile Include="Graphics\ObjMesh.cs" />
     <Compile Include="Graphics\Primitives.cs" />
     <Compile Include="Graphics\Renderer.cs" />

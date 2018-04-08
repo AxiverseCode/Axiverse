@@ -76,6 +76,7 @@
     <Compile Include="GraphicsBuffer.cs" />
     <Compile Include="GraphicsDevice2D.cs" />
     <Compile Include="GraphicsResource.cs" />
+    <Compile Include="IndexBufferBinding.cs" />
     <Compile Include="PipelineState.cs" />
     <Compile Include="PipelineStateDescription.cs" />
     <Compile Include="PrimitiveType.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="ShaderBytecode.cs" />
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="VertexBufferBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

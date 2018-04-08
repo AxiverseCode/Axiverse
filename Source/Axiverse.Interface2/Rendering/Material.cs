@@ -6,14 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Rendering
 {
-    public class Vertex
+    public class Material
     {
-        Vector3 Position;
-        Vector3 Normal;
-
-        byte[] BoneWeights;
-        byte[] BoneIndices;
-
-        Vector2[] Texture;
     }
 }

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Rendering
 {
-    public class KeyFrame<T>
+    public class Mesh
     {
-        public float Key { get; set; }
-        public T Value { get; set; }
+        public MeshDraw Draw;
+        public int MaterialIndex;
+        // Parameters
+
     }
 }
