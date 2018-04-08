@@ -92,7 +92,7 @@ namespace Axiverse.Interface.Graphics
 
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             foreach (var textLayout in TextFormats.Values)
             {

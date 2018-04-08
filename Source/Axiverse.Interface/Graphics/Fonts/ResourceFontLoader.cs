@@ -29,6 +29,7 @@ namespace Axiverse.Interface.Graphics.Fonts
         /// Initializes a new instance of the <see cref="ResourceFontLoader"/> class.
         /// </summary>
         /// <param name="factory">The factory.</param>
+        /// <param name="path"></param>
         public ResourceFontLoader(Factory factory, string path)
         {
             _factory = factory;

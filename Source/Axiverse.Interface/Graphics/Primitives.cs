@@ -86,7 +86,5 @@ namespace Axiverse.Interface.Graphics
         {
 
         }
-
-        static event Func<Vector3, T> moose;
     }
 }
