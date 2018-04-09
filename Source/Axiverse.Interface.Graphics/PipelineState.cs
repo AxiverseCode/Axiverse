@@ -8,11 +8,13 @@ using SharpDX.Direct3D;
 using SharpDX.Direct3D12;
 using SharpDX.DXGI;
 
+using NativePipelineState = SharpDX.Direct3D12.PipelineState;
+
 namespace Axiverse.Interface.Graphics
 {
     public class PipelineState : GraphicsResource
     {
-        public SharpDX.Direct3D12.PipelineState NativePipelineState;
+        internal NativePipelineState NativePipelineState;
 
         public PrimitiveType PrimitiveType = PrimitiveType.TriangleList;
 

@@ -11,7 +11,7 @@ namespace Axiverse.Interface.Graphics
 {
     public class RootSignature : GraphicsResource
     {
-        public NativeRootSignature NativeRootSignature;
+        internal NativeRootSignature NativeRootSignature;
 
         internal RootSignature(GraphicsDevice device, NativeRootSignature rootSignature) : base(device)
         {

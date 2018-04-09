@@ -15,7 +15,7 @@ namespace Axiverse.Interface.Graphics
         /// <summary>
         /// Gets the native d3d device
         /// </summary>
-        public Device NativeDevice { get; private set; }
+        internal Device NativeDevice { get; private set; }
 
         /// <summary>
         /// Gets the list of resources bound to this device.

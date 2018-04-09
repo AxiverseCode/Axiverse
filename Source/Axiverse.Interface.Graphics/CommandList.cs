@@ -17,7 +17,7 @@ namespace Axiverse.Interface.Graphics
     public class CommandList : GraphicsResource
     {
         private GraphicsCommandList nativeCommandList;
-        public GraphicsCommandList NativeCommandList => nativeCommandList;
+        internal GraphicsCommandList NativeCommandList => nativeCommandList;
 
         private PipelineState pipelineState;
         public PipelineState PipelineState
@@ -34,6 +34,26 @@ namespace Axiverse.Interface.Graphics
         private CommandAllocator[] commandAllocators;
         private Fence[] fences;
         private long[] fenceValues;
+
+        /// <summary>
+        /// The current shader resource view <see cref="DescriptorHeap"/> to copy descriptors into                             /
+        /// for execution with this command list. When it is filled, we will add it to the list of
+        /// heaps in the compiled command list for releasing after execution.
+        /// </summary>
+        private DescriptorHeap shaderResourceViewDescriptorHeap;
+        private int shaderResourceViewOffset;
+
+        /// <summary>
+        /// The current sampler <see cref="DescriptorHeap"/> to copy descriptors into for execution
+        /// with this command list.
+        /// </summary>
+        private DescriptorHeap samplerDescriptorHeap;
+        private int samplerOffset;
+
+        /// <summary>
+        /// Fixed descriptor heap array for setting the descriptor heaps.
+        /// </summary>
+        private readonly DescriptorHeap[] descriptorHeaps = new DescriptorHeap[2];
 
         public CommandList(GraphicsDevice device) : base(device)
         {

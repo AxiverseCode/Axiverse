@@ -70,12 +70,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Canvas.cs" />
+    <Compile Include="CompiledCommandList.cs" />
+    <Compile Include="ConstantBufferBinding.cs" />
     <Compile Include="Effects\Effect.cs" />
     <Compile Include="Effects\EffectInstance.cs" />
     <Compile Include="Fonts\ResourceFontFileEnumerator.cs" />
     <Compile Include="Fonts\ResourceFontFileStream.cs" />
     <Compile Include="Fonts\ResourceFontLoader.cs" />
     <Compile Include="GraphicsBuffer.cs" />
+    <Compile Include="GraphicsBufferAllocation.cs" />
     <Compile Include="GraphicsDevice2D.cs" />
     <Compile Include="GraphicsResource.cs" />
     <Compile Include="IndexBufferBinding.cs" />
@@ -91,10 +94,13 @@
     <Compile Include="SamplerStateDescription.cs" />
     <Compile Include="ShaderBytecode.cs" />
     <Compile Include="Shaders\GeometryShader.cs" />
+    <Compile Include="Shaders\ResourceBinding.cs" />
     <Compile Include="Shaders\Shader.cs" />
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="VertexBufferBinding.cs" />
+    <Compile Include="VertexDeclaration.cs" />
+    <Compile Include="VertexElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

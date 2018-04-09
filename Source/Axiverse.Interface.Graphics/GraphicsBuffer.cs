@@ -13,13 +13,15 @@ namespace Axiverse.Interface.Graphics
 {
     public class GraphicsBuffer : GraphicsResource
     {
-        private Resource mUploadHeap;
+        internal Resource NativeResource;
 
         private IndexBufferView nativeIndexBufferView;
         private VertexBufferView nativeVertexBufferView;
 
         public IndexBufferView NativeIndexBufferView => nativeIndexBufferView;
         public VertexBufferView NativeVertexBufferView => nativeVertexBufferView;
+
+        internal long GpuHandle => NativeResource.GPUVirtualAddress;
 
         private GraphicsBuffer(GraphicsDevice device) : base(device)
         {
@@ -28,7 +30,7 @@ namespace Axiverse.Interface.Graphics
 
         private void InitializeHeaps(int size, IntPtr data, bool dataStatic = true)
         {
-            mUploadHeap = Device.NativeDevice.CreateCommittedResource
+            NativeResource = Device.NativeDevice.CreateCommittedResource
             (
                 new HeapProperties(HeapType.Upload),
                 HeapFlags.None,
@@ -41,11 +43,11 @@ namespace Axiverse.Interface.Graphics
             Range range = new Range();
             range.Begin = 0;
             range.End = 0;
-            IntPtr pData = mUploadHeap.Map(0, range);
+            IntPtr pData = NativeResource.Map(0, range);
             {
                 Utilities.CopyMemory(pData, data, size);
             }
-            mUploadHeap.Unmap(0, null);
+            NativeResource.Unmap(0, null);
 
             // If it is static, we can upload it to a GPU heap.
             // NOTE: For now we only have dynamic stuff.
@@ -55,11 +57,18 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        public static GraphicsBuffer Create(GraphicsDevice device, int size, IntPtr data, bool isStatic)
+        {
+            var result = new GraphicsBuffer(device);
+            result.InitializeHeaps(size, data, isStatic);
+            return result;
+        }
+
         private void InitializeAsIndexBuffer(int size, IntPtr data, bool dataStatic = true)
         {
             InitializeHeaps(size, data, dataStatic);
 
-            nativeIndexBufferView.BufferLocation = mUploadHeap.GPUVirtualAddress; // check if its static
+            nativeIndexBufferView.BufferLocation = NativeResource.GPUVirtualAddress; // check if its static
             nativeIndexBufferView.Format = SharpDX.DXGI.Format.R32_UInt;
             nativeIndexBufferView.SizeInBytes = size;
         }
@@ -68,11 +77,12 @@ namespace Axiverse.Interface.Graphics
         {
             InitializeHeaps(size, data, dataStatic);
 
-            nativeVertexBufferView.BufferLocation = mUploadHeap.GPUVirtualAddress; // check if its static
+            nativeVertexBufferView.BufferLocation = NativeResource.GPUVirtualAddress; // check if its static
             nativeVertexBufferView.SizeInBytes = size;
             nativeVertexBufferView.StrideInBytes = vertexSize;
         }
 
+        [Obsolete]
         public static GraphicsBuffer CreateIndexBuffer(GraphicsDevice device, int size, IntPtr data, bool dataStatic = true)
         {
             var buffer = new GraphicsBuffer(device);
@@ -80,6 +90,7 @@ namespace Axiverse.Interface.Graphics
             return buffer;
         }
 
+        [Obsolete]
         public static GraphicsBuffer CreateIndexBuffer(GraphicsDevice device, int[] data, bool dataStatic = true)
         {
             var buffer = new GraphicsBuffer(device);
@@ -90,6 +101,7 @@ namespace Axiverse.Interface.Graphics
             return buffer;
         }
 
+        [Obsolete]
         public static GraphicsBuffer CreateVertexBuffer(GraphicsDevice device, int size, int vertexSize, IntPtr data, bool dataStatic = true)
         {
             var buffer = new GraphicsBuffer(device);
@@ -97,6 +109,7 @@ namespace Axiverse.Interface.Graphics
             return buffer;
         }
 
+        [Obsolete]
         public static GraphicsBuffer CreateVertexBuffer<T>(GraphicsDevice device, T[] data, int stride = 1, bool isStatic = true)
             where T : struct
         {
