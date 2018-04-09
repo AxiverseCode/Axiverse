@@ -48,7 +48,10 @@ namespace Axiverse
         /// Resets an added item.
         /// </summary>
         /// <param name="item"></param>
-        protected abstract void Reset(T item);
+        protected virtual void Reset(T item)
+        {
+
+        }
 
         private readonly ConcurrentBag<T> bag = new ConcurrentBag<T>();
     }

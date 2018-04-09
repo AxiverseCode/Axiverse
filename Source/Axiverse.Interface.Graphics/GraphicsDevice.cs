@@ -28,6 +28,12 @@ namespace Axiverse.Interface.Graphics
         internal DescriptorAllocator DepthStencilViewAllocator;
         internal DescriptorAllocator RenderTargetViewAllocator;
 
+        internal CommandAllocatorPool CommandAllocators;
+        internal DescriptorHeapPool ShaderResourceViewDescriptorHeaps;
+        internal DescriptorHeapPool SamplerHeaps;
+        internal const int ShaderResourceViewDescriptorHeapSize = 2048;
+        internal const int SamplerHeapSize = 64;
+
         /// <summary>
         /// Initializes the GPU device
         /// </summary>
@@ -38,15 +44,28 @@ namespace Axiverse.Interface.Graphics
 #endif
             NativeDevice = new Device(null, SharpDX.Direct3D.FeatureLevel.Level_11_0);
 
-            // Create Allocators
-            SamplerAllocator = new DescriptorAllocator(this, DescriptorHeapType.Sampler);
-            ShaderResourceViewAllocator= new DescriptorAllocator(
-                this,
-                DescriptorHeapType.ConstantBufferViewShaderResourceViewUnorderedAccessView);
-            DepthStencilViewAllocator =
-                new DescriptorAllocator(this, DescriptorHeapType.DepthStencilView);
-            RenderTargetViewAllocator =
-                new DescriptorAllocator(this, DescriptorHeapType.RenderTargetView);
+            // Create allocators.
+            {
+                SamplerAllocator = new DescriptorAllocator(this, DescriptorHeapType.Sampler);
+                ShaderResourceViewAllocator = new DescriptorAllocator(
+                    this,
+                    DescriptorHeapType.ConstantBufferViewShaderResourceViewUnorderedAccessView);
+                DepthStencilViewAllocator =
+                    new DescriptorAllocator(this, DescriptorHeapType.DepthStencilView);
+                RenderTargetViewAllocator =
+                    new DescriptorAllocator(this, DescriptorHeapType.RenderTargetView);
+            }
+
+            // Create pools.
+            {
+                CommandAllocators = new CommandAllocatorPool(this);
+                ShaderResourceViewDescriptorHeaps = new DescriptorHeapPool(
+                    this,
+                    DescriptorHeapType.ConstantBufferViewShaderResourceViewUnorderedAccessView,
+                    ShaderResourceViewDescriptorHeapSize);
+                SamplerHeaps = new DescriptorHeapPool(
+                    this, DescriptorHeapType.Sampler, SamplerHeapSize);
+            }
         }
 
         public static GraphicsDevice Create()
@@ -56,7 +75,61 @@ namespace Axiverse.Interface.Graphics
             return graphicsDevice;
         }
 
-        public class DescriptorAllocator : GraphicsResource
+        /// <summary>
+        /// Object pool for command allocators.
+        /// </summary>
+        internal class CommandAllocatorPool : ObjectPool<CommandAllocator>
+        {
+            public GraphicsDevice Device { get; }
+
+            public CommandAllocatorPool(GraphicsDevice device) 
+            {
+                Device = device;
+            }
+
+            protected override CommandAllocator Create()
+            {
+                return Device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
+            }
+
+            protected override void Reset(CommandAllocator item)
+            {
+                item.Reset();
+            }
+        }
+
+        /// <summary>
+        /// Object pool for descriptor heaps.
+        /// </summary>
+        internal class DescriptorHeapPool : ObjectPool<DescriptorHeap>
+        {
+            public GraphicsDevice Device { get; }
+            public DescriptorHeapType HeapType { get; }
+            public int Size { get; }
+
+            public DescriptorHeapPool(GraphicsDevice device, DescriptorHeapType heapType, int size)
+            {
+                Device = device;
+                HeapType = heapType;
+                Size = size;
+            }
+
+            protected override DescriptorHeap Create()
+            {
+                var description = new DescriptorHeapDescription
+                {
+                    DescriptorCount = Size,
+                    Flags = DescriptorHeapFlags.ShaderVisible,
+                    Type = HeapType,
+                };
+                return Device.NativeDevice.CreateDescriptorHeap(description);
+            }
+        }
+
+        /// <summary>
+        /// Allocator for individual descriptors.
+        /// </summary>
+        internal class DescriptorAllocator : GraphicsResource
         {
             private readonly DescriptorHeapType heapType;
             private DescriptorHeap heap;
