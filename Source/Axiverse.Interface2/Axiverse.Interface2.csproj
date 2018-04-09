@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\Scene.cs" />
+    <Compile Include="Engine\SceneSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Compositing\Compositor.cs" />
     <Compile Include="Rendering\Compositing\SceneRenderer.cs" />

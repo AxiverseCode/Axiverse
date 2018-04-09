@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Engine
 {
-    public class Scene
+    public class Engine
     {
     }
 }

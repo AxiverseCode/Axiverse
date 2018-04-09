@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Canvas.cs" />
+    <Compile Include="Effects\Effect.cs" />
+    <Compile Include="Effects\EffectInstance.cs" />
     <Compile Include="Fonts\ResourceFontFileEnumerator.cs" />
     <Compile Include="Fonts\ResourceFontFileStream.cs" />
     <Compile Include="Fonts\ResourceFontLoader.cs" />

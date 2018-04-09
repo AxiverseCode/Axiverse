@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Rendering.Compositing
 {
-    class Compositor
+    /// <summary>
+    /// Composites different entities from the scene and renders them
+    /// </summary>
+    public class Compositor
     {
+        // runs each scenerenderer
     }
 }

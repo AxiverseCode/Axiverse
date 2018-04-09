@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics
 {
-    public class VertexBufferBinding
+    public class GraphicsBufferAllocation
     {
-        public VertexDeclaration Declaration;
         public GraphicsBuffer Buffer;
-        public int Offset;
-        public int Count;
-
-        // declaration
+        public IntPtr Data;
+        public int Size;
+        public int Offset; //Needed?
     }
 }
