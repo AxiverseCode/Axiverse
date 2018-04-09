@@ -72,6 +72,8 @@
     <Compile Include="Canvas.cs" />
     <Compile Include="CompiledCommandList.cs" />
     <Compile Include="ConstantBufferBinding.cs" />
+    <Compile Include="DescriptorLayout.cs" />
+    <Compile Include="DescriptorSet.cs" />
     <Compile Include="Effects\Effect.cs" />
     <Compile Include="Effects\EffectInstance.cs" />
     <Compile Include="Fonts\ResourceFontFileEnumerator.cs" />
@@ -99,7 +101,7 @@
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="VertexBufferBinding.cs" />
-    <Compile Include="VertexDeclaration.cs" />
+    <Compile Include="VertexLayout.cs" />
     <Compile Include="VertexElement.cs" />
   </ItemGroup>
   <ItemGroup>

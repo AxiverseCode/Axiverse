@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
 
 namespace Axiverse
 {
@@ -48,10 +43,7 @@ namespace Axiverse
         /// Resets an added item.
         /// </summary>
         /// <param name="item"></param>
-        protected virtual void Reset(T item)
-        {
-
-        }
+        protected virtual void Reset(T item) { }
 
         private readonly ConcurrentBag<T> bag = new ConcurrentBag<T>();
     }

@@ -31,9 +31,10 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
-        private CommandAllocator[] commandAllocators;
-        private Fence[] fences;
-        private long[] fenceValues;
+        private CompiledCommandList compiledCommandList;
+        private CommandAllocator commandAllocator;
+        private Fence fence;
+        private long fenceValue;
 
         /// <summary>
         /// The current shader resource view <see cref="DescriptorHeap"/> to copy descriptors into                             /
@@ -55,26 +56,65 @@ namespace Axiverse.Interface.Graphics
         /// </summary>
         private readonly DescriptorHeap[] descriptorHeaps = new DescriptorHeap[2];
 
-        public CommandList(GraphicsDevice device) : base(device)
+        protected CommandList(GraphicsDevice device) : base(device)
         {
 
         }
 
-        public void Initialize(int bufferCount)
+        private void Initialize()
         {
-            commandAllocators = new CommandAllocator[bufferCount];
-            fences = new Fence[bufferCount];
-            fenceValues = new long[bufferCount];
-            for (int i = 0; i < bufferCount; i++)
-            {
-                commandAllocators[i] = Device.NativeDevice.CreateCommandAllocator(CommandListType.Direct);
-                fenceValues[i] = 0;
-                fences[i] = Device.NativeDevice.CreateFence(fenceValues[i], FenceFlags.None);
-            }
-            nativeCommandList = Device.NativeDevice.CreateCommandList(CommandListType.Direct, commandAllocators[0], null);
+            commandAllocator = Device.CommandAllocators.Take();
+            fenceValue = 0;
+            fence = Device.NativeDevice.CreateFence(0, FenceFlags.None);
+            
+            nativeCommandList = Device.NativeDevice.CreateCommandList(CommandListType.Direct, commandAllocator, null);
             // We close it as it starts in open state
             NativeCommandList.Close();
+
+
+
+            // Create heaps to copy resources into.
+            shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
+            shaderResourceViewOffset = 0;
+            samplerDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
+            samplerOffset = 0;
         }
+
+        public void SetDescriptors(DescriptorSet descriptors)
+        {
+
+        }
+
+        public void SetIndexBuffer(GraphicsBuffer buffer, int size, IndexBufferType type)
+        {
+            var view = new IndexBufferView
+            {
+                BufferLocation = buffer.GpuHandle,
+                Format = (type == IndexBufferType.Integer32) ?
+                    SharpDX.DXGI.Format.R32_UInt : SharpDX.DXGI.Format.R16_UInt,
+                SizeInBytes = size,
+            };
+            NativeCommandList.SetIndexBuffer(view);
+        }
+
+        public void SetVertexBuffer(GraphicsBuffer buffer, int slot, int size, int stride)
+        {
+            var view = new VertexBufferView
+            {
+                BufferLocation = buffer.GpuHandle,
+                SizeInBytes = size,
+                StrideInBytes = stride,
+            };
+            NativeCommandList.SetVertexBuffer(slot, view);
+        }
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Should be called at the start of the frame. This method waits if needed for the GPU
@@ -85,7 +125,7 @@ namespace Axiverse.Interface.Graphics
             int index = swapChain.CurrentBufferIndex;
             int waits = 0;
             int start = Environment.TickCount;
-            while (fences[index].CompletedValue < fenceValues[index])
+            while (fence.CompletedValue < fenceValue)
             {
                 // ...wait...
                 waits++;
@@ -103,8 +143,8 @@ namespace Axiverse.Interface.Graphics
 
             }
 
-            commandAllocators[index].Reset();
-            NativeCommandList.Reset(commandAllocators[index], null);
+            commandAllocator.Reset();
+            NativeCommandList.Reset(commandAllocator, null);
         }
 
         public void Close()
@@ -120,8 +160,8 @@ namespace Axiverse.Interface.Graphics
         public void FinishFrame(SwapChain swapChain)
         {
             int index = swapChain.CurrentBufferIndex;
-            fenceValues[index]++;
-            swapChain.NativeCommandQueue.Signal(fences[index], fenceValues[index]);
+            fenceValue++;
+            swapChain.NativeCommandQueue.Signal(fence, fenceValue);
         }
 
         public void SetViewport(int x,int y,int w,int h)
@@ -202,10 +242,18 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.DrawIndexedInstanced(index.Count, 1, index.Offset, vertices[0].Offset, 0);
         }
 
-        public static CommandList Create(GraphicsDevice device, int bufferCount)
+
+
+
+
+
+
+
+
+        public static CommandList Create(GraphicsDevice device)
         {
             var commandList = new CommandList(device);
-            commandList.Initialize(bufferCount);
+            commandList.Initialize();
             return commandList;
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics
 {
-    public class VertexDeclaration
+    public class VertexLayout
     {
     }
 }

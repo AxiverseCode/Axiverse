@@ -8,7 +8,7 @@ namespace Axiverse.Interface.Graphics
 {
     public class VertexBufferBinding
     {
-        public VertexDeclaration Declaration;
+        public VertexLayout Declaration;
         public GraphicsBuffer Buffer;
         public int Offset;
         public int Count;

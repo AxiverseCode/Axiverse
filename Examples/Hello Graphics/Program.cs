@@ -27,7 +27,7 @@ namespace HelloGraphics
             // Init the rendering device
             var device = GraphicsDevice.Create();
             var swapChain = SwapChain.Create(device, form);
-            var commandList = CommandList.Create(device, swapChain.BufferCount);
+            var commandList = CommandList.Create(device);
 
             // Define the vertex input layout.
             var inputElementDescs = new[]

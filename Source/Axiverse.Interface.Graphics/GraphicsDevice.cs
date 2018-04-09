@@ -127,19 +127,21 @@ namespace Axiverse.Interface.Graphics
         }
 
         /// <summary>
-        /// Allocator for individual descriptors.
+        /// Allocator for individual descriptors. These individual allocations are used to stage
+        /// descriptors to be copied into descriptor heaps by a <see cref="CommandList"/>.
         /// </summary>
         internal class DescriptorAllocator : GraphicsResource
         {
-            private readonly DescriptorHeapType heapType;
+            public DescriptorHeapType HeapType { get; }
+            public int Stride { get; }
+
             private DescriptorHeap heap;
             private CpuDescriptorHandle handle;
             private int remaining;
-            public readonly int Stride;
 
             public DescriptorAllocator(GraphicsDevice device, DescriptorHeapType heapType) : base(device)
             {
-                this.heapType = heapType;
+                HeapType = heapType;
                 Stride = device.NativeDevice.GetDescriptorHandleIncrementSize(heapType);
             }
 
@@ -150,7 +152,7 @@ namespace Axiverse.Interface.Graphics
                     heap = Device.NativeDevice.CreateDescriptorHeap(new DescriptorHeapDescription
                     {
                         Flags = DescriptorHeapFlags.None,
-                        Type = heapType,
+                        Type = HeapType,
                         DescriptorCount = DescriptorsPerHeap,
                         NodeMask = 1,
                     });
