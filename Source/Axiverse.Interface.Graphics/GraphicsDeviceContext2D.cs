@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Axiverse.Interface.Graphics.Fonts;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
-
-using Axiverse.Interface.Graphics.Fonts;
+using System.Collections.Generic;
+using CanvasUI = Axiverse.Interface.Windows.Canvas;
 using FactoryDW = SharpDX.DirectWrite.Factory;
 using FontWeightDW = SharpDX.DirectWrite.FontWeight;
-using CanvasUI = Axiverse.Interface.Windows.Canvas;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -20,7 +14,7 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Graphics class for drawing to the canvas.
     /// </summary>
-    public class Canvas : CanvasUI
+    public class GraphicsDeviceContext2D : CanvasUI
     {
         public FactoryDW FactoryDW;
         public ResourceFontLoader FontLoader;
@@ -32,7 +26,7 @@ namespace Axiverse.Interface.Graphics
 
         public SolidColorBrush SolidColorBrush;
 
-        public Canvas(DeviceContext deviceContext)
+        public GraphicsDeviceContext2D(DeviceContext deviceContext)
         {
             // initialize directwrite
 

@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canvas.cs" />
+    <Compile Include="GraphicsDeviceContext2D.cs" />
     <Compile Include="CompiledCommandList.cs" />
     <Compile Include="ConstantBufferBinding.cs" />
     <Compile Include="DescriptorLayout.cs" />

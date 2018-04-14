@@ -83,6 +83,8 @@ namespace Axiverse.Interface.Graphics
         public void SetDescriptors(DescriptorSet descriptors)
         {
 
+
+
         }
 
         public void SetIndexBuffer(GraphicsBuffer buffer, int size, IndexBufferType type)

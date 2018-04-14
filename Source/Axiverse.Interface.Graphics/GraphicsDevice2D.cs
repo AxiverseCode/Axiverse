@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Axiverse.Interface.Graphics.Fonts;
 using SharpDX;
-using SharpDX.DXGI;
 using SharpDX.Direct3D11;
 using SharpDX.DirectWrite;
-using SharpDX.Mathematics.Interop;
-
-using Axiverse.Interface.Graphics.Fonts;
-
+using SharpDX.DXGI;
+using System.Collections.Generic;
 using Device3D = SharpDX.Direct3D11.Device11On12;
 using Device3D11 = SharpDX.Direct3D11.Device;
 using Device3D12 = SharpDX.Direct3D12.Device;
 using DeviceGI = SharpDX.DXGI.Device;
 using FactoryDW = SharpDX.DirectWrite.Factory;
-using ResourceStates = SharpDX.Direct3D12.ResourceStates;
 using Resource11 = SharpDX.Direct3D11.Resource;
 using Resource12 = SharpDX.Direct3D12.Resource;
+using ResourceStates = SharpDX.Direct3D12.ResourceStates;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -59,7 +51,7 @@ namespace Axiverse.Interface.Graphics
             public Bitmap1 Bitmap;
         }
 
-        public Canvas canvas;
+        public GraphicsDeviceContext2D canvas;
         public Windows.Canvas Canvas => canvas;
         public SolidColorBrush Brush;
 
@@ -132,7 +124,7 @@ namespace Axiverse.Interface.Graphics
 
         public void InitializeFrames(Device3D12 device3D12, RenderTarget renderTarget)
         {
-            canvas = new Canvas(DeviceContext);
+            canvas = new GraphicsDeviceContext2D(DeviceContext);
 
             Brush = new SolidColorBrush(DeviceContext, SharpDX.Color.White);
 
