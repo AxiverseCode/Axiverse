@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './panel.css';
 
-class Panel extends React.Component {
+export default class Panel extends React.Component {
     render(): React.ReactNode {
         return (
             <div className={styles.panel}>
@@ -10,5 +10,3 @@ class Panel extends React.Component {
         );
     }
 }
-
-export default Panel;

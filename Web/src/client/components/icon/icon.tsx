@@ -1,14 +1,13 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-import styles from './link.css';
+import styles from './icon.css';
 
 export interface Props {
     className?: any;
-    href?: string;
 }
 
-export default class Link extends React.Component<Props> {
+export default class Icon extends React.Component<Props> {
     public static defaultProps: Partial<Props> = {
         
     };
@@ -16,9 +15,9 @@ export default class Link extends React.Component<Props> {
     public render(): React.ReactNode {
         let className = classNames(styles.this, this.props.className);
         return (
-            <a className={className} href={this.props.href}>
+            <div className={className}>
                 {this.props.children}
-            </a>
+            </div>
         );
     }
 }

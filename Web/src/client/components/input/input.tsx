@@ -7,7 +7,7 @@ export interface Props {
     type?: 'text' | 'password';
 }
 
-class Input extends React.Component<Props> {
+export default class Input extends React.Component<Props> {
     public static defaultProps: Partial<Props> = {
         type: 'text',
     };
@@ -22,5 +22,3 @@ class Input extends React.Component<Props> {
         );
     }
 }
-
-export default Input;
