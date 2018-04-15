@@ -24,8 +24,11 @@ class Avatar extends React.Component<Props> {
             [styles.large] : this.props.size == 'l',
         });
         return (
-            <div className={className}>
-                <img src={this.props.src || '/nyan.png'} alt={this.props.alt}/>
+            <div className={styles.container}>
+                <div className={className}>
+                    <img src={this.props.src || '/nyan.png'} alt={this.props.alt}/>
+                </div>
+                {this.props.children}
             </div>
         );
     }

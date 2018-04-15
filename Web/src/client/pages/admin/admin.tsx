@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, Header, Input} from '../../components'
+import {Avatar, Button, Header, Input} from '../../components'
 import styles from './admin.css';
 
 export interface Props {
@@ -10,7 +10,9 @@ class Admin extends React.Component<Props> {
   render(): React.ReactNode {
       return (
         <div className={styles.container}>
-            <Header title='Admin'></Header>
+            <Header title='Admin'>
+              <Avatar size='s'>Axiverse</Avatar>
+            </Header>
         </div>
       );
   }

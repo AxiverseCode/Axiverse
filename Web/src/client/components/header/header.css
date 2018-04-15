@@ -1,9 +1,17 @@
 :local(.header) {
+    padding: 0 10px;
+
+    background: #111;
+    color: #e7e7e7;
+
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+:local(.title) {
     font-family: 'Oswald', sans-serif;
     font-size: 24px;
     line-height: 48px;
-
-    background: #333;
-    padding: 0 10px;
-    color: #e7e7e7;
 }

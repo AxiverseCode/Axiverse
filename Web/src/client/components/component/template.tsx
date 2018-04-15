@@ -7,7 +7,7 @@ export interface Props {
     className?: any;
 }
 
-class Component extends React.Component<Props> {
+export default class Component extends React.Component<Props> {
     public static defaultProps: Partial<Props> = {
         
     };
@@ -21,5 +21,3 @@ class Component extends React.Component<Props> {
         );
     }
 }
-
-export default Component;

@@ -1,24 +1,32 @@
+:local(.container) {
+    line-height: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+}
+
 :local(.this) {
-	display: block;
+    display: inline-block;
+    vertical-align: top;
 	background: #888;
     overflow: hidden;
     
-	border-radius: 100px;
+    border-radius: 100px;
+    margin: 0 4px;
 }
 
 :local(.this) img {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 :local(.small) {
 	width: 24px;
 	height: 24px;
-	margin: 4px auto;
 }
 
 :local(.large) {
 	width: 100px;
 	height: 100px;
-	margin: 10px auto;
 }

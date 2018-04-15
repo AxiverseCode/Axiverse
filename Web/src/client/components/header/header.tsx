@@ -5,14 +5,17 @@ export interface Props {
   title: string;
 }
 
-class Header extends React.Component<Props> {
-  render(): React.ReactNode {
-      return (
-        <div className={styles.header}>
-            Axiverse {this.props.title}
-        </div>
-      );
-  }
+export default class Header extends React.Component<Props> {
+    public render(): React.ReactNode {
+        return (
+          <div className={styles.header}>
+            <span className={styles.title}>
+        		Axiverse {this.props.title}
+            </span>
+            <span className={styles.body}>
+                {this.props.children}
+            </span>
+          </div>
+        );
+    }
 }
-
-export default Header;
