@@ -11,6 +11,9 @@ namespace Axiverse.Identity
 {
     public class Crypto
     {
+        // Argon2 for password hashing
+        // hashlib for SHA-3 hashing - blockchain technology.
+
         private RandomNumberGenerator random = RandomNumberGenerator.Create();
 
         private byte[] GenerateSalt()

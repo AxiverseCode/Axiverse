@@ -34,5 +34,10 @@ namespace Axiverse.Identity
         // - email
         // - salt
         // - cryptographic function
+        // - validation methods + trust level.
+        // - different trust levels have different timeouts and multi-factor authetication requirements.
+
+        // Password storage: https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
+        // Authentication: https://www.owasp.org/index.php/Authentication_Cheat_Sheet
     }
 }
