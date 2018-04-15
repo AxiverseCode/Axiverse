@@ -1,0 +1,24 @@
+:local(.this) {
+	display: block;
+	background: #888;
+    overflow: hidden;
+    
+	border-radius: 100px;
+}
+
+:local(.this) img {
+    width: 100%;
+    height: 100%;
+}
+
+:local(.small) {
+	width: 24px;
+	height: 24px;
+	margin: 4px auto;
+}
+
+:local(.large) {
+	width: 100px;
+	height: 100px;
+	margin: 10px auto;
+}

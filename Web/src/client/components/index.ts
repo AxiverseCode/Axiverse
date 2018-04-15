@@ -1,3 +1,6 @@
+export {default as Avatar} from './avatar'
 export {default as Button} from './button'
 export {default as Header} from './header'
+export {default as Input} from './input'
+export {default as Link} from './link'
 export {default as Panel} from './panel'

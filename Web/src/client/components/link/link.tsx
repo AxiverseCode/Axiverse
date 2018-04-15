@@ -1,28 +1,26 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-import styles from './button.css';
+import styles from './link.css';
 
 export interface Props {
-    value?: string;
-
     className?: any;
+    href?: string;
 }
 
-class Button extends React.Component<Props> {
+class Link extends React.Component<Props> {
     public static defaultProps: Partial<Props> = {
         
     };
 
     public render(): React.ReactNode {
-        let className = classNames(styles.button, this.props.className);
+        let className = classNames(styles.this, this.props.className);
         return (
-            <button className={className}>
-                {this.props.value}
+            <a className={className} href={this.props.href}>
                 {this.props.children}
-            </button>
+            </a>
         );
     }
 }
 
-export default Button;
+export default Link;

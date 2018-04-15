@@ -1,0 +1,39 @@
+:local(.container) {
+	background: #222;
+	margin: 0;
+
+	display: flex;
+  	min-height: 100vh;
+
+  	align-items: center;
+  	justify-content: center;
+}
+
+:local(.card) {
+	background: #f7f7f7;
+	flex: 0;
+
+	min-width: 360px;
+	min-height: 400px;
+    box-sizing: border-box;
+	padding: 16px;
+	
+	border-radius: 2px;
+	border: 1px solid #eee;
+}
+
+:local(.card) > h1 {
+	font-weight: bold;
+	text-align: center;
+	font-size: 20px;
+	margin: 10px;
+}
+
+:local(.submit) {
+	display: block;
+	width: 100%;
+}
+
+:local(.btn) {
+	width: 100%;
+}

@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {Identity} from './pages/identity';
+import {Admin, Identity} from './pages';
+import {Button} from './components';
 
 import styles from './index.css';
 
 ReactDOM.render(
+  //<Admin></Admin>,
   <Identity></Identity>,
+  //<Button></Button>,
   document.getElementById('root') as HTMLElement
 );

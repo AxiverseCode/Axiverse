@@ -1,28 +1,25 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-import styles from './button.css';
+import styles from './template.css';
 
 export interface Props {
-    value?: string;
-
     className?: any;
 }
 
-class Button extends React.Component<Props> {
+class Component extends React.Component<Props> {
     public static defaultProps: Partial<Props> = {
         
     };
 
     public render(): React.ReactNode {
-        let className = classNames(styles.button, this.props.className);
+        let className = classNames(styles.this, this.props.className);
         return (
-            <button className={className}>
-                {this.props.value}
+            <div className={className}>
                 {this.props.children}
-            </button>
+            </div>
         );
     }
 }
 
-export default Button;
+export default Component;
