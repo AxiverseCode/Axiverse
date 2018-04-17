@@ -1,3 +1,4 @@
+export {default as Accordian} from './accordian'
 export {default as Avatar} from './avatar'
 export {default as Button} from './button'
 export {default as Header} from './header'
@@ -7,3 +8,5 @@ export {default as Link} from './link'
 export {default as Panel} from './panel'
 export {default as Table} from './table'
 export {default as Tree} from './tree'
+
+export {default as SvgComponent} from './svgcomponent'

@@ -1,0 +1,22 @@
+:local(.this) {
+	width: 64px;
+	height: 32px;
+	margin: 2px;
+
+	display: inline-block;
+
+	vertical-align: middle;
+}
+
+:local(.this) path {
+	stroke: blue;
+	stroke-width: 1;
+	fill: none;
+}
+
+:local(.this) circle {
+	stroke: white;
+	stroke-width: 1;
+	fill: blue;
+
+}

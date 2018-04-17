@@ -9,6 +9,5 @@ import styles from './index.css';
 ReactDOM.render(
   //<Admin></Admin>,
   <Identity></Identity>,
-  //<Button></Button>,
   document.getElementById('root') as HTMLElement
 );
