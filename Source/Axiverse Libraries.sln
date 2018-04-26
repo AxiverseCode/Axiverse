@@ -58,6 +58,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface2", "Axiv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Identity", "Axiverse.Identity\Axiverse.Identity.csproj", "{4925A907-0AD8-4818-9DF7-F7F85F391C40}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{F3447404-FFFF-4649-8407-DEBC6370C676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automaton", "..\Utilities\Automaton\Automaton.csproj", "{FFE9D18F-565F-4682-9943-3CBD1425A126}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +152,10 @@ Global
 		{4925A907-0AD8-4818-9DF7-F7F85F391C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4925A907-0AD8-4818-9DF7-F7F85F391C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4925A907-0AD8-4818-9DF7-F7F85F391C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFE9D18F-565F-4682-9943-3CBD1425A126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE9D18F-565F-4682-9943-3CBD1425A126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE9D18F-565F-4682-9943-3CBD1425A126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFE9D18F-565F-4682-9943-3CBD1425A126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,6 +182,7 @@ Global
 		{4CED344E-8BAC-48CB-AC37-A2C4AD7FFE02} = {76EE8D49-2A27-4BB6-B2ED-2D6D6A350AA5}
 		{B4894EA0-719A-4D14-9024-00F7FCA0E81B} = {76EE8D49-2A27-4BB6-B2ED-2D6D6A350AA5}
 		{4925A907-0AD8-4818-9DF7-F7F85F391C40} = {76EE8D49-2A27-4BB6-B2ED-2D6D6A350AA5}
+		{FFE9D18F-565F-4682-9943-3CBD1425A126} = {F3447404-FFFF-4649-8407-DEBC6370C676}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}
