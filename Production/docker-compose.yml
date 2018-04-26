@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    restart: always
+    image: mysql:latest
+    volumes:
+      - my-datavolume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    ports:
+      - "3306:3306"
+volumes:
+  my-datavolume:

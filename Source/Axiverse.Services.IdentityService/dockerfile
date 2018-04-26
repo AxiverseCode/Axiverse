@@ -1,0 +1,10 @@
+FROM mono:5.10
+
+WORKDIR /app
+COPY . .
+RUN nuget restore
+RUN xbuild /p:Configuration=Release
+
+WORKDIR /app/TestingConsoleApp/bin/Release
+
+CMD [ "mono",  "./TestingConsoleApp.exe" ]
