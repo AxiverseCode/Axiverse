@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="Flag.cs" />
+    <Compile Include="IGraph.cs" />
+    <Compile Include="IMessage.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -55,11 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
-      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
-      <Name>Axiverse.Mathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Axiverse.Simulation\Axiverse.Simulation.csproj">
+    <ProjectReference Include="..\..\Source\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
       <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
       <Name>Axiverse.Simulation</Name>
     </ProjectReference>

@@ -1,0 +1,10 @@
+FROM mono:5.10
+WORKDIR /build/
+COPY ./Source .
+RUN nuget restore
+RUN xbuild /p:Configuration=Release
+
+FROM mono:5.10 
+WORKDIR /app/
+COPY --from=builder /build/Source/Axiverse.Service.IdentityService/bin/Release .
+CMD [ "mono",  "./IdentityService.exe" ]

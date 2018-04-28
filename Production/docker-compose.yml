@@ -3,13 +3,11 @@ services:
   mysql:
     restart: always
     image: mysql:latest
-    volumes:
-      - my-datavolume:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
-      MYSQL_USER: 'test'
-      MYSQL_PASS: 'pass'
+    env_file:
+     - ./mysql-dev.env
     ports:
       - "3306:3306"
+    volumes:
+      - mysql-volume:/var/lib/mysql
 volumes:
-  my-datavolume:
+  mysql-volume:

@@ -60,7 +60,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+    <ProjectReference Include="..\..\Source\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>
     </ProjectReference>

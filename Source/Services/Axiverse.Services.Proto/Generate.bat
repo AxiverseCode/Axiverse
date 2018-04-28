@@ -10,4 +10,4 @@
 	..\..\Proto\MarketService.proto ^
 	..\..\Proto\ModelService.proto ^
 	..\..\Proto\ResourceService.proto ^
-	--plugin=protoc-gen-grpc=..\packages\Grpc.Tools.1.10.0\tools\windows_x86\grpc_csharp_plugin.exe
+	--plugin=protoc-gen-grpc=..\..\packages\Grpc.Tools.1.10.0\tools\windows_x86\grpc_csharp_plugin.exe
