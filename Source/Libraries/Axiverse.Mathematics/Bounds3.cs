@@ -85,6 +85,12 @@ namespace Axiverse.Mathematics
                 Math.Min(left.Z, right.Z), Math.Max(left.Z, right.Z));
         }
 
+        /// <summary>
+        /// Creates a bounding box from the center point and given size.
+        /// </summary>
+        /// <param name="center"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public static Bounds3 FromCenter(Vector3 center, Vector3 size)
         {
             Vector3 extent = size / 2;

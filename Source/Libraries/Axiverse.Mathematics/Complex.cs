@@ -91,9 +91,16 @@ namespace Axiverse.Mathematics
 
         #endregion
 
+        /// <summary>The zero complex number.</summary>
         public readonly static Complex Zero = new Complex(0f, 0f);
+        
+        /// <summary>The one complex number.</summary>
         public readonly static Complex One = new Complex(1f);
+        
+        /// <summary>The imaginary one complex number.</summary>
         public readonly static Complex ImaginaryOne = new Complex(0f, 1f);
+
+        /// <summary>The not a number complex number.</summary>
         public readonly static Complex NaN = new Complex(float.NaN, float.NaN);
     }
 }

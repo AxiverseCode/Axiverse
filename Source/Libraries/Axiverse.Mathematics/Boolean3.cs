@@ -31,6 +31,10 @@ namespace Axiverse.Mathematics
             Z = z;
         }
 
+        /// <summary>
+        /// Determinds if any of the components are true.
+        /// </summary>
+        /// <returns></returns>
         public bool Any()
         {
             return X || Y || Z;

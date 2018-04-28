@@ -1,7 +1,7 @@
 
-from the root of the project
+from the Source folder of the project
 
-docker build -f .\Production\IdentityService\dockerfile .
+docker build -f ..\Production\IdentityService\dockerfile .
 
 docker-compose up -d            # detaches console
 docker-compose down

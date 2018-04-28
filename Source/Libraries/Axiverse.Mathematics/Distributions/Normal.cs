@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.Distributions
 {
+    /// <summary>
+    /// Represents a normal distribution
+    /// </summary>
     public class Normal
     {
 
 
-
+        /// <summary>
+        /// Calculates the cumulative density at the given point.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
         public double CumulativeDensity(double d)
         {
             const double A1 = 0.31938153;
