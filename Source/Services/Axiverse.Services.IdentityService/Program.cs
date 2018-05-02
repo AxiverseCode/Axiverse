@@ -10,6 +10,7 @@ namespace Axiverse.Services.IdentityService
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("IdentityService");
         }
     }
 }
