@@ -5,17 +5,17 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{927FED4B-50ED-4FFB-A790-5624F5519777}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello World", "..\Examples\Hello World\Hello World.csproj", "{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello World", "Examples\Hello World\Hello World.csproj", "{D3E600B1-4CF4-4D0A-A008-9EDAE8ABD867}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Mathematics", "..\Tests\Axiverse.Tests.Mathematics\Axiverse.Tests.Mathematics.csproj", "{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Mathematics", "Tests\Axiverse.Tests.Mathematics\Axiverse.Tests.Mathematics.csproj", "{F6C19E0D-E14B-49D2-B292-5618BD9B6A12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E0C0FCA7-0649-4401-847A-46F2D5104DB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Physics", "Axiverse.Tests.Physics\Axiverse.Tests.Physics.csproj", "{F5290663-4808-4BD9-BD8E-362DBB4C3B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Graphics", "..\Examples\Hello Graphics\Hello Graphics.csproj", "{B79A989D-F5BA-441D-91BD-AF6AE025D30D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Graphics", "Examples\Hello Graphics\Hello Graphics.csproj", "{B79A989D-F5BA-441D-91BD-AF6AE025D30D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{76EE8D49-2A27-4BB6-B2ED-2D6D6A350AA5}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{AAE6C854-9031-4394-9995-EE38B6088F37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Examples", "..\Examples\Axiverse.Examples\Axiverse.Examples.csproj", "{C5C53AF6-787F-4544-B919-B458FD11686D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Examples", "Examples\Axiverse.Examples\Axiverse.Examples.csproj", "{C5C53AF6-787F-4544-B919-B458FD11686D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Simulation", "..\Tests\Axiverse.Tests.Simulation\Axiverse.Tests.Simulation.csproj", "{9B5FC6EB-9E9B-4713-A137-B704CDC0338A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Tests.Simulation", "Tests\Axiverse.Tests.Simulation\Axiverse.Tests.Simulation.csproj", "{9B5FC6EB-9E9B-4713-A137-B704CDC0338A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{F3447404-FFFF-4649-8407-DEBC6370C676}"
 EndProject

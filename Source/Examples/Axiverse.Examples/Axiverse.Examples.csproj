@@ -33,19 +33,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Axiverse">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Axiverse.dll</HintPath>
     </Reference>
     <Reference Include="Axiverse.Interface">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Interface.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Axiverse.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Axiverse.Mathematics">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Mathematics.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Axiverse.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Axiverse.Resources">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Resources.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Axiverse.Resources.dll</HintPath>
     </Reference>
     <Reference Include="Axiverse.Simulation">
-      <HintPath>..\..\Source\bin\Debug\Axiverse.Simulation.dll</HintPath>
+      <HintPath>..\..\bin\Debug\Axiverse.Simulation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
