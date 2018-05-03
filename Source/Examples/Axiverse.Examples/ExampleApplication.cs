@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Examples
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExampleApplication
     {
     }

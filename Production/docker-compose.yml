@@ -5,14 +5,20 @@ services:
     build:
       context: ../Source
       dockerfile: ../Production/identity-service.dockerfile
-    #restart: always
+    env_file:
+      - axiverse.env
+    ports:
+      - "32000:32000"
+    restart: always
   # Web Server
   web:
     build:
       context: ../Web
       dockerfile: ../Production/web.dockerfile
+    env_file:
+      - axiverse.env
     ports:
-      - "8080:8080"
+      - "8000:8000"
     restart: always
   # Database
   mysql:

@@ -7,5 +7,5 @@ RUN npm install
 
 COPY . .
 RUN npx webpack --mode production
-EXPOSE 8080
+EXPOSE 8000
 CMD [ "npx", "ts-node", "src/server/index.ts" ]
