@@ -1,15 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Axiverse.Mathematics.Tests
 {
     /// <summary>
     /// Unit tests for <see cref="Vector4"/>.
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class Vector4Test
     {
-        [TestMethod]
+        [Test]
         public void TestAdd()
         {
             Vector4 a = new Vector4(1, 2, 3, 4);
@@ -27,7 +27,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, v);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSubtract()
         {
             Vector4 a = new Vector4(1, 2, 3, 4);

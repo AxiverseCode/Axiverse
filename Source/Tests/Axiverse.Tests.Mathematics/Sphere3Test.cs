@@ -1,14 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using NUnit.Framework;
 using Axiverse.Mathematics;
 
 namespace Axiverse.Tests.Mathematics
 {
-    [TestClass]
+    [TestFixture]
     public class Sphere3Test
     {
-        [TestMethod]
+        [Test]
         public void IntersectsOverlapping()
         {
             Sphere3 value = new Sphere3(new Vector3(0, 0, 0), 1);
@@ -16,7 +15,7 @@ namespace Axiverse.Tests.Mathematics
             Assert.IsTrue(value.Intersects(value));
         }
 
-        [TestMethod]
+        [Test]
         public void IntersectsTouching()
         {
             Sphere3 left = new Sphere3(new Vector3(0, 0, 1), 1);
@@ -25,7 +24,7 @@ namespace Axiverse.Tests.Mathematics
             Assert.IsTrue(left.Intersects(right));
         }
 
-        [TestMethod]
+        [Test]
         public void Constructs()
         {
             var position = new Vector3(1, 2, 3);

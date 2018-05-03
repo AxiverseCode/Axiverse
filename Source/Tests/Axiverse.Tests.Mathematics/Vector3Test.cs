@@ -1,15 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Axiverse.Mathematics.Tests
 {
     /// <summary>
     /// Unit tests for <see cref="Vector3"/>.
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class Vector3Test
     {
-        [TestMethod]
+        [Test]
         public void TestIndexerSet()
         {
             Vector3 value = new Vector3();
@@ -23,7 +23,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(value.Z, 3);
         }
 
-        [TestMethod]
+        [Test]
         public void TestIndexerGet()
         {
             Vector3 value = new Vector3(1, 2, 3);
@@ -33,7 +33,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(value[2], 3);
         }
 
-        [TestMethod]
+        [Test]
         public void TestAdd()
         {
             Vector3 a = new Vector3(1, 2, 3);
@@ -51,7 +51,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, v);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSubtract()
         {
             Vector3 a = new Vector3(1, 2, 3);
@@ -69,7 +69,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, v);
         }
 
-        [TestMethod]
+        [Test]
         public void TestComponentMultiply()
         {
             Vector3 a = new Vector3(1, 2, 3);
@@ -85,7 +85,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, u, "Multiply(out r, ref a, ref b)");
         }
 
-        [TestMethod]
+        [Test]
         public void TestScalarMultiply()
         {
             Vector3 a = new Vector3(1, 2, 3);
@@ -107,7 +107,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, z);
         }
 
-        [TestMethod]
+        [Test]
         public void TestComponentDivide()
         {
             Vector3 a = new Vector3(5, 14, 33);
@@ -123,7 +123,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, u, "Divide(out r, ref a, ref b)");
         }
 
-        [TestMethod]
+        [Test]
         public void TestScalarDivide()
         {
             Vector3 a = new Vector3(4, 8, 16);
@@ -148,7 +148,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r1, z);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCrossProduct()
         {
             Vector3 a = new Vector3(-2, 1, 3);
@@ -164,7 +164,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, u, "Cross(out r, ref a, ref b)");
         }
 
-        [TestMethod]
+        [Test]
         public void TestDotProduct()
         {
             Vector3 a = new Vector3(3, 4, 6);

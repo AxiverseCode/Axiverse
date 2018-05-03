@@ -1,15 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Axiverse.Mathematics.Tests
 {
     /// <summary>
     /// Unit tests for <see cref="Quaternion"/>.
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class QuaternionTest
     {
-        [TestMethod]
+        [Test]
         public void TestAdd()
         {
             Quaternion a = new Quaternion(1, 2, 3, 4);
@@ -27,7 +27,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, a);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSubtract()
         {
             Quaternion a = new Quaternion(1, 2, 3, 4);
@@ -45,7 +45,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, a);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMultiply()
         {
             Quaternion a = new Quaternion(2, 5, 4, 3);
@@ -63,7 +63,7 @@ namespace Axiverse.Mathematics.Tests
             Assert.AreEqual(r, a);
         }
 
-        [TestMethod]
+        [Test]
         public void TestConjugate()
         {
             Quaternion a = new Quaternion(1, 2, 3, 4);
@@ -87,7 +87,7 @@ namespace Axiverse.Mathematics.Tests
             Quaternion r = new Quaternion();
         }
 
-        //[TestMethod]
+        //[Test]
         public void TestFromEuler()
         {
             Quaternion a = new Quaternion(2, 3, 4, 1).Normal();

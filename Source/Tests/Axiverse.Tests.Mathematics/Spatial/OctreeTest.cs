@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 using Axiverse.Mathematics;
 using Axiverse.Mathematics.Spatial;
 
 namespace Axiverse.Tests.Mathematics.Spatial
 {
-    [TestClass]
+    [TestFixture]
     public class OctreeTest
     {
-        [TestMethod]
+        [Test]
         public void FindsIntersecting()
         {
             // setup
@@ -26,7 +26,7 @@ namespace Axiverse.Tests.Mathematics.Spatial
             Assert.IsTrue(contains.Count == 1);
         }
 
-        [TestMethod]
+        [Test]
         public void FindsIntersecting2()
         {
             // setup

@@ -7,7 +7,7 @@ import {Button} from './components';
 import styles from './index.css';
 
 ReactDOM.render(
-  //<Admin></Admin>,
-  <Identity></Identity>,
+  <Admin></Admin>,
+  //<Identity></Identity>,
   document.getElementById('root') as HTMLElement
 );

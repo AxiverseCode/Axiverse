@@ -1,5 +1,20 @@
 version: '3'
 services:
+  # Identity Service
+  identity:
+    build:
+      context: ../Source
+      dockerfile: ../Production/identity-service.dockerfile
+    #restart: always
+  # Web Server
+  web:
+    build:
+      context: ../Web
+      dockerfile: ../Production/web.dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+  # Database
   mysql:
     restart: always
     image: mysql:latest
