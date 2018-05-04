@@ -1,5 +1,10 @@
 version: '3'
 services:
+  # Build
+  build:
+    build:
+      context: ../Source
+      dockerfile: ../Production/build.dockerfile
   # Entity Service
   entity:
     build:
