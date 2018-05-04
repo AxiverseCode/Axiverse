@@ -1,0 +1,45 @@
+//
+//
+//
+syntax = "proto3";
+
+option csharp_namespace = "Axiverse.Services.Proto";
+
+service SpatialService {
+
+// place command
+// query location
+	rpc CommandSteering(CommandSteeringRequest) returns (CommandSteeringResponse);
+
+    rpc CommandHeading(CommandHeadingRequest) returns (CommandHeadingResponse);
+
+    rpc GetState(GetStateRequest) returns (GetStateResponse);
+
+    rpc GetLocality(GetLocalityRequest) returns (GetStateResponse);
+}
+
+message Vector3 {
+    float x = 0;
+    float y = 1;
+    float z = 2;
+}
+
+message Quaternion {
+    float x = 0;
+    float y = 1;
+    float z = 2;
+    float w = 3;
+}
+
+message SpatialState {
+    uint64 entity_id = 0;
+    Vector3 position = 1;
+    Vector3 velocity = 2;
+}
+
+message Steering {
+    float pitch = 0;
+    float roll = 1;
+    float yaw = 2;
+    Vector3 thrust = 3; // allow for lateral thrust
+}

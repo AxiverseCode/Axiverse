@@ -1,5 +1,15 @@
 version: '3'
 services:
+  # Entity Service
+  entity:
+    build:
+      context: ../Source
+      dockerfile: ../Production/entity-service.dockerfile
+    env_file:
+      - axiverse.env
+    ports:
+      - "32001:32001"
+    restart: always
   # Identity Service
   identity:
     build:
