@@ -1,0 +1,56 @@
+//
+//
+//
+syntax = "proto3";
+
+option csharp_namespace = "Axiverse.Services.Proto";
+
+service ChatService {
+
+    rpc CreateChannel(CreateChannelRequest) returns (CreateChannelResponse);
+
+    rpc JoinChannel(JoinChannelRequest) returns (JoinChannelResponse);
+
+    rpc Listen(stream ChatEvent) returns (stream ChatEvent);
+}
+
+message CreateChannelRequest {
+
+}
+
+message CreateChannelResponse {
+
+}
+
+message JoinChannelRequest {
+
+}
+
+message JoinChannelResponse {
+
+}
+
+message ChatMessage {
+    string channel = 1;
+    string message = 2;
+}
+
+message ChatNotification {
+    enum NotificationType {
+        UNKNOWN = 0;
+        MessageDelivered = 100;
+        MessageRead = 101;
+
+        UserOnline = 200;
+        UserOffline = 201;
+    }
+
+    string channel = 1;
+}
+
+message ChatEvent {
+    oneof event {
+        ChatMessage message = 1;
+        ChatNotification notification = 2;
+    }
+}

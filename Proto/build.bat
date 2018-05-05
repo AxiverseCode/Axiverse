@@ -6,16 +6,17 @@ grpc_tools_node_protoc \
 
 
 
-..\packages\Grpc.Tools.1.10.0\tools\windows_x86\protoc.exe ^
-	-I..\..\Proto ^
-	--csharp_out . ^
-	--grpc_out . ^
-	..\..\Proto\Admin\AliasService.proto ^
-	..\..\Proto\Admin\IdentityService.proto ^
-	..\..\Proto\Interface\MetricService.proto ^
-	..\..\Proto\AssetService.proto ^
-	..\..\Proto\EntityService.proto ^
-	..\..\Proto\MarketService.proto ^
-	..\..\Proto\ModelService.proto ^
-	..\..\Proto\ResourceService.proto ^
-	--plugin=protoc-gen-grpc=..\..\packages\Grpc.Tools.1.10.0\tools\windows_x86\grpc_csharp_plugin.exe
+..\Source\packages\Grpc.Tools.1.10.0\tools\windows_x86\protoc.exe ^
+	-I. ^
+	--csharp_out ..\Source\Services\Axiverse.Services.Proto\ ^
+	--grpc_out ..\Source\Services\Axiverse.Services.Proto\ ^
+	.\Admin\AliasService.proto ^
+	.\Admin\IdentityService.proto ^
+	.\Infrastructure\MetricService.proto ^
+	.\AssetService.proto ^
+	.\ChatService.proto ^
+	.\EntityService.proto ^
+	.\MarketService.proto ^
+	.\ModelService.proto ^
+	.\ResourceService.proto ^
+	--plugin=protoc-gen-grpc=..\Source\packages\Grpc.Tools.1.10.0\tools\windows_x86\grpc_csharp_plugin.exe

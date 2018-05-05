@@ -22,29 +22,30 @@ namespace Axiverse.Services.Proto {
     static IdentityServiceReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChtBZG1pbi9JZGVudGl0eVNlcnZpY2UucHJvdG8iTAoISWRlbnRpdHkSEgoK",
-            "aWRlbnRpZmllchgBIAEoCRIUCgxkaXNwbGF5X25hbWUYAiABKAkSFgoOZGlz",
-            "cGxheV9udW1iZXIYAyABKAMiNgoXVmFsaWRhdGVJZGVudGl0eVJlcXVlc3QS",
-            "CwoDa2V5GAEgASgJEg4KBnNlY3JldBgCIAEoCSIrChhWYWxpZGF0ZUlkZW50",
-            "aXR5UmVzcG9uc2USDwoHc2Vzc2lvbhgBIAEoCSIXChVDcmVhdGVJZGVudGl0",
-            "eVJlcXVlc3QiGAoWQ3JlYXRlSWRlbnRpdHlSZXNwb25zZSIXChVEZWxldGVJ",
-            "ZGVudGl0eVJlcXVlc3QiGAoWRGVsZXRlSWRlbnRpdHlSZXNwb25zZSIUChJH",
-            "ZXRJZGVudGl0eVJlcXVlc3QiFQoTR2V0SWRlbnRpdHlSZXNwb25zZTKaAgoP",
-            "SWRlbnRpdHlTZXJ2aWNlEkcKEFZhbGlkYXRlSWRlbnRpdHkSGC5WYWxpZGF0",
-            "ZUlkZW50aXR5UmVxdWVzdBoZLlZhbGlkYXRlSWRlbnRpdHlSZXNwb25zZRJB",
-            "Cg5DcmVhdGVJZGVudGl0eRIWLkNyZWF0ZUlkZW50aXR5UmVxdWVzdBoXLkNy",
-            "ZWF0ZUlkZW50aXR5UmVzcG9uc2USQQoORGVsZXRlSWRlbnRpdHkSFi5EZWxl",
-            "dGVJZGVudGl0eVJlcXVlc3QaFy5EZWxldGVJZGVudGl0eVJlc3BvbnNlEjgK",
-            "C0dldElkZW50aXR5EhMuR2V0SWRlbnRpdHlSZXF1ZXN0GhQuR2V0SWRlbnRp",
-            "dHlSZXNwb25zZUIaqgIXQXhpdmVyc2UuU2VydmljZXMuUHJvdG9iBnByb3Rv",
-            "Mw=="));
+            "ChtBZG1pbi9JZGVudGl0eVNlcnZpY2UucHJvdG8iUgoISWRlbnRpdHkSEgoK",
+            "aWRlbnRpZmllchgBIAEoCRINCgVhbGlhcxgCIAEoCRIPCgdzdXJuYW1lGAMg",
+            "ASgJEhIKCmdpdmVuX25hbWUYBCABKAkiOAoXVmFsaWRhdGVJZGVudGl0eVJl",
+            "cXVlc3QSCwoDa2V5GAEgASgJEhAKCHBhc3Njb2RlGAIgASgJIjEKGFZhbGlk",
+            "YXRlSWRlbnRpdHlSZXNwb25zZRIVCg1zZXNzaW9uX3Rva2VuGAEgASgJIkcK",
+            "FUNyZWF0ZUlkZW50aXR5UmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNz",
+            "Y29kZRgCIAEoCRINCgVhbGlhcxgDIAEoCSIYChZDcmVhdGVJZGVudGl0eVJl",
+            "c3BvbnNlIhcKFURlbGV0ZUlkZW50aXR5UmVxdWVzdCIYChZEZWxldGVJZGVu",
+            "dGl0eVJlc3BvbnNlIhQKEkdldElkZW50aXR5UmVxdWVzdCIVChNHZXRJZGVu",
+            "dGl0eVJlc3BvbnNlMpoCCg9JZGVudGl0eVNlcnZpY2USRwoQVmFsaWRhdGVJ",
+            "ZGVudGl0eRIYLlZhbGlkYXRlSWRlbnRpdHlSZXF1ZXN0GhkuVmFsaWRhdGVJ",
+            "ZGVudGl0eVJlc3BvbnNlEkEKDkNyZWF0ZUlkZW50aXR5EhYuQ3JlYXRlSWRl",
+            "bnRpdHlSZXF1ZXN0GhcuQ3JlYXRlSWRlbnRpdHlSZXNwb25zZRJBCg5EZWxl",
+            "dGVJZGVudGl0eRIWLkRlbGV0ZUlkZW50aXR5UmVxdWVzdBoXLkRlbGV0ZUlk",
+            "ZW50aXR5UmVzcG9uc2USOAoLR2V0SWRlbnRpdHkSEy5HZXRJZGVudGl0eVJl",
+            "cXVlc3QaFC5HZXRJZGVudGl0eVJlc3BvbnNlQhqqAhdBeGl2ZXJzZS5TZXJ2",
+            "aWNlcy5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Identity), global::Axiverse.Services.Proto.Identity.Parser, new[]{ "Identifier", "DisplayName", "DisplayNumber" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ValidateIdentityRequest), global::Axiverse.Services.Proto.ValidateIdentityRequest.Parser, new[]{ "Key", "Secret" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ValidateIdentityResponse), global::Axiverse.Services.Proto.ValidateIdentityResponse.Parser, new[]{ "Session" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateIdentityRequest), global::Axiverse.Services.Proto.CreateIdentityRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Identity), global::Axiverse.Services.Proto.Identity.Parser, new[]{ "Identifier", "Alias", "Surname", "GivenName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ValidateIdentityRequest), global::Axiverse.Services.Proto.ValidateIdentityRequest.Parser, new[]{ "Key", "Passcode" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ValidateIdentityResponse), global::Axiverse.Services.Proto.ValidateIdentityResponse.Parser, new[]{ "SessionToken" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateIdentityRequest), global::Axiverse.Services.Proto.CreateIdentityRequest.Parser, new[]{ "Email", "Passcode", "Alias" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateIdentityResponse), global::Axiverse.Services.Proto.CreateIdentityResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteIdentityRequest), global::Axiverse.Services.Proto.DeleteIdentityRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteIdentityResponse), global::Axiverse.Services.Proto.DeleteIdentityResponse.Parser, null, null, null, null),
@@ -84,8 +85,9 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Identity(Identity other) : this() {
       identifier_ = other.identifier_;
-      displayName_ = other.displayName_;
-      displayNumber_ = other.displayNumber_;
+      alias_ = other.alias_;
+      surname_ = other.surname_;
+      givenName_ = other.givenName_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -107,31 +109,42 @@ namespace Axiverse.Services.Proto {
       }
     }
 
-    /// <summary>Field number for the "display_name" field.</summary>
-    public const int DisplayNameFieldNumber = 2;
-    private string displayName_ = "";
+    /// <summary>Field number for the "alias" field.</summary>
+    public const int AliasFieldNumber = 2;
+    private string alias_ = "";
     /// <summary>
     /// The display name which is unique in conjunction with the display number.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string DisplayName {
-      get { return displayName_; }
+    public string Alias {
+      get { return alias_; }
       set {
-        displayName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "display_number" field.</summary>
-    public const int DisplayNumberFieldNumber = 3;
-    private long displayNumber_;
+    /// <summary>Field number for the "surname" field.</summary>
+    public const int SurnameFieldNumber = 3;
+    private string surname_ = "";
     /// <summary>
     /// The display number which is unique in conjunction with the display name.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long DisplayNumber {
-      get { return displayNumber_; }
+    public string Surname {
+      get { return surname_; }
       set {
-        displayNumber_ = value;
+        surname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "given_name" field.</summary>
+    public const int GivenNameFieldNumber = 4;
+    private string givenName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GivenName {
+      get { return givenName_; }
+      set {
+        givenName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -149,8 +162,9 @@ namespace Axiverse.Services.Proto {
         return true;
       }
       if (Identifier != other.Identifier) return false;
-      if (DisplayName != other.DisplayName) return false;
-      if (DisplayNumber != other.DisplayNumber) return false;
+      if (Alias != other.Alias) return false;
+      if (Surname != other.Surname) return false;
+      if (GivenName != other.GivenName) return false;
       return true;
     }
 
@@ -158,8 +172,9 @@ namespace Axiverse.Services.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Identifier.Length != 0) hash ^= Identifier.GetHashCode();
-      if (DisplayName.Length != 0) hash ^= DisplayName.GetHashCode();
-      if (DisplayNumber != 0L) hash ^= DisplayNumber.GetHashCode();
+      if (Alias.Length != 0) hash ^= Alias.GetHashCode();
+      if (Surname.Length != 0) hash ^= Surname.GetHashCode();
+      if (GivenName.Length != 0) hash ^= GivenName.GetHashCode();
       return hash;
     }
 
@@ -174,13 +189,17 @@ namespace Axiverse.Services.Proto {
         output.WriteRawTag(10);
         output.WriteString(Identifier);
       }
-      if (DisplayName.Length != 0) {
+      if (Alias.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(DisplayName);
+        output.WriteString(Alias);
       }
-      if (DisplayNumber != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(DisplayNumber);
+      if (Surname.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Surname);
+      }
+      if (GivenName.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(GivenName);
       }
     }
 
@@ -190,11 +209,14 @@ namespace Axiverse.Services.Proto {
       if (Identifier.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Identifier);
       }
-      if (DisplayName.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(DisplayName);
+      if (Alias.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
       }
-      if (DisplayNumber != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(DisplayNumber);
+      if (Surname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Surname);
+      }
+      if (GivenName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GivenName);
       }
       return size;
     }
@@ -207,11 +229,14 @@ namespace Axiverse.Services.Proto {
       if (other.Identifier.Length != 0) {
         Identifier = other.Identifier;
       }
-      if (other.DisplayName.Length != 0) {
-        DisplayName = other.DisplayName;
+      if (other.Alias.Length != 0) {
+        Alias = other.Alias;
       }
-      if (other.DisplayNumber != 0L) {
-        DisplayNumber = other.DisplayNumber;
+      if (other.Surname.Length != 0) {
+        Surname = other.Surname;
+      }
+      if (other.GivenName.Length != 0) {
+        GivenName = other.GivenName;
       }
     }
 
@@ -228,11 +253,15 @@ namespace Axiverse.Services.Proto {
             break;
           }
           case 18: {
-            DisplayName = input.ReadString();
+            Alias = input.ReadString();
             break;
           }
-          case 24: {
-            DisplayNumber = input.ReadInt64();
+          case 26: {
+            Surname = input.ReadString();
+            break;
+          }
+          case 34: {
+            GivenName = input.ReadString();
             break;
           }
         }
@@ -269,7 +298,7 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ValidateIdentityRequest(ValidateIdentityRequest other) : this() {
       key_ = other.key_;
-      secret_ = other.secret_;
+      passcode_ = other.passcode_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -291,17 +320,17 @@ namespace Axiverse.Services.Proto {
       }
     }
 
-    /// <summary>Field number for the "secret" field.</summary>
-    public const int SecretFieldNumber = 2;
-    private string secret_ = "";
+    /// <summary>Field number for the "passcode" field.</summary>
+    public const int PasscodeFieldNumber = 2;
+    private string passcode_ = "";
     /// <summary>
-    /// The secret used to identify an identity.
+    /// The passcode used to identify an identity.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Secret {
-      get { return secret_; }
+    public string Passcode {
+      get { return passcode_; }
       set {
-        secret_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        passcode_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -319,7 +348,7 @@ namespace Axiverse.Services.Proto {
         return true;
       }
       if (Key != other.Key) return false;
-      if (Secret != other.Secret) return false;
+      if (Passcode != other.Passcode) return false;
       return true;
     }
 
@@ -327,7 +356,7 @@ namespace Axiverse.Services.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Key.Length != 0) hash ^= Key.GetHashCode();
-      if (Secret.Length != 0) hash ^= Secret.GetHashCode();
+      if (Passcode.Length != 0) hash ^= Passcode.GetHashCode();
       return hash;
     }
 
@@ -342,9 +371,9 @@ namespace Axiverse.Services.Proto {
         output.WriteRawTag(10);
         output.WriteString(Key);
       }
-      if (Secret.Length != 0) {
+      if (Passcode.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(Secret);
+        output.WriteString(Passcode);
       }
     }
 
@@ -354,8 +383,8 @@ namespace Axiverse.Services.Proto {
       if (Key.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
       }
-      if (Secret.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Secret);
+      if (Passcode.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Passcode);
       }
       return size;
     }
@@ -368,8 +397,8 @@ namespace Axiverse.Services.Proto {
       if (other.Key.Length != 0) {
         Key = other.Key;
       }
-      if (other.Secret.Length != 0) {
-        Secret = other.Secret;
+      if (other.Passcode.Length != 0) {
+        Passcode = other.Passcode;
       }
     }
 
@@ -386,7 +415,7 @@ namespace Axiverse.Services.Proto {
             break;
           }
           case 18: {
-            Secret = input.ReadString();
+            Passcode = input.ReadString();
             break;
           }
         }
@@ -422,7 +451,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ValidateIdentityResponse(ValidateIdentityResponse other) : this() {
-      session_ = other.session_;
+      sessionToken_ = other.sessionToken_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -430,14 +459,14 @@ namespace Axiverse.Services.Proto {
       return new ValidateIdentityResponse(this);
     }
 
-    /// <summary>Field number for the "session" field.</summary>
-    public const int SessionFieldNumber = 1;
-    private string session_ = "";
+    /// <summary>Field number for the "session_token" field.</summary>
+    public const int SessionTokenFieldNumber = 1;
+    private string sessionToken_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Session {
-      get { return session_; }
+    public string SessionToken {
+      get { return sessionToken_; }
       set {
-        session_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        sessionToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -454,14 +483,14 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Session != other.Session) return false;
+      if (SessionToken != other.SessionToken) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Session.Length != 0) hash ^= Session.GetHashCode();
+      if (SessionToken.Length != 0) hash ^= SessionToken.GetHashCode();
       return hash;
     }
 
@@ -472,17 +501,17 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Session.Length != 0) {
+      if (SessionToken.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Session);
+        output.WriteString(SessionToken);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Session.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Session);
+      if (SessionToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionToken);
       }
       return size;
     }
@@ -492,8 +521,8 @@ namespace Axiverse.Services.Proto {
       if (other == null) {
         return;
       }
-      if (other.Session.Length != 0) {
-        Session = other.Session;
+      if (other.SessionToken.Length != 0) {
+        SessionToken = other.SessionToken;
       }
     }
 
@@ -506,7 +535,7 @@ namespace Axiverse.Services.Proto {
             input.SkipLastField();
             break;
           case 10: {
-            Session = input.ReadString();
+            SessionToken = input.ReadString();
             break;
           }
         }
@@ -539,11 +568,47 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public CreateIdentityRequest(CreateIdentityRequest other) : this() {
+      email_ = other.email_;
+      passcode_ = other.passcode_;
+      alias_ = other.alias_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public CreateIdentityRequest Clone() {
       return new CreateIdentityRequest(this);
+    }
+
+    /// <summary>Field number for the "email" field.</summary>
+    public const int EmailFieldNumber = 1;
+    private string email_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Email {
+      get { return email_; }
+      set {
+        email_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "passcode" field.</summary>
+    public const int PasscodeFieldNumber = 2;
+    private string passcode_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Passcode {
+      get { return passcode_; }
+      set {
+        passcode_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "alias" field.</summary>
+    public const int AliasFieldNumber = 3;
+    private string alias_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Alias {
+      get { return alias_; }
+      set {
+        alias_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -559,12 +624,18 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Email != other.Email) return false;
+      if (Passcode != other.Passcode) return false;
+      if (Alias != other.Alias) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Email.Length != 0) hash ^= Email.GetHashCode();
+      if (Passcode.Length != 0) hash ^= Passcode.GetHashCode();
+      if (Alias.Length != 0) hash ^= Alias.GetHashCode();
       return hash;
     }
 
@@ -575,11 +646,32 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Email.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Email);
+      }
+      if (Passcode.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Passcode);
+      }
+      if (Alias.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Alias);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Email.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
+      }
+      if (Passcode.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Passcode);
+      }
+      if (Alias.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
+      }
       return size;
     }
 
@@ -587,6 +679,15 @@ namespace Axiverse.Services.Proto {
     public void MergeFrom(CreateIdentityRequest other) {
       if (other == null) {
         return;
+      }
+      if (other.Email.Length != 0) {
+        Email = other.Email;
+      }
+      if (other.Passcode.Length != 0) {
+        Passcode = other.Passcode;
+      }
+      if (other.Alias.Length != 0) {
+        Alias = other.Alias;
       }
     }
 
@@ -598,6 +699,18 @@ namespace Axiverse.Services.Proto {
           default:
             input.SkipLastField();
             break;
+          case 10: {
+            Email = input.ReadString();
+            break;
+          }
+          case 18: {
+            Passcode = input.ReadString();
+            break;
+          }
+          case 26: {
+            Alias = input.ReadString();
+            break;
+          }
         }
       }
     }

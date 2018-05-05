@@ -12,10 +12,12 @@ message Identity {
 	string identifier = 1;
 
 	// The display name which is unique in conjunction with the display number.
-	string display_name = 2;
+	string alias = 2;
 
 	// The display number which is unique in conjunction with the display name.
-	int64 display_number = 3;
+	string surname = 3;
+
+	string given_name = 4; 
 
 }
 
@@ -33,24 +35,26 @@ service IdentityService {
 
 // Request for validating identity.
 message ValidateIdentityRequest {
-
 	// The key used to identify an identity.
 	string key = 1;
 
-	// The secret used to identify an identity.
-	string secret = 2;
-
+	// The passcode used to identify an identity.
+	string passcode = 2;
 }
 
 // Response for validating identity.
 message ValidateIdentityResponse {
+	string session_token = 1;
 
-	string session = 1;
-
+	// repeated LoginAttempt failed_attempts;
 }
 
 message CreateIdentityRequest {
+	string email = 1;
 
+	string passcode = 2;
+
+	string alias = 3;
 }
 
 message CreateIdentityResponse {
