@@ -56,7 +56,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Simulation", "Libr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Services.EntityService", "Services\Axiverse.Services.EntityService\Axiverse.Services.EntityService.csproj", "{21503EE2-6EB3-425E-A0AC-DC8B892D96F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Services.ChatService", "Axiverse.Services.ChatService\Axiverse.Services.ChatService.csproj", "{6E30AC56-43A5-4D2A-BB9B-CD259EDA7591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Services.ChatService", "Services\Axiverse.Services.ChatService\Axiverse.Services.ChatService.csproj", "{6E30AC56-43A5-4D2A-BB9B-CD259EDA7591}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

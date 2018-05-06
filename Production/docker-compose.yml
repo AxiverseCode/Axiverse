@@ -29,7 +29,7 @@ services:
   identity:
     build:
       context: ../Source
-      dockerfile: ../Production/entity-identity.dockerfile
+      dockerfile: ../Production/service-identity.dockerfile
     env_file:
       - axiverse.env
     ports:

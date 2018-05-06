@@ -16,7 +16,7 @@ namespace Axiverse.Services.IdentityService
             Console.WriteLine("Validating Identity");
             var response = new ValidateIdentityResponse
             {
-                Session = "Hello World"
+                SessionToken = "Hello World"
             };
 
             return Task.FromResult(response);

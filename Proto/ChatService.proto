@@ -11,7 +11,9 @@ service ChatService {
 
     rpc JoinChannel(JoinChannelRequest) returns (JoinChannelResponse);
 
-    rpc Listen(stream ChatEvent) returns (stream ChatEvent);
+    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+
+    rpc Listen(stream ListenRequest) returns (stream ListenResponse);
 }
 
 message CreateChannelRequest {
@@ -30,9 +32,20 @@ message JoinChannelResponse {
 
 }
 
+message SendMessageRequest {
+    string channel = 1;
+    string message = 2;
+    string session_token = 3;    
+}
+
+message SendMessageResponse {
+    uint64 message_id = 1;
+}
+
 message ChatMessage {
     string channel = 1;
     string message = 2;
+    uint64 message_id = 3;
 }
 
 message ChatNotification {
@@ -46,9 +59,17 @@ message ChatNotification {
     }
 
     string channel = 1;
+    uint64 message_id = 2;
 }
 
-message ChatEvent {
+message ListenRequest {
+    string command = 1;
+    repeated string channels = 2;
+    
+    string session_token = 3;
+}
+
+message ListenResponse {
     oneof event {
         ChatMessage message = 1;
         ChatNotification notification = 2;

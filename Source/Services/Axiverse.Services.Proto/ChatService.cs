@@ -24,18 +24,25 @@ namespace Axiverse.Services.Proto {
           string.Concat(
             "ChFDaGF0U2VydmljZS5wcm90byIWChRDcmVhdGVDaGFubmVsUmVxdWVzdCIX",
             "ChVDcmVhdGVDaGFubmVsUmVzcG9uc2UiFAoSSm9pbkNoYW5uZWxSZXF1ZXN0",
-            "IhUKE0pvaW5DaGFubmVsUmVzcG9uc2UiLwoLQ2hhdE1lc3NhZ2USDwoHY2hh",
-            "bm5lbBgBIAEoCRIPCgdtZXNzYWdlGAIgASgJIo4BChBDaGF0Tm90aWZpY2F0",
-            "aW9uEg8KB2NoYW5uZWwYASABKAkiaQoQTm90aWZpY2F0aW9uVHlwZRILCgdV",
-            "TktOT1dOEAASFAoQTWVzc2FnZURlbGl2ZXJlZBBkEg8KC01lc3NhZ2VSZWFk",
-            "EGUSDwoKVXNlck9ubGluZRDIARIQCgtVc2VyT2ZmbGluZRDJASJgCglDaGF0",
-            "RXZlbnQSHwoHbWVzc2FnZRgBIAEoCzIMLkNoYXRNZXNzYWdlSAASKQoMbm90",
-            "aWZpY2F0aW9uGAIgASgLMhEuQ2hhdE5vdGlmaWNhdGlvbkgAQgcKBWV2ZW50",
-            "Mq0BCgtDaGF0U2VydmljZRI+Cg1DcmVhdGVDaGFubmVsEhUuQ3JlYXRlQ2hh",
-            "bm5lbFJlcXVlc3QaFi5DcmVhdGVDaGFubmVsUmVzcG9uc2USOAoLSm9pbkNo",
-            "YW5uZWwSEy5Kb2luQ2hhbm5lbFJlcXVlc3QaFC5Kb2luQ2hhbm5lbFJlc3Bv",
-            "bnNlEiQKBkxpc3RlbhIKLkNoYXRFdmVudBoKLkNoYXRFdmVudCgBMAFCGqoC",
-            "F0F4aXZlcnNlLlNlcnZpY2VzLlByb3RvYgZwcm90bzM="));
+            "IhUKE0pvaW5DaGFubmVsUmVzcG9uc2UiTQoSU2VuZE1lc3NhZ2VSZXF1ZXN0",
+            "Eg8KB2NoYW5uZWwYASABKAkSDwoHbWVzc2FnZRgCIAEoCRIVCg1zZXNzaW9u",
+            "X3Rva2VuGAMgASgJIikKE1NlbmRNZXNzYWdlUmVzcG9uc2USEgoKbWVzc2Fn",
+            "ZV9pZBgBIAEoBCJDCgtDaGF0TWVzc2FnZRIPCgdjaGFubmVsGAEgASgJEg8K",
+            "B21lc3NhZ2UYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoBCKiAQoQQ2hhdE5v",
+            "dGlmaWNhdGlvbhIPCgdjaGFubmVsGAEgASgJEhIKCm1lc3NhZ2VfaWQYAiAB",
+            "KAQiaQoQTm90aWZpY2F0aW9uVHlwZRILCgdVTktOT1dOEAASFAoQTWVzc2Fn",
+            "ZURlbGl2ZXJlZBBkEg8KC01lc3NhZ2VSZWFkEGUSDwoKVXNlck9ubGluZRDI",
+            "ARIQCgtVc2VyT2ZmbGluZRDJASJJCg1MaXN0ZW5SZXF1ZXN0Eg8KB2NvbW1h",
+            "bmQYASABKAkSEAoIY2hhbm5lbHMYAiADKAkSFQoNc2Vzc2lvbl90b2tlbhgD",
+            "IAEoCSJlCg5MaXN0ZW5SZXNwb25zZRIfCgdtZXNzYWdlGAEgASgLMgwuQ2hh",
+            "dE1lc3NhZ2VIABIpCgxub3RpZmljYXRpb24YAiABKAsyES5DaGF0Tm90aWZp",
+            "Y2F0aW9uSABCBwoFZXZlbnQy8AEKC0NoYXRTZXJ2aWNlEj4KDUNyZWF0ZUNo",
+            "YW5uZWwSFS5DcmVhdGVDaGFubmVsUmVxdWVzdBoWLkNyZWF0ZUNoYW5uZWxS",
+            "ZXNwb25zZRI4CgtKb2luQ2hhbm5lbBITLkpvaW5DaGFubmVsUmVxdWVzdBoU",
+            "LkpvaW5DaGFubmVsUmVzcG9uc2USOAoLU2VuZE1lc3NhZ2USEy5TZW5kTWVz",
+            "c2FnZVJlcXVlc3QaFC5TZW5kTWVzc2FnZVJlc3BvbnNlEi0KBkxpc3RlbhIO",
+            "Lkxpc3RlblJlcXVlc3QaDy5MaXN0ZW5SZXNwb25zZSgBMAFCGqoCF0F4aXZl",
+            "cnNlLlNlcnZpY2VzLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -43,9 +50,12 @@ namespace Axiverse.Services.Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateChannelResponse), global::Axiverse.Services.Proto.CreateChannelResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.JoinChannelRequest), global::Axiverse.Services.Proto.JoinChannelRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.JoinChannelResponse), global::Axiverse.Services.Proto.JoinChannelResponse.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ChatMessage), global::Axiverse.Services.Proto.ChatMessage.Parser, new[]{ "Channel", "Message" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ChatNotification), global::Axiverse.Services.Proto.ChatNotification.Parser, new[]{ "Channel" }, null, new[]{ typeof(global::Axiverse.Services.Proto.ChatNotification.Types.NotificationType) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ChatEvent), global::Axiverse.Services.Proto.ChatEvent.Parser, new[]{ "Message", "Notification" }, new[]{ "Event" }, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.SendMessageRequest), global::Axiverse.Services.Proto.SendMessageRequest.Parser, new[]{ "Channel", "Message", "SessionToken" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.SendMessageResponse), global::Axiverse.Services.Proto.SendMessageResponse.Parser, new[]{ "MessageId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ChatMessage), global::Axiverse.Services.Proto.ChatMessage.Parser, new[]{ "Channel", "Message", "MessageId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ChatNotification), global::Axiverse.Services.Proto.ChatNotification.Parser, new[]{ "Channel", "MessageId" }, null, new[]{ typeof(global::Axiverse.Services.Proto.ChatNotification.Types.NotificationType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ListenRequest), global::Axiverse.Services.Proto.ListenRequest.Parser, new[]{ "Command", "Channels", "SessionToken" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ListenResponse), global::Axiverse.Services.Proto.ListenResponse.Parser, new[]{ "Message", "Notification" }, new[]{ "Event" }, null, null)
           }));
     }
     #endregion
@@ -408,6 +418,296 @@ namespace Axiverse.Services.Proto {
 
   }
 
+  public sealed partial class SendMessageRequest : pb::IMessage<SendMessageRequest> {
+    private static readonly pb::MessageParser<SendMessageRequest> _parser = new pb::MessageParser<SendMessageRequest>(() => new SendMessageRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SendMessageRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendMessageRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendMessageRequest(SendMessageRequest other) : this() {
+      channel_ = other.channel_;
+      message_ = other.message_;
+      sessionToken_ = other.sessionToken_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendMessageRequest Clone() {
+      return new SendMessageRequest(this);
+    }
+
+    /// <summary>Field number for the "channel" field.</summary>
+    public const int ChannelFieldNumber = 1;
+    private string channel_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Channel {
+      get { return channel_; }
+      set {
+        channel_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 2;
+    private string message_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "session_token" field.</summary>
+    public const int SessionTokenFieldNumber = 3;
+    private string sessionToken_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SessionToken {
+      get { return sessionToken_; }
+      set {
+        sessionToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SendMessageRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SendMessageRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Channel != other.Channel) return false;
+      if (Message != other.Message) return false;
+      if (SessionToken != other.SessionToken) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Channel.Length != 0) hash ^= Channel.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (SessionToken.Length != 0) hash ^= SessionToken.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Channel.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Channel);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
+      if (SessionToken.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(SessionToken);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Channel.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Channel);
+      }
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (SessionToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionToken);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SendMessageRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Channel.Length != 0) {
+        Channel = other.Channel;
+      }
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      if (other.SessionToken.Length != 0) {
+        SessionToken = other.SessionToken;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Channel = input.ReadString();
+            break;
+          }
+          case 18: {
+            Message = input.ReadString();
+            break;
+          }
+          case 26: {
+            SessionToken = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SendMessageResponse : pb::IMessage<SendMessageResponse> {
+    private static readonly pb::MessageParser<SendMessageResponse> _parser = new pb::MessageParser<SendMessageResponse>(() => new SendMessageResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SendMessageResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendMessageResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendMessageResponse(SendMessageResponse other) : this() {
+      messageId_ = other.messageId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendMessageResponse Clone() {
+      return new SendMessageResponse(this);
+    }
+
+    /// <summary>Field number for the "message_id" field.</summary>
+    public const int MessageIdFieldNumber = 1;
+    private ulong messageId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MessageId {
+      get { return messageId_; }
+      set {
+        messageId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SendMessageResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SendMessageResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MessageId != other.MessageId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MessageId != 0UL) hash ^= MessageId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MessageId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(MessageId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MessageId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MessageId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SendMessageResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MessageId != 0UL) {
+        MessageId = other.MessageId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            MessageId = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ChatMessage : pb::IMessage<ChatMessage> {
     private static readonly pb::MessageParser<ChatMessage> _parser = new pb::MessageParser<ChatMessage>(() => new ChatMessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -415,7 +715,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -434,6 +734,7 @@ namespace Axiverse.Services.Proto {
     public ChatMessage(ChatMessage other) : this() {
       channel_ = other.channel_;
       message_ = other.message_;
+      messageId_ = other.messageId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -463,6 +764,17 @@ namespace Axiverse.Services.Proto {
       }
     }
 
+    /// <summary>Field number for the "message_id" field.</summary>
+    public const int MessageIdFieldNumber = 3;
+    private ulong messageId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MessageId {
+      get { return messageId_; }
+      set {
+        messageId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ChatMessage);
@@ -478,6 +790,7 @@ namespace Axiverse.Services.Proto {
       }
       if (Channel != other.Channel) return false;
       if (Message != other.Message) return false;
+      if (MessageId != other.MessageId) return false;
       return true;
     }
 
@@ -486,6 +799,7 @@ namespace Axiverse.Services.Proto {
       int hash = 1;
       if (Channel.Length != 0) hash ^= Channel.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (MessageId != 0UL) hash ^= MessageId.GetHashCode();
       return hash;
     }
 
@@ -504,6 +818,10 @@ namespace Axiverse.Services.Proto {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
+      if (MessageId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(MessageId);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -514,6 +832,9 @@ namespace Axiverse.Services.Proto {
       }
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (MessageId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MessageId);
       }
       return size;
     }
@@ -528,6 +849,9 @@ namespace Axiverse.Services.Proto {
       }
       if (other.Message.Length != 0) {
         Message = other.Message;
+      }
+      if (other.MessageId != 0UL) {
+        MessageId = other.MessageId;
       }
     }
 
@@ -547,6 +871,10 @@ namespace Axiverse.Services.Proto {
             Message = input.ReadString();
             break;
           }
+          case 24: {
+            MessageId = input.ReadUInt64();
+            break;
+          }
         }
       }
     }
@@ -560,7 +888,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -578,6 +906,7 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ChatNotification(ChatNotification other) : this() {
       channel_ = other.channel_;
+      messageId_ = other.messageId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -596,6 +925,17 @@ namespace Axiverse.Services.Proto {
       }
     }
 
+    /// <summary>Field number for the "message_id" field.</summary>
+    public const int MessageIdFieldNumber = 2;
+    private ulong messageId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MessageId {
+      get { return messageId_; }
+      set {
+        messageId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ChatNotification);
@@ -610,6 +950,7 @@ namespace Axiverse.Services.Proto {
         return true;
       }
       if (Channel != other.Channel) return false;
+      if (MessageId != other.MessageId) return false;
       return true;
     }
 
@@ -617,6 +958,7 @@ namespace Axiverse.Services.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Channel.Length != 0) hash ^= Channel.GetHashCode();
+      if (MessageId != 0UL) hash ^= MessageId.GetHashCode();
       return hash;
     }
 
@@ -631,6 +973,10 @@ namespace Axiverse.Services.Proto {
         output.WriteRawTag(10);
         output.WriteString(Channel);
       }
+      if (MessageId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(MessageId);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -638,6 +984,9 @@ namespace Axiverse.Services.Proto {
       int size = 0;
       if (Channel.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Channel);
+      }
+      if (MessageId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MessageId);
       }
       return size;
     }
@@ -649,6 +998,9 @@ namespace Axiverse.Services.Proto {
       }
       if (other.Channel.Length != 0) {
         Channel = other.Channel;
+      }
+      if (other.MessageId != 0UL) {
+        MessageId = other.MessageId;
       }
     }
 
@@ -662,6 +1014,10 @@ namespace Axiverse.Services.Proto {
             break;
           case 10: {
             Channel = input.ReadString();
+            break;
+          }
+          case 16: {
+            MessageId = input.ReadUInt64();
             break;
           }
         }
@@ -685,14 +1041,14 @@ namespace Axiverse.Services.Proto {
 
   }
 
-  public sealed partial class ChatEvent : pb::IMessage<ChatEvent> {
-    private static readonly pb::MessageParser<ChatEvent> _parser = new pb::MessageParser<ChatEvent>(() => new ChatEvent());
+  public sealed partial class ListenRequest : pb::IMessage<ListenRequest> {
+    private static readonly pb::MessageParser<ListenRequest> _parser = new pb::MessageParser<ListenRequest>(() => new ListenRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ChatEvent> Parser { get { return _parser; } }
+    public static pb::MessageParser<ListenRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -701,14 +1057,179 @@ namespace Axiverse.Services.Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ChatEvent() {
+    public ListenRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ChatEvent(ChatEvent other) : this() {
+    public ListenRequest(ListenRequest other) : this() {
+      command_ = other.command_;
+      channels_ = other.channels_.Clone();
+      sessionToken_ = other.sessionToken_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListenRequest Clone() {
+      return new ListenRequest(this);
+    }
+
+    /// <summary>Field number for the "command" field.</summary>
+    public const int CommandFieldNumber = 1;
+    private string command_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Command {
+      get { return command_; }
+      set {
+        command_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "channels" field.</summary>
+    public const int ChannelsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_channels_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> channels_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> Channels {
+      get { return channels_; }
+    }
+
+    /// <summary>Field number for the "session_token" field.</summary>
+    public const int SessionTokenFieldNumber = 3;
+    private string sessionToken_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SessionToken {
+      get { return sessionToken_; }
+      set {
+        sessionToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListenRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListenRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Command != other.Command) return false;
+      if(!channels_.Equals(other.channels_)) return false;
+      if (SessionToken != other.SessionToken) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Command.Length != 0) hash ^= Command.GetHashCode();
+      hash ^= channels_.GetHashCode();
+      if (SessionToken.Length != 0) hash ^= SessionToken.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Command.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Command);
+      }
+      channels_.WriteTo(output, _repeated_channels_codec);
+      if (SessionToken.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(SessionToken);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Command.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Command);
+      }
+      size += channels_.CalculateSize(_repeated_channels_codec);
+      if (SessionToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionToken);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListenRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Command.Length != 0) {
+        Command = other.Command;
+      }
+      channels_.Add(other.channels_);
+      if (other.SessionToken.Length != 0) {
+        SessionToken = other.SessionToken;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Command = input.ReadString();
+            break;
+          }
+          case 18: {
+            channels_.AddEntriesFrom(input, _repeated_channels_codec);
+            break;
+          }
+          case 26: {
+            SessionToken = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ListenResponse : pb::IMessage<ListenResponse> {
+    private static readonly pb::MessageParser<ListenResponse> _parser = new pb::MessageParser<ListenResponse>(() => new ListenResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListenResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.ChatServiceReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListenResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListenResponse(ListenResponse other) : this() {
       switch (other.EventCase) {
         case EventOneofCase.Message:
           Message = other.Message.Clone();
@@ -721,8 +1242,8 @@ namespace Axiverse.Services.Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ChatEvent Clone() {
-      return new ChatEvent(this);
+    public ListenResponse Clone() {
+      return new ListenResponse(this);
     }
 
     /// <summary>Field number for the "message" field.</summary>
@@ -768,11 +1289,11 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as ChatEvent);
+      return Equals(other as ListenResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ChatEvent other) {
+    public bool Equals(ListenResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -824,7 +1345,7 @@ namespace Axiverse.Services.Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ChatEvent other) {
+    public void MergeFrom(ListenResponse other) {
       if (other == null) {
         return;
       }

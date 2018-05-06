@@ -35,12 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.1.11.0\lib\net45\Grpc.Core.dll</HintPath>
+      <HintPath>..\..\packages\Grpc.Core.1.11.0\lib\net45\Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+      <HintPath>..\..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,17 +59,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Services\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
+    <ProjectReference Include="..\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
       <Project>{d5acdebb-41eb-4286-b5e3-34506daaa001}</Project>
       <Name>Axiverse.Services.Proto</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets')" />
+  <Import Project="..\..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets" Condition="Exists('..\..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Grpc.Core.1.11.0\build\net45\Grpc.Core.targets'))" />
   </Target>
 </Project>

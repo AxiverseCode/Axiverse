@@ -23,7 +23,10 @@ namespace Axiverse.Services.Proto {
     static readonly grpc::Marshaller<global::Axiverse.Services.Proto.CreateChannelResponse> __Marshaller_CreateChannelResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.CreateChannelResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Axiverse.Services.Proto.JoinChannelRequest> __Marshaller_JoinChannelRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.JoinChannelRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Axiverse.Services.Proto.JoinChannelResponse> __Marshaller_JoinChannelResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.JoinChannelResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ChatEvent> __Marshaller_ChatEvent = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ChatEvent.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.SendMessageRequest> __Marshaller_SendMessageRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.SendMessageRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.SendMessageResponse> __Marshaller_SendMessageResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.SendMessageResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ListenRequest> __Marshaller_ListenRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ListenRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ListenResponse> __Marshaller_ListenResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ListenResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Axiverse.Services.Proto.CreateChannelRequest, global::Axiverse.Services.Proto.CreateChannelResponse> __Method_CreateChannel = new grpc::Method<global::Axiverse.Services.Proto.CreateChannelRequest, global::Axiverse.Services.Proto.CreateChannelResponse>(
         grpc::MethodType.Unary,
@@ -39,12 +42,19 @@ namespace Axiverse.Services.Proto {
         __Marshaller_JoinChannelRequest,
         __Marshaller_JoinChannelResponse);
 
-    static readonly grpc::Method<global::Axiverse.Services.Proto.ChatEvent, global::Axiverse.Services.Proto.ChatEvent> __Method_Listen = new grpc::Method<global::Axiverse.Services.Proto.ChatEvent, global::Axiverse.Services.Proto.ChatEvent>(
+    static readonly grpc::Method<global::Axiverse.Services.Proto.SendMessageRequest, global::Axiverse.Services.Proto.SendMessageResponse> __Method_SendMessage = new grpc::Method<global::Axiverse.Services.Proto.SendMessageRequest, global::Axiverse.Services.Proto.SendMessageResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SendMessage",
+        __Marshaller_SendMessageRequest,
+        __Marshaller_SendMessageResponse);
+
+    static readonly grpc::Method<global::Axiverse.Services.Proto.ListenRequest, global::Axiverse.Services.Proto.ListenResponse> __Method_Listen = new grpc::Method<global::Axiverse.Services.Proto.ListenRequest, global::Axiverse.Services.Proto.ListenResponse>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "Listen",
-        __Marshaller_ChatEvent,
-        __Marshaller_ChatEvent);
+        __Marshaller_ListenRequest,
+        __Marshaller_ListenResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -65,7 +75,12 @@ namespace Axiverse.Services.Proto {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task Listen(grpc::IAsyncStreamReader<global::Axiverse.Services.Proto.ChatEvent> requestStream, grpc::IServerStreamWriter<global::Axiverse.Services.Proto.ChatEvent> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.SendMessageResponse> SendMessage(global::Axiverse.Services.Proto.SendMessageRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task Listen(grpc::IAsyncStreamReader<global::Axiverse.Services.Proto.ListenRequest> requestStream, grpc::IServerStreamWriter<global::Axiverse.Services.Proto.ListenResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -127,11 +142,27 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_JoinChannel, null, options, request);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Axiverse.Services.Proto.ChatEvent, global::Axiverse.Services.Proto.ChatEvent> Listen(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.SendMessageResponse SendMessage(global::Axiverse.Services.Proto.SendMessageRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return SendMessage(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Axiverse.Services.Proto.SendMessageResponse SendMessage(global::Axiverse.Services.Proto.SendMessageRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SendMessage, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.SendMessageResponse> SendMessageAsync(global::Axiverse.Services.Proto.SendMessageRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return SendMessageAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.SendMessageResponse> SendMessageAsync(global::Axiverse.Services.Proto.SendMessageRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SendMessage, null, options, request);
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Axiverse.Services.Proto.ListenRequest, global::Axiverse.Services.Proto.ListenResponse> Listen(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return Listen(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Axiverse.Services.Proto.ChatEvent, global::Axiverse.Services.Proto.ChatEvent> Listen(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Axiverse.Services.Proto.ListenRequest, global::Axiverse.Services.Proto.ListenResponse> Listen(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_Listen, null, options);
       }
@@ -149,6 +180,7 @@ namespace Axiverse.Services.Proto {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_CreateChannel, serviceImpl.CreateChannel)
           .AddMethod(__Method_JoinChannel, serviceImpl.JoinChannel)
+          .AddMethod(__Method_SendMessage, serviceImpl.SendMessage)
           .AddMethod(__Method_Listen, serviceImpl.Listen).Build();
     }
 
