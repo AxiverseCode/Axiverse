@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,15 +12,32 @@ namespace Axiverse.Services.IdentityService
 {
     public class IdentityServiceImpl : Proto.IdentityService.IdentityServiceBase
     {
+        private ConcurrentDictionary<string, Identity> users = new ConcurrentDictionary<string, Identity>();
+
         public override Task<ValidateIdentityResponse> ValidateIdentity(ValidateIdentityRequest request, ServerCallContext context)
         {
             Console.WriteLine("Validating Identity");
-            var response = new ValidateIdentityResponse
-            {
-                SessionToken = "Hello World"
-            };
 
-            return Task.FromResult(response);
+            if (users.TryGetValue(request.Key, out var identity))
+            {
+                if (identity.Verify(request.Passcode))
+                {
+                    // passed, assign session
+                    return Task.FromResult(new ValidateIdentityResponse { SessionToken = "pass" });
+                }
+                else
+                {
+                    return Task.FromResult(new ValidateIdentityResponse { SessionToken = "invalid" });
+                }
+            }
+
+            identity = new Identity(request.Key, request.Passcode);
+            if (users.TryAdd(request.Key, identity))
+            {
+                return Task.FromResult(new ValidateIdentityResponse { SessionToken = "created" });
+            }
+
+            return Task.FromResult(new ValidateIdentityResponse { SessionToken = "server error" });
         }
 
         public override Task<GetIdentityResponse> GetIdentity(GetIdentityRequest request, ServerCallContext context)

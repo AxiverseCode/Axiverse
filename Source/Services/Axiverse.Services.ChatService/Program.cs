@@ -20,21 +20,23 @@ namespace Axiverse.Services.ChatService
             {
                 Port = 32002;
             }
+            if (Port == 0) Port = 32002;
 
             Server server = new Server
             {
                 Services = { Proto.ChatService.BindService(new ChatServiceImpl()) },
                 Ports = { new ServerPort("0.0.0.0", Port, ServerCredentials.Insecure) }
+                //Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();
 
-            Console.WriteLine("EntityService server listening on port " + Port);
+            Console.WriteLine("ChatService server listening on port " + Port);
             Console.WriteLine("Press any key to stop the server...");
 
             Console.CancelKeyPress += (sender, e) => end.Set();
             end.WaitOne();
 
-            Console.WriteLine("Shutting down EntityService");
+            Console.WriteLine("Shutting down ChatService");
 
             server.ShutdownAsync().Wait();
         }

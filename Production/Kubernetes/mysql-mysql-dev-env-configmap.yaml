@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  MYSQL_PASS: devpassword
+  MYSQL_ROOT_PASSWORD: rootpassword
+  MYSQL_USER: devuser
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mysql-mysql-dev-env
+  name: mysql-mysql-dev-env
