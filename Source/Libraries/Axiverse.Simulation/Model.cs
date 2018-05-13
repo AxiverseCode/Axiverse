@@ -19,7 +19,7 @@ namespace Axiverse.Simulation
         // inputs
         public void Process(Entity entity)
         {
-
+            entity.Spatial.Position = Functions.Random.NextVector3() * 100;
         }
 
         // intermediates

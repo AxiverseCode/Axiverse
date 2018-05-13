@@ -60,6 +60,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Utilities.Cli", "U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries - Client", "Libraries - Client", "{F3210600-0254-4B9E-93F2-78820B9C3FE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Symbolics", "Libraries\Axiverse.Mathematics.Symbolics\Axiverse.Mathematics.Symbolics.csproj", "{91B354D2-62AE-46F7-9D52-FE84E568E1C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Numerics", "Libraries\Axiverse.Mathematics.Numerics\Axiverse.Mathematics.Numerics.csproj", "{778BF63B-456A-4F5B-8057-487F5A053006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Code", "Libraries\Axiverse.Code\Axiverse.Code.csproj", "{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +156,18 @@ Global
 		{594D60D7-15AF-4CB3-BEEB-1017E624D08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{594D60D7-15AF-4CB3-BEEB-1017E624D08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{594D60D7-15AF-4CB3-BEEB-1017E624D08C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B354D2-62AE-46F7-9D52-FE84E568E1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B354D2-62AE-46F7-9D52-FE84E568E1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B354D2-62AE-46F7-9D52-FE84E568E1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B354D2-62AE-46F7-9D52-FE84E568E1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{778BF63B-456A-4F5B-8057-487F5A053006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{778BF63B-456A-4F5B-8057-487F5A053006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{778BF63B-456A-4F5B-8057-487F5A053006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{778BF63B-456A-4F5B-8057-487F5A053006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +194,9 @@ Global
 		{21503EE2-6EB3-425E-A0AC-DC8B892D96F6} = {E0C0FCA7-0649-4401-847A-46F2D5104DB9}
 		{6E30AC56-43A5-4D2A-BB9B-CD259EDA7591} = {E0C0FCA7-0649-4401-847A-46F2D5104DB9}
 		{594D60D7-15AF-4CB3-BEEB-1017E624D08C} = {F3447404-FFFF-4649-8407-DEBC6370C676}
+		{91B354D2-62AE-46F7-9D52-FE84E568E1C5} = {AAE6C854-9031-4394-9995-EE38B6088F37}
+		{778BF63B-456A-4F5B-8057-487F5A053006} = {AAE6C854-9031-4394-9995-EE38B6088F37}
+		{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A} = {AAE6C854-9031-4394-9995-EE38B6088F37}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

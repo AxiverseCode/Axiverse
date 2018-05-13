@@ -54,6 +54,7 @@ namespace Axiverse.Simulation
             Spatial = new SpatialComponent();
 
             Components[typeof(SpatialComponent)] = Spatial;
+            Model = new Model();
         }
 
         /// <summary>
@@ -76,13 +77,27 @@ namespace Axiverse.Simulation
             Components[typeof(T)] = component;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Entity Clone() => Clone(Guid.NewGuid());
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
         public Entity Clone(Guid identifier)
         {
             var entity = new Entity(identifier);
 
             return entity;
+        }
+
+        public override string ToString()
+        {
+            return $"Entity [{ Identifier }] @ { Spatial.Position }";
         }
     }
 }

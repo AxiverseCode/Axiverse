@@ -23,7 +23,7 @@ namespace Axiverse.Simulation
             set
             {
                 var key = Key.From(type);
-                Contract.Requires<InvalidCastException>(key.IsAssignableFrom(value));
+                Preconditions.Requires<InvalidCastException>(key.IsAssignableFrom(value));
                 components[key] = value;
             }
         }
@@ -39,7 +39,7 @@ namespace Axiverse.Simulation
             foreach (var pair in components)
             {
                 var clone = pair.Value.Clone();
-                Contract.Requires<InvalidCastException>(pair.Key.IsAssignableFrom(clone));
+                Preconditions.Requires<InvalidCastException>(pair.Key.IsAssignableFrom(clone));
                 collection.components.Add(pair.Key, clone);
             }
             return collection;

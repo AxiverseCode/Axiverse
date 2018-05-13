@@ -15,6 +15,8 @@ message EntityClass {
 
 service EntityService {
 
+	rpc GetState(GetStateRequest) returns (GetStateResponse);
+
 	rpc CreateEntity(CreateEntityRequest) returns (CreateEntityResponse);
 
 	rpc DeleteEntity(DeleteEntityRequest) returns (DeleteEntityResponse);
@@ -23,16 +25,25 @@ service EntityService {
 
 }
 
-message CreateEntityRequest {
+message GetStateRequest {
 
+}
+
+message GetStateResponse {
+	float time = 1;
+	float entities = 2;
+}
+
+message CreateEntityRequest {
+	string name = 1;
 }
 
 message CreateEntityResponse {
-
+	string id = 1;
 }
 
 message DeleteEntityRequest {
-
+	string id = 1;
 }
 
 message DeleteEntityResponse {
@@ -40,7 +51,7 @@ message DeleteEntityResponse {
 }
 
 message GetEntityRequest {
-
+	string id = 1;
 }
 
 message GetEntityResponse {

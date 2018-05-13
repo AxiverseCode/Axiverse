@@ -11,6 +11,10 @@ namespace Axiverse.Simulation
     /// </summary>
     public abstract class Component
     {
+        /// <summary>
+        /// Clones the component.
+        /// </summary>
+        /// <returns></returns>
         public abstract Component Clone();
     }
 }

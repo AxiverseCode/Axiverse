@@ -58,6 +58,7 @@
     <Compile Include="ComponentCollection.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityCollection.cs" />
+    <Compile Include="Runner.cs" />
     <Compile Include="SpatialComponent.cs" />
     <Compile Include="StepTimeAttribute.cs" />
     <Compile Include="System.cs" />

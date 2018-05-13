@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
+      <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
+      <Name>Axiverse.Simulation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
       <Project>{d5acdebb-41eb-4286-b5e3-34506daaa001}</Project>
       <Name>Axiverse.Services.Proto</Name>

@@ -8,10 +8,13 @@ namespace Axiverse.Simulation
 {
     public class Universe
     {
-
         public Universe()
         {
-
+            for (int i = 0; i < 5; i++)
+            {
+                var entity = new Entity();
+                entities.Add(entity.Identifier, entity);
+            }
         }
 
         public void Post(Guid target)
@@ -19,11 +22,14 @@ namespace Axiverse.Simulation
 
         }
 
-        public void Step()
+        public void Step(float dt)
         {
-            foreach(var entity in entities.Values)
+            //Console.WriteLine("===== Stepping =====");
+
+            foreach (var entity in entities.Values)
             {
                 entity.Model?.Process(entity);
+                //Console.WriteLine(entity);
             }
         }
 

@@ -116,6 +116,11 @@ namespace Axiverse
         }
 
         /// <summary>
+        /// The default random number generator.
+        /// </summary>
+        public static readonly Random Random = new Random();
+
+        /// <summary>
         /// The degrees to radians conversion ratio.
         /// </summary>
         public static readonly float DegreesToRadians = 0.0174533f;

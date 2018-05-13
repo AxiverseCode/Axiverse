@@ -16,11 +16,6 @@ namespace Axiverse.Mathematics.Serialization
             return theta - TWO_PI * Math.Floor((theta + Math.PI) / TWO_PI);
         }
 
-        public static double Quantize(double theta)
-        {
-            theta = Normalize(theta);
-        }
-
         public static sbyte QuantizeByte(double theta)
         {
             double mapped = Normalize(theta) / Math.PI * (-sbyte.MinValue);

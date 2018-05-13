@@ -63,6 +63,7 @@
     <Compile Include="Modules\ModuleProgram.cs" />
     <Compile Include="ObjectPool.cs" />
     <Compile Include="Optional.cs" />
+    <Compile Include="Preconditions.cs" />
     <Compile Include="Producers\Graph.cs" />
     <Compile Include="Producers\NodeAttribute.cs" />
     <Compile Include="Producers\NodeInjector.cs" />

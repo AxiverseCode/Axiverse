@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Mathematics.Distributions
+namespace Axiverse.Mathematics.Numerics.Distributions
 {
     /// <summary>
     /// Represents a continuous distribution
