@@ -14,7 +14,7 @@ namespace Axiverse.Utilities.Cli
         static void Main(string[] args)
         {
             string host = "localhost";
-            host = "34.204.96.156";
+            host = "34.229.211.196";
 
             Channel idc = new Channel(host + ":32000", ChannelCredentials.Insecure);
             var id = new IdentityService.IdentityServiceClient(idc);

@@ -36,7 +36,7 @@ namespace HelloGraphics
             };
 
             // Shaders
-            var testShaderPath = "../../../../Resources/Engine/Test/test.hlsl";
+            var testShaderPath = "../../../../../Resources/Engine/Test/test.hlsl";
             var pipelineStateDescription = new PipelineStateDescription()
             {
                 InputLayout = new SharpDX.Direct3D12.InputLayoutDescription(inputElementDescs),
