@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Axiverse.Simulation.Components;
+
 namespace Axiverse.Simulation
 {
     /// <summary>
@@ -54,7 +56,7 @@ namespace Axiverse.Simulation
             Spatial = new SpatialComponent();
 
             Components[typeof(SpatialComponent)] = Spatial;
-            Model = new Model();
+            // Model = new Model();
         }
 
         /// <summary>

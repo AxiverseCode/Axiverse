@@ -18,10 +18,15 @@ namespace Axiverse.Interface.Graphics
         private IndexBufferView nativeIndexBufferView;
         private VertexBufferView nativeVertexBufferView;
 
+        [Obsolete]
         public IndexBufferView NativeIndexBufferView => nativeIndexBufferView;
+
+        [Obsolete]
         public VertexBufferView NativeVertexBufferView => nativeVertexBufferView;
 
         internal long GpuHandle => NativeResource.GPUVirtualAddress;
+
+        public int Size { get; private set; }
 
         private GraphicsBuffer(GraphicsDevice device) : base(device)
         {
@@ -30,6 +35,8 @@ namespace Axiverse.Interface.Graphics
 
         private void InitializeHeaps(int size, IntPtr data, bool dataStatic = true)
         {
+            Size = size;
+
             NativeResource = Device.NativeDevice.CreateCommittedResource
             (
                 new HeapProperties(HeapType.Upload),
@@ -64,6 +71,12 @@ namespace Axiverse.Interface.Graphics
             return result;
         }
 
+        public static GraphicsBuffer Create<T>(GraphicsDevice device, T[] data, bool isStatic)
+            where T: struct
+        {
+            return Create(device, Utilities.SizeOf(data), Marshal.UnsafeAddrOfPinnedArrayElement(data, 0), isStatic);
+        }
+
         private void InitializeAsIndexBuffer(int size, IntPtr data, bool dataStatic = true)
         {
             InitializeHeaps(size, data, dataStatic);
@@ -80,46 +93,6 @@ namespace Axiverse.Interface.Graphics
             nativeVertexBufferView.BufferLocation = NativeResource.GPUVirtualAddress; // check if its static
             nativeVertexBufferView.SizeInBytes = size;
             nativeVertexBufferView.StrideInBytes = vertexSize;
-        }
-
-        [Obsolete]
-        public static GraphicsBuffer CreateIndexBuffer(GraphicsDevice device, int size, IntPtr data, bool dataStatic = true)
-        {
-            var buffer = new GraphicsBuffer(device);
-            buffer.InitializeAsIndexBuffer(size, data, dataStatic);
-            return buffer;
-        }
-
-        [Obsolete]
-        public static GraphicsBuffer CreateIndexBuffer(GraphicsDevice device, int[] data, bool dataStatic = true)
-        {
-            var buffer = new GraphicsBuffer(device);
-            buffer.InitializeAsIndexBuffer(
-                Utilities.SizeOf(data),
-                Marshal.UnsafeAddrOfPinnedArrayElement(data, 0),
-                dataStatic);
-            return buffer;
-        }
-
-        [Obsolete]
-        public static GraphicsBuffer CreateVertexBuffer(GraphicsDevice device, int size, int vertexSize, IntPtr data, bool dataStatic = true)
-        {
-            var buffer = new GraphicsBuffer(device);
-            buffer.InitializeAsVertexBuffer(size, vertexSize, data, dataStatic);
-            return buffer;
-        }
-
-        [Obsolete]
-        public static GraphicsBuffer CreateVertexBuffer<T>(GraphicsDevice device, T[] data, int stride = 1, bool isStatic = true)
-            where T : struct
-        {
-            var buffer = new GraphicsBuffer(device);
-            buffer.InitializeAsVertexBuffer(
-                Utilities.SizeOf(data),
-                Utilities.SizeOf<T>() * stride,
-                Marshal.UnsafeAddrOfPinnedArrayElement(data, 0),
-                isStatic);
-            return buffer;
         }
     }
 }

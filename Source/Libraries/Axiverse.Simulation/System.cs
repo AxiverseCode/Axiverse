@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Simulation.SimpleEntity
+namespace Axiverse.Simulation
 {
     /// <summary>
     /// A system which acts over entities
@@ -18,14 +18,15 @@ namespace Axiverse.Simulation.SimpleEntity
             RelevantTypes = relevantTypes;
         }
 
-        public virtual void Process(EntityCollection entities)
+        public virtual void Process(EntityCollection entities, float dt)
         {
             foreach (var entity in entities)
             {
-               // if (entity)
+                // if (entity)
+                Process(entity, dt);
             }
         }
 
-        public abstract void Process(Entity entity);
+        public abstract void Process(Entity entity, float dt);
     }
 }

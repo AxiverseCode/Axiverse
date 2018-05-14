@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Axiverse.Physics;
 
-namespace Axiverse.Simulation
+namespace Axiverse.Simulation.Components
 {
     public class PhysicsComponent
     {

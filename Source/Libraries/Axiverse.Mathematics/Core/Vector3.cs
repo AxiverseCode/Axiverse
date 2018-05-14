@@ -86,11 +86,21 @@ namespace Axiverse
 
         #region Instance Methods - Setters
 
+        /// <summary>
+        /// Sets all components of the vector to the specified value.
+        /// </summary>
+        /// <param name="value"></param>
         public void Set(float value)
         {
             X = Y = Z = value;
         }
 
+        /// <summary>
+        /// Sets the components of the vector to the specified value.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public void Set(float x, float y, float z)
         {
             X = x;
@@ -98,16 +108,42 @@ namespace Axiverse
             Z = z;
         }
 
+        /// <summary>
+        /// Scales the components of the vector so that the length of the vector is the specified
+        /// length.
+        /// </summary>
+        /// <param name="length"></param>
         public void SetLength(float length)
         {
-            this = Normal().Multiply(length);
+            if (length == 0.0f && LengthSquared() == 0)
+            {
+                this = Zero;
+            }
+            else
+            {
+                this = Normal().Multiply(length);
+            }
         }
 
+        /// <summary>
+        /// Returns a vector which is the scaled version of this vector with the specified length.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
         public Vector3 OfLength(float length)
         {
+            if (length == 0.0f && LengthSquared() == 0)
+            {
+                return Zero;
+            }
             return Normal().Multiply(length);
         }
 
+        /// <summary>
+        /// Copies the values of the specified vector.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public Vector3 Copy(Vector3 v)
         {
             X = v.X;
@@ -119,7 +155,7 @@ namespace Axiverse
         #endregion
 
         #region Instance Methods - Arithmatic
-
+        
         public Vector3 Add(Vector3 v)
         {
             X += v.X;

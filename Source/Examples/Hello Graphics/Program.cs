@@ -49,8 +49,8 @@ namespace HelloGraphics
             // Lets create some resources
             var indices = new int[] { 0, 2, 1 };
             var vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
-            var indexBuffer = GraphicsBuffer.CreateIndexBuffer(device, indices, false);
-            var vertexBuffer = GraphicsBuffer.CreateVertexBuffer(device, vertices, 3, false);
+            var indexBuffer = GraphicsBuffer.Create(device, indices, false);
+            var vertexBuffer = GraphicsBuffer.Create(device, vertices, false);
             var indexBinding = new IndexBufferBinding
             {
                 Buffer = indexBuffer,
@@ -83,8 +83,10 @@ namespace HelloGraphics
 
                         commandList.SetRootSignature(pipelineStateDescription.RootSignature);
                         commandList.PipelineState = pipelineState;
-                        
-                        commandList.Draw(indexBinding, vertexBinding);
+
+                        commandList.SetIndexBuffer(indexBuffer, indexBuffer.Size, IndexBufferType.Integer32);
+                        commandList.SetVertexBuffer(vertexBuffer, 0, vertexBuffer.Size, 3 * 4);
+                        commandList.DrawIndexed(indices.Length);
                     }
                     commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
