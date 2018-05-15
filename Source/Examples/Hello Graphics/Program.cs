@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using SharpDX;
 using SharpDX.Windows;
 
-using Axiverse;
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
 using Axiverse.Interface.Graphics.Shaders;
 
+using vector3 = SharpDX.Vector3;
+
 namespace HelloGraphics
 {
+    using Axiverse;
+
     class Program
     {
         static void Main(string[] args)
@@ -45,8 +48,15 @@ namespace HelloGraphics
             var pipelineState = PipelineState.Create(device, pipelineStateDescription);
             var descriptorSet = new DescriptorSet(device, geometryShader.Layout);
 
+            var frame = 0.0f;
+            var world = Matrix4.Identity;
+            var view = Matrix4.LookAtRH(new Vector3(0, 10, 10), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+            var projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
+                1,
+                2.0f,
+                2000.0f);
             var transforms = new GeometryShader.PerObject[1];
-            transforms[0].WorldViewProjection = Matrix4.Identity;
+            transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
             transforms[0].Color = new Vector4(0.4f, 0.5f, 0.8f, 1);
             var constantBuffer = GraphicsBuffer.Create(device, transforms, false);
 
@@ -58,13 +68,9 @@ namespace HelloGraphics
             descriptorSet.SetSamplerState(0, SamplerState.Create(device, null));
 
             // Lets create some resources
-            var indices = new int[] { 0, 2, 1 };
-            var vertices = new PositionColorTexture[]
-            {
-                new PositionColorTexture(0.0f, 0.25f, 0.0f, 0, 0, 1, 0, 0, 1),
-                new PositionColorTexture(-0.25f, 0.0f, 0.0f, 0, 1, 0, 1, 0, 1),
-                new PositionColorTexture( 0.25f, 0.0f, 0.0f, 1, 0, 0, 0, 1, 1),
-            };
+            var cube = Primitives<PositionColorTexture>.Cube();
+            var indices = cube.Item1;
+            var vertices = cube.Item2;
             var indexBuffer = GraphicsBuffer.Create(device, indices, false);
 
             var vertexBuffer = GraphicsBuffer.Create(device, vertices, false);
@@ -87,6 +93,16 @@ namespace HelloGraphics
             {
                 while (loop.NextFrame())
                 {
+                    frame += 1;
+                    view = Matrix4.LookAtRH(
+                        new Vector3(
+                            10 * Functions.Sin(Functions.DegreesToRadians(frame)),
+                            4 * Functions.Sin(Functions.DegreesToRadians(frame / 3)),
+                            10 * Functions.Cos(Functions.DegreesToRadians(frame))),
+                        new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+                    transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
+                    constantBuffer.Write(transforms);
+
                     var backBuffer = swapChain.StartFrame();
                     var backBufferHandle = swapChain.GetCurrentColorHandle();
                     commandList.Reset(swapChain);

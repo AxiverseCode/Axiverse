@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Generic\IVertex.cs" />
+    <Compile Include="Generic\Primitives.cs" />
     <Compile Include="GraphicsDeviceContext2D.cs" />
     <Compile Include="CompiledCommandList.cs" />
     <Compile Include="ConstantBufferBinding.cs" />

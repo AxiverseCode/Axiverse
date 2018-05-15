@@ -115,6 +115,11 @@ namespace Axiverse
             result.Z = Clamp(value.Z, minimum.Z, maximum.Z);
         }
 
+        public static float DegreesToRadians(float degrees)
+        {
+            return degrees * DegreesToRadiansRatio;
+        }
+
         /// <summary>
         /// The default random number generator.
         /// </summary>
@@ -123,11 +128,11 @@ namespace Axiverse
         /// <summary>
         /// The degrees to radians conversion ratio.
         /// </summary>
-        public static readonly float DegreesToRadians = 0.0174533f;
+        public static readonly float DegreesToRadiansRatio = 0.0174533f;
 
         /// <summary>
         /// The radians to degrees conversion ratio.
         /// </summary>
-        public static readonly float RadiansToDegrees = 57.2958f;
+        public static readonly float RadiansToDegreesRatio = 57.2958f;
     }
 }

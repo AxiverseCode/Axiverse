@@ -346,6 +346,27 @@ namespace Axiverse
         //    return result;
         //}
 
+        public static void Multiply(out Matrix4 result, ref Matrix4 left, ref Matrix4 right)
+        {
+            Matrix4 value = new Matrix4();
+            value.M11 = (left.M11 * right.M11) + (left.M12 * right.M21) + (left.M13 * right.M31) + (left.M14 * right.M41);
+            value.M12 = (left.M11 * right.M12) + (left.M12 * right.M22) + (left.M13 * right.M32) + (left.M14 * right.M42);
+            value.M13 = (left.M11 * right.M13) + (left.M12 * right.M23) + (left.M13 * right.M33) + (left.M14 * right.M43);
+            value.M14 = (left.M11 * right.M14) + (left.M12 * right.M24) + (left.M13 * right.M34) + (left.M14 * right.M44);
+            value.M21 = (left.M21 * right.M11) + (left.M22 * right.M21) + (left.M23 * right.M31) + (left.M24 * right.M41);
+            value.M22 = (left.M21 * right.M12) + (left.M22 * right.M22) + (left.M23 * right.M32) + (left.M24 * right.M42);
+            value.M23 = (left.M21 * right.M13) + (left.M22 * right.M23) + (left.M23 * right.M33) + (left.M24 * right.M43);
+            value.M24 = (left.M21 * right.M14) + (left.M22 * right.M24) + (left.M23 * right.M34) + (left.M24 * right.M44);
+            value.M31 = (left.M31 * right.M11) + (left.M32 * right.M21) + (left.M33 * right.M31) + (left.M34 * right.M41);
+            value.M32 = (left.M31 * right.M12) + (left.M32 * right.M22) + (left.M33 * right.M32) + (left.M34 * right.M42);
+            value.M33 = (left.M31 * right.M13) + (left.M32 * right.M23) + (left.M33 * right.M33) + (left.M34 * right.M43);
+            value.M34 = (left.M31 * right.M14) + (left.M32 * right.M24) + (left.M33 * right.M34) + (left.M34 * right.M44);
+            value.M41 = (left.M41 * right.M11) + (left.M42 * right.M21) + (left.M43 * right.M31) + (left.M44 * right.M41);
+            value.M42 = (left.M41 * right.M12) + (left.M42 * right.M22) + (left.M43 * right.M32) + (left.M44 * right.M42);
+            value.M43 = (left.M41 * right.M13) + (left.M42 * right.M23) + (left.M43 * right.M33) + (left.M44 * right.M43);
+            value.M44 = (left.M41 * right.M14) + (left.M42 * right.M24) + (left.M43 * right.M34) + (left.M44 * right.M44);
+            result = value;
+        }
         //public static void Multiply(out Matrix4 result, ref Matrix4 left, ref Matrix4 right)
         //{
         //    float m11 = ((left.M11 * right.M11) + (left.M12 * right.M21)) + (left.M13 * right.M31);
@@ -498,11 +519,11 @@ namespace Axiverse
         //    return result;
         //}
 
-        //public static Matrix4 operator *(Matrix4 left, Matrix4 right)
-        //{
-        //    Multiply(out var result, ref left, ref right);
-        //    return result;
-        //}
+        public static Matrix4 operator *(Matrix4 left, Matrix4 right)
+        {
+            Multiply(out var result, ref left, ref right);
+            return result;
+        }
 
         //public static Matrix4 operator ~(Matrix4 value)
         //{
@@ -516,6 +537,79 @@ namespace Axiverse
 
         //#endregion
 
+        /// <summary>
+        /// Created a right handed projection matrix.
+        /// </summary>
+        /// <param name="fov">Field of view in the y direction, in radians.</param>
+        /// <param name="aspect">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        public static Matrix4 PerspectiveFovRH(float fov, float aspect, float znear, float zfar)
+        {
+            float yScale = (float)(1.0f / Math.Tan(fov * 0.5f));
+            float q = zfar / (znear - zfar);
+
+            var result = new Matrix4();
+            result.M11 = yScale / aspect;
+            result.M22 = yScale;
+            result.M33 = q;
+            result.M34 = -1.0f;
+            result.M43 = q * znear;
+            return result;
+        }
+
+        /// <summary>
+        /// Creates a right-handed, look-at matrix.
+        /// </summary>
+        /// <param name="eye">The position of the viewer's eye.</param>
+        /// <param name="target">The camera look-at target.</param>
+        /// <param name="up">The camera's up vector.</param>
+        /// <param name="result">When the method completes, contains the created look-at matrix.</param>
+        public static Matrix4 LookAtRH(Vector3 eye, Vector3 target, Vector3 up)
+        {
+            Vector3 xaxis, yaxis, zaxis;
+            Vector3.Subtract(out zaxis, ref eye, ref target); zaxis.Normalize();
+            Vector3.Cross(out xaxis, ref up, ref zaxis); xaxis.Normalize();
+            Vector3.Cross(out yaxis, ref zaxis, ref xaxis);
+
+            var result = Matrix4.Identity;
+            result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
+            result.M12 = yaxis.X; result.M22 = yaxis.Y; result.M32 = yaxis.Z;
+            result.M13 = zaxis.X; result.M23 = zaxis.Y; result.M33 = zaxis.Z;
+
+            result.M41 = Vector3.Dot(ref xaxis, ref eye);
+            result.M42 = Vector3.Dot(ref yaxis, ref eye);
+            result.M43 = Vector3.Dot(ref zaxis, ref eye);
+
+            result.M41 = -result.M41;
+            result.M42 = -result.M42;
+            result.M43 = -result.M43;
+
+            return result;
+        }
+
+        public static Matrix4 Transpose(Matrix4 value)
+        {
+            Matrix4 result = new Matrix4();
+            result.M11 = value.M11;
+            result.M12 = value.M21;
+            result.M13 = value.M31;
+            result.M14 = value.M41;
+            result.M21 = value.M12;
+            result.M22 = value.M22;
+            result.M23 = value.M32;
+            result.M24 = value.M42;
+            result.M31 = value.M13;
+            result.M32 = value.M23;
+            result.M33 = value.M33;
+            result.M34 = value.M43;
+            result.M41 = value.M14;
+            result.M42 = value.M24;
+            result.M43 = value.M34;
+            result.M44 = value.M44;
+
+            return result;
+        }
         #endregion
 
         /// <summary>The zero matrix.</summary>
