@@ -48,6 +48,7 @@
     <Compile Include="Bounds3.cs" />
     <Compile Include="Complex.cs" />
     <Compile Include="Core\MathematicsExtensions.cs" />
+    <Compile Include="Core\Matrix4.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Core\Functions.cs" />
     <Compile Include="IMatrix.cs" />

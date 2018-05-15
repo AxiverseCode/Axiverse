@@ -44,9 +44,16 @@ namespace Axiverse.Interface.Graphics
             }, ShaderResourceViewHandle + Layout.Entries[slot].Index * Device.ShaderResourceViewAllocator.Stride);
         }
 
-        public void SetShaderResourceView(int slot, GraphicsResource resource)
+        public void SetShaderResourceView(int slot, Texture resource)
         {
-            
+            Device.NativeDevice.CreateShaderResourceView(resource.Resource, new ShaderResourceViewDescription
+            {
+                Shader4ComponentMapping = 5768,
+                //Shader4ComponentMapping = D3DXUtilities.DefaultComponentMapping(),
+                Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
+                Dimension = ShaderResourceViewDimension.Texture2D,
+                Texture2D = { MipLevels = 1 },
+            }, ShaderResourceViewHandle + Layout.Entries[slot].Index * Device.ShaderResourceViewAllocator.Stride);
         }
 
         public void SetSamplerState(int slot, SamplerState samplerState)

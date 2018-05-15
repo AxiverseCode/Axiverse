@@ -10,7 +10,7 @@ namespace Axiverse.Interface.Graphics
 {
     public class PipelineStateDescription
     {
-        public InputLayoutDescription InputLayout { get; set; }
+        public VertexLayout InputLayout { get; set; }
         public RootSignature RootSignature { get; set; }
         public ShaderBytecode VertexShader { get; set; }
         public ShaderBytecode PixelShader { get; set; }

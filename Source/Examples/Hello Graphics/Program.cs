@@ -8,6 +8,7 @@ using SharpDX.Windows;
 
 using Axiverse;
 using Axiverse.Interface.Graphics;
+using Axiverse.Interface.Graphics.Generic;
 using Axiverse.Interface.Graphics.Shaders;
 
 namespace HelloGraphics
@@ -30,19 +31,13 @@ namespace HelloGraphics
             var device = GraphicsDevice.Create();
             var swapChain = SwapChain.Create(device, form);
             var commandList = CommandList.Create(device);
-
-            // Define the vertex input layout.
-            var inputElementDescs = new[]
-            {
-                new SharpDX.Direct3D12.InputElement("POSITION", 0, SharpDX.DXGI.Format.R32G32B32_Float, 0, 0)
-            };
-
+            
             // Shaders
             var geometryShader = new GeometryShader(device);
             geometryShader.Initialize();
             var pipelineStateDescription = new PipelineStateDescription()
             {
-                InputLayout = new SharpDX.Direct3D12.InputLayoutDescription(inputElementDescs),
+                InputLayout = PositionColorTexture.Layout,
                 RootSignature = geometryShader.RootSignature,
                 VertexShader = geometryShader.VertexShader,
                 PixelShader = geometryShader.PixelShader,
@@ -51,14 +46,25 @@ namespace HelloGraphics
             var descriptorSet = new DescriptorSet(device, geometryShader.Layout);
 
             var transforms = new GeometryShader.PerObject[1];
+            transforms[0].WorldViewProjection = Matrix4.Identity;
             transforms[0].Color = new Vector4(0.4f, 0.5f, 0.8f, 1);
             var constantBuffer = GraphicsBuffer.Create(device, transforms, false);
+
+            var texture = new Texture(device);
+            texture.Load(@"..\..\..\..\..\Resources\Textures\Placeholder Grid.jpg");
+
             descriptorSet.SetConstantBuffer(0, constantBuffer);
+            descriptorSet.SetShaderResourceView(1, texture);
             descriptorSet.SetSamplerState(0, SamplerState.Create(device, null));
 
             // Lets create some resources
             var indices = new int[] { 0, 2, 1 };
-            var vertices = new float[] { 0.0f, 0.25f, 0.0f, -0.25f, 0.0f, 0.0f, 0.25f, 0.0f, 0.0f };
+            var vertices = new PositionColorTexture[]
+            {
+                new PositionColorTexture(0.0f, 0.25f, 0.0f, 0, 0, 1, 0, 0, 1),
+                new PositionColorTexture(-0.25f, 0.0f, 0.0f, 0, 1, 0, 1, 0, 1),
+                new PositionColorTexture( 0.25f, 0.0f, 0.0f, 1, 0, 0, 0, 1, 1),
+            };
             var indexBuffer = GraphicsBuffer.Create(device, indices, false);
 
             var vertexBuffer = GraphicsBuffer.Create(device, vertices, false);
@@ -85,6 +91,11 @@ namespace HelloGraphics
                     var backBufferHandle = swapChain.GetCurrentColorHandle();
                     commandList.Reset(swapChain);
 
+                    if (texture.UploadResource != null)
+                    {
+                        texture.Prepare(commandList);
+                    }
+
                     commandList.ResourceTransition(backBuffer, ResourceState.Present, ResourceState.RenderTarget);
                     {
                         commandList.SetColorTarget(backBufferHandle);
@@ -97,7 +108,7 @@ namespace HelloGraphics
                         commandList.SetDescriptors(descriptorSet);
 
                         commandList.SetIndexBuffer(indexBuffer, indexBuffer.Size, IndexBufferType.Integer32);
-                        commandList.SetVertexBuffer(vertexBuffer, 0, vertexBuffer.Size, 3 * 4);
+                        commandList.SetVertexBuffer(vertexBuffer, 0, vertexBuffer.Size, PositionColorTexture.Layout.Stride);
                         commandList.DrawIndexed(indices.Length);
                     }
                     commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);

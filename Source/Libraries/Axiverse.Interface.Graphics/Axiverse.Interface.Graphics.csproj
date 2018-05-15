@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generic\IVertex.cs" />
     <Compile Include="GraphicsDeviceContext2D.cs" />
     <Compile Include="CompiledCommandList.cs" />
     <Compile Include="ConstantBufferBinding.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="SwapChain.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="VertexBufferBinding.cs" />
+    <Compile Include="VertexFormat.cs" />
     <Compile Include="VertexLayout.cs" />
     <Compile Include="VertexElement.cs" />
   </ItemGroup>

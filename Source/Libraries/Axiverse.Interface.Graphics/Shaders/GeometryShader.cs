@@ -16,7 +16,7 @@ namespace Axiverse.Interface.Graphics.Shaders
         [StructLayout(LayoutKind.Sequential, Pack = 16, Size = 256)]
         public struct PerObject
         {
-            public Matrix WorldViewProjection;
+            public Matrix4 WorldViewProjection;
             public Vector4 Color;
         }
 
@@ -32,7 +32,7 @@ namespace Axiverse.Interface.Graphics.Shaders
         public void Initialize()
         {
             // Pipeline state.
-            var testShaderPath = "../../../../../Resources/Engine/Test/test.hlsl";
+            var testShaderPath = "../../../../../Resources/Engine/Forward/Standard.hlsl";
             VertexShader = ShaderBytecode.CompileFromFile(testShaderPath, "VSMain", "vs_5_0");
             PixelShader = ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "ps_5_0");
 

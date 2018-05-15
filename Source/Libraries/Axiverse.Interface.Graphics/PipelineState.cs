@@ -34,7 +34,7 @@ namespace Axiverse.Interface.Graphics
             var pipelineStateDescription = new SharpDX.Direct3D12.GraphicsPipelineStateDescription()
             {
                 // From mesh
-                InputLayout = description.InputLayout,
+                InputLayout = FromVertexLayout(description.InputLayout),
 
                 // From effect
                 RootSignature = description.RootSignature.NativeRootSignature,
@@ -55,6 +55,19 @@ namespace Axiverse.Interface.Graphics
             };
             pipelineStateDescription.RenderTargetFormats[0] = Format.B8G8R8A8_UNorm;
             NativePipelineState = Device.NativeDevice.CreateGraphicsPipelineState(pipelineStateDescription);
+        }
+
+        public static InputLayoutDescription FromVertexLayout(VertexLayout layout)
+        {
+            InputElement[] elements = new InputElement[layout.Elements.Count];
+
+            for (int i = 0; i < layout.Elements.Count; i++)
+            {
+                var element = layout.Elements[i];
+                elements[i] = new InputElement(element.Name, 0, VertexLayout.GetFormat(element.Format), element.Offset, 0);
+            }
+
+            return new InputLayoutDescription(elements);
         }
 
         public static PipelineState Create(GraphicsDevice device, PipelineStateDescription description)

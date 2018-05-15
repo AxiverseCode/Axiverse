@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,9 @@ using SharpDX.Direct3D12;
 
 namespace Axiverse.Interface.Graphics
 {
+    using System.Drawing;
+    using SharpDX.Direct3D12;
+
     public class Texture : GraphicsResource
     {
         internal CpuDescriptorHandle NativeRenderTargetView;
@@ -40,5 +45,86 @@ namespace Axiverse.Interface.Graphics
         {
 
         }
+
+        public Resource Resource;
+        public Resource UploadResource;
+
+
+        public void Load(string filename)
+        {
+            Bitmap bitmap;
+            bitmap = new Bitmap(filename);
+
+            Width = bitmap.Width;
+            Height = bitmap.Height;
+            Depth = 1;
+            Dimensions = 2;
+
+            // create resources
+
+            var imageFormat = Format.B8G8R8A8_UNorm;
+            Resource = Device.NativeDevice.CreateCommittedResource(
+                new HeapProperties(HeapType.Default),
+                HeapFlags.None,
+                ResourceDescription.Texture2D(imageFormat, Width, Height),
+                ResourceStates.CopyDestination);
+
+            UploadResource = Device.NativeDevice.CreateCommittedResource(
+                new HeapProperties(CpuPageProperty.WriteBack, MemoryPool.L0),
+                HeapFlags.None,
+                ResourceDescription.Texture2D(imageFormat, Width, Height),
+                ResourceStates.GenericRead);
+
+            // copy into upload buffer
+
+            BitmapData data = bitmap.LockBits(
+                new Rectangle(0, 0, Width, Height),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppArgb);
+
+            UploadResource.WriteToSubresource(
+                0,
+                new ResourceRegion()
+                {
+                    Back = 1,
+                    Bottom = Height,
+                    Right = Width
+                },
+                data.Scan0,
+                Width * 4,
+                Width * Height * 4);
+
+            bitmap.UnlockBits(data);
+            bitmap.Dispose();
+
+            //ShaderResourceViewDescription = new ShaderResourceViewDescription
+            //{
+            //    Shader4ComponentMapping = 5768,
+            //    //Shader4ComponentMapping = D3DXUtilities.DefaultComponentMapping(),
+            //    Format = imageFormat,
+            //    Dimension = ShaderResourceViewDimension.Texture2D,
+            //    Texture2D = { MipLevels = 1 },
+            //};
+
+            // queue upload job from
+            // Renderer.ResourcePipeline.Resources.Add(this);
+        }
+
+        public void Prepare(CommandList commandList)
+        {
+            if (UploadResource != null)
+            {
+                // copy from upload buffer to gpu buffer
+                commandList.NativeCommandList.CopyTextureRegion(
+                    new TextureCopyLocation(Resource, 0), 0, 0, 0,
+                    new TextureCopyLocation(UploadResource, 0), null);
+
+                commandList.NativeCommandList.ResourceBarrierTransition(
+                    Resource,
+                    ResourceStates.CopyDestination,
+                    ResourceStates.PixelShaderResource);
+            }
+        }
+
     }
 }
