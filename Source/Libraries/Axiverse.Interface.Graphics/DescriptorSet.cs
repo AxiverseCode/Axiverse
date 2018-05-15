@@ -15,12 +15,23 @@ namespace Axiverse.Interface.Graphics
         internal readonly CpuDescriptorHandle ShaderResourceViewHandle;
         internal readonly CpuDescriptorHandle SamplerHandle;
 
-        private DescriptorSet(GraphicsDevice device, DescriptorLayout layout) : base(device)
+        public DescriptorSet(GraphicsDevice device, DescriptorLayout layout) : base(device)
         {
             Layout = layout;
 
             ShaderResourceViewHandle = device.ShaderResourceViewAllocator.Allocate(layout.ShaderResourceViewCount);
             SamplerHandle = device.SamplerAllocator.Allocate(layout.SamplerCount);
+        }
+
+        public void SetConstantBuffer(int slot, GraphicsBuffer buffer)
+        {
+            Preconditions.Requires(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ShaderResourceView);
+            Preconditions.Requires(buffer.Size % 256 == 0);
+            Device.NativeDevice.CreateConstantBufferView(new ConstantBufferViewDescription
+            {
+                BufferLocation = buffer.GpuHandle,
+                SizeInBytes = buffer.Size, // TODO: Size needs to be 256 byte aligned
+            }, ShaderResourceViewHandle + Layout.Entries[slot].Index * Device.ShaderResourceViewAllocator.Stride);
         }
 
         public void SetConstantBuffer(int slot, GraphicsBuffer buffer, int offset, int size)

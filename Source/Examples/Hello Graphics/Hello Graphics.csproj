@@ -76,6 +76,10 @@
       <Project>{cab0bbc2-a6eb-4065-9e71-fd86746696c2}</Project>
       <Name>Axiverse.Interface.Graphics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

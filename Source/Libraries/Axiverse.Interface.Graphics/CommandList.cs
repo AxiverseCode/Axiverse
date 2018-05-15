@@ -64,6 +64,7 @@ namespace Axiverse.Interface.Graphics
         private void Initialize()
         {
             commandAllocator = Device.CommandAllocators.Take();
+            compiledCommandList = new CompiledCommandList();
             fenceValue = 0;
             fence = Device.NativeDevice.CreateFence(0, FenceFlags.None);
             
@@ -76,63 +77,88 @@ namespace Axiverse.Interface.Graphics
             // Create heaps to copy resources into.
             shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
             shaderResourceViewOffset = 0;
-            samplerDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
+            samplerDescriptorHeap = Device.SamplerHeaps.Take();
             samplerOffset = 0;
+
+            descriptorHeaps[0] = shaderResourceViewDescriptorHeap;
+            descriptorHeaps[1] = samplerDescriptorHeap;
         }
 
         public void SetDescriptors(DescriptorSet descriptors)
         {
-            if (shaderResourceViewOffset + descriptors.Layout.ShaderResourceViewCount >
-                Device.ShaderResourceViewDescriptorHeaps.Size)
-            {
-                // No more space in the current descriptor heap
-                compiledCommandList.ShaderResourceViewHeaps.Add(shaderResourceViewDescriptorHeap);
+            NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
 
-                shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
-                shaderResourceViewOffset = 0;
-                descriptorHeaps[0] = shaderResourceViewDescriptorHeap;
-                NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
-            }
-            
-            // Copy CBSRV descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
-            Device.NativeDevice.CopyDescriptorsSimple(
-                descriptors.Layout.ShaderResourceViewCount,
-                shaderResourceViewDescriptorHeap.CPUDescriptorHandleForHeapStart
-                    + (shaderResourceViewOffset * Device.ShaderResourceViewDescriptorHeaps.Stride),
-                descriptors.ShaderResourceViewHandle,
-                DescriptorHeapType.ConstantBufferViewShaderResourceViewUnorderedAccessView);
-            GpuDescriptorHandle gpuHandle = shaderResourceViewDescriptorHeap.GPUDescriptorHandleForHeapStart
-                + (shaderResourceViewOffset * Device.ShaderResourceViewDescriptorHeaps.Stride);
-            shaderResourceViewOffset += descriptors.Layout.ShaderResourceViewCount;
-
-            foreach (var entry in descriptors.Layout.Entries)
+            if (descriptors.Layout.ShaderResourceViewCount != 0)
             {
-                if (entry.Type == DescriptorLayout.EntryType.ShaderResourceView)
+                if (shaderResourceViewOffset + descriptors.Layout.ShaderResourceViewCount >
+                    Device.ShaderResourceViewDescriptorHeaps.Size)
                 {
-                    NativeCommandList.SetGraphicsRootDescriptorTable(
-                        entry.Index,
-                        gpuHandle + (entry.Index * Device.ShaderResourceViewDescriptorHeaps.Stride));
+                    // No more space in the current descriptor heap
+                    compiledCommandList.ShaderResourceViewHeaps.Add(shaderResourceViewDescriptorHeap);
+
+                    shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
+                    shaderResourceViewOffset = 0;
+                    descriptorHeaps[0] = shaderResourceViewDescriptorHeap;
+                    NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
+                }
+
+                // Copy CBSRV descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
+                Device.NativeDevice.CopyDescriptorsSimple(
+                    descriptors.Layout.ShaderResourceViewCount,
+                    shaderResourceViewDescriptorHeap.CPUDescriptorHandleForHeapStart
+                        + (shaderResourceViewOffset * Device.ShaderResourceViewDescriptorHeaps.Stride),
+                    descriptors.ShaderResourceViewHandle,
+                    DescriptorHeapType.ConstantBufferViewShaderResourceViewUnorderedAccessView);
+                GpuDescriptorHandle gpuHandle = shaderResourceViewDescriptorHeap.GPUDescriptorHandleForHeapStart
+                    + (shaderResourceViewOffset * Device.ShaderResourceViewDescriptorHeaps.Stride);
+                shaderResourceViewOffset += descriptors.Layout.ShaderResourceViewCount;
+
+                foreach (var entry in descriptors.Layout.Entries)
+                {
+                    if (entry.Type == DescriptorLayout.EntryType.ShaderResourceView)
+                    {
+                        NativeCommandList.SetGraphicsRootDescriptorTable(
+                            entry.Slot,
+                            gpuHandle + (entry.Index * Device.ShaderResourceViewDescriptorHeaps.Stride));
+                    }
                 }
             }
 
-            // Copy sampler descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
-            Device.NativeDevice.CopyDescriptorsSimple(
-                descriptors.Layout.SamplerCount,
-                samplerDescriptorHeap.CPUDescriptorHandleForHeapStart
-                    + (samplerOffset * Device.SamplerHeaps.Stride),
-                descriptors.SamplerHandle,
-                DescriptorHeapType.Sampler);
-            GpuDescriptorHandle samplerGpuHandle = samplerDescriptorHeap.GPUDescriptorHandleForHeapStart
-                + (samplerOffset * Device.SamplerHeaps.Stride);
-            samplerOffset += descriptors.Layout.SamplerCount;
 
-            foreach (var entry in descriptors.Layout.Entries)
+
+            if (descriptors.Layout.SamplerCount != 0)
             {
-                if (entry.Type == DescriptorLayout.EntryType.SamplerState)
+                if (samplerOffset + descriptors.Layout.SamplerCount >
+                    Device.SamplerHeaps.Size)
                 {
-                    NativeCommandList.SetGraphicsRootDescriptorTable(
-                        entry.Index,
-                        samplerGpuHandle + (entry.Index * Device.SamplerHeaps.Stride));
+                    // No more space in the current descriptor heap
+                    compiledCommandList.SamplerHeaps.Add(samplerDescriptorHeap);
+
+                    samplerDescriptorHeap = Device.SamplerHeaps.Take();
+                    samplerOffset = 0;
+                    descriptorHeaps[1] = samplerDescriptorHeap;
+                    NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
+                }
+                
+                // Copy sampler descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
+                Device.NativeDevice.CopyDescriptorsSimple(
+                    descriptors.Layout.SamplerCount,
+                    samplerDescriptorHeap.CPUDescriptorHandleForHeapStart
+                        + (samplerOffset * Device.SamplerHeaps.Stride),
+                    descriptors.SamplerHandle,
+                    DescriptorHeapType.Sampler);
+                GpuDescriptorHandle samplerGpuHandle = samplerDescriptorHeap.GPUDescriptorHandleForHeapStart
+                    + (samplerOffset * Device.SamplerHeaps.Stride);
+                samplerOffset += descriptors.Layout.SamplerCount;
+
+                foreach (var entry in descriptors.Layout.Entries)
+                {
+                    if (entry.Type == DescriptorLayout.EntryType.SamplerState)
+                    {
+                        NativeCommandList.SetGraphicsRootDescriptorTable(
+                            entry.Slot,
+                            samplerGpuHandle + (entry.Index * Device.SamplerHeaps.Stride));
+                    }
                 }
             }
         }

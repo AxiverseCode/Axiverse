@@ -23,13 +23,13 @@ namespace Axiverse.Interface.Graphics
         /// Gets or sets the list of shader resource view descriptor heaps used by the command
         /// list to be released after the execution of the command list.
         /// </summary>
-        internal List<DescriptorHeap> ShaderResourceViewHeaps { get; set; }
+        internal List<DescriptorHeap> ShaderResourceViewHeaps { get; set; } = new List<DescriptorHeap>();
 
         /// <summary>
         /// Gets or sets the list of sampler heaps used by the command list to be released after
         /// the execution of the command list.
         /// </summary>
-        internal List<DescriptorHeap> SamplerHeaps { get; set; }
+        internal List<DescriptorHeap> SamplerHeaps { get; set; } = new List<DescriptorHeap>();
         
         internal GraphicsCommandList NativeCommandList;
         internal CommandAllocator NativeCommandAllocator;

@@ -11,21 +11,20 @@ namespace Axiverse.Interface.Graphics
         public int ShaderResourceViewCount;
         public int SamplerCount;
 
-        public Entry[] Entries { get; }
+        public List<Entry> Entries { get; } = new List<Entry>();
 
         public DescriptorLayout(params EntryType[] types)
         {
             var entries = new Entry[types.Length];
             foreach (var type in types)
             {
-                var entry = new Entry()
+                Entries.Add(new Entry()
                 {
+                    Slot = Entries.Count,
                     Type = type,
                     Index = (type == EntryType.ShaderResourceView) ? ShaderResourceViewCount++ : SamplerCount++
-                };
+                });
             }
-
-            Entries = entries;
         }
 
 
@@ -33,6 +32,7 @@ namespace Axiverse.Interface.Graphics
         {
             public EntryType Type;
             public int Index;
+            public int Slot;
         }
 
         public enum EntryType

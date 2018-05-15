@@ -13,11 +13,14 @@ namespace Axiverse.Interface.Graphics.Shaders
 {
     public class GeometryShader : Shader
     {
-        [StructLayout(LayoutKind.Sequential)]
-        struct PerObject
+        [StructLayout(LayoutKind.Sequential, Pack = 16, Size = 256)]
+        public struct PerObject
         {
-            Matrix WorldViewProjection;
+            public Matrix WorldViewProjection;
+            public Vector4 Color;
         }
+
+        public DescriptorLayout Layout { get; private set; }
 
         // cbufferview
         // samplers
@@ -29,9 +32,9 @@ namespace Axiverse.Interface.Graphics.Shaders
         public void Initialize()
         {
             // Pipeline state.
-            var testShaderPath = "../../../../Resources/Engine/Test/test.hlsl";
+            var testShaderPath = "../../../../../Resources/Engine/Test/test.hlsl";
             VertexShader = ShaderBytecode.CompileFromFile(testShaderPath, "VSMain", "vs_5_0");
-            PixelShader = ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "vs_5_0");
+            PixelShader = ShaderBytecode.CompileFromFile(testShaderPath, "PSMain", "ps_5_0");
 
             // Root parameters.
             var rootParameters = new RootParameter[]
@@ -63,7 +66,7 @@ namespace Axiverse.Interface.Graphics.Shaders
             var rootSignatureDescription = new RootSignatureDescription(RootSignatureFlags.AllowInputAssemblerInputLayout, rootParameters);
             RootSignature = RootSignature.Create(Device, rootSignatureDescription);
 
-            var layout = new DescriptorLayout(
+            Layout = new DescriptorLayout(
                 DescriptorLayout.EntryType.ShaderResourceView,
                 DescriptorLayout.EntryType.ShaderResourceView,
                 DescriptorLayout.EntryType.SamplerState);

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SharpDX.D3DCompiler;
+
 namespace Axiverse.Interface.Graphics
 {
     public class ShaderBytecode
@@ -22,7 +24,8 @@ namespace Axiverse.Interface.Graphics
 
         public static ShaderBytecode CompileFromFile(string path, string profile, string entryPoint)
         {
-            return new ShaderBytecode(SharpDX.D3DCompiler.ShaderBytecode.CompileFromFile(path, profile, entryPoint));
+            var result = SharpDX.D3DCompiler.ShaderBytecode.CompileFromFile(path, profile, entryPoint);
+            return new ShaderBytecode(result);
         }
     }
 }

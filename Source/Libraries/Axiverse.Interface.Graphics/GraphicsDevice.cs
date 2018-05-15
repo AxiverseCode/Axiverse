@@ -164,7 +164,7 @@ namespace Axiverse.Interface.Graphics
 
                 var result = handle;
 
-                handle.Ptr += Stride;
+                handle.Ptr += Stride * count;
                 remaining -= count;
 
                 return result;
