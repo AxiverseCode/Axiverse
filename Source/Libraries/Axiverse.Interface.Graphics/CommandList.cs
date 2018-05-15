@@ -82,9 +82,59 @@ namespace Axiverse.Interface.Graphics
 
         public void SetDescriptors(DescriptorSet descriptors)
         {
+            if (shaderResourceViewOffset + descriptors.Layout.ShaderResourceViewCount >
+                Device.ShaderResourceViewDescriptorHeaps.Size)
+            {
+                // No more space in the current descriptor heap
+                compiledCommandList.ShaderResourceViewHeaps.Add(shaderResourceViewDescriptorHeap);
 
+                shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
+                shaderResourceViewOffset = 0;
+                descriptorHeaps[0] = shaderResourceViewDescriptorHeap;
+                NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
+            }
+            
+            // Copy CBSRV descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
+            Device.NativeDevice.CopyDescriptorsSimple(
+                descriptors.Layout.ShaderResourceViewCount,
+                shaderResourceViewDescriptorHeap.CPUDescriptorHandleForHeapStart
+                    + (shaderResourceViewOffset * Device.ShaderResourceViewDescriptorHeaps.Stride),
+                descriptors.ShaderResourceViewHandle,
+                DescriptorHeapType.ConstantBufferViewShaderResourceViewUnorderedAccessView);
+            GpuDescriptorHandle gpuHandle = shaderResourceViewDescriptorHeap.GPUDescriptorHandleForHeapStart
+                + (shaderResourceViewOffset * Device.ShaderResourceViewDescriptorHeaps.Stride);
+            shaderResourceViewOffset += descriptors.Layout.ShaderResourceViewCount;
 
+            foreach (var entry in descriptors.Layout.Entries)
+            {
+                if (entry.Type == DescriptorLayout.EntryType.ShaderResourceView)
+                {
+                    NativeCommandList.SetGraphicsRootDescriptorTable(
+                        entry.Index,
+                        gpuHandle + (entry.Index * Device.ShaderResourceViewDescriptorHeaps.Stride));
+                }
+            }
 
+            // Copy sampler descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
+            Device.NativeDevice.CopyDescriptorsSimple(
+                descriptors.Layout.SamplerCount,
+                samplerDescriptorHeap.CPUDescriptorHandleForHeapStart
+                    + (samplerOffset * Device.SamplerHeaps.Stride),
+                descriptors.SamplerHandle,
+                DescriptorHeapType.Sampler);
+            GpuDescriptorHandle samplerGpuHandle = samplerDescriptorHeap.GPUDescriptorHandleForHeapStart
+                + (samplerOffset * Device.SamplerHeaps.Stride);
+            samplerOffset += descriptors.Layout.SamplerCount;
+
+            foreach (var entry in descriptors.Layout.Entries)
+            {
+                if (entry.Type == DescriptorLayout.EntryType.SamplerState)
+                {
+                    NativeCommandList.SetGraphicsRootDescriptorTable(
+                        entry.Index,
+                        samplerGpuHandle + (entry.Index * Device.SamplerHeaps.Stride));
+                }
+            }
         }
 
         public void SetIndexBuffer(GraphicsBuffer buffer, int size, IndexBufferType type)
@@ -206,42 +256,9 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetGraphicsRootSignature(rootSignature.NativeRootSignature);
         }
 
-        public void SetIndexBuffer(GraphicsBuffer view)
-        {
-            NativeCommandList.SetIndexBuffer(view.NativeIndexBufferView);
-        }
-
-        public void SetVertexBuffer(GraphicsBuffer view)
-        {
-            NativeCommandList.SetVertexBuffer(0, view.NativeVertexBufferView);
-        }
-
         public void DrawIndexed(int idxCnt)
         {
             NativeCommandList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
-        }
-
-        public void Draw(IndexBufferBinding index, VertexBufferBinding vertex)
-        {
-            NativeCommandList.SetIndexBuffer(index.Buffer.NativeIndexBufferView);
-            NativeCommandList.SetVertexBuffer(0, vertex.Buffer.NativeVertexBufferView);
-            NativeCommandList.DrawIndexedInstanced(index.Count, 1, index.Offset, vertex.Offset, 0);
-        }
-
-        public void Draw(IndexBufferBinding index, VertexBufferBinding[] vertices)
-        {
-            Contract.Requires<IndexOutOfRangeException>(vertices.Length > 0);
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                Contract.Requires(vertices[i].Offset == vertices[0].Offset);
-            }
-
-            NativeCommandList.SetIndexBuffer(index.Buffer.NativeIndexBufferView);
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                NativeCommandList.SetVertexBuffer(i, vertices[i].Buffer.NativeVertexBufferView);
-            }
-            NativeCommandList.DrawIndexedInstanced(index.Count, 1, index.Offset, vertices[0].Offset, 0);
         }
 
 

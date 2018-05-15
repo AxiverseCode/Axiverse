@@ -105,6 +105,7 @@ namespace Axiverse.Interface.Graphics
         {
             public GraphicsDevice Device { get; }
             public DescriptorHeapType HeapType { get; }
+            public int Stride { get; }
             public int Size { get; }
 
             public DescriptorHeapPool(GraphicsDevice device, DescriptorHeapType heapType, int size)
@@ -112,6 +113,7 @@ namespace Axiverse.Interface.Graphics
                 Device = device;
                 HeapType = heapType;
                 Size = size;
+                Stride = device.NativeDevice.GetDescriptorHandleIncrementSize(heapType);
             }
 
             protected override DescriptorHeap Create()

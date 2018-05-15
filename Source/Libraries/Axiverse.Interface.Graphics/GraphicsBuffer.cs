@@ -15,15 +15,6 @@ namespace Axiverse.Interface.Graphics
     {
         internal Resource NativeResource;
 
-        private IndexBufferView nativeIndexBufferView;
-        private VertexBufferView nativeVertexBufferView;
-
-        [Obsolete]
-        public IndexBufferView NativeIndexBufferView => nativeIndexBufferView;
-
-        [Obsolete]
-        public VertexBufferView NativeVertexBufferView => nativeVertexBufferView;
-
         internal long GpuHandle => NativeResource.GPUVirtualAddress;
 
         public int Size { get; private set; }
@@ -33,7 +24,66 @@ namespace Axiverse.Interface.Graphics
 
         }
 
-        private void InitializeHeaps(int size, IntPtr data, bool dataStatic = true)
+        public void Write<T>(ref T data, int offsetInBytes = 0)
+            where T : struct
+        {
+            Range range = new Range
+            {
+                Begin = offsetInBytes,
+                End = offsetInBytes + Utilities.SizeOf<T>()
+            };
+
+            if (range.End > Size)
+            {
+                throw new ArgumentException("Data exceeds size");
+            }
+
+            IntPtr mapPtr = NativeResource.Map(0, range);
+            Marshal.StructureToPtr(data, mapPtr, false);
+            NativeResource.Unmap(0, range);
+        }
+
+        public void Write<T>(int offsetIndex, ref T data)
+            where T : struct
+        {
+            var size = Utilities.SizeOf<T>();
+            Range range = new Range
+            {
+                Begin = offsetIndex * size,
+                End = offsetIndex * size + size
+            };
+
+            if (range.End > Size)
+            {
+                throw new ArgumentException("Data exceeds size");
+            }
+
+            IntPtr mapPtr = NativeResource.Map(0, range);
+            Marshal.StructureToPtr(data, mapPtr, false);
+            NativeResource.Unmap(0, range);
+        }
+
+        public void Write<T>(T[] data, int offsetInBytes = 0)
+            where T : struct
+        {
+            Range range = new Range
+            {
+                Begin = offsetInBytes,
+                End = offsetInBytes + Utilities.SizeOf(data)
+            };
+
+            if (range.End > Size)
+            {
+                throw new ArgumentException("Data exceeds size");
+            }
+
+            IntPtr mapPtr = NativeResource.Map(0, range);
+            IntPtr dataPtr = Marshal.UnsafeAddrOfPinnedArrayElement(data, 0);
+            Utilities.CopyMemory(mapPtr, dataPtr, range.End - range.Begin);
+            NativeResource.Unmap(0, range);
+        }
+
+        private void Initialize(int size, IntPtr data, bool dataStatic = true)
         {
             Size = size;
 
@@ -67,7 +117,7 @@ namespace Axiverse.Interface.Graphics
         public static GraphicsBuffer Create(GraphicsDevice device, int size, IntPtr data, bool isStatic)
         {
             var result = new GraphicsBuffer(device);
-            result.InitializeHeaps(size, data, isStatic);
+            result.Initialize(size, data, isStatic);
             return result;
         }
 
@@ -75,24 +125,6 @@ namespace Axiverse.Interface.Graphics
             where T: struct
         {
             return Create(device, Utilities.SizeOf(data), Marshal.UnsafeAddrOfPinnedArrayElement(data, 0), isStatic);
-        }
-
-        private void InitializeAsIndexBuffer(int size, IntPtr data, bool dataStatic = true)
-        {
-            InitializeHeaps(size, data, dataStatic);
-
-            nativeIndexBufferView.BufferLocation = NativeResource.GPUVirtualAddress; // check if its static
-            nativeIndexBufferView.Format = SharpDX.DXGI.Format.R32_UInt;
-            nativeIndexBufferView.SizeInBytes = size;
-        }
-
-        private void InitializeAsVertexBuffer(int size, int vertexSize, IntPtr data, bool dataStatic = true)
-        {
-            InitializeHeaps(size, data, dataStatic);
-
-            nativeVertexBufferView.BufferLocation = NativeResource.GPUVirtualAddress; // check if its static
-            nativeVertexBufferView.SizeInBytes = size;
-            nativeVertexBufferView.StrideInBytes = vertexSize;
         }
     }
 }
