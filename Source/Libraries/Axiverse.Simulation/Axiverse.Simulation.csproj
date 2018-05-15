@@ -47,10 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvanceProducer.cs" />
+    <Compile Include="Components\HierarchalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />
     <Compile Include="CurrentAttribute.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Model.cs" />
     <Compile Include="ParameterComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
     <Compile Include="Producer.cs" />

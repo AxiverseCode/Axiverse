@@ -34,11 +34,6 @@ namespace Axiverse.Simulation
         public SpatialComponent Spatial { get; }
 
         /// <summary>
-        /// Gets or sets the model of this entity.
-        /// </summary>
-        public Model Model { get; set; }
-
-        /// <summary>
         /// Constructs an entity with a new identifier.
         /// </summary>
         public Entity() : this(Guid.NewGuid())

@@ -52,7 +52,7 @@ namespace HelloGraphics
             var world = Matrix4.Identity;
             var view = Matrix4.LookAtRH(new Vector3(0, 10, 10), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
             var projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
-                1,
+                1.0f * form.ClientSize.Width / form.ClientSize.Height,
                 2.0f,
                 2000.0f);
             var transforms = new GeometryShader.PerObject[1];
