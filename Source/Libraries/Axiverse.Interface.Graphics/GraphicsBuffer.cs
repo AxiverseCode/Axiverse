@@ -24,6 +24,15 @@ namespace Axiverse.Interface.Graphics
 
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (!IsDisposed)
+            {
+                NativeResource.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         public void Write<T>(ref T data, int offsetInBytes = 0)
             where T : struct
         {

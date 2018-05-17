@@ -161,6 +161,15 @@ namespace Axiverse.Interface.Graphics
             // https://msdn.microsoft.com/en-us/library/windows/desktop/bb205075(v=vs.85).aspx#Handling_Window_Resizing
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (!IsDisposed)
+            {
+                DisposeFrames();
+            }
+            base.Dispose(disposing);
+        }
+
         public void DisposeFrames()
         {
             Canvas.Dispose();

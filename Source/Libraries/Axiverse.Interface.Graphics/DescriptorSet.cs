@@ -18,7 +18,7 @@ namespace Axiverse.Interface.Graphics
         public DescriptorSet(GraphicsDevice device, DescriptorLayout layout) : base(device)
         {
             Layout = layout;
-
+            
             ShaderResourceViewHandle = device.ShaderResourceViewAllocator.Allocate(layout.ShaderResourceViewCount);
             SamplerHandle = device.SamplerAllocator.Allocate(layout.SamplerCount);
         }

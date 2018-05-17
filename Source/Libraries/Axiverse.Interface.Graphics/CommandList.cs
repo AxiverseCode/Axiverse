@@ -61,6 +61,17 @@ namespace Axiverse.Interface.Graphics
 
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (!IsDisposed)
+            {
+                NativeCommandList.Dispose();
+                shaderResourceViewDescriptorHeap.Dispose();
+                samplerDescriptorHeap.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         private void Initialize()
         {
             commandAllocator = Device.CommandAllocators.Take();

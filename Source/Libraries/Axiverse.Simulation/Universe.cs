@@ -43,7 +43,7 @@ namespace Axiverse.Simulation
 
             foreach (var entity in entities.Values)
             {
-                entity.Model?.Process(entity);
+                //entity.Model?.Process(entity);
                 //Console.WriteLine(entity);
             }
         }

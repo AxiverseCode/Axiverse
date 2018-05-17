@@ -121,10 +121,13 @@ namespace Axiverse.Interface.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            NativeSwapChain.Dispose();
-            NativeSwapChain = null;
-            NativeCommandQueue.Dispose();
-            NativeCommandQueue = null;
+            if (!IsDisposed)
+            {
+                NativeSwapChain.Dispose();
+                NativeSwapChain = null;
+                NativeCommandQueue.Dispose();
+                NativeCommandQueue = null;
+            }
             base.Dispose(disposing);
         }
 

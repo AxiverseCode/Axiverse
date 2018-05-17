@@ -20,7 +20,10 @@ namespace Axiverse.Interface.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            NativeRootSignature.Dispose();
+            if (!IsDisposed)
+            {
+                NativeRootSignature.Dispose();
+            }
             base.Dispose(disposing);
         }
 

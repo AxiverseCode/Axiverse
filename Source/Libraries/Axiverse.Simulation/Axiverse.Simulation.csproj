@@ -50,6 +50,7 @@
     <Compile Include="Components\HierarchalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />
     <Compile Include="CurrentAttribute.cs" />
+    <Compile Include="EntityProcessor.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="ParameterComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />

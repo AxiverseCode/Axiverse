@@ -5,7 +5,7 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// A resource bound to a <see cref="GraphicsDevice"/>.
     /// </summary>
-    public class GraphicsResource : IDisposable
+    public class GraphicsResource : ITrackedDisposable
     {
         /// <summary>
         /// Gets the device the resource is bound to.

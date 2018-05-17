@@ -10,7 +10,7 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Is responsible for creating all other objects (textures, buffers, shaders, pipeline states, etc.)
     /// </summary>
-    public class GraphicsDevice
+    public class GraphicsDevice : IDisposable
     {
         /// <summary>
         /// Gets the native d3d device
@@ -21,8 +21,7 @@ namespace Axiverse.Interface.Graphics
         /// Gets the list of resources bound to this device.
         /// </summary>
         public List<GraphicsResource> Resources { get; } = new List<GraphicsResource>();
-
-
+        
         internal DescriptorAllocator SamplerAllocator;
         internal DescriptorAllocator ShaderResourceViewAllocator;
         internal DescriptorAllocator DepthStencilViewAllocator;
@@ -68,6 +67,10 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Creates a <see cref="GraphicsDevice"/>.
+        /// </summary>
+        /// <returns></returns>
         public static GraphicsDevice Create()
         {
             var graphicsDevice = new GraphicsDevice();
@@ -101,7 +104,7 @@ namespace Axiverse.Interface.Graphics
         /// <summary>
         /// Object pool for descriptor heaps.
         /// </summary>
-        internal class DescriptorHeapPool : ObjectPool<DescriptorHeap>
+        internal class DescriptorHeapPool : DisposableObjectPool<DescriptorHeap>
         {
             public GraphicsDevice Device { get; }
             public DescriptorHeapType HeapType { get; }
@@ -137,6 +140,7 @@ namespace Axiverse.Interface.Graphics
             public DescriptorHeapType HeapType { get; }
             public int Stride { get; }
 
+            private List<DescriptorHeap> heaps = new List<DescriptorHeap>();
             private DescriptorHeap heap;
             private CpuDescriptorHandle handle;
             private int remaining;
@@ -147,10 +151,29 @@ namespace Axiverse.Interface.Graphics
                 Stride = device.NativeDevice.GetDescriptorHandleIncrementSize(heapType);
             }
 
+            protected override void Dispose(bool disposing)
+            {
+                if (!IsDisposed)
+                {
+                    foreach (var heap in heaps)
+                    {
+                        heap.Dispose();
+                    }
+                }
+                base.Dispose(disposing);
+            }
+
             public CpuDescriptorHandle Allocate(int count)
             {
+                Preconditions.RequireUndisposed(this);
+
                 if (heap == null || remaining < count)
                 {
+                    if (heap != null)
+                    {
+                        heaps.Add(heap);
+                    }
+
                     heap = Device.NativeDevice.CreateDescriptorHeap(new DescriptorHeapDescription
                     {
                         Flags = DescriptorHeapFlags.None,
@@ -172,5 +195,36 @@ namespace Axiverse.Interface.Graphics
 
             public static int DescriptorsPerHeap = 256;
         }
+
+        #region IDisposable Support
+        public bool IsDisposed { get; private set; }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!IsDisposed)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                    foreach (var resource in Resources)
+                    {
+                        resource.Dispose();
+                    }
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                IsDisposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

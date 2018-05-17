@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\CollectionChangedAction.cs" />
+    <Compile Include="Collections\CollectionChangedEventArgs.cs" />
+    <Compile Include="Collections\EmptyList.cs" />
+    <Compile Include="Collections\ItemList.cs" />
+    <Compile Include="Collections\TrackedList.cs" />
+    <Compile Include="DisposableObjectPool.cs" />
     <Compile Include="Flag.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Injection\BindAttribute.cs" />
@@ -57,6 +63,7 @@
     <Compile Include="Injection\NamedKey.cs" />
     <Compile Include="Injection\Binder.cs" />
     <Compile Include="Injection\SyntheticKey.cs" />
+    <Compile Include="ITrackedDisposable.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Modules\MainModuleAttribute.cs" />
     <Compile Include="Modules\Module.cs" />

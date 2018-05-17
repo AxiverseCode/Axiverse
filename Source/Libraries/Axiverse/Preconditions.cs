@@ -49,5 +49,18 @@ namespace Axiverse
                 throw new TException();
             }
         }
+
+        /// <summary>
+        /// Throws an <see cref="ObjectDisposedException"/> if the object is disposed.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="disposable"></param>
+        public static void RequireUndisposed<T>(T disposable) where T: ITrackedDisposable
+        {
+            if (disposable.IsDisposed)
+            {
+                throw new ObjectDisposedException(nameof(T));
+            }
+        }
     }
 }

@@ -25,7 +25,10 @@ namespace Axiverse.Interface.Graphics
 
         protected override void Dispose(bool disposing)
         {
-            NativePipelineState.Dispose();
+            if (!IsDisposed)
+            {
+                NativePipelineState.Dispose();
+            }
             base.Dispose(disposing);
         }
 

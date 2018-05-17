@@ -10,10 +10,15 @@ namespace Axiverse
         where T : class
     {
         /// <summary>
+        /// Gets the number of elements in the <see cref="ObjectPool{T}"/>.
+        /// </summary>
+        public int Count => bag.Count;
+
+        /// <summary>
         /// Takes an object from the pool if there are any, otherwise returns a new object.
         /// </summary>
         /// <returns></returns>
-        public T Take()
+        public virtual T Take()
         {
             if (bag.TryTake(out var result))
             {
