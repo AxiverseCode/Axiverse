@@ -16,7 +16,7 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Represents a texture resource
     /// </summary>
-    public partial class Texture : IResource, IGraphicsResource
+    public partial class Texture : IGraphicsResource
     {
         /// <summary>
         /// Gets the dimensions of the texture.

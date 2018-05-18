@@ -13,5 +13,10 @@ namespace Axiverse.Interface.Engine
         public Scene Scene { get; set; }
 
         public Compositor Compositor { get; set; }
+
+        public SceneSystem()
+        {
+            Scene = new Scene();
+        }
     }
 }

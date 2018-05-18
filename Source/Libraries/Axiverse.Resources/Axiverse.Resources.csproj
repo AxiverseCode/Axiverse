@@ -51,23 +51,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache.cs" />
-    <Compile Include="FileSystemBlob.cs" />
-    <Compile Include="FileSystemMount.cs" />
-    <Compile Include="FileSystemNode.cs" />
-    <Compile Include="IStoreNode.cs" />
-    <Compile Include="IStoreBlob.cs" />
-    <Compile Include="Store.cs" />
-    <Compile Include="IResource.cs" />
+    <Compile Include="Cached.cs" />
+    <Compile Include="ILoader.cs" />
+    <Compile Include="Deprecated\Store.cs" />
     <Compile Include="Library.cs" />
-    <Compile Include="Loader.cs" />
-    <Compile Include="Mount.cs" />
+    <Compile Include="Deprecated\Mount.cs" />
+    <Compile Include="LoadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VirtualBlob.cs" />
-    <Compile Include="VirtualNode.cs" />
-    <Compile Include="ZipMount.cs" />
+    <Compile Include="TypeCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Axiverse\Axiverse.csproj">
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
+      <Name>Axiverse</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

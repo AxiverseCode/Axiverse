@@ -12,11 +12,21 @@ namespace Axiverse.Resources
     /// </summary>
     public class Library
     {
-        public Stream Open(string path)
+        public string BasePath { get; set; }
+        
+        public Stream OpenRead(string path)
         {
-            throw new NotImplementedException();
+            return File.OpenRead(GetPath(path));
         }
 
-        
+        protected string GetPath(string path)
+        {
+            return Path.Combine(BasePath, path);
+        }
+
+        public Library(string basePath)
+        {
+            BasePath = basePath;
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Axiverse.Injection;
+
 namespace Axiverse.Modules
 {
     public static class ModuleProgram
@@ -15,6 +17,8 @@ namespace Axiverse.Modules
             // create injector
 
             // load primary module(s)
+            var program = Injector.Global.Resolve<IProgram>();
+            program.Run(args);
         }
     }
 }

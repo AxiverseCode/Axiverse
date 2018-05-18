@@ -11,6 +11,9 @@ using SharpDX.DXGI;
 using SharpDX.Windows;
 using SharpDX.Direct3D12;
 
+using Axiverse.Resources;
+using Axiverse.Injection;
+
 namespace Axiverse.Interface.Graphics
 {
     using System.Drawing;
@@ -52,8 +55,13 @@ namespace Axiverse.Interface.Graphics
 
         public void Load(string filename)
         {
+            var library = Injector.Global.Resolve<Library>();
+
             Bitmap bitmap;
-            bitmap = new Bitmap(filename);
+            using (var stream = library.OpenRead(filename))
+            {
+                bitmap = new Bitmap(stream);
+            }
 
             Width = bitmap.Width;
             Height = bitmap.Height;

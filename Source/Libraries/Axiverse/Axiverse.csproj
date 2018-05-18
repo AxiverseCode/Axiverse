@@ -65,6 +65,7 @@
     <Compile Include="Injection\SyntheticKey.cs" />
     <Compile Include="ITrackedDisposable.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Modules\IProgram.cs" />
     <Compile Include="Modules\MainModuleAttribute.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ModuleProgram.cs" />

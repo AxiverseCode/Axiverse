@@ -16,11 +16,7 @@ namespace Axiverse.Resources
 
         private readonly List<Mount> mountList = new List<Mount>();
 
-        /// <summary>
-        /// Gets the root node in the store.
-        /// </summary>
-        public IStoreNode Root { get; set; }
-
+        
         // GetFiles
         // GetDirectory
         // DoesFileExists

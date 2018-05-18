@@ -83,10 +83,20 @@ namespace Axiverse.Injection
             return null;
         }
 
+        public T Resolve<T>() where T : class
+        {
+            return Resolve(Key.From(typeof(T))) as T;
+        }
+
         public T Resolve<T>(Key key) where T : class
         {
             Contract.Requires<InvalidCastException>(typeof(T).IsAssignableFrom(key.Type));
             return Resolve(key) as T;
+        }
+
+        public void Bind<T>(T value) where T : class
+        {
+            Bindings.Add(value);
         }
 
         public void Bind(Key key, object value)
@@ -103,5 +113,10 @@ namespace Axiverse.Injection
         {
 
         }
+
+        /// <summary>
+        /// Gets the global injector for the application.
+        /// </summary>
+        public static Injector Global { get; } = new Injector();
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SharpDX;
 using SharpDX.Windows;
 
+using Axiverse.Injection;
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
 using Axiverse.Interface.Graphics.Shaders;
@@ -44,6 +45,9 @@ namespace Axiverse.Interface.Engine
             var swapChain = SwapChain.Create(device, form);
             var commandList = CommandList.Create(device);
 
+            // Bind resources
+            Injector.Global.Bind(device);
+
             // Shaders
             var geometryShader = new GeometryShader(device);
             geometryShader.Initialize();
@@ -70,7 +74,7 @@ namespace Axiverse.Interface.Engine
             var constantBuffer = GraphicsBuffer.Create(device, transforms, false);
 
             var texture = new Texture(device);
-            texture.Load(@"..\..\..\..\..\Resources\Textures\Placeholder Grid.jpg");
+            texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
 
             descriptorSet.SetConstantBuffer(0, constantBuffer);
             descriptorSet.SetShaderResourceView(1, texture);
