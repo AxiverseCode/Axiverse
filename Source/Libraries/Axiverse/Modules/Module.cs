@@ -16,7 +16,7 @@ namespace Axiverse.Modules
 
         protected virtual void Initialize()
         {
-
+            var m = typeof(Main);
         }
 
         protected void Bind<T>(T value) where T : class
@@ -25,7 +25,11 @@ namespace Axiverse.Modules
         }
 
         // bind - to inject
-        
+
         // install - module possibly with parameters
+
+
+        // inject, but figure out dependencies first and automatically activate those. Keep an
+        // activation trace log as well.
     }
 }

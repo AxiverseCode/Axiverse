@@ -53,6 +53,6 @@ namespace Axiverse.Resources
             return typeCache;
         }
 
-        private Dictionary<Type, object> m_typeCaches { get; set; } = new Dictionary<Type, object>();
+        private Dictionary<Type, object> m_typeCaches = new Dictionary<Type, object>();
     }
 }

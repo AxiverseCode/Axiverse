@@ -10,10 +10,6 @@ using Axiverse.Resources;
 
 namespace Axiverse.Interface.Graphics
 {
-    using Vector2 = SharpDX.Vector2;
-    using Vector3 = SharpDX.Vector3;
-    using Vector4 = SharpDX.Vector4;
-
     public class WavefrontObjLoader
     {
         public List<Vertex> VertexList;

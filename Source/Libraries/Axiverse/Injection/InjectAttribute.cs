@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface.Graphics
+namespace Axiverse.Injection
 {
-    public class ModelComponent
+    public class InjectAttribute : Attribute
     {
-        public Texture Texture;
-        public ObjMesh Mesh;
     }
 }

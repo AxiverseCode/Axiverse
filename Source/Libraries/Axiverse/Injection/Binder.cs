@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace Axiverse.Injection
         /// non-readonly fields which have a <see cref="BindAttribute"/> attribute set will have
         /// bindings created. Derived types bound will only be bounds based on the fields and
         /// properties of the given types and may not represent the full set of bindings on that
-        /// type.
+        /// type. Relevant fields and properties will be cached.
         /// </summary>
         /// <param name="type"></param>
         public Binder(Type type)
@@ -96,7 +97,7 @@ namespace Axiverse.Injection
         public static void Bind(object obj, IBindingProvider bindings)
         {
             var type = obj.GetType();
-            Contract.Requires<InvalidCastException>(obj.GetType().IsValueType == false);
+            Contract.Requires<InvalidCastException>(obj.GetType().IsClass);
 
             var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
             foreach (var property in properties)
@@ -127,6 +128,7 @@ namespace Axiverse.Injection
         public static void Bind(ref object obj, IBindingProvider bindings)
         {
             var type = obj.GetType();
+            Preconditions.Requires(type.IsValueType || type.IsClass);
 
             var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
             foreach (var property in properties)
@@ -153,6 +155,58 @@ namespace Axiverse.Injection
                     field.SetValueDirect(reference, value);
                 }
             }
+        }
+
+        /// <summary>
+        /// Activates a new instance of the type with the injector parameters bound from the
+        /// <see cref="IBindingProvider"/>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="bindings"></param>
+        /// <returns></returns>
+        public static T Activate<T>(IBindingProvider bindings)
+        {
+            var type = typeof(T);
+
+            var constructors = type.GetConstructors(BindingFlags.Public);
+            ConstructorInfo injectConstructor = type.GetConstructor(Type.EmptyTypes);
+
+            // find best constructor
+            foreach (var constructor in constructors)
+            {
+                if (constructor.GetCustomAttributes<InjectAttribute>().Count() > 0)
+                {
+                    Preconditions.Requires<AmbiguousMatchException>(injectConstructor == null);
+                }
+            }
+
+            if (injectConstructor == null)
+            {
+                throw new MissingMethodException();
+            }
+
+            // initialize injected fields and properties
+            var value = FormatterServices.GetUninitializedObject(type);
+            Bind(ref value, bindings);
+
+            var parameters = injectConstructor.GetParameters();
+            var parameterValues = new object[parameters.Length];
+            // find attributes with binding.
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                if (bindings.TryGetValue(Key.From(parameters[i]), out var parameterValue))
+                {
+                    parameterValues[i] = parameterValue;
+                }
+                else
+                {
+                    throw new MissingFieldException();
+                }
+            }
+
+            injectConstructor.Invoke(value, parameterValues);
+
+            throw new NotImplementedException();
         }
 
         private readonly Dictionary<Key, FieldInfo> fields = new Dictionary<Key, FieldInfo>();

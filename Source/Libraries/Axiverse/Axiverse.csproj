@@ -55,6 +55,7 @@
     <Compile Include="Injection\BindingAttribute.cs" />
     <Compile Include="Injection\BindingHierarchy.cs" />
     <Compile Include="Injection\IBindingProvider.cs" />
+    <Compile Include="Injection\InjectAttribute.cs" />
     <Compile Include="Injection\Injector.cs" />
     <Compile Include="Injection\AttributedKey.cs" />
     <Compile Include="Injection\BindingDictionary.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ITrackedDisposable.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Modules\IProgram.cs" />
+    <Compile Include="Modules\Main.cs" />
     <Compile Include="Modules\MainModuleAttribute.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ModuleProgram.cs" />

@@ -17,8 +17,8 @@ namespace Axiverse.Modules
             // create injector
 
             // load primary module(s)
-            var program = Injector.Global.Resolve<IProgram>();
-            program.Run(args);
+            var main = Injector.Global.Resolve<Main>();
+            main(args);
         }
     }
 }
