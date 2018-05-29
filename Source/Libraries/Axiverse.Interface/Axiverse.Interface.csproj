@@ -67,8 +67,9 @@
     <Compile Include="Rendering\MeshDraw.cs" />
     <Compile Include="Rendering\Model.cs" />
     <Compile Include="Scenes\Entity.cs" />
-    <Compile Include="Scenes\RenderableComponent.cs" />
+    <Compile Include="Scenes\ModelComponent.cs" />
     <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="Scenes\TransformComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">

@@ -186,6 +186,11 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetIndexBuffer(view);
         }
 
+        public void SetIndexBuffer(IndexBufferBinding binding)
+        {
+            SetIndexBuffer(binding.Buffer, binding.Count * binding.Stride, binding.Type);
+        }
+
         public void SetVertexBuffer(GraphicsBuffer buffer, int slot, int size, int stride)
         {
             var view = new VertexBufferView
@@ -195,6 +200,11 @@ namespace Axiverse.Interface.Graphics
                 StrideInBytes = stride,
             };
             NativeCommandList.SetVertexBuffer(slot, view);
+        }
+
+        public void SetVertexBuffer(VertexBufferBinding binding, int slot)
+        {
+            SetVertexBuffer(binding.Buffer, slot, binding.Count * binding.Stride,  binding.Stride);
         }
 
 
@@ -278,9 +288,19 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetRenderTargets(1, view, null);
         }
 
-        public void ClearTargetColor(CpuDescriptorHandle handle,float r,float g, float b, float a)
+        public void SetRenderTargets(CpuDescriptorHandle render, CpuDescriptorHandle depth)
+        {
+            NativeCommandList.SetRenderTargets(1, render, depth);
+        }
+
+        public void ClearTargetColor(CpuDescriptorHandle handle, float r, float g, float b, float a)
         {
             NativeCommandList.ClearRenderTargetView(handle, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
+        }
+
+        public void ClearDepth(CpuDescriptorHandle handle, float depth)
+        {
+            NativeCommandList.ClearDepthStencilView(handle, ClearFlags.FlagsDepth, depth, 0);
         }
 
         public void ResourceTransition(SharpDX.Direct3D12.Resource resource,ResourceState before, ResourceState after)

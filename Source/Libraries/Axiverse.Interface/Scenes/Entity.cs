@@ -13,12 +13,12 @@ namespace Axiverse.Interface.Scenes
     {
         HierarchalComponent Hierarchy { get; }
 
-        RenderableComponent Renderable { get; }
+        ModelComponent Renderable { get; }
 
         public Entity()
         {
             Hierarchy = new HierarchalComponent();
-            Renderable = new RenderableComponent();
+            Renderable = new ModelComponent();
 
             Set(Hierarchy);
             Set(Renderable);

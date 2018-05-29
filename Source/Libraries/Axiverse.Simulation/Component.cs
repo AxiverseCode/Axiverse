@@ -15,6 +15,9 @@ namespace Axiverse.Simulation
         /// Clones the component.
         /// </summary>
         /// <returns></returns>
-        public abstract Component Clone();
+        public virtual Component Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

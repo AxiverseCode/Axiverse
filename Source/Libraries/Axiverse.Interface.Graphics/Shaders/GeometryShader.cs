@@ -39,7 +39,7 @@ namespace Axiverse.Interface.Graphics.Shaders
             // Root parameters.
             var rootParameters = new RootParameter[]
             {
-                new RootParameter(ShaderVisibility.Vertex,
+                new RootParameter(ShaderVisibility.All,
                     new DescriptorRange()
                     {
                         RangeType = DescriptorRangeType.ConstantBufferView,

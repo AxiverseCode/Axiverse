@@ -10,7 +10,8 @@ namespace Axiverse.Interface.Graphics
     {
         public VertexLayout Declaration;
         public GraphicsBuffer Buffer;
-        public int Offset;
+        //public int Offset;
+        public int Stride;
         public int Count;
 
         // declaration

@@ -516,29 +516,34 @@ namespace Axiverse
         //    result.Z = z;
         //}
 
-        //public static Matrix4 FromQuaternion(Quaternion quaternion)
-        //{
-        //    Matrix4 result;
-        //    float xx = quaternion.X * quaternion.X;
-        //    float yy = quaternion.Y * quaternion.Y;
-        //    float zz = quaternion.Z * quaternion.Z;
-        //    float xy = quaternion.X * quaternion.Y;
-        //    float zw = quaternion.Z * quaternion.W;
-        //    float zx = quaternion.Z * quaternion.X;
-        //    float yw = quaternion.Y * quaternion.W;
-        //    float yz = quaternion.Y * quaternion.Z;
-        //    float xw = quaternion.X * quaternion.W;
-        //    result.M11 = 1f - (2f * (yy + zz));
-        //    result.M12 = 2f * (xy + zw);
-        //    result.M13 = 2f * (zx - yw);
-        //    result.M21 = 2f * (xy - zw);
-        //    result.M22 = 1f - (2f * (zz + xx));
-        //    result.M23 = 2f * (yz + xw);
-        //    result.M31 = 2f * (zx + yw);
-        //    result.M32 = 2f * (yz - xw);
-        //    result.M33 = 1f - (2f * (yy + xx));
-        //    return result;
-        //}
+        public static Matrix4 FromQuaternion(Quaternion quaternion)
+        {
+            Matrix4 result;
+            float xx = quaternion.X * quaternion.X;
+            float yy = quaternion.Y * quaternion.Y;
+            float zz = quaternion.Z * quaternion.Z;
+            float xy = quaternion.X * quaternion.Y;
+            float zw = quaternion.Z * quaternion.W;
+            float zx = quaternion.Z * quaternion.X;
+            float yw = quaternion.Y * quaternion.W;
+            float yz = quaternion.Y * quaternion.Z;
+            float xw = quaternion.X * quaternion.W;
+            result.M11 = 1f - (2f * (yy + zz));
+            result.M12 = 2f * (xy + zw);
+            result.M13 = 2f * (zx - yw);
+            result.M14 = 0;
+            result.M21 = 2f * (xy - zw);
+            result.M22 = 1f - (2f * (zz + xx));
+            result.M23 = 2f * (yz + xw);
+            result.M24 = 0;
+            result.M31 = 2f * (zx + yw);
+            result.M32 = 2f * (yz - xw);
+            result.M33 = 1f - (2f * (yy + xx));
+            result.M34 = 0;
+            result.M41 = result.M42 = result.M43 = 0;
+            result.M44 = 1;
+            return result;
+        }
 
         //#endregion
 

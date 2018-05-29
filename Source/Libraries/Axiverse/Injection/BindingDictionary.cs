@@ -12,6 +12,19 @@ namespace Axiverse.Injection
     /// </summary>
     public class BindingDictionary : IBindingProvider
     {
+        public object this[Key key]
+        {
+            get
+            {
+                return bindings[key];
+            }
+            set
+            {
+                Preconditions.Requires<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
+                bindings[key] = value;
+            }
+        }
+
         public void Add<T>(T value)
         {
             bindings.Add(Key.From(typeof(T)), value);
@@ -19,13 +32,18 @@ namespace Axiverse.Injection
 
         public void Add(Key key, object value)
         {
-            Contract.Requires<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
+            Preconditions.Requires<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
             bindings.Add(key, value);
         }
 
         public bool Remove(Key key)
         {
             return bindings.Remove(key);
+        }
+
+        public T Get<T>(Key key) where T : class
+        {
+            return bindings[key] as T;
         }
 
         public bool TryGetValue(Key key, out object value)

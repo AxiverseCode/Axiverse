@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Axiverse.Resources;
 using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Assets.Models;
+
 namespace Axiverse.Interface.Assets
 {
     public class Module : Modules.Module
