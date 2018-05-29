@@ -75,7 +75,10 @@ namespace Axiverse.Interface.Graphics
         private void Initialize()
         {
             commandAllocator = Device.CommandAllocators.Take();
-            compiledCommandList = new CompiledCommandList();
+            compiledCommandList = new CompiledCommandList
+            {
+                CommandList = this
+            };
             fenceValue = 0;
             fence = Device.NativeDevice.CreateFence(0, FenceFlags.None);
             
@@ -105,12 +108,7 @@ namespace Axiverse.Interface.Graphics
                     Device.ShaderResourceViewDescriptorHeaps.Size)
                 {
                     // No more space in the current descriptor heap
-                    compiledCommandList.ShaderResourceViewHeaps.Add(shaderResourceViewDescriptorHeap);
-
-                    shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
-                    shaderResourceViewOffset = 0;
-                    descriptorHeaps[0] = shaderResourceViewDescriptorHeap;
-                    NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
+                    CloseShaderResourceViewHeap();
                 }
 
                 // Copy CBSRV descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
@@ -143,12 +141,7 @@ namespace Axiverse.Interface.Graphics
                     Device.SamplerHeaps.Size)
                 {
                     // No more space in the current descriptor heap
-                    compiledCommandList.SamplerHeaps.Add(samplerDescriptorHeap);
-
-                    samplerDescriptorHeap = Device.SamplerHeaps.Take();
-                    samplerOffset = 0;
-                    descriptorHeaps[1] = samplerDescriptorHeap;
-                    NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
+                    CloseSamplerHeap();
                 }
                 
                 // Copy sampler descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
@@ -172,6 +165,34 @@ namespace Axiverse.Interface.Graphics
                     }
                 }
             }
+        }
+
+        private void CloseShaderResourceViewHeap()
+        {
+            if (shaderResourceViewOffset == 0)
+            {
+                return;
+            }
+            compiledCommandList.ShaderResourceViewHeaps.Add(shaderResourceViewDescriptorHeap);
+
+            shaderResourceViewDescriptorHeap = Device.ShaderResourceViewDescriptorHeaps.Take();
+            shaderResourceViewOffset = 0;
+            descriptorHeaps[0] = shaderResourceViewDescriptorHeap;
+            NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
+        }
+
+        private void CloseSamplerHeap()
+        {
+            if (samplerOffset == 0)
+            {
+                return;
+            }
+            compiledCommandList.SamplerHeaps.Add(samplerDescriptorHeap);
+
+            samplerDescriptorHeap = Device.SamplerHeaps.Take();
+            samplerOffset = 0;
+            descriptorHeaps[1] = samplerDescriptorHeap;
+            NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
         }
 
         public void SetIndexBuffer(GraphicsBuffer buffer, int size, IndexBufferType type)
@@ -246,9 +267,12 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.Reset(commandAllocator, null);
         }
 
-        public void Close()
+        public CompiledCommandList Close()
         {
+            CloseShaderResourceViewHeap();
+            CloseSamplerHeap();
             NativeCommandList.Close();
+            return compiledCommandList;
         }
 
         /// <summary>

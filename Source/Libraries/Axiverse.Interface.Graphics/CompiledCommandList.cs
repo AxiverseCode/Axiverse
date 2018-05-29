@@ -33,5 +33,21 @@ namespace Axiverse.Interface.Graphics
         
         internal GraphicsCommandList NativeCommandList;
         internal CommandAllocator NativeCommandAllocator;
+
+        public void Release()
+        {
+            var device = CommandList.Device;
+            foreach (var shaderResourceViewHeap in ShaderResourceViewHeaps)
+            {
+                device.ShaderResourceViewDescriptorHeaps.Add(shaderResourceViewHeap);
+            }
+            ShaderResourceViewHeaps.Clear();
+
+            foreach (var samplerHeaps in SamplerHeaps)
+            {
+                device.SamplerHeaps.Add(samplerHeaps);
+            }
+            SamplerHeaps.Clear();
+        }
     }
 }

@@ -189,8 +189,8 @@ namespace Axiverse.Interface.Engine
                     }
                     commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
-                    commandList.Close();
-                    swapChain.ExecuteCommandList(commandList);
+                    var compiled = commandList.Close();
+                    swapChain.ExecuteCommandList(compiled);
                     commandList.FinishFrame(swapChain);
                     swapChain.Present();
                 }

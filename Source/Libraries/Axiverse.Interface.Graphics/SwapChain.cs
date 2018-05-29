@@ -26,6 +26,7 @@ namespace Axiverse.Interface.Graphics
 
         internal CommandQueue NativeCommandQueue;
         internal SwapChain3 NativeSwapChain;
+        internal List<CompiledCommandList> compiled = new List<CompiledCommandList>();
         private int width;
         private int height;
         
@@ -95,15 +96,22 @@ namespace Axiverse.Interface.Graphics
             return NativeBackBuffers[CurrentBufferIndex];
         }
 
-        public void ExecuteCommandList(CommandList list)
+        public void ExecuteCommandList(CompiledCommandList list)
         {
-            NativeCommandQueue.ExecuteCommandList(list.NativeCommandList);
+            NativeCommandQueue.ExecuteCommandList(list.CommandList.NativeCommandList);
+            compiled.Add(list);
         }
         
         public void Present()
         {
             NativeSwapChain.Present(0, PresentFlags.None);
             CurrentBufferIndex = NativeSwapChain.CurrentBackBufferIndex;
+
+            foreach (var compile in compiled)
+            {
+                compile.Release();
+            }
+            compiled.Clear();
         }
 
 
