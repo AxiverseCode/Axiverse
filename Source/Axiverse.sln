@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Graphics
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Windows", "Libraries\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj", "{4CED344E-8BAC-48CB-AC37-A2C4AD7FFE02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface2", "Libraries\Axiverse.Interface2\Axiverse.Interface2.csproj", "{B4894EA0-719A-4D14-9024-00F7FCA0E81B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface", "Libraries\Axiverse.Interface\Axiverse.Interface.csproj", "{B4894EA0-719A-4D14-9024-00F7FCA0E81B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Market", "Libraries\Axiverse.Market\Axiverse.Market.csproj", "{64A4BB2E-67F7-4BAE-AAFE-747B660CD3D1}"
 EndProject
