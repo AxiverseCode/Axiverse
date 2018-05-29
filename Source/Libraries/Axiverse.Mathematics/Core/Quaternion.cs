@@ -383,11 +383,21 @@ namespace Axiverse
 
         #region Static Methods - Mathematics
 
+        /// <summary>
+        /// Computes the conjugate of the quaternion.
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
         public static Quaternion Conjugate(Quaternion q)
         {
             return new Quaternion(-q.X, -q.Y, -q.Z, q.W);
         }
 
+        /// <summary>
+        /// Computes the conjugate of the quaternion.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="quaternion"></param>
         public static void Conjugate(out Quaternion result, ref Quaternion quaternion)
         {
             result.X = -quaternion.X;
@@ -448,6 +458,12 @@ namespace Axiverse
             return (Inverse() * r * Conjugate()).ToVector3();
         }
 
+        /// <summary>
+        /// Creates a quaternion which looks in the specified direction with the given up vector.
+        /// </summary>
+        /// <param name="lookAt"></param>
+        /// <param name="up"></param>
+        /// <returns></returns>
         public static Quaternion LookAt(Vector3 lookAt, Vector3 up)
         {
             Vector3 forward = lookAt;
@@ -464,12 +480,23 @@ namespace Axiverse
                 w);
         }
 
+        /// <summary>
+        /// ?
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public static Quaternion FromDirections(Vector3 source, Vector3 target)
         {
             float w = Functions.Sqrt(source.LengthSquared() * target.LengthSquared()) + Vector3.Dot(source, target);
             return new Quaternion(source % target, w).Normal();
         }
 
+        /// <summary>
+        /// Creates a quaternion from a rotation matrix.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public static Quaternion FromMatrix(Matrix3 matrix)
         {
             Quaternion result;
@@ -513,6 +540,12 @@ namespace Axiverse
             return result;
         }
 
+        /// <summary>
+        /// Creates a quaternion from an axis and rotation angle.
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
         public static Quaternion FromAxisAngle(Vector3 axis, float angle)
         {
             Vector3 direction = axis.Normal();
@@ -521,6 +554,11 @@ namespace Axiverse
             return new Quaternion(direction * Functions.Sin(half), Functions.Cos(half));
         }
 
+        /// <summary>
+        /// Constructs a quaternion from a euler rotation.
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public static Quaternion FromEuler(Vector3 vector)
         {
             return FromEuler(vector.X, vector.Y, vector.Z);
@@ -553,6 +591,12 @@ namespace Axiverse
             return result;
         }
 
+        /// <summary>
+        /// Converts an quaternion to an axis and rotation angle.
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="angle"></param>
+        /// <param name="quaternion"></param>
         public static void ToAxisAngle(out Vector3 axis, out float angle, ref Quaternion quaternion)
         {
             // if w>1 acos and sqrt will produce errors, this cant happen if quaternion is normalised
@@ -596,61 +640,129 @@ namespace Axiverse
 
         #region Static Methods - Operators
 
+        /// <summary>
+        /// The quaternion.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Quaternion operator +(Quaternion value)
         {
             return value;
         }
 
+        /// <summary>
+        /// Adds two quaternions together.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Quaternion operator +(Quaternion left, Quaternion right)
         {
             return Add(left, right);
         }
 
+        /// <summary>
+        /// Conjugate of the quaternion.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Quaternion operator -(Quaternion value)
         {
             return value.Conjugate();
         }
 
+        /// <summary>
+        /// Substracts two quaternions.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Quaternion operator -(Quaternion left, Quaternion right)
         {
             return Subtract(left, right);
         }
 
+        /// <summary>
+        /// Multiplies two quaternions.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Quaternion operator *(Quaternion left, Quaternion right)
         {
             return Multiply(left, right);
         }
 
+        /// <summary>
+        /// Scales the quaternion.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Quaternion operator *(float a, Quaternion b)
         {
             return Multiply(a, b);
         }
 
+        /// <summary>
+        /// Scales the quaternion.
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Quaternion operator *(Quaternion b, float a)
         {
             return Multiply(a, b);
         }
 
+        /// <summary>
+        /// Divides the quaternion by a scalar.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static Quaternion operator /(Quaternion v, float s)
         {
             return Divide(v, s);
         }
 
+        /// <summary>
+        /// Divides a scalar by a quaternion.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
         public static Quaternion operator /(float s, Quaternion v)
         {
             return Divide(s, v);
         }
 
+        /// <summary>
+        /// Divides two quaternions.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Quaternion operator /(Quaternion left, Quaternion right)
         {
             return Divide(left, right);
         }
 
+        /// <summary>
+        /// Gets the conjugate of the quaternion.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Quaternion operator ~(Quaternion value)
         {
             return value.Conjugate();
         }
 
+        /// <summary>
+        /// Computes the inverse of the quaternion.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Quaternion operator !(Quaternion value)
         {
             return value.Inverse();
@@ -683,11 +795,20 @@ namespace Axiverse
             return value;
         }
 
+        /// <summary>
+        /// Gets the X, Y, and Z, components of the quaternion as a vector.
+        /// </summary>
+        /// <returns></returns>
         public Vector3 ToVector3()
         {
             return new Vector3(X, Y, Z);
         }
 
+        /// <summary>
+        /// Computes the euler representation of the rotation represented in the quaternion.
+        /// </summary>
+        /// <param name="q1"></param>
+        /// <returns></returns>
         public static Vector3 ToEuler(Quaternion q1)
         {
             float sqw = q1.W * q1.W;

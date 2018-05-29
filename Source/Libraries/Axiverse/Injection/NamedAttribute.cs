@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Injection
 {
+    /// <summary>
+    /// Attribute defined by a name.
+    /// </summary>
     public class NamedAttribute : Attribute
     {
         public string Name { get; }

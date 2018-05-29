@@ -39,6 +39,11 @@ namespace Axiverse
             return m_value.CompareTo(value.m_value);
         }
 
+        /// <summary>
+        /// Determines if two objects are equal.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             var value = obj as Trilean?;
@@ -46,6 +51,11 @@ namespace Axiverse
             return (value.HasValue) ? value.Value.m_value == m_value : false;
         }
 
+        /// <summary>
+        /// Determines if two trileans are equal.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public bool Equals(Trilean obj)
         {
             var value = obj as Trilean?;
@@ -53,11 +63,19 @@ namespace Axiverse
             return (value.HasValue) ? value.Value.m_value == m_value : false;
         }
 
+        /// <summary>
+        /// Gets the hash code of the trilean.
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return m_value;
         }
 
+        /// <summary>
+        /// Gets a string representation of the trilean.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             switch (m_value)
@@ -75,6 +93,11 @@ namespace Axiverse
 
         // Utility
 
+        /// <summary>
+        /// Parses a string representation of a trilean.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Trilean Parse(string value)
         {
             if (value == null)
@@ -85,10 +108,12 @@ namespace Axiverse
             switch (value)
             {
                 case "+":
+                case "1":
                     return Positive;
                 case "0":
                     return Zero;
                 case "-":
+                case "-1":
                     return Negative;
 
                 default:
@@ -96,17 +121,25 @@ namespace Axiverse
             }
         }
 
+        /// <summary>
+        /// Tries to parse a string into a trilean.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public static bool TryParse(string value, out Trilean result)
         {
             switch (value)
             {
                 case "+":
+                case "1":
                     result = Positive;
                     return true;
                 case "0":
                     result = Zero;
                     return true;
                 case "-":
+                case "-1":
                     result = Negative;
                     return true;
 
@@ -118,6 +151,11 @@ namespace Axiverse
 
         // Checks
 
+        /// <summary>
+        /// Determines whether the trilean is positive.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool IsPositive(Trilean value)
         {
             // In  | + 0 -
@@ -126,6 +164,11 @@ namespace Axiverse
             return value.m_value > 0;
         }
 
+        /// <summary>
+        /// Determines whether the trielan is zero or neutral.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool IsZero(Trilean value)
         {
             // In  | + 0 -
@@ -134,6 +177,11 @@ namespace Axiverse
             return value.m_value == 0;
         }
 
+        /// <summary>
+        /// Determines whether the trilean is negative.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool IsNegative(Trilean value)
         {
             // In  | + 0 -
@@ -177,6 +225,11 @@ namespace Axiverse
 
         // Unary Operations
 
+        /// <summary>
+        /// Negates valued representations.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Trilean Negate(Trilean value)
         {
             // In  | + 0 -

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Axiverse.Mathematics
 {
     /// <summary>
-    /// Represents a 3-dimmensional boolean.
+    /// Represents a three-dimensional boolean.
     /// </summary>
     public struct Boolean3
     {

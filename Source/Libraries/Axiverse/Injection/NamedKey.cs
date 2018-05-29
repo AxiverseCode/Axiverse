@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Injection
 {
+    /// <summary>
+    /// Gets a key defined by a name.
+    /// TODO: Replace with named attribute when the attributed key allows for multiple attributes.
+    /// </summary>
     public class NamedKey : Key
     {
         /// <summary>

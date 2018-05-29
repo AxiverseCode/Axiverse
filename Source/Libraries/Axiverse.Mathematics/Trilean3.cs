@@ -6,14 +6,32 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics
 {
+    /// <summary>
+    /// Represents a three-dimensional trilean.
+    /// </summary>
     public struct Trilean3
     {
+        /// <summary>
+        /// Gets or set the X component.
+        /// </summary>
         public Trilean X;
 
+        /// <summary>
+        /// Gets or sets the Y component.
+        /// </summary>
         public Trilean Y;
 
+        /// <summary>
+        /// Gets or sets the Z component.
+        /// </summary>
         public Trilean Z;
 
+        /// <summary>
+        /// Constructs a three dimensional trilen with the given components.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public Trilean3(Trilean x, Trilean y, Trilean z)
         {
             X = x;
@@ -21,6 +39,12 @@ namespace Axiverse.Mathematics
             Z = z;
         }
 
+        /// <summary>
+        /// Constructs a three dimensional trilen with the given components.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public Trilean3(int x, int y, int z)
         {
             X = (Trilean)x;
@@ -28,6 +52,11 @@ namespace Axiverse.Mathematics
             Z = (Trilean)z;
         }
 
+        /// <summary>
+        /// Determines if the trileans are valued (not ambiguous).
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Boolean3 IsValued(Trilean3 value)
         {
             return new Boolean3(
@@ -37,6 +66,12 @@ namespace Axiverse.Mathematics
                 );
         }
 
+        /// <summary>
+        /// Computes the overflow operator of the trilean.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Trilean3 Overflow(Trilean3 left, Trilean3 right)
         {
             return new Trilean3(
@@ -47,7 +82,7 @@ namespace Axiverse.Mathematics
         }
 
         /// <summary>
-        /// 
+        /// Converts this trilean into a vector with the values -1, 0, or 1.
         /// </summary>
         /// <returns></returns>
         public Vector3 ToVector()
@@ -56,7 +91,7 @@ namespace Axiverse.Mathematics
         }
 
         /// <summary>
-        /// 
+        /// Converts a three dimensional boolean into a three dimensional trilean.
         /// </summary>
         /// <param name="value"></param>
         public static implicit operator Trilean3(Boolean3 value)
@@ -65,7 +100,7 @@ namespace Axiverse.Mathematics
         }
 
         /// <summary>
-        /// 
+        /// An array of the cardinals of trileans.
         /// </summary>
         public static readonly Trilean3[] Cardinals = new Trilean3[]
         {

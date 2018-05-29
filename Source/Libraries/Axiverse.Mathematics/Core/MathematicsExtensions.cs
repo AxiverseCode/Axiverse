@@ -12,7 +12,8 @@ namespace Axiverse
     public static class MathematicsExtensions
     {
         /// <summary>
-        /// Returns a random floating point number that is greater or equal to 0.0, and less than 1.0.
+        /// Returns a random floating point number that is greater or equal to 0.0, and less than
+        /// 1.0.
         /// </summary>
         /// <param name="random"></param>
         /// <returns></returns>
@@ -21,13 +22,22 @@ namespace Axiverse
             return (float)random.NextDouble();
         }
 
+        /// <summary>
+        /// Returns a random floating point number that is greater or equal to the minimum and 
+        /// less than the maximum.
+        /// </summary>
+        /// <param name="random"></param>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        /// <returns></returns>
         public static float NextFloat(this Random random, float minimum, float maximum)
         {
             return (float)(random.NextDouble() * (maximum - minimum) + minimum);
         }
 
         /// <summary>
-        /// Returns a random <see cref="Vector2"/> whose components are greater or equal to 0.0, and less than 1.0.
+        /// Returns a random <see cref="Vector2"/> whose components are greater or equal to 0.0,
+        /// and less than 1.0.
         /// </summary>
         /// <param name="random"></param>
         /// <returns></returns>

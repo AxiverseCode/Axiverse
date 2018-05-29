@@ -22,6 +22,11 @@ namespace Axiverse.Injection
             Attribute = attribute;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj is AttributedKey key)
@@ -31,6 +36,10 @@ namespace Axiverse.Injection
             return false;
         }
 
+        /// <summary>
+        /// Gets the hash code for the current object.
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return Type.GetHashCode() ^ Attribute.GetHashCode();

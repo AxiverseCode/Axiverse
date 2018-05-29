@@ -47,6 +47,13 @@ namespace Axiverse
 
         #region Properties
 
+
+        /// <summary>
+        /// Gets or sets the component at the given index.
+        /// </summary>
+        /// <param name="i">The i index of the component.</param>
+        /// <param name="j">The j index of the component.</param>
+        /// <returns></returns>
         public float this[int i, int j]
         {
             get
@@ -117,6 +124,10 @@ namespace Axiverse
 
         #region Constructors
 
+        /// <summary>
+        /// Constructs a 3 by 3 matrix with specified value assigned to all components.
+        /// </summary>
+        /// <param name="value"></param>
         public Matrix3(float value)
         {
             M11 = M12 = M13 = value;
@@ -124,6 +135,12 @@ namespace Axiverse
             M31 = M32 = M33 = value;
         }
 
+        /// <summary>
+        /// Constructs a 3 by 3 matrix with the specified diagonals.
+        /// </summary>
+        /// <param name="m11"></param>
+        /// <param name="m22"></param>
+        /// <param name="m33"></param>
         public Matrix3(float m11, float m22, float m33)
         {
             M11 = m11; M12 = 0; M13 = 0;
@@ -131,17 +148,26 @@ namespace Axiverse
             M31 = 0; M32 = 0; M33 = m33;
         }
 
-        public Matrix3(float m11, float m12, float m13, float m21, float m22, float m23, float m31, float m32, float m33)
+        /// <summary>
+        /// Constructs a 3 by 3 matrix with the specified values.
+        /// </summary>
+        /// <param name="m11"></param>
+        /// <param name="m12"></param>
+        /// <param name="m13"></param>
+        /// <param name="m21"></param>
+        /// <param name="m22"></param>
+        /// <param name="m23"></param>
+        /// <param name="m31"></param>
+        /// <param name="m32"></param>
+        /// <param name="m33"></param>
+        public Matrix3(
+            float m11, float m12, float m13,
+            float m21, float m22, float m23,
+            float m31, float m32, float m33)
         {
-            M11 = m11;
-            M12 = m12;
-            M13 = m13;
-            M21 = m21;
-            M22 = m22;
-            M23 = m23;
-            M31 = m31;
-            M32 = m32;
-            M33 = m33;
+            M11 = m11; M12 = m12; M13 = m13;
+            M21 = m21; M22 = m22; M23 = m23;
+            M31 = m31; M32 = m32; M33 = m33;
         }
 
         #endregion
@@ -150,6 +176,11 @@ namespace Axiverse
 
         #region Instance Methods - Setters & Getters
 
+        /// <summary>
+        /// Gets the vector representation of the specified row.
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public Vector3 Row(int i)
         {
             switch (i)
@@ -161,6 +192,11 @@ namespace Axiverse
             throw new ArgumentOutOfRangeException();
         }
 
+        /// <summary>
+        /// Gets the vector representation of the specified column.
+        /// </summary>
+        /// <param name="j"></param>
+        /// <returns></returns>
         public Vector3 Column(int j)
         {
             switch (j)
@@ -255,6 +291,10 @@ namespace Axiverse
 
         #region Instance Methods - Overrides
 
+        /// <summary>
+        /// Gets a string representation of the matrix.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"[ {M11} {M12}, {M13} | {M21}, {M22}, {M23} | {M31}, {M32}, {M33} ]";
@@ -268,12 +308,24 @@ namespace Axiverse
 
         #region Static Methods - Arithmatics
 
+        /// <summary>
+        /// Adds two matrices together.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Matrix3 Add(Matrix3 left, Matrix3 right)
         {
             Add(out var result, ref left, ref right);
             return result;
         }
 
+        /// <summary>
+        /// Adds two matrices together.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         public static void Add(out Matrix3 result, ref Matrix3 left, ref Matrix3 right)
         {
             result.M11 = left.M11 + right.M11;
@@ -287,12 +339,24 @@ namespace Axiverse
             result.M33 = left.M33 + right.M33;
         }
 
+        /// <summary>
+        /// Subtracts two matrices.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Matrix3 Subtract(Matrix3 left, Matrix3 right)
         {
             Subtract(out var result, ref left, ref right);
             return result;
         }
 
+        /// <summary>
+        /// Substracts two matrices.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         public static void Subtract(out Matrix3 result, ref Matrix3 left, ref Matrix3 right)
         {
             result.M11 = left.M11 - right.M11;
@@ -306,12 +370,24 @@ namespace Axiverse
             result.M33 = left.M33 - right.M33;
         }
 
+        /// <summary>
+        /// Multiplies two matrices.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Matrix3 Multiply(Matrix3 left, Matrix3 right)
         {
             Multiply(out var result, ref left, ref right);
             return result;
         }
 
+        /// <summary>
+        /// Multiplies two matrices.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         public static void Multiply(out Matrix3 result, ref Matrix3 left, ref Matrix3 right)
         {
             float m11 = ((left.M11 * right.M11) + (left.M12 * right.M21)) + (left.M13 * right.M31);
@@ -339,12 +415,22 @@ namespace Axiverse
 
         #region Static Methods - Mathematics
 
+        /// <summary>
+        /// Transposes a matrix.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public static Matrix3 Transpose(Matrix3 matrix)
         {
             Transpose(out var result, ref matrix);
             return result;
         }
 
+        /// <summary>
+        /// Transposes a matrix.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="matrix"></param>
         public static void Transpose(out Matrix3 result, ref Matrix3 matrix)
         {
             result.M11 = matrix.M11;
@@ -358,12 +444,22 @@ namespace Axiverse
             result.M33 = matrix.M33;
         }
 
+        /// <summary>
+        /// Computes the inverse of a matrix.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Matrix3 Inverse(Matrix3 value)
         {
             Inverse(out var result, ref value);
             return result;
         }
 
+        /// <summary>
+        /// Computes the inverse of a matrix.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="matrix"></param>
         public static void Inverse(out Matrix3 result, ref Matrix3 matrix)
         {
             float det = matrix.M11 * matrix.M22 * matrix.M33 -
@@ -396,12 +492,24 @@ namespace Axiverse
             result.M33 = num33 / det;
         }
 
+        /// <summary>
+        /// Transforms a vector by a matrix.
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public static Vector3 Transform(Vector3 vector, Matrix3 matrix)
         {
             Transform(out var result, ref vector, ref matrix);
             return result;
         }
 
+        /// <summary>
+        /// Transforms a vector by a matrix.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="vector"></param>
+        /// <param name="matrix"></param>
         public static void Transform(out Vector3 result, ref Vector3 vector, ref Matrix3 matrix)
         {
             float x = ((vector.X * matrix.M11) + (vector.Y * matrix.M21)) + (vector.Z * matrix.M31);
@@ -413,12 +521,24 @@ namespace Axiverse
             result.Z = z;
         }
 
+        /// <summary>
+        /// Transforms a vector by a matrix.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public static Vector3 Transform(Matrix3 matrix, Vector3 vector)
         {
             TransposedTransform(out var result, ref vector, ref matrix);
             return result;
         }
 
+        /// <summary>
+        /// Transforms a vector by the transpose of a matrix.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="vector"></param>
+        /// <param name="matrix"></param>
         public static void TransposedTransform(out Vector3 result, ref Vector3 vector, ref Matrix3 matrix)
         {
             float x = ((vector.X * matrix.M11) + (vector.Y * matrix.M12)) + (vector.Z * matrix.M13);
@@ -430,6 +550,11 @@ namespace Axiverse
             result.Z = z;
         }
 
+        /// <summary>
+        /// Creates a three dimensional rotation matrix from a quaternion.
+        /// </summary>
+        /// <param name="quaternion"></param>
+        /// <returns></returns>
         public static Matrix3 FromQuaternion(Quaternion quaternion)
         {
             Matrix3 result;
@@ -458,23 +583,45 @@ namespace Axiverse
 
         #region Static Methods - Operators
 
+        /// <summary>
+        /// Transforms a vector by a matrix.
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public static Vector3 operator *(Vector3 vector, Matrix3 matrix)
         {
             Transform(out var result, ref vector, ref matrix);
             return result;
         }
 
+        /// <summary>
+        /// Multiplies two matrices.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Matrix3 operator *(Matrix3 left, Matrix3 right)
         {
             Multiply(out var result, ref left, ref right);
             return result;
         }
 
+        /// <summary>
+        /// Transposes the matrix.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Matrix3 operator ~(Matrix3 value)
         {
             return value.Transposition();
         }
 
+        /// <summary>
+        /// Computes the inverse of a matrix.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Matrix3 operator !(Matrix3 value)
         {
             return value.Inverse();

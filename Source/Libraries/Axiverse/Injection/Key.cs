@@ -92,11 +92,22 @@ namespace Axiverse.Injection
             return new AttributedKey(type, attribute);
         }
 
+        /// <summary>
+        /// Gets a named key from the specified binding type and name.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static Key From(Type type, string name)
         {
             return new NamedKey(type, name);
         }
 
+        /// <summary>
+        /// Gets a key from a <see cref="FieldInfo"/>.
+        /// </summary>
+        /// <param name="fieldInfo"></param>
+        /// <returns></returns>
         public static Key From(FieldInfo fieldInfo)
         {
             var attributes = fieldInfo.GetCustomAttributes(false);
@@ -110,7 +121,12 @@ namespace Axiverse.Injection
 
             return From(type, attributes.Length > 0 ? attributes[0] as Attribute : null);
         }
-
+        
+        /// <summary>
+        /// Gets a key from a <see cref="ParameterInfo"/>.
+        /// </summary>
+        /// <param name="parameterInfo"></param>
+        /// <returns></returns>
         public static Key From(ParameterInfo parameterInfo)
         {
             var attributes = parameterInfo.GetCustomAttributes(false);
@@ -125,6 +141,11 @@ namespace Axiverse.Injection
             return From(type, attributes.Length > 0 ? attributes[0] as Attribute : null);
         }
 
+        /// <summary>
+        /// Gets a key from a <see cref="PropertyInfo"/>.
+        /// </summary>
+        /// <param name="propertyInfo"></param>
+        /// <returns></returns>
         public static Key From(PropertyInfo propertyInfo)
         {
             var attributes = propertyInfo.GetCustomAttributes(false);
@@ -160,8 +181,15 @@ namespace Axiverse.Injection
             return new SyntheticKey(type, name);
         }
 
+        /// <summary>
+        /// Singleton creation of a typed key without any attributes.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         protected static class TypedKey<T>
         {
+            /// <summary>
+            /// The key of this type.
+            /// </summary>
             public static readonly Key Key = new Key(typeof(T));
         }
     }
