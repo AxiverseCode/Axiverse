@@ -197,19 +197,33 @@ namespace Axiverse.Interface.Graphics
 
         public void SetIndexBuffer(GraphicsBuffer buffer, int size, IndexBufferType type)
         {
-            var view = new IndexBufferView
+            if (buffer != null)
             {
-                BufferLocation = buffer.GpuHandle,
-                Format = (type == IndexBufferType.Integer32) ?
-                    SharpDX.DXGI.Format.R32_UInt : SharpDX.DXGI.Format.R16_UInt,
-                SizeInBytes = size,
-            };
-            NativeCommandList.SetIndexBuffer(view);
+                var view = new IndexBufferView
+                {
+                    BufferLocation = buffer.GpuHandle,
+                    Format = (type == IndexBufferType.Integer32) ?
+                        SharpDX.DXGI.Format.R32_UInt : SharpDX.DXGI.Format.R16_UInt,
+                    SizeInBytes = size,
+                };
+                NativeCommandList.SetIndexBuffer(view);
+            }
+            else
+            {
+                NativeCommandList.SetIndexBuffer(null);
+            }
         }
 
         public void SetIndexBuffer(IndexBufferBinding binding)
         {
-            SetIndexBuffer(binding.Buffer, binding.Count * binding.Stride, binding.Type);
+            if (binding != null)
+            {
+                SetIndexBuffer(binding.Buffer, binding.Count * binding.Stride, binding.Type);
+            }
+            else
+            {
+                NativeCommandList.SetIndexBuffer(null);
+            }
         }
 
         public void SetVertexBuffer(GraphicsBuffer buffer, int slot, int size, int stride)
@@ -247,6 +261,7 @@ namespace Axiverse.Interface.Graphics
             int start = Environment.TickCount;
             while (fence.CompletedValue < fenceValue)
             {
+                System.Threading.Thread.Sleep(1);
                 // ...wait...
                 waits++;
             }
@@ -337,8 +352,14 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetGraphicsRootSignature(rootSignature.NativeRootSignature);
         }
 
+        public void Draw(int count)
+        {
+            NativeCommandList.DrawInstanced(count, 1, 0, 0);
+        }
+
         public void DrawIndexed(int idxCnt)
         {
+            
             NativeCommandList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
         }
 

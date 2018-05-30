@@ -657,6 +657,20 @@ namespace Axiverse
 
             return result;
         }
+
+        public static Matrix4 Scale(float x, float y, float z)
+        {
+            return new Matrix4(x, y, z, 1);
+        }
+
+        public static Matrix4 Translate(float x, float y, float z)
+        {
+            var result = Identity;
+            result.M41 = x;
+            result.M42 = y;
+            result.M43 = z;
+            return result;
+        }
         #endregion
 
         /// <summary>The zero matrix.</summary>

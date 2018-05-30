@@ -110,12 +110,25 @@ namespace Axiverse.Interface.Engine
             {
                 Draw = meshDraw,
             };
-            var meshes = new[] { mesh1, mesh2 };
+
+            var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, @".\Resources\Models\ship.obj");
+            var spaceMeshDraw = new MeshDraw
+            {
+                VertexBuffers = new[] { spaceMesh },
+                Count = spaceMesh.Count,
+            };
+            var mesh3 = new Mesh
+            {
+                Draw = spaceMeshDraw,
+            };
+
+            var meshes = new[] { mesh1, mesh2, mesh3 };
 
             var transforms = new GeometryShader.PerObject[meshes.Length];
             transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
             transforms[0].Color = new Vector4(0.4f, 0.5f, 0.8f, 1);
             transforms[1].Color = new Vector4(1f, 1f, 1f, 1);
+            transforms[2].Color = new Vector4(1f, 1f, 1f, 1);
             var constantBuffer = GraphicsBuffer.Create(device, transforms, false);
 
             var descriptorSets = new DescriptorSet[meshes.Length];
@@ -146,9 +159,9 @@ namespace Axiverse.Interface.Engine
                         Matrix4.Transpose(
                             Matrix4.FromQuaternion(Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400))
                             * view * projection);
+                    mesh3.Bindings[Key.From<Matrix4>()] = Matrix4.Transpose(Matrix4.Scale(10, 10, 10) * view * projection);
 
-
-                    transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
+                    //transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
 
                     constantBuffer.Write(transforms);
 
@@ -178,7 +191,7 @@ namespace Axiverse.Interface.Engine
 
                             commandList.SetDescriptors(descriptorSets[i]);
 
-                            Draw(commandList, meshDraw);
+                            Draw(commandList, meshes[i].Draw);
                         }
                         //commandList.SetIndexBuffer(indexBinding);
                         //commandList.SetVertexBuffer(vertexBinding, 0);
@@ -204,7 +217,15 @@ namespace Axiverse.Interface.Engine
             {
                 commandList.SetVertexBuffer(meshDraw.VertexBuffers[i], i);
             }
-            commandList.DrawIndexed(meshDraw.Count);
+
+            if (meshDraw.IndexBuffer != null)
+            {
+                commandList.DrawIndexed(meshDraw.Count);
+            }
+            else
+            {
+                commandList.Draw(meshDraw.Count);
+            }
         }
 
     }

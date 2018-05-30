@@ -72,6 +72,10 @@
     <Compile Include="Scenes\TransformComponent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Client\Axiverse.Interface.Assets\Axiverse.Interface.Assets.csproj">
+      <Project>{cd0ed517-2595-413d-9822-2b33a7876842}</Project>
+      <Name>Axiverse.Interface.Assets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
       <Project>{cab0bbc2-a6eb-4065-9e71-fd86746696c2}</Project>
       <Name>Axiverse.Interface.Graphics</Name>
@@ -94,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

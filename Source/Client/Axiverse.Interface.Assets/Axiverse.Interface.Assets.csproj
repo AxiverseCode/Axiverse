@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Models\ObjLoader.cs" />
     <Compile Include="Models\WavefrontObjLoader.cs" />
+    <Compile Include="Models\WavefrontObjMesh.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -50,10 +52,6 @@
     <ProjectReference Include="..\..\Libraries\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
       <Project>{cab0bbc2-a6eb-4065-9e71-fd86746696c2}</Project>
       <Name>Axiverse.Interface.Graphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Axiverse.Interface\Axiverse.Interface.csproj">
-      <Project>{b4894ea0-719a-4d14-9024-00f7fca0e81b}</Project>
-      <Name>Axiverse.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
