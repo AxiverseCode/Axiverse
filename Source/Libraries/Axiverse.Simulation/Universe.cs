@@ -11,12 +11,19 @@ namespace Axiverse.Simulation
 {
     public class Universe
     {
+        public Entity this[Guid identifier]
+        {
+            get => entities[identifier];
+        }
+
+        public int Count => entities.Count;
+
         public Universe()
         {
             for (int i = 0; i < 5; i++)
             {
                 var entity = new Entity();
-                entity.Set(new NavigationComponent());
+                entity.Components.Add(new NavigationComponent());
                 entities.Add(entity.Identifier, entity);
             }
 
@@ -55,26 +62,75 @@ namespace Axiverse.Simulation
             OnEntityAdded(entity);
         }
 
-        protected internal void OnComponentAdded(Entity entity, Component component)
+        public bool Remove(Entity entity)
         {
-
-        }
-
-        protected internal void OnComponentRemoved(Entity entity, Component component)
-        {
-
+            var result = entities.Remove(entity.Identifier);
+            if (result)
+            {
+                OnEntityRemoved(entity);
+            }
+            return result;
         }
 
         protected void OnEntityAdded(Entity entity)
         {
+            entity.ComponentAdded += OnComponentAdded;
+            foreach (var processor in processors)
+            {
+                if (processor.Matches(entity))
+                {
+                    processor.Add(entity);
+                }
+            }
 
+            EntityAdded?.Invoke(this, new EntityEventArgs(entity));
         }
 
         protected void OnEntityRemoved(Entity entity)
         {
+            entity.ComponentRemoved += OnComponentRemoved;
+            foreach (var processor in processors)
+            {
+                if (processor.ContainsKey(entity.Identifier))
+                {
+                    processor.Remove(entity);
+                }
+            }
 
+            EntityRemoved?.Invoke(this, new EntityEventArgs(entity));
         }
-        
+
+        private void OnComponentAdded(object sender, ComponentEventArgs e)
+        {
+            var entity = sender as Entity;
+
+            foreach (var processor in processors)
+            {
+                if (!processor.ContainsKey(entity.Identifier) && processor.Matches(entity))
+                {
+                    processor.Add(entity);
+                }
+            }
+        }
+
+        private void OnComponentRemoved(object sender, ComponentEventArgs e)
+        {
+            var entity = sender as Entity;
+
+            foreach (var processor in processors)
+            {
+                if (processor.ContainsKey(entity.Identifier) && !processor.Matches(entity))
+                {
+                    processor.Remove(entity);
+                }
+            }
+        }
+
+        public event EntityEventHandler EntityAdded;
+        public event EntityEventHandler EntityRemoved;
+
+        public List<Processor> Processors => processors;
+
         private readonly List<Processor> processors = new List<Processor>();
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
         private readonly List<System> systems = new List<System>();

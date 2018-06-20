@@ -13,7 +13,7 @@ namespace Axiverse.Simulation.Systems
         public override void Process(Entity entity, float dt)
         {
             var spatial = entity.Spatial;
-            var navigation = entity.Get<NavigationComponent>();
+            var navigation = entity.Components.Get<NavigationComponent>();
 
             if (navigation != null)
             {

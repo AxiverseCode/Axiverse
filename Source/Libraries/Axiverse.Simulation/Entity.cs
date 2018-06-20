@@ -36,7 +36,7 @@ namespace Axiverse.Simulation
         /// <summary>
         /// Gets the collection of components in this entity.
         /// </summary>
-        public ComponentCollection Components { get; }
+        public ComponentDictionary Components { get; }
 
         /// <summary>
         /// Gets the spatial component of this entity.
@@ -57,30 +57,9 @@ namespace Axiverse.Simulation
         public Entity(Guid identifier)
         {
             Identifier = identifier;
-            Components = new ComponentCollection(this);
+            Components = new ComponentDictionary(this);
             Spatial = new SpatialComponent();
-            Set(Spatial);
-            // Model = new Model();
-        }
-
-        /// <summary>
-        /// Sets the component bound to the specified type.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public T Get<T>() where T : Component
-        {
-            return (T)Components[typeof(T)];
-        }
-
-        /// <summary>
-        /// Gets a component bound to the specified type.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="component"></param>
-        public void Set<T>(T component) where T : Component
-        {
-            Components[typeof(T)] = component;
+            Components.Add(Spatial);
         }
 
         /// <summary>
@@ -109,5 +88,25 @@ namespace Axiverse.Simulation
         {
             return $"Entity [{ Identifier }] @ { Spatial.Position }";
         }
+
+        protected internal void OnComponentAdded(ComponentEventArgs e)
+        {
+            ComponentAdded?.Invoke(this, e);
+        }
+
+        protected internal void OnComponentRemoved(ComponentEventArgs e)
+        {
+            ComponentRemoved?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Event when a component is added.
+        /// </summary>
+        public event ComponentEventHandler ComponentAdded;
+
+        /// <summary>
+        /// Event when a component is removed.
+        /// </summary>
+        public event ComponentEventHandler ComponentRemoved;
     }
 }

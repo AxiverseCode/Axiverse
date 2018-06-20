@@ -20,8 +20,8 @@ namespace Axiverse.Interface.Scenes
             Hierarchy = new HierarchalComponent();
             Renderable = new ModelComponent();
 
-            Set(Hierarchy);
-            Set(Renderable);
+            Components.Add(Hierarchy);
+            Components.Add(Renderable);
         }
     }
 }

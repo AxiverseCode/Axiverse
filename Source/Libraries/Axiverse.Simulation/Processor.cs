@@ -3,29 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Axiverse.Injection;
 namespace Axiverse.Simulation
 {
     public class Processor
     {
-        public void Advance()
-        {
+        public Type[] ComponentTypes { get; }
 
-        }
-    }
+        public Dictionary<Guid, Entity> Entities { get; } = new Dictionary<Guid, Entity>();
 
-    /// <summary>
-    /// Processor for transforming entities with the given set of components.
-    /// </summary>
-    /// <typeparam name="TComponent"></typeparam>
-    /// <typeparam name="TData"></typeparam>
-    public class Processor<TComponent, TData> : Processor
-    {
-        public Processor(params Type[] requiredComponents)
+        public Processor(params Type[] componentTypes)
         {
-            required = requiredComponents;
+            ComponentTypes = componentTypes;
         }
 
-        private Type[] required;
+        public bool ContainsKey(Guid identifier)
+        {
+            return Entities.ContainsKey(identifier);
+        }
+
+        public bool Matches(Entity entity)
+        {
+            return ComponentTypes.All(t => entity.Components.ContainsKey(t));
+        }
+
+        public void Add(Entity entity)
+        {
+            Entities.Add(entity.Identifier, entity);
+        }
+
+        public void Remove(Entity entity)
+        {
+            Entities.Remove(entity.Identifier);
+        }
     }
 }

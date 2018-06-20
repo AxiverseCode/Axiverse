@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentEventArgs.cs" />
+    <Compile Include="EntityEventArgs.cs" />
     <Compile Include="Systems\AdvanceProducer.cs" />
     <Compile Include="Components\HierarchalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />
@@ -57,7 +59,7 @@
     <Compile Include="Producers\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Component.cs" />
-    <Compile Include="ComponentCollection.cs" />
+    <Compile Include="ComponentDictionary.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityCollection.cs" />
     <Compile Include="Runner.cs" />

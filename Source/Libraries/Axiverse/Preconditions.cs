@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Axiverse.Injection;
 
 namespace Axiverse
 {
@@ -60,6 +61,32 @@ namespace Axiverse
             if (disposable.IsDisposed)
             {
                 throw new ObjectDisposedException(nameof(T));
+            }
+        }
+
+        /// <summary>
+        /// Throws an <see cref="InvalidCastException"/> if the object cannot be assigned to key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void RequiresAssignableFrom(Key key, object value)
+        {
+            if (!key.IsAssignableFrom(value))
+            {
+                throw new InvalidCastException($"Cannot assign {value.GetType().Name} to key {key}");
+            }
+        }
+
+        /// <summary>
+        /// Throws an <see cref="InvalidCastException"/> if the type T cannot be assigned to key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        public static void RequiresAssignableFrom<T>(Key key)
+        {
+            if (!key.IsAssignableFrom(typeof(T)))
+            {
+                throw new InvalidCastException($"Cannot assign {typeof(T).Name} to key {key}");
             }
         }
     }
