@@ -27,6 +27,16 @@ namespace Axiverse.Interface.Rendering.Compositing
 
         }
 
+        public void Prepare()
+        {
+
+        }
+
+        public void Render()
+        {
+
+        }
+
         public void DrawModel(Model model)
         {
             foreach (var mesh in model.Meshes)

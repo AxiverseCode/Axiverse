@@ -30,11 +30,56 @@ namespace Axiverse.Simulation
         public void Add(Entity entity)
         {
             Entities.Add(entity.Identifier, entity);
+            OnEntityAdded(entity);
         }
 
         public void Remove(Entity entity)
         {
             Entities.Remove(entity.Identifier);
+            OnEntityRemoved(entity);
+        }
+
+        protected virtual void OnEntityAdded(Entity entity)
+        {
+
+        }
+
+        protected virtual void OnEntityRemoved(Entity entity)
+        {
+
+        }
+    }
+
+    public class Processor<T1> : Processor 
+        where T1 : Component
+    {
+        public Processor() : base(typeof(T1))
+        {
+
+        }
+
+        protected virtual void OnEntityAdded(Entity entity, T1 component1)
+        {
+
+        }
+
+        protected virtual void OnEntityRemoved(Entity entity, T1 component1)
+        {
+
+        }
+
+        protected override void OnEntityAdded(Entity entity)
+        {
+            base.OnEntityAdded(entity);
+            var component1 = entity.Components.Get<T1>();
+            OnEntityAdded(entity, component1);
+        }
+
+        protected override void OnEntityRemoved(Entity entity)
+        {
+            base.OnEntityRemoved(entity);
+            var component1 = entity.Components.Get<T1>();
+            OnEntityRemoved(entity, component1);
         }
     }
 }

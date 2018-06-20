@@ -19,3 +19,31 @@ build the systems around them to support their interconnection.
 
 At this point we should be able to fly around in a world where other things are flying around as
 well.
+
+
+
+
+
+Next steps:
+
+Resource management - programmatic or automatic from file. Uri generated.
+Compositor
+- Setup frame and present frame
+Renderer
+- ForwardRenderer specialization
+RenderStage
+- Support sorting and drawers.
+ModelDrawer
+- Performs draw calls for the model objects.
+- Sets the necessary fields in the effect.
+
+Matrix4
+- Implement a lot of the stuff.
+
+Simplify engine
+- Separate model generation and store in resource manager.
+- Automatically compute the transform from the components.
+- Put attribute into components.
+- Render using renderers.
+
+We have a functional engine!

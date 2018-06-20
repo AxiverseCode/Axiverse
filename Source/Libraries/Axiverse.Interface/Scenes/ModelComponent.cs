@@ -8,7 +8,7 @@ using Axiverse.Interface.Rendering;
 using Axiverse.Mathematics;
 namespace Axiverse.Interface.Scenes
 {
-    public class ModelComponent : Simulation.Component
+    public class ModelComponent : Component
     {
         /// <summary>
         /// Gets or sets the model.

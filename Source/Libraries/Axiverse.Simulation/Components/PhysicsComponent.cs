@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 using Axiverse.Physics;
 
-namespace Axiverse.Simulation.Components
+namespace Axiverse.Simulation
 {
-    public class PhysicsComponent
+    public class PhysicsComponent : Component
     {
-        public Body Body { get; set; }
+        public Body Body { get; }
 
-        
+        public PhysicsComponent(Body body)
+        {
+            Body = body;
+        }
     }
 }
