@@ -38,7 +38,6 @@ namespace Axiverse.Interface.Engine
 
         public void Run()
         {
-
             form.Show();
 
             // Init the rendering device

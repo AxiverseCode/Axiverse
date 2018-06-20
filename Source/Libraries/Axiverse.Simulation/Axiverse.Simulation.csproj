@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ComponentEventArgs.cs" />
     <Compile Include="EntityEventArgs.cs" />
+    <Compile Include="PhysicsProcessor.cs" />
     <Compile Include="Systems\AdvanceProducer.cs" />
     <Compile Include="Components\HierarchalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />
