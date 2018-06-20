@@ -14,6 +14,16 @@ namespace Axiverse.Simulation
     /// </summary>
     public class ComponentCollection
     {
+        /// <summary>
+        /// Gets the entity the <see cref="ComponentCollection"/> is bound to.
+        /// </summary>
+        public Entity Entity { get; }
+
+        /// <summary>
+        /// Gets or sets a component by the type of the component.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public Component this[Type type]
         {
             get
@@ -33,9 +43,18 @@ namespace Axiverse.Simulation
         /// </summary>
         public int Count => components.Count;
 
-        public ComponentCollection Clone()
+        /// <summary>
+        /// Constructs an <see cref="ComponentCollection"/> bound to the specified entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        public ComponentCollection(Entity entity)
         {
-            var collection = new ComponentCollection();
+            Entity = entity;
+        }
+
+        public ComponentCollection Clone(Entity entity)
+        {
+            var collection = new ComponentCollection(entity);
             foreach (var pair in components)
             {
                 var clone = pair.Value.Clone();

@@ -46,15 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvanceProducer.cs" />
+    <Compile Include="Systems\AdvanceProducer.cs" />
     <Compile Include="Components\HierarchalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />
-    <Compile Include="CurrentAttribute.cs" />
-    <Compile Include="EntityProcessor.cs" />
+    <Compile Include="Producers\CurrentAttribute.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="ParameterComponent.cs" />
+    <Compile Include="Components\ParameterComponent.cs" />
     <Compile Include="Components\PhysicsComponent.cs" />
-    <Compile Include="Producer.cs" />
+    <Compile Include="Producers\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentCollection.cs" />
@@ -62,7 +62,7 @@
     <Compile Include="EntityCollection.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Components\SpatialComponent.cs" />
-    <Compile Include="StepTimeAttribute.cs" />
+    <Compile Include="Producers\StepTimeAttribute.cs" />
     <Compile Include="System.cs" />
     <Compile Include="Systems\NavigationSystem.cs" />
     <Compile Include="Systems\SpatialSystem.cs" />

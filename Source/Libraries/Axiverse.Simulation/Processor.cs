@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Simulation
 {
+    public class Processor
+    {
+        public void Advance()
+        {
+
+        }
+    }
+
     /// <summary>
     /// Processor for transforming entities with the given set of components.
     /// </summary>
     /// <typeparam name="TComponent"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    public class EntityProcessor<TComponent, TData>
+    public class Processor<TComponent, TData> : Processor
     {
-        public EntityProcessor(params Type[] requiredComponents)
+        public Processor(params Type[] requiredComponents)
         {
             required = requiredComponents;
         }

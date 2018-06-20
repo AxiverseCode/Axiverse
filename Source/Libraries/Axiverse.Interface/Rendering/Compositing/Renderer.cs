@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Rendering.Compositing
 {
-    public class SceneRenderer
+    public class Renderer
     {
         // set pipeline state
 

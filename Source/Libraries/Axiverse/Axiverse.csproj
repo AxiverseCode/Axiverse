@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\CascadingDictionary.cs" />
     <Compile Include="Collections\CollectionChangedAction.cs" />
     <Compile Include="Collections\CollectionChangedEventArgs.cs" />
     <Compile Include="Collections\EmptyList.cs" />

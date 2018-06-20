@@ -141,13 +141,16 @@ namespace Axiverse.Interface.Engine
                 descriptorSets[i].SetConstantBuffer(0, constantBuffer, i * perObjectSize, perObjectSize);
             }
 
-
+            var prev = Environment.TickCount;
             // Into the loop we go!
             using (var loop = new RenderLoop(form))
             {
                 while (loop.NextFrame())
                 {
-                    frame += 1;
+                    var next = Environment.TickCount;
+                    frame += (next - prev) / 10.0f;
+                    prev = next;
+
                     view = Matrix4.LookAtRH(
                         new Vector3(
                             10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),

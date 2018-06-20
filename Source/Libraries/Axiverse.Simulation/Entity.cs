@@ -14,6 +14,16 @@ namespace Axiverse.Simulation
     public class Entity
     {
         /// <summary>
+        /// Gets the universe which this entity is attached to.
+        /// </summary>
+        public Universe Universe { get; internal set; }
+
+        /// <summary>
+        /// Gets if this entity is attached to a universe.
+        /// </summary>
+        public bool IsAttached => Universe != null;
+
+        /// <summary>
         /// Gets the identifier for this entity.
         /// </summary>
         public Guid Identifier { get; }
@@ -47,10 +57,9 @@ namespace Axiverse.Simulation
         public Entity(Guid identifier)
         {
             Identifier = identifier;
-            Components = new ComponentCollection();
+            Components = new ComponentCollection(this);
             Spatial = new SpatialComponent();
-
-            Components[typeof(SpatialComponent)] = Spatial;
+            Set(Spatial);
             // Model = new Model();
         }
 
@@ -61,7 +70,7 @@ namespace Axiverse.Simulation
         /// <returns></returns>
         public T Get<T>() where T : Component
         {
-            return Components[typeof(T)] as T;
+            return (T)Components[typeof(T)];
         }
 
         /// <summary>
@@ -92,6 +101,10 @@ namespace Axiverse.Simulation
             return entity;
         }
 
+        /// <summary>
+        /// String representation of the entity.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Entity [{ Identifier }] @ { Spatial.Position }";

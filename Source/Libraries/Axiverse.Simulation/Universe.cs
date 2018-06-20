@@ -31,8 +31,6 @@ namespace Axiverse.Simulation
 
         public void Step(float dt)
         {
-            //Console.WriteLine("===== Stepping =====");
-
             foreach (var system in systems)
             {
                 foreach (var entity in entities.Values)
@@ -48,6 +46,36 @@ namespace Axiverse.Simulation
             }
         }
 
+        public void Add(Entity entity)
+        {
+            Preconditions.Requires<InvalidOperationException>(!entity.IsAttached);
+
+            entity.Universe = this;
+            entities.Add(entity.Identifier, entity);
+            OnEntityAdded(entity);
+        }
+
+        protected internal void OnComponentAdded(Entity entity, Component component)
+        {
+
+        }
+
+        protected internal void OnComponentRemoved(Entity entity, Component component)
+        {
+
+        }
+
+        protected void OnEntityAdded(Entity entity)
+        {
+
+        }
+
+        protected void OnEntityRemoved(Entity entity)
+        {
+
+        }
+        
+        private readonly List<Processor> processors = new List<Processor>();
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
         private readonly List<System> systems = new List<System>();
     }

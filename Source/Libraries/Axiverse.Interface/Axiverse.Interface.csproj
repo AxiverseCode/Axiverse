@@ -61,11 +61,13 @@
     <Compile Include="Engine\SceneSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Compositing\Compositor.cs" />
-    <Compile Include="Rendering\Compositing\SceneRenderer.cs" />
+    <Compile Include="Rendering\Compositing\RenderStage.cs" />
+    <Compile Include="Rendering\Compositing\Renderer.cs" />
     <Compile Include="Rendering\Material.cs" />
     <Compile Include="Rendering\Mesh.cs" />
     <Compile Include="Rendering\MeshDraw.cs" />
     <Compile Include="Rendering\Model.cs" />
+    <Compile Include="Scenes\CameraComponent.cs" />
     <Compile Include="Scenes\Entity.cs" />
     <Compile Include="Scenes\ModelComponent.cs" />
     <Compile Include="Scenes\Scene.cs" />
