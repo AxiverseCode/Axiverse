@@ -8,10 +8,8 @@ using Axiverse.Simulation;
 
 namespace Axiverse.Interface.Scenes
 {
-    public class Scene
+    public class Scene : Universe
     {
-        public Universe Universe { get; set; }
-
         public Entity Root { get; set; }
     }
 }
