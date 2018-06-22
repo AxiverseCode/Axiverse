@@ -25,8 +25,8 @@ namespace Axiverse.Interface.Graphics
 
         public void SetConstantBuffer(int slot, GraphicsBuffer buffer)
         {
-            Preconditions.Requires(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ShaderResourceView);
-            Preconditions.Requires(buffer.Size % 256 == 0);
+            Requires.That(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ShaderResourceView);
+            Requires.That(buffer.Size % 256 == 0);
             Device.NativeDevice.CreateConstantBufferView(new ConstantBufferViewDescription
             {
                 BufferLocation = buffer.GpuHandle,

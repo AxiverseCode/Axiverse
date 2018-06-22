@@ -11,7 +11,7 @@ namespace Axiverse
     {
         public override T Take()
         {
-            Preconditions.RequireUndisposed(this);
+            Requires.IsNotDisposed(this);
             return base.Take();
         }
 

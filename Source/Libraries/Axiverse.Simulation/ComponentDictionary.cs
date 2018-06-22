@@ -33,7 +33,7 @@ namespace Axiverse.Simulation
             set
             {
                 var key = Key.From(type);
-                Preconditions.RequiresAssignableFrom(key, value);
+                Requires.AssignableFrom(key, value);
                 components[key] = value;
                 OnComponentAdded(key, value);
             }
@@ -120,7 +120,7 @@ namespace Axiverse.Simulation
         /// <returns></returns>
         public bool TryGetValue<T>(Key key, out T component) where T:Component
         {
-            Preconditions.RequiresAssignableFrom<T>(key);
+            Requires.AssignableFrom<T>(key);
             bool result = components.TryGetValue(key, out var value);
             component = value as T;
             return result;
@@ -134,14 +134,14 @@ namespace Axiverse.Simulation
         public void Add<T>(T component) where T : Component
         {
             Key key = Key.From<T>();
-            Preconditions.RequiresAssignableFrom(key, component);
+            Requires.AssignableFrom(key, component);
             components.Add(key, component);
             OnComponentAdded(key, component);
         }
 
         public void Add(Key key, Component component)
         {
-            Preconditions.RequiresAssignableFrom(key, component);
+            Requires.AssignableFrom(key, component);
             components.Add(key, component);
             OnComponentAdded(key, component);
         }
@@ -164,7 +164,7 @@ namespace Axiverse.Simulation
             foreach (var pair in components)
             {
                 var clone = pair.Value.Clone();
-                Preconditions.Requires<InvalidCastException>(pair.Key.IsAssignableFrom(clone));
+                Requires.That<InvalidCastException>(pair.Key.IsAssignableFrom(clone));
                 collection.components.Add(pair.Key, clone);
             }
             return collection;

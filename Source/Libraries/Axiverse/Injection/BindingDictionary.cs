@@ -25,7 +25,7 @@ namespace Axiverse.Injection
             }
             set
             {
-                Preconditions.Requires<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
+                Requires.That<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
                 bindings[key] = value;
             }
         }
@@ -50,7 +50,7 @@ namespace Axiverse.Injection
         /// </exception>
         public void Add(Key key, object value)
         {
-            Preconditions.Requires<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
+            Requires.That<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
             bindings.Add(key, value);
         }
 

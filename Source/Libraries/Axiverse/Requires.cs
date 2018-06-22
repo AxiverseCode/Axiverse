@@ -10,13 +10,13 @@ namespace Axiverse
     /// <summary>
     /// Functions for preconditions.
     /// </summary>
-    public static class Preconditions
+    public static class Requires
     {
         /// <summary>
         /// Throws an exception of the conditions are not met.
         /// </summary>
         /// <param name="condition"></param>
-        public static void Requires(bool condition)
+        public static void That(bool condition)
         {
             if (!condition)
             {
@@ -30,7 +30,7 @@ namespace Axiverse
         /// <param name="condition"></param>
         /// <param name="format"></param>
         /// <param name="args"></param>
-        public static void Requires(bool condition, string format, params object[] args)
+        public static void That(bool condition, string format, params object[] args)
         {
             if (!condition)
             {
@@ -43,7 +43,7 @@ namespace Axiverse
         /// </summary>
         /// <typeparam name="TException"></typeparam>
         /// <param name="condition"></param>
-        public static void Requires<TException>(bool condition) where TException : Exception, new()
+        public static void That<TException>(bool condition) where TException : Exception, new()
         {
             if (!condition)
             {
@@ -56,7 +56,7 @@ namespace Axiverse
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="disposable"></param>
-        public static void RequireUndisposed<T>(T disposable) where T: ITrackedDisposable
+        public static void IsNotDisposed<T>(T disposable) where T: ITrackedDisposable
         {
             if (disposable.IsDisposed)
             {
@@ -67,14 +67,30 @@ namespace Axiverse
         /// <summary>
         /// Throws an <see cref="InvalidCastException"/> if the object cannot be assigned to key.
         /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        public static T AssignableFrom<T>(T value)
+        {
+            if (!typeof(T).IsAssignableFrom(value.GetType()))
+            {
+                throw new InvalidCastException($"Cannot assign {value.GetType().Name} to type {typeof(T).Name}");
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Throws an <see cref="InvalidCastException"/> if the object cannot be assigned to key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public static void RequiresAssignableFrom(Key key, object value)
+        public static T AssignableFrom<T>(Key key, T value)
         {
             if (!key.IsAssignableFrom(value))
             {
                 throw new InvalidCastException($"Cannot assign {value.GetType().Name} to key {key}");
             }
+            return value;
         }
 
         /// <summary>
@@ -82,7 +98,7 @@ namespace Axiverse
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
-        public static void RequiresAssignableFrom<T>(Key key)
+        public static void AssignableFrom<T>(Key key)
         {
             if (!key.IsAssignableFrom(typeof(T)))
             {

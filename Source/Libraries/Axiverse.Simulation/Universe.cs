@@ -55,7 +55,7 @@ namespace Axiverse.Simulation
 
         public void Add(Entity entity)
         {
-            Preconditions.Requires<InvalidOperationException>(!entity.IsAttached);
+            Requires.That<InvalidOperationException>(!entity.IsAttached);
 
             entity.Universe = this;
             entities.Add(entity.Identifier, entity);

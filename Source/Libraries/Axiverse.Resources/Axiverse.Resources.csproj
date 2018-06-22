@@ -58,6 +58,7 @@
     <Compile Include="Deprecated\Mount.cs" />
     <Compile Include="LoadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceModule.cs" />
     <Compile Include="TypeCache.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -165,7 +165,7 @@ namespace Axiverse.Interface.Graphics
 
             public CpuDescriptorHandle Allocate(int count)
             {
-                Preconditions.RequireUndisposed(this);
+                Requires.IsNotDisposed(this);
 
                 if (heap == null || remaining < count)
                 {

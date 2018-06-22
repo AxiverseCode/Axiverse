@@ -128,7 +128,7 @@ namespace Axiverse.Injection
         public static void Bind(ref object obj, IBindingProvider bindings)
         {
             var type = obj.GetType();
-            Preconditions.Requires(type.IsValueType || type.IsClass);
+            Requires.That(type.IsValueType || type.IsClass);
 
             var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
             foreach (var property in properties)
@@ -176,7 +176,7 @@ namespace Axiverse.Injection
             {
                 if (constructor.GetCustomAttributes<InjectAttribute>().Count() > 0)
                 {
-                    Preconditions.Requires<AmbiguousMatchException>(injectConstructor == null);
+                    Requires.That<AmbiguousMatchException>(injectConstructor == null);
                 }
             }
 
