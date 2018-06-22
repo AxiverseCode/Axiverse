@@ -68,6 +68,20 @@ namespace Axiverse
         /// Throws an <see cref="InvalidCastException"/> if the object cannot be assigned to key.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        public static Type AssignableFrom<T>(Type type)
+        {
+            if (!typeof(T).IsAssignableFrom(type))
+            {
+                throw new InvalidCastException($"Cannot assign {type.Name} to type {typeof(T).Name}");
+            }
+            return type;
+        }
+
+        /// <summary>
+        /// Throws an <see cref="InvalidCastException"/> if the object cannot be assigned to key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         public static T AssignableFrom<T>(T value)
         {

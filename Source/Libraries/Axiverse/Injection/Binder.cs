@@ -15,201 +15,161 @@ namespace Axiverse.Injection
     public class Binder
     {
         /// <summary>
-        /// Creates on object binding to the given type. All public properties with a setter and
-        /// non-readonly fields which have a <see cref="BindAttribute"/> attribute set will have
-        /// bindings created. Derived types bound will only be bounds based on the fields and
-        /// properties of the given types and may not represent the full set of bindings on that
-        /// type. Relevant fields and properties will be cached.
-        /// </summary>
-        /// <param name="type"></param>
-        public Binder(Type type)
-        {
-            var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
-            foreach (var property in properties)
-            {
-                var key = Key.From(property.PropertyType, property.Name);
-                this.properties.Add(key, property);
-            }
-            
-            var fields = type.GetFields(BindingFlags.Public);
-            foreach (var field in fields)
-            {
-                if (!field.IsInitOnly)
-                {
-                    var key = Key.From(field.FieldType, field.Name);
-                    this.fields.Add(key, field);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Binds all bindings to the given class object. This method will not work on structs.
+        /// Binds the fields and properties on a class.
+        /// 
+        /// By default, fields with the <see cref="BindAttribute"/> applied will be set. This
+        /// includes readonly fields. If <paramref name="forceAll"/> is set then all public fields
+        /// will be bound from the injector.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="bindings"></param>
-        public void SetValues(object obj, IBindingProvider bindings)
+        /// <param name="forceAll"></param>
+        public static void Bind<T>(ref T obj, IBindingProvider bindings, bool forceAll = false)
         {
-            Contract.Requires<InvalidCastException>(obj.GetType().IsValueType == false);
-
-            foreach (var property in properties)
+            var type = obj.GetType();
+            var propertyEntires = GetBindingProperties(type, forceAll);
+            foreach (var propertyEntry in propertyEntires)
             {
-                if (bindings.TryGetValue(property.Key, out var value))
-                {
-                    property.Value.SetValue(obj, value);
-                }
+                propertyEntry.Value.SetValue(obj, bindings[propertyEntry.Key]);
             }
 
-            foreach (var field in fields)
+            var reference = __makeref(obj);
+            var fieldEntries = GetBindingFields(type, forceAll);
+            foreach (var fieldEntry in fieldEntries)
             {
-                if (bindings.TryGetValue(field.Key, out var value))
-                {
-                    field.Value.SetValue(obj, value);
-                }
+                fieldEntry.Value.SetValueDirect(reference, bindings[fieldEntry.Key]);
             }
         }
 
         /// <summary>
-        /// Binds all bindings to the given reference object.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="bindings"></param>
-        public void SetValues<T>(ref T obj, IBindingProvider bindings)
-            where T : struct
-        {
-            foreach (var property in properties)
-            {
-                if (bindings.TryGetValue(property.Key, out var value))
-                {
-                    property.Value.SetValue(obj, value);
-                }
-            }
-
-            var reference = __makeref(obj);
-            foreach (var field in fields)
-            {
-                if (bindings.TryGetValue(field.Key, out var value))
-                {
-                    field.Value.SetValueDirect(reference, value);
-                }
-            }
-        }
-
-        public static void Bind(object obj, IBindingProvider bindings)
-        {
-            var type = obj.GetType();
-            Contract.Requires<InvalidCastException>(obj.GetType().IsClass);
-
-            var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
-            foreach (var property in properties)
-            {
-                var key = Key.From(property.PropertyType, property.Name);
-                if (!bindings.TryGetValue(key, out var value))
-                {
-                    throw new MissingFieldException($"Missing binding for {key}.");
-                }
-                property.SetValue(obj, value);
-            }
-
-            var fields = type.GetFields(BindingFlags.Public);
-            foreach (var field in fields)
-            {
-                if (!field.IsInitOnly)
-                {
-                    var key = Key.From(field.FieldType, field.Name);
-                    if (bindings.TryGetValue(key, out var value))
-                    {
-                        throw new MissingFieldException($"Missing binding for {key}.");
-                    }
-                    field.SetValue(obj, value);
-                }
-            }
-        }
-
-        public static void Bind(ref object obj, IBindingProvider bindings)
-        {
-            var type = obj.GetType();
-            Requires.That(type.IsValueType || type.IsClass);
-
-            var properties = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public);
-            foreach (var property in properties)
-            {
-                var key = Key.From(property.PropertyType, property.Name);
-                if (!bindings.TryGetValue(key, out var value))
-                {
-                    throw new MissingFieldException($"Missing binding for {key}.");
-                }
-                property.SetValue(obj, value);
-            }
-
-            var reference = __makeref(obj);
-            var fields = type.GetFields(BindingFlags.Public);
-            foreach (var field in fields)
-            {
-                if (!field.IsInitOnly)
-                {
-                    var key = Key.From(field.FieldType, field.Name);
-                    if (bindings.TryGetValue(key, out var value))
-                    {
-                        throw new MissingFieldException($"Missing binding for {key}.");
-                    }
-                    field.SetValueDirect(reference, value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Activates a new instance of the type with the injector parameters bound from the
+        /// Activates a new instance of the type with the fields and properties bound and then the
+        /// constructor called afterwards.
         /// <see cref="IBindingProvider"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="bindings"></param>
+        /// <param name="forceAll"></param>
         /// <returns></returns>
-        public static T Activate<T>(IBindingProvider bindings)
+        public static T Activate<T>(IBindingProvider bindings, bool forceAll = false)
         {
             var type = typeof(T);
-
-            var constructors = type.GetConstructors(BindingFlags.Public);
-            ConstructorInfo injectConstructor = type.GetConstructor(Type.EmptyTypes);
-
-            // find best constructor
-            foreach (var constructor in constructors)
-            {
-                if (constructor.GetCustomAttributes<InjectAttribute>().Count() > 0)
-                {
-                    Requires.That<AmbiguousMatchException>(injectConstructor == null);
-                }
-            }
-
-            if (injectConstructor == null)
-            {
-                throw new MissingMethodException();
-            }
-
-            // initialize injected fields and properties
+            ConstructorInfo constructor = GetConstructor(type);
+            
             var value = FormatterServices.GetUninitializedObject(type);
-            Bind(ref value, bindings);
+            Bind(ref value, bindings, forceAll);
+            
+            var parameters = constructor.GetParameters().Select(p => bindings[GetKey(p)]).ToArray();
+            constructor.Invoke(value, parameters);
 
-            var parameters = injectConstructor.GetParameters();
-            var parameterValues = new object[parameters.Length];
-            // find attributes with binding.
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                if (bindings.TryGetValue(Key.From(parameters[i]), out var parameterValue))
-                {
-                    parameterValues[i] = parameterValue;
-                }
-                else
-                {
-                    throw new MissingFieldException();
-                }
-            }
-
-            injectConstructor.Invoke(value, parameterValues);
-
-            throw new NotImplementedException();
+            return (T)value;
         }
 
-        private readonly Dictionary<Key, FieldInfo> fields = new Dictionary<Key, FieldInfo>();
-        private readonly Dictionary<Key, PropertyInfo> properties = new Dictionary<Key, PropertyInfo>();
+        /// <summary>
+        /// Gets the constructor to use for activation.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static ConstructorInfo GetConstructor(Type type)
+        {
+            ConstructorInfo result = null;
+
+            foreach (var constructorInfo in type.GetConstructors(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (constructorInfo.GetCustomAttribute<InjectAttribute>(false) != null)
+                {
+                    Requires.That<AmbiguousMatchException>(result == null);
+                    result = constructorInfo;
+                }
+            }
+            
+            return result ?? type.GetConstructor(Array.Empty<Type>()) ?? throw new MissingMethodException();
+        }
+
+        /// <summary>
+        /// Gets the field for binding and their associated keys.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="forceAll"></param>
+        /// <returns></returns>
+        public static Dictionary<Key, FieldInfo> GetBindingFields(Type type, bool forceAll = false)
+        {
+            var result = new Dictionary<Key, FieldInfo>();
+            var bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+
+            if (!forceAll)
+            {
+                bindingFlags |= BindingFlags.NonPublic;
+            }
+
+            foreach (var fieldInfo in type.GetFields(bindingFlags))
+            {
+                if (forceAll || fieldInfo.GetCustomAttribute<BindAttribute>() != null)
+                {
+                    result.Add(GetKey(fieldInfo), fieldInfo);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the properties for binding and their associated keys.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="forceAll"></param>
+        /// <returns></returns>
+        public static Dictionary<Key, PropertyInfo> GetBindingProperties(Type type, bool forceAll = false)
+        {
+            var result = new Dictionary<Key, PropertyInfo>();
+            var bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty;
+            
+            if (!forceAll)
+            {
+                bindingFlags |= BindingFlags.NonPublic;
+            }
+
+            foreach (var proeprtyInfo in type.GetProperties(bindingFlags))
+            {
+                if (forceAll || proeprtyInfo.GetCustomAttribute<BindAttribute>() != null)
+                {
+                    result.Add(GetKey(proeprtyInfo), proeprtyInfo);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the key to be used for a field.
+        /// </summary>
+        /// <param name="fieldInfo"></param>
+        /// <returns></returns>
+        public static Key GetKey(FieldInfo fieldInfo)
+        {
+            return Key.From(fieldInfo.FieldType, fieldInfo.GetCustomAttributes());
+        }
+
+        /// <summary>
+        /// Gets the key to be used for a property.
+        /// </summary>
+        /// <param name="propertyInfo"></param>
+        /// <returns></returns>
+        public static Key GetKey(PropertyInfo propertyInfo)
+        {
+            return Key.From(propertyInfo.PropertyType, propertyInfo.GetCustomAttributes());
+        }
+
+        /// <summary>
+        /// Gets the key to be used for a parameter.
+        /// </summary>
+        /// <param name="parameterInfo"></param>
+        /// <returns></returns>
+        public static Key GetKey(ParameterInfo parameterInfo)
+        {
+            return Key.From(parameterInfo.ParameterType, parameterInfo.GetCustomAttributes());
+        }
+
+        private readonly Dictionary<Key, FieldInfo> fields;
+        private readonly Dictionary<Key, PropertyInfo> properties;
     }
 }

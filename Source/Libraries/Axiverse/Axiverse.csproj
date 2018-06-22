@@ -67,12 +67,12 @@
     <Compile Include="Injection\SyntheticKey.cs" />
     <Compile Include="ITrackedDisposable.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Modules\Config.cs" />
     <Compile Include="Modules\DependencyAttribute.cs" />
-    <Compile Include="Modules\IProgram.cs" />
+    <Compile Include="Modules\ConfigAttribute.cs" />
+    <Compile Include="Modules\Installer.cs" />
     <Compile Include="Modules\Main.cs" />
-    <Compile Include="Modules\MainModuleAttribute.cs" />
     <Compile Include="Modules\Module.cs" />
-    <Compile Include="Modules\ModuleProgram.cs" />
     <Compile Include="ObjectPool.cs" />
     <Compile Include="Optional.cs" />
     <Compile Include="Requires.cs" />

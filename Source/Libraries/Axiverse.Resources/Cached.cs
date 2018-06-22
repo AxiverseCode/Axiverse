@@ -15,7 +15,7 @@ namespace Axiverse.Resources
         /// <summary>
         /// Gets the path used to load the cached object.
         /// </summary>
-        public string Path { get; set; }
+        public Uri Uri { get; set; }
 
         /// <summary>
         /// Gets the number of references to the cached object.
@@ -37,10 +37,11 @@ namespace Axiverse.Resources
         /// <summary>
         /// Constructs a cached object.
         /// </summary>
+        /// <param name="uri"></param>
         /// <param name="value"></param>
-        public Cached(string path, T value)
+        public Cached(Uri uri, T value)
         {
-            Path = path;
+            Uri = uri;
             this.value = value;
         }
 

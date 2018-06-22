@@ -13,17 +13,6 @@ namespace Axiverse.Resources
     /// <typeparam name="T"></typeparam>
     public interface ILoader<T>
     {
-        /// <summary>
-        /// Gets the array of extensions supported by the loader.
-        /// </summary>
-        string[] Extensions { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        T Load(Stream stream, LoadContext context);
+        bool TryLoad(Uri uri, out T value);
     }
 }

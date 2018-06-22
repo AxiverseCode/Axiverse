@@ -51,6 +51,11 @@ namespace Axiverse.Injection
             return Type.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return $"Key({Type.Name})";
+        }
+
         /// <summary>
         /// Gets a key from the specified binding type.
         /// </summary>
@@ -93,6 +98,32 @@ namespace Axiverse.Injection
         }
 
         /// <summary>
+        /// Gets a key from the specified binding type and attribute.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        public static Key From(Type type, IEnumerable<Attribute> attributes)
+        {
+            Key key = null;
+            foreach (var attribute in attributes)
+            {
+                if (ignoredTypes.Contains(attribute.GetType()))
+                {
+                    continue;
+                }
+
+                if (key != null)
+                {
+                    throw new NotSupportedException();
+                }
+                key = From(type, attribute);
+            }
+
+            return key ?? From(type);
+        }
+
+        /// <summary>
         /// Gets a named key from the specified binding type and name.
         /// </summary>
         /// <param name="type"></param>
@@ -101,63 +132,6 @@ namespace Axiverse.Injection
         public static Key From(Type type, string name)
         {
             return new NamedKey(type, name);
-        }
-
-        /// <summary>
-        /// Gets a key from a <see cref="FieldInfo"/>.
-        /// </summary>
-        /// <param name="fieldInfo"></param>
-        /// <returns></returns>
-        public static Key From(FieldInfo fieldInfo)
-        {
-            var attributes = fieldInfo.GetCustomAttributes(false);
-            var type = fieldInfo.FieldType;
-
-            if (attributes.Length > 1)
-            {
-                // TODO: allow multiple attributes
-                throw new AmbiguousMatchException();
-            }
-
-            return From(type, attributes.Length > 0 ? attributes[0] as Attribute : null);
-        }
-        
-        /// <summary>
-        /// Gets a key from a <see cref="ParameterInfo"/>.
-        /// </summary>
-        /// <param name="parameterInfo"></param>
-        /// <returns></returns>
-        public static Key From(ParameterInfo parameterInfo)
-        {
-            var attributes = parameterInfo.GetCustomAttributes(false);
-            var type = parameterInfo.ParameterType;
-
-            if (attributes.Length > 1)
-            {
-                // TODO: allow multiple attributes
-                throw new AmbiguousMatchException();
-            }
-
-            return From(type, attributes.Length > 0 ? attributes[0] as Attribute : null);
-        }
-
-        /// <summary>
-        /// Gets a key from a <see cref="PropertyInfo"/>.
-        /// </summary>
-        /// <param name="propertyInfo"></param>
-        /// <returns></returns>
-        public static Key From(PropertyInfo propertyInfo)
-        {
-            var attributes = propertyInfo.GetCustomAttributes(false);
-            var type = propertyInfo.PropertyType;
-
-            if (attributes.Length > 1)
-            {
-                // TODO: allow multiple attributes
-                throw new AmbiguousMatchException();
-            }
-
-            return From(type, attributes.Length > 0 ? attributes[0] as Attribute : null);
         }
 
         /// <summary>
@@ -192,5 +166,19 @@ namespace Axiverse.Injection
             /// </summary>
             public static readonly Key Key = new Key(typeof(T));
         }
+
+        public static void IgnoreAttribute(Type type)
+        {
+            Requires.AssignableFrom<Attribute>(type);
+            ignoredTypes.Add(type);
+        }
+
+        static Key()
+        {
+            ignoredTypes.Add(typeof(BindAttribute));
+            ignoredTypes.Add(typeof(InjectAttribute));
+        }
+
+        private static List<Type> ignoredTypes = new List<Type>();
     }
 }

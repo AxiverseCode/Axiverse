@@ -58,7 +58,7 @@ namespace Axiverse.Injection
         /// <returns>A string that represents this <see cref="SyntheticKey"/>.</returns>
         public override string ToString()
         {
-            return base.ToString();
+            return $"NamedKey({Name}, {Type.Name})";
         }
     }
 }

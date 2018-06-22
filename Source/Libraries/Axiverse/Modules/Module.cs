@@ -31,5 +31,20 @@ namespace Axiverse.Modules
 
         // inject, but figure out dependencies first and automatically activate those. Keep an
         // activation trace log as well.
+
+
+
+
+        public static void Run<T>(string[] args)
+            where T : Module
+        {
+            // parse arguments and flags
+
+            // create injector
+
+            // load primary module(s)
+            var main = Injector.Global.Resolve<Main>();
+            main(args);
+        }
     }
 }

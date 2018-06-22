@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Modules
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class DependencyAttribute : Attribute
     {
+        /// <summary>
+        /// The type of module
+        /// </summary>
         public Type ModuleType { get; }
 
         /// <summary>
@@ -19,7 +24,7 @@ namespace Axiverse.Modules
         /// <param name="moduleType"></param>
         public DependencyAttribute(Type moduleType)
         {
-            Requires.AssignableFrom(Key.From<Module>(), moduleType);
+            ModuleType = Requires.AssignableFrom<Module>(moduleType);
         }
     }
 }

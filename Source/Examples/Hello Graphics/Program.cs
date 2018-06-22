@@ -12,8 +12,7 @@ namespace HelloGraphics
             Injector.Global.Bind(new Main(Run));
             // Set the load root to Axiverse\
             Injector.Global.Bind(new Library(@"..\..\..\..\..\"));
-            ModuleProgram.Run(args);
-
+            Module.Run<Module>(args);
         }
 
         public static void Run(string[] args)

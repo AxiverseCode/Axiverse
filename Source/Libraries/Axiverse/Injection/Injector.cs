@@ -83,18 +83,18 @@ namespace Axiverse.Injection
             return null;
         }
 
-        public T Resolve<T>() where T : class
+        public T Resolve<T>()
         {
-            return Resolve(Key.From(typeof(T))) as T;
+            return (T)Resolve(Key.From(typeof(T)));
         }
 
-        public T Resolve<T>(Key key) where T : class
+        public T Resolve<T>(Key key)
         {
             Contract.Requires<InvalidCastException>(typeof(T).IsAssignableFrom(key.Type));
-            return Resolve(key) as T;
+            return (T)Resolve(key);
         }
 
-        public void Bind<T>(T value) where T : class
+        public void Bind<T>(T value)
         {
             Bindings.Add(value);
         }
@@ -102,6 +102,11 @@ namespace Axiverse.Injection
         public void Bind(Key key, object value)
         {
             Bindings.Add(key, value);
+        }
+
+        public void Bind<T>(string name, T value)
+        {
+            Bindings.Add(Key.From(typeof(T), name), value);
         }
 
         public void Install(Func<ValueType> method)

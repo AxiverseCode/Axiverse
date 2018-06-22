@@ -11,36 +11,66 @@ namespace Axiverse.Resources
     /// <summary>
     /// An object cache backed for loaded objects.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class Cache
     {
-        public Library Library { get; set; }
-
-        public Cache()
+        /// <summary>
+        /// Adds an resource into the cache with the given uri.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Cached<T> Add<T>(Uri uri, T value)
         {
-            Library = Injector.Global.Resolve<Library>();
+            return GetTypeCache<T>().Add(uri, value);
         }
 
-        public Cache(Library library)
+        /// <summary>
+        /// Removes a resource into the cache with the given uri.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        public bool Remove<T>(Uri uri)
         {
-            Library = library;
+            return GetTypeCache<T>().Remove(uri);
         }
 
-        public Cached<T> Load<T>(string path)
+        /// <summary>
+        /// Requests for an object to be loaded by the registered loaders.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException">Throws if none of the processors can load the uri.</exception>
+        public Cached<T> Load<T>(Uri uri)
         {
-            return GetTypeCache<T>().Load(path);
+            return GetTypeCache<T>().Load(uri);
         }
 
+        /// <summary>
+        /// Releases a reference to a cached object.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cached"></param>
         public void Unload<T>(Cached<T> cached)
         {
             GetTypeCache<T>().Unload(cached);
         }
 
+        /// <summary>
+        /// Registers a loader to be used when loading objects.
+        /// </summary>
+        /// <param name="loader"></param>
         public void Register<T>(ILoader<T> loader)
         {
             GetTypeCache<T>().Register(loader);
         }
 
+        /// <summary>
+        /// Gets the <see cref="TypeCache{T}"/> for the requested type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         protected TypeCache<T> GetTypeCache<T>()
         {
             if (m_typeCaches.TryGetValue(typeof(T), out var cache))
@@ -48,7 +78,7 @@ namespace Axiverse.Resources
                 return cache as TypeCache<T>;
             }
 
-            var typeCache = new TypeCache<T>(Library);
+            var typeCache = new TypeCache<T>();
             m_typeCaches.Add(typeof(T), typeCache);
             return typeCache;
         }

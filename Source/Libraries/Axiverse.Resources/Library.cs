@@ -24,6 +24,11 @@ namespace Axiverse.Resources
             return Path.Combine(BasePath, path);
         }
 
+        public Library()
+        {
+
+        }
+
         public Library(string basePath)
         {
             BasePath = basePath;

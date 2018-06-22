@@ -20,10 +20,6 @@ build the systems around them to support their interconnection.
 At this point we should be able to fly around in a world where other things are flying around as
 well.
 
-
-
-
-
 Next steps:
 
 Resource management - programmatic or automatic from file. Uri generated.
@@ -47,3 +43,5 @@ Simplify engine
 - Render using renderers.
 
 We have a functional engine!
+
+Camera controls and inputs.

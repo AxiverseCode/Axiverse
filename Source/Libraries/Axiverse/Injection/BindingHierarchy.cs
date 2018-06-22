@@ -13,6 +13,24 @@ namespace Axiverse.Injection
     public class BindingHierarchy : List<BindingDictionary>, IBindingProvider
     {
         /// <summary>
+        /// Gets the binding with the specified key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException">Throws if the key is not found.</exception>
+        public object this[Key key]
+        {
+            get
+            {
+                if (TryGetValue(key, out var value))
+                {
+                    return value;
+                }
+                throw new KeyNotFoundException();
+            }
+        }
+
+        /// <summary>
         /// Sees if any provider contains the specified key.
         /// </summary>
         /// <param name="key"></param>
@@ -37,7 +55,6 @@ namespace Axiverse.Injection
         /// <returns></returns>
         public bool TryGetValue(Key key, out object value)
         {
-
             for (int i = Count - 1; i >= 0; i++)
             {
                 if (this[i].TryGetValue(key, out value))

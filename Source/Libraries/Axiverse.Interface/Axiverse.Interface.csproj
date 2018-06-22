@@ -61,6 +61,7 @@
     <Compile Include="Engine\SceneSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Compositing\Compositor.cs" />
+    <Compile Include="Rendering\Compositing\ForwardRenderer.cs" />
     <Compile Include="Rendering\Compositing\RenderStage.cs" />
     <Compile Include="Rendering\Compositing\Renderer.cs" />
     <Compile Include="Rendering\Material.cs" />

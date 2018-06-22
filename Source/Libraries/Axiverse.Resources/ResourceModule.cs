@@ -9,5 +9,10 @@ namespace Axiverse.Resources
 {
     public class ResourceModule : Module
     {
+        protected override void Initialize()
+        {
+            Bind(new Cache());
+            Bind(new Library());
+        }
     }
 }
