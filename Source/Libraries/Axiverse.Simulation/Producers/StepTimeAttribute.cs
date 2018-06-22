@@ -8,7 +8,7 @@ using Axiverse.Injection;
 
 namespace Axiverse.Simulation
 {
-    public class StepTimeAttribute : BindingAttribute
+    public class StepTimeAttribute : Attribute
     {
     }
 }

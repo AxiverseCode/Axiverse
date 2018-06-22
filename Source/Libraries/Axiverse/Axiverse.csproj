@@ -53,7 +53,6 @@
     <Compile Include="Flag.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Injection\BindAttribute.cs" />
-    <Compile Include="Injection\BindingAttribute.cs" />
     <Compile Include="Injection\BindingHierarchy.cs" />
     <Compile Include="Injection\IBindingProvider.cs" />
     <Compile Include="Injection\InjectAttribute.cs" />

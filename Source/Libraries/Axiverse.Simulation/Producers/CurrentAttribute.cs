@@ -8,7 +8,7 @@ using Axiverse.Injection;
 
 namespace Axiverse.Simulation
 {
-    public class CurrentAttribute : BindingAttribute
+    public class CurrentAttribute : Attribute
     {
     }
 }
