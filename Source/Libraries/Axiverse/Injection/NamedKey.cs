@@ -14,10 +14,9 @@ namespace Axiverse.Injection
     public class NamedKey : Key
     {
         /// <summary>
-        /// Gets or sets an optional display name. This field is not used for binding equality. The
-        /// specific instance of the key must be used for binding.
+        /// Gets the name of the key. For a <see cref="NamedKey"/>, this is used for equality.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
         /// Constructs a <see cref="SyntheticKey"/> with the given display name.

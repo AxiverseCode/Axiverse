@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Axiverse.Injection
@@ -21,12 +22,18 @@ namespace Axiverse.Injection
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets the identifier for this <see cref="SyntheticKey"/> which is unique in the
+        /// <see cref="AppContext"/>.
+        /// </summary>
+        public int Identifier { get; }
+
+        /// <summary>
         /// Constructs a <see cref="SyntheticKey"/>.
         /// </summary>
         /// <param name="type"></param>
         protected internal SyntheticKey(Type type) : base(type)
         {
-
+            Identifier = Interlocked.Increment(ref identifier);
         }
 
         /// <summary>
@@ -34,7 +41,7 @@ namespace Axiverse.Injection
         /// </summary>
         /// <param name="type"></param>
         /// <param name="name"></param>
-        protected internal SyntheticKey(Type type, String name) : base(type)
+        protected internal SyntheticKey(Type type, String name) : this(type)
         {
             Name = name;
         }
@@ -64,7 +71,17 @@ namespace Axiverse.Injection
         /// <returns>A string that represents this <see cref="SyntheticKey"/>.</returns>
         public override string ToString()
         {
-            return base.ToString();
+            if (string.IsNullOrEmpty(Name))
+            {
+                return $"SyntheticKey({Identifier})";
+            }
+            return $"SyntheticKey({Identifier}, {Name})";
         }
+
+        /// <summary>
+        /// The current last used identifier. Identifiers are assigned post increment, so the first
+        /// identifier will be 1. 0 is unused.
+        /// </summary>
+        private static int identifier;
     }
 }

@@ -27,16 +27,33 @@ namespace Axiverse.Injection
             Type = type;
         }
 
+        /// <summary>
+        /// Determines whether the specified type can be assigned to the type specified by this
+        /// key.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public bool IsAssignableFrom(Type type)
         {
             return Type.IsAssignableFrom(type);
         }
 
+        /// <summary>
+        /// Determines whether the type of the specified object can be assigned to the type
+        /// specified by this key.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool IsAssignableFrom(object value)
         {
             return Type.IsAssignableFrom(value.GetType());
         }
 
+        /// <summary>
+        /// Determines whether this is equal to the specified object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj is Key key)
@@ -46,11 +63,19 @@ namespace Axiverse.Injection
             return false;
         }
 
+        /// <summary>
+        /// Returns a hash code for this <see cref="Key"/>.
+        /// </summary>
+        /// <returns>An integer value that specifies a hash value for this <see cref="Key"/>.</returns>
         public override int GetHashCode()
         {
             return Type.GetHashCode();
         }
 
+        /// <summary>
+        /// Converts this <see cref="Key"/> to a human-readable string.
+        /// </summary>
+        /// <returns>A string that represents this <see cref="Key"/>.</returns>
         public override string ToString()
         {
             return $"Key({Type.Name})";
@@ -167,6 +192,15 @@ namespace Axiverse.Injection
             public static readonly Key Key = new Key(typeof(T));
         }
 
+        /// <summary>
+        /// Registers a type of an attribute to be ignored when determining the key from a
+        /// collection of attributes. By default <see cref="BindAttribute"/> and
+        /// <see cref="InjectAttribute"/> is ignored.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <exception cref="InvalidCastException">
+        /// Throws if the type is not of an<see cref="Attribute"/>.
+        /// </exception>
         public static void IgnoreAttribute(Type type)
         {
             Requires.AssignableFrom<Attribute>(type);

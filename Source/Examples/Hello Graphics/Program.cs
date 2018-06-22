@@ -5,14 +5,23 @@ using Axiverse.Resources;
 
 namespace HelloGraphics
 {
-    class Program
+    [Dependency(typeof(ResourceModule))]
+    public class Program : Module
     {
-        static void Main(string[] args)
+        [Inject]
+        public Program(Library library)
+        {
+            library.BasePath = @"..\..\..\..\..\";
+        }
+
+        protected override void Initialize()
         {
             Injector.Global.Bind(new Main(Run));
-            // Set the load root to Axiverse\
-            Injector.Global.Bind(new Library(@"..\..\..\..\..\"));
-            Module.Run<Module>(args);
+        }
+
+        static void Main(string[] args)
+        {
+            Run<Program>(args);
         }
 
         public static void Run(string[] args)

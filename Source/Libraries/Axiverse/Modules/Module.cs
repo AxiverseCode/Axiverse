@@ -12,38 +12,45 @@ namespace Axiverse.Modules
     /// </summary>
     public abstract class Module
     {
-        public Injector Injector { get; set; }
+        /// <summary>
+        /// Gets the <see cref="Injector"/> to install the module onto.
+        /// </summary>
+        public Injector Injector { get; internal set; }
 
-        protected virtual void Initialize()
+        /// <summary>
+        /// Initializes the module.
+        /// </summary>
+        protected internal virtual void Initialize()
         {
             var m = typeof(Main);
         }
 
-        protected void Bind<T>(T value) where T : class
+        /// <summary>
+        /// Binds to the injector.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        protected void Bind<T>(T value)
         {
             Injector.Bind(Key.From(typeof(T)), value);
         }
-
-        // bind - to inject
-
-        // install - module possibly with parameters
-
-
-        // inject, but figure out dependencies first and automatically activate those. Keep an
-        // activation trace log as well.
-
-
-
-
+        
+        /// <summary>
+        /// Runs the application from the installation of the specified <see cref="Module"/>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="args"></param>
         public static void Run<T>(string[] args)
             where T : Module
         {
-            // parse arguments and flags
+            var injector = Injector.Global;
 
-            // create injector
+            {
+                var installer = new Installer(injector);
+                installer.Install(typeof(T));
+            }
 
-            // load primary module(s)
-            var main = Injector.Global.Resolve<Main>();
+            var main = injector.Resolve<Main>();
             main(args);
         }
     }

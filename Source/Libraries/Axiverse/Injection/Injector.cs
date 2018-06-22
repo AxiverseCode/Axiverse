@@ -22,40 +22,38 @@ namespace Axiverse.Injection
         /// </summary>
         public Injector Fallback { get; set; }
 
-        public T Inject<T>() where T : class
-        {
-            return Inject(typeof(T)) as T;
-        }
-
         /// <summary>
-        /// Injects a specified type using the bindings already availaible in this injector and
-        /// automatically injecting dependent classes if available.
+        /// Constructs an injector with the injector bound.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public object Inject(Type type)
+        public Injector()
         {
-            var constructors = type.GetConstructors(BindingFlags.Public);
-
-            Contract.Requires<AmbiguousMatchException>(constructors.Length == 1, "Injected types must only have one public constructor.");
-
-            var constructor = constructors[0];
-            var parameters = constructor.GetParameters();
-            var injects = new object[parameters.Length];
-
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                injects[i] = Resolve(parameters[i]);
-            }
-
-            return constructor.Invoke(injects);
+            Bind(this);
         }
 
-        protected object Resolve(ParameterInfo parameter)
+        public void Bind<T>(T value)
         {
-            // If the injector is requested, return this injector.
+            Bindings.Add(value);
+        }
 
-            return null;
+        public void Bind(Key key, object value)
+        {
+            Bindings.Add(key, value);
+        }
+
+        public void Bind<T>(string name, T value)
+        {
+            Bindings.Add(Key.From(typeof(T), name), value);
+        }
+
+        public T Resolve<T>()
+        {
+            return (T)Resolve(Key.From(typeof(T)));
+        }
+
+        public T Resolve<T>(Key key)
+        {
+            Contract.Requires<InvalidCastException>(typeof(T).IsAssignableFrom(key.Type));
+            return (T)Resolve(key);
         }
 
         public object Resolve(Key key)
@@ -77,46 +75,10 @@ namespace Axiverse.Injection
             if (Cascade)
             {
                 // TODO(axiverse): install on arbitrary key?
-                return Inject(key.Type);
+                // return Inject(key.Type);
             }
 
             return null;
-        }
-
-        public T Resolve<T>()
-        {
-            return (T)Resolve(Key.From(typeof(T)));
-        }
-
-        public T Resolve<T>(Key key)
-        {
-            Contract.Requires<InvalidCastException>(typeof(T).IsAssignableFrom(key.Type));
-            return (T)Resolve(key);
-        }
-
-        public void Bind<T>(T value)
-        {
-            Bindings.Add(value);
-        }
-
-        public void Bind(Key key, object value)
-        {
-            Bindings.Add(key, value);
-        }
-
-        public void Bind<T>(string name, T value)
-        {
-            Bindings.Add(Key.From(typeof(T), name), value);
-        }
-
-        public void Install(Func<ValueType> method)
-        {
-
-        }
-
-        public void Install(Action method)
-        {
-
         }
 
         /// <summary>

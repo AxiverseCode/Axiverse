@@ -40,6 +40,7 @@ namespace Axiverse.Resources.Tests
             Assert.AreEqual("public-property", value.BoundPublicProperty);
             Assert.AreEqual("protected-property", value.BoundProtectedProperty);
             Assert.AreEqual("private-property", value.BoundPrivateProperty);
+            Assert.IsNull(value.PublicField);
         }
 
         [Test]
@@ -48,10 +49,13 @@ namespace Axiverse.Resources.Tests
             var value = Binder.Activate<ActivationTester>(injector.Bindings);
 
             Assert.IsTrue(value.Constructed);
+            Assert.IsNull(value.PublicField);
         }
 
         public class BindingTester
         {
+            public string PublicField;
+
             [Bind]
             [Named("public field")]
             public string BoundPublicField;
@@ -82,6 +86,8 @@ namespace Axiverse.Resources.Tests
         public class ActivationTester
         {
             public bool Constructed;
+
+            public string PublicField;
 
             [Bind]
             [Named("public field")]

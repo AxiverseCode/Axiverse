@@ -12,7 +12,7 @@ namespace Axiverse.Injection
     /// <summary>
     /// Represents a binding between a <see cref="Type"/> and a <see cref="IBindingProvider"/>.
     /// </summary>
-    public class Binder
+    public static class Binder
     {
         /// <summary>
         /// Binds the fields and properties on a class.
@@ -53,15 +53,29 @@ namespace Axiverse.Injection
         public static T Activate<T>(IBindingProvider bindings, bool forceAll = false)
         {
             var type = typeof(T);
+            return (T)Activate(type, bindings, forceAll);
+        }
+
+        /// <summary>
+        /// Activates a new instance of the type with the fields and properties bound and then the
+        /// constructor called afterwards.
+        /// <see cref="IBindingProvider"/>.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="bindings"></param>
+        /// <param name="forceAll"></param>
+        /// <returns></returns>
+        public static object Activate(Type type, IBindingProvider bindings, bool forceAll = false)
+        {
             ConstructorInfo constructor = GetConstructor(type);
-            
+
             var value = FormatterServices.GetUninitializedObject(type);
             Bind(ref value, bindings, forceAll);
-            
+
             var parameters = constructor.GetParameters().Select(p => bindings[GetKey(p)]).ToArray();
             constructor.Invoke(value, parameters);
 
-            return (T)value;
+            return value;
         }
 
         /// <summary>
@@ -168,8 +182,5 @@ namespace Axiverse.Injection
         {
             return Key.From(parameterInfo.ParameterType, parameterInfo.GetCustomAttributes());
         }
-
-        private readonly Dictionary<Key, FieldInfo> fields;
-        private readonly Dictionary<Key, PropertyInfo> properties;
     }
 }

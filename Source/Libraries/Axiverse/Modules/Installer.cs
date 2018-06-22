@@ -47,8 +47,14 @@ namespace Axiverse.Modules
             var dependencies = GetDependencies(type);
             foreach (var dependency in dependencies)
             {
-                Install(type);
+                Install(dependency);
             }
+
+            var module = Injection.Binder.Activate(type, Injector.Bindings) as Module;
+            module.Injector = Injector;
+            module.Initialize();
+
+            modules.Add(type);
         }
 
         /// <summary>
