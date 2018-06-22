@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\EngineModule.cs" />
     <Compile Include="Engine\SceneSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Compositing\Compositor.cs" />
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Resources\Axiverse.Resources.csproj">
+      <Project>{DB2FCC23-BEFB-44CD-8F9B-EC1702AEDF57}</Project>
+      <Name>Axiverse.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Axiverse.Simulation\Axiverse.Simulation.csproj">
       <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>

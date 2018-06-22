@@ -20,10 +20,7 @@ namespace Axiverse.Modules
         /// <summary>
         /// Initializes the module.
         /// </summary>
-        protected internal virtual void Initialize()
-        {
-            var m = typeof(Main);
-        }
+        protected internal abstract void Initialize();
 
         /// <summary>
         /// Binds to the injector.
@@ -34,24 +31,17 @@ namespace Axiverse.Modules
         {
             Injector.Bind(Key.From(typeof(T)), value);
         }
-        
-        /// <summary>
-        /// Runs the application from the installation of the specified <see cref="Module"/>.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="args"></param>
-        public static void Run<T>(string[] args)
-            where T : Module
+
+        protected T Bind<T>()
         {
-            var injector = Injector.Global;
+            var value = Binder.Activate<T>(Injector.Bindings);
+            Injector.Bind(Key.From(typeof(T)), value);
+            return value;
+        }
 
-            {
-                var installer = new Installer(injector);
-                installer.Install(typeof(T));
-            }
-
-            var main = injector.Resolve<Main>();
-            main(args);
+        protected T Activate<T>()
+        {
+            return Binder.Activate<T>(Injector.Bindings);
         }
     }
 }

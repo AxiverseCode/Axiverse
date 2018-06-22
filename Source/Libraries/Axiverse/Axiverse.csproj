@@ -50,8 +50,6 @@
     <Compile Include="Collections\ItemList.cs" />
     <Compile Include="Collections\TrackedList.cs" />
     <Compile Include="DisposableObjectPool.cs" />
-    <Compile Include="Flag.cs" />
-    <Compile Include="Flags.cs" />
     <Compile Include="Injection\BindAttribute.cs" />
     <Compile Include="Injection\BindingHierarchy.cs" />
     <Compile Include="Injection\IBindingProvider.cs" />
@@ -72,6 +70,7 @@
     <Compile Include="Modules\Installer.cs" />
     <Compile Include="Modules\Main.cs" />
     <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ProgramModule.cs" />
     <Compile Include="ObjectPool.cs" />
     <Compile Include="Optional.cs" />
     <Compile Include="Requires.cs" />

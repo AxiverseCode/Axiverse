@@ -10,7 +10,7 @@ namespace Axiverse.Modules
     /// <summary>
     /// 
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class DependencyAttribute : Attribute
     {
         /// <summary>

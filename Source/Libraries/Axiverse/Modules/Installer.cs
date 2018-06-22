@@ -36,12 +36,12 @@ namespace Axiverse.Modules
         /// Installs a module type
         /// </summary>
         /// <param name="type"></param>
-        public void Install(Type type)
+        public Module Install(Type type)
         {
             Requires.AssignableFrom<Module>(type);
             if (modules.Contains(type))
             {
-                return;
+                return null;
             }
 
             var dependencies = GetDependencies(type);
@@ -55,6 +55,7 @@ namespace Axiverse.Modules
             module.Initialize();
 
             modules.Add(type);
+            return module;
         }
 
         /// <summary>

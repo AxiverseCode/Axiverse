@@ -6,30 +6,27 @@ using Axiverse.Resources;
 namespace HelloGraphics
 {
     [Dependency(typeof(ResourceModule))]
-    public class Program : Module
+    [Dependency(typeof(EngineModule))]
+    public class Program : ProgramModule
     {
+        [Bind]
+        Engine engine;
+
         [Inject]
         public Program(Library library)
         {
             library.BasePath = @"..\..\..\..\..\";
         }
 
-        protected override void Initialize()
+        public override void Execute(string[] args)
         {
-            Injector.Global.Bind(new Main(Run));
+            engine.Initialize();
+            engine.Run();
         }
 
         static void Main(string[] args)
         {
             Run<Program>(args);
-        }
-
-        public static void Run(string[] args)
-        {
-            Engine engine = new Engine();
-            engine.Initialize();
-
-            engine.Run();
         }
     }
 }
