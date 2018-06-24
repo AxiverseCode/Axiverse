@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Axiverse.Interface.Input")]
+[assembly: AssemblyTitle("Axiverse.Physics.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Axiverse.Interface.Input")]
+[assembly: AssemblyProduct("Axiverse.Physics.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f77beee3-dd1f-45bc-ac20-7b120419aba5")]
+[assembly: Guid("63e2639e-ca6c-49cf-ac2a-be1d82574718")]
 
 // Version information for an assembly consists of the following four values:
 //

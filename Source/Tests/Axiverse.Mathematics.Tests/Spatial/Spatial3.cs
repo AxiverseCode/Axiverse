@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Axiverse.Mathematics;
 using Axiverse.Mathematics.Spatial;
 
-namespace Axiverse.Tests.Mathematics.Spatial
+namespace Axiverse.Mathematics.Spatial
 {
     public class Spatial3 : ISpatial3
     {

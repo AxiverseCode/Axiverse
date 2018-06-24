@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Axiverse.Mathematics.Tests
+namespace Axiverse.Mathematics
 {
     /// <summary>
     /// Unit tests for <see cref="Vector4"/>.

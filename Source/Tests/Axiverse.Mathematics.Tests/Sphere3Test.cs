@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Axiverse.Mathematics;
 
-namespace Axiverse.Tests.Mathematics
+namespace Axiverse.Tests
 {
     [TestFixture]
     public class Sphere3Test

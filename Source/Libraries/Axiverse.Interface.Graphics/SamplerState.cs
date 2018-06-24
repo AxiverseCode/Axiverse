@@ -35,7 +35,7 @@ namespace Axiverse.Interface.Graphics
             };
 
             NativeSampler = Device.SamplerAllocator.Allocate(1);
-            Device.NativeDevice.CreateSampler(nativeDescription, NativeSampler);
+            Device.NativeDevice.CreateSampler(ref nativeDescription, NativeSampler);
         }
 
         public static SamplerState Create(GraphicsDevice device, SamplerStateDescription description)

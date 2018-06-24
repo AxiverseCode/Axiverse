@@ -6,7 +6,7 @@ using NUnit.Framework;
 using Axiverse.Mathematics;
 using Axiverse.Mathematics.Spatial;
 
-namespace Axiverse.Tests.Mathematics.Spatial
+namespace Axiverse.Mathematics.Spatial
 {
     [TestFixture]
     public class OctreeTest

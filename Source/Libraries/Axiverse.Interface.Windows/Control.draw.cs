@@ -66,7 +66,6 @@ namespace Axiverse.Interface.Windows
         {
             compositor.FillRoundedRectangle(new Rectangle(0, 0, Width, Height), new Vector2(0, 0), BackgroundColor);
             compositor.DrawText(Text, Font, new TextLayout(), new Rectangle(0, 0, Width, Height), ForegroundColor);
-            compositor.DeviceContext.Clear(new Color4(1, 1, 1, 1));
         }
 
         public virtual void DrawChildren(DrawContext compositor)
@@ -74,33 +73,25 @@ namespace Axiverse.Interface.Windows
             DrawChildren(Vector2.Zero, compositor);
         }
 
-        public virtual void DrawChildren(Vector2 parentOffset, DrawContext compositor)
+        public virtual void DrawChildren(Vector2 parentOffset, DrawContext context)
         {
-            var canvas = compositor;// as Graphics.Compositor;
-            // apply my transform
-
             // could be optimized as transforms affects axis aligned clips
             var offset = parentOffset + Bounds.TopLeft;
             Matrix3x2 transform = Matrix3x2.Translation(offset.ToVector2());
             RectangleF absoluteBounds = new RectangleF(offset.X, offset.Y, Bounds.Width, Bounds.Height);
-            canvas.DeviceContext.PushAxisAlignedClip(absoluteBounds, AntialiasMode.Aliased);
-            canvas.DeviceContext.Transform = transform;
-            Draw(canvas);
-            canvas.DeviceContext.Transform = Matrix3x2.Identity;
 
+            context.DeviceContext.PushAxisAlignedClip(absoluteBounds, AntialiasMode.Aliased);
+
+            context.DeviceContext.Transform = transform;
+            Draw(context);
+
+            context.DeviceContext.Transform = Matrix3x2.Identity;
             foreach (var child in Children)
             {
-                child.DrawChildren(offset, canvas);
+                child.DrawChildren(offset, context);
             }
 
-            canvas.DeviceContext.PopAxisAlignedClip();
-
-            // Material Design Iconic (icon) http://zavoloklom.github.io/material-design-iconic-font/icons.html
-            // Iosevka (monospace)
-            // Open Sans (paragraph, sans-serif)
-            // Roboto Condensed (heading, sans-serif)
-            // Vollkorn (paragraph, serif)
-            // Noto Serif (heading, serif)
+            context.DeviceContext.PopAxisAlignedClip();
         }
     }
 }

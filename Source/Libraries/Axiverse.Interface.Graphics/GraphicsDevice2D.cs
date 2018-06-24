@@ -106,11 +106,9 @@ namespace Axiverse.Interface.Graphics
                 SharpDX.DirectWrite.FontWeight.Normal,
                 FontStyle.Normal,
                 FontStretch.Normal,
-                30)
-            {
-                TextAlignment = TextAlignment.Leading,
-                ParagraphAlignment = ParagraphAlignment.Near,
-            };
+                30);
+            TextFormat.SetTextAlignment(TextAlignment.Leading);
+            TextFormat.SetParagraphAlignment(ParagraphAlignment.Near);
 
             DeviceContextOptions deviceOptions = DeviceContextOptions.None;
             using (var deviceGI = Device3D.QueryInterface<DeviceGI>())

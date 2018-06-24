@@ -78,27 +78,23 @@ namespace Axiverse.Interface.Engine
 
             Window = new Window();
             Window.Bounds = new Rectangle(0, 0, presenter.Description.Width, presenter.Description.Height);
-            Control.DefaultFont = new Windows.Font("Open Sans", 16, Windows.FontWeight.Normal);
+            Window.Bind(form);
+            Control.DefaultFont = new Font("Open Sans", 16, Windows.FontWeight.Normal);
 
             var control = new Dialog();
-            control.Bounds = new Rectangle(10, 10, 400, 400);
+            control.Bounds = new Rectangle(10, 10, 200, 400);
             control.BackgroundColor = new Windows.Color(.4f);
             Window.Children.Add(control);
 
-            control.Children.Add(new Windows.Control()
+            control.Children.Add(new Control()
             {
-                Bounds = new Rectangle(10, 50, 50, 50),
-                BackgroundColor = Windows.Colors.Yellow,
+                Bounds = new Rectangle(10, 100, 50, 50),
+                BackgroundColor = Colors.Yellow,
             });
-
+            control.Children.Add(new Button()
             {
-                var z = new Windows.Button()
-                {
-                    Location = new Vector2(100, 50),
-                };
-
-                control.Children.Add(z);
-            }
+                Location = new Vector2(10, 50),
+            });
 
 
             var compositor = new Compositor(device, presenter);
