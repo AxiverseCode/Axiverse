@@ -21,7 +21,9 @@ namespace Axiverse.Interface.Graphics
         /// Gets the list of resources bound to this device.
         /// </summary>
         public List<GraphicsResource> Resources { get; } = new List<GraphicsResource>();
-        
+
+        public Queue<GraphicsResource> UploadQueue { get; } = new Queue<GraphicsResource>();
+
         internal DescriptorAllocator SamplerAllocator;
         internal DescriptorAllocator ShaderResourceViewAllocator;
         internal DescriptorAllocator DepthStencilViewAllocator;

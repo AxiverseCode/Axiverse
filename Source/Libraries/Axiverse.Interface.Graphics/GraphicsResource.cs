@@ -31,6 +31,16 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        public virtual void Upload(CommandList commandList)
+        {
+
+        }
+
+        public virtual void DisposeUpload()
+        {
+
+        }
+
         /// <summary>
         /// Disposes the resource.
         /// </summary>

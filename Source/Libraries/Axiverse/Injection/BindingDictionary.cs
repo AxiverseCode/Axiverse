@@ -21,7 +21,7 @@ namespace Axiverse.Injection
             }
             set
             {
-                Requires.That<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
+                Requires.AssignableFrom(key, value);
                 bindings[key] = value;
             }
         }
@@ -46,7 +46,7 @@ namespace Axiverse.Injection
         /// </exception>
         public void Add(Key key, object value)
         {
-            Requires.That<InvalidCastException>(key.Type.IsAssignableFrom(value.GetType()));
+            Requires.AssignableFrom(key, value);
             bindings.Add(key, value);
         }
 
@@ -66,9 +66,33 @@ namespace Axiverse.Injection
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T Get<T>(Key key) where T : class
+        public T Get<T>(Key key)
         {
-            return bindings[key] as T;
+            Requires.AssignableFrom<T>(key);
+            return (T)bindings[key];
+        }
+
+        public T Get<T>()
+        {
+            return (T)bindings[Key.From<T>()];
+        }
+
+        public T Or<T>(Key key, T @default)
+        {
+            if (TryGetValue(key, out var value))
+            {
+                return (T)value;
+            }
+            return @default;
+        }
+
+        public T OrDefault<T>(Key key) where T : class
+        {
+            if (TryGetValue(key, out var value))
+            {
+                return (T)value;
+            }
+            return default(T);
         }
 
         /// <summary>

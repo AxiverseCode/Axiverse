@@ -9,5 +9,7 @@ namespace Axiverse.Interface.Scenes
 {
     public class CameraComponent : Component
     {
+        public Matrix4 View { get; set; }
+        public Matrix4 Projection { get; set; }
     }
 }

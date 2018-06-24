@@ -15,7 +15,11 @@ namespace Axiverse.Interface.Graphics
 
         public Texture BackBuffer { get; set; }
 
+        public Texture[] BackBuffers { get; set; }
+
         public int BackBufferIndex => bufferIndex;
+
+        public int BackBufferCount => bufferCount;
 
         public Texture DepthStencilBuffer { get; set; }
 
@@ -57,7 +61,14 @@ namespace Axiverse.Interface.Graphics
             // We need now to retrieve the back buffers:
             // 1) We need a heap to store the views
             var handle = Device.RenderTargetViewAllocator.Allocate(bufferCount);
-            
+
+            BackBuffers = new Texture[bufferCount];
+            for (int i = 0; i < bufferCount; i++)
+            {
+                BackBuffers[i] = new Texture(Device);
+                BackBuffers[i].Initialize(NativeSwapChain.GetBackBuffer<Resource>(i));
+            }
+
             BackBuffer = new Texture(Device);
             BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
 
@@ -103,9 +114,21 @@ namespace Axiverse.Interface.Graphics
         
         protected void ResizeSwapChain()
         {
+            BackBuffer.Dispose();
+            for (int i = 0; i < BackBufferCount; i++)
+            {
+                BackBuffers[i].Dispose();
+            }
+
             NativeSwapChain.ResizeBuffers(bufferCount,
                 Description.Width, Description.Height,
                 Format.B8G8R8A8_UNorm, SwapChainFlags.None);
+
+            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
+            for (int i = 0; i < bufferCount; i++)
+            {
+                BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(i));
+            }
         }
 
         protected void ResizeDepthStencilBuffer()

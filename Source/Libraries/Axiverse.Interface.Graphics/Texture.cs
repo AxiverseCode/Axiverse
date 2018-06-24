@@ -136,6 +136,7 @@ namespace Axiverse.Interface.Graphics
             bitmap.UnlockBits(data);
             bitmap.Dispose();
 
+            Device.UploadQueue.Enqueue(this);
             //ShaderResourceViewDescription = new ShaderResourceViewDescription
             //{
             //    Shader4ComponentMapping = 5768,
@@ -149,7 +150,7 @@ namespace Axiverse.Interface.Graphics
             // Renderer.ResourcePipeline.Resources.Add(this);
         }
 
-        public void Prepare(CommandList commandList)
+        public override void Upload(CommandList commandList)
         {
             if (UploadResource != null)
             {
@@ -165,5 +166,13 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        public override void DisposeUpload()
+        {
+            if (UploadResource != null)
+            {
+                UploadResource.Dispose();
+                UploadResource = null;
+            }
+        }
     }
 }

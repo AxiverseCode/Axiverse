@@ -82,4 +82,40 @@ namespace Axiverse.Simulation
             OnEntityRemoved(entity, component1);
         }
     }
+
+    public class Processor<T1, T2> : Processor
+        where T1 : Component
+        where T2 : Component
+    {
+        public Processor() : base(typeof(T1), typeof(T2))
+        {
+
+        }
+
+        protected virtual void OnEntityAdded(Entity entity, T1 component1, T2 component2)
+        {
+
+        }
+
+        protected virtual void OnEntityRemoved(Entity entity, T1 component1, T2 component2)
+        {
+
+        }
+
+        protected override void OnEntityAdded(Entity entity)
+        {
+            base.OnEntityAdded(entity);
+            var component1 = entity.Components.Get<T1>();
+            var component2 = entity.Components.Get<T2>();
+            OnEntityAdded(entity, component1, component2);
+        }
+
+        protected override void OnEntityRemoved(Entity entity)
+        {
+            base.OnEntityRemoved(entity);
+            var component1 = entity.Components.Get<T1>();
+            var component2 = entity.Components.Get<T2>();
+            OnEntityRemoved(entity, component1, component2);
+        }
+    }
 }

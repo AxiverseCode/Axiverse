@@ -10,7 +10,7 @@ namespace Axiverse
     /// An concurrent object pool for disposable objects.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class DisposableObjectPool<T> : ObjectPool<T>, ITrackedDisposable
+    public class DisposableObjectPool<T> : ObjectPool<T>, ITrackedDisposable
         where T : class, IDisposable
     {
         /// <summary>
@@ -27,6 +27,16 @@ namespace Axiverse
         /// Gets whether this <see cref="DisposableObjectPool{T}"/> has already been disposed.
         /// </summary>
         public bool IsDisposed { get; private set; }
+
+        public DisposableObjectPool()
+        {
+
+        }
+
+        public DisposableObjectPool(Func<T> activator) : base(activator)
+        {
+
+        }
 
         /// <summary>
         /// Disposes all objects in the object pool.

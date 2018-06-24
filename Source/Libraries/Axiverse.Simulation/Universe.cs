@@ -126,6 +126,19 @@ namespace Axiverse.Simulation
             }
         }
 
+        public void Add(Processor processor)
+        {
+            Processors.Add(processor);
+
+            foreach (var entity in entities.Values)
+            {
+                if (processor.Matches(entity))
+                {
+                    processor.Add(entity);
+                }
+            }
+        }
+
         public event EntityEventHandler EntityAdded;
         public event EntityEventHandler EntityRemoved;
 

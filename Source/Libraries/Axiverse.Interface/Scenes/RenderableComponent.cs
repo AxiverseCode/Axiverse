@@ -11,5 +11,7 @@ namespace Axiverse.Interface.Scenes
     public class RenderableComponent : Component
     {
         public RenderObject Renderable { get; set; }
+
+        public Mesh Mesh { get; set; }
     }
 }

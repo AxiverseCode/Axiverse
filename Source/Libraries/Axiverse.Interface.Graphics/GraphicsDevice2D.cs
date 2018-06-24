@@ -23,7 +23,7 @@ namespace Axiverse.Interface.Graphics
         private Dictionary<string, FontCollection> m_fontCollections = new Dictionary<string, FontCollection>();
         private Dictionary<Windows.Font, TextFormat> m_fonts = new Dictionary<Windows.Font, TextFormat>();
 
-        public SwapChain SwapChain;
+        public Presenter Presenter;
 
         public Device3D Device3D;
         public Device3D11 Device3D11;
@@ -62,16 +62,16 @@ namespace Axiverse.Interface.Graphics
 
         }
 
-        public void Initialize(SwapChain swapChain)
+        public void Initialize(Presenter presenter)
         {
             // https://msdn.microsoft.com/en-us/library/windows/desktop/mt186590(v=vs.85).aspx
-            SwapChain = swapChain;
+            Presenter = presenter;
             Device3D11 = Device3D11.CreateFromDirect3D12(
                 Device.NativeDevice,
                 DeviceCreationFlags.BgraSupport,// | DeviceCreationFlags.Debug,
                 null,
                 null,
-                swapChain.NativeCommandQueue);
+                presenter.NativeCommandQueue);
 
             DeviceContext3D = Device3D11.ImmediateContext;
             Device3D = Device3D11.QueryInterface<Device3D>();
@@ -134,15 +134,15 @@ namespace Axiverse.Interface.Graphics
                 DesktopDpi.Height,
                 BitmapOptions.Target | BitmapOptions.CannotDraw);
 
-            FrameResources = new FrameResource[SwapChain.BufferCount];
-            for (int i = 0; i < SwapChain.BufferCount; i++)
+            FrameResources = new FrameResource[Presenter.BackBufferCount];
+            for (int i = 0; i < Presenter.BackBufferCount; i++)
             {
                 var frameResource = new FrameResource();
                 FrameResources[i] = frameResource;
-                frameResource.RenderTarget = SwapChain.NativeBackBuffers[i];
+                frameResource.RenderTarget = Presenter.BackBuffers[i].Resource;
 
                 Device3D.CreateWrappedResource(
-                    SwapChain.NativeBackBuffers[i],
+                    Presenter.BackBuffers[i].Resource,
                     new D3D11ResourceFlags()
                     {
                         BindFlags = (int)BindFlags.RenderTarget
@@ -195,10 +195,10 @@ namespace Axiverse.Interface.Graphics
             */
         }
 
-        public static GraphicsDevice2D Create(GraphicsDevice device, SwapChain swapChain)
+        public static GraphicsDevice2D Create(GraphicsDevice device, Presenter presenter)
         {
             var result = new GraphicsDevice2D(device);
-            result.Initialize(swapChain);
+            result.Initialize(presenter);
             return result;
         }
     }

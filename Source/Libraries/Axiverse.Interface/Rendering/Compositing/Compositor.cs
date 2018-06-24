@@ -1,4 +1,5 @@
 ﻿using Axiverse.Interface.Graphics;
+using Axiverse.Interface.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,29 @@ namespace Axiverse.Interface.Rendering.Compositing
         /// </summary>
         public Renderer Renderer { get; set; }
 
+        public CommandList DefaultCommandList { get; }
+
+        private Queue<GraphicsResource> uploadedResources = new Queue<GraphicsResource>();
+
         // runs each scenerenderer
 
-        public Compositor()
+        public Compositor(GraphicsDevice device, Presenter presenter)
         {
-            Renderer = new ForwardRenderer();
+            Device = device;
+            Presenter = presenter;
+
+            Renderer = new ForwardRenderer(device);
+            DefaultCommandList = CommandList.Create(device);
         }
 
-        public void Process()
+        public void Process(Scene scene, CameraComponent camera)
         {
-            var context = new RenderContext();
+            var context = new RenderContext()
+            {
+                CommandList = DefaultCommandList,
+                Scene = scene,
+                Camera = camera,
+            };
 
             Renderer.Collect(context);
 
@@ -52,11 +66,14 @@ namespace Axiverse.Interface.Rendering.Compositing
 
             // Render and present
 
+            context.CommandList.Wait();
             Renderer.Release(context);
         }
 
         public void Prerender(RenderContext context)
         {
+            context.CommandList.Reset(Presenter);
+
             Presenter.BeginDraw(context.CommandList);
             context.CommandList.ResourceTransition(Presenter.BackBuffer, ResourceState.Present, ResourceState.RenderTarget);
 
@@ -65,6 +82,13 @@ namespace Axiverse.Interface.Rendering.Compositing
             context.CommandList.SetScissor(0, 0, Presenter.Description.Width, Presenter.Description.Height);
             context.CommandList.ClearDepth(Presenter.DepthStencilBuffer, 1.0f);
             context.CommandList.ClearTargetColor(Presenter.BackBuffer, 0.2f, 0.2f, 0.2f, 1.0f);
+
+            while (Device.UploadQueue.Count > 0)
+            {
+                var resource = Device.UploadQueue.Dequeue();
+                resource.Upload(context.CommandList);
+                uploadedResources.Enqueue(resource);
+            }
         }
 
         public void Postrender(RenderContext context)
@@ -74,6 +98,14 @@ namespace Axiverse.Interface.Rendering.Compositing
             Presenter.EndDraw(context.CommandList);
             context.CommandList.FinishFrame(Presenter);
             Presenter.Present();
+        }
+
+        public void Release()
+        {
+            while (uploadedResources.Count > 0)
+            {
+                uploadedResources.Dequeue().DisposeUpload();
+            }
         }
     }
 }

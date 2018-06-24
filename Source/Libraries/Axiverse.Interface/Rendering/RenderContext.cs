@@ -25,5 +25,7 @@ namespace Axiverse.Interface.Rendering
         public Scene Scene { get; set; }
 
         public CommandList CommandList { get; set; }
+
+        public CameraComponent Camera { get; set; }
     }
 }

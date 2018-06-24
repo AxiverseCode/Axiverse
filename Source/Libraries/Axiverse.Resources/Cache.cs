@@ -26,6 +26,18 @@ namespace Axiverse.Resources
         }
 
         /// <summary>
+        /// Adds an resource into the cache with the given uri.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Cached<T> Add<T>(string uri, T value)
+        {
+            return GetTypeCache<T>().Add(new Uri(uri), value);
+        }
+
+        /// <summary>
         /// Removes a resource into the cache with the given uri.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -45,6 +57,18 @@ namespace Axiverse.Resources
         public Cached<T> Load<T>(Uri uri)
         {
             return GetTypeCache<T>().Load(uri);
+        }
+
+        /// <summary>
+        /// Requests for an object to be loaded by the registered loaders.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException">Throws if none of the processors can load the uri.</exception>
+        public Cached<T> Load<T>(string uri)
+        {
+            return GetTypeCache<T>().Load(new Uri(uri));
         }
 
         /// <summary>

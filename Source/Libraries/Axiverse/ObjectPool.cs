@@ -1,4 +1,8 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Axiverse
 {
@@ -6,9 +10,14 @@ namespace Axiverse
     /// An concurrent object pool.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class ObjectPool<T>
+    public class ObjectPool<T>
         where T : class
     {
+        /// <summary>
+        /// Gets the activator.
+        /// </summary>
+        public Func<T> Activator { get; }
+
         /// <summary>
         /// Gets the number of elements in the <see cref="ObjectPool{T}"/>.
         /// </summary>
@@ -20,12 +29,24 @@ namespace Axiverse
         /// <returns></returns>
         public virtual T Take()
         {
+            Debug.WriteLine("taken " + typeof(T).Name);
+
             if (bag.TryTake(out var result))
             {
                 return result;
             }
 
             return Create();
+        }
+
+        public ObjectPool()
+        {
+
+        }
+
+        public ObjectPool(Func<T> activator)
+        {
+            Activator = activator;
         }
 
         /// <summary>
@@ -36,13 +57,29 @@ namespace Axiverse
         {
             Reset(item);
             bag.Add(item);
+            Debug.WriteLine("returned " + typeof(T).Name);
+        }
+
+        /// <summary>
+        /// Adds objects to the pool to be reset and made available for others to use.
+        /// </summary>
+        /// <param name="items"></param>
+        public void AddAll(IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                Add(item);
+            }
         }
 
         /// <summary>
         /// Creates an new object.
         /// </summary>
         /// <returns></returns>
-        protected abstract T Create();
+        protected virtual T Create()
+        {
+            return Activator();
+        }
 
         /// <summary>
         /// Resets an added item.

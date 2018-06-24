@@ -4,6 +4,7 @@ using Axiverse.Interface.Graphics.Generic;
 using Axiverse.Interface.Graphics.Shaders;
 using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Rendering.Compositing;
+using Axiverse.Interface.Scenes;
 using Axiverse.Resources;
 using SharpDX;
 using SharpDX.Windows;
@@ -23,7 +24,7 @@ namespace Axiverse.Interface.Engine
 
         public Compositor Compositor { get; set; }
 
-        public SceneSystem SceneSystem { get; set; }
+        public Scene Scene { get; set; }
 
         /// <summary>
         /// Constructs an engine.
@@ -35,7 +36,7 @@ namespace Axiverse.Interface.Engine
         {
             Injector = injector;
             Cache = cache;
-            SceneSystem = new SceneSystem();
+            Scene = new Scene();
         }
 
         /// <summary>
@@ -50,14 +51,6 @@ namespace Axiverse.Interface.Engine
                 Height = 720,
                 Text = "Axiverse | Hello Graphics",
             };
-        }
-
-
-        public void Process()
-        {
-            //SceneSystem.Process();
-
-            Compositor.Process();
         }
 
         /// <summary>
@@ -78,41 +71,90 @@ namespace Axiverse.Interface.Engine
             var presenter = new Presenter(device, presenterDescription);
             presenter.Initialize();
 
-            var compositor = new Compositor()
-            {
-                Device = device,
-                Presenter = presenter
-            };
-            var commandList = CommandList.Create(device);
+            var compositor = new Compositor(device, presenter);
 
             // Bind resources
             Injector.Bind(device);
 
             // Shaders
-            var geometryShader = new GeometryShader(device);
-            geometryShader.Initialize();
-            var pipelineStateDescription = new PipelineStateDescription()
-            {
-                InputLayout = PositionColorTexture.Layout,
-                RootSignature = geometryShader.RootSignature,
-                VertexShader = geometryShader.VertexShader,
-                PixelShader = geometryShader.PixelShader,
-            };
-            var pipelineState = PipelineState.Create(device, pipelineStateDescription);
-
             var frame = 0.0f;
-            var world = Matrix4.Identity;
-            var view = Matrix4.LookAtRH(new Vector3(0, 10, 10), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
-            var projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
-                1.0f * form.ClientSize.Width / form.ClientSize.Height,
-                2.0f,
-                2000.0f);
 
             var texture = new Texture(device);
             texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
-            
+
 
             // Lets create some resources
+            LoadCube(device);
+            LoadShip(device);
+           
+            // Create camera entity.
+            var cameraEntity = new Entity();
+            var cameraComponent = new CameraComponent
+            {
+                Projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
+                    1.0f * form.ClientSize.Width / form.ClientSize.Height,
+                    2.0f,
+                    2000.0f)
+            };
+            cameraEntity.Components.Add(cameraComponent);
+            Scene.Add(cameraEntity);
+
+            var entity1 = new Entity();
+            Scene.Add(entity1);
+            entity1.Components.Add(new TransformComponent());
+            entity1.Components.Add(new RenderableComponent()
+            {
+                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value}
+            });
+            entity1.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+
+            var entity2 = new Entity();
+            Scene.Add(entity2);
+            entity2.Components.Add(new TransformComponent());
+            entity2.Components.Add(new RenderableComponent()
+            {
+                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value }
+            });
+            entity2.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+
+            var entity3 = new Entity();
+            Scene.Add(entity3);
+            entity3.Components.Add(new TransformComponent());
+            entity3.Components.Add(new RenderableComponent()
+            {
+                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
+            });
+            entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+
+            var prev = Environment.TickCount;
+            // Into the loop we go!
+            using (var loop = new RenderLoop(form))
+            {
+                while (loop.NextFrame())
+                {
+                    var next = Environment.TickCount;
+                    frame += (next - prev) / 10.0f;
+                    prev = next;
+
+                    entity1.Components.Get<TransformComponent>().GlobalTransform = Matrix4.Identity;
+                    entity2.Components.Get<TransformComponent>().GlobalTransform =
+                        Matrix4.FromQuaternion(Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400));
+                    entity3.Components.Get<TransformComponent>().GlobalTransform = Matrix4.Scale(10, 10, 10);
+                    
+                    cameraComponent.View = Matrix4.LookAtRH(
+                        new Vector3(
+                            10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
+                            4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
+                            10 * Functions.Cos(Functions.DegreesToRadians(frame / 10))),
+                        new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+                    
+                    compositor.Process(Scene, cameraComponent);
+                }
+            }
+        }
+
+        public void LoadCube(GraphicsDevice device)
+        {
             var cube = Primitives<PositionColorTexture>.Cube();
             var indices = cube.Item1;
             var vertices = cube.Item2;
@@ -139,119 +181,20 @@ namespace Axiverse.Interface.Engine
                 VertexBuffers = new[] { vertexBinding },
                 Count = indices.Length,
             };
-            var mesh1 = new Mesh
-            {
-                Draw = meshDraw,
-            };
-            var mesh2 = new Mesh
-            {
-                Draw = meshDraw,
-            };
 
+            Cache.Add("memory:cube", meshDraw);
+        }
+
+        public void LoadShip(GraphicsDevice device)
+        {
             var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, @".\Resources\Models\ship.obj");
             var spaceMeshDraw = new MeshDraw
             {
                 VertexBuffers = new[] { spaceMesh },
                 Count = spaceMesh.Count,
             };
-            var mesh3 = new Mesh
-            {
-                Draw = spaceMeshDraw,
-            };
 
-            var meshes = new[] { mesh1, mesh2, mesh3 };
-
-            var transforms = new GeometryShader.PerObject[meshes.Length];
-            transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
-            transforms[0].Color = new Vector4(0.4f, 0.5f, 0.8f, 1);
-            transforms[1].Color = new Vector4(1f, 1f, 1f, 1);
-            transforms[2].Color = new Vector4(1f, 1f, 1f, 1);
-            var constantBuffer = GraphicsBuffer.Create(device, transforms, false);
-
-            var descriptorSets = new DescriptorSet[meshes.Length];
-            int perObjectSize = Utilities.SizeOf<GeometryShader.PerObject>();
-            for (int i = 0; i < descriptorSets.Length; i++)
-            {
-                descriptorSets[i] = new DescriptorSet(device, geometryShader.Layout);
-                descriptorSets[i].SetShaderResourceView(1, texture);
-                descriptorSets[i].SetSamplerState(0, SamplerState.Create(device, null));
-                descriptorSets[i].SetConstantBuffer(0, constantBuffer, i * perObjectSize, perObjectSize);
-            }
-
-            var prev = Environment.TickCount;
-            var renderContext = new RenderContext()
-            {
-                CommandList = commandList
-            };
-            // Into the loop we go!
-            using (var loop = new RenderLoop(form))
-            {
-                while (loop.NextFrame())
-                {
-                    var next = Environment.TickCount;
-                    frame += (next - prev) / 10.0f;
-                    prev = next;
-
-                    view = Matrix4.LookAtRH(
-                        new Vector3(
-                            10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
-                            4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
-                            10 * Functions.Cos(Functions.DegreesToRadians(frame / 10))),
-                        new Vector3(0, 0, 0), new Vector3(0, 1, 0));
-                    mesh1.Bindings[Key.From<Matrix4>()] = Matrix4.Transpose(world * view * projection);
-                    mesh2.Bindings[Key.From<Matrix4>()] = 
-                        Matrix4.Transpose(
-                            Matrix4.FromQuaternion(Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400))
-                            * view * projection);
-                    mesh3.Bindings[Key.From<Matrix4>()] = Matrix4.Transpose(Matrix4.Scale(10, 10, 10) * view * projection);
-
-                    //transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
-
-                    constantBuffer.Write(transforms);
-                    
-                    commandList.Reset(presenter);
-
-                    if (texture.UploadResource != null)
-                    {
-                        texture.Prepare(commandList);
-                    }
-
-                    compositor.Prerender(renderContext);
-                    {
-                        commandList.SetRootSignature(pipelineStateDescription.RootSignature);
-                        commandList.PipelineState = pipelineState;
-
-                        for (int i = 0; i < meshes.Length; i++)
-                        {
-                            transforms[i].WorldViewProjection = (Matrix4)meshes[i].Bindings[Key.From<Matrix4>()];
-
-                            commandList.SetDescriptors(descriptorSets[i]);
-
-                            Draw(commandList, meshes[i].Draw);
-                        }
-                    }
-                    compositor.Postrender(renderContext);
-                }
-            }
+            Cache.Add("memory:ship", spaceMeshDraw);
         }
-
-        public void Draw(CommandList commandList, MeshDraw meshDraw)
-        {
-            commandList.SetIndexBuffer(meshDraw.IndexBuffer);
-            for (int i = 0; i < meshDraw.VertexBuffers.Length; i++)
-            {
-                commandList.SetVertexBuffer(meshDraw.VertexBuffers[i], i);
-            }
-
-            if (meshDraw.IndexBuffer != null)
-            {
-                commandList.DrawIndexed(meshDraw.Count);
-            }
-            else
-            {
-                commandList.Draw(meshDraw.Count);
-            }
-        }
-
     }
 }

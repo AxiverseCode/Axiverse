@@ -267,7 +267,13 @@ namespace Axiverse.Interface.Graphics
 
 
 
-
+        public void Wait()
+        {
+            while (fence.CompletedValue < fenceValue)
+            {
+                System.Threading.Thread.Sleep(1);
+            }
+        }
 
        
 
@@ -397,6 +403,18 @@ namespace Axiverse.Interface.Graphics
         public void SetRootSignature(RootSignature rootSignature)
         {
             NativeCommandList.SetGraphicsRootSignature(rootSignature.NativeRootSignature);
+        }
+
+        public void Draw(int count, bool indexed)
+        {
+            if (indexed)
+            {
+                DrawIndexed(count);
+            }
+            else
+            {
+                Draw(count);
+            }
         }
 
         public void Draw(int count)
