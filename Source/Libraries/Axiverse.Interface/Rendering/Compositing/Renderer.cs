@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Axiverse.Interface.Scenes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Rendering.Compositing
 {
-    public class Renderer
+    /// <summary>
+    /// Renderer
+    /// </summary>
+    public abstract class Renderer
     {
+        public Scene Scene { get; set; }
         // set pipeline state
 
         // iterate through all nodes
@@ -22,22 +27,27 @@ namespace Axiverse.Interface.Rendering.Compositing
         // - apply mesh bindings to cbuffers
         // - draw
 
-        public void Collect()
+        public virtual void Collect(RenderContext context)
         {
 
         }
 
-        public void Prepare()
+        public virtual void Prepare(RenderContext context)
         {
 
         }
 
-        public void Render()
+        public virtual void Render(RenderContext context)
         {
 
         }
 
-        public void DrawModel(Model model)
+        public virtual void Release(RenderContext context)
+        {
+
+        }
+
+        public virtual void DrawModel(Model model)
         {
             foreach (var mesh in model.Meshes)
             {

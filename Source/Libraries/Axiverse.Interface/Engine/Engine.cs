@@ -1,30 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SharpDX;
-using SharpDX.Windows;
-
-using Axiverse.Injection;
+﻿using Axiverse.Injection;
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
 using Axiverse.Interface.Graphics.Shaders;
 using Axiverse.Interface.Rendering;
+using Axiverse.Interface.Rendering.Compositing;
+using Axiverse.Resources;
+using SharpDX;
+using SharpDX.Windows;
+using System;
 
 namespace Axiverse.Interface.Engine
 {
+    /// <summary>
+    /// An interface engine.
+    /// </summary>
     public class Engine
     {
+        public Injector Injector { get; private set; }
+        public Cache Cache { get; private set; }
+
         RenderForm form;
+
+        public Compositor Compositor { get; set; }
 
         public SceneSystem SceneSystem { get; set; }
 
-        public Engine()
+        /// <summary>
+        /// Constructs an engine.
+        /// </summary>
+        /// <param name="injector"></param>
+        /// <param name="cache"></param>
+        [Inject]
+        public Engine(Injector injector, Cache cache)
         {
+            Injector = injector;
+            Cache = cache;
             SceneSystem = new SceneSystem();
         }
 
+        /// <summary>
+        /// Initializes the engine.
+        /// </summary>
         public void Initialize()
         {
             // Create a window
@@ -36,6 +52,17 @@ namespace Axiverse.Interface.Engine
             };
         }
 
+
+        public void Process()
+        {
+            //SceneSystem.Process();
+
+            Compositor.Process();
+        }
+
+        /// <summary>
+        /// Run loop for the engine.
+        /// </summary>
         public void Run()
         {
             form.Show();
@@ -48,7 +75,7 @@ namespace Axiverse.Interface.Engine
             var commandList = CommandList.Create(device);
 
             // Bind resources
-            Injector.Global.Bind(device);
+            Injector.Bind(device);
 
             // Shaders
             var geometryShader = new GeometryShader(device);
@@ -178,10 +205,10 @@ namespace Axiverse.Interface.Engine
 
                     commandList.ResourceTransition(backBuffer, ResourceState.Present, ResourceState.RenderTarget);
                     {
-                        commandList.SetRenderTargets(backBufferHandle, depth.NativeDepthStencilView);
+                        commandList.SetRenderTargets(backBufferHandle, depth);
                         commandList.SetViewport(0, 0, 1024, 720);
                         commandList.SetScissor(0, 0, 1024, 720);
-                        commandList.ClearDepth(depth.NativeDepthStencilView, 1.0f);
+                        commandList.ClearDepth(depth, 1.0f);
                         commandList.ClearTargetColor(backBufferHandle, 0.2f, 0.2f, 0.2f, 1.0f);
 
                         commandList.SetRootSignature(pipelineStateDescription.RootSignature);

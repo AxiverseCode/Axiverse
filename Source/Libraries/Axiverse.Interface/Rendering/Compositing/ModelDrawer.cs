@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface.Audio
+namespace Axiverse.Interface.Rendering.Compositing
 {
-    public class Class1
+    class ModelDrawer
     {
     }
 }

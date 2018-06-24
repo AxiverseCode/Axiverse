@@ -195,6 +195,12 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="size"></param>
+        /// <param name="type"></param>
         public void SetIndexBuffer(GraphicsBuffer buffer, int size, IndexBufferType type)
         {
             if (buffer != null)
@@ -214,6 +220,10 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="binding"></param>
         public void SetIndexBuffer(IndexBufferBinding binding)
         {
             if (binding != null)
@@ -226,6 +236,13 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="slot"></param>
+        /// <param name="size"></param>
+        /// <param name="stride"></param>
         public void SetVertexBuffer(GraphicsBuffer buffer, int slot, int size, int stride)
         {
             var view = new VertexBufferView
@@ -237,6 +254,11 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetVertexBuffer(slot, view);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="binding"></param>
+        /// <param name="slot"></param>
         public void SetVertexBuffer(VertexBufferBinding binding, int slot)
         {
             SetVertexBuffer(binding.Buffer, slot, binding.Count * binding.Stride,  binding.Stride);
@@ -282,6 +304,38 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.Reset(commandAllocator, null);
         }
 
+        /// <summary>
+        /// Should be called at the start of the frame. This method waits if needed for the GPU
+        /// </summary>
+        /// <param name="presenter"></param>
+        public void Reset(Presenter presenter)
+        {
+            int index = presenter.BackBufferIndex;
+            int waits = 0;
+            int start = Environment.TickCount;
+            while (fence.CompletedValue < fenceValue)
+            {
+                System.Threading.Thread.Sleep(1);
+                // ...wait...
+                waits++;
+            }
+
+            int end = Environment.TickCount;
+            if (waits > 0)
+            {
+                // We just have 1ms res with Environment.TickCount, we need a hires timer for accurate results
+                int waitedMs = end - start;
+                if (waitedMs >= 1)
+                {
+                    Console.WriteLine("Waited:" + waitedMs + "ms!");
+                }
+
+            }
+
+            commandAllocator.Reset();
+            NativeCommandList.Reset(commandAllocator, null);
+        }
+
         public CompiledCommandList Close()
         {
             CloseShaderResourceViewHeap();
@@ -297,9 +351,19 @@ namespace Axiverse.Interface.Graphics
         /// <param name="swapChain"></param>
         public void FinishFrame(SwapChain swapChain)
         {
-            int index = swapChain.CurrentBufferIndex;
             fenceValue++;
             swapChain.NativeCommandQueue.Signal(fence, fenceValue);
+        }
+
+        /// <summary>
+        /// This should be called after this context is executed. This way we will add
+        /// sync commands at the end of the queue
+        /// </summary>
+        /// <param name="swapChain"></param>
+        public void FinishFrame(Presenter presenter)
+        {
+            fenceValue++;
+            presenter.NativeCommandQueue.Signal(fence, fenceValue);
         }
 
         public void SetViewport(int x,int y,int w,int h)
@@ -327,9 +391,21 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetRenderTargets(1, view, null);
         }
 
+        [Obsolete]
         public void SetRenderTargets(CpuDescriptorHandle render, CpuDescriptorHandle depth)
         {
             NativeCommandList.SetRenderTargets(1, render, depth);
+        }
+
+        [Obsolete]
+        public void SetRenderTargets(CpuDescriptorHandle render, Texture depth)
+        {
+            NativeCommandList.SetRenderTargets(1, render, depth?.NativeDepthStencilView);
+        }
+
+        public void SetRenderTargets(Texture render, Texture depth)
+        {
+            NativeCommandList.SetRenderTargets(1, render.NativeRenderTargetView, depth?.NativeDepthStencilView);
         }
 
         public void ClearTargetColor(CpuDescriptorHandle handle, float r, float g, float b, float a)
@@ -337,14 +413,29 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.ClearRenderTargetView(handle, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
         }
 
+        public void ClearTargetColor(Texture texture, float r, float g, float b, float a)
+        {
+            NativeCommandList.ClearRenderTargetView(texture.NativeDepthStencilView, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
+        }
+
         public void ClearDepth(CpuDescriptorHandle handle, float depth)
         {
             NativeCommandList.ClearDepthStencilView(handle, ClearFlags.FlagsDepth, depth, 0);
         }
 
-        public void ResourceTransition(SharpDX.Direct3D12.Resource resource,ResourceState before, ResourceState after)
+        public void ClearDepth(Texture texture, float depth)
+        {
+            NativeCommandList.ClearDepthStencilView(texture.NativeDepthStencilView, ClearFlags.FlagsDepth, depth, 0);
+        }
+
+        public void ResourceTransition(Resource resource,ResourceState before, ResourceState after)
         {
             NativeCommandList.ResourceBarrierTransition(resource, (ResourceStates)before, (ResourceStates)after);
+        }
+
+        public void ResourceTransition(Texture resource, ResourceState before, ResourceState after)
+        {
+            NativeCommandList.ResourceBarrierTransition(resource.Resource, (ResourceStates)before, (ResourceStates)after);
         }
 
         public void SetRootSignature(RootSignature rootSignature)

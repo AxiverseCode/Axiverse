@@ -22,7 +22,7 @@ namespace Axiverse.Interface.Graphics
     public class Texture : GraphicsResource
     {
         internal CpuDescriptorHandle NativeRenderTargetView;
-        public CpuDescriptorHandle NativeDepthStencilView;
+        internal CpuDescriptorHandle NativeDepthStencilView;
 
         /// <summary>
         /// Gets the dimensions of the texture.
@@ -52,12 +52,20 @@ namespace Axiverse.Interface.Graphics
         public Resource Resource;
         public Resource UploadResource;
 
+        internal void Initialize(Resource resource)
+        {
+            Resource = resource;
+
+            NativeRenderTargetView = Device.RenderTargetViewAllocator.Allocate(1);
+            Device.NativeDevice.CreateRenderTargetView(Resource, null, NativeRenderTargetView);
+            // TODO: Recycle render target view
+        }
+
         public void CreateDepth(int width, int height)
         {
             Width = width;
             Height = height;
 
-            NativeDepthStencilView = Device.DepthStencilViewAllocator.Allocate(1);
 
             ClearValue depthOptimizedClearValue = new ClearValue()
             {
@@ -72,6 +80,7 @@ namespace Axiverse.Interface.Graphics
                 ResourceStates.DepthWrite,
                 depthOptimizedClearValue);
 
+            NativeDepthStencilView = Device.DepthStencilViewAllocator.Allocate(1);
             Device.NativeDevice.CreateDepthStencilView(Resource, null, NativeDepthStencilView);
         }
 

@@ -39,7 +39,7 @@ namespace Axiverse
         {
             if (symbols.TryGetValue(guid, out var symbol))
             {
-                Contract.Requires(symbol.Description == description);
+                Requires.That(symbol.Description == description);
             }
             else
             {

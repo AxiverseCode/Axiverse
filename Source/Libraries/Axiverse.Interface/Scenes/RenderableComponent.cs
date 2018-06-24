@@ -1,4 +1,5 @@
-﻿using Axiverse.Simulation;
+﻿using Axiverse.Interface.Rendering;
+using Axiverse.Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Scenes
 {
-    public class CameraComponent : Component
+    public class RenderableComponent : Component
     {
+        public RenderObject Renderable { get; set; }
     }
 }
