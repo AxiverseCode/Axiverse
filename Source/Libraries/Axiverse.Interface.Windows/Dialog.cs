@@ -12,7 +12,7 @@ namespace Axiverse.Interface.Windows
         
         public Color TitleColor { get; set; }
 
-        public override void Draw(Canvas compositor)
+        public override void Draw(DrawContext compositor)
         {
             compositor.FillRoundedRectangle(new Rectangle(0, 0, Width, TitleHeight), new Vector2(0, 0), new Color(0));
             compositor.FillRoundedRectangle(new Rectangle(0, TitleHeight, Width, Height - TitleHeight), new Vector2(0, 0), BackgroundColor);

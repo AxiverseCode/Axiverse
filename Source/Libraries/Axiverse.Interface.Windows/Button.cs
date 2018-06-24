@@ -49,7 +49,7 @@ namespace Axiverse.Interface.Windows
             base.OnMouseUp(sender, e);
         }
 
-        public override void Draw(Canvas compositor)
+        public override void Draw(DrawContext compositor)
         {
             var color = Active ? ActiveColor : Hover ? HoverColor : BackgroundColor;
             var layout = new TextLayout()

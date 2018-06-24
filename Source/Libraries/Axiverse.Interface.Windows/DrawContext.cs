@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Windows
 {
-    public abstract class Canvas : IDisposable
+    public abstract class DrawContext : IDisposable
     {
         public abstract SharpDX.Direct2D1.DeviceContext DeviceContext { get; }
 

@@ -5,6 +5,7 @@ using Axiverse.Interface.Graphics.Shaders;
 using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Rendering.Compositing;
 using Axiverse.Interface.Scenes;
+using Axiverse.Interface.Windows;
 using Axiverse.Resources;
 using SharpDX;
 using SharpDX.Windows;
@@ -25,6 +26,8 @@ namespace Axiverse.Interface.Engine
         public Compositor Compositor { get; set; }
 
         public Scene Scene { get; set; }
+
+        public Window Window { get; set; }
 
         /// <summary>
         /// Constructs an engine.
@@ -70,8 +73,37 @@ namespace Axiverse.Interface.Engine
             };
             var presenter = new Presenter(device, presenterDescription);
             presenter.Initialize();
+            var device2d = GraphicsDevice2D.Create(device, presenter);
+            
+
+            Window = new Window();
+            Window.Bounds = new Rectangle(0, 0, presenter.Description.Width, presenter.Description.Height);
+            Control.DefaultFont = new Windows.Font("Open Sans", 16, Windows.FontWeight.Normal);
+
+            var control = new Dialog();
+            control.Bounds = new Rectangle(10, 10, 400, 400);
+            control.BackgroundColor = new Windows.Color(.4f);
+            Window.Children.Add(control);
+
+            control.Children.Add(new Windows.Control()
+            {
+                Bounds = new Rectangle(10, 50, 50, 50),
+                BackgroundColor = Windows.Colors.Yellow,
+            });
+
+            {
+                var z = new Windows.Button()
+                {
+                    Location = new Vector2(100, 50),
+                };
+
+                control.Children.Add(z);
+            }
+
 
             var compositor = new Compositor(device, presenter);
+            compositor.Device2D = device2d;
+            compositor.Window = Window;
 
             // Bind resources
             Injector.Bind(device);

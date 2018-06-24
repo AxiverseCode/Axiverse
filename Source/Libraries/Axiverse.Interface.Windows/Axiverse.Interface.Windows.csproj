@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="Color.cs" />
-    <Compile Include="Canvas.cs" />
+    <Compile Include="DrawContext.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="Control.draw.cs" />
     <Compile Include="Control.input.cs" />

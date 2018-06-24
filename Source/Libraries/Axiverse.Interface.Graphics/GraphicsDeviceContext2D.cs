@@ -3,7 +3,7 @@ using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 using System.Collections.Generic;
-using CanvasUI = Axiverse.Interface.Windows.Canvas;
+using CanvasUI = Axiverse.Interface.Windows.DrawContext;
 using FactoryDW = SharpDX.DirectWrite.Factory;
 using FontWeightDW = SharpDX.DirectWrite.FontWeight;
 

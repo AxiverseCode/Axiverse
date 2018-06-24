@@ -62,18 +62,19 @@ namespace Axiverse.Interface.Windows
 
         }
 
-        public virtual void Draw(Canvas compositor)
+        public virtual void Draw(DrawContext compositor)
         {
             compositor.FillRoundedRectangle(new Rectangle(0, 0, Width, Height), new Vector2(0, 0), BackgroundColor);
             compositor.DrawText(Text, Font, new TextLayout(), new Rectangle(0, 0, Width, Height), ForegroundColor);
+            compositor.DeviceContext.Clear(new Color4(1, 1, 1, 1));
         }
 
-        public virtual void DrawChildren(Canvas compositor)
+        public virtual void DrawChildren(DrawContext compositor)
         {
             DrawChildren(Vector2.Zero, compositor);
         }
 
-        public virtual void DrawChildren(Vector2 parentOffset, Canvas compositor)
+        public virtual void DrawChildren(Vector2 parentOffset, DrawContext compositor)
         {
             var canvas = compositor;// as Graphics.Compositor;
             // apply my transform

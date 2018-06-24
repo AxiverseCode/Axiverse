@@ -98,7 +98,7 @@ namespace Axiverse.Interface.Windows
             }
         }
 
-        public override void Draw(Canvas compositor)
+        public override void Draw(DrawContext compositor)
         {
 
         }

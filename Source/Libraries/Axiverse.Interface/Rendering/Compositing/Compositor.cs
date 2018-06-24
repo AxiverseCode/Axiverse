@@ -1,5 +1,6 @@
 ﻿using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Scenes;
+using Axiverse.Interface.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace Axiverse.Interface.Rendering.Compositing
         /// Gets the <see cref="GraphicsDevice"/> used to render.
         /// </summary>
         public GraphicsDevice Device { get; set; }
+
+
+        public GraphicsDevice2D Device2D { get; set; }
+
+        public Window Window { get; set; }
 
         /// <summary>
         /// Gets the <see cref="SwapChain"/> that the compositor is targeting for final display.
@@ -93,9 +99,12 @@ namespace Axiverse.Interface.Rendering.Compositing
 
         public void Postrender(RenderContext context)
         {
-            context.CommandList.ResourceTransition(Presenter.BackBuffer, ResourceState.RenderTarget, ResourceState.Present);
+            //context.CommandList.ResourceTransition(Presenter.BackBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
             Presenter.EndDraw(context.CommandList);
+
+            Device2D.Draw(Window);
+
             context.CommandList.FinishFrame(Presenter);
             Presenter.Present();
         }

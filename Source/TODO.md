@@ -45,3 +45,5 @@ Simplify engine
 We have a functional engine!
 
 Camera controls and inputs.
+
+Let's do some game stuff. ^_^

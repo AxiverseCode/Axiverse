@@ -87,9 +87,17 @@
       <Project>{cd0ed517-2595-413d-9822-2b33a7876842}</Project>
       <Name>Axiverse.Interface.Assets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Interface.Audio\Axiverse.Interface.Audio.csproj">
+      <Project>{f4783bb9-02a3-4fb7-864f-3b94219519e3}</Project>
+      <Name>Axiverse.Interface.Audio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
       <Project>{cab0bbc2-a6eb-4065-9e71-fd86746696c2}</Project>
       <Name>Axiverse.Interface.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
+      <Project>{4ced344e-8bac-48cb-ac37-a2c4ad7ffe02}</Project>
+      <Name>Axiverse.Interface.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>

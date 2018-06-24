@@ -15,6 +15,7 @@ using ResourceStates = SharpDX.Direct3D12.ResourceStates;
 
 namespace Axiverse.Interface.Graphics
 {
+    using Axiverse.Interface.Windows;
     using SharpDX.Direct2D1;
 
     public class GraphicsDevice2D : GraphicsResource
@@ -51,8 +52,8 @@ namespace Axiverse.Interface.Graphics
             public Bitmap1 Bitmap;
         }
 
-        public GraphicsDeviceContext2D canvas;
-        public Windows.Canvas Canvas => canvas;
+        public GraphicsDeviceContext2D deviceContext2D;
+        public Windows.DrawContext DrawContext => deviceContext2D;
         public SolidColorBrush Brush;
 
         public RoundedRectangleGeometry RoundedRectangleGeometry;
@@ -119,12 +120,12 @@ namespace Axiverse.Interface.Graphics
             }
 
             DesktopDpi = Factory.DesktopDpi;
-            //InitializeFrames(Device.NativeDevice, Renderer.RenderTarget);
+            InitializeFrames(Device.NativeDevice);
         }
 
-        public void InitializeFrames(Device3D12 device3D12, RenderTarget renderTarget)
+        public void InitializeFrames(Device3D12 device3D12)
         {
-            canvas = new GraphicsDeviceContext2D(DeviceContext);
+            deviceContext2D = new GraphicsDeviceContext2D(DeviceContext);
 
             Brush = new SolidColorBrush(DeviceContext, SharpDX.Color.White);
 
@@ -172,7 +173,7 @@ namespace Axiverse.Interface.Graphics
 
         public void DisposeFrames()
         {
-            Canvas.Dispose();
+            DrawContext.Dispose();
             Brush?.Dispose();
             DeviceContext.Target = null;
             DeviceContext3D.OutputMerger.SetRenderTargets((RenderTargetView)null);
@@ -200,6 +201,49 @@ namespace Axiverse.Interface.Graphics
             var result = new GraphicsDevice2D(device);
             result.Initialize(presenter);
             return result;
+        }
+
+        public void Draw(Window window)
+        {
+            FrameResource frameResource = FrameResources[Presenter.BackBufferIndex];
+
+            Device3D.AcquireWrappedResources(new[] { frameResource.WrappedBackBuffer }, 1);
+            var rectangle = new RectangleF(0, 0, 200, 200);
+
+            DeviceContext.Target = frameResource.Bitmap;
+
+            DeviceContext.BeginDraw();
+
+            DeviceContext.Transform = Matrix3x2.Identity;
+            window.DrawChildren(DrawContext);
+
+            //var b = new RectangleF(50, 50, 100, 100);
+            //DeviceContext.PushAxisAlignedClip(b, AntialiasMode.PerPrimitive);
+
+            // https://github.com/Microsoft/DirectX-Graphics-Samples/issues/212
+            //DeviceContext.FillRectangle(b, Brush);
+            //DeviceContext.Clear(new Color4(1, 1, 1, 1));
+            //DeviceContext.PopAxisAlignedClip();
+            //DeviceContext.Clear(new Color4(1, 1, 1, 1));
+
+            //DeviceContext.Flush();
+            DeviceContext.EndDraw();
+
+
+
+
+
+            Device3D.ReleaseWrappedResources(new[] { frameResource.WrappedBackBuffer }, 1);
+            DeviceContext3D.Flush();
+
+
+
+            /*
+            PathGeometry geometry = new PathGeometry(Factory);
+            GeometrySink sink = geometry.Open();
+            sink.Close();
+            */
+
         }
     }
 }
