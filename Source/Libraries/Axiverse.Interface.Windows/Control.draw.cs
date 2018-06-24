@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using SharpDX;
 using SharpDX.Direct2D1;
+using SharpDX.Mathematics.Interop;
 
 namespace Axiverse.Interface.Windows
 {
@@ -66,6 +67,7 @@ namespace Axiverse.Interface.Windows
         {
             compositor.FillRoundedRectangle(new Rectangle(0, 0, Width, Height), new Vector2(0, 0), BackgroundColor);
             compositor.DrawText(Text, Font, new TextLayout(), new Rectangle(0, 0, Width, Height), ForegroundColor);
+            //compositor.DeviceContext.Clear((new RawColor4(1, 1, 1, 1));
         }
 
         public virtual void DrawChildren(DrawContext compositor)

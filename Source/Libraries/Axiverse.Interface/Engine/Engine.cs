@@ -50,8 +50,7 @@ namespace Axiverse.Interface.Engine
             // Create a window
             form = new RenderForm()
             {
-                Width = 1200,
-                Height = 800,
+                ClientSize = new System.Drawing.Size(1200, 800),
                 Text = "Axiverse | Hello Graphics",
             };
         }
@@ -83,13 +82,13 @@ namespace Axiverse.Interface.Engine
 
             var control = new Dialog();
             control.Bounds = new Rectangle(10, 10, 200, 400);
-            control.BackgroundColor = new Windows.Color(.4f);
+            control.BackgroundColor = new Color(0, 1, 0);
             Window.Children.Add(control);
 
             control.Children.Add(new Control()
             {
                 Bounds = new Rectangle(10, 100, 50, 50),
-                BackgroundColor = Colors.Yellow,
+                BackgroundColor = Colors.Red,
             });
             control.Children.Add(new Button()
             {

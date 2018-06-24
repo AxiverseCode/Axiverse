@@ -209,13 +209,13 @@ namespace Axiverse.Interface.Graphics
             var rectangle = new RectangleF(0, 0, 200, 200);
 
             DeviceContext.Target = frameResource.Bitmap;
-
+            //DeviceContext.AntialiasMode = AntialiasMode.Aliased;
             DeviceContext.BeginDraw();
 
             DeviceContext.Transform = Matrix3x2.Identity;
             window.DrawChildren(DrawContext);
 
-            //var b = new RectangleF(50, 50, 100, 100);
+            var b = new RectangleF(50f, 50f, 100, 100);
             //DeviceContext.PushAxisAlignedClip(b, AntialiasMode.PerPrimitive);
 
             // https://github.com/Microsoft/DirectX-Graphics-Samples/issues/212
