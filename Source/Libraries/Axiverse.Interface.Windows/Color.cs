@@ -72,8 +72,6 @@ namespace Axiverse.Interface.Windows
 
     public static class Colors
     {
-
-
         public static Color Red = Color.FromHex(0xeb213b);
         public static Color RR = Color.FromHex(0xee503b);
         public static Color Orange = Color.FromHex(0xf59331);

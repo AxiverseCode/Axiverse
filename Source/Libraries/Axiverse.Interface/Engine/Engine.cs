@@ -50,8 +50,8 @@ namespace Axiverse.Interface.Engine
             // Create a window
             form = new RenderForm()
             {
-                Width = 1024,
-                Height = 720,
+                Width = 1200,
+                Height = 800,
                 Text = "Axiverse | Hello Graphics",
             };
         }
