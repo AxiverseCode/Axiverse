@@ -69,9 +69,20 @@ namespace Axiverse.Interface.Engine
 
             // Init the rendering device
             var device = GraphicsDevice.Create();
-            var swapChain = SwapChain.Create(device, form);
-            var depth = new Texture(device);
-            depth.CreateDepth(form.ClientSize.Width, form.ClientSize.Height);
+            var presenterDescription = new PresenterDescription()
+            {
+                Width = form.ClientSize.Width,
+                Height = form.ClientSize.Height,
+                WindowHandle = form.Handle
+            };
+            var presenter = new Presenter(device, presenterDescription);
+            presenter.Initialize();
+
+            var compositor = new Compositor()
+            {
+                Device = device,
+                Presenter = presenter
+            };
             var commandList = CommandList.Create(device);
 
             // Bind resources
@@ -168,6 +179,10 @@ namespace Axiverse.Interface.Engine
             }
 
             var prev = Environment.TickCount;
+            var renderContext = new RenderContext()
+            {
+                CommandList = commandList
+            };
             // Into the loop we go!
             using (var loop = new RenderLoop(form))
             {
@@ -193,24 +208,16 @@ namespace Axiverse.Interface.Engine
                     //transforms[0].WorldViewProjection = Matrix4.Transpose(world * view * projection);
 
                     constantBuffer.Write(transforms);
-
-                    var backBuffer = swapChain.StartFrame();
-                    var backBufferHandle = swapChain.GetCurrentColorHandle();
-                    commandList.Reset(swapChain);
+                    
+                    commandList.Reset(presenter);
 
                     if (texture.UploadResource != null)
                     {
                         texture.Prepare(commandList);
                     }
 
-                    commandList.ResourceTransition(backBuffer, ResourceState.Present, ResourceState.RenderTarget);
+                    compositor.Prerender(renderContext);
                     {
-                        commandList.SetRenderTargets(backBufferHandle, depth);
-                        commandList.SetViewport(0, 0, 1024, 720);
-                        commandList.SetScissor(0, 0, 1024, 720);
-                        commandList.ClearDepth(depth, 1.0f);
-                        commandList.ClearTargetColor(backBufferHandle, 0.2f, 0.2f, 0.2f, 1.0f);
-
                         commandList.SetRootSignature(pipelineStateDescription.RootSignature);
                         commandList.PipelineState = pipelineState;
 
@@ -222,19 +229,8 @@ namespace Axiverse.Interface.Engine
 
                             Draw(commandList, meshes[i].Draw);
                         }
-                        //commandList.SetIndexBuffer(indexBinding);
-                        //commandList.SetVertexBuffer(vertexBinding, 0);
-                        //commandList.SetIndexBuffer(indexBuffer, indexBuffer.Size, IndexBufferType.Integer32);
-                        //commandList.SetVertexBuffer(vertexBuffer, 0, vertexBuffer.Size, PositionColorTexture.Layout.Stride);
-                        //commandList.DrawIndexed(indices.Length);
-                        
                     }
-                    commandList.ResourceTransition(backBuffer, ResourceState.RenderTarget, ResourceState.Present);
-
-                    var compiled = commandList.Close();
-                    swapChain.ExecuteCommandList(compiled);
-                    commandList.FinishFrame(swapChain);
-                    swapChain.Present();
+                    compositor.Postrender(renderContext);
                 }
             }
         }

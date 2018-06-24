@@ -14,7 +14,7 @@ namespace Axiverse.Interface.Rendering.Compositing
 
         public ForwardRenderer()
         {
-            Scene.Processors.Add(renderableProcessor);
+            //Scene.Processors.Add(renderableProcessor);
         }
 
         public override void Collect(RenderContext context)

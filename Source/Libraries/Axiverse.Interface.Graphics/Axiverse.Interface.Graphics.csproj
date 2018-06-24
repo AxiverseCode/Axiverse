@@ -102,7 +102,6 @@
     <Compile Include="Shaders\GeometryShader.cs" />
     <Compile Include="Shaders\ResourceBinding.cs" />
     <Compile Include="Shaders\Shader.cs" />
-    <Compile Include="SwapChain.cs" />
     <Compile Include="PresenterDescription.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="VertexBufferBinding.cs" />

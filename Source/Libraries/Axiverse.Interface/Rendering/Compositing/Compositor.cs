@@ -29,8 +29,6 @@ namespace Axiverse.Interface.Rendering.Compositing
         /// </summary>
         public Renderer Renderer { get; set; }
 
-        public Texture DepthStencil { get; set; }
-
         // runs each scenerenderer
 
         public Compositor()
@@ -59,12 +57,13 @@ namespace Axiverse.Interface.Rendering.Compositing
 
         public void Prerender(RenderContext context)
         {
+            Presenter.BeginDraw(context.CommandList);
             context.CommandList.ResourceTransition(Presenter.BackBuffer, ResourceState.Present, ResourceState.RenderTarget);
 
-            context.CommandList.SetRenderTargets(Presenter.BackBuffer, DepthStencil);
+            context.CommandList.SetRenderTargets(Presenter.BackBuffer, Presenter.DepthStencilBuffer);
             context.CommandList.SetViewport(0, 0, Presenter.Description.Width, Presenter.Description.Height);
             context.CommandList.SetScissor(0, 0, Presenter.Description.Width, Presenter.Description.Height);
-            context.CommandList.ClearDepth(DepthStencil, 1.0f);
+            context.CommandList.ClearDepth(Presenter.DepthStencilBuffer, 1.0f);
             context.CommandList.ClearTargetColor(Presenter.BackBuffer, 0.2f, 0.2f, 0.2f, 1.0f);
         }
 
@@ -72,8 +71,7 @@ namespace Axiverse.Interface.Rendering.Compositing
         {
             context.CommandList.ResourceTransition(Presenter.BackBuffer, ResourceState.RenderTarget, ResourceState.Present);
 
-            //var compiled = context.CommandList.Close();
-            //Presenter.ExecuteCommandList(compiled);
+            Presenter.EndDraw(context.CommandList);
             context.CommandList.FinishFrame(Presenter);
             Presenter.Present();
         }

@@ -269,40 +269,7 @@ namespace Axiverse.Interface.Graphics
 
 
 
-
-
-
-        /// <summary>
-        /// Should be called at the start of the frame. This method waits if needed for the GPU
-        /// </summary>
-        /// <param name="swapChain"></param>
-        public void Reset(SwapChain swapChain)
-        {
-            int index = swapChain.CurrentBufferIndex;
-            int waits = 0;
-            int start = Environment.TickCount;
-            while (fence.CompletedValue < fenceValue)
-            {
-                System.Threading.Thread.Sleep(1);
-                // ...wait...
-                waits++;
-            }
-
-            int end = Environment.TickCount;
-            if (waits > 0)
-            {
-                // We just have 1ms res with Environment.TickCount, we need a hires timer for accurate results
-                int waitedMs = end - start;
-                if (waitedMs >= 1)
-                {
-                    Console.WriteLine("Waited:" + waitedMs + "ms!");
-                }
-
-            }
-
-            commandAllocator.Reset();
-            NativeCommandList.Reset(commandAllocator, null);
-        }
+       
 
         /// <summary>
         /// Should be called at the start of the frame. This method waits if needed for the GPU
@@ -342,17 +309,6 @@ namespace Axiverse.Interface.Graphics
             CloseSamplerHeap();
             NativeCommandList.Close();
             return compiledCommandList;
-        }
-
-        /// <summary>
-        /// This should be called after this context is executed. This way we will add
-        /// sync commands at the end of the queue
-        /// </summary>
-        /// <param name="swapChain"></param>
-        public void FinishFrame(SwapChain swapChain)
-        {
-            fenceValue++;
-            swapChain.NativeCommandQueue.Signal(fence, fenceValue);
         }
 
         /// <summary>
@@ -415,7 +371,7 @@ namespace Axiverse.Interface.Graphics
 
         public void ClearTargetColor(Texture texture, float r, float g, float b, float a)
         {
-            NativeCommandList.ClearRenderTargetView(texture.NativeDepthStencilView, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
+            NativeCommandList.ClearRenderTargetView(texture.NativeRenderTargetView, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
         }
 
         public void ClearDepth(CpuDescriptorHandle handle, float depth)

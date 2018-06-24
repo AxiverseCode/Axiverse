@@ -26,7 +26,7 @@ namespace Axiverse.Interface.Graphics
             Description = description;
         }
 
-        private void Initialize()
+        public void Initialize()
         {
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);
@@ -59,11 +59,14 @@ namespace Axiverse.Interface.Graphics
             var handle = Device.RenderTargetViewAllocator.Allocate(bufferCount);
             
             BackBuffer = new Texture(Device);
+            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
+
+            CreateDepthStencilBuffer();
         }
 
         public void BeginDraw(CommandList commandList)
         {
-            commandList.Reset(this);
+            //commandList.Reset(this);
         }
 
         public void EndDraw(CommandList commandList)
