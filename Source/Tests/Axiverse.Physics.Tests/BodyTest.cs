@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Physics.Tests
 {
-    public class Class1
+    public class BodyTest
     {
     }
 }
