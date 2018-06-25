@@ -60,7 +60,7 @@
     <Compile Include="Spatial\Octant.cs" />
     <Compile Include="Spatial\Octree.cs" />
     <Compile Include="Sphere3.cs" />
-    <Compile Include="Transform3.cs" />
+    <Compile Include="Core\Transform3.cs" />
     <Compile Include="Core\Trilean.cs" />
     <Compile Include="Trilean3.cs" />
     <Compile Include="Core\Vector2.cs" />

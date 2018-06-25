@@ -512,9 +512,9 @@ namespace Axiverse
         /// <param name="matrix"></param>
         public static void Transform(out Vector3 result, ref Vector3 vector, ref Matrix3 matrix)
         {
-            float x = ((vector.X * matrix.M11) + (vector.Y * matrix.M21)) + (vector.Z * matrix.M31);
-            float y = ((vector.X * matrix.M12) + (vector.Y * matrix.M22)) + (vector.Z * matrix.M32);
-            float z = ((vector.X * matrix.M13) + (vector.Y * matrix.M23)) + (vector.Z * matrix.M33);
+            float x = (vector.X * matrix.M11) + (vector.Y * matrix.M21) + (vector.Z * matrix.M31);
+            float y = (vector.X * matrix.M12) + (vector.Y * matrix.M22) + (vector.Z * matrix.M32);
+            float z = (vector.X * matrix.M13) + (vector.Y * matrix.M23) + (vector.Z * matrix.M33);
 
             result.X = x;
             result.Y = y;
@@ -541,9 +541,9 @@ namespace Axiverse
         /// <param name="matrix"></param>
         public static void TransposedTransform(out Vector3 result, ref Vector3 vector, ref Matrix3 matrix)
         {
-            float x = ((vector.X * matrix.M11) + (vector.Y * matrix.M12)) + (vector.Z * matrix.M13);
-            float y = ((vector.X * matrix.M21) + (vector.Y * matrix.M22)) + (vector.Z * matrix.M23);
-            float z = ((vector.X * matrix.M31) + (vector.Y * matrix.M32)) + (vector.Z * matrix.M33);
+            float x = (vector.X * matrix.M11) + (vector.Y * matrix.M12) + (vector.Z * matrix.M13);
+            float y = (vector.X * matrix.M21) + (vector.Y * matrix.M22) + (vector.Z * matrix.M23);
+            float z = (vector.X * matrix.M31) + (vector.Y * matrix.M32) + (vector.Z * matrix.M33);
 
             result.X = x;
             result.Y = y;
