@@ -74,6 +74,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Physics.Tests", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Calibration", "Client\Axiverse.Calibration\Axiverse.Calibration.csproj", "{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Input", "Client\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj", "{C9160E27-003A-466B-BB08-A51435D509AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Input", "Examples\Hello Input\Hello Input.csproj", "{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,6 +196,14 @@ Global
 		{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9160E27-003A-466B-BB08-A51435D509AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9160E27-003A-466B-BB08-A51435D509AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9160E27-003A-466B-BB08-A51435D509AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9160E27-003A-466B-BB08-A51435D509AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -225,6 +237,8 @@ Global
 		{86FC31C7-F972-4AED-9216-EF1C224065D9} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
 		{63E2639E-CA6C-49CF-AC2A-BE1D82574718} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
 		{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23} = {F3210600-0254-4B9E-93F2-78820B9C3FE1}
+		{C9160E27-003A-466B-BB08-A51435D509AA} = {F3210600-0254-4B9E-93F2-78820B9C3FE1}
+		{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

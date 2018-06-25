@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Calibration
 {
-    public class Class1
+    class ControllerComponent
     {
     }
 }

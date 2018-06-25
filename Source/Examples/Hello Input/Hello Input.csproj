@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axiverse.Calibration</RootNamespace>
-    <AssemblyName>Axiverse.Calibration</AssemblyName>
+    <ProjectGuid>{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>HelloInput</RootNamespace>
+    <AssemblyName>Hello Input</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,8 +32,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpDX, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpDX.4.1.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpDX.DirectInput.4.1.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.RawInput, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpDX.RawInput.4.0.1\lib\net45\SharpDX.RawInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpDX.XInput.4.1.0\lib\net45\SharpDX.XInput.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,28 +55,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControllerComponent.cs" />
-    <Compile Include="PropulsionComponent.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropulsionEmitter.cs" />
-    <Compile Include="PropulsionProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
-      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
-      <Name>Axiverse.Mathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Axiverse.Physics\Axiverse.Physics.csproj">
-      <Project>{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}</Project>
-      <Name>Axiverse.Physics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
-      <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
-      <Name>Axiverse.Simulation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Axiverse\Axiverse.csproj">
-      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
-      <Name>Axiverse</Name>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Client\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj">
+      <Project>{c9160e27-003a-466b-bb08-a51435d509aa}</Project>
+      <Name>Axiverse.Interface.Input</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

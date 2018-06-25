@@ -75,7 +75,7 @@ namespace Axiverse.Simulation
         protected void OnEntityAdded(Entity entity)
         {
             entity.ComponentAdded += OnComponentAdded;
-            foreach (var processor in processors)
+            foreach (var processor in processors.Values)
             {
                 if (processor.Matches(entity))
                 {
@@ -89,7 +89,7 @@ namespace Axiverse.Simulation
         protected void OnEntityRemoved(Entity entity)
         {
             entity.ComponentRemoved += OnComponentRemoved;
-            foreach (var processor in processors)
+            foreach (var processor in processors.Values)
             {
                 if (processor.ContainsKey(entity.Identifier))
                 {
@@ -104,7 +104,7 @@ namespace Axiverse.Simulation
         {
             var entity = sender as Entity;
 
-            foreach (var processor in processors)
+            foreach (var processor in processors.Values)
             {
                 if (!processor.ContainsKey(entity.Identifier) && processor.Matches(entity))
                 {
@@ -117,7 +117,7 @@ namespace Axiverse.Simulation
         {
             var entity = sender as Entity;
 
-            foreach (var processor in processors)
+            foreach (var processor in processors.Values)
             {
                 if (processor.ContainsKey(entity.Identifier) && !processor.Matches(entity))
                 {
@@ -128,7 +128,7 @@ namespace Axiverse.Simulation
 
         public void Add(Processor processor)
         {
-            Processors.Add(processor);
+            Processors.Add(processor.Stage, processor);
 
             foreach (var entity in entities.Values)
             {
@@ -142,9 +142,9 @@ namespace Axiverse.Simulation
         public event EntityEventHandler EntityAdded;
         public event EntityEventHandler EntityRemoved;
 
-        public List<Processor> Processors => processors;
-
-        private readonly List<Processor> processors = new List<Processor>();
+        public SortedList<int, Processor> Processors => processors;
+        
+        private readonly SortedList<int, Processor> processors = new SortedList<int, Processor>();
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
         private readonly List<System> systems = new List<System>();
     }

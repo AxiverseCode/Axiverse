@@ -18,7 +18,7 @@ namespace Axiverse.Simulation
         {
             universe = new Universe();
             processor = new Processor(typeof(TestComponent));
-            universe.Processors.Add(processor);
+            universe.Add(processor);
         }
 
         [Test]

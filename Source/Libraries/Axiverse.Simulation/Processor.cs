@@ -8,9 +8,13 @@ namespace Axiverse.Simulation
 {
     public class Processor
     {
+        public int Stage { get; set; }
+
         public Type[] ComponentTypes { get; }
 
         public Dictionary<Guid, Entity> Entities { get; } = new Dictionary<Guid, Entity>();
+
+        public bool Enabled { get; set; }
 
         public Processor(params Type[] componentTypes)
         {
@@ -39,6 +43,22 @@ namespace Axiverse.Simulation
             OnEntityRemoved(entity);
         }
 
+        public virtual void Process()
+        {
+            if (Enabled)
+            {
+                foreach (var entity in Entities.Values)
+                {
+                    ProcessEntity(entity);
+                }
+            }
+        }
+
+        public virtual void ProcessEntity(Entity entity)
+        {
+
+        }
+
         protected virtual void OnEntityAdded(Entity entity)
         {
 
@@ -54,6 +74,17 @@ namespace Axiverse.Simulation
         where T1 : Component
     {
         public Processor() : base(typeof(T1))
+        {
+
+        }
+
+        public override void ProcessEntity(Entity entity)
+        {
+            var component1 = entity.Components.Get<T1>();
+            ProcessEntity(entity, component1);
+        }
+
+        public virtual void ProcessEntity(Entity entity, T1 component)
         {
 
         }
@@ -88,6 +119,18 @@ namespace Axiverse.Simulation
         where T2 : Component
     {
         public Processor() : base(typeof(T1), typeof(T2))
+        {
+
+        }
+
+        public override void ProcessEntity(Entity entity)
+        {
+            var component1 = entity.Components.Get<T1>();
+            var component2 = entity.Components.Get<T2>();
+            ProcessEntity(entity, component1, component2);
+        }
+
+        public virtual void ProcessEntity(Entity entity, T1 component1, T2 component2)
         {
 
         }
