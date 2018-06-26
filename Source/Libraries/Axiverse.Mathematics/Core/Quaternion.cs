@@ -609,19 +609,19 @@ namespace Axiverse
         /// <summary>
         /// Constructs a quaternion from a euler rotation.
         /// </summary>
-        /// <param name="vector"></param>
+        /// <param name="vector">The euler angles in radians.</param>
         /// <returns></returns>
         public static Quaternion FromEuler(Vector3 vector)
         {
-            return FromEuler(vector.X, vector.Y, vector.Z);
+            return FromEuler(vector.Z, vector.Y, vector.X);
         }
 
         /// <summary>
         /// From Euler in degrees
         /// </summary>
-        /// <param name="yaw"></param>
-        /// <param name="pitch"></param>
-        /// <param name="roll"></param>
+        /// <param name="yaw">The yaw in radians.</param>
+        /// <param name="pitch">The pitch in radians.</param>
+        /// <param name="roll">The roll in radians.</param>
         /// <returns></returns>
         public static Quaternion FromEuler(float yaw, float pitch, float roll)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpDX.DirectInput;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,15 +19,58 @@ namespace Axiverse.Interface.Input
 
         public List<Source> Sources { get; set; }
         public List<Listener> Listeners { get; set; }
-        
+
+        static readonly Guid spaceNavigatorProductGuid = new Guid("{c626046d-0000-0000-0000-504944564944}");
+        private DirectInput directInput;
+        private Joystick joystick;
+        public JoystickState PreviousState = new JoystickState();
+        public RouterState State;
+
         public Router()
         {
+            // SpaceMouse
+            // Axis 0 - X
+            // Axis 1 - Y
+            // Axis 2 - Z (Up negative)
+            // Axis 3 - Pitch
+            // Axis 4 - Roll
+            // Axis 5 - Yaw
 
+            State = new RouterState();
+            directInput = new DirectInput();
+            var joysticks = directInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AllDevices);
+            var spaceNavigator = joysticks.FirstOrDefault(j => j.ProductGuid == spaceNavigatorProductGuid);
+
+            if (spaceNavigator != null)
+            {
+                joystick = new Joystick(directInput, spaceNavigator.InstanceGuid);
+                joystick.Acquire();
+            }
         }
+
+        
 
         public void Poll()
         {
-            Sources.ForEach(s => s.Poll());
+            //Sources.ForEach(s => s.Poll());
+
+            if (joystick == null)
+                return;
+
+            var state = joystick.GetCurrentState();
+            
+            State = new RouterState
+            {
+                X = (state.X - PreviousState.X) / (float)short.MaxValue,
+                Y = (state.Y - PreviousState.Y) / (float)short.MaxValue,
+                Z = (state.Z - PreviousState.Z) / (float)short.MaxValue,
+                RotationX = (state.RotationX - PreviousState.RotationX) / (float)short.MaxValue,
+                RotationY = (state.RotationY - PreviousState.RotationY) / (float)short.MaxValue,
+                RotationZ = (state.RotationZ - PreviousState.RotationZ) / (float)short.MaxValue,
+            };
+
+            PreviousState = state;
+            Console.WriteLine(State.X);
         }
 
         /// <summary>
@@ -36,5 +80,16 @@ namespace Axiverse.Interface.Input
         {
 
         }
+    }
+
+    public class RouterState
+    {
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Z { get; set; }
+        
+        public float RotationX { get; set; }
+        public float RotationY { get; set; }
+        public float RotationZ { get; set; }
     }
 }

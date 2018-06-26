@@ -69,7 +69,12 @@ namespace Axiverse.Injection
             var value = FormatterServices.GetUninitializedObject(type);
             Bind(ref value, bindings, forceAll);
 
-            var parameters = constructor.GetParameters().Select(p => bindings[GetKey(p)]).ToArray();
+            var parameterInfos = constructor.GetParameters();
+            var parameters = new object[parameterInfos.Length];
+            for (int i = 0; i < parameterInfos.Length; i++)
+            {
+                parameters[i] = bindings[GetKey(parameterInfos[i])];
+            }
             constructor.Invoke(value, parameters);
 
             return value;

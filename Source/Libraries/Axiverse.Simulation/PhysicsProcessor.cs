@@ -16,7 +16,7 @@ namespace Axiverse.Simulation
 
         public override void Process(SimulationContext context)
         {
-            World.Step(context.DeltaTime);
+            // World.Step(context.DeltaTime);
             base.Process(context);
         }
 

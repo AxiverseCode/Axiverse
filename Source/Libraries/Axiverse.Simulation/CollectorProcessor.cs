@@ -73,6 +73,10 @@ namespace Axiverse.Simulation
             Entities.Remove(entity.Identifier);
         }
 
+        /// <summary>
+        /// Processes the entities.
+        /// </summary>
+        /// <param name="context"></param>
         public virtual void Process(SimulationContext context)
         {
 

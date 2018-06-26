@@ -13,8 +13,11 @@ namespace Axiverse.Interface.Scenes
 
         public override void ProcessEntity(SimulationContext context, Entity entity, CameraComponent camera, TransformComponent transform)
         {
-            var forward = Vector3.ForwardRH * transform.GlobalTransform;
-            var up = new Vector4(Vector3.Up, 0).XYZ;// * transform.GlobalTransform;
+            //var forward = new Vector4(Vector3.ForwardRH, 0).XYZ * transform.GlobalTransform;
+            //var up = new Vector4(Vector3.Up, 0).XYZ;// * transform.GlobalTransform;
+
+            var forward = transform.Rotation.Transform(Vector3.ForwardRH);
+            var up = transform.Rotation.Transform(Vector3.Up);
 
             switch (camera.Mode)
             {

@@ -29,8 +29,6 @@ namespace Axiverse
         /// <returns></returns>
         public virtual T Take()
         {
-            Debug.WriteLine("taken " + typeof(T).Name);
-
             if (bag.TryTake(out var result))
             {
                 return result;

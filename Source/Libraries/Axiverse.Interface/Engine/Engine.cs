@@ -2,6 +2,7 @@
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
 using Axiverse.Interface.Graphics.Shaders;
+using Axiverse.Interface.Input;
 using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Rendering.Compositing;
 using Axiverse.Interface.Scenes;
@@ -30,6 +31,8 @@ namespace Axiverse.Interface.Engine
 
         public Window Window { get; set; }
 
+        public Router Router { get; set; }
+
         /// <summary>
         /// Constructs an engine.
         /// </summary>
@@ -41,6 +44,7 @@ namespace Axiverse.Interface.Engine
             Injector = injector;
             Cache = cache;
             Scene = new Scene();
+            Router = new Router();
             Injector.Bind<Universe>(Scene);
 
             Scene.Add(new TransformProcessor());
@@ -127,11 +131,10 @@ namespace Axiverse.Interface.Engine
                     1.0f * form.ClientSize.Width / form.ClientSize.Height,
                     2.0f,
                     2000.0f),
-                Mode = CameraMode.Targeted
+                Mode = CameraMode.Forward
             });
             var cameraTransform = cameraEntity.Components.Add(new TransformComponent
             {
-                GlobalTransform = Matrix4.Translation(0, 0, -10),
                 Translation = new Vector3(0, 0, 10)
             });
             Scene.Add(cameraEntity);
@@ -166,6 +169,9 @@ namespace Axiverse.Interface.Engine
             });
             entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
+            var maximumVelocity = new Vector3(10, 10, 10);
+            var maximumAngle = new Vector3(1, 1, 1);
+
             var prev = Environment.TickCount;
             // Into the loop we go!
             using (var loop = new RenderLoop(form))
@@ -174,6 +180,7 @@ namespace Axiverse.Interface.Engine
                 {
                     var next = Environment.TickCount;
                     var delta = next - prev;
+                    var dt = delta / 1000.0f;
                     frame += delta / 10.0f;
                     prev = next;
 
@@ -184,10 +191,21 @@ namespace Axiverse.Interface.Engine
                         4 * Functions.Cos(Functions.DegreesToRadians(frame / 8)));
                     entity2.Components.Get<TransformComponent>().Rotation = Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400);
 
-                    cameraTransform.Translation = new Vector3(
-                        10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
-                        4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
-                        10 * Functions.Cos(Functions.DegreesToRadians(frame / 10)));
+                    //cameraTransform.Translation = new Vector3(
+                    //    10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
+                    //    4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
+                    //    10 * Functions.Cos(Functions.DegreesToRadians(frame / 10)));
+
+                    Router.Poll();
+                    var state = Router.State;
+                    var velocity = cameraTransform.Rotation.Transform(new Vector3(state.X, -state.Z, state.Y)) * maximumVelocity;
+                    //var angular = new Vector3(state.RotationX, state.RotationY, state.RotationZ) * maximumAngle;
+                    var angular = new Vector3(state.RotationY, -state.RotationZ, state.RotationX) * maximumAngle;
+                    //Console.WriteLine(velocity);
+                    //Console.WriteLine(angular);
+
+                    cameraTransform.Translation += velocity;
+                    cameraTransform.Rotation *= Quaternion.FromEuler(angular);
 
                     Scene.Step(delta / 1000.0f);
 

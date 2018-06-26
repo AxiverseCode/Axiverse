@@ -38,7 +38,7 @@ namespace Axiverse.Interface.Input
 
             foreach (var datum in data)
             {
-                
+
             }
 
             throw new NotImplementedException();

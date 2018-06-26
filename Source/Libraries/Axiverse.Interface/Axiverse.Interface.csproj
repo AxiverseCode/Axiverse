@@ -89,6 +89,10 @@
       <Project>{cd0ed517-2595-413d-9822-2b33a7876842}</Project>
       <Name>Axiverse.Interface.Assets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Client\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj">
+      <Project>{C9160E27-003A-466B-BB08-A51435D509AA}</Project>
+      <Name>Axiverse.Interface.Input</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Interface.Audio\Axiverse.Interface.Audio.csproj">
       <Project>{f4783bb9-02a3-4fb7-864f-3b94219519e3}</Project>
       <Name>Axiverse.Interface.Audio</Name>
