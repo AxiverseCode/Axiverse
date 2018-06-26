@@ -127,17 +127,33 @@ namespace Axiverse
 
         #region Instance Methods - Setters
 
+        /// <summary>
+        /// Sets all components of the quaternion to the specified value.
+        /// </summary>
+        /// <param name="value"></param>
         public void Set(float value)
         {
             X = Y = Z = W = value;
         }
 
+        /// <summary>
+        /// Sets the components of the quaternion to the specified values.
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="w"></param>
         public void Set(float axis, float w)
         {
             X = Y = Z = axis;
             W = w;
         }
 
+        /// <summary>
+        /// Sets the components of the quaternion to the specified values.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="w"></param>
         public void Set(float x, float y, float z, float w)
         {
             X = x;
@@ -150,21 +166,36 @@ namespace Axiverse
 
         #region Instance Methods - Arithmatic
 
+        /// <summary>
+        /// Adds the given quaternion to this quaternion.
+        /// </summary>
+        /// <param name="value"></param>
         public void Add(Quaternion value)
         {
             Add(out this, ref this, ref value);
         }
 
+        /// <summary>
+        /// Substracts the given quaternion from this quaternion.
+        /// </summary>
+        /// <param name="value"></param>
         public void Subtract(Quaternion value)
         {
             Subtract(out this, ref this, ref value);
         }
 
+        /// <summary>
+        /// Multiplies this quaternion by the given quaternion.
+        /// </summary>
+        /// <param name="value"></param>
         public void Multiply(Quaternion value)
         {
             Multiply(out this, ref this, ref value);
         }
 
+        /// <summary>
+        /// Normalizes the quaternion.
+        /// </summary>
         public void Normalize()
         {
             this /= Length();
@@ -174,26 +205,47 @@ namespace Axiverse
 
         #region Instance Methods - Mathematics
 
+        /// <summary>
+        /// Computes the conjugate of the quaternion.
+        /// </summary>
+        /// <returns></returns>
         public Quaternion Conjugate()
         {
             return Conjugate(this);
         }
 
+        /// <summary>
+        /// Computes the normal of the quaternion.
+        /// </summary>
+        /// <returns></returns>
         public Quaternion Normal()
         {
             return this / Length();
         }
 
+        /// <summary>
+        /// Computes the inverse of the quaternion.
+        /// </summary>
+        /// <returns></returns>
         public Quaternion Inverse()
         {
             return Conjugate() / LengthSquared();
         }
 
+        /// <summary>
+        /// Computes the length of the quaternion.
+        /// </summary>
+        /// <returns></returns>
         public float Length()
         {
             return (float)Math.Sqrt(LengthSquared());
         }
 
+        /// <summary>
+        /// Computes the square of the length of the quaternion. This is cheaper than computing
+        /// the length and is preferred when comparing the length of two quaternions.
+        /// </summary>
+        /// <returns></returns>
         public float LengthSquared()
         {
             return X * X + Y * Y + Z * Z + W * W;

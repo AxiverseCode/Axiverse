@@ -104,18 +104,18 @@ namespace Axiverse.Simulation
             OnEntityRemoved(entity);
         }
 
-        public virtual void Process()
+        public virtual void Process(SimulationContext context)
         {
             if (Enabled)
             {
                 foreach (var entity in Entities.Values)
                 {
-                    ProcessEntity(entity);
+                    ProcessEntity(context, entity);
                 }
             }
         }
 
-        public virtual void ProcessEntity(Entity entity)
+        public virtual void ProcessEntity(SimulationContext context, Entity entity)
         {
 
         }
@@ -136,16 +136,16 @@ namespace Axiverse.Simulation
     {
         public Processor() : base(typeof(T1))
         {
-
+            Enabled = true;
         }
 
-        public override void ProcessEntity(Entity entity)
+        public override void ProcessEntity(SimulationContext context, Entity entity)
         {
             var component1 = entity.Components.Get<T1>();
-            ProcessEntity(entity, component1);
+            ProcessEntity(context, entity, component1);
         }
 
-        public virtual void ProcessEntity(Entity entity, T1 component)
+        public virtual void ProcessEntity(SimulationContext context, Entity entity, T1 component)
         {
 
         }
@@ -181,24 +181,24 @@ namespace Axiverse.Simulation
     {
         public Processor() : base(typeof(T1), typeof(T2))
         {
-
+            Enabled = true;
         }
 
-        public override void ProcessEntity(Entity entity)
+        public override void ProcessEntity(SimulationContext context, Entity entity)
         {
             var component1 = entity.Components.Get<T1>();
             var component2 = entity.Components.Get<T2>();
-            ProcessEntity(entity, component1, component2);
+            ProcessEntity(context, entity, component1, component2);
         }
 
-        public virtual void ProcessEntity(Entity entity, T1 component1, T2 component2)
+        public virtual void ProcessEntity(SimulationContext context, Entity entity, T1 component1, T2 component2)
         {
 
         }
 
         protected virtual void OnEntityAdded(Entity entity, T1 component1, T2 component2)
         {
-
+            
         }
 
         protected virtual void OnEntityRemoved(Entity entity, T1 component1, T2 component2)

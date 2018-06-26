@@ -12,7 +12,7 @@ namespace Axiverse.Calibration
         // Move to preprocessing once we use propulsoncomponent
         public override ProcessorStage Stage => ProcessorStage.Components;
 
-        public override void ProcessEntity(Entity entity, PilotingComponent piloting, PhysicsComponent physics)
+        public override void ProcessEntity(SimulationContext context, Entity entity, PilotingComponent piloting, PhysicsComponent physics)
         {
             // physics.Body.ApplyTorqueImpulse();
         }

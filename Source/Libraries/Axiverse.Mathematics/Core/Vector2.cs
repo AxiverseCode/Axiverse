@@ -411,6 +411,19 @@ namespace Axiverse
 
         #endregion
 
+
+        /// <summary>The up vector. [0, 1]</summary>
+        public static readonly Vector2 Up = new Vector2(0, 1);
+
+        /// <summary>The down vector. [0, -1]</summary>
+        public static readonly Vector2 Down = new Vector2(0, -1);
+
+        /// <summary>The left vector. [-1. 0]</summary>
+        public static readonly Vector2 Left = new Vector2(-1, 0);
+
+        /// <summary>The right vector. [1, 0]</summary>
+        public static readonly Vector2 Right = new Vector2(1, 0);
+
         /// <summary>The zero vector.</summary>
         public static readonly Vector2 Zero = new Vector2(0, 0);
         

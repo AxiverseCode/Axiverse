@@ -11,12 +11,24 @@ namespace Axiverse.Interface.Scenes
     {
         public override ProcessorStage Stage => ProcessorStage.Propagation;
 
-        public override void ProcessEntity(Entity entity, CameraComponent camera, TransformComponent transform)
+        public override void ProcessEntity(SimulationContext context, Entity entity, CameraComponent camera, TransformComponent transform)
         {
             var forward = Vector3.ForwardRH * transform.GlobalTransform;
-            var up = Vector3.Up * transform.GlobalTransform;
+            var up = new Vector4(Vector3.Up, 0).XYZ;// * transform.GlobalTransform;
 
-            var view = Matrix4.LookAtRH(transform.Translation, forward, up);
+            switch (camera.Mode)
+            {
+                case CameraMode.Forward:
+                    camera.View = Matrix4.LookAtRH(transform.Translation, transform.Translation + forward, up);
+                    break;
+                case CameraMode.Oriented:
+                    break;
+                case CameraMode.Targeted:
+                    camera.View = Matrix4.LookAtRH(transform.Translation, camera.Target, up);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

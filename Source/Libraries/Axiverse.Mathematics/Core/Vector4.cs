@@ -29,6 +29,8 @@ namespace Axiverse
 
         #region Properties
 
+        public Vector3 XYZ => new Vector3(X, Y, Z);
+
         /// <summary>
         /// Gets or sets the component at the given index.
         /// </summary>

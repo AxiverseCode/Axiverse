@@ -41,6 +41,10 @@ namespace Axiverse.Interface.Engine
             Injector = injector;
             Cache = cache;
             Scene = new Scene();
+            Injector.Bind<Universe>(Scene);
+
+            Scene.Add(new TransformProcessor());
+            Scene.Add(new CameraProcessor());
         }
 
         /// <summary>
@@ -117,14 +121,19 @@ namespace Axiverse.Interface.Engine
            
             // Create camera entity.
             var cameraEntity = new Entity();
-            var cameraComponent = new CameraComponent
+            var cameraComponent = cameraEntity.Components.Add(new CameraComponent
             {
                 Projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
                     1.0f * form.ClientSize.Width / form.ClientSize.Height,
                     2.0f,
-                    2000.0f)
-            };
-            cameraEntity.Components.Add(cameraComponent);
+                    2000.0f),
+                Mode = CameraMode.Targeted
+            });
+            var cameraTransform = cameraEntity.Components.Add(new TransformComponent
+            {
+                GlobalTransform = Matrix4.Translation(0, 0, -10),
+                Translation = new Vector3(0, 0, 10)
+            });
             Scene.Add(cameraEntity);
 
             var entity1 = new Entity();
@@ -139,7 +148,7 @@ namespace Axiverse.Interface.Engine
             var entity2 = new Entity();
             Scene.Add(entity2);
             entity2.Components.Add(new TransformComponent());
-            entity2.Components.Add(new RenderableComponent()
+            entity2.Components.Add(new RenderableComponent
             {
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value }
             });
@@ -147,8 +156,11 @@ namespace Axiverse.Interface.Engine
 
             var entity3 = new Entity();
             Scene.Add(entity3);
-            entity3.Components.Add(new TransformComponent());
-            entity3.Components.Add(new RenderableComponent()
+            entity3.Components.Add(new TransformComponent
+            {
+                Scaling = new Vector3(10, 10, 10)
+            });
+            entity3.Components.Add(new RenderableComponent
             {
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
             });
@@ -161,21 +173,25 @@ namespace Axiverse.Interface.Engine
                 while (loop.NextFrame())
                 {
                     var next = Environment.TickCount;
-                    frame += (next - prev) / 10.0f;
+                    var delta = next - prev;
+                    frame += delta / 10.0f;
                     prev = next;
 
-                    entity1.Components.Get<TransformComponent>().GlobalTransform = Matrix4.Identity;
-                    entity2.Components.Get<TransformComponent>().GlobalTransform =
-                        Matrix4.FromQuaternion(Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400));
-                    entity3.Components.Get<TransformComponent>().GlobalTransform = Matrix4.Scale(10, 10, 10);
-                    
-                    cameraComponent.View = Matrix4.LookAtRH(
-                        new Vector3(
-                            10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
-                            4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
-                            10 * Functions.Cos(Functions.DegreesToRadians(frame / 10))),
-                        new Vector3(0, 0, 0), new Vector3(0, 1, 0));
-                    
+
+                    entity1.Components.Get<TransformComponent>().Translation = new Vector3(
+                        3 * Functions.Sin(Functions.DegreesToRadians(frame / 3)),
+                        2 * Functions.Sin(Functions.DegreesToRadians(frame / 6)),
+                        4 * Functions.Cos(Functions.DegreesToRadians(frame / 8)));
+                    entity2.Components.Get<TransformComponent>().Rotation = Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400);
+
+                    cameraTransform.Translation = new Vector3(
+                        10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
+                        4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
+                        10 * Functions.Cos(Functions.DegreesToRadians(frame / 10)));
+
+                    Scene.Step(delta / 1000.0f);
+
+
                     compositor.Process(Scene, cameraComponent);
                 }
             }

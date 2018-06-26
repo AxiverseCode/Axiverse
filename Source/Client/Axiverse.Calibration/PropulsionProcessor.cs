@@ -11,7 +11,7 @@ namespace Axiverse.Calibration
     {
         public override ProcessorStage Stage => ProcessorStage.Components;
 
-        public override void ProcessEntity(Entity entity, PhysicsComponent physics, PropulsionComponent propulsion)
+        public override void ProcessEntity(SimulationContext context, Entity entity, PhysicsComponent physics, PropulsionComponent propulsion)
         {
             foreach (var emitter in propulsion.Emitters)
             {

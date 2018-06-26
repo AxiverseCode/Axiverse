@@ -762,12 +762,59 @@ namespace Axiverse
             return result;
         }
 
-        public static Matrix4 Scale(float x, float y, float z)
+        public static void Rotation(ref Quaternion rotation, out Matrix4 result)
+        {
+            float xx = rotation.X * rotation.X;
+            float yy = rotation.Y * rotation.Y;
+            float zz = rotation.Z * rotation.Z;
+            float xy = rotation.X * rotation.Y;
+            float zw = rotation.Z * rotation.W;
+            float zx = rotation.Z * rotation.X;
+            float yw = rotation.Y * rotation.W;
+            float yz = rotation.Y * rotation.Z;
+            float xw = rotation.X * rotation.W;
+
+            result = new Matrix4()
+            {
+                M11 = 1.0f - (2.0f * (yy + zz)),
+                M12 = 2.0f * (xy + zw),
+                M13 = 2.0f * (zx - yw),
+                M21 = 2.0f * (xy - zw),
+                M22 = 1.0f - (2.0f * (zz + xx)),
+                M23 = 2.0f * (yz + xw),
+                M31 = 2.0f * (zx + yw),
+                M32 = 2.0f * (yz - xw),
+                M33 = 1.0f - (2.0f * (yy + xx)),
+                M44 = 1.0f
+            };
+        }
+
+        public static Matrix4 Rotation(Quaternion rotation)
+        {
+            Rotation(ref rotation, out var result);
+            return result;
+        }
+
+        public static void Rotation(float yaw, float pitch, float roll, out Matrix4 result)
+        {
+            var rotation = Quaternion.FromEuler(yaw, pitch, roll);
+            Rotation(ref rotation, out result);
+        }
+
+        public static Matrix4 Rotation(float yaw, float pitch, float roll)
+        {
+            Rotation(yaw, pitch, roll, out var result);
+            return result;
+        }
+
+        public static Matrix4 Scaling(float x, float y, float z)
         {
             return new Matrix4(x, y, z, 1);
         }
 
-        public static Matrix4 Translate(float x, float y, float z)
+        public static Matrix4 Scaling(Vector3 scaling) => Scaling(scaling.X, scaling.Y, scaling.Z);
+
+        public static Matrix4 Translation(float x, float y, float z)
         {
             var result = Identity;
             result.M41 = x;
@@ -775,6 +822,58 @@ namespace Axiverse
             result.M43 = z;
             return result;
         }
+
+        public static Matrix4 Translation(Vector3 translation) => Translation(translation.X, translation.Y, translation.Z);
+
+
+        public static Matrix4 Transformation(
+            Vector3 scaling,
+            Quaternion rotation,
+            Vector3 translation)
+        {
+            Transformation(ref scaling, ref rotation, ref translation, out var result);
+            return result;
+        }
+        public static void Transformation(
+            ref Vector3 scaling,
+            ref Quaternion rotation,
+            ref Vector3 translation,
+            out Matrix4 result)
+        {
+            result = Scaling(scaling) * Rotation(rotation) * Translation(translation);
+        }
+
+        public static void Transformation(
+            ref Vector3 scalingCenter,
+            ref Vector3 scaling,
+            ref Vector3 rotationCenter,
+            ref Quaternion rotation,
+            ref Vector3 translation,
+            out Matrix4 result)
+        {
+            result =
+                Translation(-scalingCenter) * Scaling(scaling) * Translation(scalingCenter) *
+                Translation(-rotationCenter) * Rotation(rotation) * Translation(rotationCenter) *
+                Translation(translation);
+        }
+
+        public static void Transformation(
+            ref Vector3 scalingCenter,
+            ref Quaternion scalingRotation,
+            ref Vector3 scaling,
+            ref Vector3 rotationCenter,
+            ref Quaternion rotation,
+            ref Vector3 translation,
+            out Matrix4 result)
+        {
+            Matrix4 scalingRotationMatrix = Rotation(scalingRotation);
+
+            result = 
+                Translation(-scalingCenter) * Transpose(scalingRotationMatrix) * Scaling(scaling) * scalingRotationMatrix * Translation(scalingCenter) *
+                Translation(-rotationCenter) * Rotation(rotation) * Translation(rotationCenter) *
+                Translation(translation);
+        }
+
         #endregion
 
         /// <summary>The zero matrix.</summary>

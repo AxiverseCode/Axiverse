@@ -20,13 +20,6 @@ namespace Axiverse.Simulation
 
         public Universe()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                var entity = new Entity();
-                entity.Components.Add(new NavigationComponent());
-                entities.Add(entity.Identifier, entity);
-            }
-
             systems.Add(new NavigationSystem());
             systems.Add(new SpatialSystem());
         }
@@ -38,19 +31,29 @@ namespace Axiverse.Simulation
 
         public void Step(float dt)
         {
-            foreach (var system in systems)
+            SimulationContext context = new SimulationContext()
             {
-                foreach (var entity in entities.Values)
-                {
-                    system.Process(entity, dt);
-                }
+                DeltaTime = dt
+            };
+
+            foreach (var processor in processors.Values)
+            {
+                processor.Process(context);
             }
 
-            foreach (var entity in entities.Values)
-            {
-                //entity.Model?.Process(entity);
-                //Console.WriteLine(entity);
-            }
+            //foreach (var system in systems)
+            //{
+            //    foreach (var entity in entities.Values)
+            //    {
+            //        system.Process(entity, dt);
+            //    }
+            //}
+
+            //foreach (var entity in entities.Values)
+            //{
+            //    //entity.Model?.Process(entity);
+            //    //Console.WriteLine(entity);
+            //}
         }
 
         public void Add(Entity entity)
@@ -144,8 +147,21 @@ namespace Axiverse.Simulation
 
         public SortedList<ProcessorStage, Processor> Processors => processors;
         
-        private readonly SortedList<ProcessorStage, Processor> processors = new SortedList<ProcessorStage, Processor>();
+        private readonly SortedList<ProcessorStage, Processor> processors = new SortedList<ProcessorStage, Processor>(new ProcessorComparer());
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
         private readonly List<System> systems = new List<System>();
+
+        private class ProcessorComparer : IComparer<ProcessorStage>
+        {
+            public int Compare(ProcessorStage x, ProcessorStage y)
+            {
+                int result = x.CompareTo(y);
+
+                if (result == 0)
+                    return 1;   // Handle equality as beeing greater
+                else
+                    return result;
+            }
+        }
     }
 }

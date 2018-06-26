@@ -11,12 +11,12 @@ namespace Axiverse.Interface.Scenes
         /// <summary>
         /// Gets or sets the transform relative to the global basis.
         /// </summary>
-        public Matrix4 GlobalTransform { get; set; }
+        public Matrix4 GlobalTransform { get; set; } = Matrix4.Identity;
 
         /// <summary>
         /// Gets or sets the local transform relative to the parent.
         /// </summary>
-        public Matrix4 LocalTransform { get; set; }
+        public Matrix4 LocalTransform { get; set; } = Matrix4.Identity;
 
         /// <summary>
         /// Gets or sets the translation.
@@ -26,12 +26,12 @@ namespace Axiverse.Interface.Scenes
         /// <summary>
         /// Gets or sets the rotation.
         /// </summary>
-        public Quaternion Rotation { get; set; }
+        public Quaternion Rotation { get; set; } = Quaternion.Identity;
 
         /// <summary>
         /// Gets or sets the scaling.
         /// </summary>
-        public Vector3 Scaling { get; set; }
+        public Vector3 Scaling { get; set; } = Vector3.One;
 
         /// <summary>
         /// Clones the component.

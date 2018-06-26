@@ -131,12 +131,13 @@ namespace Axiverse.Simulation
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="component"></param>
-        public void Add<T>(T component) where T : Component
+        public T Add<T>(T component) where T : Component
         {
             Key key = Key.From<T>();
             Requires.AssignableFrom(key, component);
             components.Add(key, component);
             OnComponentAdded(key, component);
+            return component;
         }
 
         public void Add(Key key, Component component)

@@ -11,5 +11,16 @@ namespace Axiverse.Interface.Scenes
     {
         public Matrix4 View { get; set; }
         public Matrix4 Projection { get; set; }
+
+        public CameraMode Mode { get; set; }
+        public Vector3 Target { get; set; }
+        public Quaternion Orientation { get; set; }
+    }
+
+    public enum CameraMode
+    {
+        Forward,
+        Oriented,
+        Targeted,
     }
 }
