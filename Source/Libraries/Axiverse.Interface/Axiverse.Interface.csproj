@@ -81,6 +81,7 @@
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneView.cs" />
     <Compile Include="Scenes\TransformComponent.cs" />
+    <Compile Include="Scenes\TransformPhysicsProcessor.cs" />
     <Compile Include="Scenes\TransformProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +104,10 @@
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Physics\Axiverse.Physics.csproj">
+      <Project>{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}</Project>
+      <Name>Axiverse.Physics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Axiverse.Resources\Axiverse.Resources.csproj">
       <Project>{DB2FCC23-BEFB-44CD-8F9B-EC1702AEDF57}</Project>

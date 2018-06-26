@@ -20,8 +20,10 @@ namespace Axiverse.Simulation
 
         public Universe()
         {
-            systems.Add(new NavigationSystem());
-            systems.Add(new SpatialSystem());
+            //systems.Add(new NavigationSystem());
+            //systems.Add(new SpatialSystem());
+
+            Add(new PhysicsProcessor());
         }
 
         public void Post(Guid target)
@@ -129,7 +131,7 @@ namespace Axiverse.Simulation
             }
         }
 
-        public void Add(Processor processor)
+        public void Add(IProcessor processor)
         {
             Processors.Add(processor.Stage, processor);
 
@@ -145,9 +147,9 @@ namespace Axiverse.Simulation
         public event EntityEventHandler EntityAdded;
         public event EntityEventHandler EntityRemoved;
 
-        public SortedList<ProcessorStage, Processor> Processors => processors;
+        public SortedList<ProcessorStage, IProcessor> Processors => processors;
         
-        private readonly SortedList<ProcessorStage, Processor> processors = new SortedList<ProcessorStage, Processor>(new ProcessorComparer());
+        private readonly SortedList<ProcessorStage, IProcessor> processors = new SortedList<ProcessorStage, IProcessor>(new ProcessorComparer());
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
         private readonly List<System> systems = new List<System>();
 

@@ -11,13 +11,13 @@ namespace Axiverse.Simulation
     public class ProcessorTest
     {
         Universe universe;
-        Processor processor;
+        CollectorProcessor processor;
 
         [SetUp]
         public void SetUpUniverse()
         {
             universe = new Universe();
-            processor = new Processor(typeof(TestComponent));
+            processor = new CollectorProcessor(typeof(TestComponent));
             universe.Add(processor);
         }
 

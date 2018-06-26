@@ -14,6 +14,12 @@ namespace Axiverse.Simulation
 
         public World World { get; } = new World();
 
+        public override void Process(SimulationContext context)
+        {
+            World.Step(context.DeltaTime);
+            base.Process(context);
+        }
+
         protected override void OnEntityAdded(Entity entity, PhysicsComponent component)
         {
             World.Bodies.Add(component.Body);

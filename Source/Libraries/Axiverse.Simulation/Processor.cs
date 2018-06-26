@@ -6,91 +6,45 @@ using System.Threading.Tasks;
 using Axiverse.Injection;
 namespace Axiverse.Simulation
 {
-    // Stages
-    // 0    - Critical First
-    // 100  - Preprocessing
-    // 200  - 
-
-    public enum ProcessorStage
-    {
-        None = 0,
-        Critical = 1,
-
-        Preprocessing = 1000,
-
-        Components = 2000,
-
-        Physics = 3000,
-
-        Reconciliation = 4000,
-
-        Propagation = 5000,
-
-        Final = 9000,
-    }
-
-
     /// <summary>
-    /// Represents a processor or system for entities.
+    /// Processor for entities with the given components.
     /// </summary>
-    public class Processor
+    public class Processor : CollectorProcessor
     {
         /// <summary>
-        /// Gets the stage of the processor determining the order of execution.
+        /// Constructs a processor.
         /// </summary>
-        public virtual ProcessorStage Stage => ProcessorStage.None;
+        public Processor(Type[] componentTypes) : base(componentTypes) { }
 
         /// <summary>
-        /// Gets the types of components which are required by this porcessor.
+        /// Processes the entities.
         /// </summary>
-        public Type[] ComponentTypes { get; }
-
-        /// <summary>
-        /// Gets the dictionary of entities being watched and processed by this processor.
-        /// </summary>
-        public Dictionary<Guid, Entity> Entities { get; } = new Dictionary<Guid, Entity>();
-
-        /// <summary>
-        /// Gets whether this processor is enabled.
-        /// </summary>
-        public bool Enabled { get; set; }
-
-        /// <summary>
-        /// Constructs a processor listening to entities with the specified component types.
-        /// </summary>
-        /// <param name="componentTypes"></param>
-        public Processor(params Type[] componentTypes)
+        /// <param name="context"></param>
+        public override void Process(SimulationContext context)
         {
-            ComponentTypes = componentTypes;
+            foreach (var entity in Entities.Values)
+            {
+                ProcessEntity(context, entity);
+            }
         }
 
         /// <summary>
-        /// Determines whether the processor contains an entity with the given identifier.
+        /// Processes an entity.
         /// </summary>
-        /// <param name="identifier"></param>
-        /// <returns></returns>
-        public bool ContainsKey(Guid identifier)
-        {
-            return Entities.ContainsKey(identifier);
-        }
-
-        /// <summary>
-        /// Determins whether an entity has the required component types specified by the processor.
-        /// </summary>
+        /// <param name="context"></param>
         /// <param name="entity"></param>
-        /// <returns></returns>
-        public bool Matches(Entity entity)
+        public virtual void ProcessEntity(SimulationContext context, Entity entity)
         {
-            return ComponentTypes.All(t => entity.Components.ContainsKey(t));
-        }
 
+        }
+        
         /// <summary>
         /// Adds an entity to the processor.
         /// </summary>
         /// <param name="entity"></param>
-        public void Add(Entity entity)
+        public override void Add(Entity entity)
         {
-            Entities.Add(entity.Identifier, entity);
+            base.Add(entity);
             OnEntityAdded(entity);
         }
 
@@ -98,128 +52,328 @@ namespace Axiverse.Simulation
         /// Removes an entity from the processor.
         /// </summary>
         /// <param name="entity"></param>
-        public void Remove(Entity entity)
+        public override void Remove(Entity entity)
         {
-            Entities.Remove(entity.Identifier);
+            base.Remove(entity);
             OnEntityRemoved(entity);
         }
 
-        public virtual void Process(SimulationContext context)
-        {
-            if (Enabled)
-            {
-                foreach (var entity in Entities.Values)
-                {
-                    ProcessEntity(context, entity);
-                }
-            }
-        }
-
-        public virtual void ProcessEntity(SimulationContext context, Entity entity)
-        {
-
-        }
-
+        /// <summary>
+        /// When an entity is added.
+        /// </summary>
+        /// <param name="entity"></param>
         protected virtual void OnEntityAdded(Entity entity)
         {
 
         }
 
+        /// <summary>
+        /// When an entity is removed.
+        /// </summary>
+        /// <param name="entity"></param>
         protected virtual void OnEntityRemoved(Entity entity)
         {
 
         }
     }
 
-    public class Processor<T1> : Processor 
+    /// <summary>
+    /// Processor for entities with the given components.
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    public class Processor<T1> : CollectorProcessor 
         where T1 : Component
     {
-        public Processor() : base(typeof(T1))
+        /// <summary>
+        /// Constructs a processor.
+        /// </summary>
+        public Processor() : base(typeof(T1)) { }
+
+        /// <summary>
+        /// Processes the entities.
+        /// </summary>
+        /// <param name="context"></param>
+        public override void Process(SimulationContext context)
         {
-            Enabled = true;
+            foreach (var entity in Entities.Values)
+            {
+                var components = GetComponents(entity);
+                ProcessEntity(context, entity, components.Item1);
+            }
         }
 
-        public override void ProcessEntity(SimulationContext context, Entity entity)
-        {
-            var component1 = entity.Components.Get<T1>();
-            ProcessEntity(context, entity, component1);
-        }
-
+        /// <summary>
+        /// Processes an entity.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="entity"></param>
+        /// <param name="component"></param>
         public virtual void ProcessEntity(SimulationContext context, Entity entity, T1 component)
         {
 
         }
+        
+        /// <summary>
+        /// Adds an entity to the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        public override void Add(Entity entity)
+        {
+            base.Add(entity);
+            var components = GetComponents(entity);
+            OnEntityAdded(entity, components.Item1);
+        }
 
+        /// <summary>
+        /// Removes an entity from the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        public override void Remove(Entity entity)
+        {
+            base.Remove(entity);
+            var components = GetComponents(entity);
+            OnEntityRemoved(entity, components.Item1);
+        }
+
+        /// <summary>
+        /// When an entity is added.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
         protected virtual void OnEntityAdded(Entity entity, T1 component1)
         {
 
         }
 
+        /// <summary>
+        /// When an entity is removed.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
         protected virtual void OnEntityRemoved(Entity entity, T1 component1)
         {
 
         }
 
-        protected override void OnEntityAdded(Entity entity)
+        /// <summary>
+        /// Gets the components from an entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        protected Tuple<T1> GetComponents(Entity entity)
         {
-            base.OnEntityAdded(entity);
-            var component1 = entity.Components.Get<T1>();
-            OnEntityAdded(entity, component1);
-        }
-
-        protected override void OnEntityRemoved(Entity entity)
-        {
-            base.OnEntityRemoved(entity);
-            var component1 = entity.Components.Get<T1>();
-            OnEntityRemoved(entity, component1);
+            return new Tuple<T1> (
+                entity.Components.Get<T1>());
         }
     }
 
-    public class Processor<T1, T2> : Processor
+    /// <summary>
+    /// Processor for entities with the given components.
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
+    public class Processor<T1, T2> : CollectorProcessor
         where T1 : Component
         where T2 : Component
     {
-        public Processor() : base(typeof(T1), typeof(T2))
+        /// <summary>
+        /// Constructs a processor.
+        /// </summary>
+        public Processor() : base(typeof(T1), typeof(T2)) { }
+
+        /// <summary>
+        /// Processes the entities.
+        /// </summary>
+        /// <param name="context"></param>
+        public override void Process(SimulationContext context)
         {
-            Enabled = true;
+            foreach (var entity in Entities.Values)
+            {
+                var components = GetComponents(entity);
+                ProcessEntity(context, entity, components.Item1, components.Item2);
+            }
         }
 
-        public override void ProcessEntity(SimulationContext context, Entity entity)
+        /// <summary>
+        /// Processes an entity.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
+        /// <param name="component2"></param>
+        public virtual void ProcessEntity(
+            SimulationContext context,
+            Entity entity,
+            T1 component1,
+            T2 component2)
         {
-            var component1 = entity.Components.Get<T1>();
-            var component2 = entity.Components.Get<T2>();
-            ProcessEntity(context, entity, component1, component2);
+
         }
 
-        public virtual void ProcessEntity(SimulationContext context, Entity entity, T1 component1, T2 component2)
+        /// <summary>
+        /// Adds an entity to the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        public override void Add(Entity entity)
         {
-
+            base.Add(entity);
+            var components = GetComponents(entity);
+            OnEntityAdded(entity, components.Item1, components.Item2);
         }
 
+        /// <summary>
+        /// Removes an entity from the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        public override void Remove(Entity entity)
+        {
+            base.Remove(entity);
+            var components = GetComponents(entity);
+            OnEntityRemoved(entity, components.Item1, components.Item2);
+        }
+
+        /// <summary>
+        /// When an entity is added.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
+        /// <param name="component2"></param>
         protected virtual void OnEntityAdded(Entity entity, T1 component1, T2 component2)
         {
-            
+
         }
 
+        /// <summary>
+        /// When an entity is removed.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
+        /// <param name="component2"></param>
         protected virtual void OnEntityRemoved(Entity entity, T1 component1, T2 component2)
         {
 
         }
 
-        protected override void OnEntityAdded(Entity entity)
+        /// <summary>
+        /// Gets the components from an entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        protected Tuple<T1, T2> GetComponents(Entity entity)
         {
-            base.OnEntityAdded(entity);
-            var component1 = entity.Components.Get<T1>();
-            var component2 = entity.Components.Get<T2>();
-            OnEntityAdded(entity, component1, component2);
+            return new Tuple<T1, T2>(
+                entity.Components.Get<T1>(),
+                entity.Components.Get<T2>());
+        }
+    }
+
+    /// <summary>
+    /// Processor for entities with the given components.
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
+    /// <typeparam name="T3"></typeparam>
+    public class Processor<T1, T2, T3> : CollectorProcessor
+        where T1 : Component
+        where T2 : Component
+        where T3 : Component
+    {
+        /// <summary>
+        /// Constructs a processor.
+        /// </summary>
+        public Processor() : base(typeof(T1), typeof(T2), typeof(T3)) { }
+
+        /// <summary>
+        /// Processes the entities.
+        /// </summary>
+        /// <param name="context"></param>
+        public override void Process(SimulationContext context)
+        {
+            foreach (var entity in Entities.Values)
+            {
+                var components = GetComponents(entity);
+                ProcessEntity(context, entity,
+                    components.Item1,
+                    components.Item2,
+                    components.Item3);
+            }
         }
 
-        protected override void OnEntityRemoved(Entity entity)
+        /// <summary>
+        /// Processes an entity.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
+        /// <param name="component2"></param>
+        /// <param name="component3"></param>
+        public virtual void ProcessEntity(
+            SimulationContext context,
+            Entity entity,
+            T1 component1,
+            T2 component2,
+            T3 component3)
         {
-            base.OnEntityRemoved(entity);
-            var component1 = entity.Components.Get<T1>();
-            var component2 = entity.Components.Get<T2>();
-            OnEntityRemoved(entity, component1, component2);
+
+        }
+
+        /// <summary>
+        /// Adds an entity to the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        public override void Add(Entity entity)
+        {
+            base.Add(entity);
+            var components = GetComponents(entity);
+            OnEntityAdded(entity, components.Item1, components.Item2, components.Item3);
+        }
+
+        /// <summary>
+        /// Removes an entity from the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        public override void Remove(Entity entity)
+        {
+            base.Remove(entity);
+            var components = GetComponents(entity);
+            OnEntityRemoved(entity, components.Item1, components.Item2, components.Item3);
+        }
+
+        /// <summary>
+        /// When an entity is added.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
+        /// <param name="component2"></param>
+        /// <param name="component3"></param>
+        protected virtual void OnEntityAdded(Entity entity, T1 component1, T2 component2, T3 component3)
+        {
+
+        }
+
+        /// <summary>
+        /// When an entity is removed.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component1"></param>
+        /// <param name="component2"></param>
+        /// <param name="component3"></param>
+        protected virtual void OnEntityRemoved(Entity entity, T1 component1, T2 component2, T3 component3)
+        {
+
+        }
+
+        /// <summary>
+        /// Gets the components from an entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        protected Tuple<T1, T2, T3> GetComponents(Entity entity)
+        {
+            return new Tuple<T1, T2, T3>(
+                entity.Components.Get<T1>(),
+                entity.Components.Get<T2>(),
+                entity.Components.Get<T3>());
         }
     }
 }
