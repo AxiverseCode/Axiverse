@@ -10,6 +10,8 @@ namespace Axiverse.Simulation
 {
     public class PhysicsProcessor : Processor<PhysicsComponent>
     {
+        public override ProcessorStage Stage => ProcessorStage.Physics;
+
         public World World { get; } = new World();
 
         protected override void OnEntityAdded(Entity entity, PhysicsComponent component)

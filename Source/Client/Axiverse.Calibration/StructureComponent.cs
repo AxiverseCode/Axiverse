@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Calibration
 {
-    /// <summary>
-    /// Component for user interactable control surfaces and sensors.
-    /// </summary>
-    public class ControllerComponent : Component
+    public class StructureComponent : Component
     {
+        public float Health { get; set; }
+
+        public float MaximumHealth { get; set; }
     }
 }

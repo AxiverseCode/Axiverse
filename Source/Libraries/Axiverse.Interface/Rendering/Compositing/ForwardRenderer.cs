@@ -15,8 +15,6 @@ namespace Axiverse.Interface.Rendering.Compositing
 {
     public class ForwardRenderer : Renderer
     {
-        private Processor<RenderableComponent> renderableProcessor = new Processor<RenderableComponent>();
-
         private GeometryShader geometryShader;
         private PipelineState pipelineState;
         private PipelineStateDescription pipelineStateDescription;

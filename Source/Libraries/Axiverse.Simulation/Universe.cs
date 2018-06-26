@@ -142,9 +142,9 @@ namespace Axiverse.Simulation
         public event EntityEventHandler EntityAdded;
         public event EntityEventHandler EntityRemoved;
 
-        public SortedList<int, Processor> Processors => processors;
+        public SortedList<ProcessorStage, Processor> Processors => processors;
         
-        private readonly SortedList<int, Processor> processors = new SortedList<int, Processor>();
+        private readonly SortedList<ProcessorStage, Processor> processors = new SortedList<ProcessorStage, Processor>();
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
         private readonly List<System> systems = new List<System>();
     }

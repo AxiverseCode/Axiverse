@@ -768,6 +768,19 @@ namespace Axiverse
 
         #endregion
 
+
+
+        public static readonly Vector3 Up = new Vector3(0, 1, 0);
+        public static readonly Vector3 Down = new Vector3(0, -1, 0);
+
+        public static readonly Vector3 Left = new Vector3(-1, 0, 0);
+        public static readonly Vector3 Right = new Vector3(1, 0, 0);
+
+        public static readonly Vector3 ForwardLH = new Vector3(0, 0, 1);
+        public static readonly Vector3 BackwardLH = new Vector3(0, 0, -1);
+        public static readonly Vector3 ForwardRH = new Vector3(0, 0, -1);
+        public static readonly Vector3 BackwardRH = new Vector3(0, 0, 1);
+
         /// <summary>The zero vector.</summary>
         public static readonly Vector3 Zero = new Vector3(0, 0, 0);
         

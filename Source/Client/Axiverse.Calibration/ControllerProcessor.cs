@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Calibration
 {
-    /// <summary>
-    /// Component for user interactable control surfaces and sensors.
-    /// </summary>
-    public class ControllerComponent : Component
+    public class ControllerProcessor : Processor<ControllerComponent>
     {
+        public override ProcessorStage Stage => ProcessorStage.Preprocessing;
     }
 }

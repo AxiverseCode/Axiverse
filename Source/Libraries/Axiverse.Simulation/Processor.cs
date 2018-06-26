@@ -6,37 +6,98 @@ using System.Threading.Tasks;
 using Axiverse.Injection;
 namespace Axiverse.Simulation
 {
+    // Stages
+    // 0    - Critical First
+    // 100  - Preprocessing
+    // 200  - 
+
+    public enum ProcessorStage
+    {
+        None = 0,
+        Critical = 1,
+
+        Preprocessing = 1000,
+
+        Components = 2000,
+
+        Physics = 3000,
+
+        Reconciliation = 4000,
+
+        Propagation = 5000,
+
+        Final = 9000,
+    }
+
+
+    /// <summary>
+    /// Represents a processor or system for entities.
+    /// </summary>
     public class Processor
     {
-        public int Stage { get; set; }
+        /// <summary>
+        /// Gets the stage of the processor determining the order of execution.
+        /// </summary>
+        public virtual ProcessorStage Stage => ProcessorStage.None;
 
+        /// <summary>
+        /// Gets the types of components which are required by this porcessor.
+        /// </summary>
         public Type[] ComponentTypes { get; }
 
+        /// <summary>
+        /// Gets the dictionary of entities being watched and processed by this processor.
+        /// </summary>
         public Dictionary<Guid, Entity> Entities { get; } = new Dictionary<Guid, Entity>();
 
+        /// <summary>
+        /// Gets whether this processor is enabled.
+        /// </summary>
         public bool Enabled { get; set; }
 
+        /// <summary>
+        /// Constructs a processor listening to entities with the specified component types.
+        /// </summary>
+        /// <param name="componentTypes"></param>
         public Processor(params Type[] componentTypes)
         {
             ComponentTypes = componentTypes;
         }
 
+        /// <summary>
+        /// Determines whether the processor contains an entity with the given identifier.
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
         public bool ContainsKey(Guid identifier)
         {
             return Entities.ContainsKey(identifier);
         }
 
+        /// <summary>
+        /// Determins whether an entity has the required component types specified by the processor.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public bool Matches(Entity entity)
         {
             return ComponentTypes.All(t => entity.Components.ContainsKey(t));
         }
 
+        /// <summary>
+        /// Adds an entity to the processor.
+        /// </summary>
+        /// <param name="entity"></param>
         public void Add(Entity entity)
         {
             Entities.Add(entity.Identifier, entity);
             OnEntityAdded(entity);
         }
 
+        /// <summary>
+        /// Removes an entity from the processor.
+        /// </summary>
+        /// <param name="entity"></param>
         public void Remove(Entity entity)
         {
             Entities.Remove(entity.Identifier);

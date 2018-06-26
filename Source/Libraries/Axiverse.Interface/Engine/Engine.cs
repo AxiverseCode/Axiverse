@@ -7,6 +7,7 @@ using Axiverse.Interface.Rendering.Compositing;
 using Axiverse.Interface.Scenes;
 using Axiverse.Interface.Windows;
 using Axiverse.Resources;
+using Axiverse.Simulation;
 using SharpDX;
 using SharpDX.Windows;
 using System;

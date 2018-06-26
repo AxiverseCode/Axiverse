@@ -637,6 +637,7 @@ namespace Axiverse
             Add(out var result, ref left, ref right);
             return result;
         }
+
         /// <summary>
         /// Subtracts two matrices.
         /// </summary>
@@ -659,6 +660,19 @@ namespace Axiverse
         {
             Transform(out var result, ref vector, ref matrix);
             return result;
+        }
+
+        /// <summary>
+        /// Transforms a vector by a matrix.
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Vector3 operator *(Vector3 vector, Matrix4 matrix)
+        {
+            var vector4 = new Vector4(vector, 1.0f);
+            Transform(out var result, ref vector4, ref matrix);
+            return new Vector3(result.X, result.Y, result.Z);
         }
 
         /// <summary>
