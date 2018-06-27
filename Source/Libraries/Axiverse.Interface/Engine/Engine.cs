@@ -129,7 +129,7 @@ namespace Axiverse.Interface.Engine
             {
                 Projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
                     1.0f * form.ClientSize.Width / form.ClientSize.Height,
-                    2.0f,
+                    0.5f,
                     2000.0f),
                 Mode = CameraMode.Forward
             });
@@ -170,7 +170,7 @@ namespace Axiverse.Interface.Engine
             entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
             var maximumVelocity = new Vector3(10, 10, 10);
-            var maximumAngle = new Vector3(1, 1, 1);
+            var maximumAngle = new Vector3(3, 3, 3);
 
             var prev = Environment.TickCount;
             // Into the loop we go!

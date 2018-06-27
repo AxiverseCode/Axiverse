@@ -70,7 +70,7 @@ namespace Axiverse.Interface.Input
             };
 
             PreviousState = state;
-            Console.WriteLine(State.X);
+            //Console.WriteLine(State.X);
         }
 
         /// <summary>
