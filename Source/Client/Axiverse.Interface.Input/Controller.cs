@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Input
 {
-    public class DiscreteEventArgs : EventArgs
+    public class Controller
     {
-    }
+        public string Name { get; set; }
 
-    public delegate void DiscreteEventHandler(object sender, DiscreteEventArgs e);
+
+
+
+        public void OnKeyboardInput()
+        {
+
+        }
+    }
 }

@@ -12,11 +12,7 @@ namespace Axiverse.Interface.Input
 
         public abstract void Poll();
 
-
-        public event ContinuousEventHandler ContinuousEvent;
-
-        public event DiscreteEventHandler DiscreteEvent;
-
+        
 
     }
 }
