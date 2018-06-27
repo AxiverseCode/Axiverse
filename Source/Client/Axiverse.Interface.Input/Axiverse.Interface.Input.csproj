@@ -53,16 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContinuousEventArgs.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="DirectInputSource.cs" />
-    <Compile Include="KeyboardEventArgs.cs" />
     <Compile Include="Listener.cs" />
-    <Compile Include="MouseEventArgs.cs" />
+    <Compile Include="RoutedEventArgs.cs" />
     <Compile Include="Router.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source.cs" />
     <Compile Include="SourceDescription.cs" />
-    <Compile Include="DiscreteEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

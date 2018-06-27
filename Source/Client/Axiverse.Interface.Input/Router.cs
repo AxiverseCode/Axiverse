@@ -11,6 +11,16 @@ namespace Axiverse.Interface.Input
 {
     public class Router
     {
+        // Sources provide input
+        // Consolidate in the router
+        // Handles routing to the controllers which are bound.
+
+
+        // Axis input
+        // Button input
+        // Key input (Overcapture)
+        // Midi Input
+
         // Sources -> Devices which can generate input
         // Listeners -> Game representations of things that can receive input
 
@@ -21,7 +31,6 @@ namespace Axiverse.Interface.Input
         public List<Listener> Listeners { get; set; }
 
         static readonly Guid spaceNavigatorProductGuid = new Guid("{c626046d-0000-0000-0000-504944564944}");
-        private DirectInput directInput;
         private Joystick joystick;
         public JoystickState PreviousState = new JoystickState();
         public RouterState State;
@@ -48,7 +57,18 @@ namespace Axiverse.Interface.Input
             }
         }
 
-        
+        protected void Enumerate()
+        {
+            var devices = directInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
+            var match = new Dictionary<Guid, DirectInputSource>(directInputSources);
+
+            foreach (var device in devices)
+            {
+
+            }
+
+        }
+
 
         public void Poll()
         {
@@ -58,7 +78,7 @@ namespace Axiverse.Interface.Input
                 return;
 
             var state = joystick.GetCurrentState();
-            
+
             State = new RouterState
             {
                 X = (state.X - PreviousState.X) / (float)short.MaxValue,
@@ -80,6 +100,31 @@ namespace Axiverse.Interface.Input
         {
 
         }
+
+
+
+        protected virtual void OnKeyboardInput()
+        {
+
+        }
+
+        protected virtual void OnAxisInput()
+        {
+
+        }
+
+        protected virtual void OnButtonInput()
+        {
+
+        }
+
+        protected virtual void OnMidiEvent()
+        {
+
+        }
+
+        private DirectInput directInput;
+        private Dictionary<Guid, DirectInputSource> directInputSources = new Dictionary<Guid, DirectInputSource>();
     }
 
     public class RouterState

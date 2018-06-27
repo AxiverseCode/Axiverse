@@ -11,6 +11,10 @@ namespace Axiverse.Interface.Input
     {
         public DirectInput DirectInput { get; set; }
 
+        public Guid InstanceIdentifier { get; set; }
+        public Guid DeviceIdentifier{ get; set; }
+
+
         public Guid Identifier { get; set; }
         public Joystick Joystick { get; set; }
 
