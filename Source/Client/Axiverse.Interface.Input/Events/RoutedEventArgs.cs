@@ -12,5 +12,7 @@ namespace Axiverse.Interface.Input
         /// Gets or sets whether the event has been handled.
         /// </summary>
         public bool Handled { get; set; }
+
+        public long Timestamp { get; set; }
     }
 }

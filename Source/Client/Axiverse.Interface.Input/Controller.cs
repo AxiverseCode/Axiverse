@@ -8,6 +8,9 @@ namespace Axiverse.Interface.Input
 {
     public class Controller
     {
+        /// <summary>
+        /// Gets or sets the name of the <see cref="Controller"/>.
+        /// </summary>
         public string Name { get; set; }
 
 

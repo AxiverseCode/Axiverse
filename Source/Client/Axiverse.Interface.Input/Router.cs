@@ -79,6 +79,7 @@ namespace Axiverse.Interface.Input
 
             var state = joystick.GetCurrentState();
 
+
             State = new RouterState
             {
                 X = (state.X - PreviousState.X) / (float)short.MaxValue,
