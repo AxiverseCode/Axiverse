@@ -67,6 +67,7 @@
     <Compile Include="Core\Vector2.cs" />
     <Compile Include="Core\Vector3.cs" />
     <Compile Include="Core\Vector4.cs" />
+    <Compile Include="Viewport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
