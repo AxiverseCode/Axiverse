@@ -118,9 +118,12 @@ namespace Axiverse.Interface.Engine
             var texture = new Texture(device);
             texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
 
+            var skymap = new Texture(device);
+            skymap.Load(@".\Resources\Textures\NASA Starmap 8k.jpg");
 
             // Lets create some resources
             LoadCube(device);
+            LoadSphere(device);
             LoadShip(device);
            
             // Create camera entity.
@@ -138,6 +141,15 @@ namespace Axiverse.Interface.Engine
                 Translation = new Vector3(0, 0, 10)
             });
             Scene.Add(cameraEntity);
+
+            var sky = new Entity();
+            Scene.Add(sky);
+            sky.Components.Add(new TransformComponent());
+            sky.Components.Add(new RenderableComponent()
+            {
+                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:sphere").Value }
+            });
+            sky.Components.Get<RenderableComponent>().Mesh.Bindings.Add(skymap);
 
             var entity1 = new Entity();
             Scene.Add(entity1);
@@ -245,6 +257,38 @@ namespace Axiverse.Interface.Engine
             };
 
             Cache.Add("memory:cube", meshDraw);
+        }
+
+        public void LoadSphere(GraphicsDevice device)
+        {
+            var cube = Primitives<PositionColorTexture>.Sphere(20, 20, 20);
+            var indices = cube.Item1;
+            var vertices = cube.Item2;
+            var indexBuffer = GraphicsBuffer.Create(device, indices, false);
+
+            var vertexBuffer = GraphicsBuffer.Create(device, vertices, false);
+            var indexBinding = new IndexBufferBinding
+            {
+                Buffer = indexBuffer,
+                Count = indices.Length,
+                Type = IndexBufferType.Integer32,
+                //Offset = 0,
+            };
+            var vertexBinding = new VertexBufferBinding
+            {
+                Buffer = vertexBuffer,
+                Count = vertices.Length,
+                Stride = PositionColorTexture.Layout.Stride,
+                //Offset = 0,
+            };
+            var meshDraw = new MeshDraw
+            {
+                IndexBuffer = indexBinding,
+                VertexBuffers = new[] { vertexBinding },
+                Count = indices.Length,
+            };
+
+            Cache.Add("memory:sphere", meshDraw);
         }
 
         public void LoadShip(GraphicsDevice device)
