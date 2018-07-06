@@ -54,6 +54,7 @@
     <Compile Include="Core\Matrix3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Quaternion.cs" />
+    <Compile Include="Ray3.cs" />
     <Compile Include="Serialization\QuantizedAngle.cs" />
     <Compile Include="Serialization\UnitQuaternion64.cs" />
     <Compile Include="Spatial\ISpatial3.cs" />

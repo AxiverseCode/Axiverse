@@ -1,3 +1,18 @@
+
+
+### 7/5
+
+- Control a ship
+- Have other ships move randomly
+- Integrate some game mechanics
+- Better input routing.
+- Tying entity state to GUI
+
+- Resource management and loading
+- Mipmap generation.
+
+### Pre 7/5
+
 Binding
 Producers
 Module
@@ -47,3 +62,4 @@ We have a functional engine!
 Camera controls and inputs.
 
 Let's do some game stuff. ^_^
+

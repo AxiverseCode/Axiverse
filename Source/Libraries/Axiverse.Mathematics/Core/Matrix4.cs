@@ -455,7 +455,7 @@ namespace Axiverse
         /// <returns></returns>
         public static Matrix4 Transpose(Matrix4 matrix)
         {
-            Transpose(out var result, ref matrix);
+            Transpose(ref matrix, out var result);
             return result;
         }
 
@@ -464,7 +464,7 @@ namespace Axiverse
         /// </summary>
         /// <param name="result"></param>
         /// <param name="value"></param>
-        public static void Transpose(out Matrix4 result, ref Matrix4 value)
+        public static void Transpose(ref Matrix4 value, out Matrix4 result)
         {
             result = new Matrix4
             {
@@ -494,7 +494,7 @@ namespace Axiverse
         /// <returns></returns>
         public static Matrix4 Inverse(Matrix4 value)
         {
-            Inverse(out var result, ref value);
+            Inverse(ref value, out var result);
             return result;
         }
 
@@ -503,7 +503,7 @@ namespace Axiverse
         /// </summary>
         /// <param name="result">The inverse of the matrix or the zero matrix if there is no inverse.</param>
         /// <param name="value"></param>
-        public static bool Inverse(out Matrix4 result, ref Matrix4 value)
+        public static bool Inverse(ref Matrix4 value, out Matrix4 result)
         {
             float b0 = (value.M31 * value.M42) - (value.M32 * value.M41);
             float b1 = (value.M31 * value.M43) - (value.M33 * value.M41);
@@ -575,6 +575,20 @@ namespace Axiverse
         {
             TransposedTransform(out var result, ref vector, ref matrix);
             return result;
+        }
+
+        public static Vector3 Transform(Vector3 vector, Matrix4 matrix)
+        {
+            Transform(ref vector, ref matrix, out var result);
+            return result;
+        }
+
+        public static void Transform(ref Vector3 vector, ref Matrix4 matrix, out Vector3 result)
+        {
+            result = new Vector3(
+                (vector.X * matrix.M11) + (vector.Y * matrix.M21) + (vector.Z * matrix.M31) + (matrix.M41),
+                (vector.X * matrix.M12) + (vector.Y * matrix.M22) + (vector.Z * matrix.M32) + (matrix.M42),
+                (vector.X * matrix.M13) + (vector.Y * matrix.M23) + (vector.Z * matrix.M33) + (matrix.M43));
         }
 
         public static void TransposedTransform(out Vector4 result, ref Vector4 vector, ref Matrix4 matrix)

@@ -647,6 +647,45 @@ namespace Axiverse
 
         #endregion
 
+        #region Static Methods - 3D
+
+        public static void Project(ref Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, ref Matrix4 worldViewProjection, out Vector3 result)
+        {
+            Vector3 v = new Vector3();
+            Matrix4.Transform(ref vector, ref worldViewProjection, out v);
+
+            result = new Vector3(((1.0f + v.X) * 0.5f * width) + x, ((1.0f - v.Y) * 0.5f * height) + y, (v.Z * (maxZ - minZ)) + minZ);
+        }
+
+        public static Vector3 Project(Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, Matrix4 worldViewProjection)
+        {
+            Vector3 result;
+            Project(ref vector, x, y, width, height, minZ, maxZ, ref worldViewProjection, out result);
+            return result;
+        }
+
+        public static void Unproject(ref Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, ref Matrix4 worldViewProjection, out Vector3 result)
+        {
+            Vector3 v = new Vector3();
+            Matrix4 matrix = new Matrix4();
+            Matrix4.Inverse(ref worldViewProjection, out matrix);
+
+            v.X = (((vector.X - x) / width) * 2.0f) - 1.0f;
+            v.Y = -((((vector.Y - y) / height) * 2.0f) - 1.0f);
+            v.Z = (vector.Z - minZ) / (maxZ - minZ);
+
+            Matrix4.Transform(ref v, ref matrix, out result);
+        }
+
+        public static Vector3 Unproject(Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, Matrix4 worldViewProjection)
+        {
+            Vector3 result;
+            Unproject(ref vector, x, y, width, height, minZ, maxZ, ref worldViewProjection, out result);
+            return result;
+        }
+
+        #endregion
+
         #region Static Methods - Operators
 
         public static Vector3 operator +(Vector3 a)
