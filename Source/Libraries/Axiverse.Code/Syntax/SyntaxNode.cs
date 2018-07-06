@@ -8,22 +8,20 @@ namespace Axiverse.Code.Syntax
 {
     public class SyntaxNode
     {
-        private SyntaxNode parent;
-        internal SyntaxTree syntaxTree;
+        public SyntaxNode Parent { get; set; }
 
-        public int Position { get; set;  }
+        public List<SyntaxNode> Children { get; protected set; }
 
-        public int Length { get; set; }
+        public String Type { get; set; }
 
-        public TextSpan TextSpan
+        public SyntaxNode()
         {
-            get
-            {
-                return new TextSpan(Position, Length);
-            }
+            Children = new List<SyntaxNode>();
         }
 
-
-        // Child (they are either a node or token)
+        public override string ToString()
+        {
+            return $"Node {Type}, children {Children.Count}";
+        }
     }
 }

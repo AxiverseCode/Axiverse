@@ -8,7 +8,6 @@ namespace Axiverse.Code
 {
     public class LexicalAnalyzer
     {
-
         ParseTree Parse(string code)
         {
             throw new NotImplementedException();

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Code.Syntax
 {
-    public class SyntaxToken
+    public class SyntaxToken : SyntaxNode
     {
-        public int Index { get; set; }
+        public String Value { get; set; }
 
-        public int Position { get; set; }
+        public SyntaxToken()
+        {
+            Children = null;
+        }
 
-        public int Length { get; set; }
-
-        // Type
-
-        // Value
-
-
+        public override string ToString()
+        {
+            return $"Token {Type} : {Value}";
+        }
     }
 }
