@@ -78,7 +78,7 @@ namespace Axiverse.Interface.Graphics.Generic
                 var sinPolar = Functions.Sin(polar);
                 var cosPolar = Functions.Cos(polar);
 
-                for (int i = 0; i < meridians; i++)
+                for (int i = 0; i <= meridians; i++)
                 {
                     var v = (float)i / meridians;
                     var azimuth = 2f * (float)Math.PI * v;
@@ -89,7 +89,7 @@ namespace Axiverse.Interface.Graphics.Generic
                         cosPolar,
                         sinPolar * sinAzimuth);
 
-                    vertices.Add(Vertex(point * radius, point, new Vector2(u, v), Vector4.One));
+                    vertices.Add(Vertex(point * radius, point, new Vector2(v, u), Vector4.One));
                 }
             }
 
@@ -108,14 +108,14 @@ namespace Axiverse.Interface.Graphics.Generic
 
             for (int j = 0; j < parallels - 2; j++)
             {
-                var ja = j * meridians + 1;
-                var jb = (j + 1) * meridians + 1;
+                var ja = j * (meridians + 1) + 1;
+                var jb = (j + 1) * (meridians + 1) + 1;
                 for (int i = 0; i < meridians; i++)
                 {
                     var a = ja + i;
-                    var c = ja + (i + 1) % meridians;
+                    var c = ja + (i + 1);
                     var b = jb + i;
-                    var d = jb + (i + 1) % meridians;
+                    var d = jb + (i + 1);
 
                     indices.Add((uint)a);
                     indices.Add((uint)c);
