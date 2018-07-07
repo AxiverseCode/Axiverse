@@ -81,6 +81,7 @@
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneView.cs" />
     <Compile Include="Scenes\TransformComponent.cs" />
+    <Compile Include="Scenes\TransformInheritance.cs" />
     <Compile Include="Scenes\TransformPhysicsProcessor.cs" />
     <Compile Include="Scenes\TransformProcessor.cs" />
   </ItemGroup>

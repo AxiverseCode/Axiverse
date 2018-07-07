@@ -12,6 +12,11 @@ namespace Axiverse.Simulation
     public abstract class Component
     {
         /// <summary>
+        /// Gets the entity this component is bound to.
+        /// </summary>
+        public Entity Entity { get; internal set; }
+
+        /// <summary>
         /// Clones the component.
         /// </summary>
         /// <returns></returns>

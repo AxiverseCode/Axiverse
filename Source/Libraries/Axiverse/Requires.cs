@@ -52,6 +52,34 @@ namespace Axiverse
         }
 
         /// <summary>
+        /// Throws an <see cref="NullReferenceException"/> if the object is null.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        public static void IsNotNull<T>(T value)
+            where T : class
+        {
+            if (value == null)
+            {
+                throw new NullReferenceException();
+            }
+        }
+
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/> if the object is not null.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        public static void IsNull<T>(T value)
+            where T : class
+        {
+            if (value != null)
+            {
+                throw new ArgumentException("Expected argument to be null.");
+            }
+        }
+
+        /// <summary>
         /// Throws an <see cref="ObjectDisposedException"/> if the object is disposed.
         /// </summary>
         /// <typeparam name="T"></typeparam>

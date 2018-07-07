@@ -213,7 +213,7 @@ namespace Axiverse
         /// <param name="m44"></param>
         public Matrix4(
             float m11, float m12, float m13, float m14,
-            float m21, float m22, float m23, float m24, 
+            float m21, float m22, float m23, float m24,
             float m31, float m32, float m33, float m34,
             float m41, float m42, float m43, float m44)
         {
@@ -237,8 +237,20 @@ namespace Axiverse
                 case 1: return new Vector4(M21, M22, M23, M24);
                 case 2: return new Vector4(M31, M32, M33, M34);
                 case 3: return new Vector4(M41, M42, M43, M44);
+                default: throw new ArgumentOutOfRangeException();
             }
-            throw new ArgumentOutOfRangeException();
+        }
+
+        public void Row(int i, Vector4 value)
+        {
+            switch (i)
+            {
+                case 0: M11 = value.X; M12 = value.Y; M13 = value.Z; M14 = value.W; break;
+                case 1: M21 = value.X; M22 = value.Y; M23 = value.Z; M24 = value.W; break;
+                case 2: M31 = value.X; M32 = value.Y; M33 = value.Z; M34 = value.W; break;
+                case 3: M41 = value.X; M42 = value.Y; M43 = value.Z; M44 = value.W; break;
+                default: throw new ArgumentOutOfRangeException();
+            }
         }
 
         public Vector4 Column(int j)
@@ -882,7 +894,7 @@ namespace Axiverse
         {
             Matrix4 scalingRotationMatrix = Rotation(scalingRotation);
 
-            result = 
+            result =
                 Translation(-scalingCenter) * Transpose(scalingRotationMatrix) * Scaling(scaling) * scalingRotationMatrix * Translation(scalingCenter) *
                 Translation(-rotationCenter) * Rotation(rotation) * Translation(rotationCenter) *
                 Translation(translation);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Collections
 {
-    public class TrackedList<T> : IList<T>, IList
+    public abstract class TrackedList<T> : IList<T>, IList
     {
         private readonly List<T> list = new List<T>();
 
@@ -17,32 +17,28 @@ namespace Axiverse.Collections
             get => list[index];
             set
             {
+                var previous = list[index];
                 list[index] = value;
+                OnItemRemoved(previous);
+                OnItemAdded(value);
             }
         }
 
-        object IList.this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int Count => list.Count;
-
-        bool ICollection<T>.IsReadOnly => ((IList<T>)list).IsReadOnly;
-
-        bool IList.IsReadOnly => ((IList)list).IsReadOnly;
-
-        bool IList.IsFixedSize => ((IList)list).IsFixedSize;
-
-        object ICollection.SyncRoot => ((IList)list).SyncRoot;
-
-        bool ICollection.IsSynchronized => ((IList)list).IsSynchronized;
 
         public void Add(T item)
         {
             list.Add(item);
+            OnItemAdded(item);
         }
 
         public void Clear()
         {
+            var items = list.ToArray();
             list.Clear();
+            foreach (var item in items)
+            {
+                OnItemRemoved(item);
+            }
         }
 
         public bool Contains(T item)
@@ -68,21 +64,65 @@ namespace Axiverse.Collections
         public void Insert(int index, T item)
         {
             list.Insert(index, item);
+            OnItemAdded(item);
         }
 
         public bool Remove(T item)
         {
-            return Remove(item);
+            var removed = Remove(item);
+            if (removed)
+            {
+                OnItemRemoved(item);
+            }
+            return removed;
         }
 
         public void RemoveAt(int index)
         {
+            var item = this[index];
             RemoveAt(index);
+            OnItemRemoved(item);
+        }
+        
+        public abstract void OnItemAdded(T item);
+
+        public abstract void OnItemRemoved(T item);
+
+        #region IList
+
+        object IList.this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int Count => list.Count;
+
+        bool ICollection<T>.IsReadOnly => ((IList<T>)list).IsReadOnly;
+
+        bool IList.IsReadOnly => ((IList)list).IsReadOnly;
+
+        bool IList.IsFixedSize => ((IList)list).IsFixedSize;
+
+        object ICollection.SyncRoot => ((IList)list).SyncRoot;
+
+        bool ICollection.IsSynchronized => ((IList)list).IsSynchronized;
+
+        int IList.IndexOf(object value)
+        {
+            return ((IList)list).IndexOf(value);
+        }
+
+        void IList.Insert(int index, object value)
+        {
+            Insert(index, (T)value);
+        }
+
+        void IList.Remove(object value)
+        {
+            Remove((T)value);
         }
 
         int IList.Add(object value)
         {
-            return ((IList)list).Add(value);
+            throw new NotSupportedException();
+            // return ((IList)list).Add(value);
         }
 
         bool IList.Contains(object value)
@@ -100,19 +140,6 @@ namespace Axiverse.Collections
             return GetEnumerator();
         }
 
-        int IList.IndexOf(object value)
-        {
-            return ((IList)list).IndexOf(value);
-        }
-
-        void IList.Insert(int index, object value)
-        {
-            ((IList)list).Insert(index, value);
-        }
-
-        void IList.Remove(object value)
-        {
-            ((IList)list).Remove(value);
-        }
+        #endregion
     }
 }

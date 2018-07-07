@@ -48,13 +48,14 @@
   <ItemGroup>
     <Compile Include="CollectorProcessor.cs" />
     <Compile Include="ComponentEventArgs.cs" />
+    <Compile Include="Components\HierarchicalComponentCollection.cs" />
     <Compile Include="EntityEventArgs.cs" />
+    <Compile Include="HierarchicalProcessor.cs" />
     <Compile Include="IProcessor.cs" />
     <Compile Include="PhysicsProcessor.cs" />
     <Compile Include="ProcessorStage.cs" />
     <Compile Include="SimulationContext.cs" />
-    <Compile Include="Systems\AdvanceProducer.cs" />
-    <Compile Include="Components\HierarchalComponent.cs" />
+    <Compile Include="Components\HierarchicalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />
     <Compile Include="Producers\CurrentAttribute.cs" />
     <Compile Include="Processor.cs" />
@@ -66,13 +67,9 @@
     <Compile Include="Component.cs" />
     <Compile Include="ComponentDictionary.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="EntityCollection.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Components\SpatialComponent.cs" />
     <Compile Include="Producers\StepTimeAttribute.cs" />
-    <Compile Include="System.cs" />
-    <Compile Include="Systems\NavigationSystem.cs" />
-    <Compile Include="Systems\SpatialSystem.cs" />
     <Compile Include="Universe.cs" />
   </ItemGroup>
   <ItemGroup>

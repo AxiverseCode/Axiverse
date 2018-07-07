@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Axiverse.Simulation.Components;
-using Axiverse.Simulation.Systems;
 
 namespace Axiverse.Simulation
 {
@@ -20,9 +19,6 @@ namespace Axiverse.Simulation
 
         public Universe()
         {
-            //systems.Add(new NavigationSystem());
-            //systems.Add(new SpatialSystem());
-
             Add(new PhysicsProcessor());
         }
 
@@ -151,7 +147,6 @@ namespace Axiverse.Simulation
         
         private readonly SortedList<ProcessorStage, IProcessor> processors = new SortedList<ProcessorStage, IProcessor>(new ProcessorComparer());
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
-        private readonly List<System> systems = new List<System>();
 
         private class ProcessorComparer : IComparer<ProcessorStage>
         {

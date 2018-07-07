@@ -59,7 +59,7 @@ namespace Axiverse.Interface.Engine
             // Create a window
             form = new RenderForm()
             {
-                ClientSize = new System.Drawing.Size(1200, 800),
+                ClientSize = new System.Drawing.Size(1600, 1200),
                 Text = "Axiverse | Hello Graphics",
             };
         }
@@ -82,7 +82,7 @@ namespace Axiverse.Interface.Engine
             var presenter = new Presenter(device, presenterDescription);
             presenter.Initialize();
             var device2d = GraphicsDevice2D.Create(device, presenter);
-            
+
 
             Window = new Window();
             Window.Bounds = new Rectangle(0, 0, presenter.Description.Width, presenter.Description.Height);
@@ -125,7 +125,19 @@ namespace Axiverse.Interface.Engine
             LoadCube(device);
             LoadSphere(device);
             LoadShip(device);
-           
+
+            var sky = new Entity();
+            Scene.Add(sky);
+            sky.Components.Add(new TransformComponent()
+            {
+                Inheritance = TransformInheritance.Translation
+            });
+            sky.Components.Add(new RenderableComponent()
+            {
+                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:sphere").Value }
+            });
+            sky.Components.Get<RenderableComponent>().Mesh.Bindings.Add(skymap);
+
             // Create camera entity.
             var cameraEntity = new Entity();
             var cameraComponent = cameraEntity.Components.Add(new CameraComponent
@@ -140,23 +152,16 @@ namespace Axiverse.Interface.Engine
             {
                 Translation = new Vector3(0, 0, 10)
             });
+            cameraTransform.Children.Add(sky);
             Scene.Add(cameraEntity);
 
-            var sky = new Entity();
-            Scene.Add(sky);
-            sky.Components.Add(new TransformComponent());
-            sky.Components.Add(new RenderableComponent()
-            {
-                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:sphere").Value }
-            });
-            sky.Components.Get<RenderableComponent>().Mesh.Bindings.Add(skymap);
 
             var entity1 = new Entity();
             Scene.Add(entity1);
             entity1.Components.Add(new TransformComponent());
             entity1.Components.Add(new RenderableComponent()
             {
-                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value}
+                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value }
             });
             entity1.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
@@ -261,7 +266,7 @@ namespace Axiverse.Interface.Engine
 
         public void LoadSphere(GraphicsDevice device)
         {
-            var cube = Primitives<PositionColorTexture>.Sphere(20, 20, 20);
+            var cube = Primitives<PositionColorTexture>.Sphere(1500, 20, 20);
             var indices = cube.Item1;
             var vertices = cube.Item2;
             var indexBuffer = GraphicsBuffer.Create(device, indices, false);

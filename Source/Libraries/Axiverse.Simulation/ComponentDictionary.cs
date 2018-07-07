@@ -34,7 +34,14 @@ namespace Axiverse.Simulation
             {
                 var key = Key.From(type);
                 Requires.AssignableFrom(key, value);
+
+                var previous = components[key];
                 components[key] = value;
+
+                if (previous != null)
+                {
+                    OnComponentRemoved(key, previous);
+                }
                 OnComponentAdded(key, value);
             }
         }
@@ -60,6 +67,7 @@ namespace Axiverse.Simulation
         /// <param name="entity"></param>
         public ComponentDictionary(Entity entity)
         {
+            Requires.That(entity != null);
             Entity = entity;
         }
 
@@ -118,7 +126,7 @@ namespace Axiverse.Simulation
         /// <param name="key"></param>
         /// <param name="component"></param>
         /// <returns></returns>
-        public bool TryGetValue<T>(Key key, out T component) where T:Component
+        public bool TryGetValue<T>(Key key, out T component) where T : Component
         {
             Requires.AssignableFrom<T>(key);
             bool result = components.TryGetValue(key, out var value);
@@ -135,16 +143,19 @@ namespace Axiverse.Simulation
         {
             Key key = Key.From<T>();
             Requires.AssignableFrom(key, component);
+            Requires.That(component.Entity == null);
             components.Add(key, component);
             OnComponentAdded(key, component);
             return component;
         }
 
-        public void Add(Key key, Component component)
+        public Component Add(Key key, Component component)
         {
             Requires.AssignableFrom(key, component);
+            Requires.That(component.Entity == null);
             components.Add(key, component);
             OnComponentAdded(key, component);
+            return component;
         }
 
         public bool Remove<T>() where T : Component
@@ -173,18 +184,14 @@ namespace Axiverse.Simulation
 
         protected void OnComponentAdded(Key key, Component component)
         {
-            if (Entity != null)
-            {
-                Entity.OnComponentAdded(new ComponentEventArgs(key, component));
-            }
+            component.Entity = Entity;
+            Entity.OnComponentAdded(new ComponentEventArgs(key, component));
         }
 
         protected void OnComponentRemoved(Key key, Component component)
         {
-            if (Entity != null)
-            {
-                Entity.OnComponentRemoved(new ComponentEventArgs(key, component));
-            }
+            component.Entity = null;
+            Entity.OnComponentRemoved(new ComponentEventArgs(key, component));
         }
 
         private readonly Dictionary<Key, Component> components = new Dictionary<Key, Component>();

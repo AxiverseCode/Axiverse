@@ -4,14 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Axiverse.Simulation;
+using Axiverse.Simulation.Components;
+
 namespace Axiverse.Interface.Scenes
 {
-    public class TransformComponent : Component
+    public class TransformComponent : HierarchicalComponent<TransformComponent>
     {
         /// <summary>
         /// Gets or sets the transform relative to the global basis.
         /// </summary>
         public Matrix4 GlobalTransform { get; set; } = Matrix4.Identity;
+
+        /// <summary>
+        /// Gets or sets the properties which are inherited from the parent.
+        /// </summary>
+        public TransformInheritance Inheritance { get; set; }
 
         /// <summary>
         /// Gets or sets the local transform relative to the parent.
