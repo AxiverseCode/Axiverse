@@ -121,7 +121,7 @@ namespace Axiverse.Interface.Engine
             texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
 
             var skymap = new Texture(device);
-            skymap.Load(@".\Resources\Textures\NASA Starmap 4k.jpg");
+            skymap.Load(@".\Resources\Textures\NASA Starmap 8k.jpg");
 
             // Lets create some resources
             LoadCube(device);
@@ -191,7 +191,7 @@ namespace Axiverse.Interface.Engine
             entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
             var body = new Body();
             entity3.Components.Add(new PhysicsComponent(body));
-            body.ApplyTorque(Vector3.UnitY * 0.1f);
+            body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
 
             var maximumVelocity = new Vector3(10, 10, 10);
             var maximumAngle = new Vector3(3, 3, 3);

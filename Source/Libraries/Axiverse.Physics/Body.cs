@@ -14,8 +14,8 @@ namespace Axiverse.Physics
     public class Body
     {
         // static or kinematic object
-        private Matrix3 inverseInertiaTensorWorld;
-        private Matrix3 inverseInertiaLocal; // maybe nullable when dirty?
+        private Matrix3 inverseInertiaTensorWorld = Matrix3.Identity;
+        private Matrix3 inverseInertiaLocal = Matrix3.Identity; // maybe nullable when dirty?
         private Matrix3 inertiaLocal = Matrix3.Identity;// InertialTensors.FromSphere(1, 1); // not used in calc
 
         // position and orientation and velocities

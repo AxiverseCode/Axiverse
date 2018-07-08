@@ -31,6 +31,7 @@ namespace Axiverse.Interface.Input
         public List<Listener> Listeners { get; set; }
 
         static readonly Guid spaceNavigatorProductGuid = new Guid("{c626046d-0000-0000-0000-504944564944}");
+        static readonly Guid xboxControllerProductGuid = new Guid("{02e3045e-0000-0000-0000-504944564944}");
         private Joystick joystick;
         public JoystickState PreviousState = new JoystickState();
         public RouterState State;
