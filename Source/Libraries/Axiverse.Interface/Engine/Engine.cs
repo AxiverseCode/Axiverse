@@ -152,7 +152,7 @@ namespace Axiverse.Interface.Engine
             });
             var cameraTransform = cameraEntity.Components.Add(new TransformComponent
             {
-                Translation = new Vector3(0, 0, 10),
+                Translation = Vector3.BackwardRH * 10,
                 Inheritance = TransformInheritance.Rotation | TransformInheritance.Translation
             });
             cameraTransform.Children.Add(sky);
