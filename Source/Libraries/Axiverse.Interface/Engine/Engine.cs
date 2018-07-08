@@ -7,6 +7,7 @@ using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Rendering.Compositing;
 using Axiverse.Interface.Scenes;
 using Axiverse.Interface.Windows;
+using Axiverse.Physics;
 using Axiverse.Resources;
 using Axiverse.Simulation;
 using SharpDX;
@@ -47,6 +48,7 @@ namespace Axiverse.Interface.Engine
             Router = new Router();
             Injector.Bind<Universe>(Scene);
 
+            Scene.Add(new TransformPhysicsProcessor());
             Scene.Add(new TransformProcessor());
             Scene.Add(new CameraProcessor());
         }
@@ -119,14 +121,14 @@ namespace Axiverse.Interface.Engine
             texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
 
             var skymap = new Texture(device);
-            skymap.Load(@".\Resources\Textures\NASA Starmap 8k.jpg");
+            skymap.Load(@".\Resources\Textures\NASA Starmap 4k.jpg");
 
             // Lets create some resources
             LoadCube(device);
             LoadSphere(device);
             LoadShip(device);
 
-            var sky = new Entity();
+            var sky = new Entity("sky");
             Scene.Add(sky);
             sky.Components.Add(new TransformComponent()
             {
@@ -139,7 +141,7 @@ namespace Axiverse.Interface.Engine
             sky.Components.Get<RenderableComponent>().Mesh.Bindings.Add(skymap);
 
             // Create camera entity.
-            var cameraEntity = new Entity();
+            var cameraEntity = new Entity("camera");
             var cameraComponent = cameraEntity.Components.Add(new CameraComponent
             {
                 Projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
@@ -150,7 +152,8 @@ namespace Axiverse.Interface.Engine
             });
             var cameraTransform = cameraEntity.Components.Add(new TransformComponent
             {
-                Translation = new Vector3(0, 0, 10)
+                Translation = new Vector3(0, 0, 10),
+                Inheritance = TransformInheritance.Rotation | TransformInheritance.Translation
             });
             cameraTransform.Children.Add(sky);
             Scene.Add(cameraEntity);
@@ -174,17 +177,21 @@ namespace Axiverse.Interface.Engine
             });
             entity2.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
-            var entity3 = new Entity();
+            var entity3 = new Entity("ship");
             Scene.Add(entity3);
-            entity3.Components.Add(new TransformComponent
+            var shipTransform = entity3.Components.Add(new TransformComponent
             {
                 Scaling = new Vector3(10, 10, 10)
             });
+            shipTransform.Children.Add(cameraEntity);
             entity3.Components.Add(new RenderableComponent
             {
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
             });
             entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+            var body = new Body();
+            entity3.Components.Add(new PhysicsComponent(body));
+            body.ApplyTorque(Vector3.UnitY * 0.1f);
 
             var maximumVelocity = new Vector3(10, 10, 10);
             var maximumAngle = new Vector3(3, 3, 3);

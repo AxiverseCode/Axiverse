@@ -38,20 +38,6 @@ namespace Axiverse.Simulation
             {
                 processor.Process(context);
             }
-
-            //foreach (var system in systems)
-            //{
-            //    foreach (var entity in entities.Values)
-            //    {
-            //        system.Process(entity, dt);
-            //    }
-            //}
-
-            //foreach (var entity in entities.Values)
-            //{
-            //    //entity.Model?.Process(entity);
-            //    //Console.WriteLine(entity);
-            //}
         }
 
         public void Add(Entity entity)

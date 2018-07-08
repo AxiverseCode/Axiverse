@@ -109,13 +109,6 @@ namespace Axiverse.Physics
         /// </summary>
         public Body()
         {
-            Random random = new Random();
-            angularPosition = new Quaternion(
-                (float)random.NextDouble(),
-                (float)random.NextDouble(),
-                (float)random.NextDouble(),
-                (float)random.NextDouble());
-            angularPosition.Normalize();
         }
 
         /// <summary>

@@ -51,6 +51,14 @@ namespace Axiverse.Simulation
         }
 
         /// <summary>
+        /// Constructs an entity with a new identifier.
+        /// </summary>
+        public Entity(string name) : this()
+        {
+            Name = name;
+        }
+
+        /// <summary>
         /// Constructs an entity with the given identifier.
         /// </summary>
         /// <param name="identifier"></param>
@@ -86,7 +94,11 @@ namespace Axiverse.Simulation
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Entity [{ Identifier }] @ { Spatial.Position }";
+            if (string.IsNullOrEmpty(Name))
+            {
+                return $"Entity [{ Identifier }] @ { Spatial.Position }";
+            }
+                return $"{Name} [{ Identifier }] @ { Spatial.Position }";
         }
 
         protected internal void OnComponentAdded(ComponentEventArgs e)

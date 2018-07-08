@@ -20,6 +20,12 @@ namespace Axiverse.Simulation
             base.Process(context);
         }
 
+        public override void ProcessEntity(SimulationContext context, Entity entity, PhysicsComponent component)
+        {
+            //base.ProcessEntity(context, entity, component);
+            component.Body.Integrate(context.DeltaTime);
+        }
+
         protected override void OnEntityAdded(Entity entity, PhysicsComponent component)
         {
             World.Bodies.Add(component.Body);

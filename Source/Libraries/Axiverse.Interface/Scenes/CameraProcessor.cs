@@ -19,10 +19,15 @@ namespace Axiverse.Interface.Scenes
             var forward = transform.Rotation.Transform(Vector3.ForwardRH);
             var up = transform.Rotation.Transform(Vector3.Up);
 
+            var p = transform.GlobalTransform.Row(3).XYZ;
+            var f = Matrix4.Transform(Vector3.ForwardRH, transform.GlobalTransform);
+            var u = Matrix4.Transform(Vector3.Up, transform.GlobalTransform);
+
             switch (camera.Mode)
             {
                 case CameraMode.Forward:
-                    camera.View = Matrix4.LookAtRH(transform.Translation, transform.Translation + forward, up);
+                    //camera.View = Matrix4.LookAtRH(transform.Translation, transform.Translation + forward, up);
+                    camera.View = Matrix4.LookAtRH(p, f, u);
                     break;
                 case CameraMode.Oriented:
                     break;
