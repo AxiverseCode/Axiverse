@@ -739,6 +739,28 @@ namespace Axiverse
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(Vector3 left, Vector3 right)
+        {
+            return left.X == right.X && left.Y == right.Y && left.Z == right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(Vector3 left, Vector3 right)
+        {
+            return left.X != right.X || left.Y != right.Y || left.Z != right.Z;
+        }
+
+        /// <summary>
         /// Cross product
         /// </summary>
         /// <param name="a"></param>

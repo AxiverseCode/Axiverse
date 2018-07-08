@@ -78,6 +78,17 @@ namespace Axiverse.Physics
             set => angularVelocity = value;
         }
 
+        public Vector3 LinearDampening
+        {
+            get => linearDampening;
+            set => linearDampening = value;
+        }
+
+        public Vector3 AngularDampening
+        {
+            get => angularDampening;
+            set => angularDampening = value;
+        }
         /// <summary>
         /// Gets or sets the mass of the body.
         /// </summary>
@@ -200,9 +211,13 @@ namespace Axiverse.Physics
         /// <param name="torque"></param>
         public void ApplyTorqueImpulse(Vector3 torque)
         {
-            // angularVelocity = angularVelocity + inverseInertiaTensorWorld * torque * angularFactor
             angularVelocity = angularVelocity +
                 Matrix3.Transform(inverseInertiaTensorWorld, torque) * angularFactor;
+        }
+
+        public void ApplyLocalTorqueImpulse(Vector3 localTorque)
+        {
+            ApplyTorqueImpulse(AngularPosition.Transform(localTorque));
         }
 
         /// <summary>
@@ -229,6 +244,11 @@ namespace Axiverse.Physics
         public void ApplyTorque(Vector3 torque)
         {
             totalTorque += torque * angularFactor;
+        }
+
+        public void ApplyLocalTorque(Vector3 localTorque)
+        {
+            ApplyTorque(AngularPosition.Transform(localTorque));
         }
 
         /// <summary>

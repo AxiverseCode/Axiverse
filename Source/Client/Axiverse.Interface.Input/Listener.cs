@@ -26,5 +26,9 @@ namespace Axiverse.Interface.Input
         /// </summary>
         public string Description { get; set; }
 
+        public virtual void Process(Signal signal)
+        {
+
+        }
     }
 }

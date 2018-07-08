@@ -46,12 +46,17 @@ namespace Axiverse.Interface.Engine
             Cache = cache;
             Scene = new Scene();
             Router = new Router();
+            Router.Listeners.Add(sixAxisListner);
+            Router.Listeners.Add(twoAxisListener);
             Injector.Bind<Universe>(Scene);
 
             Scene.Add(new TransformPhysicsProcessor());
             Scene.Add(new TransformProcessor());
             Scene.Add(new CameraProcessor());
         }
+
+        SixAxisListener sixAxisListner = new SixAxisListener();
+        TwoAxisListener twoAxisListener = new TwoAxisListener();
 
         /// <summary>
         /// Initializes the engine.
@@ -183,18 +188,20 @@ namespace Axiverse.Interface.Engine
             {
                 Scaling = new Vector3(10, 10, 10)
             });
-            shipTransform.Children.Add(cameraEntity);
+            //shipTransform.Children.Add(cameraEntity);
             entity3.Components.Add(new RenderableComponent
             {
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
             });
             entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
             var body = new Body();
+            body.LinearDampening *= 0.5f;
+            body.AngularDampening *= 0.5f;
             entity3.Components.Add(new PhysicsComponent(body));
             body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
 
-            var maximumVelocity = new Vector3(10, 10, 10);
-            var maximumAngle = new Vector3(3, 3, 3);
+            var maximumVelocity = Vector3.One;
+            var maximumAngle = Vector3.One / 6.28f;
 
             var prev = Environment.TickCount;
             // Into the loop we go!
@@ -208,7 +215,9 @@ namespace Axiverse.Interface.Engine
                     frame += delta / 10.0f;
                     prev = next;
 
-
+                    //body.LinearVelocity = new Vector3(twoAxisListener.Position.X / 100, twoAxisListener.Position.Y / 100, 0);
+                    body.ApplyCentralForce(new Vector3(twoAxisListener.Position.X / 10, 0, -twoAxisListener.Position.Y / 10));
+                    body.ApplyLocalTorque(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
                     entity1.Components.Get<TransformComponent>().Translation = new Vector3(
                         3 * Functions.Sin(Functions.DegreesToRadians(frame / 3)),
                         2 * Functions.Sin(Functions.DegreesToRadians(frame / 6)),
@@ -221,10 +230,10 @@ namespace Axiverse.Interface.Engine
                     //    10 * Functions.Cos(Functions.DegreesToRadians(frame / 10)));
 
                     Router.Poll();
-                    var state = Router.State;
-                    var velocity = cameraTransform.Rotation.Transform(new Vector3(state.X, -state.Z, state.Y)) * maximumVelocity;
+                    var velocity = cameraTransform.Rotation.Transform(new Vector3(sixAxisListner.Translation.X, -sixAxisListner.Translation.Z, sixAxisListner.Translation.Y)) * maximumVelocity;
                     //var angular = new Vector3(state.RotationX, state.RotationY, state.RotationZ) * maximumAngle;
-                    var angular = new Vector3(state.RotationY, -state.RotationZ, state.RotationX) * maximumAngle;
+                    var angular = new Vector3(sixAxisListner.Rotation.Y, -sixAxisListner.Rotation.Z, sixAxisListner.Rotation.X) * maximumAngle;
+                    sixAxisListner.Acknowledge();
                     //Console.WriteLine(velocity);
                     //Console.WriteLine(angular);
 

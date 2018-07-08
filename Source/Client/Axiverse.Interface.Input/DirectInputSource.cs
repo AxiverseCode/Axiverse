@@ -25,6 +25,7 @@ namespace Axiverse.Interface.Input
             Joystick = new Joystick(directInput, identifier);
 
             // Set BufferSize in order to use buffered data.
+            Joystick.Properties.AxisMode = DeviceAxisMode.Relative;
             Joystick.Properties.BufferSize = 128;
 
             var objects = Joystick.GetObjects();
@@ -35,17 +36,19 @@ namespace Axiverse.Interface.Input
             Joystick.Acquire();
         }
         
-        public override void Poll()
+        public override Signal[] Poll()
         {
             Joystick.Poll();
             var data = Joystick.GetBufferedData();
-
-            foreach (var datum in data)
+            return data.Select(u =>
             {
-
-            }
-
-            throw new NotImplementedException();
+                return new Signal()
+                {
+                    Source = this,
+                    Offset = u.Offset,
+                    Value = u.Value
+                };
+            }).ToArray();
         }
     }
 }

@@ -478,25 +478,32 @@ namespace Axiverse
         /// <returns></returns>
         public Vector3 Transform(Vector3 direction)
         {
-            //Quaternion r = new Quaternion(direction, 0);
-            //return (this * r * Conjugate()).ToVector3();
+            var vector = new Vector3(X, Y, Z);
+            var scalar = W;
 
-            float x = direction.X, y = direction.Y, z = direction.Z;
-            float qx = X, qy = Y, qz = Z, qw = W;
+            return 2.0f * Vector3.Dot(ref vector, ref direction) * vector
+                + (scalar * scalar - Vector3.Dot(ref vector, ref vector)) * direction
+                + 2.0f * scalar * Vector3.Cross(vector, direction);
+            
+            ////Quaternion r = new Quaternion(direction, 0);
+            ////return (this * r * Conjugate()).ToVector3();
 
-            // calculate quat * vector
+            //float x = direction.X, y = direction.Y, z = direction.Z;
+            //float qx = X, qy = Y, qz = Z, qw = W;
 
-            var ix = qw * x + qy * z - qz * y;
-            var iy = qw * y + qz * x - qx * z;
-            var iz = qw * z + qx * y - qy * x;
-            var iw = -qx * x - qy * y - qz * z;
+            //// calculate quat * vector
 
-            // calculate result * inverse quat
+            //var ix = qw * x + qy * z - qz * y;
+            //var iy = qw * y + qz * x - qx * z;
+            //var iz = qw * z + qx * y - qy * x;
+            //var iw = -qx * x - qy * y - qz * z;
 
-            return new Vector3(
-                ix * qw + iw * -qx + iy * -qz - iz * -qy,
-                iy * qw + iw * -qy + iz * -qx - ix * -qz,
-                iz * qw + iw * -qz + ix * -qy - iy * -qx);
+            //// calculate result * inverse quat
+
+            //return new Vector3(
+            //    ix * qw + iw * -qx + iy * -qz - iz * -qy,
+            //    iy * qw + iw * -qy + iz * -qx - ix * -qz,
+            //    iz * qw + iw * -qz + ix * -qy - iy * -qx);
         }
 
         /// <summary>
