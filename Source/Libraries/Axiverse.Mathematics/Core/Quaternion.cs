@@ -513,8 +513,9 @@ namespace Axiverse
         /// <returns></returns>
         public Vector3 InverseTransform(Vector3 direction)
         {
-            Quaternion r = new Quaternion(direction, 0);
-            return (Inverse() * r * Conjugate()).ToVector3();
+            return Inverse().Transform(direction);
+            //Quaternion r = new Quaternion(direction, 0);
+            //return (Inverse() * r * Conjugate()).ToVector3();
         }
 
         /// <summary>

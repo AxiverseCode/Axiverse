@@ -188,7 +188,7 @@ namespace Axiverse.Interface.Engine
             {
                 Scaling = new Vector3(10, 10, 10)
             });
-            //shipTransform.Children.Add(cameraEntity);
+            shipTransform.Children.Add(cameraEntity);
             entity3.Components.Add(new RenderableComponent
             {
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
@@ -198,7 +198,7 @@ namespace Axiverse.Interface.Engine
             body.LinearDampening *= 0.5f;
             body.AngularDampening *= 0.5f;
             entity3.Components.Add(new PhysicsComponent(body));
-            body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
+            //body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
 
             var maximumVelocity = Vector3.One;
             var maximumAngle = Vector3.One / 6.28f;
@@ -216,8 +216,9 @@ namespace Axiverse.Interface.Engine
                     prev = next;
 
                     //body.LinearVelocity = new Vector3(twoAxisListener.Position.X / 100, twoAxisListener.Position.Y / 100, 0);
-                    body.ApplyCentralForce(new Vector3(twoAxisListener.Position.X / 10, 0, -twoAxisListener.Position.Y / 10));
-                    body.ApplyLocalTorque(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
+                    body.ApplyCentralLocalImpulse(new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y));
+                    //body.ApplyLocalTorqueImpulse(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
+                    body.ApplyLocalTorqueImpulse(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
                     entity1.Components.Get<TransformComponent>().Translation = new Vector3(
                         3 * Functions.Sin(Functions.DegreesToRadians(frame / 3)),
                         2 * Functions.Sin(Functions.DegreesToRadians(frame / 6)),

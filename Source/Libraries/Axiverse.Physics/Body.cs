@@ -181,7 +181,9 @@ namespace Axiverse.Physics
             }
 
             Quaternion deltaOrientation = new Quaternion(axis, (float)Math.Cos(0.5f * angle * delta));
-            angularPosition = (angularPosition * deltaOrientation).Normal();
+            // This stored angularVelocity in local space
+            // angularPosition = (angularPosition * deltaOrientation).Normal();
+            angularPosition = (deltaOrientation * angularPosition).Normal();
         }
 
         /// <summary>
@@ -198,23 +200,36 @@ namespace Axiverse.Physics
         /// <summary>
         /// Applies an impulse on the center of the body. Will not cause any linear changes.
         /// </summary>
-        /// <param name="impulse"></param>
-        public void ApplyCentralImpulse(Vector3 impulse)
+        /// <param name="globalImpulse">Impulse in global space.</param>
+        public void ApplyCentralImpulse(Vector3 globalImpulse)
         {
             // linearVelocity = linearVelocity + impulse * inverseMass * linearFactor
-            linearVelocity = linearVelocity + impulse * linearFactor * inverseMass;
+            linearVelocity = linearVelocity + globalImpulse * linearFactor * inverseMass;
+        }
+
+        /// <summary>
+        /// Applies an impulse on the center of the body. Will not cause any linear changes.
+        /// </summary>
+        /// <param name="localImpulse">Impulse in local space.</param>
+        public void ApplyCentralLocalImpulse(Vector3 localImpulse)
+        {
+            ApplyCentralImpulse(AngularPosition.Transform(localImpulse));
         }
 
         /// <summary>
         /// Applies a torque impulse on the body. Will only cause any angular changes.
         /// </summary>
-        /// <param name="torque"></param>
-        public void ApplyTorqueImpulse(Vector3 torque)
+        /// <param name="globalTorque">Torque impulse in global space.</param>
+        public void ApplyTorqueImpulse(Vector3 globalTorque)
         {
             angularVelocity = angularVelocity +
-                Matrix3.Transform(inverseInertiaTensorWorld, torque) * angularFactor;
+                Matrix3.Transform(inverseInertiaTensorWorld, globalTorque) * angularFactor;
         }
 
+        /// <summary>
+        /// Applies a torque impulse on the body. Will only cause any angular changes.
+        /// </summary>
+        /// <param name="localTorque">Torque impulse in local space.</param>
         public void ApplyLocalTorqueImpulse(Vector3 localTorque)
         {
             ApplyTorqueImpulse(AngularPosition.Transform(localTorque));
@@ -240,10 +255,10 @@ namespace Axiverse.Physics
         /// <summary>
         /// Applies a torque on the body. Will only apply angular torque.
         /// </summary>
-        /// <param name="torque"></param>
-        public void ApplyTorque(Vector3 torque)
+        /// <param name="globalTorque"></param>
+        public void ApplyTorque(Vector3 globalTorque)
         {
-            totalTorque += torque * angularFactor;
+            totalTorque += globalTorque * angularFactor;
         }
 
         public void ApplyLocalTorque(Vector3 localTorque)
@@ -265,11 +280,11 @@ namespace Axiverse.Physics
         /// changes.
         /// </summary>
         /// <param name="force"></param>
-        /// <param name="localPosition"></param>
-        public void ApplyForce(Vector3 force, Vector3 localPosition)
+        /// <param name="relativeGlobalPosition"></param>
+        public void ApplyForce(Vector3 force, Vector3 relativeGlobalPosition)
         {
             ApplyCentralForce(force);
-            ApplyTorque(localPosition % force * linearFactor);
+            ApplyTorque(relativeGlobalPosition % force * linearFactor);
         }
 
         /// <summary>
