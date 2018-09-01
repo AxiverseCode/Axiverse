@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Axiverse
 {
@@ -130,5 +131,24 @@ namespace Axiverse
         /// The radians to degrees conversion ratio.
         /// </summary>
         public static readonly float RadiansToDegreesRatio = 57.2958f;
+
+        [StructLayout(LayoutKind.Explicit)]
+        private struct Cross32
+        {
+            [FieldOffset(0)]
+            public uint UInt;
+
+            [FieldOffset(0)]
+            public float Float;
+        }
+
+        private float InverseSqrt(float f)
+        {
+            // http://rrrola.wz.cz/inv_sqrt.html
+            // https://news.ycombinator.com/item?id=17487475
+            var c = new Cross32 { Float = f };
+            c.UInt = 0x5F1FFFF9 - (c.UInt >> 1);
+            return 0.703952253f * c.Float * (2.38924456f - f * c.Float * c.Float);
+        }
     }
 }

@@ -1,3 +1,16 @@
+### 7/9
+
+- Serialization
+	- Lex/parse - JSON for most
+	- Write support for files
+- Input routing
+- Gui implementation
+- Flush out math library
+- Screen space selection
+
+
+
+
 
 
 ### 7/5

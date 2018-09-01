@@ -1,0 +1,13 @@
+{
+	"name" : "SpaceNavigator",
+	"mapping" : {
+		"X" : {},
+		"Y" : {},
+		"Z" : {},
+		"RotationX" : {},
+		"RotationY" : {},
+		"RotationZ" : {},
+		"Button0" : {},
+		"Button1" : {}
+	}	
+}

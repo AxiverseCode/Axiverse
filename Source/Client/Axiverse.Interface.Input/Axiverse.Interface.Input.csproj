@@ -57,6 +57,7 @@
     <Compile Include="Listener.cs" />
     <Compile Include="Events\MouseEventArgs.cs" />
     <Compile Include="Events\RoutedEventArgs.cs" />
+    <Compile Include="Mapping.cs" />
     <Compile Include="Router.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signal.cs" />
@@ -69,6 +70,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">

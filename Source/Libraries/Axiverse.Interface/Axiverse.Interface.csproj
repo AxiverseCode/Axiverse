@@ -60,6 +60,9 @@
     <Compile Include="Engine\AudioEngine.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\EngineModule.cs" />
+    <Compile Include="Engine\Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Engine\SceneSystem.cs" />
     <Compile Include="Engine\VisualEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,7 +24,7 @@ namespace Axiverse.Interface.Engine
         public Injector Injector { get; private set; }
         public Cache Cache { get; private set; }
 
-        RenderForm form;
+        Form form;
 
         public Compositor Compositor { get; set; }
 
@@ -64,7 +64,7 @@ namespace Axiverse.Interface.Engine
         public void Initialize()
         {
             // Create a window
-            form = new RenderForm()
+            form = new Form()
             {
                 ClientSize = new System.Drawing.Size(1600, 1200),
                 Text = "Axiverse | Hello Graphics",
