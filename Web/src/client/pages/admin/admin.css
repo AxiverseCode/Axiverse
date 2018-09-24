@@ -5,21 +5,18 @@
     right: 0;
 }
 
-:local(.container) > nav {
-    position: fixed;
-    left: 0;
-    top: 48px;
-    bottom: 0;
-
-    width: 320px;
-
-    background: #ccc;
-}
-
 :local(.container) > section {
     padding: 70px 0 70px 320px;
 }
 
 :local(.content) {
     margin: 10px;
+}
+
+:local(.header) {
+  width: 120px;
+  height: 31px;
+  background: rgba(255,255,255,.2);
+  margin: 16px 24px 16px 0;
+  float: left;
 }
