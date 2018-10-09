@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-
+import api from "./api"
 // Create Express server
 const app = express();
 
@@ -27,6 +27,7 @@ dns.resolve(IDENTITY_SERVICE, (err, records) => {
     IDENTITY_SERVICE = records[0];
 })
 
+app.use('/api', api);
 
 app.get("/test", (req, res, next) => {
     console.log('creating client ' + IDENTITY_SERVICE + ':32000');

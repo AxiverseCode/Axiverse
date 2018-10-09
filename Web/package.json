@@ -37,6 +37,8 @@
     "@types/google-protobuf": "^3.2.7",
     "antd": "^3.9.3",
     "classnames": "^2.2.5",
+    "csv-parse": "^3.0.0",
+    "csvtojson": "^2.0.8",
     "d3": "^5.0.0",
     "express": "^4.16.3",
     "google-protobuf": "^3.5.0",

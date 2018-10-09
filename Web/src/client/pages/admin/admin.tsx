@@ -22,7 +22,7 @@ export default class Admin extends React.Component<Props> {
       <BrowserRouter>
         <Layout>
           <Header>
-            <div className={styles.header} />
+            <a href="/"><div className={styles.header} /></a>
             <AutoComplete dataSource={['1', '2', '3']} />
             <Menu
                 theme="dark"
@@ -31,7 +31,7 @@ export default class Admin extends React.Component<Props> {
                 style={{ lineHeight: '64px', float: 'right' }}>
               <Menu.Item key="1"><Link to="/hierarchy">Hierarchy</Link></Menu.Item>
               <Menu.Item key="2"><Link to="/correlation">Correlation</Link></Menu.Item>
-              <Menu.Item key="3"><Link to="/timeseries">Timeseries</Link></Menu.Item>
+              <Menu.Item key="3"><Link to="/timeseries/ACY">Timeseries</Link></Menu.Item>
               <Menu.Item key="4"><Link to="/operations">Operations</Link></Menu.Item>
             </Menu>
           </Header>
@@ -39,7 +39,7 @@ export default class Admin extends React.Component<Props> {
             path="/correlation"
             component={Correlation} />
           <Route
-            path="/timeseries"
+            path="/timeseries/:id"
             component={Timeseries} />
           <Route
             path="/operations"
