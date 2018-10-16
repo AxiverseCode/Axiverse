@@ -49,6 +49,7 @@
     <Compile Include="Complex.cs" />
     <Compile Include="Core\MathematicsExtensions.cs" />
     <Compile Include="Core\Matrix4.cs" />
+    <Compile Include="Core\Swizzle.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Core\Functions.cs" />
     <Compile Include="Core\Matrix3.cs" />

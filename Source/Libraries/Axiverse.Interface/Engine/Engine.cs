@@ -10,9 +10,11 @@ using Axiverse.Interface.Windows;
 using Axiverse.Physics;
 using Axiverse.Resources;
 using Axiverse.Simulation;
+using Axiverse.Simulation.Behaviors;
 using SharpDX;
 using SharpDX.Windows;
 using System;
+using System.Collections.Generic;
 
 namespace Axiverse.Interface.Engine
 {
@@ -53,6 +55,7 @@ namespace Axiverse.Interface.Engine
             Scene.Add(new TransformPhysicsProcessor());
             Scene.Add(new TransformProcessor());
             Scene.Add(new CameraProcessor());
+            Scene.Add(new BehaviorProcessor());
         }
 
         SixAxisListener sixAxisListner = new SixAxisListener();
@@ -200,6 +203,29 @@ namespace Axiverse.Interface.Engine
             entity3.Components.Add(new PhysicsComponent(body));
             //body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
 
+
+            List<Entity> flock = new List<Entity>();
+            for (int i = 0; i < 10; i++)
+            {
+                var bloid = new Entity();
+                bloid.Components.Add(new TransformComponent());
+                bloid.Components.Add(new BehaviorComponent());
+                bloid.Components.Add(new RenderableComponent()
+                {
+                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
+                });
+                bloid.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+                bloid.Components.Add(new PhysicsComponent(new Body
+                {
+                    LinearPosition = Functions.Random.NextVector3(-10, 10),
+                    LinearVelocity = Functions.Random.NextVector3(-10, 10),
+                    AngularPosition = Functions.Random.NextQuaternion()
+                }));
+
+                Scene.Add(bloid);
+                flock.Add(bloid);
+            }
+
             var maximumVelocity = Vector3.One;
             var maximumAngle = Vector3.One / 6.28f;
 
@@ -241,6 +267,7 @@ namespace Axiverse.Interface.Engine
                     cameraTransform.Translation += velocity;
                     cameraTransform.Rotation *= Quaternion.FromEuler(angular);
 
+                    // Step and run processors.
                     Scene.Step(delta / 1000.0f);
 
 

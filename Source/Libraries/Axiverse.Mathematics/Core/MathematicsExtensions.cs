@@ -1,4 +1,5 @@
 ﻿using System;
+using static Axiverse.Functions;
 
 namespace Axiverse
 {
@@ -114,6 +115,29 @@ namespace Axiverse
                 random.NextFloat(minimum, maximum),
                 random.NextFloat(minimum, maximum),
                 random.NextFloat(minimum, maximum));
+        }
+
+        /// <summary>
+        /// Returns a random <see cref="Quaternion"/>.
+        /// </summary>
+        /// <param name="random"></param>
+        /// <returns></returns>
+        public static Quaternion NextQuaternion(this Random random)
+        {
+            // http://planning.cs.uiuc.edu/node198.html
+            float u = random.NextFloat();
+            float v = random.NextFloat();
+            float w = random.NextFloat();
+
+            float a = Sqrt(1 - u);
+            float b = Sqrt(u);
+
+            return new Quaternion(
+                    a * Sin(2 * Pi * v),
+                    a * Cos(2 * Pi * v),
+                    b * Sin(2 * Pi * w),
+                    b * Cos(2 * Pi * w)
+                );
         }
     }
 }

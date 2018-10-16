@@ -9,7 +9,7 @@ namespace Axiverse.Simulation
     /// <summary>
     /// Component which represents a set of related attributes in an entity.
     /// </summary>
-    public abstract class Component
+    public abstract class Component : IComponent
     {
         /// <summary>
         /// Gets the entity this component is bound to.

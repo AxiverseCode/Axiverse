@@ -419,6 +419,78 @@ namespace Axiverse
         //    return (s * (float)Math.Cos(theta)) + (delta * (float)Math.Sin(theta));
         //}
 
+        public Vector3 this[Swizzle3 order]
+        {
+            get
+            {
+                switch (order)
+                {
+                    case Swizzle3.XXX: return new Vector3(X, X, X);
+                    case Swizzle3.XXY: return new Vector3(X, X, Y);
+                    case Swizzle3.XXZ: return new Vector3(X, X, Z);
+                    case Swizzle3.XYX: return new Vector3(X, Y, X);
+                    case Swizzle3.XYY: return new Vector3(X, Y, Y);
+                    case Swizzle3.XYZ: return new Vector3(X, Y, Z);
+                    case Swizzle3.XZX: return new Vector3(X, Z, X);
+                    case Swizzle3.XZY: return new Vector3(X, Z, Y);
+                    case Swizzle3.XZZ: return new Vector3(X, Z, Z);
+                    case Swizzle3.YXX: return new Vector3(Y, X, X);
+                    case Swizzle3.YXY: return new Vector3(Y, X, Y);
+                    case Swizzle3.YXZ: return new Vector3(Y, X, Z);
+                    case Swizzle3.YYX: return new Vector3(Y, Y, X);
+                    case Swizzle3.YYY: return new Vector3(Y, Y, Y);
+                    case Swizzle3.YYZ: return new Vector3(Y, Y, Z);
+                    case Swizzle3.YZX: return new Vector3(Y, Z, X);
+                    case Swizzle3.YZY: return new Vector3(Y, Z, Y);
+                    case Swizzle3.YZZ: return new Vector3(Y, Z, Z);
+                    case Swizzle3.ZXX: return new Vector3(Z, X, X);
+                    case Swizzle3.ZXY: return new Vector3(Z, X, Y);
+                    case Swizzle3.ZXZ: return new Vector3(Z, X, Z);
+                    case Swizzle3.ZYX: return new Vector3(Z, Y, X);
+                    case Swizzle3.ZYY: return new Vector3(Z, Y, Y);
+                    case Swizzle3.ZYZ: return new Vector3(Z, Y, Z);
+                    case Swizzle3.ZZX: return new Vector3(Z, Z, X);
+                    case Swizzle3.ZZY: return new Vector3(Z, Z, Y);
+                    case Swizzle3.ZZZ: return new Vector3(Z, Z, Z);
+                    default: throw new ArgumentException();
+                }
+            }
+            set
+            {
+                switch (order)
+                {
+                    case Swizzle3.XXX: Set(X, X, X); break;
+                    case Swizzle3.XXY: Set(X, X, Y); break;
+                    case Swizzle3.XXZ: Set(X, X, Z); break;
+                    case Swizzle3.XYX: Set(X, Y, X); break;
+                    case Swizzle3.XYY: Set(X, Y, Y); break;
+                    case Swizzle3.XYZ: Set(X, Y, Z); break;
+                    case Swizzle3.XZX: Set(X, Z, X); break;
+                    case Swizzle3.XZY: Set(X, Z, Y); break;
+                    case Swizzle3.XZZ: Set(X, Z, Z); break;
+                    case Swizzle3.YXX: Set(Y, X, X); break;
+                    case Swizzle3.YXY: Set(Y, X, Y); break;
+                    case Swizzle3.YXZ: Set(Y, X, Z); break;
+                    case Swizzle3.YYX: Set(Y, Y, X); break;
+                    case Swizzle3.YYY: Set(Y, Y, Y); break;
+                    case Swizzle3.YYZ: Set(Y, Y, Z); break;
+                    case Swizzle3.YZX: Set(Y, Z, X); break;
+                    case Swizzle3.YZY: Set(Y, Z, Y); break;
+                    case Swizzle3.YZZ: Set(Y, Z, Z); break;
+                    case Swizzle3.ZXX: Set(Z, X, X); break;
+                    case Swizzle3.ZXY: Set(Z, X, Y); break;
+                    case Swizzle3.ZXZ: Set(Z, X, Z); break;
+                    case Swizzle3.ZYX: Set(Z, Y, X); break;
+                    case Swizzle3.ZYY: Set(Z, Y, Y); break;
+                    case Swizzle3.ZYZ: Set(Z, Y, Z); break;
+                    case Swizzle3.ZZX: Set(Z, Z, X); break;
+                    case Swizzle3.ZZY: Set(Z, Z, Y); break;
+                    case Swizzle3.ZZZ: Set(Z, Z, Z); break;
+                    default: throw new ArgumentException();
+                }
+            }
+        }
+
         #endregion
 
         #region Instance Methods - Overrides

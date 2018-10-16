@@ -46,11 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\BehaviorComponent.cs" />
+    <Compile Include="Behaviors\BehaviorProcessor.cs" />
+    <Compile Include="Behaviors\Steering.cs" />
     <Compile Include="CollectorProcessor.cs" />
     <Compile Include="ComponentEventArgs.cs" />
     <Compile Include="Components\HierarchicalComponentCollection.cs" />
     <Compile Include="EntityEventArgs.cs" />
     <Compile Include="HierarchicalProcessor.cs" />
+    <Compile Include="IComponent.cs" />
     <Compile Include="IProcessor.cs" />
     <Compile Include="PhysicsProcessor.cs" />
     <Compile Include="ProcessorStage.cs" />
@@ -89,5 +93,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -78,12 +78,18 @@ namespace Axiverse.Physics
             set => angularVelocity = value;
         }
 
+        /// <summary>
+        /// Gets or sets the linear dampening factor for attenuating linear physics.
+        /// </summary>
         public Vector3 LinearDampening
         {
             get => linearDampening;
             set => linearDampening = value;
         }
 
+        /// <summary>
+        /// Gets or sets the angular dampening factor for attenuating angular physics.
+        /// </summary>
         public Vector3 AngularDampening
         {
             get => angularDampening;
@@ -111,8 +117,17 @@ namespace Axiverse.Physics
             set => collisionShape = value;
         }
 
+        /// <summary>
+        /// Gets or sets if the body is static. Static bodies cannot be acted upon but can act on
+        /// other bodies for collisions.
+        /// </summary>
         public bool IsStatic { get; set; }
 
+        /// <summary>
+        /// Gets or sets if the body is active. Active bodies are updated and can be deactivated
+        /// if the body comes to rest and activated if a force acts on it. A body at rest stays at
+        /// rest.
+        /// </summary>
         public bool IsActive { get; set; }
 
         /// <summary>
@@ -239,21 +254,21 @@ namespace Axiverse.Physics
         /// Applies an impulse at a local position on the body. Can cause linear and/or angular
         /// changes.
         /// </summary>
-        /// <param name="impulse"></param>
+        /// <param name="globalImpulse"></param>
         /// <param name="localPosition"></param>
-        public void ApplyImpulse(Vector3 impulse, Vector3 localPosition)
+        public void ApplyImpulse(Vector3 globalImpulse, Vector3 localPosition)
         {
             if (inverseMass != 0)
             {
-                ApplyCentralImpulse(impulse);
+                ApplyCentralImpulse(globalImpulse);
                 // if (angularFactor != 0)                
-                ApplyTorqueImpulse(localPosition % impulse * linearFactor);
+                ApplyTorqueImpulse(localPosition % globalImpulse * linearFactor);
 
             }
         }
 
         /// <summary>
-        /// Applies a torque on the body. Will only apply angular torque.
+        /// Applies a torque on the body in global space. Will only apply angular torque.
         /// </summary>
         /// <param name="globalTorque"></param>
         public void ApplyTorque(Vector3 globalTorque)
@@ -261,6 +276,10 @@ namespace Axiverse.Physics
             totalTorque += globalTorque * angularFactor;
         }
 
+        /// <summary>
+        /// Applies a torque on the body in local space. Will only apply angular torque.
+        /// </summary>
+        /// <param name="localTorque"></param>
         public void ApplyLocalTorque(Vector3 localTorque)
         {
             ApplyTorque(AngularPosition.Transform(localTorque));
@@ -288,9 +307,9 @@ namespace Axiverse.Physics
         }
 
         /// <summary>
-        /// Resets both the force and torques applied to the body.
+        /// Clears both the force and torques applied to the body.
         /// </summary>
-        public void ResetForces()
+        public void ClearForces()
         {
             totalForce.Set(0);
             totalTorque.Set(0);
@@ -307,7 +326,7 @@ namespace Axiverse.Physics
         }
 
         /// <summary>
-        /// 
+        /// Calculates the impulse denominator.
         /// </summary>
         /// <param name="position"></param>
         /// <param name="normal"></param>

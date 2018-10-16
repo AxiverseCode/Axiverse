@@ -50,6 +50,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropulsionEmitter.cs" />
     <Compile Include="PropulsionProcessor.cs" />
+    <Compile Include="Simulation\StateProcessor.cs" />
+    <Compile Include="Simulation\UniverseProcessor.cs" />
     <Compile Include="StructureComponent.cs" />
   </ItemGroup>
   <ItemGroup>
