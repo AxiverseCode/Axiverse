@@ -652,108 +652,6 @@ namespace Axiverse
             return result;
         }
 
-        public static Quaternion FromEulerRH(float yaw, float pitch, float roll)
-        {
-            float halfRoll = roll * 0.5f;
-            float sinHalfRoll = (float)Math.Sin((double)halfRoll);
-            float cosHalfRoll = (float)Math.Cos((double)halfRoll);
-            float halfPitch = pitch * 0.5f;
-            float sinHalfPitch = (float)Math.Sin((double)halfPitch);
-            float cosHalfPitch = (float)Math.Cos((double)halfPitch);
-            float halfYaw = yaw * 0.5f;
-            float sinHalfYaw = (float)Math.Sin((double)halfYaw);
-            float cosHalfYaw = (float)Math.Cos((double)halfYaw);
-            Quaternion result;
-            result.X = cosHalfYaw * sinHalfPitch * cosHalfRoll + sinHalfYaw * cosHalfPitch * sinHalfRoll;
-            result.Y = sinHalfYaw * cosHalfPitch * cosHalfRoll - cosHalfYaw * sinHalfPitch * sinHalfRoll;
-            result.Z = cosHalfYaw * cosHalfPitch * sinHalfRoll - sinHalfYaw * sinHalfPitch * cosHalfRoll;
-            result.W = cosHalfYaw * cosHalfPitch * cosHalfRoll + sinHalfYaw * sinHalfPitch * sinHalfRoll;
-            return result;
-        }
-
-        public static Quaternion FromEulerRH2(float yaw, float pitch, float roll)
-        {
-            // Abbreviations for the various angular functions
-            float cy = Functions.Cos(yaw * 0.5f);
-            float sy = Functions.Sin(yaw * 0.5f);
-            float cr = Functions.Cos(roll * 0.5f);
-            float sr = Functions.Sin(roll * 0.5f);
-            float cp = Functions.Cos(pitch * 0.5f);
-            float sp = Functions.Sin(pitch * 0.5f);
-
-            Quaternion q;
-            q.W = cy * cr * cp + sy * sr * sp;
-            q.X = cy * sr * cp - sy * cr * sp;
-            q.Y = cy * cr * sp + sy * sr * cp;
-            q.Z = sy * cr * cp - cy * sr * sp;
-            return q;
-        }
-
-        public static Vector3 ToEulerAngle(Quaternion q)
-        {
-            float roll;
-            float pitch;
-            float yaw;
-            // roll (x-axis rotation)
-            float sinr_cosp = +2.0f * (q.W * q.X + q.Y * q.Z);
-            float cosr_cosp = +1.0f - 2.0f * (q.X * q.X + q.Y * q.Y);
-            roll = (float)Math.Atan2(sinr_cosp, cosr_cosp);
-
-            // pitch (y-axis rotation)
-            float sinp = +2.0f * (q.W * q.Y - q.Z * q.X);
-            if (Math.Abs(sinp) >= 1)
-                pitch = Functions.CopySign(Functions.Pi / 2, sinp); // use 90 degrees if out of range
-            else
-                pitch = (float)Math.Asin(sinp);
-
-            // yaw (z-axis rotation)
-            double siny_cosp = +2.0 * (q.W * q.Z + q.X * q.Y);
-            double cosy_cosp = +1.0 - 2.0 * (q.Y * q.Y + q.Z * q.Z);
-            yaw = (float)Math.Atan2(siny_cosp, cosy_cosp);
-
-            return new Vector3(yaw, pitch, roll);
-        }
-
-        public Vector3 ToEulerAngles()
-        {
-            // Store the Euler angles in radians
-            Vector3 pitchYawRoll = new Vector3();
-
-            double sqw = W * W;
-            double sqx = X * X;
-            double sqy = Y * Y;
-            double sqz = Z * Z;
-
-            // If quaternion is normalised the unit is one, otherwise it is the correction factor
-            double unit = sqx + sqy + sqz + sqw;
-            double test = X * Y + Z * W;
-
-            if (test > 0.4999f * unit)                              // 0.4999f OR 0.5f - EPSILON
-            {
-                // Singularity at north pole
-                pitchYawRoll.Y = 2f * (float)Math.Atan2(X, W);  // Yaw
-                pitchYawRoll.X = Functions.Pi * 0.5f;                         // Pitch
-                pitchYawRoll.Z = 0f;                                // Roll
-                return pitchYawRoll;
-            }
-            else if (test < -0.4999f * unit)                        // -0.4999f OR -0.5f + EPSILON
-            {
-                // Singularity at south pole
-                pitchYawRoll.Y = -2f * (float)Math.Atan2(X, W); // Yaw
-                pitchYawRoll.X = -Functions.Pi * 0.5f;                        // Pitch
-                pitchYawRoll.Z = 0f;                                // Roll
-                return pitchYawRoll;
-            }
-            else
-            {
-                pitchYawRoll.Y = (float)Math.Atan2(2f * Y * W - 2f * X * Z, sqx - sqy - sqz + sqw);       // Yaw
-                pitchYawRoll.X = (float)Math.Asin(2f * test / unit);                                             // Pitch
-                pitchYawRoll.Z = (float)Math.Atan2(2f * X * W - 2f * Y * Z, -sqx + sqy - sqz + sqw);      // Roll
-            }
-
-            return pitchYawRoll;
-        }
-
         /// <summary>
         /// Converts an quaternion to an axis and rotation angle.
         /// </summary>
@@ -802,18 +700,6 @@ namespace Axiverse
             while (angle < -Math.PI)
                 angle += 2 * (float)Math.PI;
             return angle;
-        }
-
-        public static float AngleBetween(Quaternion a, Quaternion b, bool needsNormalization = false)
-        {
-            if (needsNormalization)
-            {
-                a.Normalize();
-                b.Normalize();
-            }
-
-            float dot = a.X * b.X + a.Y * b.Y + a.Z + b.Z + a.W + b.W;
-            return 2.0f * (float)Math.Acos(dot);
         }
 
         public static Quaternion Average(IEnumerable<Quaternion> quaternions)
@@ -1032,6 +918,59 @@ namespace Axiverse
             var pitch = (float)Math.Asin(2f * (q.X * q.Z - q.W * q.Y));
             var roll = (float)Math.Atan2(2f * q.X * q.Y + 2f * q.Z * q.W, 1 - 2f * (q.Y * q.Y + q.Z * q.Z));
             return NormalizeAngles(new Vector3(roll, pitch, yaw));
+        }
+
+        public static void Lerp(ref Quaternion former, ref Quaternion latter, float scale, out Quaternion result)
+        {
+            float inverse = 1.0f - scale;
+
+            if (Dot(former, latter) >= 0.0f)
+            {
+                result = (inverse * former) + (scale * latter);
+            }
+            else
+            {
+                result = (inverse * former) - (scale * latter);
+            }
+
+            result.Normalize();
+        }
+
+        public static Quaternion Lerp(Quaternion former, Quaternion latter, float scale)
+        {
+            Quaternion result;
+            Lerp(ref former, ref latter, scale, out result);
+            return result;
+        }
+
+        public static void Slerp(ref Quaternion former, ref Quaternion latter, float scale, out Quaternion result)
+        {
+            float opposite;
+            float inverse;
+            float dot = Dot(former, latter);
+
+            if (Math.Abs(dot) > 1.0f - Functions.ZeroEpsilon)
+            {
+                inverse = 1.0f - scale;
+                opposite = scale * Math.Sign(dot);
+            }
+            else
+            {
+                float acos = (float)Math.Acos(Math.Abs(dot));
+                float invSin = (float)(1.0 / Math.Sin(acos));
+
+                inverse = Functions.Sin((1.0f - scale) * acos) * invSin;
+                opposite = Functions.Sin(scale * acos) * invSin * Math.Sign(dot);
+            }
+
+            result = (inverse * former) + (opposite * latter);
+        }
+        
+        public static Quaternion Slerp(Quaternion former, Quaternion latter, float scale)
+        {
+            Quaternion result;
+            Slerp(ref former, ref latter, scale, out result);
+            return result;
         }
 
         #endregion

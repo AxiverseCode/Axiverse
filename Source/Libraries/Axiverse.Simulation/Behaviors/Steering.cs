@@ -111,16 +111,30 @@ namespace Axiverse.Simulation.Behaviors
             return sum / count;
         }
 
+        public static Vector3 Traveling(IEnumerable<Body> neighbors)
+        {
+            Vector3 sum = Vector3.Zero;
+            int count = 0;
+
+            foreach (var body in neighbors)
+            {
+                sum += body.LinearVelocity;
+                count++;
+            }
+
+            return sum / count;
+        }
+
         /// <summary>
         /// Calculates the alignment angular vector by finding the average angular position of all
         /// the neightbors and the difference between that and that of the agent.
         /// </summary>
         /// <param name="neighbors"></param>
-        public static Vector3 Alignment(Quaternion orientation, IEnumerable<Body> neighbors)
+        public static Quaternion Alignment(Quaternion orientation, IEnumerable<Body> neighbors)
         {
             var average = Quaternion.Average(neighbors.Select(b=>b.AngularPosition));
-            average = Quaternion.Identity;
-            return Quaternion.ToEuler((average * orientation.Inverse()).Normal());
+            return average;
+            // return Quaternion.ToEuler((average * orientation.Inverse()).Normal());
         }
 
         public static void Orbit()

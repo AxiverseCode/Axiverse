@@ -10,7 +10,8 @@ namespace Axiverse.Simulation.Behaviors
     public class BehaviorProcessor : Processor<BehaviorComponent, PhysicsComponent>
     {
         private float acceleration = 0.1f;
-        
+        private float maxAngularVelocity = 0.1f;
+
         float radius = 50.0f;
 
         public IEnumerable<Body> Neighbors(float distance, Body body)
@@ -28,14 +29,18 @@ namespace Axiverse.Simulation.Behaviors
             var desire = Vector3.Zero;
             desire += Steering.Cohesion(radius, body.LinearPosition, neighbors);
             desire += Steering.Separation(radius, body.LinearPosition, neighbors);
+            desire += Steering.Traveling(neighbors);
 
-            var angularDelta = Steering.Alignment(body.AngularPosition, neighbors);
-            var angularLength = angularDelta.Length();
-            var angularFactor = Math.Min(0.1f, angularLength);
-            var angularSteering = angularFactor / angularLength * angularDelta;
-
-            body.ApplyLocalTorque(angularSteering * context.DeltaTime);
+            var angularTarget = Steering.Alignment(body.AngularPosition, neighbors);
+            var angularDistance = Quaternion.Distance(body.AngularPosition, angularTarget);
+            if (angularDistance > 0)
+            {
+                var scaled = Math.Min(1, maxAngularVelocity * context.DeltaTime / angularDistance);
+                body.AngularPosition = Quaternion.Lerp(body.AngularPosition, angularTarget, scaled);
+            }
+            
             body.LinearVelocity += Steering.Arrival(body.LinearPosition + desire, body, 1, 0.1f) * context.DeltaTime;
+            body.AngularPosition = Quaternion.LookAt(-body.LinearVelocity, body.AngularPosition.Transform(Vector3.Up));
         }
     }
 }

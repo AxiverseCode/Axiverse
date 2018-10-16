@@ -134,6 +134,8 @@ namespace Axiverse
 
         public static readonly float Pi = (float)Math.PI;
 
+        public static readonly float ZeroEpsilon = 1e-10f;
+
         [StructLayout(LayoutKind.Explicit)]
         private struct Cross32
         {
