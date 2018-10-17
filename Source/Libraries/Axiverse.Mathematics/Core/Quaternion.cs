@@ -528,18 +528,19 @@ namespace Axiverse
         /// <returns></returns>
         public static Quaternion LookAt(Vector3 lookAt, Vector3 up)
         {
-            Vector3 forward = lookAt;
-            Vector3.OrthroNormalize(ref forward, ref up);
-            Vector3 right = up % forward;
-            
-            float w = Functions.Sqrt(1 + right.X + up.Y + forward.Z) / 2;
-            float v = 1 / (4 * w);
+            lookAt.Normalize();
 
-            return new Quaternion(
-                (up.Z - forward.Y) * v,
-                (forward.X - right.Z) * v,
-                (right.Y - up.X) * v,
-                w);
+            //compute rotation axis
+            Vector3 rotAxis = Vector3.Cross(Vector3.ForwardLH, lookAt).Normal();
+            if (rotAxis.LengthSquared() == 0)
+                rotAxis = up;
+
+            //find the angle around rotation axis
+            float dot = Vector3.ForwardLH.Dot(lookAt);
+            float ang = Functions.Acos(dot);
+
+            //convert axis angle to quaternion
+            return FromAxisAngle(rotAxis, ang);
         }
 
         /// <summary>

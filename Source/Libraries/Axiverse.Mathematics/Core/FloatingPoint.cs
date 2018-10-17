@@ -14,38 +14,50 @@ namespace Axiverse
     /// </summary>
     public static class FloatingPoint
     {
-        const uint EM_DENORMAL = 0x00080000;
+        const uint EM_DEFAULT = EM_INVALID | EM_ZERODIVIDE | EM_OVERFLOW | EM_UNDERFLOW;
         const uint EM_INVALID = 0x00000010;
         const uint EM_ZERODIVIDE = 0x00000008;
         const uint EM_OVERFLOW = 0x00000004;
         const uint EM_UNDERFLOW = 0x00000002;
         const uint EM_INEXACT = 0x00000001;
-        const uint MCW_EM = 0x0008001f; // From float.h
+        const uint MCW_EM = 0x0008001F;
 
-        const uint EM_DEFAULT = EM_INVALID | EM_ZERODIVIDE | EM_OVERFLOW | EM_UNDERFLOW;
+        const uint RC_CHOP = 0x00000300;
+        const uint RC_UP = 0x00000200;
+        const uint RC_DOWN = 0x00000100;
+        const uint RC_NEAR = 0x00000000;
+        const uint MCW_RC = 0x00000300;
 
+        /// <summary>
+        /// Gets and sets the floating-point control word.
+        /// 
+        /// https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/control87-controlfp-control87-2
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="mask"></param>
+        /// <returns></returns>
         [DllImport("msvcrt.dll")]
-        static extern uint _controlfp(uint a, uint b);
+        static extern uint _controlfp(uint value, uint mask);
 
+        /// <summary>
+        /// Gets and clears the floating-point status word.
+        /// 
+        /// https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/clear87-clearfp
+        /// </summary>
+        /// <returns></returns>
         [DllImport("msvcrt.dll")]
         static extern uint _clearfp();
 
         // Clearing a bit sets the interrupts.
-        static uint cw;
-        static uint Control
+        static uint controlFlags;
+        static uint InterruptFlags
         {
-            get { return cw; }
+            get { return controlFlags; }
             set
             {
-                _controlfp(cw, MCW_EM);
-                cw = value;
+                _controlfp(controlFlags, MCW_EM);
+                controlFlags = value;
             }
-        }
-
-        public static bool ThrowOnDenormal
-        {
-            get => (Control & EM_DENORMAL) == 0;
-            set => Control = (value) ? (Control & ~EM_DENORMAL) : (Control | EM_DENORMAL);
         }
 
         /// <summary>
@@ -54,8 +66,8 @@ namespace Axiverse
         /// </summary>
         public static bool ThrowOnInvalidOperation
         {
-            get => (Control & EM_INVALID) == 0;
-            set => Control = (value) ? (Control & ~EM_INVALID) : (Control | EM_INVALID);
+            get => (InterruptFlags & EM_INVALID) == 0;
+            set => InterruptFlags = (value) ? (InterruptFlags & ~EM_INVALID) : (InterruptFlags | EM_INVALID);
         }
 
         /// <summary>
@@ -65,8 +77,8 @@ namespace Axiverse
         /// </summary>
         public static bool ThrowOnDivideByZero
         {
-            get => (Control & EM_ZERODIVIDE) == 0;
-            set => Control = (value) ? (Control & ~EM_ZERODIVIDE) : (Control | EM_ZERODIVIDE);
+            get => (InterruptFlags & EM_ZERODIVIDE) == 0;
+            set => InterruptFlags = (value) ? (InterruptFlags & ~EM_ZERODIVIDE) : (InterruptFlags | EM_ZERODIVIDE);
         }
 
         /// <summary>
@@ -75,8 +87,8 @@ namespace Axiverse
         /// </summary>
         public static bool ThrowOnOverflow
         {
-            get => (Control & EM_OVERFLOW) == 0;
-            set => Control = (value) ? (Control & ~EM_OVERFLOW) : (Control | EM_OVERFLOW);
+            get => (InterruptFlags & EM_OVERFLOW) == 0;
+            set => InterruptFlags = (value) ? (InterruptFlags & ~EM_OVERFLOW) : (InterruptFlags | EM_OVERFLOW);
         }
 
         /// <summary>
@@ -85,8 +97,8 @@ namespace Axiverse
         /// </summary>
         public static bool ThrowOnUnderflow
         {
-            get => (Control & EM_UNDERFLOW) == 0;
-            set => Control = (value) ? (Control & ~EM_UNDERFLOW) : (Control | EM_UNDERFLOW);
+            get => (InterruptFlags & EM_UNDERFLOW) == 0;
+            set => InterruptFlags = (value) ? (InterruptFlags & ~EM_UNDERFLOW) : (InterruptFlags | EM_UNDERFLOW);
         }
 
         /// <summary>
@@ -95,14 +107,14 @@ namespace Axiverse
         /// </summary>
         public static bool ThrowOnInexact
         {
-            get => (Control & EM_INEXACT) == 0;
-            set => Control = (value) ? (Control & ~EM_INEXACT) : (Control | EM_INEXACT);
+            get => (InterruptFlags & EM_INEXACT) == 0;
+            set => InterruptFlags = (value) ? (InterruptFlags & ~EM_INEXACT) : (InterruptFlags | EM_INEXACT);
         }
 
         public static bool ThrowOnSevere
         {
-            get => (Control & EM_DEFAULT) == EM_DEFAULT;
-            set => Control = (value) ? (Control & ~EM_DEFAULT) : (Control | EM_DEFAULT);
+            get => (InterruptFlags & EM_DEFAULT) == EM_DEFAULT;
+            set => InterruptFlags = (value) ? (InterruptFlags & ~EM_DEFAULT) : (InterruptFlags | EM_DEFAULT);
         }
 
         /// <summary>
@@ -115,7 +127,7 @@ namespace Axiverse
 
         static FloatingPoint()
         {
-            cw = _controlfp(0, 0);
+            controlFlags = _controlfp(0, 0);
         }
     }
 }
