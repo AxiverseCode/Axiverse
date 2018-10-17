@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Simulation.Behaviors
 {
+    /// <summary>
+    /// 
+    /// https://imada.sdu.dk/~marco/Teaching/AY2012-2013/DM810/Slides/dm810-lec2.pdf
+    /// </summary>
     class Steering
     {
         public static void Seek()

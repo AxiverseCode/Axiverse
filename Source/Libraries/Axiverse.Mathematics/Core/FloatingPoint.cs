@@ -55,8 +55,7 @@ namespace Axiverse
             get { return controlFlags; }
             set
             {
-                _controlfp(controlFlags, MCW_EM);
-                controlFlags = value;
+                controlFlags = _controlfp(controlFlags, MCW_EM);
             }
         }
 

@@ -29,19 +29,20 @@ namespace Axiverse.Simulation.Behaviors
             var desire = Vector3.Zero;
             desire += Steering.Cohesion(radius, body.LinearPosition, neighbors);
             desire += Steering.Separation(radius, body.LinearPosition, neighbors);
-            //desire += Steering.Traveling(neighbors);
+            desire += Steering.Traveling(neighbors);
+            desire += Steering.Arrival(Vector3.Zero, body, 1, 1);
 
             var angularTarget = Steering.Alignment(body.AngularPosition, neighbors);
             var angularDistance = Quaternion.Distance(body.AngularPosition, angularTarget);
-            Console.Write(angularDistance.ToString("n2") + ", ");
+            //Console.Write(angularDistance.ToString("n2") + ", ");
+
             if (angularDistance > 0)
             {
                 var scaled = Math.Min(1, maxAngularVelocity * context.DeltaTime / angularDistance);
                 body.AngularPosition = Quaternion.Lerp(body.AngularPosition, angularTarget, scaled);
             }
-            //Requires.IsNotNaN(body.LinearPosition);
-            body.LinearVelocity += Steering.Arrival(body.LinearPosition + desire, body, 1, 0.1f) * context.DeltaTime;
-            //Requires.IsNotNaN(body.LinearPosition);
+
+            body.LinearVelocity += desire * context.DeltaTime;
 
             body.ClearForces();
             body.AngularPosition = Quaternion.LookAt(-body.LinearVelocity, body.AngularPosition.Transform(Vector3.Up));
@@ -50,7 +51,7 @@ namespace Axiverse.Simulation.Behaviors
         public override void Process(SimulationContext context)
         {
             base.Process(context);
-            Console.WriteLine();
+            //Console.WriteLine();
         }
     }
 }
