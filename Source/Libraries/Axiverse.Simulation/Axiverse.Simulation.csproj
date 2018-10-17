@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\BehaviorComponent.cs" />
     <Compile Include="Behaviors\BehaviorProcessor.cs" />
+    <Compile Include="Behaviors\PidController.cs" />
     <Compile Include="Behaviors\Steering.cs" />
     <Compile Include="CollectorProcessor.cs" />
     <Compile Include="ComponentEventArgs.cs" />
