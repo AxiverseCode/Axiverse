@@ -94,7 +94,7 @@ namespace Axiverse.Simulation.Behaviors
                 count++;
             }
 
-            return (sum / count) - position;
+            return (count == 0) ? Vector3.Zero : (sum / count) - position;
         }
 
         public static Vector3 Center(IEnumerable<Body> neighbors)
@@ -108,7 +108,7 @@ namespace Axiverse.Simulation.Behaviors
                 count++;
             }
 
-            return sum / count;
+            return (count == 0) ? Vector3.Zero : sum / count;
         }
 
         public static Vector3 Traveling(IEnumerable<Body> neighbors)
@@ -122,7 +122,7 @@ namespace Axiverse.Simulation.Behaviors
                 count++;
             }
 
-            return sum / count;
+            return (count == 0) ? Vector3.Zero : sum / count;
         }
 
         /// <summary>

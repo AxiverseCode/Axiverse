@@ -48,6 +48,16 @@ namespace Axiverse
             return Math.Cos(value);
         }
 
+        public static float Acos(float value)
+        {
+            return (float)Math.Acos(value);
+        }
+
+        public static double Acos(double value)
+        {
+            return Math.Acos(value);
+        }
+
         /// <summary>
         /// Calculates the square root of the value.
         /// </summary>

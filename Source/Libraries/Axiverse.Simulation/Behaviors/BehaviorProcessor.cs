@@ -10,7 +10,7 @@ namespace Axiverse.Simulation.Behaviors
     public class BehaviorProcessor : Processor<BehaviorComponent, PhysicsComponent>
     {
         private float acceleration = 0.1f;
-        private float maxAngularVelocity = 0.1f;
+        private float maxAngularVelocity = 0.5f;
 
         float radius = 50.0f;
 
@@ -29,18 +29,28 @@ namespace Axiverse.Simulation.Behaviors
             var desire = Vector3.Zero;
             desire += Steering.Cohesion(radius, body.LinearPosition, neighbors);
             desire += Steering.Separation(radius, body.LinearPosition, neighbors);
-            desire += Steering.Traveling(neighbors);
+            //desire += Steering.Traveling(neighbors);
 
             var angularTarget = Steering.Alignment(body.AngularPosition, neighbors);
             var angularDistance = Quaternion.Distance(body.AngularPosition, angularTarget);
+            Console.Write(angularDistance.ToString("n2") + ", ");
             if (angularDistance > 0)
             {
                 var scaled = Math.Min(1, maxAngularVelocity * context.DeltaTime / angularDistance);
                 body.AngularPosition = Quaternion.Lerp(body.AngularPosition, angularTarget, scaled);
             }
-            
+            //Requires.IsNotNaN(body.LinearPosition);
             body.LinearVelocity += Steering.Arrival(body.LinearPosition + desire, body, 1, 0.1f) * context.DeltaTime;
+            //Requires.IsNotNaN(body.LinearPosition);
+
+            body.ClearForces();
             body.AngularPosition = Quaternion.LookAt(-body.LinearVelocity, body.AngularPosition.Transform(Vector3.Up));
+        }
+
+        public override void Process(SimulationContext context)
+        {
+            base.Process(context);
+            Console.WriteLine();
         }
     }
 }

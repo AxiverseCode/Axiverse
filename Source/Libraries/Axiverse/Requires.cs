@@ -92,6 +92,24 @@ namespace Axiverse
             }
         }
 
+        public static void IsNotNaN<T>(T value)
+        {
+            if (!value.Equals(value))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public static void IsNotNaN<T>(IEnumerable<T> values)
+        {
+            foreach (var value in values) {
+                if (!value.Equals(value))
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
         /// <summary>
         /// Throws an <see cref="InvalidCastException"/> if the object cannot be assigned to key.
         /// </summary>

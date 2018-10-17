@@ -469,7 +469,8 @@ namespace Axiverse
         {
             // https://math.stackexchange.com/questions/90081/quaternion-distance
             float inner = left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
-            return (float)Math.Acos(2 * inner * inner - 1);
+            inner = Functions.Clamp(inner, -1, 1);
+            return Functions.Acos(2 * inner * inner - 1);
         }
 
         /// <summary>
@@ -705,11 +706,20 @@ namespace Axiverse
         public static Quaternion Average(IEnumerable<Quaternion> quaternions)
         {
             int count = quaternions.Count();
-            Quaternion sum = Quaternion.Zero;
+            float fraction = 1f / count;
+
+            Quaternion sum = Zero;
 
             foreach (var q in quaternions)
             {
-                sum += q;
+                if (Dot(sum, q) > 0)
+                {
+                    sum -= q * fraction;
+                }
+                else
+                {
+                    sum += q * fraction;
+                }
             }
 
             return sum.Normal();

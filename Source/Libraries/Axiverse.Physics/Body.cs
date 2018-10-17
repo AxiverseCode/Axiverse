@@ -199,6 +199,8 @@ namespace Axiverse.Physics
             // This stored angularVelocity in local space
             // angularPosition = (angularPosition * deltaOrientation).Normal();
             angularPosition = (deltaOrientation * angularPosition).Normal();
+
+            Requires.IsNotNaN(AngularPosition);
         }
 
         /// <summary>
@@ -338,6 +340,11 @@ namespace Axiverse.Physics
             Vector3 v = Vector3.Cross(Matrix3.Transform(c, inverseInertiaTensorWorld), r);
 
             return inverseMass + Vector3.Dot(normal, v);
+        }
+
+        public override string ToString()
+        {
+            return $"Body 𝑥:{LinearPosition}, ω:{AngularPosition}";
         }
     }
 }

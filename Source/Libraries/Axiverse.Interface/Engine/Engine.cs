@@ -128,13 +128,17 @@ namespace Axiverse.Interface.Engine
             var texture = new Texture(device);
             texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
 
+            var uvGrid = new Texture(device);
+            uvGrid.Load(@".\Resources\Textures\UV Grid.png");
+
             var skymap = new Texture(device);
             skymap.Load(@".\Resources\Textures\NASA Starmap 8k.jpg");
 
             // Lets create some resources
             LoadCube(device);
             LoadSphere(device);
-            LoadShip(device);
+            LoadModel(device, "ship");
+            LoadModel(device, "drone");
 
             var sky = new Entity("sky");
             Scene.Add(sky);
@@ -208,13 +212,16 @@ namespace Axiverse.Interface.Engine
             for (int i = 0; i < 10; i++)
             {
                 var bloid = new Entity();
-                bloid.Components.Add(new TransformComponent());
+                bloid.Components.Add(new TransformComponent
+                {
+                    Scaling = new Vector3(0.2f, 0.2f, 0.2f)
+                });
                 bloid.Components.Add(new BehaviorComponent());
                 bloid.Components.Add(new RenderableComponent()
                 {
-                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
+                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:drone").Value }
                 });
-                bloid.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+                bloid.Components.Get<RenderableComponent>().Mesh.Bindings.Add(uvGrid);
                 bloid.Components.Add(new PhysicsComponent(new Body
                 {
                     LinearPosition = Functions.Random.NextVector3(-10, 10),
@@ -231,6 +238,7 @@ namespace Axiverse.Interface.Engine
 
             var prev = Environment.TickCount;
             // Into the loop we go!
+
             using (var loop = new RenderLoop(form))
             {
                 while (loop.NextFrame())
@@ -268,8 +276,8 @@ namespace Axiverse.Interface.Engine
                     cameraTransform.Rotation *= Quaternion.FromEuler(angular);
 
                     // Step and run processors.
+                    FloatingPoint.ThrowOnSevere = true;
                     Scene.Step(delta / 1000.0f);
-
 
                     compositor.Process(Scene, cameraComponent);
                 }
@@ -340,16 +348,16 @@ namespace Axiverse.Interface.Engine
             Cache.Add("memory:sphere", meshDraw);
         }
 
-        public void LoadShip(GraphicsDevice device)
+        public void LoadModel(GraphicsDevice device, string name)
         {
-            var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, @".\Resources\Models\ship.obj");
+            var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, $@".\Resources\Models\{name}.obj");
             var spaceMeshDraw = new MeshDraw
             {
                 VertexBuffers = new[] { spaceMesh },
                 Count = spaceMesh.Count,
             };
 
-            Cache.Add("memory:ship", spaceMeshDraw);
+            Cache.Add("memory:" + name, spaceMeshDraw);
         }
     }
 }

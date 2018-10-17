@@ -47,6 +47,7 @@
     <Compile Include="Bounds.cs" />
     <Compile Include="Bounds3.cs" />
     <Compile Include="Complex.cs" />
+    <Compile Include="Core\FloatingPoint.cs" />
     <Compile Include="Core\MathematicsExtensions.cs" />
     <Compile Include="Core\Matrix4.cs" />
     <Compile Include="Core\Swizzle.cs" />
