@@ -16,7 +16,7 @@ namespace Axiverse.Interface.Assets.Models
         public int VertexCount { get; set; }
 
 
-        public static VertexBufferBinding Load(GraphicsDevice device, String filename)
+        public static VertexBufferBinding Load(GraphicsDevice device, String filename, Matrix3? positionTransform = null)
         {
             var library = Injector.Global.Resolve<Library>();
             var loader = new WavefrontObjLoader();
@@ -25,6 +25,15 @@ namespace Axiverse.Interface.Assets.Models
                 loader.LoadObj(stream);
             }
 
+            if (positionTransform.HasValue)
+            {
+                Matrix3 transform = positionTransform.Value;
+                for (int j = 0; j < loader.VertexList.Count; j++)
+                {
+                    loader.VertexList[j].Vector = Matrix3.Transform(loader.VertexList[j].Vector, transform);
+                }
+            }
+            
             // vertex buffer
             var vertexCount = loader.TriangleCount * 3;
             var vertices = new PositionColorTexture[vertexCount];

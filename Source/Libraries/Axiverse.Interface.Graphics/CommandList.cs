@@ -124,7 +124,7 @@ namespace Axiverse.Interface.Graphics
 
                 foreach (var entry in descriptors.Layout.Entries)
                 {
-                    if (entry.Type == DescriptorLayout.EntryType.ShaderResourceView)
+                    if (entry.Type == DescriptorLayout.EntryType.ConstantBufferShaderResourceOrUnorderedAccessView)
                     {
                         NativeCommandList.SetGraphicsRootDescriptorTable(
                             entry.Slot,

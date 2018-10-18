@@ -100,6 +100,7 @@
     <Compile Include="SamplerStateDescription.cs" />
     <Compile Include="ShaderBytecode.cs" />
     <Compile Include="Shaders\GeometryShader.cs" />
+    <Compile Include="Shaders\MipMapShader.cs" />
     <Compile Include="Shaders\ResourceBinding.cs" />
     <Compile Include="Shaders\Shader.cs" />
     <Compile Include="PresenterDescription.cs" />

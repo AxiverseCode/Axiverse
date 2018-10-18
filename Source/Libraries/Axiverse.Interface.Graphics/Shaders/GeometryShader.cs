@@ -67,8 +67,8 @@ namespace Axiverse.Interface.Graphics.Shaders
             RootSignature = RootSignature.Create(Device, rootSignatureDescription);
 
             Layout = new DescriptorLayout(
-                DescriptorLayout.EntryType.ShaderResourceView,
-                DescriptorLayout.EntryType.ShaderResourceView,
+                DescriptorLayout.EntryType.ConstantBufferShaderResourceOrUnorderedAccessView,
+                DescriptorLayout.EntryType.ConstantBufferShaderResourceOrUnorderedAccessView,
                 DescriptorLayout.EntryType.SamplerState);
         }
     }

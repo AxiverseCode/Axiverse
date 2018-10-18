@@ -161,9 +161,9 @@ namespace Axiverse
         /// <param name="m32"></param>
         /// <param name="m33"></param>
         public Matrix3(
-            float m11, float m12, float m13,
-            float m21, float m22, float m23,
-            float m31, float m32, float m33)
+            float m11 = 0f, float m12 = 0f, float m13 = 0f,
+            float m21 = 0f, float m22 = 0f, float m23 = 0f,
+            float m31 = 0f, float m32 = 0f, float m33 = 0f)
         {
             M11 = m11; M12 = m12; M13 = m13;
             M21 = m21; M22 = m22; M23 = m23;

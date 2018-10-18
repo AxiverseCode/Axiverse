@@ -44,6 +44,11 @@ namespace Axiverse.Interface.Graphics
         /// </summary>
         public int Depth { get; private set; }
 
+        /// <summary>
+        /// Gets the number of mip levels of the texture. Should be at least 1.
+        /// </summary>
+        public short MipLevels { get; private set; } = 1;
+
         public Texture(GraphicsDevice device) : base(device)
         {
 
@@ -76,7 +81,10 @@ namespace Axiverse.Interface.Graphics
             Resource = Device.NativeDevice.CreateCommittedResource(
                 new HeapProperties(HeapType.Default),
                 HeapFlags.None,
-                ResourceDescription.Texture2D(Format.D32_Float, Width, Height, flags: ResourceFlags.AllowDepthStencil),
+                ResourceDescription.Texture2D(
+                    Format.D32_Float, Width, Height,
+                    mipLevels: MipLevels,
+                    flags: ResourceFlags.AllowDepthStencil),
                 ResourceStates.DepthWrite,
                 depthOptimizedClearValue);
 
@@ -98,20 +106,26 @@ namespace Axiverse.Interface.Graphics
             Height = bitmap.Height;
             Depth = 1;
             Dimensions = 2;
+            MipLevels = (short)(Math.Floor(Math.Log(Math.Min(Width, Height), 2)));
+
 
             // create resources
 
             var imageFormat = Format.B8G8R8A8_UNorm;
+            double levels = Math.Log(Math.Min(Width, Height), 2) - 1;
+            var resourceDescription =
+                ResourceDescription.Texture2D(imageFormat, Width, Height, mipLevels: MipLevels);            
+
             Resource = Device.NativeDevice.CreateCommittedResource(
                 new HeapProperties(HeapType.Default),
                 HeapFlags.None,
-                ResourceDescription.Texture2D(imageFormat, Width, Height),
+                resourceDescription,
                 ResourceStates.CopyDestination);
 
             UploadResource = Device.NativeDevice.CreateCommittedResource(
                 new HeapProperties(CpuPageProperty.WriteBack, MemoryPool.L0),
                 HeapFlags.None,
-                ResourceDescription.Texture2D(imageFormat, Width, Height),
+                resourceDescription,
                 ResourceStates.GenericRead);
 
             // copy into upload buffer
@@ -126,17 +140,49 @@ namespace Axiverse.Interface.Graphics
                 new ResourceRegion()
                 {
                     Back = 1,
+                    Right = Width,
                     Bottom = Height,
-                    Right = Width
                 },
                 data.Scan0,
                 Width * 4,
                 Width * Height * 4);
 
             bitmap.UnlockBits(data);
+
+            // Generate mipmaps on CPU
+            for (int i = 1; i < MipLevels; i++)
+            {
+                int mipWidth = Width / (1 << i);
+                int mipHeight = Height / (1 << i);
+                Bitmap mipMap = new Bitmap(bitmap, new Size(mipWidth, mipHeight));
+                data = mipMap.LockBits(
+                    new Rectangle(0, 0, mipWidth, mipHeight),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format32bppArgb);
+
+                UploadResource.WriteToSubresource(
+                    i,
+                    new ResourceRegion()
+                    {
+                        Back = 1,
+                        Right = mipWidth,
+                        Bottom = mipHeight,
+                    },
+                    data.Scan0,
+                    mipWidth * 4,
+                    mipWidth * mipHeight * 4);
+
+                mipMap.UnlockBits(data);
+                mipMap.Dispose();
+            }
+
+
+
             bitmap.Dispose();
 
+
             Device.UploadQueue.Enqueue(this);
+            //ShaderResourceViewDescription;
             //ShaderResourceViewDescription = new ShaderResourceViewDescription
             //{
             //    Shader4ComponentMapping = 5768,
@@ -155,9 +201,13 @@ namespace Axiverse.Interface.Graphics
             if (UploadResource != null)
             {
                 // copy from upload buffer to gpu buffer
-                commandList.NativeCommandList.CopyTextureRegion(
-                    new TextureCopyLocation(Resource, 0), 0, 0, 0,
-                    new TextureCopyLocation(UploadResource, 0), null);
+
+                for (int i = 0; i < MipLevels; i++)
+                {
+                    commandList.NativeCommandList.CopyTextureRegion(
+                        new TextureCopyLocation(Resource, i), 0, 0, 0,
+                        new TextureCopyLocation(UploadResource, i), null);
+                }
 
                 commandList.NativeCommandList.ResourceBarrierTransition(
                     Resource,

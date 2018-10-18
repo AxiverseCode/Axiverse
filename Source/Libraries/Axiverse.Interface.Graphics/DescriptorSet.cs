@@ -25,7 +25,7 @@ namespace Axiverse.Interface.Graphics
 
         public void SetConstantBuffer(int slot, GraphicsBuffer buffer)
         {
-            Requires.That(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ShaderResourceView);
+            Requires.That(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ConstantBufferShaderResourceOrUnorderedAccessView);
             Requires.That(buffer.Size % 256 == 0);
             Device.NativeDevice.CreateConstantBufferView(new ConstantBufferViewDescription
             {
@@ -36,7 +36,7 @@ namespace Axiverse.Interface.Graphics
 
         public void SetConstantBuffer(int slot, GraphicsBuffer buffer, int offset, int size)
         {
-            Contract.Requires(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ShaderResourceView);
+            Contract.Requires(Layout.Entries[slot].Type == DescriptorLayout.EntryType.ConstantBufferShaderResourceOrUnorderedAccessView);
             Device.NativeDevice.CreateConstantBufferView(new ConstantBufferViewDescription
             {
                 BufferLocation = buffer.GpuHandle + offset,
@@ -48,11 +48,13 @@ namespace Axiverse.Interface.Graphics
         {
             Device.NativeDevice.CreateShaderResourceView(resource.Resource, new ShaderResourceViewDescription
             {
+                 
                 Shader4ComponentMapping = 5768,
                 //Shader4ComponentMapping = D3DXUtilities.DefaultComponentMapping(),
                 Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
                 Dimension = ShaderResourceViewDimension.Texture2D,
-                Texture2D = { MipLevels = 1 },
+                // TODO(axiverse): Take this from the texture resource
+                Texture2D = { MipLevels = resource.MipLevels },
             }, ShaderResourceViewHandle + Layout.Entries[slot].Index * Device.ShaderResourceViewAllocator.Stride);
         }
 

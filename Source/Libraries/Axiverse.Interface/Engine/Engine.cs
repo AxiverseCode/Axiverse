@@ -132,13 +132,15 @@ namespace Axiverse.Interface.Engine
             uvGrid.Load(@".\Resources\Textures\UV Grid.png");
 
             var skymap = new Texture(device);
-            skymap.Load(@".\Resources\Textures\NASA Starmap 8k.jpg");
+            skymap.Load(@".\Resources\Textures\NASA Starmap 4k.jpg");
 
             // Lets create some resources
             LoadCube(device);
             LoadSphere(device);
             LoadModel(device, "ship");
-            LoadModel(device, "drone");
+            // Blender is Z top to bottom, Y front to back, X right to left.
+            // X right to left, Z
+            LoadModel(device, "drone", new Matrix3(m11: 1, m23: -1, m32: 1));
 
             var sky = new Entity("sky");
             Scene.Add(sky);
@@ -348,9 +350,9 @@ namespace Axiverse.Interface.Engine
             Cache.Add("memory:sphere", meshDraw);
         }
 
-        public void LoadModel(GraphicsDevice device, string name)
+        public void LoadModel(GraphicsDevice device, string name, Matrix3? transform = null)
         {
-            var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, $@".\Resources\Models\{name}.obj");
+            var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, $@".\Resources\Models\{name}.obj", transform);
             var spaceMeshDraw = new MeshDraw
             {
                 VertexBuffers = new[] { spaceMesh },

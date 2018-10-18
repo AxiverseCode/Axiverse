@@ -22,7 +22,7 @@ namespace Axiverse.Interface.Graphics
                 {
                     Slot = Entries.Count,
                     Type = type,
-                    Index = (type == EntryType.ShaderResourceView) ? ShaderResourceViewCount++ : SamplerCount++
+                    Index = (type == EntryType.ConstantBufferShaderResourceOrUnorderedAccessView) ? ShaderResourceViewCount++ : SamplerCount++
                 });
             }
         }
@@ -37,7 +37,7 @@ namespace Axiverse.Interface.Graphics
 
         public enum EntryType
         {
-            ShaderResourceView,
+            ConstantBufferShaderResourceOrUnorderedAccessView,
             SamplerState,
         }
     }

@@ -74,6 +74,7 @@ namespace Axiverse.Interface.Rendering.Compositing
 
             context.CommandList.Wait();
             Renderer.Release(context);
+            Release();
         }
 
         public void Prerender(RenderContext context)
