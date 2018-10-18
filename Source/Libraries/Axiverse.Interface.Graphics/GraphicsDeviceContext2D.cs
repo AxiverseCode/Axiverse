@@ -138,26 +138,26 @@ namespace Axiverse.Interface.Graphics
             switch (layout.HorizontalAlignment)
             {
                 case HorizontalAlign.Near:
-                    format.SetTextAlignment(TextAlignment.Leading);
+                    format.TextAlignment = TextAlignment.Leading;
                     break;
                 case HorizontalAlign.Center:
-                    format.SetTextAlignment(TextAlignment.Center);
+                    format.TextAlignment = TextAlignment.Center;
                     break;
                 case HorizontalAlign.Far:
-                    format.SetTextAlignment(TextAlignment.Trailing);
+                    format.TextAlignment = TextAlignment.Trailing;
                     break;
             }
 
             switch (layout.VerticalAlignment)
             {
                 case VerticalAlign.Leading:
-                    format.SetParagraphAlignment(ParagraphAlignment.Near);
+                    format.ParagraphAlignment = ParagraphAlignment.Near;
                     break;
                 case VerticalAlign.Middle:
-                    format.SetParagraphAlignment(ParagraphAlignment.Center);
+                    format.ParagraphAlignment = ParagraphAlignment.Center;
                     break;
                 case VerticalAlign.Trailing:
-                    format.SetParagraphAlignment(ParagraphAlignment.Far);
+                    format.ParagraphAlignment = ParagraphAlignment.Far;
                     break;
             }
 

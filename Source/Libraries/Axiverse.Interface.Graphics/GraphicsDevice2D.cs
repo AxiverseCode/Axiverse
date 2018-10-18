@@ -107,8 +107,8 @@ namespace Axiverse.Interface.Graphics
                 FontStyle.Normal,
                 FontStretch.Normal,
                 30);
-            TextFormat.SetTextAlignment(TextAlignment.Leading);
-            TextFormat.SetParagraphAlignment(ParagraphAlignment.Near);
+            TextFormat.TextAlignment = TextAlignment.Leading;
+            TextFormat.ParagraphAlignment = ParagraphAlignment.Near;
 
             DeviceContextOptions deviceOptions = DeviceContextOptions.None;
             using (var deviceGI = Device3D.QueryInterface<DeviceGI>())
