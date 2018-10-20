@@ -15,7 +15,7 @@ namespace Axiverse.Calibration
         {
             foreach (var emitter in propulsion.Emitters)
             {
-                physics.Body.ApplyForce(emitter.ThrustVector, emitter.Offset);
+                physics.Body.AccumulateForce(emitter.ThrustVector, emitter.Offset);
             }
         }
     }

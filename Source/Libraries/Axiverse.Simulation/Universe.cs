@@ -29,6 +29,11 @@ namespace Axiverse.Simulation
 
         public void Step(float dt)
         {
+            if (dt == 0)
+            {
+                return;
+            }
+
             SimulationContext context = new SimulationContext()
             {
                 DeltaTime = dt

@@ -60,7 +60,7 @@ namespace Axiverse
             X = Y = value;
         }
 
-        public Vector2(float x, float y)
+        public Vector2(float x = 0f, float y = 0f)
         {
             X = x;
             Y = y;

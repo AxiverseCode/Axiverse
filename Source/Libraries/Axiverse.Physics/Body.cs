@@ -36,8 +36,8 @@ namespace Axiverse.Physics
         private float inverseMass = 1;
 
         // can be used as per frame accumulators if cleared
-        private Vector3 totalForce;
-        private Vector3 totalTorque;
+        public Vector3 totalForce;
+        public Vector3 totalTorque;
 
         // collision shapes
         private Shape collisionShape;
@@ -217,39 +217,126 @@ namespace Axiverse.Physics
         /// <summary>
         /// Applies an impulse on the center of the body. Will not cause any linear changes.
         /// </summary>
-        /// <param name="globalImpulse">Impulse in global space.</param>
-        public void ApplyCentralImpulse(Vector3 globalImpulse)
+        /// <param name="globalCentralImpulse">Impulse in global space.</param>
+        public void ApplyGlobalCentralImpulse(Vector3 globalCentralImpulse)
         {
-            // linearVelocity = linearVelocity + impulse * inverseMass * linearFactor
-            linearVelocity = linearVelocity + globalImpulse * linearFactor * inverseMass;
+            linearVelocity = linearVelocity + globalCentralImpulse * linearFactor * inverseMass;
         }
 
         /// <summary>
         /// Applies an impulse on the center of the body. Will not cause any linear changes.
         /// </summary>
-        /// <param name="localImpulse">Impulse in local space.</param>
-        public void ApplyCentralLocalImpulse(Vector3 localImpulse)
+        /// <param name="momentaryGlobalCentralForce"></param>
+        /// <param name="deltaTime"></param>
+        public void ApplyGlobalCentralImpulse(Vector3 momentaryGlobalCentralForce, float deltaTime)
         {
-            ApplyCentralImpulse(AngularPosition.Transform(localImpulse));
+            ApplyGlobalCentralImpulse(momentaryGlobalCentralForce * deltaTime);
+        }
+
+        /// <summary>
+        /// Applies an impulse on the center of the body. Will not cause any linear changes.
+        /// </summary>
+        /// <param name="localCentralImpulse">Impulse in local space.</param>
+        public void ApplyLocalCentralImpulse(Vector3 localCentralImpulse)
+        {
+            ApplyGlobalCentralImpulse(AngularPosition.Transform(localCentralImpulse));
+        }
+
+        /// <summary>
+        /// Applies an impulse on the center of the body. Will not cause any linear changes.
+        /// </summary>
+        /// <param name="momentaryLocalCentralForce"></param>
+        /// <param name="deltaTime"></param>
+        public void ApplyLocalCentralImpulse(Vector3 momentaryLocalCentralForce, float deltaTime)
+        {
+            ApplyLocalCentralImpulse(momentaryLocalCentralForce * deltaTime);
         }
 
         /// <summary>
         /// Applies a torque impulse on the body. Will only cause any angular changes.
         /// </summary>
-        /// <param name="globalTorque">Torque impulse in global space.</param>
-        public void ApplyTorqueImpulse(Vector3 globalTorque)
+        /// <param name="globalTorqueImpulse">Torque impulse in global space.</param>
+        public void ApplyGlobalTorqueImpulse(Vector3 globalTorqueImpulse)
         {
             angularVelocity = angularVelocity +
-                Matrix3.Transform(inverseInertiaTensorWorld, globalTorque) * angularFactor;
+                Matrix3.Transform(inverseInertiaTensorWorld, globalTorqueImpulse) * angularFactor;
         }
 
         /// <summary>
         /// Applies a torque impulse on the body. Will only cause any angular changes.
         /// </summary>
-        /// <param name="localTorque">Torque impulse in local space.</param>
-        public void ApplyLocalTorqueImpulse(Vector3 localTorque)
+        /// <param name="momentaryGlobalTorque"></param>
+        /// <param name="deltaTime"></param>
+        public void ApplyGlobalTorqueImpulse(Vector3 momentaryGlobalTorque, float deltaTime)
         {
-            ApplyTorqueImpulse(AngularPosition.Transform(localTorque));
+            ApplyGlobalTorqueImpulse(momentaryGlobalTorque * deltaTime);
+        }
+
+        /// <summary>
+        /// Applies a torque impulse on the body. Will only cause any angular changes.
+        /// </summary>
+        /// <param name="localTorqueImpulse">Torque impulse in local space.</param>
+        public void ApplyLocalTorqueImpulse(Vector3 localTorqueImpulse)
+        {
+            ApplyGlobalTorqueImpulse(AngularPosition.Transform(localTorqueImpulse));
+        }
+
+        /// <summary>
+        /// Applies a torque impulse on the body. Will only cause any angular changes.
+        /// </summary>
+        /// <param name="momentaryLocalTorque"></param>
+        /// <param name="deltaTime"></param>
+        public void ApplyLocalTorqueImpulse(Vector3 momentaryLocalTorque, float deltaTime)
+        {
+            ApplyLocalTorqueImpulse(momentaryLocalTorque * deltaTime);
+        }
+
+        /// <summary>
+        /// Applies a central force on the body. Will only apply linear forces.
+        /// </summary>
+        /// <param name="globalCentralForce"></param>
+        public void AccumulateGlobalCentralForce(Vector3 globalCentralForce)
+        {
+            totalForce += globalCentralForce * linearFactor;
+        }
+
+        /// <summary>
+        /// Applies a central force on the body. Will only apply linear forces.
+        /// </summary>
+        /// <param name="localCentralForce"></param>
+        public void AccumulateLocalCentralForce(Vector3 localCentralForce)
+        {
+            AccumulateGlobalCentralForce(AngularPosition.Transform(localCentralForce));
+        }
+
+        /// <summary>
+        /// Applies a torque on the body in global space. Will only apply angular torque.
+        /// </summary>
+        /// <param name="globalTorque"></param>
+        public void AccumulateGlobalTorque(Vector3 globalTorque)
+        {
+            totalTorque += globalTorque * angularFactor;
+        }
+
+        /// <summary>
+        /// Applies a torque on the body in local space. Will only apply angular torque.
+        /// </summary>
+        /// <param name="localTorque"></param>
+        public void AccumulateLocalTorque(Vector3 localTorque)
+        {
+            AccumulateGlobalTorque(AngularPosition.Transform(localTorque));
+        }
+
+        /// <summary>
+        /// Applies a force at a local position on the body. Can cause linear and/or angular
+        /// changes.
+        /// </summary>
+        /// <param name="globalForce"></param>
+        /// <param name="relativeGlobalPosition"></param>
+        public void AccumulateForce(Vector3 globalForce, Vector3 relativeGlobalPosition)
+        {
+            AccumulateGlobalCentralForce(globalForce);
+            AccumulateGlobalTorque(relativeGlobalPosition % globalForce * linearFactor);
         }
 
         /// <summary>
@@ -262,50 +349,11 @@ namespace Axiverse.Physics
         {
             if (inverseMass != 0)
             {
-                ApplyCentralImpulse(globalImpulse);
+                ApplyGlobalCentralImpulse(globalImpulse);
                 // if (angularFactor != 0)                
-                ApplyTorqueImpulse(localPosition % globalImpulse * linearFactor);
+                ApplyGlobalTorqueImpulse(localPosition % globalImpulse * linearFactor);
 
             }
-        }
-
-        /// <summary>
-        /// Applies a torque on the body in global space. Will only apply angular torque.
-        /// </summary>
-        /// <param name="globalTorque"></param>
-        public void ApplyTorque(Vector3 globalTorque)
-        {
-            totalTorque += globalTorque * angularFactor;
-        }
-
-        /// <summary>
-        /// Applies a torque on the body in local space. Will only apply angular torque.
-        /// </summary>
-        /// <param name="localTorque"></param>
-        public void ApplyLocalTorque(Vector3 localTorque)
-        {
-            ApplyTorque(AngularPosition.Transform(localTorque));
-        }
-
-        /// <summary>
-        /// Applies a central force on the body. Will only apply linear forces.
-        /// </summary>
-        /// <param name="force"></param>
-        public void ApplyCentralForce(Vector3 force)
-        {
-            totalForce += force * linearFactor;
-        }
-
-        /// <summary>
-        /// Applies a force at a local position on the body. Can cause linear and/or angular
-        /// changes.
-        /// </summary>
-        /// <param name="force"></param>
-        /// <param name="relativeGlobalPosition"></param>
-        public void ApplyForce(Vector3 force, Vector3 relativeGlobalPosition)
-        {
-            ApplyCentralForce(force);
-            ApplyTorque(relativeGlobalPosition % force * linearFactor);
         }
 
         /// <summary>

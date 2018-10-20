@@ -15,6 +15,12 @@ namespace Axiverse.Interface.Scenes
         public CameraMode Mode { get; set; }
         public Vector3 Target { get; set; }
         public Quaternion Orientation { get; set; }
+
+        public float Rate { get; set; } = 0.2f;
+
+        public Vector3? previousPosition;
+        public Vector3 previousForward;
+        public Vector3 previousUp;
     }
 
     public enum CameraMode

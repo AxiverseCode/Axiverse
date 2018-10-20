@@ -79,6 +79,8 @@
     <Compile Include="Rendering\RenderObject.cs" />
     <Compile Include="Scenes\CameraComponent.cs" />
     <Compile Include="Scenes\CameraProcessor.cs" />
+    <Compile Include="Scenes\DirectControlComponent.cs" />
+    <Compile Include="Scenes\DirectControlProcessor.cs" />
     <Compile Include="Scenes\ModelComponent.cs" />
     <Compile Include="Scenes\RenderableComponent.cs" />
     <Compile Include="Scenes\Scene.cs" />

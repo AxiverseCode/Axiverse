@@ -55,7 +55,7 @@ namespace Axiverse
         {
             Reset(item);
             bag.Add(item);
-            Debug.WriteLine("returned " + typeof(T).Name);
+            // Debug.WriteLine("returned " + typeof(T).Name);
         }
 
         /// <summary>

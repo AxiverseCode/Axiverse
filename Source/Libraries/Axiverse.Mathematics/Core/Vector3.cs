@@ -66,7 +66,7 @@ namespace Axiverse
             X = Y = Z = value;
         }
 
-        public Vector3(float x, float y, float z)
+        public Vector3(float x = 0f, float y = 0f, float z = 0f)
         {
             X = x;
             Y = y;
@@ -137,6 +137,21 @@ namespace Axiverse
                 return Zero;
             }
             return Normal().Multiply(length);
+        }
+
+        /// <summary>
+        /// Returns a vector whose length which at most is the specified length.
+        /// </summary>
+        /// <param name="maximumLength"></param>
+        /// <returns></returns>
+        public Vector3 ClampLength(float maximumLength)
+        {
+            var lengthSquared = LengthSquared();
+            if (lengthSquared > maximumLength * maximumLength)
+            {
+                return maximumLength / Functions.Sqrt(lengthSquared) * this;
+            }
+            return this;
         }
 
         /// <summary>

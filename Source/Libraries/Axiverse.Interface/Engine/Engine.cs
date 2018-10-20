@@ -56,6 +56,7 @@ namespace Axiverse.Interface.Engine
             Scene.Add(new TransformProcessor());
             Scene.Add(new CameraProcessor());
             Scene.Add(new BehaviorProcessor());
+            Scene.Add(new DirectControlProcessor());
         }
 
         SixAxisListener sixAxisListner = new SixAxisListener();
@@ -191,22 +192,25 @@ namespace Axiverse.Interface.Engine
             });
             entity2.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
-            var entity3 = new Entity("ship");
-            Scene.Add(entity3);
-            var shipTransform = entity3.Components.Add(new TransformComponent
+            var shipEntity = new Entity("ship");
+            Scene.Add(shipEntity);
+            var shipTransform = shipEntity.Components.Add(new TransformComponent
             {
                 Scaling = new Vector3(10, 10, 10)
             });
             shipTransform.Children.Add(cameraEntity);
-            entity3.Components.Add(new RenderableComponent
+            shipEntity.Components.Add(new RenderableComponent
             {
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
             });
-            entity3.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+            shipEntity.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
             var body = new Body();
-            body.LinearDampening *= 0.5f;
-            body.AngularDampening *= 0.5f;
-            entity3.Components.Add(new PhysicsComponent(body));
+            //body.LinearDampening *= 0.99f;
+            //body.AngularDampening *= 0.99f;
+            body.LinearPosition = Vector3.ForwardLH * 10;
+            shipEntity.Components.Add(new PhysicsComponent(body));
+            var controller = shipEntity.Components.Add(new DirectControlComponent());
+
             //body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
 
 
@@ -251,10 +255,13 @@ namespace Axiverse.Interface.Engine
                     frame += delta / 10.0f;
                     prev = next;
 
-                    //body.LinearVelocity = new Vector3(twoAxisListener.Position.X / 100, twoAxisListener.Position.Y / 100, 0);
-                    body.ApplyCentralLocalImpulse(new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y));
-                    //body.ApplyLocalTorqueImpulse(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
-                    body.ApplyLocalTorqueImpulse(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
+                    var mappedLinear = new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y);
+                    var mappedAngular = new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0);
+                    // body.ApplyCentralLocalImpulse(new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y));
+                    // body.ApplyLocalTorqueImpulse(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
+                    controller.Translational = mappedLinear;
+                    controller.Steering = mappedAngular;
+
                     entity1.Components.Get<TransformComponent>().Translation = new Vector3(
                         3 * Functions.Sin(Functions.DegreesToRadians(frame / 3)),
                         2 * Functions.Sin(Functions.DegreesToRadians(frame / 6)),
@@ -279,6 +286,8 @@ namespace Axiverse.Interface.Engine
 
                     // Step and run processors.
                     FloatingPoint.ThrowOnSevere = true;
+
+                    //Console.WriteLine(delta);
                     Scene.Step(delta / 1000.0f);
 
                     compositor.Process(Scene, cameraComponent);

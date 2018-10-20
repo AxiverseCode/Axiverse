@@ -114,6 +114,7 @@ namespace Axiverse
         /// <param name="value"></param>
         /// <param name="minimum"></param>
         /// <param name="maximum"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
         public static void Clamp(ref Vector3 value, ref Vector3 minimum, ref Vector3 maximum, out Vector3 result)
         {

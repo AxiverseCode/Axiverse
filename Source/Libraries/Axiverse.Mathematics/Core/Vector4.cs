@@ -73,7 +73,7 @@ namespace Axiverse
         /// <param name="y">The value to set the Y component.</param>
         /// <param name="z">The value to set the Z component.</param>
         /// <param name="w">The value to set the W component.</param>
-        public Vector4(float x, float y, float z, float w)
+        public Vector4(float x = 0f, float y = 0f, float z = 0f, float w = 0f)
         {
             X = x;
             Y = y;

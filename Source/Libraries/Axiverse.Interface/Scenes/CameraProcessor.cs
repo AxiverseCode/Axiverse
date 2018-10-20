@@ -23,6 +23,21 @@ namespace Axiverse.Interface.Scenes
             var f = Matrix4.Transform(new Vector4(Vector3.ForwardRH, 0), transform.GlobalTransform).XYZ;
             var u = Matrix4.Transform(new Vector4(Vector3.Up, 0), transform.GlobalTransform).XYZ;
 
+            if (camera.Rate != 1)
+            {
+                if (camera.previousPosition.HasValue)
+                {
+                    var s = camera.Rate;
+                    p = s * p + (1 - s) * camera.previousPosition.Value;
+                    f = s * f + (1 - s) * camera.previousForward;
+                    u = s * u + (1 - s) * camera.previousUp;
+                }
+
+                camera.previousPosition = p;
+                camera.previousForward = f;
+                camera.previousUp = u;
+            }
+
             switch (camera.Mode)
             {
                 case CameraMode.Forward:
