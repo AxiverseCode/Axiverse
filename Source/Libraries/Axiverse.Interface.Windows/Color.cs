@@ -8,9 +8,24 @@ namespace Axiverse.Interface.Windows
 {
     public struct Color
     {
+        /// <summary>
+        /// Gets the red value.
+        /// </summary>
         public float Red { get; }
+
+        /// <summary>
+        /// Gets the green value.
+        /// </summary>
         public float Green { get; }
+
+        /// <summary>
+        /// Gets the blue value.
+        /// </summary>
         public float Blue { get; }
+
+        /// <summary>
+        /// Gets the opacity.
+        /// </summary>
         public float Opacity { get; }
 
         public Color(float gray) : this(gray, 1.0f)
@@ -47,8 +62,10 @@ namespace Axiverse.Interface.Windows
 
         public static bool operator ==(Color former, Color latter)
         {
-            return former.Red == latter.Red && former.Green == latter.Green && former.Blue == latter.Blue &&
-                former.Opacity == latter.Opacity;
+            return former.Red == latter.Red
+                && former.Green == latter.Green
+                && former.Blue == latter.Blue
+                && former.Opacity == latter.Opacity;
         }
 
         public static bool operator !=(Color former, Color latter)

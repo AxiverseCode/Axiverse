@@ -30,7 +30,7 @@ namespace Axiverse.Interface.Windows
             form.MouseDown += (sender, e) => HandleMouseDown(new MouseEventArgs(e.X, e.Y, (MouseButtons)((int)e.Button >> 20)));
             form.MouseUp += (sender, e) => HandleMouseUp(new MouseEventArgs(e.X, e.Y, (MouseButtons)((int)e.Button >> 20)));
             form.Resize += (sender, e) => Size = new Vector2(form.Width, form.Height);
-
+            
             Width = form.Width;
             Height = form.Height;
         }

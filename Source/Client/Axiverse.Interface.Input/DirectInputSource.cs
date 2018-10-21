@@ -12,7 +12,7 @@ namespace Axiverse.Interface.Input
         public DirectInput DirectInput { get; set; }
 
         public Guid InstanceIdentifier { get; set; }
-        public Guid DeviceIdentifier{ get; set; }
+        public Guid DeviceIdentifier { get; set; }
 
 
         public Guid Identifier { get; set; }
@@ -35,7 +35,7 @@ namespace Axiverse.Interface.Input
             // Acquire the joystick
             Joystick.Acquire();
         }
-        
+
         public override Signal[] Poll()
         {
             try
@@ -52,7 +52,8 @@ namespace Axiverse.Interface.Input
                     };
                 }).ToArray();
 
-            }catch (Exception e)
+            }
+            catch (Exception)
             {
                 return Array.Empty<Signal>();
             }

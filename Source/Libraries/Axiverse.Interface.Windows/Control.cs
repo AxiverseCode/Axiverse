@@ -32,10 +32,12 @@ namespace Axiverse.Interface.Windows
             Text = "Hello World";
             Name = $"Control {++s_controlCount}";
         }
+        
         public override string ToString()
         {
             return $"Name = {Name}, Bounds = [{Bounds}]";
         }
+
         public void Layout()
         {
 
