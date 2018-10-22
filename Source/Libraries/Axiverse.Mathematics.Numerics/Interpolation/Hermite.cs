@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.Numerics.Interpolation
 {
-    class Hermite
+    public class Hermite
     {
-
         public static float Interpolate(float inPosition, float inTangent, float outPosition, float outTangent, float t)
         {
             float a = -inPosition / 2.0f + (3.0f * inTangent) / 2.0f - (3.0f * outPosition) / 2.0f + outTangent / 2.0f;

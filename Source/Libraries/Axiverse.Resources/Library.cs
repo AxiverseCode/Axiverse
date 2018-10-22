@@ -10,6 +10,10 @@ namespace Axiverse.Resources
     /// <summary>
     /// Virtual file system for resources.
     /// </summary>
+    /// <remarks>
+    /// For every path, we use the store with the most specific matching path with the same schema.
+    /// This means that some stores can shadow others.
+    /// </remarks>
     public class Library
     {
         public string BasePath { get; set; }
@@ -28,6 +32,22 @@ namespace Axiverse.Resources
         {
 
         }
+
+
+        // Path
+        // - Get Files
+        // - Get Directories
+        // File
+        // - Open
+        // - Create
+        // - Save
+        // Cache
+        // - GetOrLoad
+        // - GetOnly
+        // - Add
+        // - Remove
+
+        // How do we ensure unique mount paths? (most specific first?) - among the same scheme
 
         public Library(string basePath)
         {

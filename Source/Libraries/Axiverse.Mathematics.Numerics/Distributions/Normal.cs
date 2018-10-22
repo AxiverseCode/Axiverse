@@ -11,8 +11,6 @@ namespace Axiverse.Mathematics.Numerics.Distributions
     /// </summary>
     public class Normal
     {
-
-
         /// <summary>
         /// Calculates the cumulative density at the given point.
         /// </summary>

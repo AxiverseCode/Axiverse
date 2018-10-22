@@ -49,13 +49,17 @@
   <ItemGroup>
     <Compile Include="Cache.cs" />
     <Compile Include="Cached.cs" />
+    <Compile Include="CachedStore.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="Deprecated\Store.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Deprecated\Mount.cs" />
+    <Compile Include="MemoryStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceModule.cs" />
+    <Compile Include="SystemStore.cs" />
     <Compile Include="TypeCache.cs" />
+    <Compile Include="WebStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
