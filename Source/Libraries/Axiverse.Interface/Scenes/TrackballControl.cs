@@ -20,29 +20,75 @@ namespace Axiverse.Interface.Scenes
             TouchZoomPan,
         }
 
+        /// <summary>
+        /// Gets or sets whether the camera controller is enabled.
+        /// </summary>
         public bool Enabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the dimensions of the screen.
+        /// </summary>
         public Rectangle Screen { get; set; }
-        public float RotateSpeed { get; set; }
-        public float ZoomSpeed { get; set; }
-        public float PanSpeed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pan speed;
+        /// </summary>
+        public float RotateSpeed { get; set; } = 1.0f;
+
+        /// <summary>
+        /// Gets or sets the zoom speed;
+        /// </summary>
+        public float ZoomSpeed { get; set; } = 1.2f;
+
+        /// <summary>
+        /// Gets or sets the pan speed;
+        /// </summary>
+        public float PanSpeed { get; set; } = 0.3f;
+
+        /// <summary>
+        /// Gets or sets whether rotations are enabled.
+        /// </summary>
         public bool RotateEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether zoom is enabled.
+        /// </summary>
         public bool ZoomEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether panning is enabled.
+        /// </summary>
         public bool PanEnabled { get; set; }
 
-        public bool StaticMoving { get; set; }
-        public float DynamicDampeningFactor { get; set; }
+        /// <summary>
+        /// Gets or sets whether momentum moving is off.
+        /// </summary>
+        public bool StaticMoving { get; set; } = false;
 
+        /// <summary>
+        /// Gets or sets the dynamic dampening factor for momentum moving;
+        /// </summary>
+        public float DynamicDampeningFactor { get; set; } = 0.2f;
+
+        /// <summary>
+        /// The minimum distance for zooming.
+        /// </summary>
         public float MinDistance { get; set; }
+
+        /// <summary>
+        /// The maximum distance for zooming.
+        /// </summary>
         public float MaxDistance { get; set; }
+
 
         private Vector3 target;
         private float epsilon = 0.000001f;
         private Vector3 lastPosition;
-        private State state =State.None;
+        private State state = State.None;
         private State previousState = State.None;
         private Vector3 eye;
-        private Vector2 movePrev;
-        private Vector2 moveCurr;
+        private Vector2 movePrevious;
+        private Vector2 moveCurrent;
         private Vector3 lastAxis;
         private float lastAngle;
         private Vector2 zoomStart;
@@ -54,7 +100,6 @@ namespace Axiverse.Interface.Scenes
 
         private Vector3 objectPosition;
         private Vector3 objectUpDirection;
-        private Vector3 objectSidewaysDirection;
 
         void HandlResize(Rectangle screen)
         {
@@ -73,30 +118,22 @@ namespace Axiverse.Interface.Scenes
 
         void RotateCamera()
         {
-            Vector3 axis;
-            Quaternion quaternion;
-            Vector3 eyeDirection;
-            Vector3 objectUpDirection;
-            Vector3 objectSidewaysDirection;
-            Vector3 moveDirection;
-            float angle;
-
-            moveDirection = new Vector3(moveCurr.X - movePrev.X, moveCurr.Y - movePrev.Y, 0);
-            angle = moveDirection.Length();
+            Vector3 moveDirection = new Vector3(moveCurrent.X - movePrevious.X, moveCurrent.Y - movePrevious.Y, 0);
+            float angle = moveDirection.Length();
 
             if (angle != 0)
             {
                 eye = objectPosition - target;
 
-                eyeDirection = eye.Normal();
-                objectUpDirection = this.objectUpDirection.Normal();
-                objectSidewaysDirection = (objectUpDirection % eyeDirection).Normal();
+                Vector3 eyeDirection = eye.Normal();
+                Vector3 objectUp = this.objectUpDirection.Normal();
+                Vector3 objectSideways = (objectUp % eyeDirection).Normal();
 
-                moveDirection = objectUpDirection + objectSidewaysDirection;
-                axis = (moveDirection % eyeDirection).Normal();
+                moveDirection = objectUp + objectSideways;
+                Vector3 axis = (moveDirection % eyeDirection).Normal();
 
                 angle *= RotateSpeed;
-                quaternion = Quaternion.FromAxisAngle(axis, angle);
+                Quaternion quaternion = Quaternion.FromAxisAngle(axis, angle);
 
                 eye = quaternion.Transform(eye);
                 this.objectUpDirection = quaternion.Transform(this.objectUpDirection);
@@ -108,26 +145,24 @@ namespace Axiverse.Interface.Scenes
             {
                 lastAngle *= Functions.Sqrt(1 - DynamicDampeningFactor);
                 eye = this.objectPosition - target;
-                quaternion = Quaternion.FromAxisAngle(lastAxis, lastAngle);
+                Quaternion quaternion = Quaternion.FromAxisAngle(lastAxis, lastAngle);
                 eye = quaternion.Transform(eye);
                 this.objectUpDirection = quaternion.Transform(this.objectUpDirection);
             }
-            movePrev = moveCurr;
+            movePrevious = moveCurrent;
         }
 
-        void ZoomCamera ()
+        void ZoomCamera()
         {
-            float factor;
-
             if (state == State.TouchZoomPan)
             {
-                factor = touchZoomDistanceStart / touchZoomDistanceEnd;
+                float factor = touchZoomDistanceStart / touchZoomDistanceEnd;
                 touchZoomDistanceStart = touchZoomDistanceEnd;
                 eye *= factor;
             }
             else
             {
-                factor = 1 + (zoomEnd.Y - zoomStart.Y) * ZoomSpeed;
+                float factor = 1 + (zoomEnd.Y - zoomStart.Y) * ZoomSpeed;
 
                 if (factor != 1 && factor > 0)
                 {
@@ -148,16 +183,12 @@ namespace Axiverse.Interface.Scenes
 
         void PanCamera()
         {
-            Vector2 mouseChange;
-            Vector3 objectUp;
-            Vector3 pan;
-
-            mouseChange = panEnd - panStart;
+            Vector2 mouseChange = panEnd - panStart;
 
             if (mouseChange != Vector2.Zero)
             {
-                mouseChange *= eye.Length() * PanSpeed;
-                pan = (eye % objectUpDirection).OfLength(mouseChange.X);
+                 mouseChange *= eye.Length() * PanSpeed;
+                Vector3 pan = (eye % objectUpDirection).OfLength(mouseChange.X);
                 pan += objectUpDirection.OfLength(mouseChange.Y);
 
                 objectPosition += pan;
@@ -214,6 +245,7 @@ namespace Axiverse.Interface.Scenes
             objectPosition = target + eye;
             CheckDistances();
             // object.lookAt(target);
+
             if (lastPosition.DistanceToSquared(objectPosition) > epsilon)
             {
                 // dispatchevent (changed)
@@ -225,7 +257,6 @@ namespace Axiverse.Interface.Scenes
         {
             state = State.None;
             previousState = State.None;
-
         }
 
         void OnKeyDown(char key)
@@ -284,10 +315,10 @@ namespace Axiverse.Interface.Scenes
 
             if (state == State.Rotate && RotateEnabled)
             {
-                moveCurr = GetMouseOnCircle(page);
-                movePrev = moveCurr;
+                moveCurrent = GetMouseOnCircle(page);
+                movePrevious = moveCurrent;
             }
-            else if (state== State.Zoom && ZoomEnabled)
+            else if (state == State.Zoom && ZoomEnabled)
             {
                 zoomStart = GetMouseOnScreen(page);
                 zoomEnd = zoomStart;
@@ -312,11 +343,11 @@ namespace Axiverse.Interface.Scenes
             }
 
             // stoppropagation
-            
+
             if (state == State.Rotate && RotateEnabled)
             {
-                movePrev = moveCurr;
-                moveCurr = GetMouseOnCircle(page);
+                movePrevious = moveCurrent;
+                moveCurrent = GetMouseOnCircle(page);
             }
             else if (state == State.Zoom && ZoomEnabled)
             {

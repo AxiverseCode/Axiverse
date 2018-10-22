@@ -15,6 +15,8 @@ namespace Axiverse.Interface.Windows
 
         public ControlCollection Children { get; set; }
 
+        public Window Window { get; internal set; }
+
         public Control()
         {
             // initialize collections

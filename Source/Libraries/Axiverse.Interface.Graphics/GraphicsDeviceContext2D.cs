@@ -3,9 +3,9 @@ using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 using System.Collections.Generic;
-using CanvasUI = Axiverse.Interface.Windows.DrawContext;
 using FactoryDW = SharpDX.DirectWrite.Factory;
 using FontWeightDW = SharpDX.DirectWrite.FontWeight;
+using TextLayoutDW = SharpDX.DirectWrite.TextLayout;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -14,7 +14,7 @@ namespace Axiverse.Interface.Graphics
     /// <summary>
     /// Graphics class for drawing to the canvas.
     /// </summary>
-    public class GraphicsDeviceContext2D : CanvasUI
+    public class GraphicsDeviceContext2D : DrawContext
     {
         public FactoryDW FactoryDW;
         public ResourceFontLoader FontLoader;
@@ -103,6 +103,9 @@ namespace Axiverse.Interface.Graphics
         public override void DrawText(string text, Font font, TextLayout layout, Rectangle bounds, Color color)
         {
             var format = Format(font, layout);
+
+            //TextLayoutDW d = new TextLayoutDW(FactoryDW, text, format, 10, 100);
+            //d.HitTestPoint();
             SolidColorBrush.Color = color.ToColor4();
             DeviceContext.DrawText(text, format, bounds.ToRectangleF(), SolidColorBrush);
         }

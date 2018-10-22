@@ -102,13 +102,15 @@ namespace Axiverse.Interface.Engine
 
             var control = new Dialog();
             control.Bounds = new Rectangle(10, 10, 200, 400);
-            control.BackgroundColor = new Color(0, 1, 0);
+            control.BackgroundColor = Colors.Blue;
+            control.ForegroundColor = Colors.Yellow;
             Window.Children.Add(control);
 
             control.Children.Add(new Control()
             {
                 Bounds = new Rectangle(10, 100, 50, 50),
                 BackgroundColor = Colors.Red,
+                ForegroundColor = Colors.Yellow,
             });
             control.Children.Add(new Button()
             {

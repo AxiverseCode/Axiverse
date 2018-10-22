@@ -53,7 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonEventArgs.cs" />
     <Compile Include="DirectInputSource.cs" />
+    <Compile Include="InputEventArgs.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="Events\MouseEventArgs.cs" />
     <Compile Include="Events\RoutedEventArgs.cs" />

@@ -117,5 +117,50 @@ namespace Axiverse.Interface.Windows
         {
             AnimatedChanged?.Invoke(sender, e);
         }
+
+        private bool m_selectable;
+        public virtual bool Selectable
+        {
+            get => m_selectable;
+            set
+            {
+                if (value != m_selectable)
+                {
+                    m_selectable = value;
+                    OnSelectedChanged(this, null);
+                }
+            }
+        }
+
+        public event EventHandler SelectableChanged;
+        protected virtual void OnSelectableChanged(object sender, EventArgs e)
+        {
+            SelectableChanged?.Invoke(sender, e);
+        }
+
+        private bool m_selected;
+        public virtual bool Selected
+        {
+            get => m_selected;
+            set
+            {
+                if (value != m_selected)
+                {
+                    Window?.Select(this);
+                }
+            }
+        }
+
+        public event EventHandler SelectedChanged;
+        protected virtual void OnSelectedChanged(object sender, EventArgs e)
+        {
+            SelectedChanged?.Invoke(sender, e);
+        }
+
+        internal void SetSelection(bool value)
+        {
+            m_selected = value;
+            OnSelectedChanged(this, null);
+        }
     }
 }

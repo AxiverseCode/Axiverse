@@ -76,6 +76,7 @@
     <Compile Include="MouseEventArgs.cs" />
     <Compile Include="MouseMoveEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextBox.cs" />
     <Compile Include="TextLayout.cs" />
     <Compile Include="VerticalAlign.cs" />
     <Compile Include="Window.cs" />
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
       <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse\Axiverse.csproj">
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
+      <Name>Axiverse</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

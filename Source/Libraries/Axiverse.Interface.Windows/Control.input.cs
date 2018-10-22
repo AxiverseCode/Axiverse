@@ -10,7 +10,6 @@ namespace Axiverse.Interface.Windows
     public partial class Control
     {
         public int? m_tabIndex;
-
         public virtual int? TabIndex
         {
             get => m_tabIndex;
