@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Resources
 {
+    /// <summary>
+    /// A store which only exists in memory.
+    /// </summary>
     public class MemoryStore
     {
         /// <summary>

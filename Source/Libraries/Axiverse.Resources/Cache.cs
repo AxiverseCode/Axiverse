@@ -14,6 +14,20 @@ namespace Axiverse.Resources
     public class Cache
     {
         /// <summary>
+        /// Gets the <see cref="Library"/> which backs the cache and loaders.
+        /// </summary>
+        public Library Library { get; }
+        
+        /// <summary>
+        /// Constructs a cache given the specified <see cref="Library"/>.
+        /// </summary>
+        [Inject]
+        public Cache(Library library)
+        {
+            Library = library;
+        }
+
+        /// <summary>
         /// Adds an resource into the cache with the given uri.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -85,7 +99,7 @@ namespace Axiverse.Resources
         /// Registers a loader to be used when loading objects.
         /// </summary>
         /// <param name="loader"></param>
-        public void Register<T>(ILoader<T> loader)
+        public void Register<T>(IResourceLoader<T> loader)
         {
             GetTypeCache<T>().Register(loader);
         }
@@ -102,7 +116,7 @@ namespace Axiverse.Resources
                 return cache as TypeCache<T>;
             }
 
-            var typeCache = new TypeCache<T>();
+            var typeCache = new TypeCache<T>(Library);
             m_typeCaches.Add(typeof(T), typeCache);
             return typeCache;
         }

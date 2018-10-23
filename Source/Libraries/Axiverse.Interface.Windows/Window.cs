@@ -114,6 +114,7 @@ namespace Axiverse.Interface.Windows
         protected void OnMouseUp(MouseEventArgs eventArgs)
         {
             Click?.OnMouseUp(Click, eventArgs);
+            Click = null;
 
             // continue hover mechanics.
             var hover = FindControl(MouseLocation);

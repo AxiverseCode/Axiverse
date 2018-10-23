@@ -7,12 +7,19 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Resources
 {
-    public class ResourceModule : Module
+    /// <summary>
+    /// Module for resource classes.
+    /// </summary>
+    public sealed class ResourceModule : Module
     {
+        /// <summary>
+        /// Initializes the module.
+        /// </summary>
         protected override void Initialize()
         {
-            Bind(new Cache());
-            Bind(new Library());
+            var library = new Library();
+            Bind(new Cache(library));
+            Bind(library);
         }
     }
 }

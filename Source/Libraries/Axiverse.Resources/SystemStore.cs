@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Resources
 {
-    public class SystemStore
+    /// <summary>
+    /// A store backed by the filesystem.
+    /// </summary>
+    public class SystemStore : IResourceStore
     {
         public string Schema => "file";
 

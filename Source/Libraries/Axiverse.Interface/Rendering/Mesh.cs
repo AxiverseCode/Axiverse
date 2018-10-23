@@ -14,6 +14,5 @@ namespace Axiverse.Interface.Rendering
         public int MaterialIndex;
         public readonly BindingDictionary Bindings = new BindingDictionary();
         // Parameters
-
     }
 }

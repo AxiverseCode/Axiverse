@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Axiverse.Resources
 {
     /// <summary>
-    /// 
+    /// A store backed by a remote and local store. Streams loaded from the remote store will be
+    /// duplicated to the local store.
     /// </summary>
     /// <remarks>
     /// </remarks>

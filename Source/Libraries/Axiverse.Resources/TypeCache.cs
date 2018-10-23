@@ -10,11 +10,24 @@ using Axiverse.Injection;
 namespace Axiverse.Resources
 {
     /// <summary>
-    /// An object cache backed for loaded objects.
+    /// An typed object cache backed for loaded objects.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class TypeCache<T>
     {
+        /// <summary>
+        /// Gets the <see cref="Library"/> which backs the cache and loaders.
+        /// </summary>
+        public Library Library { get; }
+
+        /// <summary>
+        /// Constructs a typed cache given the specified <see cref="Library"/>.
+        /// </summary>
+        public TypeCache(Library library)
+        {
+            Library = library;
+        }
+
         /// <summary>
         /// Adds an object to the cache with the given uri.
         /// </summary>
@@ -52,16 +65,33 @@ namespace Axiverse.Resources
                 return cached;
             }
 
-            foreach (var loader in m_loaders)
+            return Create(uri);
+        }
+
+        /// <summary>
+        /// Creates the file drawing 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        protected Cached<T> Create(Uri uri)
+        {
+            // Get the stream.
+            if (Library.FileExists(uri))
             {
-                if (loader.TryLoad(uri, out var value))
+                using(var stream = Library.OpenRead(uri))
                 {
-                    cached = new Cached<T>(uri, value);
-                    m_objects.Add(uri, cached);
-                    return cached;
+                    foreach (var loader in m_loaders)
+                    {
+                        if (loader.TryLoad(stream, out var value))
+                        {
+                            var cached = new Cached<T>(uri, value);
+                            m_objects.Add(uri, cached);
+                            return cached;
+                        }
+                    }
                 }
             }
-            
+
             throw new FileNotFoundException();
         }
 
@@ -82,12 +112,12 @@ namespace Axiverse.Resources
         /// Registers a loader to be used when loading objects.
         /// </summary>
         /// <param name="loader"></param>
-        public void Register(ILoader<T> loader)
+        public void Register(IResourceLoader<T> loader)
         {
             m_loaders.Add(loader);
         }
 
-        private readonly List<ILoader<T>> m_loaders = new List<ILoader<T>>();
+        private readonly List<IResourceLoader<T>> m_loaders = new List<IResourceLoader<T>>();
         private readonly Dictionary<Uri, Cached<T>> m_objects = new Dictionary<Uri, Cached<T>>();
     }
 }

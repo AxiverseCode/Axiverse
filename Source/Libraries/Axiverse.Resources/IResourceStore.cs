@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Resources
 {
-    /// <summary>
-    /// Stream store backed by a web source. Often used in conjunction with a cache.
-    /// </summary>
-    public class WebStore : IResourceStore
+    public interface IResourceStore
     {
     }
 }
