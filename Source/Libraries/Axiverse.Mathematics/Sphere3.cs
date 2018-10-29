@@ -39,6 +39,17 @@ namespace Axiverse.Mathematics
         /// <summary>
         /// Constructs a sphere with the given center position and radius.
         /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="position"></param>
+        public Sphere3(float radius, Vector3 position = default(Vector3))
+        {
+            Radius = radius;
+            Position = position;
+        }
+
+        /// <summary>
+        /// Constructs a sphere with the given center position and radius.
+        /// </summary>
         /// <param name="position"></param>
         /// <param name="radius"></param>
         public Sphere3(Vector3 position, float radius)

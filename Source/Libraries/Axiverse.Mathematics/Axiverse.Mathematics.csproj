@@ -54,6 +54,10 @@
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Core\Functions.cs" />
     <Compile Include="Core\Matrix3.cs" />
+    <Compile Include="Geometry\Box.cs" />
+    <Compile Include="Geometry\Plane3.cs" />
+    <Compile Include="Geometry\Sphere.cs" />
+    <Compile Include="Geometry\Triangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Quaternion.cs" />
     <Compile Include="Ray3.cs" />
@@ -71,8 +75,6 @@
     <Compile Include="Core\Vector4.cs" />
     <Compile Include="Viewport.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Geometry\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

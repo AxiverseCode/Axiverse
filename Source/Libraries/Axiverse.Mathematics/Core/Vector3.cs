@@ -930,7 +930,7 @@ namespace Axiverse
         public static readonly Vector3 BackwardRH = new Vector3(0, 0, 1);
 
         /// <summary>The zero vector.</summary>
-        public static readonly Vector3 Zero = new Vector3(0, 0, 0);
+        public static readonly Vector3 Zero = default(Vector3);
         
         /// <summary>The one vector.</summary>
         public static readonly Vector3 One = new Vector3(1, 1, 1);
