@@ -139,9 +139,9 @@ namespace Axiverse.Mathematics
         public static bool Intersects(ref Bounds3 left, ref Bounds3 right)
         {
             return
-                (left.Maximum.X >= right.Minimum.X && left.Minimum.X >= right.Maximum.X) &&
-                (left.Maximum.Y >= right.Minimum.Y && left.Minimum.Y >= right.Maximum.Y) &&
-                (left.Maximum.Z >= right.Minimum.Z && left.Minimum.Z >= right.Maximum.Z);
+                ((left.Minimum.X <= right.Minimum.X && right.Minimum.X <= left.Maximum.X) || (right.Minimum.X <= left.Minimum.X && left.Minimum.X <= right.Maximum.X)) &&
+                ((left.Minimum.Y <= right.Minimum.Y && right.Minimum.Y <= left.Maximum.Y) || (right.Minimum.Y <= left.Minimum.Y && left.Minimum.Y <= right.Maximum.Y)) &&
+                ((left.Minimum.Z <= right.Minimum.Z && right.Minimum.Z <= left.Maximum.Z) || (right.Minimum.Z <= left.Minimum.Z && left.Minimum.Z <= right.Maximum.Z));
         }
     }
 }

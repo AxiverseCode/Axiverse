@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Axiverse.Mathematics;
 using Axiverse.Physics.Shapes;
 
 namespace Axiverse.Physics
@@ -135,6 +135,7 @@ namespace Axiverse.Physics
         /// </summary>
         public Body()
         {
+            collisionShape = new Sphere(1f);
         }
 
         /// <summary>
@@ -388,6 +389,11 @@ namespace Axiverse.Physics
             Vector3 v = Vector3.Cross(Matrix3.Transform(c, inverseInertiaTensorWorld), r);
 
             return inverseMass + Vector3.Dot(normal, v);
+        }
+
+        public Bounds3 CalculateBounds()
+        {
+            return CollisionShape.CalculateBounds(Matrix4.Transformation(Vector3.One, AngularPosition, LinearPosition));
         }
 
         public override string ToString()

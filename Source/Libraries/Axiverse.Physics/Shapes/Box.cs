@@ -22,6 +22,11 @@ namespace Axiverse.Physics.Shapes
 
         }
 
+        public override Bounds3 CalculateBounds(Matrix4 transform)
+        {
+            throw new NotImplementedException();
+        }
+
         public Bounds3 GetBoundingBox(ref Matrix3 orientation, out Bounds3 bounds)
         {
             throw new NotFiniteNumberException();
@@ -29,14 +34,14 @@ namespace Axiverse.Physics.Shapes
 
         public void CalculateMassInertia()
         {
-            Mass = size.X * size.Y * size.Z;
+            //Mass = size.X * size.Y * size.Z;
 
-            Inertia = Matrix3.Identity;
-            Inertia.M11 = (1.0f / 12.0f) * Mass * (size.Y * size.Y + size.Z * size.Z);
-            Inertia.M22 = (1.0f / 12.0f) * Mass * (size.X * size.X + size.Z * size.Z);
-            Inertia.M33 = (1.0f / 12.0f) * Mass * (size.X * size.X + size.Y * size.Y);
+            //Inertia = Matrix3.Identity;
+            //Inertia.M11 = (1.0f / 12.0f) * Mass * (size.Y * size.Y + size.Z * size.Z);
+            //Inertia.M22 = (1.0f / 12.0f) * Mass * (size.X * size.X + size.Z * size.Z);
+            //Inertia.M33 = (1.0f / 12.0f) * Mass * (size.X * size.X + size.Y * size.Y);
 
-            Origin = Vector3.Zero;
+            //Origin = Vector3.Zero;
         }
 
         public Vector3 FurthestPoint(Vector3 direction)

@@ -39,7 +39,7 @@ namespace Axiverse.Physics
         public World()
         {
             Bodies = m_rigidBodies;
-            BroadPhase = new BruteForceFilter();
+            BroadPhase = new BruteForceFilter(this);
         }
 
         public void Step(float timestep)
@@ -62,9 +62,13 @@ namespace Axiverse.Physics
 
             // collision broadphase(s) -> pair
             var pairs = BroadPhase.Detect();
+            if (pairs.Count != 0)
+            {
+                Console.WriteLine(pairs.Count);
+            }
 
             // collision narrowphase(s) -> manifold
-            var manifolds = NarrowPhase.Collide(pairs);
+            //var manifolds = NarrowPhase.Collide(pairs);
 
             // add manifold (contact pairs) from collision
 

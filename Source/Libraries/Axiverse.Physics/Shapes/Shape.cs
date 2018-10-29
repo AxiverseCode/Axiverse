@@ -9,23 +9,15 @@ using Axiverse.Mathematics;
 namespace Axiverse.Physics.Shapes
 {
     /// <summary>
-    /// A sphere collision.
+    /// A collision shape.
     /// </summary>
     public abstract class Shape
     {
-        internal float Mass;
-        internal Matrix3 Inertia;
-        internal Vector3 Origin;
-        public Vector3 Position;
-
-        public void ComputeBoundingBox()
-        {
-
-        }
-
-        //public abstract Vector3 FurthestPoint(Vector3 axis);
-        //public abstract Vector3 Center();
-
-
+        /// <summary>
+        /// Computes the axis aligned bounding box given the specified transform.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public abstract Bounds3 CalculateBounds(Matrix4 transform);
     }
 }

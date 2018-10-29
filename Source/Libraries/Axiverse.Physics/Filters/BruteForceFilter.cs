@@ -10,22 +10,18 @@ using Axiverse.Physics.Shapes;
 namespace Axiverse.Physics.Filters
 {
     /// <summary>
-    /// 
+    /// A broad phase brute force filter detecting if axis-aligned bounding-boxes overlap.
     /// </summary>
     public class BruteForceFilter : IFilter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<IBoundedBody> Bodies { get; } = new List<IBoundedBody>();
-        // single phase brute force collider
+        public World World { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public BruteForceFilter()
+        public BruteForceFilter(World world)
         {
-            Bodies = new List<IBoundedBody>();
+            World = world;
         }
 
         /// <summary>
@@ -36,18 +32,18 @@ namespace Axiverse.Physics.Filters
         {
             var pairs = new List<ContactPair>();
 
-            for (int i = 0; i < Bodies.Count; i++)
+            for (int i = 0; i < World.Bodies.Count; i++)
             {
-                IBoundedBody former = Bodies[i];
+                var former = World.Bodies[i];
 
-                for (int j = i + 1; j < Bodies.Count; j++)
+                for (int j = i + 1; j < World.Bodies.Count; j++)
                 {
-                    IBoundedBody latter = Bodies[j];
+                    var latter = World.Bodies[j];
 
                     if (Detect(former, latter))
                     {
                         // generate collision pair for narrow-phase
-                        pairs.Add(new ContactPair((Body)former, (Body)latter));
+                        pairs.Add(new ContactPair(former, latter));
                     }
                 }
             }
@@ -61,14 +57,9 @@ namespace Axiverse.Physics.Filters
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public bool Detect(IBoundedBody left, IBoundedBody right)
+        public bool Detect(Body left, Body right)
         {
-            if (left.IsUnaffected && right.IsUnaffected)
-            {
-                return false;
-            }
-
-            return left.Bounds.Intersects(right.Bounds);
+            return left.CalculateBounds().Intersects(right.CalculateBounds());
         }
 
     }

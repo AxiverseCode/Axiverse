@@ -71,5 +71,8 @@
     <Compile Include="Core\Vector4.cs" />
     <Compile Include="Viewport.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Geometry\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

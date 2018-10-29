@@ -49,7 +49,7 @@ namespace Axiverse.Physics.Collision
             }
 
             // vector from the center of former to the center of latter in former space
-            Vector3 difference = Matrix3.Transform(formerTransform, latter.Position - former.Position);
+            Vector3 difference = Vector3.Zero; // Matrix3.Transform(formerTransform, latter.Position - former.Position);
 
             // query states
             float s;

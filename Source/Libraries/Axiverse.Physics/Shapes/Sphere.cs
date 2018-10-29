@@ -13,15 +13,49 @@ namespace Axiverse.Physics.Shapes
     /// </summary>
     public class Sphere : Shape
     {
+        /// <summary>
+        /// The radius of the sphere.
+        /// </summary>
         public float Radius;
+
+        /// <summary>
+        /// The center position of the sphere.
+        /// </summary>
         public Vector3 Position;
 
-
-
-
-        public Bounds3 GetBounds()
+        /// <summary>
+        /// Constructs a sphere.
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="position"></param>
+        public Sphere(float radius)
         {
-            return new Bounds3();
+            Radius = radius;
+            Position = Vector3.Zero;
+        }
+
+        /// <summary>
+        /// Constructs a sphere.
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="position"></param>
+        public Sphere(float radius, Vector3 position)
+        {
+            Radius = radius;
+            Position = position;
+        }
+
+        /// <summary>
+        /// Computes the axis aligned bounding box given the specified transform.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public override Bounds3 CalculateBounds(Matrix4 transform)
+        {
+            var center = Matrix4.Transform(Position, transform);
+            var offset = new Vector3(Radius);
+
+            return new Bounds3(center - offset, center + offset);
         }
     }
 }
