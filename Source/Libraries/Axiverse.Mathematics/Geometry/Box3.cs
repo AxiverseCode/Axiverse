@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Mathematics.Geometry
+namespace Axiverse.Mathematics
 {
-    class Sphere
+    class Box3
     {
+        Vector3 Origin;
+
+        Vector3 HalfLengths;
+
+        Quaternion Orientation;
     }
 }

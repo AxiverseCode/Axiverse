@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics
 {
+    /// <summary>
+    /// A three dimensional ray.
+    /// </summary>
     public struct Ray3
     {
+        /// <summary>
+        /// The origin of the ray.
+        /// </summary>
         public Vector3 Origin;
 
+        /// <summary>
+        /// The direction vector of the ray.
+        /// </summary>
         public Vector3 Direction;
 
         public Ray3(Vector3 origin, Vector3 direction)

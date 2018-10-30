@@ -139,5 +139,10 @@ namespace Axiverse
                     b * Cos(2 * Pi * w)
                 );
         }
+
+        public static bool WithinInclusive(this float value, float lower, float higher)
+        {
+            return value >= lower && value <= higher;
+        }
     }
 }
