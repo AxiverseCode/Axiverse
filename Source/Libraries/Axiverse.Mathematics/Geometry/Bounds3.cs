@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Axiverse.Mathematics
 {
@@ -79,6 +80,19 @@ namespace Axiverse.Mathematics
                 Math.Min(left.X, right.X), Math.Max(left.X, right.X),
                 Math.Min(left.Y, right.Y), Math.Max(left.Y, right.Y),
                 Math.Min(left.Z, right.Z), Math.Max(left.Z, right.Z));
+        }
+
+        /// <summary>
+        /// Creates a bounding box containing all vectors.
+        /// </summary>
+        /// <param name="vectors"></param>
+        /// <returns></returns>
+        public static Bounds3 FromVectors(IEnumerable<Vector3> vectors)
+        {
+            var minimum = Vector3.Minimum(vectors);
+            var maximum = Vector3.Maximum(vectors);
+
+            return new Bounds3(minimum, maximum);
         }
 
         /// <summary>

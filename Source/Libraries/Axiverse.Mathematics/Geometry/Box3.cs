@@ -8,10 +8,15 @@ namespace Axiverse.Mathematics
 {
     class Box3
     {
-        Vector3 Origin;
+        Vector3 Extents;
 
-        Vector3 HalfLengths;
+        Matrix4 Transform;
 
-        Quaternion Orientation;
+        public Box3(Bounds3 bounds)
+        {
+            var origin = bounds.Minimum + (bounds.Maximum - bounds.Minimum) / 2;
+            Extents = bounds.Maximum - origin;
+            Transform = Matrix4.Translation(origin);
+        }
     }
 }

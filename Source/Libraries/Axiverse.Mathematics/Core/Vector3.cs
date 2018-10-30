@@ -734,6 +734,44 @@ namespace Axiverse
 
         #endregion
 
+        public static Vector3 Minimum(Vector3 former, Vector3 latter)
+        {
+            return new Vector3(
+                Math.Min(former.X, latter.X),
+                Math.Min(former.Y, latter.Y),
+                Math.Min(former.Z, latter.Z)
+                );
+        }
+
+        public static Vector3 Minimum(IEnumerable<Vector3> vectors)
+        {
+            var minimum = PositiveInfinity;
+            foreach (var vector in vectors)
+            {
+                minimum = Minimum(minimum, vector);
+            }
+            return minimum;
+        }
+
+        public static Vector3 Maximum(Vector3 former, Vector3 latter)
+        {
+            return new Vector3(
+                Math.Max(former.X, latter.X),
+                Math.Max(former.Y, latter.Y),
+                Math.Max(former.Z, latter.Z)
+                );
+        }
+
+        public static Vector3 Maximum(IEnumerable<Vector3> vectors)
+        {
+            var maximum = PositiveInfinity;
+            foreach (var vector in vectors)
+            {
+                maximum = Maximum(maximum, vector);
+            }
+            return maximum;
+        }
+
         #region Static Methods - 3D
 
         public static void Project(ref Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, ref Matrix4 worldViewProjection, out Vector3 result)
