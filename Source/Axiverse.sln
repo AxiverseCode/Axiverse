@@ -60,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Numeri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Code", "Libraries\Axiverse.Code\Axiverse.Code.csproj", "{763C0CC5-3E07-4AE2-8846-FE3B919D1B3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Assets", "Client\Axiverse.Interface.Assets\Axiverse.Interface.Assets.csproj", "{CD0ED517-2595-413D-9822-2B33A7876842}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Assets", "Libraries\Axiverse.Interface.Assets\Axiverse.Interface.Assets.csproj", "{CD0ED517-2595-413D-9822-2B33A7876842}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Simulation.Tests", "Tests\Axiverse.Simulation.Tests\Axiverse.Simulation.Tests.csproj", "{05197E1E-8C28-4DA9-9DD8-A8C95C8238B0}"
 EndProject
@@ -70,9 +70,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Physics.Tests", "Tests\Axiverse.Physics.Tests\Axiverse.Physics.Tests.csproj", "{63E2639E-CA6C-49CF-AC2A-BE1D82574718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Calibration", "Client\Axiverse.Calibration\Axiverse.Calibration.csproj", "{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Calibration", "Libraries\Axiverse.Calibration\Axiverse.Calibration.csproj", "{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Input", "Client\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj", "{C9160E27-003A-466B-BB08-A51435D509AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface.Input", "Libraries\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj", "{C9160E27-003A-466B-BB08-A51435D509AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Input", "Examples\Hello Input\Hello Input.csproj", "{C0D84302-9BB3-4AD0-9CEB-3CA7EFFF5F4D}"
 EndProject

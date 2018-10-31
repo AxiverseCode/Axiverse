@@ -63,7 +63,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Client\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj">
+    <ProjectReference Include="..\..\Libraries\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj">
       <Project>{c9160e27-003a-466b-bb08-a51435d509aa}</Project>
       <Name>Axiverse.Interface.Input</Name>
     </ProjectReference>
