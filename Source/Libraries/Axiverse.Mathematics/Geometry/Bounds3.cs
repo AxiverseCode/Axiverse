@@ -157,5 +157,120 @@ namespace Axiverse.Mathematics
                 ((left.Minimum.Y <= right.Minimum.Y && right.Minimum.Y <= left.Maximum.Y) || (right.Minimum.Y <= left.Minimum.Y && left.Minimum.Y <= right.Maximum.Y)) &&
                 ((left.Minimum.Z <= right.Minimum.Z && right.Minimum.Z <= left.Maximum.Z) || (right.Minimum.Z <= left.Minimum.Z && left.Minimum.Z <= right.Maximum.Z));
         }
+
+        public bool Intersects(Line3 line)
+        {
+            float near = float.NegativeInfinity;
+            float far = float.PositiveInfinity;
+
+            return IntersectsLine(ref line.Origin, ref line.Direction, ref near, ref far);
+        }
+
+        public bool Intersects(Segment3 segment)
+        {
+            Vector3 direction = segment.V - segment.U;
+            var length = direction.Normalize();
+
+            float near = 0;
+            float far = length;
+
+            return IntersectsLine(ref segment.U, ref direction, ref near, ref far);
+        }
+
+        public bool Intersects(Ray3 ray)
+        {
+            float near = 0;
+            float far = float.PositiveInfinity;
+
+            return IntersectsLine(ref ray.Origin, ref ray.Direction, ref near, ref far);
+        }
+
+        private bool IntersectsLine(ref Vector3 origin, ref Vector3 direction, ref float near, ref float far)
+        {
+            https://github.com/juj/MathGeoLib/blob/master/src/Geometry/AABB.cpp
+
+            // X axis.
+            if (Math.Abs(direction.X) != 0)
+            {
+                float former = (Minimum.X - origin.X) / direction.X;
+                float latter = (Maximum.X - origin.X) / direction.X;
+
+                if (former < latter)
+                {
+                    near = Math.Max(former, near);
+                    far = Math.Min(latter, far);
+                }
+                else // Swap former and latter.
+                {
+                    near = Math.Max(latter, near);
+                    far = Math.Min(former, far);
+                }
+
+                if (near > far)
+                {
+                    return false;
+                }
+            }
+            else if (origin.X < Minimum.X || origin.X > Maximum.X)
+            {
+                return false;
+            }
+
+            // Y axis.
+            if (Math.Abs(direction.Y) != 0)
+            {
+                float former = (Minimum.Y - origin.Y) / direction.Y;
+                float latter = (Maximum.Y - origin.Y) / direction.Y;
+
+                if (former < latter)
+                {
+                    near = Math.Max(former, near);
+                    far = Math.Min(latter, far);
+                }
+                else // Swap former and latter.
+                {
+                    near = Math.Max(latter, near);
+                    far = Math.Min(former, far);
+                }
+
+                if (near > far)
+                {
+                    return false;
+                }
+            }
+            else if (origin.Y < Minimum.Y || origin.Y > Maximum.Y)
+            {
+                return false;
+            }
+
+            // Z axis.
+            if (Math.Abs(direction.Z) != 0)
+            {
+                float former = (Minimum.Z - origin.Z) / direction.Z;
+                float latter = (Maximum.Z - origin.Z) / direction.Z;
+
+                if (former < latter)
+                {
+                    near = Math.Max(former, near);
+                    far = Math.Min(latter, far);
+                }
+                else // Swap former and latter.
+                {
+                    near = Math.Max(latter, near);
+                    far = Math.Min(former, far);
+                }
+
+                if (near > far)
+                {
+                    return false;
+                }
+            }
+            else if (origin.Z < Minimum.Z || origin.Z > Maximum.Z)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

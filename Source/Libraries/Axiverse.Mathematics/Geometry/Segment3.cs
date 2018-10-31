@@ -20,5 +20,11 @@ namespace Axiverse.Mathematics
         /// The V point of the line segment.
         /// </summary>
         public Vector3 V;
+
+        public Segment3(Vector3 u, Vector3 v)
+        {
+            U = u;
+            V = v;
+        }
     }
 }

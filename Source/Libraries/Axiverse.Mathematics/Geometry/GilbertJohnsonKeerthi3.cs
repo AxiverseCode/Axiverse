@@ -22,7 +22,7 @@ namespace Axiverse.Mathematics.Geometry
     /// Gilbert–Johnson–Keerthi (GJK) 3D distance algorithm - Micha Mettke
     /// https://gist.github.com/vurtun/29727217c269a2fbf4c0ed9a1d11cb40
     /// </remarks>
-    public class GilbertJohnsonKeerthi
+    public class GilbertJohnsonKeerthi3
     {
         private const int Iterations = 50;
 

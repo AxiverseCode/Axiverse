@@ -55,7 +55,8 @@
     <Compile Include="Core\Functions.cs" />
     <Compile Include="Core\Matrix3.cs" />
     <Compile Include="Geometry\Box3.cs" />
-    <Compile Include="Geometry\GilbertJohnsonKeerthi.cs" />
+    <Compile Include="Geometry\GilbertJohnsonKeerthi2.cs" />
+    <Compile Include="Geometry\GilbertJohnsonKeerthi3.cs" />
     <Compile Include="Geometry\Line3.cs" />
     <Compile Include="Geometry\Plane3.cs" />
     <Compile Include="Geometry\Segment3.cs" />

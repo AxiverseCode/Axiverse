@@ -294,9 +294,14 @@ namespace Axiverse
         /// Returns this vector after normalizing. The length of the vector
         /// will be 1.
         /// </summary>
-        public void Normalize()
+        /// <returns>
+        /// The length of the vector.
+        /// </returns>
+        public float Normalize()
         {
-            Divide(Length());
+            var length = Length();
+            Divide(length);
+            return length;
         }
 
         public Vector3 Normal()
