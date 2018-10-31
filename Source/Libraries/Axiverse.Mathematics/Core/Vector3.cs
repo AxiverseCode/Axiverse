@@ -323,6 +323,16 @@ namespace Axiverse
         }
 
         /// <summary>
+        /// (this % v) % this.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public Vector3 DoubleCross(Vector3 v)
+        {
+            return Cross(Cross(this, v), this);
+        }
+
+        /// <summary>
         /// Returns the distance between this and the specified vector.
         /// </summary>
         /// <returns>The to.</returns>
@@ -660,11 +670,11 @@ namespace Axiverse
 
         public static Vector3 Cross(Vector3 left, Vector3 right)
         {
-            Cross(out var result, ref left, ref right);
+            Cross(ref left, ref right, out var result);
             return result;
         }
 
-        public static void Cross(out Vector3 result, ref Vector3 left, ref Vector3 right)
+        public static void Cross(ref Vector3 left, ref Vector3 right, out Vector3 result)
         {
             var x = left.Y * right.Z - left.Z * right.Y;
             var y = left.Z * right.X - left.X * right.Z;
@@ -673,6 +683,18 @@ namespace Axiverse
             result.X = x;
             result.Y = y;
             result.Z = z;
+        }
+
+        public static Vector3 DoubleCross(Vector3 left, Vector3 right)
+        {
+            DoubleCross(ref left, ref right, out var result);
+            return result;
+        }
+
+        public  static void DoubleCross(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        {
+            Cross(ref left, ref right, out result);
+            Cross(ref result, ref left, out result);
         }
 
         public static float Dot(Vector3 left, Vector3 right)

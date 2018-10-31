@@ -156,7 +156,7 @@ namespace Axiverse.Mathematics
 
             Vector3 s = a % b;
             Vector3 t = Vector3.Cross(a, b);
-            Vector3.Cross(out var u, ref a, ref b);
+            Vector3.Cross(ref a, ref b, out var u);
 
             Vector3 r = new Vector3(-7, 13, -9);
             Assert.AreEqual(r, s, "a % b");

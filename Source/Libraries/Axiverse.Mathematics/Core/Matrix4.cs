@@ -769,8 +769,8 @@ namespace Axiverse
         {
             Vector3 xaxis, yaxis, zaxis;
             Vector3.Subtract(out zaxis, ref eye, ref target); zaxis.Normalize();
-            Vector3.Cross(out xaxis, ref up, ref zaxis); xaxis.Normalize();
-            Vector3.Cross(out yaxis, ref zaxis, ref xaxis);
+            Vector3.Cross(ref up, ref zaxis, out xaxis); xaxis.Normalize();
+            Vector3.Cross(ref zaxis, ref xaxis, out yaxis);
 
             var result = Matrix4.Identity;
             result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
