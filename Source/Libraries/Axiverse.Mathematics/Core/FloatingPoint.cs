@@ -36,7 +36,7 @@ namespace Axiverse
         /// <param name="value"></param>
         /// <param name="mask"></param>
         /// <returns></returns>
-        [DllImport("msvcrt.dll")]
+        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern uint _controlfp(uint value, uint mask);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Axiverse
         /// https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/clear87-clearfp
         /// </summary>
         /// <returns></returns>
-        [DllImport("msvcrt.dll")]
+        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern uint _clearfp();
 
         // Clearing a bit sets the interrupts.
