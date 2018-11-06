@@ -48,6 +48,9 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VirtualMachine\BitPointer.cs" />
+    <Compile Include="VirtualMachine\Machine.cs" />
+    <Compile Include="VirtualMachine\Opcode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
