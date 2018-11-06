@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using static System.BitConverter;
 namespace Axiverse.Computing.VirtualMachine
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Machine
     {
         /// <summary>
@@ -33,6 +36,9 @@ namespace Axiverse.Computing.VirtualMachine
         /// </remarks>
         public int FramePointer { get; set; }
 
+        /// <summary>
+        /// The memory allocated to the program.
+        /// </summary>
         public byte[] Memory { get; set; } = new byte[1024];
 
         // 32 bit?
