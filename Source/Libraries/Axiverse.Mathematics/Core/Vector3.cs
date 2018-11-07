@@ -9,7 +9,7 @@ namespace Axiverse
     /// <summary>
     /// Represents a 3-dimensional Cartesian vector
     /// </summary>
-	[Serializable]
+    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector3 : IEnumerable<float>
     {
@@ -170,7 +170,7 @@ namespace Axiverse
         #endregion
 
         #region Instance Methods - Arithmatic
-        
+
         public Vector3 Add(Vector3 v)
         {
             X += v.X;
@@ -696,7 +696,7 @@ namespace Axiverse
             return result;
         }
 
-        public  static void DoubleCross(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        public static void DoubleCross(ref Vector3 left, ref Vector3 right, out Vector3 result)
         {
             Cross(ref left, ref right, out result);
             Cross(ref result, ref left, out result);
@@ -862,7 +862,7 @@ namespace Axiverse
 
         public static Vector3 operator *(float a, Vector3 b)
         {
-            return Multiply(a, b) ;
+            return Multiply(a, b);
         }
 
         public static Vector3 operator *(Vector3 b, float a)
@@ -985,7 +985,7 @@ namespace Axiverse
 
         public static readonly Vector3 Up = new Vector3(0, 1, 0);
         public static readonly Vector3 Down = new Vector3(0, -1, 0);
-
+        
         public static readonly Vector3 Left = new Vector3(-1, 0, 0);
         public static readonly Vector3 Right = new Vector3(1, 0, 0);
 
@@ -996,26 +996,26 @@ namespace Axiverse
 
         /// <summary>The zero vector.</summary>
         public static readonly Vector3 Zero = default(Vector3);
-        
+
         /// <summary>The one vector.</summary>
         public static readonly Vector3 One = new Vector3(1, 1, 1);
 
         /// <summary>The X unit vector.</summary>
         public static readonly Vector3 UnitX = new Vector3(1, 0, 0);
-        
+
         /// <summary>The Y unit vector.</summary>
         public static readonly Vector3 UnitY = new Vector3(0, 1, 0);
-        
+
         /// <summary>The Z unit vector.</summary>
         public static readonly Vector3 UnitZ = new Vector3(0, 0, 1);
 
         /// <summary>The not-a-number vector.</summary>
         public static readonly Vector3 NaN = new Vector3(float.NaN, float.NaN, float.NaN);
-        
+
         /// <summary>The negative infinity vector.</summary>
-        public static readonly Vector3 NegativeInfinity = new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
-     
+        public static readonly Vector3 NegativeInfinity = new Vector3(float.NegativeInfinity);
+
         /// <summary>The positive infinity vector.</summary>
-        public static readonly Vector3 PositiveInfinity = new Vector3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity);
+        public static readonly Vector3 PositiveInfinity = new Vector3(float.PositiveInfinity);
     }
 }

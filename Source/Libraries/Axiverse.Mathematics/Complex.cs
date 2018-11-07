@@ -8,7 +8,7 @@ namespace Axiverse.Mathematics
     /// <summary>
     /// Represents a 2-dimensional Cartesian vector
     /// </summary>
-	[Serializable]
+    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public class Complex
     {
@@ -91,10 +91,10 @@ namespace Axiverse.Mathematics
 
         /// <summary>The zero complex number.</summary>
         public readonly static Complex Zero = new Complex(0f, 0f);
-        
+
         /// <summary>The one complex number.</summary>
         public readonly static Complex One = new Complex(1f);
-        
+
         /// <summary>The imaginary one complex number.</summary>
         public readonly static Complex ImaginaryOne = new Complex(0f, 1f);
 

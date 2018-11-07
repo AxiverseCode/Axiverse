@@ -6,7 +6,7 @@ namespace Axiverse
     /// <summary>
     /// Represents a 4 by 4 matrix.
     /// </summary>
-	[Serializable]
+    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Matrix4
     {

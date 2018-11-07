@@ -8,7 +8,7 @@ namespace Axiverse
     /// <summary>
     /// Represents a 2-dimensional Cartesian vector
     /// </summary>
-	[Serializable]
+    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector2
     {
@@ -333,7 +333,7 @@ namespace Axiverse
         {
             return new { X, Y }.GetHashCode();
         }
-        
+
         public override string ToString()
         {
             return $"[{X}, {Y}]";
@@ -426,22 +426,22 @@ namespace Axiverse
 
         /// <summary>The zero vector.</summary>
         public static readonly Vector2 Zero = new Vector2(0, 0);
-        
+
         /// <summary>The one vector.</summary>
         public static readonly Vector2 One = new Vector2(1, 1);
 
         /// <summary>The X unit vector.</summary>
         public static readonly Vector2 UnitX = new Vector2(1, 0);
-        
+
         /// <summary>The Y unit vector.</summary>
         public static readonly Vector2 UnitY = new Vector2(0, 1);
 
         /// <summary>The not-a-number vector.</summary>
         public static readonly Vector2 NaN = new Vector2(float.NaN, float.NaN);
-        
+
         /// <summary>The negative infinity vector.</summary>
         public static readonly Vector2 NegativeInfinity = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
-        
+
         /// <summary>The positive infinity vector.</summary>
         public static readonly Vector2 PositiveInfinity = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
     }

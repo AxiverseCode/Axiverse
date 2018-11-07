@@ -28,6 +28,16 @@ namespace Axiverse.Computing.VirtualMachine
         /// </summary>
         Add,
 
+        Subtract,
+
+        /// <summary>
+        /// Branches to target location
+        /// </summary>
+        Jump,
+
+        JumpIfZero,
+        JumpGreaterThanZero,
+
         /// <summary>
         /// Load variable relative to fp.
         /// </summary>

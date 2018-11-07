@@ -7,7 +7,7 @@ namespace Axiverse
     /// <summary>
     /// Represents a 3-dimensional Cartesian vector
     /// </summary>
-	[Serializable]
+    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector4
     {
@@ -103,20 +103,20 @@ namespace Axiverse
 
         public Vector4(Vector3 v) : this(v.X, v.Y, v.Z) { }
 
-        public Vector4(Vector2 v) : this(v.X, v.Y){ }
+        public Vector4(Vector2 v) : this(v.X, v.Y) { }
 
         public Vector4(Vector3 v, float w) : this(v.X, v.Y, v.Z, w) { }
 
-        public Vector4(Vector2 u, Vector2 v) : this(u.X, u.Y, v.X, v.Y) {}
+        public Vector4(Vector2 u, Vector2 v) : this(u.X, u.Y, v.X, v.Y) { }
 
-        public Vector4(Vector2 u, float z, float w) : this(u.X, u.Y, z, w){}
+        public Vector4(Vector2 u, float z, float w) : this(u.X, u.Y, z, w) { }
 
         public Vector4(Quaternion q) : this(q.X, q.Y, q.Z, q.W) { }
 
         #endregion
 
         #region Instance Methods
-        
+
         #region Instance Methods - Setters
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace Axiverse
         #endregion
 
         #region Instance Methods - Overrides
-        
+
         public override bool Equals(object obj)
         {
             var v = obj as Vector4? ?? Vector4.NaN;
@@ -428,28 +428,28 @@ namespace Axiverse
 
         /// <summary>The zero vector.</summary>
         public static readonly Vector4 Zero = new Vector4(0, 0, 0, 0);
-      
+
         /// <summary>The one vector.</summary>
         public static readonly Vector4 One = new Vector4(1, 1, 1, 1);
 
         /// <summary>The X unit vector.</summary>
         public static readonly Vector4 UnitX = new Vector4(1, 0, 0, 0);
-       
+
         /// <summary>The Y unit vector.</summary>
         public static readonly Vector4 UnitY = new Vector4(0, 1, 0, 0);
-      
+
         /// <summary>The Z unit vector.</summary>
         public static readonly Vector4 UnitZ = new Vector4(0, 0, 1, 0);
-       
+
         /// <summary>The W unit vector.</summary>
         public static readonly Vector4 UnitW = new Vector4(0, 0, 0, 1);
 
         /// <summary>The not-a-number vector.</summary>
         public static readonly Vector4 NaN = new Vector4(float.NaN, float.NaN, float.NaN, float.NaN);
-      
+
         /// <summary>The negative infinity vector.</summary>
         public static readonly Vector4 NegativeInfinity = new Vector4(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
-      
+
         /// <summary>The positive infinity vector.</summary>
         public static readonly Vector4 PositiveInfinity = new Vector4(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity);
     }
