@@ -8,19 +8,39 @@ namespace Hello_Computer
     {
         static void Main(string[] args)
         {
-            var machine = new Machine();
+            var main = new FunctionBlock("main");
+            main.Emit(Opcode.Const, 1);
+            main.Emit(Opcode.Const, 10);
+            main.Emit(Opcode.AddI32);
+            main.Emit(Opcode.Print)
+                ;
+            main.Emit(Opcode.Halt);
 
-            var stream = new MemoryStream(machine.Memory);
-            var writer = new BinaryWriter(stream);
+            // factorial(i)
+            var factorial = new FunctionBlock("factorial");
+            // if (i == 1) return 1;
+            factorial.Emit(Opcode.Load32, -16); // i
+            factorial.Emit(Opcode.Const, 1);
+            factorial.EmitLabel(Opcode.JumpCompareNotEqual, "recurse");
+            factorial.Emit(Opcode.Const, 1);
+            factorial.Emit(Opcode.Return32);
 
-            writer.Write(Opcode.Const);
-            writer.Write(1);
-            writer.Write(Opcode.Const);
-            writer.Write(10);
-            writer.Write(Opcode.Add);
-            writer.Write(Opcode.Print);
-            writer.Write(Opcode.Halt);
+            // call factorial(i - 1)
+            factorial.MarkLabel("recurse");
+            factorial.Emit(Opcode.Load32, -16); // i
+            factorial.Emit(Opcode.Const, 1);
+            factorial.Emit(Opcode.SubtractI32);
+            factorial.EmitCall("factorial");
+            // return i * result;
+            factorial.Emit(Opcode.Load32, -16); // i
+            factorial.Emit(Opcode.MultiplyI32);
+            factorial.Emit(Opcode.Return32);
 
+
+            var linker = new Linker();
+            var bytecode = linker.Link(main);
+
+            var machine = new ExecutionEngine(bytecode);
             machine.Go();
 
             Console.ReadKey();

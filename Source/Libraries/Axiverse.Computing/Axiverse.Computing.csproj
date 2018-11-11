@@ -48,9 +48,17 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VirtualMachine\BitPointer.cs" />
-    <Compile Include="VirtualMachine\Machine.cs" />
+    <Compile Include="VirtualMachine\FunctionBlock.cs" />
+    <Compile Include="VirtualMachine\Linker.cs" />
+    <Compile Include="VirtualMachine\ExecutionEngine.cs" />
     <Compile Include="VirtualMachine\Opcode.cs" />
+    <Compile Include="VirtualMachine\OpcodeDefinition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Axiverse\Axiverse.csproj">
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
+      <Name>Axiverse</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,47 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Axiverse.Computing.VirtualMachine
+﻿namespace Axiverse.Computing.VirtualMachine
 {
     /// <summary>
     /// Virtual machine operation codes.
     /// </summary>
+    /// <remarks>
+    /// https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings
+    /// https://en.wikipedia.org/wiki/List_of_CIL_instructions
+    /// </remarks>
     public enum Opcode : byte
     {
+        /// <summary>
+        /// No operation.
+        /// </summary>
         Nop = 0x00,
 
         /// <summary>
+        /// Calls a method.
         /// 
-        /// Takes argument count.
+        /// displacement [2] - relative address of the call to the opcode.
         /// </summary>
-        Call,
+        Call16,
 
+        /// <summary>
+        /// Calls a method.
+        /// 
+        /// displacement [4] - relative address of the call to the opcode.
+        /// </summary>
+        Call32,
+
+        /// <summary>
+        /// Returns without parameters.
+        /// </summary>
         Return,
+
+        /// <summary>
+        /// Returns a 32 bit value from the stack.
+        /// </summary>
+        Return32,
+
+        /// <summary>
+        /// Returns a 64 bit value from the stack.
+        /// </summary>
+        Return64,
+
+        /// <summary>
+        /// Halts the program.
+        /// </summary>
         Halt,
 
         /// <summary>
-        /// 
         /// Adds two 32 bit numbers together from the stack.
         /// </summary>
-        Add,
-
-        Subtract,
+        AddI32,
 
         /// <summary>
-        /// Branches to target location
+        /// Subtracts two 32-bit numbers together from the stack.
+        /// </summary>
+        SubtractI32,
+
+        MultiplyI32,
+
+        /// <summary>
+        /// Branches to target offset. (of what)
+        /// 
+        /// displacement - offset from the position of the opcode.
         /// </summary>
         Jump,
 
         JumpIfZero,
         JumpGreaterThanZero,
 
+        JumpCompareEqual,
+        JumpCompareNotEqual,
+
         /// <summary>
         /// Load variable relative to fp.
         /// </summary>
-        Load,
+        Load32,
+        Load64,
 
         /// <summary>
         /// Load variable from global memory.
@@ -63,6 +99,9 @@ namespace Axiverse.Computing.VirtualMachine
         /// </summary>
         Const,
 
+        /// <summary>
+        /// Prints an 32 bit.
+        /// </summary>
         Print,
     }
 }
