@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Canvas\Image.cs" />
     <Compile Include="DepthStencilStateDescription.cs" />
     <Compile Include="Generic\IVertex.cs" />
     <Compile Include="Generic\Primitives.cs" />

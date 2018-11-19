@@ -224,5 +224,13 @@ namespace Axiverse.Interface.Graphics
                 UploadResource = null;
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            UploadResource?.Dispose();
+            Resource?.Dispose();
+        }
     }
 }

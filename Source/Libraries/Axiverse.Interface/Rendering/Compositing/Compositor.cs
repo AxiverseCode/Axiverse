@@ -80,6 +80,7 @@ namespace Axiverse.Interface.Rendering.Compositing
         public void Prerender(RenderContext context)
         {
             context.CommandList.Reset(Presenter);
+            Presenter.TryResize();
 
             Presenter.BeginDraw(context.CommandList);
             context.CommandList.ResourceTransition(Presenter.BackBuffer, ResourceState.Present, ResourceState.RenderTarget);

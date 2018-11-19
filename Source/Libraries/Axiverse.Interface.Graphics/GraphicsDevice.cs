@@ -1,9 +1,6 @@
-﻿using System;
+﻿using SharpDX.Direct3D12;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SharpDX.Direct3D12;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -69,6 +66,19 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        public void PrintLiveObjects()
+        {
+#if DEBUG
+            using (var debugDevice = NativeDevice.QueryInterface<DebugDevice>())
+            {
+                // http://sharpdx.org/forum/4-general/1241-reportliveobjects
+                // Contains several Refcount: 0 lines. This cannot be avoided, but is still be useful to
+                // find memory leaks (all objects should have Refcount=0, the device still has RefCount=3)
+                debugDevice.ReportLiveDeviceObjects(ReportingLevel.Detail);
+            }
+#endif
+        }
+
         /// <summary>
         /// Creates a <see cref="GraphicsDevice"/>.
         /// </summary>
@@ -87,7 +97,7 @@ namespace Axiverse.Interface.Graphics
         {
             public GraphicsDevice Device { get; }
 
-            public CommandAllocatorPool(GraphicsDevice device) 
+            public CommandAllocatorPool(GraphicsDevice device)
             {
                 Device = device;
             }

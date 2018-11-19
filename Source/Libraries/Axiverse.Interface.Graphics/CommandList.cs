@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SharpDX;
+﻿using SharpDX;
 using SharpDX.Direct3D;
 using SharpDX.Direct3D12;
+using System;
 
 
 namespace Axiverse.Interface.Graphics
@@ -81,7 +76,7 @@ namespace Axiverse.Interface.Graphics
             };
             fenceValue = 0;
             fence = Device.NativeDevice.CreateFence(0, FenceFlags.None);
-            
+
             nativeCommandList = Device.NativeDevice.CreateCommandList(CommandListType.Direct, commandAllocator, null);
             // We close it as it starts in open state
             NativeCommandList.Close();
@@ -143,7 +138,7 @@ namespace Axiverse.Interface.Graphics
                     // No more space in the current descriptor heap
                     CloseSamplerHeap();
                 }
-                
+
                 // Copy sampler descriptors from cpu descriptor table into the rolling gpu upload descriptor heap.
                 Device.NativeDevice.CopyDescriptorsSimple(
                     descriptors.Layout.SamplerCount,
@@ -261,12 +256,14 @@ namespace Axiverse.Interface.Graphics
         /// <param name="slot"></param>
         public void SetVertexBuffer(VertexBufferBinding binding, int slot)
         {
-            SetVertexBuffer(binding.Buffer, slot, binding.Count * binding.Stride,  binding.Stride);
+            SetVertexBuffer(binding.Buffer, slot, binding.Count * binding.Stride, binding.Stride);
         }
 
 
 
-
+        /// <summary>
+        /// Synchronously waits for the fence value.
+        /// </summary>
         public void Wait()
         {
             while (fence.CompletedValue < fenceValue)
@@ -275,7 +272,7 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
-       
+
 
         /// <summary>
         /// Should be called at the start of the frame. This method waits if needed for the GPU
@@ -309,6 +306,10 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.Reset(commandAllocator, null);
         }
 
+        /// <summary>
+        /// Closes the command list and returns a compile command list with the utilized resources.
+        /// </summary>
+        /// <returns></returns>
         public CompiledCommandList Close()
         {
             CloseShaderResourceViewHeap();
@@ -321,23 +322,23 @@ namespace Axiverse.Interface.Graphics
         /// This should be called after this context is executed. This way we will add
         /// sync commands at the end of the queue
         /// </summary>
-        /// <param name="swapChain"></param>
+        /// <param name="presenter"></param>
         public void FinishFrame(Presenter presenter)
         {
             fenceValue++;
             presenter.NativeCommandQueue.Signal(fence, fenceValue);
         }
 
-        public void SetViewport(int x,int y,int w,int h)
+        public void SetViewport(int x, int y, int w, int h)
         {
             ViewportF viewport = new ViewportF
             {
-                Width       = w,
-                Height      = h,
-                X           = x,
-                Y           = y,
-                MaxDepth    = 1.0f,
-                MinDepth    = 0.0f
+                Width = w,
+                Height = h,
+                X = x,
+                Y = y,
+                MaxDepth = 1.0f,
+                MinDepth = 0.0f
             };
             NativeCommandList.SetViewport(viewport);
         }
@@ -390,7 +391,7 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.ClearDepthStencilView(texture.NativeDepthStencilView, ClearFlags.FlagsDepth, depth, 0);
         }
 
-        public void ResourceTransition(Resource resource,ResourceState before, ResourceState after)
+        public void ResourceTransition(Resource resource, ResourceState before, ResourceState after)
         {
             NativeCommandList.ResourceBarrierTransition(resource, (ResourceStates)before, (ResourceStates)after);
         }
@@ -424,7 +425,7 @@ namespace Axiverse.Interface.Graphics
 
         public void DrawIndexed(int idxCnt)
         {
-            
+
             NativeCommandList.DrawIndexedInstanced(idxCnt, 1, 0, 0, 0);
         }
 

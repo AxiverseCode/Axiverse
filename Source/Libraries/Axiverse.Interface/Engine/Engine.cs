@@ -1,7 +1,6 @@
 ﻿using Axiverse.Injection;
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
-using Axiverse.Interface.Graphics.Shaders;
 using Axiverse.Interface.Input;
 using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Rendering.Compositing;
@@ -11,7 +10,6 @@ using Axiverse.Physics;
 using Axiverse.Resources;
 using Axiverse.Simulation;
 using Axiverse.Simulation.Behaviors;
-using SharpDX;
 using SharpDX.Windows;
 using System;
 using System.Collections.Generic;
@@ -75,6 +73,8 @@ namespace Axiverse.Interface.Engine
             };
         }
 
+
+        bool resize = false;
         /// <summary>
         /// Run loop for the engine.
         /// </summary>
@@ -93,7 +93,10 @@ namespace Axiverse.Interface.Engine
             var presenter = new Presenter(device, presenterDescription);
             presenter.Initialize();
             var device2d = GraphicsDevice2D.Create(device, presenter);
-
+            form.ResizeEnd += (e, sender) =>
+            {
+                resize = true;
+            };
 
             Window = new Window();
             Window.Bounds = new Rectangle(0, 0, presenter.Description.Width, presenter.Description.Height);
@@ -291,6 +294,14 @@ namespace Axiverse.Interface.Engine
 
                     //Console.WriteLine(delta);
                     Scene.Step(delta / 1000.0f);
+
+                    if (resize)
+                    {
+                        device2d.DisposeFrames();
+                        presenter.Resize(form.ClientSize.Width, form.ClientSize.Height);
+                        presenter.TryResize();
+                        device2d.InitializeFrames(device);
+                    }
 
                     compositor.Process(Scene, cameraComponent);
                 }

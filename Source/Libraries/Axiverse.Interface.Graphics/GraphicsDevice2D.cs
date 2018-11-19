@@ -20,7 +20,6 @@ namespace Axiverse.Interface.Graphics
 
     public class GraphicsDevice2D : GraphicsResource
     {
-
         private Dictionary<string, FontCollection> m_fontCollections = new Dictionary<string, FontCollection>();
         private Dictionary<Windows.Font, TextFormat> m_fonts = new Dictionary<Windows.Font, TextFormat>();
 
@@ -121,6 +120,11 @@ namespace Axiverse.Interface.Graphics
             InitializeFrames(Device.NativeDevice);
         }
 
+        public void InitializeFrames(GraphicsDevice device)
+        {
+            InitializeFrames(device.NativeDevice);
+        }
+
         public void InitializeFrames(Device3D12 device3D12)
         {
             deviceContext2D = new GraphicsDeviceContext2D(DeviceContext);
@@ -187,11 +191,11 @@ namespace Axiverse.Interface.Graphics
 
             DeviceContext3D.Flush();
 
-            /*
+#if false
             DeviceDebug debug = Device3D11.QueryInterface<DeviceDebug>();
             debug.ReportLiveDeviceObjects(ReportingLevel.Detail);
             debug.Dispose();
-            */
+#endif
         }
 
         public static GraphicsDevice2D Create(GraphicsDevice device, Presenter presenter)

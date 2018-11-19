@@ -1,13 +1,10 @@
 ﻿using SharpDX.DXGI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics
 {
     using SharpDX.Direct3D12;
+    using System.Diagnostics;
 
     public class Presenter : GraphicsResource
     {
@@ -35,7 +32,7 @@ namespace Axiverse.Interface.Graphics
             // Lets create a present command queue
             var queueDesc = new CommandQueueDescription(CommandListType.Direct);
             NativeCommandQueue = Device.NativeDevice.CreateCommandQueue(queueDesc);
-            
+
             // Descirbe and create the swap chain
             using (var factory = new Factory4())
             {
@@ -73,6 +70,8 @@ namespace Axiverse.Interface.Graphics
             BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
 
             CreateDepthStencilBuffer();
+
+            Device.PrintLiveObjects();
         }
 
         public void BeginDraw(CommandList commandList)
@@ -108,26 +107,48 @@ namespace Axiverse.Interface.Graphics
             Description.Width = width;
             Description.Height = height;
 
+            ResizePending = true;
+        }
+
+        private bool ResizePending;
+
+        public void TryResize()
+        {
+            if (!ResizePending)
+            {
+                return;
+            }
+            ResizePending = false;
+
             ResizeSwapChain();
             ResizeDepthStencilBuffer();
         }
-        
+
         protected void ResizeSwapChain()
         {
-            BackBuffer.Dispose();
+
+            Device.PrintLiveObjects();
+
+            Debug.WriteLine("====");
             for (int i = 0; i < BackBufferCount; i++)
             {
                 BackBuffers[i].Dispose();
             }
+            BackBuffer.Dispose();
 
-            NativeSwapChain.ResizeBuffers(bufferCount,
-                Description.Width, Description.Height,
-                Format.B8G8R8A8_UNorm, SwapChainFlags.None);
+            Device.PrintLiveObjects();
+
+            NativeSwapChain.ResizeBuffers(
+                bufferCount,
+                Description.Width,
+                Description.Height,
+                Format.B8G8R8A8_UNorm,
+                SwapChainFlags.None);
 
             BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
             for (int i = 0; i < bufferCount; i++)
             {
-                BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(i));
+                BackBuffers[i].Initialize(NativeSwapChain.GetBackBuffer<Resource>(i));
             }
         }
 
