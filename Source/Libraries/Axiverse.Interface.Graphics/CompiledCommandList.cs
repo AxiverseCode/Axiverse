@@ -1,10 +1,5 @@
-﻿using System;
+﻿using SharpDX.Direct3D12;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpDX.Direct3D12;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -30,10 +25,10 @@ namespace Axiverse.Interface.Graphics
         /// the execution of the command list.
         /// </summary>
         internal List<DescriptorHeap> SamplerHeaps { get; set; } = new List<DescriptorHeap>();
-        
-        internal GraphicsCommandList NativeCommandList;
-        internal CommandAllocator NativeCommandAllocator;
 
+        /// <summary>
+        /// Releases all resources heald by this <see cref="CompiledCommandList"/>.
+        /// </summary>
         public void Release()
         {
             var device = CommandList.Device;

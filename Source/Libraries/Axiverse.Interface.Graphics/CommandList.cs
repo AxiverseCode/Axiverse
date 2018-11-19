@@ -15,6 +15,9 @@ namespace Axiverse.Interface.Graphics
         internal GraphicsCommandList NativeCommandList => nativeCommandList;
 
         private PipelineState pipelineState;
+        /// <summary>
+        /// Gets or sets the pipeline state for the command list.
+        /// </summary>
         public PipelineState PipelineState
         {
             get => pipelineState;
@@ -51,11 +54,19 @@ namespace Axiverse.Interface.Graphics
         /// </summary>
         private readonly DescriptorHeap[] descriptorHeaps = new DescriptorHeap[2];
 
+        /// <summary>
+        /// Constructs a <see cref="CommandList"/>.
+        /// </summary>
+        /// <param name="device"></param>
         protected CommandList(GraphicsDevice device) : base(device)
         {
 
         }
 
+        /// <summary>
+        /// Disposes the <see cref="CommandList"/>.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!IsDisposed)
@@ -93,6 +104,16 @@ namespace Axiverse.Interface.Graphics
             descriptorHeaps[1] = samplerDescriptorHeap;
         }
 
+        /// <summary>
+        /// Sets the descriptors to the specified descriptor set.
+        /// </summary>
+        /// <remarks>
+        /// This method copies the descriptors from the CPU memory descriptor sets into a GPU
+        /// descriptor set buffer along with other descriptors for use in rendering. While there
+        /// are opportunities for optimization for keeping persistant descriptors, the maintanence
+        /// cost is too high at the moment.
+        /// </remarks>
+        /// <param name="descriptors"></param>
         public void SetDescriptors(DescriptorSet descriptors)
         {
             NativeCommandList.SetDescriptorHeaps(descriptorHeaps);
@@ -216,7 +237,7 @@ namespace Axiverse.Interface.Graphics
         }
 
         /// <summary>
-        /// 
+        /// Sets the index buffer.
         /// </summary>
         /// <param name="binding"></param>
         public void SetIndexBuffer(IndexBufferBinding binding)
@@ -232,7 +253,7 @@ namespace Axiverse.Interface.Graphics
         }
 
         /// <summary>
-        /// 
+        /// Sets the vertex buffer.
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="slot"></param>
@@ -329,6 +350,13 @@ namespace Axiverse.Interface.Graphics
             presenter.NativeCommandQueue.Signal(fence, fenceValue);
         }
 
+        /// <summary>
+        /// Sets the viewport.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="w"></param>
+        /// <param name="h"></param>
         public void SetViewport(int x, int y, int w, int h)
         {
             ViewportF viewport = new ViewportF
@@ -343,69 +371,142 @@ namespace Axiverse.Interface.Graphics
             NativeCommandList.SetViewport(viewport);
         }
 
+        /// <summary>
+        /// Sets the scissor rectangle.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="w"></param>
+        /// <param name="h"></param>
         public void SetScissor(int x, int y, int w, int h)
         {
             SharpDX.Rectangle rectangle = new SharpDX.Rectangle(x, y, w, h);
             NativeCommandList.SetScissorRectangles(rectangle);
         }
 
+        /// <summary>
+        /// Sets the color target.
+        /// </summary>
+        /// <param name="view"></param>
         public void SetColorTarget(CpuDescriptorHandle view)
         {
             NativeCommandList.SetRenderTargets(1, view, null);
         }
 
+        /// <summary>
+        /// Sets the render targets.
+        /// </summary>
+        /// <param name="render"></param>
+        /// <param name="depth"></param>
         [Obsolete]
         public void SetRenderTargets(CpuDescriptorHandle render, CpuDescriptorHandle depth)
         {
             NativeCommandList.SetRenderTargets(1, render, depth);
         }
 
+        /// <summary>
+        /// Sets the render targets.
+        /// </summary>
+        /// <param name="render"></param>
+        /// <param name="depth"></param>
         [Obsolete]
         public void SetRenderTargets(CpuDescriptorHandle render, Texture depth)
         {
             NativeCommandList.SetRenderTargets(1, render, depth?.NativeDepthStencilView);
         }
 
+        /// <summary>
+        /// Sets the render targets.
+        /// </summary>
+        /// <param name="render"></param>
+        /// <param name="depth"></param>
         public void SetRenderTargets(Texture render, Texture depth)
         {
             NativeCommandList.SetRenderTargets(1, render.NativeRenderTargetView, depth?.NativeDepthStencilView);
         }
 
+        /// <summary>
+        /// Clears the render target.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="a"></param>
         public void ClearTargetColor(CpuDescriptorHandle handle, float r, float g, float b, float a)
         {
             NativeCommandList.ClearRenderTargetView(handle, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
         }
 
+        /// <summary>
+        /// Clears the render target.
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="a"></param>
         public void ClearTargetColor(Texture texture, float r, float g, float b, float a)
         {
             NativeCommandList.ClearRenderTargetView(texture.NativeRenderTargetView, new SharpDX.Mathematics.Interop.RawColor4(r, g, b, a));
         }
 
+        /// <summary>
+        /// Clears the depth stencil.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <param name="depth"></param>
         public void ClearDepth(CpuDescriptorHandle handle, float depth)
         {
             NativeCommandList.ClearDepthStencilView(handle, ClearFlags.FlagsDepth, depth, 0);
         }
 
+        /// <summary>
+        /// Clears the depth stencil.
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="depth"></param>
         public void ClearDepth(Texture texture, float depth)
         {
             NativeCommandList.ClearDepthStencilView(texture.NativeDepthStencilView, ClearFlags.FlagsDepth, depth, 0);
         }
 
+        /// <summary>
+        /// Transitions a resource.
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
         public void ResourceTransition(Resource resource, ResourceState before, ResourceState after)
         {
             NativeCommandList.ResourceBarrierTransition(resource, (ResourceStates)before, (ResourceStates)after);
         }
 
+        /// <summary>
+        /// Transitions a resource.
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
         public void ResourceTransition(Texture resource, ResourceState before, ResourceState after)
         {
             NativeCommandList.ResourceBarrierTransition(resource.Resource, (ResourceStates)before, (ResourceStates)after);
         }
 
+        /// <summary>
+        /// Sets the root signature.
+        /// </summary>
+        /// <param name="rootSignature"></param>
         public void SetRootSignature(RootSignature rootSignature)
         {
             NativeCommandList.SetGraphicsRootSignature(rootSignature.NativeRootSignature);
         }
 
+        /// <summary>
+        /// Draws primitives.
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="indexed"></param>
         public void Draw(int count, bool indexed)
         {
             if (indexed)
@@ -418,11 +519,19 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Draws primitives.
+        /// </summary>
+        /// <param name="count"></param>
         public void Draw(int count)
         {
             NativeCommandList.DrawInstanced(count, 1, 0, 0);
         }
 
+        /// <summary>
+        /// Draws indexed primitives.
+        /// </summary>
+        /// <param name="idxCnt"></param>
         public void DrawIndexed(int idxCnt)
         {
 
@@ -436,7 +545,11 @@ namespace Axiverse.Interface.Graphics
 
 
 
-
+        /// <summary>
+        /// Creates a command list.
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
         public static CommandList Create(GraphicsDevice device)
         {
             var commandList = new CommandList(device);

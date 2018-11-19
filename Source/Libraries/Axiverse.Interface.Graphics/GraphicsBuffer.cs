@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpDX;
+﻿using SharpDX;
 using SharpDX.Direct3D12;
-using SharpDX.Mathematics.Interop;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Axiverse.Interface.Graphics
 {
+    /// <summary>
+    /// Represents a generic GPU bound buffer.
+    /// </summary>
     public class GraphicsBuffer : GraphicsResource
     {
         internal Resource NativeResource;
 
         internal long GpuHandle => NativeResource.GPUVirtualAddress;
 
+        /// <summary>
+        /// Gets the size of the buffer in bytes.
+        /// </summary>
         public int Size { get; private set; }
 
         private GraphicsBuffer(GraphicsDevice device) : base(device)
@@ -24,6 +24,10 @@ namespace Axiverse.Interface.Graphics
 
         }
 
+        /// <summary>
+        /// Disposes the <see cref="GraphicsBuffer"/>.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!IsDisposed)
@@ -33,6 +37,12 @@ namespace Axiverse.Interface.Graphics
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Writes data into the buffer at a byte offset.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <param name="offsetInBytes"></param>
         public void Write<T>(ref T data, int offsetInBytes = 0)
             where T : struct
         {
@@ -52,6 +62,12 @@ namespace Axiverse.Interface.Graphics
             NativeResource.Unmap(0, range);
         }
 
+        /// <summary>
+        /// Writes data into the buffer at a index offset.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="offsetIndex"></param>
+        /// <param name="data"></param>
         public void Write<T>(int offsetIndex, ref T data)
             where T : struct
         {
@@ -72,6 +88,12 @@ namespace Axiverse.Interface.Graphics
             NativeResource.Unmap(0, range);
         }
 
+        /// <summary>
+        /// Writes an array of data into the buffer at a byte offset.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <param name="offsetInBytes"></param>
         public void Write<T>(T[] data, int offsetInBytes = 0)
             where T : struct
         {
@@ -92,6 +114,12 @@ namespace Axiverse.Interface.Graphics
             NativeResource.Unmap(0, range);
         }
 
+        /// <summary>
+        /// Initializes a graphics buffer with the specified data.
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="data"></param>
+        /// <param name="dataStatic"></param>
         private void Initialize(int size, IntPtr data, bool dataStatic = true)
         {
             Size = size;
@@ -123,6 +151,14 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Creates a <see cref="GraphicsBuffer"/>.
+        /// </summary>
+        /// <param name="device"></param>
+        /// <param name="size"></param>
+        /// <param name="data"></param>
+        /// <param name="isStatic"></param>
+        /// <returns></returns>
         public static GraphicsBuffer Create(GraphicsDevice device, int size, IntPtr data, bool isStatic)
         {
             var result = new GraphicsBuffer(device);
@@ -130,8 +166,16 @@ namespace Axiverse.Interface.Graphics
             return result;
         }
 
+        /// <summary>
+        /// Creates a <see cref="GraphicsBuffer"/>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="device"></param>
+        /// <param name="data"></param>
+        /// <param name="isStatic"></param>
+        /// <returns></returns>
         public static GraphicsBuffer Create<T>(GraphicsDevice device, T[] data, bool isStatic)
-            where T: struct
+            where T : struct
         {
             return Create(device, Utilities.SizeOf(data), Marshal.UnsafeAddrOfPinnedArrayElement(data, 0), isStatic);
         }

@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpDX;
-using SharpDX.DXGI;
-using SharpDX.Windows;
-using SharpDX.Direct3D12;
-
+﻿using Axiverse.Injection;
 using Axiverse.Resources;
-using Axiverse.Injection;
+using SharpDX.DXGI;
+using System;
+using System.Drawing.Imaging;
 
 namespace Axiverse.Interface.Graphics
 {
-    using System.Drawing;
     using SharpDX.Direct3D12;
+    using System.Drawing;
 
+    /// <summary>
+    /// Represents a texture shader resource.
+    /// </summary>
+    /// <remarks>
+    /// Currently generates mip-maps in software.
+    /// </remarks>
     public class Texture : GraphicsResource
     {
         internal CpuDescriptorHandle NativeRenderTargetView;
@@ -114,7 +110,7 @@ namespace Axiverse.Interface.Graphics
             var imageFormat = Format.B8G8R8A8_UNorm;
             double levels = Math.Log(Math.Min(Width, Height), 2) - 1;
             var resourceDescription =
-                ResourceDescription.Texture2D(imageFormat, Width, Height, mipLevels: MipLevels);            
+                ResourceDescription.Texture2D(imageFormat, Width, Height, mipLevels: MipLevels);
 
             Resource = Device.NativeDevice.CreateCommittedResource(
                 new HeapProperties(HeapType.Default),
