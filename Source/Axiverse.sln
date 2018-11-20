@@ -81,10 +81,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Computer", "Examples\Hello Computer\Hello Computer.csproj", "{A1F91D38-124C-4AE6-9BB2-FD668FDEBA39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{30F4E4F2-CBE5-461F-99BE-ECD77E691898}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment.md = Deployment.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge", "Deployment\Bridge\Bridge.csproj", "{3D826B2A-BAC8-42D4-8B7F-84E66C82864B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Geometry", "Libraries\Axiverse.Mathematics.Geometry\Axiverse.Mathematics.Geometry.csproj", "{BD10941E-997A-450B-9D91-392FF39B9F9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calibration", "Deployment\Calibration\Calibration.csproj", "{660912D6-5032-479A-8F22-4DE44DE1FD48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -224,6 +229,10 @@ Global
 		{BD10941E-997A-450B-9D91-392FF39B9F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD10941E-997A-450B-9D91-392FF39B9F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD10941E-997A-450B-9D91-392FF39B9F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -262,6 +271,7 @@ Global
 		{A1F91D38-124C-4AE6-9BB2-FD668FDEBA39} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 		{3D826B2A-BAC8-42D4-8B7F-84E66C82864B} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
 		{BD10941E-997A-450B-9D91-392FF39B9F9F} = {AAE6C854-9031-4394-9995-EE38B6088F37}
+		{660912D6-5032-479A-8F22-4DE44DE1FD48} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}
