@@ -86,6 +86,7 @@
     <Compile Include="GraphicsDevice2D.cs" />
     <Compile Include="GraphicsResource.cs" />
     <Compile Include="IndexBufferBinding.cs" />
+    <Compile Include="IPresenterResource.cs" />
     <Compile Include="PipelineState.cs" />
     <Compile Include="PipelineStateDescription.cs" />
     <Compile Include="Presenter.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="ShaderBytecode.cs" />
     <Compile Include="Shaders\GeometryShader.cs" />
     <Compile Include="Shaders\MipMapShader.cs" />
+    <Compile Include="Shaders\PhysicallyBasedShader.cs" />
     <Compile Include="Shaders\ResourceBinding.cs" />
     <Compile Include="Shaders\Shader.cs" />
     <Compile Include="PresenterDescription.cs" />

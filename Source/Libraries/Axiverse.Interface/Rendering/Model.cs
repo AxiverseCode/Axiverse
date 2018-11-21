@@ -1,10 +1,5 @@
-﻿using System;
+﻿using Axiverse.Injection;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Axiverse.Injection;
 
 namespace Axiverse.Interface.Rendering
 {
@@ -22,9 +17,20 @@ namespace Axiverse.Interface.Rendering
         /// Gets a list of the materials in the model.
         /// </summary>
         public List<Material> Materials { get; } = new List<Material>();
+
+        /// <summary>
+        /// List of child models which need to be iteratively rendered.
+        /// </summary>
         public List<Model> Children { get; } = new List<Model>();
+
+        /// <summary>
+        /// The parent of this model.
+        /// </summary>
         public Model Parent;
 
+        /// <summary>
+        /// Other bindings.
+        /// </summary>
         public readonly BindingDictionary Bindings = new BindingDictionary();
     }
 }

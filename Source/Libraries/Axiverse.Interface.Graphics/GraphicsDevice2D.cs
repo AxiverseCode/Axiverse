@@ -18,7 +18,7 @@ namespace Axiverse.Interface.Graphics
     using Axiverse.Interface.Windows;
     using SharpDX.Direct2D1;
 
-    public class GraphicsDevice2D : GraphicsResource
+    public class GraphicsDevice2D : GraphicsResource, IPresenterResource
     {
         private Dictionary<string, FontCollection> m_fontCollections = new Dictionary<string, FontCollection>();
         private Dictionary<Windows.Font, TextFormat> m_fonts = new Dictionary<Windows.Font, TextFormat>();
@@ -117,16 +117,16 @@ namespace Axiverse.Interface.Graphics
             }
 
             DesktopDpi = Factory.DesktopDpi;
-            InitializeFrames(Device.NativeDevice);
+            InitializePresentable(Device);
         }
 
-        public void InitializeFrames(GraphicsDevice device)
+        /// <summary>
+        /// Initializes the presentable resources before resize.
+        /// </summary>
+        /// <param name="device"></param>
+        public void InitializePresentable(GraphicsDevice device)
         {
-            InitializeFrames(device.NativeDevice);
-        }
-
-        public void InitializeFrames(Device3D12 device3D12)
-        {
+            Device3D12 device3D12 = device.NativeDevice;
             deviceContext2D = new GraphicsDeviceContext2D(DeviceContext);
 
             Brush = new SolidColorBrush(DeviceContext, SharpDX.Color.White);
@@ -164,6 +164,10 @@ namespace Axiverse.Interface.Graphics
             // https://msdn.microsoft.com/en-us/library/windows/desktop/bb205075(v=vs.85).aspx#Handling_Window_Resizing
         }
 
+        /// <summary>
+        /// Disposes resources.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!IsDisposed)
@@ -246,6 +250,16 @@ namespace Axiverse.Interface.Graphics
             sink.Close();
             */
 
+        }
+
+        void IPresenterResource.Recreate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IPresenterResource.Dispose()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ObjLoader.cs" />
     <Compile Include="Models\WavefrontObjLoader.cs" />
     <Compile Include="Models\WavefrontObjMesh.cs" />
     <Compile Include="Module.cs" />

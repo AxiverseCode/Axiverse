@@ -3,9 +3,8 @@ using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 using System.Collections.Generic;
-using FactoryDW = SharpDX.DirectWrite.Factory;
+using DirectWriteFactory = SharpDX.DirectWrite.Factory;
 using FontWeightDW = SharpDX.DirectWrite.FontWeight;
-using TextLayoutDW = SharpDX.DirectWrite.TextLayout;
 
 namespace Axiverse.Interface.Graphics
 {
@@ -16,7 +15,7 @@ namespace Axiverse.Interface.Graphics
     /// </summary>
     public class GraphicsDeviceContext2D : DrawContext
     {
-        public FactoryDW FactoryDW;
+        public DirectWriteFactory DirectWriteFactory;
         public ResourceFontLoader FontLoader;
         public FontCollection FontCollection;
         public Dictionary<Font, TextFormat> TextFormats { get; } = new Dictionary<Font, TextFormat>();
@@ -30,9 +29,9 @@ namespace Axiverse.Interface.Graphics
         {
             // initialize directwrite
 
-            FactoryDW = new FactoryDW(SharpDX.DirectWrite.FactoryType.Shared);
-            FontLoader = new ResourceFontLoader(FactoryDW, @"Fonts");
-            FontCollection = new FontCollection(FactoryDW, FontLoader, FontLoader.Key);
+            DirectWriteFactory = new DirectWriteFactory(SharpDX.DirectWrite.FactoryType.Shared);
+            FontLoader = new ResourceFontLoader(DirectWriteFactory, @"Fonts");
+            FontCollection = new FontCollection(DirectWriteFactory, FontLoader, FontLoader.Key);
 
             this.deviceContext = deviceContext;
 
@@ -56,13 +55,13 @@ namespace Axiverse.Interface.Graphics
             if (FontCollection.FindFamilyName(font.FamilyName, out int index))
             {
                 // load from a font collection
-                textFormat = new TextFormat(FactoryDW, font.FamilyName, FontCollection, weight,
+                textFormat = new TextFormat(DirectWriteFactory, font.FamilyName, FontCollection, weight,
                     FontStyle.Normal, FontStretch.Normal, font.Size);
             }
             else
             {
                 // load from system
-                textFormat = new TextFormat(FactoryDW, font.FamilyName, weight, FontStyle.Normal, font.Size);
+                textFormat = new TextFormat(DirectWriteFactory, font.FamilyName, weight, FontStyle.Normal, font.Size);
 
             }
 
@@ -97,7 +96,7 @@ namespace Axiverse.Interface.Graphics
             FontLoader.Dispose();
             SolidColorBrush.Dispose();
 
-            FactoryDW.Dispose();
+            DirectWriteFactory.Dispose();
         }
 
         public override void DrawText(string text, Font font, TextLayout layout, Rectangle bounds, Color color)
@@ -108,6 +107,11 @@ namespace Axiverse.Interface.Graphics
             //d.HitTestPoint();
             SolidColorBrush.Color = color.ToColor4();
             DeviceContext.DrawText(text, format, bounds.ToRectangleF(), SolidColorBrush);
+        }
+
+        public void DrawImage()
+        {
+
         }
 
         public override void DrawRoundedRectangle(Rectangle bounds, Vector2 radius, Color color)

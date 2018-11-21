@@ -45,12 +45,23 @@ namespace Axiverse.Interface.Graphics
         /// </summary>
         public short MipLevels { get; private set; } = 1;
 
-        public Texture(GraphicsDevice device) : base(device)
+        /// <summary>
+        /// Constructs a texture.
+        /// </summary>
+        /// <param name="device"></param>
+        protected internal Texture(GraphicsDevice device) : base(device)
         {
 
         }
 
+        /// <summary>
+        /// Gets the resource.
+        /// </summary>
         public Resource Resource;
+
+        /// <summary>
+        /// Gets the upload resource.
+        /// </summary>
         public Resource UploadResource;
 
         internal void Initialize(Resource resource)
@@ -62,6 +73,11 @@ namespace Axiverse.Interface.Graphics
             // TODO: Recycle render target view
         }
 
+        /// <summary>
+        /// Creates a depth texture.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public void CreateDepth(int width, int height)
         {
             Width = width;
@@ -88,6 +104,17 @@ namespace Axiverse.Interface.Graphics
             Device.NativeDevice.CreateDepthStencilView(Resource, null, NativeDepthStencilView);
         }
 
+        public static Texture Load(GraphicsDevice device, string filename)
+        {
+            var result = new Texture(device);
+            result.Load(filename);
+            return result;
+        }
+
+        /// <summary>
+        /// Loads a texture from a file.
+        /// </summary>
+        /// <param name="filename"></param>
         public void Load(string filename)
         {
             var library = Injector.Global.Resolve<Library>();
@@ -192,6 +219,10 @@ namespace Axiverse.Interface.Graphics
             // Renderer.ResourcePipeline.Resources.Add(this);
         }
 
+        /// <summary>
+        /// Uploads a texture to GPU resource.
+        /// </summary>
+        /// <param name="commandList"></param>
         public override void Upload(CommandList commandList)
         {
             if (UploadResource != null)
@@ -212,6 +243,9 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Disposes the upload resource.
+        /// </summary>
         public override void DisposeUpload()
         {
             if (UploadResource != null)
@@ -221,6 +255,10 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Disposes the resource.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);

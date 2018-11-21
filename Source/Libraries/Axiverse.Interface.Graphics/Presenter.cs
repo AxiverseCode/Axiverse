@@ -14,9 +14,9 @@ namespace Axiverse.Interface.Graphics
 
         public Texture[] BackBuffers { get; set; }
 
-        public int BackBufferIndex => bufferIndex;
+        public int BackBufferIndex { get; private set; } = 0;
 
-        public int BackBufferCount => bufferCount;
+        public int BackBufferCount { get; } = 3;
 
         public Texture DepthStencilBuffer { get; set; }
 
@@ -40,7 +40,7 @@ namespace Axiverse.Interface.Graphics
                 var height = Description.Height;
                 var swapChainDescription = new SwapChainDescription
                 {
-                    BufferCount = bufferCount,
+                    BufferCount = BackBufferCount,
                     ModeDescription = new ModeDescription(width, height, new Rational(60, 1), Format.B8G8R8A8_UNorm),
                     Usage = Usage.RenderTargetOutput,
                     SwapEffect = SwapEffect.FlipDiscard,
@@ -52,22 +52,22 @@ namespace Axiverse.Interface.Graphics
                 using (var tempSwapChain = new SharpDX.DXGI.SwapChain(factory, NativeCommandQueue, swapChainDescription))
                 {
                     NativeSwapChain = tempSwapChain.QueryInterface<SwapChain3>();
-                    bufferIndex = NativeSwapChain.CurrentBackBufferIndex;
+                    BackBufferIndex = NativeSwapChain.CurrentBackBufferIndex;
                 }
             }
             // We need now to retrieve the back buffers:
             // 1) We need a heap to store the views
-            var handle = Device.RenderTargetViewAllocator.Allocate(bufferCount);
+            var handle = Device.RenderTargetViewAllocator.Allocate(BackBufferCount);
 
-            BackBuffers = new Texture[bufferCount];
-            for (int i = 0; i < bufferCount; i++)
+            BackBuffers = new Texture[BackBufferCount];
+            for (int i = 0; i < BackBufferCount; i++)
             {
                 BackBuffers[i] = new Texture(Device);
                 BackBuffers[i].Initialize(NativeSwapChain.GetBackBuffer<Resource>(i));
             }
 
             BackBuffer = new Texture(Device);
-            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
+            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(BackBufferIndex));
 
             CreateDepthStencilBuffer();
 
@@ -88,10 +88,10 @@ namespace Axiverse.Interface.Graphics
         public void Present()
         {
             NativeSwapChain.Present(0, PresentFlags.None);
-            bufferIndex = NativeSwapChain.CurrentBackBufferIndex;
+            BackBufferIndex = NativeSwapChain.CurrentBackBufferIndex;
 
             BackBuffer.Resource.Dispose();
-            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
+            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(BackBufferIndex));
 
             compiledCommandLists.ForEach(c => c.Release());
             compiledCommandLists.Clear();
@@ -126,10 +126,14 @@ namespace Axiverse.Interface.Graphics
 
         protected void ResizeSwapChain()
         {
-
             Device.PrintLiveObjects();
 
             Debug.WriteLine("====");
+
+            foreach (var resource in Device.PresenterResources)
+            {
+                resource.Dispose();
+            }
             for (int i = 0; i < BackBufferCount; i++)
             {
                 BackBuffers[i].Dispose();
@@ -139,16 +143,20 @@ namespace Axiverse.Interface.Graphics
             Device.PrintLiveObjects();
 
             NativeSwapChain.ResizeBuffers(
-                bufferCount,
+                BackBufferCount,
                 Description.Width,
                 Description.Height,
                 Format.B8G8R8A8_UNorm,
                 SwapChainFlags.None);
 
-            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(bufferIndex));
-            for (int i = 0; i < bufferCount; i++)
+            BackBuffer.Initialize(NativeSwapChain.GetBackBuffer<Resource>(BackBufferIndex));
+            for (int i = 0; i < BackBufferCount; i++)
             {
                 BackBuffers[i].Initialize(NativeSwapChain.GetBackBuffer<Resource>(i));
+            }
+            foreach (var resource in Device.PresenterResources)
+            {
+                resource.Recreate();
             }
         }
 
@@ -172,9 +180,6 @@ namespace Axiverse.Interface.Graphics
 
         internal CommandQueue NativeCommandQueue;
         internal SwapChain3 NativeSwapChain;
-
-        private int bufferCount = 3;
-        private int bufferIndex = 0;
 
         private readonly List<CompiledCommandList> compiledCommandLists = new List<CompiledCommandList>();
     }

@@ -69,6 +69,7 @@
     <Compile Include="Rendering\Compositing\Compositor.cs" />
     <Compile Include="Rendering\Compositing\ForwardRenderer.cs" />
     <Compile Include="Rendering\Compositing\ModelDrawer.cs" />
+    <Compile Include="Rendering\Compositing\PhysicallyBasedRenderer.cs" />
     <Compile Include="Rendering\Compositing\Renderer.cs" />
     <Compile Include="Rendering\Material.cs" />
     <Compile Include="Rendering\Mesh.cs" />

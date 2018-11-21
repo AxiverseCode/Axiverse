@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpDX.Direct3D;
-using SharpDX.Direct3D12;
+﻿using SharpDX.Direct3D12;
 using SharpDX.DXGI;
 
 using NativePipelineState = SharpDX.Direct3D12.PipelineState;
@@ -43,12 +36,12 @@ namespace Axiverse.Interface.Graphics
                 RootSignature = description.RootSignature.NativeRootSignature,
                 VertexShader = new SharpDX.Direct3D12.ShaderBytecode(description.VertexShader),
                 PixelShader = new SharpDX.Direct3D12.ShaderBytecode(description.PixelShader),
-
+                
                 // Common
                 RasterizerState = RasterizerStateDescription.Default(),
                 BlendState = BlendStateDescription.Default(),
                 DepthStencilFormat = Format.D32_Float,
-                DepthStencilState = SharpDX.Direct3D12.DepthStencilStateDescription.Default(),
+                DepthStencilState = DepthStencilStateDescription.Default(),
                 SampleMask = int.MaxValue,
                 PrimitiveTopologyType = PrimitiveTopologyType.Triangle,
                 RenderTargetCount = 1,

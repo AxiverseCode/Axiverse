@@ -18,6 +18,7 @@ namespace Axiverse.Interface.Graphics
         /// Gets the list of resources bound to this device.
         /// </summary>
         public List<GraphicsResource> Resources { get; } = new List<GraphicsResource>();
+        public List<IPresenterResource> PresenterResources { get; } = new List<IPresenterResource>();
 
         public Queue<GraphicsResource> UploadQueue { get; } = new Queue<GraphicsResource>();
 

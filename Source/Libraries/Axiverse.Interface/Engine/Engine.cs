@@ -131,14 +131,9 @@ namespace Axiverse.Interface.Engine
             // Shaders
             var frame = 0.0f;
 
-            var texture = new Texture(device);
-            texture.Load(@".\Resources\Textures\Placeholder Grid.jpg");
-
-            var uvGrid = new Texture(device);
-            uvGrid.Load(@".\Resources\Textures\UV Grid.png");
-
-            var skymap = new Texture(device);
-            skymap.Load(@".\Resources\Textures\NASA Starmap 4k.jpg");
+            var texture = Texture.Load(device, @".\Resources\Textures\Placeholder Grid.jpg");
+            var uvGrid = Texture.Load(device, @".\Resources\Textures\UV Grid.png");
+            var skymap = Texture.Load(device, @".\Resources\Textures\NASA Starmap 4k.jpg");
 
             // Lets create some resources
             LoadCube(device);
@@ -300,7 +295,7 @@ namespace Axiverse.Interface.Engine
                         device2d.DisposeFrames();
                         presenter.Resize(form.ClientSize.Width, form.ClientSize.Height);
                         presenter.TryResize();
-                        device2d.InitializeFrames(device);
+                        device2d.InitializePresentable(device);
                     }
 
                     compositor.Process(Scene, cameraComponent);

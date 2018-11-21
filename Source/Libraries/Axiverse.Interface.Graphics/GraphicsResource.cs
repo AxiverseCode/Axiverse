@@ -16,7 +16,7 @@ namespace Axiverse.Interface.Graphics
         /// Gets whether the resource has already been disposed.
         /// </summary>
         public bool IsDisposed { get; protected set; }
-        
+
         /// <summary>
         /// Constructs a resoruce bound to the specified device.
         /// </summary>
@@ -28,6 +28,11 @@ namespace Axiverse.Interface.Graphics
             if (device != null)
             {
                 device.Resources.Add(this);
+
+                if (this is IPresenterResource presenterResource)
+                {
+                    device.PresenterResources.Add(presenterResource);
+                }
             }
         }
 
@@ -57,6 +62,12 @@ namespace Axiverse.Interface.Graphics
         protected virtual void Dispose(bool disposing)
         {
             Device.Resources.Remove(this);
+
+            if (this is IPresenterResource presenterResource)
+            {
+                Device.PresenterResources.Add(presenterResource);
+            }
+
             IsDisposed = true;
         }
     }

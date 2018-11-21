@@ -4,21 +4,20 @@ using System.IO;
 
 namespace Axiverse.Interface.Graphics.Canvas
 {
-    class Image
+    public class Image
     {
-        public Image()
+        internal Bitmap1 NativeBitmap;
+
+        public Image(Stream stream, DeviceContext context)
         {
-            var ic = new SharpDX.WIC.ImagingFactory();
+            var factory = new ImagingFactory();
+            var decoder = new BitmapDecoder(factory, stream, DecodeOptions.CacheOnLoad);
 
-            Stream s = new MemoryStream();
-            var bc = new SharpDX.WIC.BitmapDecoder(ic, s, DecodeOptions.CacheOnLoad);
+            BitmapFrameDecode frame = decoder.GetFrame(0);
 
-            BitmapFrameDecode f = bc.GetFrame(0);
+            FormatConverter converter = new FormatConverter(factory);
+            converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPRGBA);
 
-            FormatConverter converter = new FormatConverter(ic);
-            converter.Initialize(f, SharpDX.WIC.PixelFormat.Format32bppPRGBA);
-
-            DeviceContext context = null;
             var newBitmap = Bitmap1.FromWicBitmap(context, converter);
         }
     }

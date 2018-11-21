@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics.Generic
 {
@@ -21,40 +18,40 @@ namespace Axiverse.Interface.Graphics.Generic
 
             T[] vertices = new T[]{
                 //front
-                Vertex( new Vector3(-1.0f, -1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 0.0f), new Vector4(1.0f, 0.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3(-1.0f,  1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 1.0f), new Vector4(1.0f, 0.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f,  1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(1.0f, 0.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f, -1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector4(1.0f, 0.0f, 0.0f, 0.0f) ),
+                Vertex( new Vector3(-1, -1,  1), new Vector3(0, 0, 0), new Vector2(0, 0), new Vector4(1, 0, 0, 0) ),
+                Vertex( new Vector3(-1,  1,  1), new Vector3(0, 0, 0), new Vector2(0, 1), new Vector4(1, 0, 0, 0) ),
+                Vertex( new Vector3( 1,  1,  1), new Vector3(0, 0, 0), new Vector2(1, 1), new Vector4(1, 0, 0, 0) ),
+                Vertex( new Vector3( 1, -1,  1), new Vector3(0, 0, 0), new Vector2(1, 0), new Vector4(1, 0, 0, 0) ),
 
                 // back
-                Vertex( new Vector3(-1.0f, -1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 0.0f), new Vector4(0.0f, 1.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f, -1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 1.0f), new Vector4(0.0f, 1.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f,  1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(0.0f, 1.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3(-1.0f,  1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector4(0.0f, 1.0f, 0.0f, 0.0f) ),
+                Vertex( new Vector3(-1, -1, -1), new Vector3(0, 0, 0), new Vector2(0, 0), new Vector4(0, 1, 0, 0) ),
+                Vertex( new Vector3( 1, -1, -1), new Vector3(0, 0, 0), new Vector2(0, 1), new Vector4(0, 1, 0, 0) ),
+                Vertex( new Vector3( 1,  1, -1), new Vector3(0, 0, 0), new Vector2(1, 1), new Vector4(0, 1, 0, 0) ),
+                Vertex( new Vector3(-1,  1, -1), new Vector3(0, 0, 0), new Vector2(1, 0), new Vector4(0, 1, 0, 0) ),
 
                 // top
-                Vertex( new Vector3(-1.0f,  1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 0.0f), new Vector4(0.0f, 0.0f, 1.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f,  1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 1.0f), new Vector4(0.0f, 0.0f, 1.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f,  1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(0.0f, 0.0f, 1.0f, 0.0f) ),
-                Vertex( new Vector3(-1.0f,  1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector4(0.0f, 0.0f, 1.0f, 0.0f) ),
+                Vertex( new Vector3(-1,  1, -1), new Vector3(0, 0, 0), new Vector2(0, 0), new Vector4(0, 0, 1, 0) ),
+                Vertex( new Vector3( 1,  1, -1), new Vector3(0, 0, 0), new Vector2(0, 1), new Vector4(0, 0, 1, 0) ),
+                Vertex( new Vector3( 1,  1,  1), new Vector3(0, 0, 0), new Vector2(1, 1), new Vector4(0, 0, 1, 0) ),
+                Vertex( new Vector3(-1,  1,  1), new Vector3(0, 0, 0), new Vector2(1, 0), new Vector4(0, 0, 1, 0) ),
 
                 // bottom
-                Vertex( new Vector3(-1.0f, -1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 0.0f), new Vector4(0.0f, 0.0f, 0.0f, 1.0f) ),
-                Vertex( new Vector3(-1.0f, -1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 1.0f), new Vector4(0.0f, 0.0f, 0.0f, 1.0f) ),
-                Vertex( new Vector3( 1.0f, -1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(0.0f, 0.0f, 0.0f, 1.0f) ),
-                Vertex( new Vector3( 1.0f, -1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector4(0.0f, 0.0f, 0.0f, 1.0f) ),
+                Vertex( new Vector3(-1, -1, -1), new Vector3(0, 0, 0), new Vector2(0, 0), new Vector4(0, 0, 0, 1) ),
+                Vertex( new Vector3(-1, -1,  1), new Vector3(0, 0, 0), new Vector2(0, 1), new Vector4(0, 0, 0, 1) ),
+                Vertex( new Vector3( 1, -1,  1), new Vector3(0, 0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 1) ),
+                Vertex( new Vector3( 1, -1, -1), new Vector3(0, 0, 0), new Vector2(1, 0), new Vector4(0, 0, 0, 1) ),
 
                 // right
-                Vertex( new Vector3( 1.0f, -1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 0.0f), new Vector4(1.0f, 1.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f, -1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 1.0f), new Vector4(1.0f, 1.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f,  1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(1.0f, 1.0f, 0.0f, 0.0f) ),
-                Vertex( new Vector3( 1.0f,  1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector4(1.0f, 1.0f, 0.0f, 0.0f) ),
+                Vertex( new Vector3( 1, -1, -1), new Vector3(0, 0, 0), new Vector2(0, 0), new Vector4(1, 1, 0, 0) ),
+                Vertex( new Vector3( 1, -1,  1), new Vector3(0, 0, 0), new Vector2(0, 1), new Vector4(1, 1, 0, 0) ),
+                Vertex( new Vector3( 1,  1,  1), new Vector3(0, 0, 0), new Vector2(1, 1), new Vector4(1, 1, 0, 0) ),
+                Vertex( new Vector3( 1,  1, -1), new Vector3(0, 0, 0), new Vector2(1, 0), new Vector4(1, 1, 0, 0) ),
 
-                // left
-                Vertex( new Vector3(-1.0f, -1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 0.0f), new Vector4(1.0f, 0.0f, 1.0f, 0.0f) ),
-                Vertex( new Vector3(-1.0f,  1.0f, -1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(0.0f, 1.0f), new Vector4(1.0f, 0.0f, 1.0f, 0.0f) ),
-                Vertex( new Vector3(-1.0f,  1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector4(1.0f, 0.0f, 1.0f, 0.0f) ),
-                Vertex( new Vector3(-1.0f, -1.0f,  1.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector4(1.0f, 0.0f, 1.0f, 0.0f) ),
+                // let
+                Vertex( new Vector3(-1, -1, -1), new Vector3(0, 0, 0), new Vector2(0, 0), new Vector4(1, 0, 1, 0) ),
+                Vertex( new Vector3(-1,  1, -1), new Vector3(0, 0, 0), new Vector2(0, 1), new Vector4(1, 0, 1, 0) ),
+                Vertex( new Vector3(-1,  1,  1), new Vector3(0, 0, 0), new Vector2(1, 1), new Vector4(1, 0, 1, 0) ),
+                Vertex( new Vector3(-1, -1,  1), new Vector3(0, 0, 0), new Vector2(1, 0), new Vector4(1, 0, 1, 0) ),
             };
 
             return new Tuple<uint[], T[]>(indices, vertices);
@@ -129,7 +126,7 @@ namespace Axiverse.Interface.Graphics.Generic
             for (uint i = 0; i < meridians; i++)
             {
                 var a = i + meridians * (parallels - 2) + 1;
-                var b = (i+1) % meridians + meridians * (parallels - 2) + 1;
+                var b = (i + 1) % meridians + meridians * (parallels - 2) + 1;
                 var c = vertices.Count - 1;
                 indices.Add((uint)c);
                 indices.Add((uint)a);
@@ -137,6 +134,30 @@ namespace Axiverse.Interface.Graphics.Generic
             }
 
             return new Tuple<uint[], T[]>(indices.ToArray(), vertices.ToArray());
+        }
+
+        /// <summary>
+        /// Sphere with line on axis, coloried according to direction
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="meridians"></param>
+        /// <param name="parallels"></param>
+        /// <returns></returns>
+        public static Tuple<uint[], T[]> OrientationSphere(float radius, int meridians, int parallels)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Axis with cone arrows.
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="meridians"></param>
+        /// <param name="parallels"></param>
+        /// <returns></returns>
+        public static Tuple<uint[], T[]> Axis(float radius, int meridians, int parallels)
+        {
+            throw new NotImplementedException();
         }
 
         private static T Vertex(Vector3 position, Vector3 normal, Vector2 texture, Vector4 color)

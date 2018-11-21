@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using Axiverse.Injection;
-using Axiverse.Resources;
+﻿using Axiverse.Injection;
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
+using Axiverse.Resources;
+using System;
 
 namespace Axiverse.Interface.Assets.Models
 {
@@ -33,7 +28,7 @@ namespace Axiverse.Interface.Assets.Models
                     loader.VertexList[j].Vector = Matrix3.Transform(loader.VertexList[j].Vector, transform);
                 }
             }
-            
+
             // vertex buffer
             var vertexCount = loader.TriangleCount * 3;
             var vertices = new PositionColorTexture[vertexCount];
