@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Boolean3.cs" />
     <Compile Include="Bounds.cs" />
+    <Compile Include="Core\Operators.cs" />
     <Compile Include="Geometry\Bounds3.cs" />
     <Compile Include="Complex.cs" />
     <Compile Include="Core\FloatingPoint.cs" />

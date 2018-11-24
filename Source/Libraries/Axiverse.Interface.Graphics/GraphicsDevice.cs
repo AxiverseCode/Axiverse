@@ -18,8 +18,15 @@ namespace Axiverse.Interface.Graphics
         /// Gets the list of resources bound to this device.
         /// </summary>
         public List<GraphicsResource> Resources { get; } = new List<GraphicsResource>();
+
+        /// <summary>
+        /// Gets the list of resources which need to perform cleanup during presenter resizing.
+        /// </summary>
         public List<IPresenterResource> PresenterResources { get; } = new List<IPresenterResource>();
 
+        /// <summary>
+        /// Gets the list of resources which need to be uploaded to GPU memory.
+        /// </summary>
         public Queue<GraphicsResource> UploadQueue { get; } = new Queue<GraphicsResource>();
 
         internal DescriptorAllocator SamplerAllocator;
@@ -67,6 +74,9 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Prints all live objects.
+        /// </summary>
         public void PrintLiveObjects()
         {
 #if DEBUG
@@ -210,8 +220,15 @@ namespace Axiverse.Interface.Graphics
         }
 
         #region IDisposable Support
+        /// <summary>
+        /// Gets whether the device is disposed.
+        /// </summary>
         public bool IsDisposed { get; private set; }
 
+        /// <summary>
+        /// Disposes the device.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!IsDisposed)
@@ -232,6 +249,9 @@ namespace Axiverse.Interface.Graphics
             }
         }
 
+        /// <summary>
+        /// Disposes the device.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

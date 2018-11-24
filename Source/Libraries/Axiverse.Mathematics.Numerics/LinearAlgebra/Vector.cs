@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.LinearAlgebra
 {
+    /// <summary>
+    /// Represents a vector.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Vector<T>
         where T : IEquatable<T>, IFormattable
     {
@@ -16,7 +16,5 @@ namespace Axiverse.Mathematics.LinearAlgebra
             get => default(T);
             set => value = default(T);
         }
-
-
     }
 }

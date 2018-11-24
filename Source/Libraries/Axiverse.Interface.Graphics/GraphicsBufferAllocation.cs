@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics
 {
+    /// <summary>
+    /// Allocation of space within a buffer for parameter binding in constant buffers.
+    /// </summary>
     public class GraphicsBufferAllocation
     {
         public GraphicsBuffer Buffer;

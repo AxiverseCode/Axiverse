@@ -23,6 +23,9 @@ namespace Axiverse.Interface.Graphics
         /// </summary>
         public int Stride { get; private set; }
 
+        /// <summary>
+        /// Constructs a vertex layout.
+        /// </summary>
         public VertexLayout()
         {
             Elements = new List<VertexElement>();

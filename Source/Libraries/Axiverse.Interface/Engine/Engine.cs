@@ -21,7 +21,14 @@ namespace Axiverse.Interface.Engine
     /// </summary>
     public class Engine
     {
+        /// <summary>
+        /// Gets the injector.
+        /// </summary>
         public Injector Injector { get; private set; }
+
+        /// <summary>
+        /// Gets the object cache.
+        /// </summary>
         public Cache Cache { get; private set; }
 
         Form form;

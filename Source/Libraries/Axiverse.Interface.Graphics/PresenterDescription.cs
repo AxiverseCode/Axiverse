@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Graphics
 {
+    /// <summary>
+    /// Description for the <see cref="Presenter"/>.
+    /// </summary>
     public class PresenterDescription
     {
         /// <summary>

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpDX.Direct3D12;
+﻿using SharpDX.Direct3D12;
+using System;
 using NativeRootSignature = SharpDX.Direct3D12.RootSignature;
 
 namespace Axiverse.Interface.Graphics
 {
+    /// <summary>
+    /// Root signature which defines the buffer and sampler bindings.
+    /// </summary>
     public class RootSignature : GraphicsResource
     {
         internal NativeRootSignature NativeRootSignature;
@@ -18,6 +16,10 @@ namespace Axiverse.Interface.Graphics
             NativeRootSignature = rootSignature;
         }
 
+        /// <summary>
+        /// Disposes the root signature.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!IsDisposed)
@@ -27,6 +29,11 @@ namespace Axiverse.Interface.Graphics
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Creates a root signature.
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
         public static RootSignature Create(GraphicsDevice device)
         {
             // NOTE: I think we could work with prebaked root signatures (we can define it

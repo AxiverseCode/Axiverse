@@ -18,6 +18,9 @@ namespace Axiverse.Interface.Graphics
     using Axiverse.Interface.Windows;
     using SharpDX.Direct2D1;
 
+    /// <summary>
+    /// Direct2D derivation from the graphics device.
+    /// </summary>
     public class GraphicsDevice2D : GraphicsResource, IPresenterResource
     {
         private Dictionary<string, FontCollection> m_fontCollections = new Dictionary<string, FontCollection>();
