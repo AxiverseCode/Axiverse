@@ -13,7 +13,7 @@ namespace Axiverse
     /// <summary>
     /// Represents a three dimensional rotation.
     /// </summary>
-	[Serializable]
+    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Quaternion : IEnumerable<float>
     {
@@ -486,7 +486,7 @@ namespace Axiverse
             return 2.0f * Vector3.Dot(ref vector, ref direction) * vector
                 + (scalar * scalar - Vector3.Dot(ref vector, ref vector)) * direction
                 + 2.0f * scalar * Vector3.Cross(vector, direction);
-            
+
             ////Quaternion r = new Quaternion(direction, 0);
             ////return (this * r * Conjugate()).ToVector3();
 
@@ -976,7 +976,7 @@ namespace Axiverse
 
             result = (inverse * former) + (opposite * latter);
         }
-        
+
         public static Quaternion Slerp(Quaternion former, Quaternion latter, float scale)
         {
             Quaternion result;

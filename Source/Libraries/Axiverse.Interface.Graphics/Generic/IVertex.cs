@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-    using System.Runtime.InteropServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Axiverse.Mathematics.Serialization;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Axiverse.Interface.Graphics.Generic
 {
@@ -19,6 +16,16 @@ namespace Axiverse.Interface.Graphics.Generic
 
         bool HasTexture { get; }
         Vector2 Texture { get; set; }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Vertex
+    {
+        Vector3 Position;
+        byte4 BoneWeight;
+        byte4 BoneIndices;
+        byte4 Normal;
+        ushort2 Texture;
     }
 
     /// <summary>
@@ -59,7 +66,7 @@ namespace Axiverse.Interface.Graphics.Generic
         public Vector3 Position;
         public Vector2 Texture;
         public Vector4 Color;
-        
+
         public static readonly VertexLayout Layout = new VertexLayout(
             new VertexElement("Position", 0, VertexFormat.Vector3),
             new VertexElement("Texture", 12, VertexFormat.Vector2),

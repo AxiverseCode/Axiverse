@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
-
 namespace Axiverse
 {
     /// <summary>
@@ -132,7 +133,7 @@ namespace Axiverse
         /// The default random number generator.
         /// </summary>
         public static readonly Random Random = new Random();
-        
+
         /// <summary>
         /// The degrees to radians conversion ratio.
         /// </summary>
@@ -169,6 +170,11 @@ namespace Axiverse
         public static float CopySign(float value, float sign)
         {
             return sign < 0 && value > 0 ? -value : value;
+        }
+
+        public static bool Equals(IEnumerable<float> a, IEnumerable<float> b, float epsillon)
+        {
+            return a.Zip(b, (i, j) => Math.Abs(j - i) <= epsillon).All(v => v);
         }
     }
 }

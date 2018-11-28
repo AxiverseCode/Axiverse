@@ -47,6 +47,7 @@
     <Compile Include="Collections\CollectionChangedAction.cs" />
     <Compile Include="Collections\CollectionChangedEventArgs.cs" />
     <Compile Include="Collections\EmptyList.cs" />
+    <Compile Include="Collections\Extensions.cs" />
     <Compile Include="Collections\ItemList.cs" />
     <Compile Include="Collections\TrackedList.cs" />
     <Compile Include="DisposableObjectPool.cs" />

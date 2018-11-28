@@ -57,8 +57,6 @@ namespace Axiverse.Interface.Graphics
             }
             // We need now to retrieve the back buffers:
             // 1) We need a heap to store the views
-            var handle = Device.RenderTargetViewAllocator.Allocate(BackBufferCount);
-
             BackBuffers = new Texture[BackBufferCount];
             for (int i = 0; i < BackBufferCount; i++)
             {

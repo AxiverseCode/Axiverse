@@ -759,6 +759,18 @@ namespace Axiverse
             tangent = (tangent - projection).Normal();
         }
 
+        public static void Lerp(ref Vector3 former, ref Vector3 latter, float scale, out Vector3 result)
+        {
+            result = former * (1 - scale) + latter * scale;
+        }
+
+        public static Vector3 Lerp(Vector3 former, Vector3 latter, float scale)
+        {
+            Vector3 result;
+            Lerp(ref former, ref latter, scale, out result);
+            return result;
+        }
+
         #endregion
 
         public static Vector3 Minimum(Vector3 former, Vector3 latter)
@@ -985,7 +997,7 @@ namespace Axiverse
 
         public static readonly Vector3 Up = new Vector3(0, 1, 0);
         public static readonly Vector3 Down = new Vector3(0, -1, 0);
-        
+
         public static readonly Vector3 Left = new Vector3(-1, 0, 0);
         public static readonly Vector3 Right = new Vector3(1, 0, 0);
 

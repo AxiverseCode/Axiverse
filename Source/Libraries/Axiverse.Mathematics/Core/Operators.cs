@@ -6,6 +6,10 @@ namespace Axiverse
     /// <summary>
     /// Generic operator usage.
     /// </summary>
+    /// <remarks>
+    /// We cannot use operator on generics so we have to use this bridge class in order to enable
+    /// that.
+    /// </remarks>
     public static class Operators
     {
         /// <summary>
