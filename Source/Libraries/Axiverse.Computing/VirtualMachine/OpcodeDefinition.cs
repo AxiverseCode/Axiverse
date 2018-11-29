@@ -20,7 +20,7 @@ namespace Axiverse.Computing.VirtualMachine
             Register(Opcode.AddI32);
             Register(Opcode.Print);
             Register(Opcode.Halt);
-            Register(Opcode.Const, typeof(int));
+            Register(Opcode.Const32, typeof(int));
             Register(Opcode.Call16, typeof(short));
             Register(Opcode.Call32, typeof(int));
             Register(Opcode.Jump, typeof(short));
