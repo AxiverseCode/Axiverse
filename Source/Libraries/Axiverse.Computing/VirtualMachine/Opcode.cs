@@ -15,6 +15,11 @@
         Nop = 0x00,
 
         /// <summary>
+        /// Halts the program.
+        /// </summary>
+        Halt,
+
+        /// <summary>
         /// Calls a method.
         /// 
         /// displacement [2] - relative address of the call to the opcode.
@@ -42,11 +47,6 @@
         /// Returns a 64 bit value from the stack.
         /// </summary>
         Return64,
-
-        /// <summary>
-        /// Halts the program.
-        /// </summary>
-        Halt,
 
         Complement32,
         Not32,
@@ -97,34 +97,36 @@
         /// 
         /// displacement - offset from the position of the opcode.
         /// </summary>
-        Jump,
+        Jump16,
 
-        JumpIfZeroI32,
-        JumpIfPositiveI32,
-        JumpIfNegativeI32,
+        Jump16IfZeroI32,
+        Jump16IfNotZeroI32,
+        Jump16IfPositiveI32,
+        Jump16IfNegativeI32,
 
-        JumpCompareEqualI32,
-        JumpCompareNotEqualI32,
-        JumpCompareGreaterI32,
-        JumpCompareLesserI32,
-        JumpCompareGreaterOrEqualI32,
-        JumpCompareLesserOrEqualI32,
+        Jump16CompareEqualI32,
+        Jump16CompareNotEqualI32,
+        Jump16CompareGreaterI32,
+        Jump16CompareLesserI32,
+        Jump16CompareGreaterOrEqualI32,
+        Jump16CompareLesserOrEqualI32,
 
         /// <summary>
         /// Load variable relative to fp.
         /// </summary>
-        LocalLoad32,
-        LocalLoad64,
+        Local16Load32,
+        Local16Load64,
+
+        /// <summary>
+        /// Store variable relative to fp.
+        /// </summary>
+        Local16Store32,
+        Local16Store64,
 
         /// <summary>
         /// Load variable from global memory.
         /// </summary>
         GlobalLoad32,
-
-        /// <summary>
-        /// Store variable relative to fp.
-        /// </summary>
-        LocalStore32,
 
         /// <summary>
         /// Store variable into global memory from stack.

@@ -52,8 +52,23 @@ namespace Axiverse.Computing.VirtualMachine
         /// </summary>
         public byte[] Memory { get; set; }
 
-        public Executor(byte[] program)
+        /// <summary>
+        /// Constructs an executor.
+        /// </summary>
+        /// <param name="program"></param>
+        public Executor(byte[] program) : this(program, program.Length)
         {
+
+        }
+
+        /// <summary>
+        /// Constructs an executor.
+        /// </summary>
+        /// <param name="program"></param>
+        /// <param name="count"></param>
+        public Executor(byte[] program, int count)
+        {
+            Requires.That(count > program.Length);
             Memory = new byte[1024];
 
             Buffer.BlockCopy(program, 0, Memory, 0, program.Length);
@@ -142,39 +157,39 @@ namespace Axiverse.Computing.VirtualMachine
 
 
                     // Jump (relative) -> 
-                    case Opcode.Jump:
+                    case Opcode.Jump16:
                         {
-                            var address = ReadInt32(ref instructionPointer);
+                            var address = ReadInt16(ref instructionPointer);
                             instructionPointer += address;
                             break;
                         }
                     // Jump if (value, relative) ->
-                    case Opcode.JumpIfZeroI32: JumpIfI32(a => a == 0); break;
-                    case Opcode.JumpIfPositiveI32: JumpIfI32(a => a > 0); break;
-                    case Opcode.JumpIfNegativeI32: JumpIfI32(a => a < 0); break;
+                    case Opcode.Jump16IfZeroI32: Jump16IfI32(a => a == 0); break;
+                    case Opcode.Jump16IfPositiveI32: Jump16IfI32(a => a > 0); break;
+                    case Opcode.Jump16IfNegativeI32: Jump16IfI32(a => a < 0); break;
 
                     // Jump compare (a, b, relative) ->
-                    case Opcode.JumpCompareEqualI32: JumpCompareI32((a, b) => a == b); break;
-                    case Opcode.JumpCompareNotEqualI32: JumpCompareI32((a, b) => a != b); break;
-                    case Opcode.JumpCompareGreaterI32: JumpCompareI32((a, b) => a > b); break;
-                    case Opcode.JumpCompareLesserI32: JumpCompareI32((a, b) => a < b); break;
-                    case Opcode.JumpCompareGreaterOrEqualI32: JumpCompareI32((a, b) => a >= b); break;
-                    case Opcode.JumpCompareLesserOrEqualI32: JumpCompareI32((a, b) => a <= b); break;
+                    case Opcode.Jump16CompareEqualI32: Jump16CompareI32((a, b) => a == b); break;
+                    case Opcode.Jump16CompareNotEqualI32: Jump16CompareI32((a, b) => a != b); break;
+                    case Opcode.Jump16CompareGreaterI32: Jump16CompareI32((a, b) => a > b); break;
+                    case Opcode.Jump16CompareLesserI32: Jump16CompareI32((a, b) => a < b); break;
+                    case Opcode.Jump16CompareGreaterOrEqualI32: Jump16CompareI32((a, b) => a >= b); break;
+                    case Opcode.Jump16CompareLesserOrEqualI32: Jump16CompareI32((a, b) => a <= b); break;
 
                     // Local [relative] (value) -> .
-                    case Opcode.LocalLoad32:
+                    case Opcode.Local16Load32:
                         {
                             var address = stackPointer + ReadInt32(ref instructionPointer);
                             Push(ReadInt32(ref address), ref stackPointer);
                             break;
                         }
-                    case Opcode.LocalLoad64:
+                    case Opcode.Local16Load64:
                         {
                             var address = stackPointer + ReadInt32(ref instructionPointer);
                             Push(ReadInt64(ref address), ref stackPointer);
                             break;
                         }
-                    case Opcode.LocalStore32:
+                    case Opcode.Local16Store32:
                         {
                             var address = stackPointer + ReadInt32(ref instructionPointer);
                             Set(ReadInt64(ref stackPointer), address);
@@ -221,9 +236,9 @@ namespace Axiverse.Computing.VirtualMachine
 
         }
 
-        private void JumpIfI32(Predicate<int> predicate)
+        private void Jump16IfI32(Predicate<int> predicate)
         {
-            var address = ReadInt32(ref instructionPointer);
+            var address = ReadInt16(ref instructionPointer);
             var value = ReadInt32(ref stackPointer);
 
             if (predicate(value))
@@ -232,9 +247,9 @@ namespace Axiverse.Computing.VirtualMachine
             }
         }
 
-        private void JumpCompareI32(Func<int, int, bool> predicate)
+        private void Jump16CompareI32(Func<int, int, bool> predicate)
         {
-            var address = ReadInt32(ref instructionPointer);
+            var address = ReadInt16(ref instructionPointer);
             var latter = ReadInt32(ref stackPointer);
             var former = ReadInt32(ref stackPointer);
 

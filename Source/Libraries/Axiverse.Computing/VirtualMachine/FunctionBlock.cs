@@ -68,15 +68,31 @@ namespace Axiverse.Computing.VirtualMachine
         public void Emit(Opcode opcode, byte param1)
         {
             Requires.That(OpcodeDefinition.For(opcode).Params.SequenceEqual(new Type[] { typeof(byte) }));
-
+            Buffer.Position = Length;
+            writer.Write((byte)opcode);
+            writer.Write(param1);
+            Length = (int)Buffer.Position;
         }
 
         public void Emit(Opcode opcode, short param1)
         {
             Requires.That(OpcodeDefinition.For(opcode).Params.SequenceEqual(new Type[] { typeof(short) }));
+            Buffer.Position = Length;
+            writer.Write((byte)opcode);
+            writer.Write(param1);
+            Length = (int)Buffer.Position;
         }
 
         public void Emit(Opcode opcode, int param1)
+        {
+            Requires.That(OpcodeDefinition.For(opcode).Params.SequenceEqual(new Type[] { typeof(int) }));
+            Buffer.Position = Length;
+            writer.Write((byte)opcode);
+            writer.Write(param1);
+            Length = (int)Buffer.Position;
+        }
+
+        public void Emit(Opcode opcode, long param1)
         {
             Requires.That(OpcodeDefinition.For(opcode).Params.SequenceEqual(new Type[] { typeof(int) }));
             Buffer.Position = Length;
@@ -121,6 +137,5 @@ namespace Axiverse.Computing.VirtualMachine
             Buffer.Seek(offset, SeekOrigin.Begin);
             writer.Write(address);
         }
-
     }
 }

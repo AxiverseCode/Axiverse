@@ -19,20 +19,20 @@ namespace Hello_Computer
             // factorial(i)
             var factorial = new FunctionBlock("factorial");
             // if (i == 1) return 1;
-            factorial.Emit(Opcode.LocalLoad32, -16); // i
+            factorial.Emit(Opcode.Local16Load32, -16); // i
             factorial.Emit(Opcode.Const32, 1);
-            factorial.EmitLabel(Opcode.JumpCompareNotEqualI32, "recurse");
+            factorial.EmitLabel(Opcode.Jump16CompareNotEqualI32, "recurse");
             factorial.Emit(Opcode.Const32, 1);
             factorial.Emit(Opcode.Return32);
 
             // call factorial(i - 1)
             factorial.MarkLabel("recurse");
-            factorial.Emit(Opcode.LocalLoad32, -16); // i
+            factorial.Emit(Opcode.Local16Load32, -16); // i
             factorial.Emit(Opcode.Const32, 1);
             factorial.Emit(Opcode.SubtractI32);
             factorial.EmitCall("factorial");
             // return i * result;
-            factorial.Emit(Opcode.LocalLoad32, -16); // i
+            factorial.Emit(Opcode.Local16Load32, -16); // i
             factorial.Emit(Opcode.MultiplyI32);
             factorial.Emit(Opcode.Return32);
 
