@@ -91,6 +91,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Geomet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calibration", "Deployment\Calibration\Calibration.csproj", "{660912D6-5032-479A-8F22-4DE44DE1FD48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Computing.Tests", "Tests\Axiverse.Computing.Tests\Axiverse.Computing.Tests.csproj", "{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -233,6 +235,10 @@ Global
 		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{660912D6-5032-479A-8F22-4DE44DE1FD48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -272,6 +278,7 @@ Global
 		{3D826B2A-BAC8-42D4-8B7F-84E66C82864B} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
 		{BD10941E-997A-450B-9D91-392FF39B9F9F} = {AAE6C854-9031-4394-9995-EE38B6088F37}
 		{660912D6-5032-479A-8F22-4DE44DE1FD48} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
+		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

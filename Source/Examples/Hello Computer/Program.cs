@@ -8,18 +8,21 @@ namespace Hello_Computer
     {
         static void Main(string[] args)
         {
-            var main = new FunctionBlock("main");
+            var main = new FunctionBuilder("main");
             main.Emit(Opcode.Const32, 1);
             main.Emit(Opcode.Const32, 10);
             main.Emit(Opcode.AddI32);
-            main.Emit(Opcode.Print)
-                ;
-            main.Emit(Opcode.Halt);
+            main.Emit(Opcode.Print);
+            main.Emit(Opcode.Const32, 10);
+            main.EmitCall("factorial");
+            main.Emit(Opcode.Print);
+            main.Emit(Opcode.Return);
 
             // factorial(i)
-            var factorial = new FunctionBlock("factorial");
+            var factorial = new FunctionBuilder("factorial");
+            factorial.Parameters = 4;
             // if (i == 1) return 1;
-            factorial.Emit(Opcode.Local16Load32, -16); // i
+            factorial.Emit(Opcode.Local16Load32, 12); // i
             factorial.Emit(Opcode.Const32, 1);
             factorial.EmitLabel(Opcode.Jump16CompareNotEqualI32, "recurse");
             factorial.Emit(Opcode.Const32, 1);
@@ -27,18 +30,20 @@ namespace Hello_Computer
 
             // call factorial(i - 1)
             factorial.MarkLabel("recurse");
-            factorial.Emit(Opcode.Local16Load32, -16); // i
+            factorial.Emit(Opcode.Local16Load32, 12); // i
             factorial.Emit(Opcode.Const32, 1);
             factorial.Emit(Opcode.SubtractI32);
             factorial.EmitCall("factorial");
             // return i * result;
-            factorial.Emit(Opcode.Local16Load32, -16); // i
+            factorial.Emit(Opcode.Local16Load32, 12); // i
             factorial.Emit(Opcode.MultiplyI32);
             factorial.Emit(Opcode.Return32);
 
 
             var linker = new Linker();
-            var bytecode = linker.Link(main);
+            var bytecode = linker.Link(main, factorial);
+
+            Console.WriteLine(Disassembler.Disassemble(bytecode));
 
             var machine = new Executor(bytecode);
             machine.Go();

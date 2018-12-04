@@ -48,9 +48,11 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VirtualMachine\FunctionBlock.cs" />
+    <Compile Include="VirtualMachine\Disassembler.cs" />
+    <Compile Include="VirtualMachine\FunctionBuilder.cs" />
     <Compile Include="VirtualMachine\Linker.cs" />
     <Compile Include="VirtualMachine\Executor.cs" />
+    <Compile Include="VirtualMachine\ObjectBuilder.cs" />
     <Compile Include="VirtualMachine\Opcode.cs" />
     <Compile Include="VirtualMachine\OpcodeDefinition.cs" />
   </ItemGroup>

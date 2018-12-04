@@ -143,5 +143,8 @@
         /// Prints an 32 bit.
         /// </summary>
         Print,
+
+        Metadata = 0xff,
+        Debug = 0xff,
     }
 }

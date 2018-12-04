@@ -56,7 +56,7 @@ namespace Axiverse.Computing.VirtualMachine
         /// Constructs an executor.
         /// </summary>
         /// <param name="program"></param>
-        public Executor(byte[] program) : this(program, program.Length)
+        public Executor(byte[] program) : this(program, program.Length + 1024)
         {
 
         }
@@ -68,15 +68,21 @@ namespace Axiverse.Computing.VirtualMachine
         /// <param name="count"></param>
         public Executor(byte[] program, int count)
         {
-            Requires.That(count > program.Length);
-            Memory = new byte[1024];
+            Requires.That(count >= program.Length);
+            Memory = new byte[count];
 
             Buffer.BlockCopy(program, 0, Memory, 0, program.Length);
+
+            for (int i = program.Length; i < Memory.Length; i++)
+            {
+                Memory[i] = 0xff;
+            }
+
 
             StackPointer = Memory.Length;
 
             // Skip entry point metadata.
-            InstructionPointer = 4;
+            InstructionPointer = 0;
         }
 
         // 32 bit?
@@ -88,12 +94,19 @@ namespace Axiverse.Computing.VirtualMachine
             int baseAddress;
             while ((opcode = (Opcode)Memory[baseAddress = InstructionPointer++]) != Opcode.Halt)
             {
+                Console.WriteLine($"ip: {instructionPointer} sp: {stackPointer} fp: {FramePointer}");
                 Console.WriteLine(opcode.ToString());
 
                 switch (opcode)
                 {
                     case Opcode.Call16:
                         {
+                            // Variables
+                            // Metadata (fp+12)
+                            // FramePointer (fp+8)
+                            // ReturnAddress (fp+4)
+                            // < New Frame Pointer
+
                             // Read function address and argument count.
                             var displacement = ReadInt16(ref instructionPointer);
                             var returnAddress = instructionPointer;
@@ -115,11 +128,38 @@ namespace Axiverse.Computing.VirtualMachine
                             stackPointer = FramePointer;
                             instructionPointer = ReadInt32(ref stackPointer);
                             FramePointer = ReadInt32(ref stackPointer);
-                            var metadata = ReadInt32(ref stackPointer);
+
+                            Requires.That((Opcode)ReadInt8(ref stackPointer) == Opcode.Metadata);
+                            var m1 = ReadInt8(ref stackPointer);
+                            var m2 = ReadInt8(ref stackPointer);
+                            var m3 = ReadInt8(ref stackPointer);
 
                             // Discard arguments.
-                            var argCount = metadata & 0xff;
+                            var argCount = m3;
                             stackPointer -= argCount * sizeof(int);
+
+                            break;
+                        }
+                    case Opcode.Return32:
+                        {
+                            var value = ReadInt32(ref stackPointer);
+
+                            // Reset instruction pointer and frame pointer.
+                            stackPointer = FramePointer;
+                            instructionPointer = ReadInt32(ref stackPointer);
+                            FramePointer = ReadInt32(ref stackPointer);
+
+                            Requires.That((Opcode)ReadInt8(ref stackPointer) == Opcode.Metadata);
+                            var m1 = ReadInt8(ref stackPointer);
+                            var m2 = ReadInt8(ref stackPointer);
+                            var m3 = ReadInt8(ref stackPointer);
+
+                            // Discard arguments.
+                            var argCount = m3;
+                            stackPointer -= argCount * sizeof(int);
+
+                            // Push return value.
+                            Push(value, ref stackPointer);
 
                             break;
                         }
@@ -160,38 +200,38 @@ namespace Axiverse.Computing.VirtualMachine
                     case Opcode.Jump16:
                         {
                             var address = ReadInt16(ref instructionPointer);
-                            instructionPointer += address;
+                            instructionPointer = baseAddress + address;
                             break;
                         }
                     // Jump if (value, relative) ->
-                    case Opcode.Jump16IfZeroI32: Jump16IfI32(a => a == 0); break;
-                    case Opcode.Jump16IfPositiveI32: Jump16IfI32(a => a > 0); break;
-                    case Opcode.Jump16IfNegativeI32: Jump16IfI32(a => a < 0); break;
+                    case Opcode.Jump16IfZeroI32: Jump16IfI32(a => a == 0, baseAddress); break;
+                    case Opcode.Jump16IfPositiveI32: Jump16IfI32(a => a > 0, baseAddress); break;
+                    case Opcode.Jump16IfNegativeI32: Jump16IfI32(a => a < 0, baseAddress); break;
 
                     // Jump compare (a, b, relative) ->
-                    case Opcode.Jump16CompareEqualI32: Jump16CompareI32((a, b) => a == b); break;
-                    case Opcode.Jump16CompareNotEqualI32: Jump16CompareI32((a, b) => a != b); break;
-                    case Opcode.Jump16CompareGreaterI32: Jump16CompareI32((a, b) => a > b); break;
-                    case Opcode.Jump16CompareLesserI32: Jump16CompareI32((a, b) => a < b); break;
-                    case Opcode.Jump16CompareGreaterOrEqualI32: Jump16CompareI32((a, b) => a >= b); break;
-                    case Opcode.Jump16CompareLesserOrEqualI32: Jump16CompareI32((a, b) => a <= b); break;
+                    case Opcode.Jump16CompareEqualI32: Jump16CompareI32((a, b) => a == b, baseAddress); break;
+                    case Opcode.Jump16CompareNotEqualI32: Jump16CompareI32((a, b) => a != b, baseAddress); break;
+                    case Opcode.Jump16CompareGreaterI32: Jump16CompareI32((a, b) => a > b, baseAddress); break;
+                    case Opcode.Jump16CompareLesserI32: Jump16CompareI32((a, b) => a < b, baseAddress); break;
+                    case Opcode.Jump16CompareGreaterOrEqualI32: Jump16CompareI32((a, b) => a >= b, baseAddress); break;
+                    case Opcode.Jump16CompareLesserOrEqualI32: Jump16CompareI32((a, b) => a <= b, baseAddress); break;
 
                     // Local [relative] (value) -> .
                     case Opcode.Local16Load32:
                         {
-                            var address = stackPointer + ReadInt32(ref instructionPointer);
+                            var address = FramePointer + ReadInt16(ref instructionPointer);
                             Push(ReadInt32(ref address), ref stackPointer);
                             break;
                         }
                     case Opcode.Local16Load64:
                         {
-                            var address = stackPointer + ReadInt32(ref instructionPointer);
+                            var address = FramePointer + ReadInt16(ref instructionPointer);
                             Push(ReadInt64(ref address), ref stackPointer);
                             break;
                         }
                     case Opcode.Local16Store32:
                         {
-                            var address = stackPointer + ReadInt32(ref instructionPointer);
+                            var address = FramePointer + ReadInt16(ref instructionPointer);
                             Set(ReadInt64(ref stackPointer), address);
                             break;
                         }
@@ -226,28 +266,32 @@ namespace Axiverse.Computing.VirtualMachine
                     case Opcode.Print:
                         {
                             var a = ReadInt32(ref stackPointer);
-                            Console.WriteLine(a.ToString("x8"));
+                            Console.WriteLine("= {0:X8} ({0})", a);
                             break;
                         }
+
+                    case Opcode.Debug:
                     default:
-                        break;
+                        throw new InvalidOperationException();
                 }
             }
 
+            Console.WriteLine($"ip: {instructionPointer} sp: {stackPointer} fp: {FramePointer}");
+            Console.WriteLine(Opcode.Halt.ToString());
         }
 
-        private void Jump16IfI32(Predicate<int> predicate)
+        private void Jump16IfI32(Predicate<int> predicate, int baseAddress)
         {
             var address = ReadInt16(ref instructionPointer);
             var value = ReadInt32(ref stackPointer);
 
             if (predicate(value))
             {
-                instructionPointer += address;
+                instructionPointer = baseAddress + address;
             }
         }
 
-        private void Jump16CompareI32(Func<int, int, bool> predicate)
+        private void Jump16CompareI32(Func<int, int, bool> predicate, int baseAddress)
         {
             var address = ReadInt16(ref instructionPointer);
             var latter = ReadInt32(ref stackPointer);
@@ -255,7 +299,7 @@ namespace Axiverse.Computing.VirtualMachine
 
             if (predicate(former, latter))
             {
-                instructionPointer += address;
+                instructionPointer = baseAddress + address;
             }
         }
 
@@ -289,6 +333,11 @@ namespace Axiverse.Computing.VirtualMachine
             var latter = ReadSingle(ref stackPointer);
             var former = ReadSingle(ref stackPointer);
             Push(operation(former, latter), ref stackPointer);
+        }
+
+        private short ReadInt8(ref int pointer)
+        {
+            return Memory[pointer++];
         }
 
         private short ReadInt16(ref int pointer)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 namespace Axiverse.Computing.VirtualMachine
@@ -8,12 +9,12 @@ namespace Axiverse.Computing.VirtualMachine
     /// </summary>
     public class Linker
     {
-        public byte[] Link(params FunctionBlock[] emitters)
+        public byte[] Link(params FunctionBuilder[] emitters)
         {
-            return Link((IEnumerable<FunctionBlock>)emitters);
+            return Link((IEnumerable<FunctionBuilder>)emitters);
         }
 
-        public byte[] Link(IEnumerable<FunctionBlock> emitters)
+        public byte[] Link(IEnumerable<FunctionBuilder> emitters)
         {
             // goes through all the emitters, lays them out in memory and then links them to their
             // actual memory addresses.
@@ -25,11 +26,18 @@ namespace Axiverse.Computing.VirtualMachine
             var addresses = new Dictionary<string, int>();
 
             // layout all emitters
-            var offset = 0;
+            var offset = OpcodeDefinition.Stride(Opcode.Jump16) + OpcodeDefinition.Stride(Opcode.Halt);
+            var entry = emitters.First();
+
             foreach (var emitter in emitters)
             {
-                addresses.Add(emitter.Name, (int)memoryStream.Position);
-                offset += (int)memoryStream.Position;
+                var disassembly = Disassembler.Disassemble(emitter.Buffer.GetBuffer(), emitter.Length);
+                //Console.WriteLine(disassembly);
+
+                Console.WriteLine($"Linked {emitter.Name} @ {offset}");
+                addresses.Add(emitter.Name, offset);
+                emitter.Address = offset;
+                offset += emitter.Length;
             }
 
             // set absolute addresses
@@ -41,15 +49,24 @@ namespace Axiverse.Computing.VirtualMachine
                 }
             }
 
+            // Write jump to entry function.
+            memoryStream.WriteByte((byte)Opcode.Call16);
+            memoryStream.Write(BitConverter.GetBytes((short)addresses[entry.Name]), 0, sizeof(short));
+            memoryStream.WriteByte((byte)Opcode.Halt);
+
             // iterate through all emitters, and rewrite
             foreach (var emitter in emitters)
             {
+                var disassembly = Disassembler.Disassemble(emitter.Buffer.GetBuffer(), emitter.Length);
+                //Console.WriteLine(disassembly);
                 Requires.That(addresses[emitter.Name] == memoryStream.Position);
                 emitter.Buffer.Position = 0;
                 emitter.Buffer.CopyTo(memoryStream, emitter.Length);
             }
 
-            return memoryStream.GetBuffer();
+            memoryStream.Position = 0;
+            BinaryReader reader = new BinaryReader(memoryStream);
+            return reader.ReadBytes((int)memoryStream.Length);
         }
     }
 }

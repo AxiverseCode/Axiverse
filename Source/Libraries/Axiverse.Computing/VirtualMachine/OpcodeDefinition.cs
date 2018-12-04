@@ -31,6 +31,11 @@ namespace Axiverse.Computing.VirtualMachine
             Register(Opcode.Return32);
             Register(Opcode.Return64);
 
+            Register(Opcode.AddI32, 2, 1);
+            Register(Opcode.SubtractI32, 2, 1);
+            Register(Opcode.MultiplyI32, 2, 1);
+            Register(Opcode.DivideI32, 2, 1);
+
             Register(Opcode.Jump16, typeof(short));
             Register(Opcode.Jump16IfZeroI32, typeof(short));
             Register(Opcode.Jump16IfNotZeroI32, typeof(short));
@@ -52,6 +57,9 @@ namespace Axiverse.Computing.VirtualMachine
 
             Register(Opcode.Const32, typeof(int));
             Register(Opcode.Const64, typeof(long));
+
+            Register(Opcode.Print, 1, 0);
+            Register(Opcode.Debug);
         }
 
         private static void Register(Opcode opcode, int take, int give, params Type[] @params)
@@ -62,6 +70,35 @@ namespace Axiverse.Computing.VirtualMachine
         private static void Register(Opcode opcode, params Type[] @params)
         {
             definitions.Add(opcode, new OpcodeDefinition(opcode, @params));
+        }
+
+        public static int Stride(Opcode opcode)
+        {
+            var stride = sizeof(Opcode);
+            foreach (var t in For(opcode).Params)
+            {
+                if (t == typeof(byte))
+                {
+                    stride += sizeof(byte);
+                }
+                else if (t == typeof(short))
+                {
+                    stride += sizeof(short);
+                }
+                else if (t == typeof(int))
+                {
+                    stride += sizeof(int);
+                }
+                else if (t == typeof(long))
+                {
+                    stride += sizeof(long);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            return stride;
         }
 
         public static OpcodeDefinition For(Opcode opcode)
