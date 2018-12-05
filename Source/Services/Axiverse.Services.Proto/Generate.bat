@@ -1,6 +1,6 @@
 echo Generating Protos
 
-%1\packages\Grpc.Tools.1.15.0\tools\windows_x86\protoc.exe ^
+%1\packages\Grpc.Tools.1.17.0\tools\windows_x86\protoc.exe ^
 	-I%1\Proto ^
 	--csharp_out %2 ^
 	--grpc_out %2 ^
@@ -12,4 +12,4 @@ echo Generating Protos
 	%1\Proto\MarketService.proto ^
 	%1\Proto\ModelService.proto ^
 	%1\Proto\ResourceService.proto ^
-	--plugin=protoc-gen-grpc=%1\packages\Grpc.Tools.1.15.0\tools\windows_x86\grpc_csharp_plugin.exe
+	--plugin=protoc-gen-grpc=%1\packages\Grpc.Tools.1.17.0\tools\windows_x86\grpc_csharp_plugin.exe
