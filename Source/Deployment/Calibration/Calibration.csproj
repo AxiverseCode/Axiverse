@@ -70,5 +70,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
+      <Project>{d5acdebb-41eb-4286-b5e3-34506daaa001}</Project>
+      <Name>Axiverse.Services.Proto</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

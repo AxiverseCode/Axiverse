@@ -6,12 +6,9 @@
 // Asset Service
 //
 // Consumer service on the management of assets.
-#pragma warning disable 1591
+#pragma warning disable 0414, 1591
 #region Designer generated code
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
 namespace Axiverse.Services.Proto {
@@ -138,7 +135,7 @@ namespace Axiverse.Services.Proto {
       {
       }
 
-      public virtual global::Axiverse.Services.Proto.CreateAssetClassResponse CreateAssetClass(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateAssetClassResponse CreateAssetClass(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateAssetClass(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -146,7 +143,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAssetClass, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetClassResponse> CreateAssetClassAsync(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetClassResponse> CreateAssetClassAsync(global::Axiverse.Services.Proto.CreateAssetClassRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateAssetClassAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -154,7 +151,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAssetClass, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.DeleteAssetClassResponse DeleteAssetClass(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteAssetClassResponse DeleteAssetClass(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteAssetClass(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -162,7 +159,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteAssetClass, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetClassResponse> DeleteAssetClassAsync(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetClassResponse> DeleteAssetClassAsync(global::Axiverse.Services.Proto.DeleteAssetClassRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteAssetClassAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -170,7 +167,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteAssetClass, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.CreateAssetResponse CreateAsset(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateAssetResponse CreateAsset(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateAsset(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -178,7 +175,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAsset, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetResponse> CreateAssetAsync(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateAssetResponse> CreateAssetAsync(global::Axiverse.Services.Proto.CreateAssetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateAssetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -186,7 +183,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAsset, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.DeleteAssetResponse DeleteAsset(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteAssetResponse DeleteAsset(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteAsset(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -194,7 +191,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteAsset, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetResponse> DeleteAssetAsync(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteAssetResponse> DeleteAssetAsync(global::Axiverse.Services.Proto.DeleteAssetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteAssetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -202,7 +199,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteAsset, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.TransferAssetResponse TransferAsset(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.TransferAssetResponse TransferAsset(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return TransferAsset(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -210,7 +207,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_TransferAsset, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.TransferAssetResponse> TransferAssetAsync(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.TransferAssetResponse> TransferAssetAsync(global::Axiverse.Services.Proto.TransferAssetRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return TransferAssetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -218,7 +215,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_TransferAsset, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.ExecuteTransactionResponse ExecuteTransaction(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.ExecuteTransactionResponse ExecuteTransaction(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ExecuteTransaction(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -226,7 +223,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_ExecuteTransaction, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ExecuteTransactionResponse> ExecuteTransactionAsync(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ExecuteTransactionResponse> ExecuteTransactionAsync(global::Axiverse.Services.Proto.ExecuteTransactionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ExecuteTransactionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }

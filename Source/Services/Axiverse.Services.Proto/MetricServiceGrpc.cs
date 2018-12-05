@@ -6,12 +6,9 @@
 // Metric Service
 //
 //
-#pragma warning disable 1591
+#pragma warning disable 0414, 1591
 #region Designer generated code
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
 namespace Axiverse.Services.Proto {
@@ -68,7 +65,7 @@ namespace Axiverse.Services.Proto {
       {
       }
 
-      public virtual global::Axiverse.Services.Proto.RecordCounterResponse RecordCounter(global::Axiverse.Services.Proto.RecordCounterRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.RecordCounterResponse RecordCounter(global::Axiverse.Services.Proto.RecordCounterRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return RecordCounter(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -76,7 +73,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_RecordCounter, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.RecordCounterResponse> RecordCounterAsync(global::Axiverse.Services.Proto.RecordCounterRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.RecordCounterResponse> RecordCounterAsync(global::Axiverse.Services.Proto.RecordCounterRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return RecordCounterAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }

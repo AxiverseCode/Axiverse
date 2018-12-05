@@ -6,12 +6,9 @@
 //
 //
 //
-#pragma warning disable 1591
+#pragma warning disable 0414, 1591
 #region Designer generated code
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
 namespace Axiverse.Services.Proto {
@@ -110,7 +107,7 @@ namespace Axiverse.Services.Proto {
       {
       }
 
-      public virtual global::Axiverse.Services.Proto.ValidateIdentityResponse ValidateIdentity(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.ValidateIdentityResponse ValidateIdentity(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ValidateIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -118,7 +115,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_ValidateIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ValidateIdentityResponse> ValidateIdentityAsync(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.ValidateIdentityResponse> ValidateIdentityAsync(global::Axiverse.Services.Proto.ValidateIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ValidateIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -126,7 +123,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_ValidateIdentity, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.CreateIdentityResponse CreateIdentity(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.CreateIdentityResponse CreateIdentity(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -134,7 +131,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateIdentityResponse> CreateIdentityAsync(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.CreateIdentityResponse> CreateIdentityAsync(global::Axiverse.Services.Proto.CreateIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -142,7 +139,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateIdentity, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.DeleteIdentityResponse DeleteIdentity(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.DeleteIdentityResponse DeleteIdentity(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -150,7 +147,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_DeleteIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteIdentityResponse> DeleteIdentityAsync(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.DeleteIdentityResponse> DeleteIdentityAsync(global::Axiverse.Services.Proto.DeleteIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DeleteIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -158,7 +155,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteIdentity, null, options, request);
       }
-      public virtual global::Axiverse.Services.Proto.GetIdentityResponse GetIdentity(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Axiverse.Services.Proto.GetIdentityResponse GetIdentity(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetIdentity(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -166,7 +163,7 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetIdentity, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.GetIdentityResponse> GetIdentityAsync(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Axiverse.Services.Proto.GetIdentityResponse> GetIdentityAsync(global::Axiverse.Services.Proto.GetIdentityRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetIdentityAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
