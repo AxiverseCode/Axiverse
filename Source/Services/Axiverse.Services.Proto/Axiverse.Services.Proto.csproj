@@ -72,10 +72,44 @@
     <Compile Include="ResourceService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Proto\Admin\AliasService.proto">
+      <Link>Protos\Admin\AliasService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\Admin\IdentityService.proto">
+      <Link>Protos\Admin\IdentityService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\AssetService.proto">
+      <Link>Protos\AssetService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\build.bat">
+      <Link>Protos\build.bat</Link>
+    </None>
+    <None Include="..\..\Proto\ChatService.proto">
+      <Link>Protos\ChatService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\EntityService.proto">
+      <Link>Protos\EntityService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\Infrastructure\MetricService.proto">
+      <Link>Protos\Infrastructure\MetricService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\MarketService.proto">
+      <Link>Protos\MarketService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\ModelService.proto">
+      <Link>Protos\ModelService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\ResourceService.proto">
+      <Link>Protos\ResourceService.proto</Link>
+    </None>
+    <None Include="..\..\Proto\SpatialService.proto">
+      <Link>Protos\SpatialService.proto</Link>
+    </None>
     <None Include="app.config" />
     <None Include="Generate.bat" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>call $(ProjectDir)Generate.bat $(SolutionDir) $(ProjectDir)</PreBuildEvent>
