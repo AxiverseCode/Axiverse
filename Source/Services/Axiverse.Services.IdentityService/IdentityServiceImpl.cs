@@ -42,7 +42,7 @@ namespace Axiverse.Services.IdentityService
 
         public override Task<GetIdentityResponse> GetIdentity(GetIdentityRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new GetIdentityResponse());
+            return Task.FromResult(new GetIdentityResponse() { Value = "hello world" });
         }
 
         public override Task<CreateIdentityResponse> CreateIdentity(CreateIdentityRequest request, ServerCallContext context)

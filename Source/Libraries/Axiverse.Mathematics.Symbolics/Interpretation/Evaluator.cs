@@ -8,9 +8,12 @@ namespace Axiverse.Mathematics.Symbolics.Interpretation
 {
     public class Evaluator
     {
-        protected delegate Symbol Transformation(Expression expression, Context context);
+        public delegate bool Transformation(Expression expression, Context context, out Symbol symbol);
 
         public delegate Symbol Functor(Context context);
+
+        public delegate Symbol CollectionFunctor<T>(T[] t, Context context)
+            where T : Symbol;
 
         public delegate Symbol Functor<T>(T t, Context context)
             where T : Symbol;
@@ -24,38 +27,95 @@ namespace Axiverse.Mathematics.Symbolics.Interpretation
             where U : Symbol
             where V : Symbol;
 
-        protected Transformation Transform { get; }
+        public List<Transformation> Transforms { get; } = new List<Transformation>();
 
         protected Evaluator(Transformation transform)
         {
-            Transform = transform;
+            Transforms.Add(transform);
         }
 
         public Symbol Evaluate(Symbol symbol, Context context)
         {
-            return Transform((Expression)symbol, context);
+            bool evaluated = false;
+            foreach (var transform in Transforms)
+            {
+                if (transform((Expression)symbol, context, out var result))
+                {
+                    if (evaluated)
+                    {
+                        return Atom.OfName("Ambiguous");
+                    }
+
+                    symbol = result;
+                    evaluated = true;
+                }
+            }
+            return symbol;
+        }
+
+        public static Evaluator FromLambda<T>(CollectionFunctor<T> functor)
+            where T : Symbol
+        {
+            return new Evaluator((Expression e, Context c, out Symbol s) =>
+            {
+                s = null;
+                if (e.Count == 0)
+                {
+                    return false;
+                }
+
+                var arguments = new T[e.Count - 1];
+
+                for (int i = 0; i < e.Count - 1; i++)
+                {
+                    if (e[i + 1] is T t)
+                    {
+                        arguments[i] = t;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                s = functor(arguments, c);
+                return true;
+            });
         }
 
         public static Evaluator FromLambda(Functor functor)
         {
-            return new Evaluator((e, c) =>
+            return new Evaluator((Expression e, Context c, out Symbol s) =>
             {
-                Requires.That(e.Count == 1);
+                s = null;
+                if (e.Count < 1)
+                {
+                    return false;
+                }
 
-                return functor(c);
+                s = functor(c);
+                return true;
             });
         }
 
         public static Evaluator FromLambda<T>(Functor<T> functor)
             where T : Symbol
         {
-            return new Evaluator((e, c) =>
+            return new Evaluator((Expression e, Context c, out Symbol s) =>
             {
-                Requires.That(e.Count == 2);
+                s = null;
+                if (e.Count < 2)
+                {
+                    return false;
+                }
 
-                var t = (T)e[1];
+                if (!(e[1] is T t))
+                {
+                    return false;
+                }
 
-                return functor(t, c);
+                s = functor(t, c);
+                return true;
             });
         }
 
@@ -63,14 +123,25 @@ namespace Axiverse.Mathematics.Symbolics.Interpretation
             where T : Symbol
             where U : Symbol
         {
-            return new Evaluator((e, c) =>
+            return new Evaluator((Expression e, Context c, out Symbol s) =>
             {
-                Requires.That(e.Count == 3);
+                s = null;
+                if (e.Count < 3)
+                {
+                    return false;
+                }
 
-                var t = (T)e[1];
-                var u = (U)e[2];
+                if (!(e[1] is T t))
+                {
+                    return false;
+                }
+                if (!(e[2] is U u))
+                {
+                    return false;
+                }
 
-                return functor(t, u, c);
+                s = functor(t, u, c);
+                return true;
             });
         }
 
@@ -79,15 +150,30 @@ namespace Axiverse.Mathematics.Symbolics.Interpretation
             where U : Symbol
             where V : Symbol
         {
-            return new Evaluator((e, c) =>
+            return new Evaluator((Expression e, Context c, out Symbol s) =>
             {
-                Requires.That(e.Count == 4);
+                s = null;
+                if (e.Count < 4)
+                {
+                    return false;
+                }
 
-                var t = (T)e[1];
-                var u = (U)e[2];
-                var v = (V)e[3];
+                if (!(e[1] is T t))
+                {
+                    return false;
+                }
+                if (!(e[2] is U u))
+                {
+                    return false;
+                }
+                if (!(e[3] is V v))
+                {
+                    return false;
+                }
 
-                return functor(t, u, v, c);
+
+                s = functor(t, u, v, c);
+                return true;
             });
         }
     }

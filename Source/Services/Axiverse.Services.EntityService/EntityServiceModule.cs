@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Grpc.Core;
+using Axiverse.Modules;
 
 namespace Axiverse.Services.EntityService
 {
-    class Program
+    public class EntityServiceModule : Module
     {
         static ManualResetEvent end = new ManualResetEvent(false);
 
-        static void Main(string[] args)
+        protected override void Initialize()
         {
-            String port = Environment.GetEnvironmentVariable("ENTITY_SERVICE_PORT");
+            string port = Environment.GetEnvironmentVariable("ENTITY_SERVICE_PORT");
             Console.WriteLine("EntityService reading port " + port);
             if (int.TryParse(port, out var Port))
             {

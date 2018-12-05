@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Axiverse.Modules;
 using Grpc.Core;
 
 namespace Axiverse.Services.IdentityService
 {
-    class IdentityModule
+    public class IdentityServiceModule : Module
     {
-        public void Install()
+        protected override void Initialize()
         {
             var port = 9090;
 
@@ -26,7 +26,6 @@ namespace Axiverse.Services.IdentityService
             Console.ReadKey();
 
             server.ShutdownAsync().Wait();
-
         }
     }
 }

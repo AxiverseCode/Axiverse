@@ -1,7 +1,5 @@
-echo %cd%
+echo Generating Protos
 
-echo %1
-echo %2
 %1\packages\Grpc.Tools.1.15.0\tools\windows_x86\protoc.exe ^
 	-I%1\Proto ^
 	--csharp_out %2 ^

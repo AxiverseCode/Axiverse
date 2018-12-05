@@ -22,11 +22,11 @@ namespace Axiverse.Mathematics.Symbolics.Interpretation
             });
 
             Context.Evaluators[Atom.OfName("+")] = Evaluator.FromLambda(
-                (Numeric u, Numeric v, Context c) => new Numeric(u.Value + v.Value));
+                (Numeric[] n, Context c) => new Numeric(n.Sum(i => i.Value)));
             Context.Evaluators[Atom.OfName("-")] = Evaluator.FromLambda(
                 (Numeric u, Numeric v, Context c) => new Numeric(u.Value - v.Value));
             Context.Evaluators[Atom.OfName("*")] = Evaluator.FromLambda(
-                (Numeric u, Numeric v, Context c) => new Numeric(u.Value * v.Value));
+                (Numeric[] n, Context c) => n.Aggregate((i, j) => new Numeric(i.Value * j.Value)));
             Context.Evaluators[Atom.OfName("/")] = Evaluator.FromLambda(
                 (Numeric u, Numeric v, Context c) => new Numeric(u.Value / v.Value));
         }

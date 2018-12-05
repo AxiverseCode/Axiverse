@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Grpc.Core;
+using Axiverse.Modules;
 
 namespace Axiverse.Services.ChatService
 {
-    class Program
+    public class ChatServiceModule : Module
     {
         static ManualResetEvent end = new ManualResetEvent(false);
 
-        static void Main(string[] args)
+        protected override void Initialize()
         {
-            String port = Environment.GetEnvironmentVariable("CHAT_SERVICE_PORT");
+            string port = Environment.GetEnvironmentVariable("CHAT_SERVICE_PORT");
             Console.WriteLine("ChatService reading port " + port);
             if (int.TryParse(port, out var Port))
             {

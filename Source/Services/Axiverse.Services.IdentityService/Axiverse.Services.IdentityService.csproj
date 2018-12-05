@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A9CCD2F2-2FC0-4DF1-B854-6334E2B32D77}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Axiverse.Services.IdentityService</RootNamespace>
     <AssemblyName>Axiverse.Services.IdentityService</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
@@ -131,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Identity.cs" />
-    <Compile Include="IdentityModule.cs" />
+    <Compile Include="IdentityServiceModule.cs" />
     <Compile Include="IdentityServiceImpl.cs" />
     <Compile Include="IdentityStore.cs" />
     <Compile Include="Program.cs" />
@@ -142,6 +145,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Axiverse\Axiverse.csproj">
+      <Project>{F00060A0-3A63-485C-929B-5F206EE743EF}</Project>
+      <Name>Axiverse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
       <Project>{d5acdebb-41eb-4286-b5e3-34506daaa001}</Project>
       <Name>Axiverse.Services.Proto</Name>

@@ -32,15 +32,15 @@ namespace Axiverse.Services.Proto {
             "FUNyZWF0ZUlkZW50aXR5UmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQCghwYXNz",
             "Y29kZRgCIAEoCRINCgVhbGlhcxgDIAEoCSIYChZDcmVhdGVJZGVudGl0eVJl",
             "c3BvbnNlIhcKFURlbGV0ZUlkZW50aXR5UmVxdWVzdCIYChZEZWxldGVJZGVu",
-            "dGl0eVJlc3BvbnNlIhQKEkdldElkZW50aXR5UmVxdWVzdCIVChNHZXRJZGVu",
-            "dGl0eVJlc3BvbnNlMpoCCg9JZGVudGl0eVNlcnZpY2USRwoQVmFsaWRhdGVJ",
-            "ZGVudGl0eRIYLlZhbGlkYXRlSWRlbnRpdHlSZXF1ZXN0GhkuVmFsaWRhdGVJ",
-            "ZGVudGl0eVJlc3BvbnNlEkEKDkNyZWF0ZUlkZW50aXR5EhYuQ3JlYXRlSWRl",
-            "bnRpdHlSZXF1ZXN0GhcuQ3JlYXRlSWRlbnRpdHlSZXNwb25zZRJBCg5EZWxl",
-            "dGVJZGVudGl0eRIWLkRlbGV0ZUlkZW50aXR5UmVxdWVzdBoXLkRlbGV0ZUlk",
-            "ZW50aXR5UmVzcG9uc2USOAoLR2V0SWRlbnRpdHkSEy5HZXRJZGVudGl0eVJl",
-            "cXVlc3QaFC5HZXRJZGVudGl0eVJlc3BvbnNlQhqqAhdBeGl2ZXJzZS5TZXJ2",
-            "aWNlcy5Qcm90b2IGcHJvdG8z"));
+            "dGl0eVJlc3BvbnNlIhQKEkdldElkZW50aXR5UmVxdWVzdCIkChNHZXRJZGVu",
+            "dGl0eVJlc3BvbnNlEg0KBXZhbHVlGAEgASgJMpoCCg9JZGVudGl0eVNlcnZp",
+            "Y2USRwoQVmFsaWRhdGVJZGVudGl0eRIYLlZhbGlkYXRlSWRlbnRpdHlSZXF1",
+            "ZXN0GhkuVmFsaWRhdGVJZGVudGl0eVJlc3BvbnNlEkEKDkNyZWF0ZUlkZW50",
+            "aXR5EhYuQ3JlYXRlSWRlbnRpdHlSZXF1ZXN0GhcuQ3JlYXRlSWRlbnRpdHlS",
+            "ZXNwb25zZRJBCg5EZWxldGVJZGVudGl0eRIWLkRlbGV0ZUlkZW50aXR5UmVx",
+            "dWVzdBoXLkRlbGV0ZUlkZW50aXR5UmVzcG9uc2USOAoLR2V0SWRlbnRpdHkS",
+            "Ey5HZXRJZGVudGl0eVJlcXVlc3QaFC5HZXRJZGVudGl0eVJlc3BvbnNlQhqq",
+            "AhdBeGl2ZXJzZS5TZXJ2aWNlcy5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -52,7 +52,7 @@ namespace Axiverse.Services.Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteIdentityRequest), global::Axiverse.Services.Proto.DeleteIdentityRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.DeleteIdentityResponse), global::Axiverse.Services.Proto.DeleteIdentityResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetIdentityRequest), global::Axiverse.Services.Proto.GetIdentityRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetIdentityResponse), global::Axiverse.Services.Proto.GetIdentityResponse.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetIdentityResponse), global::Axiverse.Services.Proto.GetIdentityResponse.Parser, new[]{ "Value" }, null, null, null)
           }));
     }
     #endregion
@@ -1196,12 +1196,24 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetIdentityResponse(GetIdentityResponse other) : this() {
+      value_ = other.value_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetIdentityResponse Clone() {
       return new GetIdentityResponse(this);
+    }
+
+    /// <summary>Field number for the "value" field.</summary>
+    public const int ValueFieldNumber = 1;
+    private string value_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Value {
+      get { return value_; }
+      set {
+        value_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1217,12 +1229,14 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Value != other.Value) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Value.Length != 0) hash ^= Value.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1236,6 +1250,10 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Value.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Value);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1244,6 +1262,9 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Value.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1254,6 +1275,9 @@ namespace Axiverse.Services.Proto {
     public void MergeFrom(GetIdentityResponse other) {
       if (other == null) {
         return;
+      }
+      if (other.Value.Length != 0) {
+        Value = other.Value;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1266,6 +1290,10 @@ namespace Axiverse.Services.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            Value = input.ReadString();
+            break;
+          }
         }
       }
     }

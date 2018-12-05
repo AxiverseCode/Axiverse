@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{21503EE2-6EB3-425E-A0AC-DC8B892D96F6}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Axiverse.Services.EntityService</RootNamespace>
-    <AssemblyName>Axiverse.Services.EntityService</AssemblyName>
+    <ProjectGuid>{C85E1444-83D0-4120-A789-7671D5C8A560}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Services</RootNamespace>
+    <AssemblyName>Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -23,7 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,17 +34,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Grpc.Core.1.15.0\lib\net45\Grpc.Core.dll</HintPath>
+      <HintPath>..\..\packages\Grpc.Core.1.17.0\lib\net45\Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,8 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityServiceImpl.cs" />
-    <Compile Include="EntityServiceModule.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,25 +59,29 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
-      <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
-      <Name>Axiverse.Simulation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse\Axiverse.csproj">
-      <Project>{F00060A0-3A63-485C-929B-5F206EE743EF}</Project>
+      <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
       <Name>Axiverse</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
-      <Project>{d5acdebb-41eb-4286-b5e3-34506daaa001}</Project>
-      <Name>Axiverse.Services.Proto</Name>
+    <ProjectReference Include="..\..\Services\Axiverse.Services.ChatService\Axiverse.Services.ChatService.csproj">
+      <Project>{6e30ac56-43a5-4d2a-bb9b-cd259eda7591}</Project>
+      <Name>Axiverse.Services.ChatService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Axiverse.Services.EntityService\Axiverse.Services.EntityService.csproj">
+      <Project>{21503ee2-6eb3-425e-a0ac-dc8b892d96f6}</Project>
+      <Name>Axiverse.Services.EntityService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Axiverse.Services.IdentityService\Axiverse.Services.IdentityService.csproj">
+      <Project>{a9ccd2f2-2fc0-4df1-b854-6334e2b32d77}</Project>
+      <Name>Axiverse.Services.IdentityService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\Grpc.Core.1.15.0\build\net45\Grpc.Core.targets" Condition="Exists('..\..\packages\Grpc.Core.1.15.0\build\net45\Grpc.Core.targets')" />
+  <Import Project="..\..\packages\Grpc.Core.1.17.0\build\net45\Grpc.Core.targets" Condition="Exists('..\..\packages\Grpc.Core.1.17.0\build\net45\Grpc.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Grpc.Core.1.15.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Grpc.Core.1.15.0\build\net45\Grpc.Core.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Grpc.Core.1.17.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Grpc.Core.1.17.0\build\net45\Grpc.Core.targets'))" />
   </Target>
 </Project>

@@ -74,5 +74,5 @@ message GetIdentityRequest {
 }
 
 message GetIdentityResponse {
-
+	string value = 1;
 }

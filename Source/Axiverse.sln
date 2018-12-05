@@ -90,10 +90,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Mathematics.Geometry", "Libraries\Axiverse.Mathematics.Geometry\Axiverse.Mathematics.Geometry.csproj", "{BD10941E-997A-450B-9D91-392FF39B9F9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calibration", "Deployment\Calibration\Calibration.csproj", "{660912D6-5032-479A-8F22-4DE44DE1FD48}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6E30AC56-43A5-4D2A-BB9B-CD259EDA7591} = {6E30AC56-43A5-4D2A-BB9B-CD259EDA7591}
+		{21503EE2-6EB3-425E-A0AC-DC8B892D96F6} = {21503EE2-6EB3-425E-A0AC-DC8B892D96F6}
+		{A9CCD2F2-2FC0-4DF1-B854-6334E2B32D77} = {A9CCD2F2-2FC0-4DF1-B854-6334E2B32D77}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Computing.Tests", "Tests\Axiverse.Computing.Tests\Axiverse.Computing.Tests.csproj", "{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Symbolics", "Examples\Hello Symbolics\Hello Symbolics.csproj", "{675E2A2F-3115-436D-B4D0-B5D80CC04553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Deployment\Services\Services.csproj", "{C85E1444-83D0-4120-A789-7671D5C8A560}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +252,10 @@ Global
 		{675E2A2F-3115-436D-B4D0-B5D80CC04553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{675E2A2F-3115-436D-B4D0-B5D80CC04553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675E2A2F-3115-436D-B4D0-B5D80CC04553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C85E1444-83D0-4120-A789-7671D5C8A560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C85E1444-83D0-4120-A789-7671D5C8A560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C85E1444-83D0-4120-A789-7671D5C8A560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C85E1444-83D0-4120-A789-7671D5C8A560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -286,6 +297,7 @@ Global
 		{660912D6-5032-479A-8F22-4DE44DE1FD48} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
 		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
 		{675E2A2F-3115-436D-B4D0-B5D80CC04553} = {927FED4B-50ED-4FFB-A790-5624F5519777}
+		{C85E1444-83D0-4120-A789-7671D5C8A560} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}
