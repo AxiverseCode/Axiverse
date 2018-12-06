@@ -79,6 +79,10 @@
       <Project>{d5acdebb-41eb-4286-b5e3-34506daaa001}</Project>
       <Name>Axiverse.Services.Proto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Services\Axiverse.Services\Axiverse.Services.csproj">
+      <Project>{f63c4b60-a3ae-4c54-910c-a46fd2d1a409}</Project>
+      <Name>Axiverse.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Grpc.Core.1.17.0\build\net45\Grpc.Core.targets" Condition="Exists('..\..\packages\Grpc.Core.1.17.0\build\net45\Grpc.Core.targets')" />

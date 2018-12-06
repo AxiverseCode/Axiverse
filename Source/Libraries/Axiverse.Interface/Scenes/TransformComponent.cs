@@ -48,5 +48,10 @@ namespace Axiverse.Interface.Scenes
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            return $"TransformComponent {Translation}, {Rotation}";
+        }
     }
 }

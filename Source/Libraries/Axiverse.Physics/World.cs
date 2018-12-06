@@ -45,11 +45,11 @@ namespace Axiverse.Physics
         public void Step(float timestep)
         {
             Timestep = timestep;
-            
+
             // don't integrate if no time has passed.
             if (timestep == 0.0f) return;
             if (timestep < 0.0f) throw new ArgumentException("Timestep must be positive.", "timestep");
-            
+
             //m_rigidBodies.ForEach(rigidBody => rigidBody.OnStepping());
 
             // update contacts
@@ -64,7 +64,7 @@ namespace Axiverse.Physics
             var pairs = BroadPhase.Detect();
             if (pairs.Count != 0)
             {
-                Console.WriteLine(pairs.Count);
+                //Console.WriteLine("Collision pairs: {0}, pairs.Count);
             }
 
             // collision narrowphase(s) -> manifold
@@ -80,12 +80,12 @@ namespace Axiverse.Physics
 
                 // preserve contacts so that waking up is stable
             }
-            
+
             foreach (var body in m_rigidBodies)
             {
                 body.Integrate(timestep);
             }
-            
+
             // n-body gravitation calculation
 
             // handle arbiter

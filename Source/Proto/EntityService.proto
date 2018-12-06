@@ -23,6 +23,16 @@ service EntityService {
 
 	rpc GetEntity(GetEntityRequest) returns (GetEntityResponse);
 
+	rpc Stream(stream ClientEvent) returns (stream ServerEvent);
+
+}
+
+message ClientEvent {
+
+}
+
+message ServerEvent {
+
 }
 
 message GetStateRequest {

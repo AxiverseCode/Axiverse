@@ -100,7 +100,7 @@ namespace Axiverse.Interface.Engine
             var presenter = new Presenter(device, presenterDescription);
             presenter.Initialize();
             var device2d = GraphicsDevice2D.Create(device, presenter);
-            form.ResizeEnd += (e, sender) =>
+            form.Resize += (e, sender) =>
             {
                 resize = true;
             };
@@ -264,8 +264,6 @@ namespace Axiverse.Interface.Engine
 
                     var mappedLinear = new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y);
                     var mappedAngular = new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0);
-                    // body.ApplyCentralLocalImpulse(new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y));
-                    // body.ApplyLocalTorqueImpulse(new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0) * dt * 100);
                     controller.Translational = mappedLinear;
                     controller.Steering = mappedAngular;
 
@@ -275,18 +273,14 @@ namespace Axiverse.Interface.Engine
                         4 * Functions.Cos(Functions.DegreesToRadians(frame / 8)));
                     entity2.Components.Get<TransformComponent>().Rotation = Quaternion.FromEuler(frame / 100f, frame / 747, frame / 400);
 
-                    //cameraTransform.Translation = new Vector3(
-                    //    10 * Functions.Sin(Functions.DegreesToRadians(frame / 10)),
-                    //    4 * Functions.Sin(Functions.DegreesToRadians(frame / 30)),
-                    //    10 * Functions.Cos(Functions.DegreesToRadians(frame / 10)));
-
                     Router.Poll();
-                    var velocity = cameraTransform.Rotation.Transform(new Vector3(sixAxisListner.Translation.X, -sixAxisListner.Translation.Z, sixAxisListner.Translation.Y)) * maximumVelocity;
-                    //var angular = new Vector3(state.RotationX, state.RotationY, state.RotationZ) * maximumAngle;
+                    var velocity = cameraTransform.Rotation.Transform(
+                        new Vector3(sixAxisListner.Translation.X, -sixAxisListner.Translation.Z, sixAxisListner.Translation.Y)) * maximumVelocity;
                     var angular = new Vector3(sixAxisListner.Rotation.Y, -sixAxisListner.Rotation.Z, sixAxisListner.Rotation.X) * maximumAngle;
                     sixAxisListner.Acknowledge();
-                    //Console.WriteLine(velocity);
-                    //Console.WriteLine(angular);
+
+                    if (velocity != Vector3.Zero) Console.WriteLine("Linear camera: {0}", velocity);
+                    if (angular != Vector3.Zero) Console.WriteLine("Angular camera: {0}", angular);
 
                     cameraTransform.Translation += velocity;
                     cameraTransform.Rotation *= Quaternion.FromEuler(angular);

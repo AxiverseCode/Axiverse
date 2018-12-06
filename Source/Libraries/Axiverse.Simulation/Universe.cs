@@ -17,6 +17,11 @@ namespace Axiverse.Simulation
 
         public int Count => entities.Count;
 
+        public IEnumerable<Entity> Entities
+        {
+            get => entities.Values;
+        }
+
         public Universe()
         {
             Add(new PhysicsProcessor());
@@ -135,7 +140,7 @@ namespace Axiverse.Simulation
         public event EntityEventHandler EntityRemoved;
 
         public SortedList<ProcessorStage, IProcessor> Processors => processors;
-        
+
         private readonly SortedList<ProcessorStage, IProcessor> processors = new SortedList<ProcessorStage, IProcessor>(new ProcessorComparer());
         private readonly Dictionary<Guid, Entity> entities = new Dictionary<Guid, Entity>();
 

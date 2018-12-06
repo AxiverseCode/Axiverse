@@ -15,6 +15,7 @@ namespace Axiverse.Interface.Input
         public event EventHandler DeviceRemoved;
 
         static readonly Guid spaceNavigatorProductGuid = new Guid("{c626046d-0000-0000-0000-504944564944}");
+        static readonly Guid _3dConnexionKmjEmultorProductGuid = new Guid("{046dbeef-0000-0000-0000-504944564944}");
         static readonly Guid xboxControllerProductGuid = new Guid("{02e3045e-0000-0000-0000-504944564944}");
         // Sources provide input
         // Consolidate in the router
@@ -38,7 +39,9 @@ namespace Axiverse.Interface.Input
         public Router()
         {
             directInput = new DirectInput();
-            var joysticks = directInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AllDevices).Where(j => j.ProductGuid != xboxControllerProductGuid);
+            var joysticks = directInput
+                .GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AllDevices)
+                .Where(j => j.ProductGuid != xboxControllerProductGuid && j.ProductGuid != _3dConnexionKmjEmultorProductGuid);
             foreach (var joystick in joysticks)
             {
                 Sources.Add(new DirectInputSource(directInput, joystick.InstanceGuid));

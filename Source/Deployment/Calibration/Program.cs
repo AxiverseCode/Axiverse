@@ -1,37 +1,51 @@
-﻿using Axiverse.Services.Proto;
+﻿using Axiverse.Injection;
+using Axiverse.Interface.Engine;
+using Axiverse.Modules;
+using Axiverse.Resources;
+using Axiverse.Services.Proto;
 using Grpc.Core;
 using System;
 using System.Windows.Forms;
 
 namespace Calibration
 {
-    static class Program
+    [Dependency(typeof(ResourceModule))]
+    [Dependency(typeof(EngineModule))]
+    public class Program : ProgramModule
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        [Bind]
+        Engine engine;
+
+        [Inject]
+        public Program(Library library)
+        {
+            library.BasePath = @"..\..\..\..\..\";
+        }
+
+        public override void Execute(string[] args)
         {
             Channel channel = new Channel("127.0.0.1:32000", ChannelCredentials.Insecure);
             var client = new IdentityService.IdentityServiceClient(channel);
-            var response = client.GetIdentity(new GetIdentityRequest());
-            Console.WriteLine(response.Value);
-            var r2 = client.GetIdentityAsync(new GetIdentityRequest());
-
-            while (!r2.ResponseAsync.IsCompleted)
+            var connecting = channel.ConnectAsync();
+            connecting.Wait(1000);
+            if (connecting.IsFaulted || !connecting.IsCompleted)
             {
-
+                Console.ReadKey();
             }
 
-            response = r2.ResponseAsync.Result;
+
+            var response = client.GetIdentity(new GetIdentityRequest());
             Console.WriteLine(response.Value);
 
-            Console.ReadKey();
-            channel.ShutdownAsync().Wait();
+            engine.Initialize();
+            engine.Run();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            channel.ShutdownAsync().Wait();
+        }
+
+        static void Main(string[] args)
+        {
+            Run<Program>(args);
         }
     }
 }

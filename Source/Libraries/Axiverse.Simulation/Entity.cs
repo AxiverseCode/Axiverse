@@ -96,9 +96,9 @@ namespace Axiverse.Simulation
         {
             if (string.IsNullOrEmpty(Name))
             {
-                return $"Entity [{ Identifier }] @ { Spatial.Position }";
+                return $"Entity [{ Identifier.ToString().Substring(0, 8) }] @ { Spatial.Position }";
             }
-                return $"{Name} [{ Identifier }] @ { Spatial.Position }";
+            return $"{Name} @ { Spatial.Position }";
         }
 
         protected internal void OnComponentAdded(ComponentEventArgs e)

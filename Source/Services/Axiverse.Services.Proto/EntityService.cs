@@ -25,23 +25,27 @@ namespace Axiverse.Services.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChNFbnRpdHlTZXJ2aWNlLnByb3RvIggKBkVudGl0eSINCgtFbnRpdHlDbGFz",
-            "cyIRCg9HZXRTdGF0ZVJlcXVlc3QiMgoQR2V0U3RhdGVSZXNwb25zZRIMCgR0",
-            "aW1lGAEgASgCEhAKCGVudGl0aWVzGAIgASgCIiMKE0NyZWF0ZUVudGl0eVJl",
-            "cXVlc3QSDAoEbmFtZRgBIAEoCSIiChRDcmVhdGVFbnRpdHlSZXNwb25zZRIK",
-            "CgJpZBgBIAEoCSIhChNEZWxldGVFbnRpdHlSZXF1ZXN0EgoKAmlkGAEgASgJ",
-            "IhYKFERlbGV0ZUVudGl0eVJlc3BvbnNlIh4KEEdldEVudGl0eVJlcXVlc3QS",
-            "CgoCaWQYASABKAkiEwoRR2V0RW50aXR5UmVzcG9uc2Uy7gEKDUVudGl0eVNl",
-            "cnZpY2USLwoIR2V0U3RhdGUSEC5HZXRTdGF0ZVJlcXVlc3QaES5HZXRTdGF0",
-            "ZVJlc3BvbnNlEjsKDENyZWF0ZUVudGl0eRIULkNyZWF0ZUVudGl0eVJlcXVl",
-            "c3QaFS5DcmVhdGVFbnRpdHlSZXNwb25zZRI7CgxEZWxldGVFbnRpdHkSFC5E",
-            "ZWxldGVFbnRpdHlSZXF1ZXN0GhUuRGVsZXRlRW50aXR5UmVzcG9uc2USMgoJ",
-            "R2V0RW50aXR5EhEuR2V0RW50aXR5UmVxdWVzdBoSLkdldEVudGl0eVJlc3Bv",
-            "bnNlQhqqAhdBeGl2ZXJzZS5TZXJ2aWNlcy5Qcm90b2IGcHJvdG8z"));
+            "cyINCgtDbGllbnRFdmVudCINCgtTZXJ2ZXJFdmVudCIRCg9HZXRTdGF0ZVJl",
+            "cXVlc3QiMgoQR2V0U3RhdGVSZXNwb25zZRIMCgR0aW1lGAEgASgCEhAKCGVu",
+            "dGl0aWVzGAIgASgCIiMKE0NyZWF0ZUVudGl0eVJlcXVlc3QSDAoEbmFtZRgB",
+            "IAEoCSIiChRDcmVhdGVFbnRpdHlSZXNwb25zZRIKCgJpZBgBIAEoCSIhChNE",
+            "ZWxldGVFbnRpdHlSZXF1ZXN0EgoKAmlkGAEgASgJIhYKFERlbGV0ZUVudGl0",
+            "eVJlc3BvbnNlIh4KEEdldEVudGl0eVJlcXVlc3QSCgoCaWQYASABKAkiEwoR",
+            "R2V0RW50aXR5UmVzcG9uc2UymAIKDUVudGl0eVNlcnZpY2USLwoIR2V0U3Rh",
+            "dGUSEC5HZXRTdGF0ZVJlcXVlc3QaES5HZXRTdGF0ZVJlc3BvbnNlEjsKDENy",
+            "ZWF0ZUVudGl0eRIULkNyZWF0ZUVudGl0eVJlcXVlc3QaFS5DcmVhdGVFbnRp",
+            "dHlSZXNwb25zZRI7CgxEZWxldGVFbnRpdHkSFC5EZWxldGVFbnRpdHlSZXF1",
+            "ZXN0GhUuRGVsZXRlRW50aXR5UmVzcG9uc2USMgoJR2V0RW50aXR5EhEuR2V0",
+            "RW50aXR5UmVxdWVzdBoSLkdldEVudGl0eVJlc3BvbnNlEigKBlN0cmVhbRIM",
+            "LkNsaWVudEV2ZW50GgwuU2VydmVyRXZlbnQoATABQhqqAhdBeGl2ZXJzZS5T",
+            "ZXJ2aWNlcy5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.EntityClass), global::Axiverse.Services.Proto.EntityClass.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ClientEvent), global::Axiverse.Services.Proto.ClientEvent.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ServerEvent), global::Axiverse.Services.Proto.ServerEvent.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetStateRequest), global::Axiverse.Services.Proto.GetStateRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetStateResponse), global::Axiverse.Services.Proto.GetStateResponse.Parser, new[]{ "Time", "Entities" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateEntityRequest), global::Axiverse.Services.Proto.CreateEntityRequest.Parser, new[]{ "Name" }, null, null, null),
@@ -258,6 +262,208 @@ namespace Axiverse.Services.Proto {
 
   }
 
+  public sealed partial class ClientEvent : pb::IMessage<ClientEvent> {
+    private static readonly pb::MessageParser<ClientEvent> _parser = new pb::MessageParser<ClientEvent>(() => new ClientEvent());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ClientEvent> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ClientEvent() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ClientEvent(ClientEvent other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ClientEvent Clone() {
+      return new ClientEvent(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ClientEvent);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ClientEvent other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ClientEvent other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ServerEvent : pb::IMessage<ServerEvent> {
+    private static readonly pb::MessageParser<ServerEvent> _parser = new pb::MessageParser<ServerEvent>(() => new ServerEvent());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ServerEvent> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ServerEvent() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ServerEvent(ServerEvent other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ServerEvent Clone() {
+      return new ServerEvent(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ServerEvent);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ServerEvent other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ServerEvent other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
   public sealed partial class GetStateRequest : pb::IMessage<GetStateRequest> {
     private static readonly pb::MessageParser<GetStateRequest> _parser = new pb::MessageParser<GetStateRequest>(() => new GetStateRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -266,7 +472,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -367,7 +573,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -524,7 +730,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -653,7 +859,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -782,7 +988,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -911,7 +1117,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1012,7 +1218,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1141,7 +1347,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

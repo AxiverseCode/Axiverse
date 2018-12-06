@@ -11,7 +11,7 @@ namespace Axiverse.Interface.Scenes
     {
         float maximumTranslational = 100;
         float maximumRotational = 5;
-        
+
         public override void ProcessEntity(SimulationContext context, Entity entity, DirectControlComponent controller, PhysicsComponent physicsComponent)
         {
             var body = physicsComponent.Body;
@@ -40,8 +40,7 @@ namespace Axiverse.Interface.Scenes
                 body.ApplyGlobalTorqueImpulse(-body.AngularVelocity.ClampLength(maximumRotational), context.DeltaTime);
             }
 
-            Console.WriteLine(body.AngularVelocity.Length());
-
+            // Console.WriteLine("DC Angular velocity length: {0}", body.AngularVelocity.Length());
             // Console.WriteLine(body.totalForce);
 
             base.ProcessEntity(context, entity, controller, physicsComponent);

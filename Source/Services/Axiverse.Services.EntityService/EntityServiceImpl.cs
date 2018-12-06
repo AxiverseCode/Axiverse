@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Axiverse.Services.Proto;
 using Axiverse.Simulation;
+using Grpc.Core;
 
 namespace Axiverse.Services.EntityService
 {
@@ -21,6 +22,14 @@ namespace Axiverse.Services.EntityService
             runner.Universe = universe;
 
             running = runner.Run();
+        }
+
+        public override Task Stream(
+            IAsyncStreamReader<ClientEvent> requestStream,
+            IServerStreamWriter<ServerEvent> responseStream,
+            ServerCallContext context)
+        {
+            return base.Stream(requestStream, responseStream, context);
         }
     }
 }

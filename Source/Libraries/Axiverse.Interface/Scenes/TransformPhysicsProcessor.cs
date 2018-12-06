@@ -13,6 +13,7 @@ namespace Axiverse.Interface.Scenes
         {
             transform.Rotation = physics.Body.AngularPosition;
             transform.Translation = physics.Body.LinearPosition;
+            entity.Spatial.Position = transform.Translation;
         }
     }
 }

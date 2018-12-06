@@ -24,6 +24,8 @@ namespace Axiverse.Services.Proto {
     static readonly grpc::Marshaller<global::Axiverse.Services.Proto.DeleteEntityResponse> __Marshaller_DeleteEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.DeleteEntityResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Axiverse.Services.Proto.GetEntityRequest> __Marshaller_GetEntityRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.GetEntityRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Axiverse.Services.Proto.GetEntityResponse> __Marshaller_GetEntityResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.GetEntityResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ClientEvent> __Marshaller_ClientEvent = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ClientEvent.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Axiverse.Services.Proto.ServerEvent> __Marshaller_ServerEvent = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Axiverse.Services.Proto.ServerEvent.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Axiverse.Services.Proto.GetStateRequest, global::Axiverse.Services.Proto.GetStateResponse> __Method_GetState = new grpc::Method<global::Axiverse.Services.Proto.GetStateRequest, global::Axiverse.Services.Proto.GetStateResponse>(
         grpc::MethodType.Unary,
@@ -53,6 +55,13 @@ namespace Axiverse.Services.Proto {
         __Marshaller_GetEntityRequest,
         __Marshaller_GetEntityResponse);
 
+    static readonly grpc::Method<global::Axiverse.Services.Proto.ClientEvent, global::Axiverse.Services.Proto.ServerEvent> __Method_Stream = new grpc::Method<global::Axiverse.Services.Proto.ClientEvent, global::Axiverse.Services.Proto.ServerEvent>(
+        grpc::MethodType.DuplexStreaming,
+        __ServiceName,
+        "Stream",
+        __Marshaller_ClientEvent,
+        __Marshaller_ServerEvent);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -78,6 +87,11 @@ namespace Axiverse.Services.Proto {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Axiverse.Services.Proto.GetEntityResponse> GetEntity(global::Axiverse.Services.Proto.GetEntityRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task Stream(grpc::IAsyncStreamReader<global::Axiverse.Services.Proto.ClientEvent> requestStream, grpc::IServerStreamWriter<global::Axiverse.Services.Proto.ServerEvent> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -171,6 +185,14 @@ namespace Axiverse.Services.Proto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetEntity, null, options, request);
       }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Axiverse.Services.Proto.ClientEvent, global::Axiverse.Services.Proto.ServerEvent> Stream(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Stream(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Axiverse.Services.Proto.ClientEvent, global::Axiverse.Services.Proto.ServerEvent> Stream(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_Stream, null, options);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override EntityServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -186,7 +208,8 @@ namespace Axiverse.Services.Proto {
           .AddMethod(__Method_GetState, serviceImpl.GetState)
           .AddMethod(__Method_CreateEntity, serviceImpl.CreateEntity)
           .AddMethod(__Method_DeleteEntity, serviceImpl.DeleteEntity)
-          .AddMethod(__Method_GetEntity, serviceImpl.GetEntity).Build();
+          .AddMethod(__Method_GetEntity, serviceImpl.GetEntity)
+          .AddMethod(__Method_Stream, serviceImpl.Stream).Build();
     }
 
     /// <summary>Register service method implementations with a service binder. Useful when customizing the service binding logic.
@@ -199,6 +222,7 @@ namespace Axiverse.Services.Proto {
       serviceBinder.AddMethod(__Method_CreateEntity, serviceImpl.CreateEntity);
       serviceBinder.AddMethod(__Method_DeleteEntity, serviceImpl.DeleteEntity);
       serviceBinder.AddMethod(__Method_GetEntity, serviceImpl.GetEntity);
+      serviceBinder.AddMethod(__Method_Stream, serviceImpl.Stream);
     }
 
   }
