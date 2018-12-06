@@ -17,6 +17,9 @@ service MarketService {
 
 	rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse);
 
+	// Place Order 
+	// Place Market Order
+
 }
 
 message PlaceOrderRequest {

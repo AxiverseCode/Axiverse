@@ -6,39 +6,19 @@ using System.Threading.Tasks;
 using System.Threading;
 using Grpc.Core;
 using Axiverse.Modules;
+using Axiverse.Injection;
 
 namespace Axiverse.Services.EntityService
 {
+    [Dependency(typeof(ServerModule))]
     public class EntityServiceModule : Module
     {
-        static ManualResetEvent end = new ManualResetEvent(false);
+        [Bind]
+        Server server;
 
         protected override void Initialize()
         {
-            string port = Environment.GetEnvironmentVariable("ENTITY_SERVICE_PORT");
-            Console.WriteLine("EntityService reading port " + port);
-            if (int.TryParse(port, out var Port))
-            {
-                Port = 32001;
-            }
-            Port = 32001;
-
-            Server server = new Server
-            {
-                Services = { Proto.EntityService.BindService(new EntityServiceImpl()) },
-                Ports = { new ServerPort("0.0.0.0", Port, ServerCredentials.Insecure) }
-            };
-            server.Start();
-
-            Console.WriteLine("EntityService server listening on port " + Port);
-            Console.WriteLine("Press any key to stop the server...");
-
-            Console.CancelKeyPress += (sender, e) => end.Set();
-            end.WaitOne();
-
-            Console.WriteLine("Shutting down EntityService");
-
-            server.ShutdownAsync().Wait();
+            server.Services.Add(Proto.EntityService.BindService(new EntityServiceImpl()));
         }
     }
 }

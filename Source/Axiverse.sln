@@ -102,6 +102,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello Symbolics", "Examples
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Deployment\Services\Services.csproj", "{C85E1444-83D0-4120-A789-7671D5C8A560}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Services", "Services\Axiverse.Services\Axiverse.Services.csproj", "{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -256,6 +258,10 @@ Global
 		{C85E1444-83D0-4120-A789-7671D5C8A560}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C85E1444-83D0-4120-A789-7671D5C8A560}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C85E1444-83D0-4120-A789-7671D5C8A560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,6 +306,7 @@ Global
 		{28B64E7D-0EF4-45D7-AA73-C1FF5F9F94EF} = {9463CAC4-EC1A-4B44-BEDE-A67DF266AC1B}
 		{675E2A2F-3115-436D-B4D0-B5D80CC04553} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 		{C85E1444-83D0-4120-A789-7671D5C8A560} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
+		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409} = {E0C0FCA7-0649-4401-847A-46F2D5104DB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}

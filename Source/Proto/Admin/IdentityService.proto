@@ -22,13 +22,16 @@ message Identity {
 }
 
 service IdentityService {
-
+	// Authenticates an identity.
 	rpc ValidateIdentity(ValidateIdentityRequest) returns (ValidateIdentityResponse);
 
+	// Creates a new identity.
 	rpc CreateIdentity(CreateIdentityRequest) returns (CreateIdentityResponse);
 
+	// Deletes a new identity.
 	rpc DeleteIdentity(DeleteIdentityRequest) returns (DeleteIdentityResponse);
 
+	// Gets an identity.
 	rpc GetIdentity(GetIdentityRequest) returns (GetIdentityResponse);
 
 }
