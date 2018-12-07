@@ -6,7 +6,11 @@ syntax = "proto3";
 option csharp_namespace = "Axiverse.Services.Proto";
 
 message Entity {
+	Vector3 position = 1;
 
+	Vector3 velocity = 2;
+
+	Quaternion rotation = 3;
 }
 
 message EntityClass {
@@ -27,12 +31,25 @@ service EntityService {
 
 }
 
-message ClientEvent {
+message Vector3 {
+	float x = 1;
+	float y = 2;
+	float z = 3;
+}
 
+message Quaternion {
+	float x = 1;
+	float y = 2;
+	float z = 3;
+	// w is inferred from a normalized quaternion
+}
+
+message ClientEvent {
+	Entity entity = 1;
 }
 
 message ServerEvent {
-
+	repeated Entity entities = 1;
 }
 
 message GetStateRequest {

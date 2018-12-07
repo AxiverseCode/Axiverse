@@ -41,6 +41,10 @@ namespace Axiverse.Interface.Engine
 
         public Router Router { get; set; }
 
+        public EventHandler Advance;
+
+        public Entity Ship;
+
         /// <summary>
         /// Constructs an engine.
         /// </summary>
@@ -211,6 +215,7 @@ namespace Axiverse.Interface.Engine
                 Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
             });
             shipEntity.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
+            Ship = shipEntity;
             var body = new Body();
             //body.LinearDampening *= 0.99f;
             //body.AngularDampening *= 0.99f;
@@ -290,6 +295,8 @@ namespace Axiverse.Interface.Engine
 
                     //Console.WriteLine(delta);
                     Scene.Step(delta / 1000.0f);
+
+                    Advance?.Invoke(this, null);
 
                     if (resize)
                     {

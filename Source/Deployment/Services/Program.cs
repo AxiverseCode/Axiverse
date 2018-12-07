@@ -16,7 +16,7 @@ namespace Services
 {
     //[Dependency(typeof(ChatServiceModule))]
     [Dependency(typeof(IdentityServiceModule))]
-    //[Dependency(typeof(EntityServiceModule))]
+    [Dependency(typeof(EntityServiceModule))]
     //[Dependency(typeof(ServerModule))]
     public class Program : ProgramModule
     {

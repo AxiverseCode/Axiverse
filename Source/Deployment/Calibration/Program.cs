@@ -26,6 +26,8 @@ namespace Calibration
         {
             Channel channel = new Channel("127.0.0.1:32000", ChannelCredentials.Insecure);
             var client = new IdentityService.IdentityServiceClient(channel);
+            var entityClient = new EntityService.EntityServiceClient(channel);
+
             var connecting = channel.ConnectAsync();
             connecting.Wait(1000);
             if (connecting.IsFaulted || !connecting.IsCompleted)
@@ -37,6 +39,20 @@ namespace Calibration
             var response = client.GetIdentity(new GetIdentityRequest());
             Console.WriteLine(response.Value);
 
+            var stream = entityClient.Stream();
+
+            engine.Advance += (s, e) => stream.RequestStream.WriteAsync(new ClientEvent
+            {
+                Entity = new Entity
+                {
+                    Position = new Vector3()
+                    {
+                        X = engine.Ship.Spatial.Position.X,
+                        Y = engine.Ship.Spatial.Position.Y,
+                        Z = engine.Ship.Spatial.Position.Z,
+                    }
+                }
+            });
             engine.Initialize();
             engine.Run();
 

@@ -24,28 +24,35 @@ namespace Axiverse.Services.Proto {
     static EntityServiceReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNFbnRpdHlTZXJ2aWNlLnByb3RvIggKBkVudGl0eSINCgtFbnRpdHlDbGFz",
-            "cyINCgtDbGllbnRFdmVudCINCgtTZXJ2ZXJFdmVudCIRCg9HZXRTdGF0ZVJl",
-            "cXVlc3QiMgoQR2V0U3RhdGVSZXNwb25zZRIMCgR0aW1lGAEgASgCEhAKCGVu",
-            "dGl0aWVzGAIgASgCIiMKE0NyZWF0ZUVudGl0eVJlcXVlc3QSDAoEbmFtZRgB",
-            "IAEoCSIiChRDcmVhdGVFbnRpdHlSZXNwb25zZRIKCgJpZBgBIAEoCSIhChNE",
-            "ZWxldGVFbnRpdHlSZXF1ZXN0EgoKAmlkGAEgASgJIhYKFERlbGV0ZUVudGl0",
-            "eVJlc3BvbnNlIh4KEEdldEVudGl0eVJlcXVlc3QSCgoCaWQYASABKAkiEwoR",
-            "R2V0RW50aXR5UmVzcG9uc2UymAIKDUVudGl0eVNlcnZpY2USLwoIR2V0U3Rh",
-            "dGUSEC5HZXRTdGF0ZVJlcXVlc3QaES5HZXRTdGF0ZVJlc3BvbnNlEjsKDENy",
-            "ZWF0ZUVudGl0eRIULkNyZWF0ZUVudGl0eVJlcXVlc3QaFS5DcmVhdGVFbnRp",
-            "dHlSZXNwb25zZRI7CgxEZWxldGVFbnRpdHkSFC5EZWxldGVFbnRpdHlSZXF1",
-            "ZXN0GhUuRGVsZXRlRW50aXR5UmVzcG9uc2USMgoJR2V0RW50aXR5EhEuR2V0",
-            "RW50aXR5UmVxdWVzdBoSLkdldEVudGl0eVJlc3BvbnNlEigKBlN0cmVhbRIM",
-            "LkNsaWVudEV2ZW50GgwuU2VydmVyRXZlbnQoATABQhqqAhdBeGl2ZXJzZS5T",
-            "ZXJ2aWNlcy5Qcm90b2IGcHJvdG8z"));
+            "ChNFbnRpdHlTZXJ2aWNlLnByb3RvIl8KBkVudGl0eRIaCghwb3NpdGlvbhgB",
+            "IAEoCzIILlZlY3RvcjMSGgoIdmVsb2NpdHkYAiABKAsyCC5WZWN0b3IzEh0K",
+            "CHJvdGF0aW9uGAMgASgLMgsuUXVhdGVybmlvbiINCgtFbnRpdHlDbGFzcyIq",
+            "CgdWZWN0b3IzEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIi0K",
+            "ClF1YXRlcm5pb24SCQoBeBgBIAEoAhIJCgF5GAIgASgCEgkKAXoYAyABKAIi",
+            "JgoLQ2xpZW50RXZlbnQSFwoGZW50aXR5GAEgASgLMgcuRW50aXR5IigKC1Nl",
+            "cnZlckV2ZW50EhkKCGVudGl0aWVzGAEgAygLMgcuRW50aXR5IhEKD0dldFN0",
+            "YXRlUmVxdWVzdCIyChBHZXRTdGF0ZVJlc3BvbnNlEgwKBHRpbWUYASABKAIS",
+            "EAoIZW50aXRpZXMYAiABKAIiIwoTQ3JlYXRlRW50aXR5UmVxdWVzdBIMCgRu",
+            "YW1lGAEgASgJIiIKFENyZWF0ZUVudGl0eVJlc3BvbnNlEgoKAmlkGAEgASgJ",
+            "IiEKE0RlbGV0ZUVudGl0eVJlcXVlc3QSCgoCaWQYASABKAkiFgoURGVsZXRl",
+            "RW50aXR5UmVzcG9uc2UiHgoQR2V0RW50aXR5UmVxdWVzdBIKCgJpZBgBIAEo",
+            "CSITChFHZXRFbnRpdHlSZXNwb25zZTKYAgoNRW50aXR5U2VydmljZRIvCghH",
+            "ZXRTdGF0ZRIQLkdldFN0YXRlUmVxdWVzdBoRLkdldFN0YXRlUmVzcG9uc2US",
+            "OwoMQ3JlYXRlRW50aXR5EhQuQ3JlYXRlRW50aXR5UmVxdWVzdBoVLkNyZWF0",
+            "ZUVudGl0eVJlc3BvbnNlEjsKDERlbGV0ZUVudGl0eRIULkRlbGV0ZUVudGl0",
+            "eVJlcXVlc3QaFS5EZWxldGVFbnRpdHlSZXNwb25zZRIyCglHZXRFbnRpdHkS",
+            "ES5HZXRFbnRpdHlSZXF1ZXN0GhIuR2V0RW50aXR5UmVzcG9uc2USKAoGU3Ry",
+            "ZWFtEgwuQ2xpZW50RXZlbnQaDC5TZXJ2ZXJFdmVudCgBMAFCGqoCF0F4aXZl",
+            "cnNlLlNlcnZpY2VzLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, new[]{ "Position", "Velocity", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.EntityClass), global::Axiverse.Services.Proto.EntityClass.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ClientEvent), global::Axiverse.Services.Proto.ClientEvent.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ServerEvent), global::Axiverse.Services.Proto.ServerEvent.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Vector3), global::Axiverse.Services.Proto.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Quaternion), global::Axiverse.Services.Proto.Quaternion.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ClientEvent), global::Axiverse.Services.Proto.ClientEvent.Parser, new[]{ "Entity" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ServerEvent), global::Axiverse.Services.Proto.ServerEvent.Parser, new[]{ "Entities" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetStateRequest), global::Axiverse.Services.Proto.GetStateRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetStateResponse), global::Axiverse.Services.Proto.GetStateResponse.Parser, new[]{ "Time", "Entities" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.CreateEntityRequest), global::Axiverse.Services.Proto.CreateEntityRequest.Parser, new[]{ "Name" }, null, null, null),
@@ -85,12 +92,48 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Entity(Entity other) : this() {
+      position_ = other.position_ != null ? other.position_.Clone() : null;
+      velocity_ = other.velocity_ != null ? other.velocity_.Clone() : null;
+      rotation_ = other.rotation_ != null ? other.rotation_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Entity Clone() {
       return new Entity(this);
+    }
+
+    /// <summary>Field number for the "position" field.</summary>
+    public const int PositionFieldNumber = 1;
+    private global::Axiverse.Services.Proto.Vector3 position_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Axiverse.Services.Proto.Vector3 Position {
+      get { return position_; }
+      set {
+        position_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "velocity" field.</summary>
+    public const int VelocityFieldNumber = 2;
+    private global::Axiverse.Services.Proto.Vector3 velocity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Axiverse.Services.Proto.Vector3 Velocity {
+      get { return velocity_; }
+      set {
+        velocity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rotation" field.</summary>
+    public const int RotationFieldNumber = 3;
+    private global::Axiverse.Services.Proto.Quaternion rotation_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Axiverse.Services.Proto.Quaternion Rotation {
+      get { return rotation_; }
+      set {
+        rotation_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -106,12 +149,18 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(Position, other.Position)) return false;
+      if (!object.Equals(Velocity, other.Velocity)) return false;
+      if (!object.Equals(Rotation, other.Rotation)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (position_ != null) hash ^= Position.GetHashCode();
+      if (velocity_ != null) hash ^= Velocity.GetHashCode();
+      if (rotation_ != null) hash ^= Rotation.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -125,6 +174,18 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (position_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Position);
+      }
+      if (velocity_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Velocity);
+      }
+      if (rotation_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Rotation);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -133,6 +194,15 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (position_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
+      }
+      if (velocity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Velocity);
+      }
+      if (rotation_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Rotation);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -143,6 +213,24 @@ namespace Axiverse.Services.Proto {
     public void MergeFrom(Entity other) {
       if (other == null) {
         return;
+      }
+      if (other.position_ != null) {
+        if (position_ == null) {
+          position_ = new global::Axiverse.Services.Proto.Vector3();
+        }
+        Position.MergeFrom(other.Position);
+      }
+      if (other.velocity_ != null) {
+        if (velocity_ == null) {
+          velocity_ = new global::Axiverse.Services.Proto.Vector3();
+        }
+        Velocity.MergeFrom(other.Velocity);
+      }
+      if (other.rotation_ != null) {
+        if (rotation_ == null) {
+          rotation_ = new global::Axiverse.Services.Proto.Quaternion();
+        }
+        Rotation.MergeFrom(other.Rotation);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -155,6 +243,27 @@ namespace Axiverse.Services.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            if (position_ == null) {
+              position_ = new global::Axiverse.Services.Proto.Vector3();
+            }
+            input.ReadMessage(position_);
+            break;
+          }
+          case 18: {
+            if (velocity_ == null) {
+              velocity_ = new global::Axiverse.Services.Proto.Vector3();
+            }
+            input.ReadMessage(velocity_);
+            break;
+          }
+          case 26: {
+            if (rotation_ == null) {
+              rotation_ = new global::Axiverse.Services.Proto.Quaternion();
+            }
+            input.ReadMessage(rotation_);
+            break;
+          }
         }
       }
     }
@@ -262,6 +371,379 @@ namespace Axiverse.Services.Proto {
 
   }
 
+  public sealed partial class Vector3 : pb::IMessage<Vector3> {
+    private static readonly pb::MessageParser<Vector3> _parser = new pb::MessageParser<Vector3>(() => new Vector3());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Vector3> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Vector3() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Vector3(Vector3 other) : this() {
+      x_ = other.x_;
+      y_ = other.y_;
+      z_ = other.z_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Vector3 Clone() {
+      return new Vector3(this);
+    }
+
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 1;
+    private float x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 2;
+    private float y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "z" field.</summary>
+    public const int ZFieldNumber = 3;
+    private float z_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Z {
+      get { return z_; }
+      set {
+        z_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Vector3);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Vector3 other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
+      }
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
+      }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (X != 0F) {
+        size += 1 + 4;
+      }
+      if (Y != 0F) {
+        size += 1 + 4;
+      }
+      if (Z != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Vector3 other) {
+      if (other == null) {
+        return;
+      }
+      if (other.X != 0F) {
+        X = other.X;
+      }
+      if (other.Y != 0F) {
+        Y = other.Y;
+      }
+      if (other.Z != 0F) {
+        Z = other.Z;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            X = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Quaternion : pb::IMessage<Quaternion> {
+    private static readonly pb::MessageParser<Quaternion> _parser = new pb::MessageParser<Quaternion>(() => new Quaternion());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Quaternion> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Quaternion() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Quaternion(Quaternion other) : this() {
+      x_ = other.x_;
+      y_ = other.y_;
+      z_ = other.z_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Quaternion Clone() {
+      return new Quaternion(this);
+    }
+
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 1;
+    private float x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 2;
+    private float y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "z" field.</summary>
+    public const int ZFieldNumber = 3;
+    private float z_;
+    /// <summary>
+    /// w is inferred from a normalized quaternion
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Z {
+      get { return z_; }
+      set {
+        z_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Quaternion);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Quaternion other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (X != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(X);
+      }
+      if (Y != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Y);
+      }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (X != 0F) {
+        size += 1 + 4;
+      }
+      if (Y != 0F) {
+        size += 1 + 4;
+      }
+      if (Z != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Quaternion other) {
+      if (other == null) {
+        return;
+      }
+      if (other.X != 0F) {
+        X = other.X;
+      }
+      if (other.Y != 0F) {
+        Y = other.Y;
+      }
+      if (other.Z != 0F) {
+        Z = other.Z;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            X = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ClientEvent : pb::IMessage<ClientEvent> {
     private static readonly pb::MessageParser<ClientEvent> _parser = new pb::MessageParser<ClientEvent>(() => new ClientEvent());
     private pb::UnknownFieldSet _unknownFields;
@@ -270,7 +752,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -287,12 +769,24 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ClientEvent(ClientEvent other) : this() {
+      entity_ = other.entity_ != null ? other.entity_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ClientEvent Clone() {
       return new ClientEvent(this);
+    }
+
+    /// <summary>Field number for the "entity" field.</summary>
+    public const int EntityFieldNumber = 1;
+    private global::Axiverse.Services.Proto.Entity entity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Axiverse.Services.Proto.Entity Entity {
+      get { return entity_; }
+      set {
+        entity_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -308,12 +802,14 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(Entity, other.Entity)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (entity_ != null) hash ^= Entity.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -327,6 +823,10 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (entity_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Entity);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -335,6 +835,9 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (entity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Entity);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -345,6 +848,12 @@ namespace Axiverse.Services.Proto {
     public void MergeFrom(ClientEvent other) {
       if (other == null) {
         return;
+      }
+      if (other.entity_ != null) {
+        if (entity_ == null) {
+          entity_ = new global::Axiverse.Services.Proto.Entity();
+        }
+        Entity.MergeFrom(other.Entity);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -357,6 +866,13 @@ namespace Axiverse.Services.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            if (entity_ == null) {
+              entity_ = new global::Axiverse.Services.Proto.Entity();
+            }
+            input.ReadMessage(entity_);
+            break;
+          }
         }
       }
     }
@@ -371,7 +887,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -388,12 +904,23 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ServerEvent(ServerEvent other) : this() {
+      entities_ = other.entities_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ServerEvent Clone() {
       return new ServerEvent(this);
+    }
+
+    /// <summary>Field number for the "entities" field.</summary>
+    public const int EntitiesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Axiverse.Services.Proto.Entity> _repeated_entities_codec
+        = pb::FieldCodec.ForMessage(10, global::Axiverse.Services.Proto.Entity.Parser);
+    private readonly pbc::RepeatedField<global::Axiverse.Services.Proto.Entity> entities_ = new pbc::RepeatedField<global::Axiverse.Services.Proto.Entity>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Axiverse.Services.Proto.Entity> Entities {
+      get { return entities_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -409,12 +936,14 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if(!entities_.Equals(other.entities_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      hash ^= entities_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -428,6 +957,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      entities_.WriteTo(output, _repeated_entities_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -436,6 +966,7 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      size += entities_.CalculateSize(_repeated_entities_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -447,6 +978,7 @@ namespace Axiverse.Services.Proto {
       if (other == null) {
         return;
       }
+      entities_.Add(other.entities_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -458,6 +990,10 @@ namespace Axiverse.Services.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            entities_.AddEntriesFrom(input, _repeated_entities_codec);
+            break;
+          }
         }
       }
     }
@@ -472,7 +1008,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -573,7 +1109,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -730,7 +1266,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -859,7 +1395,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -988,7 +1524,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1117,7 +1653,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1218,7 +1754,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1347,7 +1883,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Axiverse.Services.Proto.EntityServiceReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

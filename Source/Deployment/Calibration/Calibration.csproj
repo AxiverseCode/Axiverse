@@ -91,9 +91,17 @@
       <Project>{B4894EA0-719A-4D14-9024-00F7FCA0E81B}</Project>
       <Name>Axiverse.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700D5AB7-622F-443E-AE55-D51556EC88BD}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse.Resources\Axiverse.Resources.csproj">
       <Project>{DB2FCC23-BEFB-44CD-8F9B-EC1702AEDF57}</Project>
       <Name>Axiverse.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
+      <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
+      <Name>Axiverse.Simulation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse\Axiverse.csproj">
       <Project>{F00060A0-3A63-485C-929B-5F206EE743EF}</Project>

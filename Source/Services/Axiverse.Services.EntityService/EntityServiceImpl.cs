@@ -24,12 +24,15 @@ namespace Axiverse.Services.EntityService
             running = runner.Run();
         }
 
-        public override Task Stream(
+        public override async Task Stream(
             IAsyncStreamReader<ClientEvent> requestStream,
             IServerStreamWriter<ServerEvent> responseStream,
             ServerCallContext context)
         {
-            return base.Stream(requestStream, responseStream, context);
+            while (await requestStream.MoveNext())
+            {
+                Console.WriteLine(requestStream.Current.Entity.Position);
+            }
         }
     }
 }
