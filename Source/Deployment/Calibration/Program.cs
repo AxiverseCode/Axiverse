@@ -1,4 +1,5 @@
-﻿using Axiverse.Injection;
+﻿using Axiverse.Calibration;
+using Axiverse.Injection;
 using Axiverse.Interface.Engine;
 using Axiverse.Modules;
 using Axiverse.Resources;
@@ -46,7 +47,12 @@ namespace Calibration
             engine.Simulation.Stepped += (s, e) =>
             {
             };
+
+            var calibrationProcess = new CalibrartionProcess(engine);
+            engine.Process = calibrationProcess;
+
             engine.Initialize();
+            calibrationProcess.OnInitialize();
             engine.Run();
 
             channel.ShutdownAsync().Wait();

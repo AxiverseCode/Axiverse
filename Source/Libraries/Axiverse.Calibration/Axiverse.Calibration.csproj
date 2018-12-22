@@ -30,8 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpDX.Desktop, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +72,22 @@
     <ProjectReference Include="..\..\Libraries\Axiverse\Axiverse.csproj">
       <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
       <Name>Axiverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Interface.Assets\Axiverse.Interface.Assets.csproj">
+      <Project>{CD0ED517-2595-413D-9822-2B33A7876842}</Project>
+      <Name>Axiverse.Interface.Assets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
+      <Project>{CAB0BBC2-A6EB-4065-9E71-FD86746696C2}</Project>
+      <Name>Axiverse.Interface.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
+      <Project>{4CED344E-8BAC-48CB-AC37-A2C4AD7FFE02}</Project>
+      <Name>Axiverse.Interface.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Resources\Axiverse.Resources.csproj">
+      <Project>{DB2FCC23-BEFB-44CD-8F9B-EC1702AEDF57}</Project>
+      <Name>Axiverse.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

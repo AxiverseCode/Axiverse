@@ -87,6 +87,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Calibration\Axiverse.Calibration.csproj">
+      <Project>{AE0262F6-63FC-45AF-BBFD-9F0916D4AD23}</Project>
+      <Name>Axiverse.Calibration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse.Interface\Axiverse.Interface.csproj">
       <Project>{B4894EA0-719A-4D14-9024-00F7FCA0E81B}</Project>
       <Name>Axiverse.Interface</Name>

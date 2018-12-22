@@ -31,7 +31,7 @@ namespace Axiverse.Interface.Engine
         /// </summary>
         public Cache Cache { get; private set; }
 
-        Form form;
+        public Form Form { get; private set; }
 
         public Scene Scene { get; set; }
 
@@ -39,7 +39,11 @@ namespace Axiverse.Interface.Engine
         public Escapement SimulationEscapement { get; }
         public Universe Simulation { get; set; }
 
-        public Window Window { get; set; }
+        public Window Window
+        {
+            get => Compositor.Window;
+            set => Compositor.Window = value;
+        }
 
         public Router Router { get; set; }
 
@@ -47,6 +51,9 @@ namespace Axiverse.Interface.Engine
         public GraphicsDevice Device { get; private set; }
         public GraphicsDevice2D Device2D { get; set; }
         public Compositor Compositor { get; private set; }
+        public Process Process { get; set; }
+        public Presenter Presenter { get; set; }
+        public CameraComponent Camera { get; set; }
 
         /// <summary>
         /// Constructs an engine.
@@ -69,12 +76,6 @@ namespace Axiverse.Interface.Engine
             Router.Listeners.Add(sixAxisListner);
             Router.Listeners.Add(twoAxisListener);
             Injector.Bind<Universe>(Scene);
-
-            Scene.Add(new TransformPhysicsProcessor());
-            Scene.Add(new TransformProcessor());
-            Scene.Add(new CameraProcessor());
-            Scene.Add(new BehaviorProcessor());
-            Scene.Add(new DirectControlProcessor());
         }
 
         SixAxisListener sixAxisListner = new SixAxisListener();
@@ -86,11 +87,34 @@ namespace Axiverse.Interface.Engine
         public void Initialize()
         {
             // Create a window
-            form = new Form()
+            Form = new Form()
             {
                 ClientSize = new System.Drawing.Size(1600, 1200),
                 Text = "Axiverse | Hello Graphics",
             };
+
+            // Init the rendering device
+            Device = GraphicsDevice.Create();
+            var presenterDescription = new PresenterDescription()
+            {
+                Width = Form.ClientSize.Width,
+                Height = Form.ClientSize.Height,
+                WindowHandle = Form.Handle
+            };
+
+            Presenter = new Presenter(Device, presenterDescription);
+            Presenter.Initialize();
+            Device2D = GraphicsDevice2D.Create(Device, Presenter);
+            Form.Resize += (e, sender) =>
+            {
+                resize = true;
+            };
+
+            Compositor = new Compositor(Device, Presenter);
+            Compositor.Device2D = Device2D;
+
+            // Bind resources
+            Injector.Bind(Device);
         }
 
 
@@ -100,32 +124,10 @@ namespace Axiverse.Interface.Engine
         /// </summary>
         public void Run()
         {
-            form.Show();
-
-            // Init the rendering device
-            Device = GraphicsDevice.Create();
-            var presenterDescription = new PresenterDescription()
-            {
-                Width = form.ClientSize.Width,
-                Height = form.ClientSize.Height,
-                WindowHandle = form.Handle
-            };
-            var presenter = new Presenter(Device, presenterDescription);
-            presenter.Initialize();
-            Device2D = GraphicsDevice2D.Create(Device, presenter);
-            form.Resize += (e, sender) =>
-            {
-                resize = true;
-            };
-
-            Compositor = new Compositor(Device, presenter);
-            Compositor.Device2D = Device2D;
-
-            // Bind resources
-            Injector.Bind(Device);
+            Form.Show();
 
             var previousTick = Environment.TickCount;
-            using (var loop = new RenderLoop(form))
+            using (var loop = new RenderLoop(Form))
             {
                 while (loop.NextFrame())
                 {
@@ -152,97 +154,14 @@ namespace Axiverse.Interface.Engine
                     if (resize)
                     {
                         Device2D.DisposeFrames();
-                        presenter.Resize(form.ClientSize.Width, form.ClientSize.Height);
-                        presenter.TryResize();
+                        Presenter.Resize(Form.ClientSize.Width, Form.ClientSize.Height);
+                        Presenter.TryResize();
                         Device2D.InitializePresentable(Device);
                     }
 
-                    Compositor.Process(Scene, null);
+                    Compositor.Process(Scene, Camera);
                 }
             }
-        }
-
-        public void Process()
-        {
-            // Continuation.
-            // Really hard to understand processes. 
-            // Bad architecture leads to a lot of work but not a lot of progress.
-        }
-
-        public void LoadCube(GraphicsDevice device)
-        {
-            var cube = Primitives<PositionColorTexture>.Cube();
-            var indices = cube.Item1;
-            var vertices = cube.Item2;
-            var indexBuffer = GraphicsBuffer.Create(device, indices, false);
-
-            var vertexBuffer = GraphicsBuffer.Create(device, vertices, false);
-            var indexBinding = new IndexBufferBinding
-            {
-                Buffer = indexBuffer,
-                Count = indices.Length,
-                Type = IndexBufferType.Integer32,
-                //Offset = 0,
-            };
-            var vertexBinding = new VertexBufferBinding
-            {
-                Buffer = vertexBuffer,
-                Count = vertices.Length,
-                Stride = PositionColorTexture.Layout.Stride,
-                //Offset = 0,
-            };
-            var meshDraw = new MeshDraw
-            {
-                IndexBuffer = indexBinding,
-                VertexBuffers = new[] { vertexBinding },
-                Count = indices.Length,
-            };
-
-            Cache.Add("memory:cube", meshDraw);
-        }
-
-        public void LoadSphere(GraphicsDevice device)
-        {
-            var cube = Primitives<PositionColorTexture>.Sphere(1500, 20, 20);
-            var indices = cube.Item1;
-            var vertices = cube.Item2;
-            var indexBuffer = GraphicsBuffer.Create(device, indices, false);
-
-            var vertexBuffer = GraphicsBuffer.Create(device, vertices, false);
-            var indexBinding = new IndexBufferBinding
-            {
-                Buffer = indexBuffer,
-                Count = indices.Length,
-                Type = IndexBufferType.Integer32,
-                //Offset = 0,
-            };
-            var vertexBinding = new VertexBufferBinding
-            {
-                Buffer = vertexBuffer,
-                Count = vertices.Length,
-                Stride = PositionColorTexture.Layout.Stride,
-                //Offset = 0,
-            };
-            var meshDraw = new MeshDraw
-            {
-                IndexBuffer = indexBinding,
-                VertexBuffers = new[] { vertexBinding },
-                Count = indices.Length,
-            };
-
-            Cache.Add("memory:sphere", meshDraw);
-        }
-
-        public void LoadModel(GraphicsDevice device, string name, Matrix3? transform = null)
-        {
-            var spaceMesh = Assets.Models.WavefrontObjMesh.Load(device, $@".\Resources\Models\{name}.obj", transform);
-            var spaceMeshDraw = new MeshDraw
-            {
-                VertexBuffers = new[] { spaceMesh },
-                Count = spaceMesh.Count,
-            };
-
-            Cache.Add("memory:" + name, spaceMeshDraw);
         }
     }
 }
