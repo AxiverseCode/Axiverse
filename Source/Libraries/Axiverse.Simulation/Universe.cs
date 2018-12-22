@@ -32,7 +32,7 @@ namespace Axiverse.Simulation
 
         }
 
-        public void Step(float dt)
+        public virtual void Step(float dt)
         {
             if (dt == 0)
             {
@@ -48,6 +48,8 @@ namespace Axiverse.Simulation
             {
                 processor.Process(context);
             }
+
+            Stepped?.Invoke(this, null);
         }
 
         public void Add(Entity entity)
@@ -138,6 +140,8 @@ namespace Axiverse.Simulation
 
         public event EntityEventHandler EntityAdded;
         public event EntityEventHandler EntityRemoved;
+
+        public event EventHandler Stepped;
 
         public SortedList<ProcessorStage, IProcessor> Processors => processors;
 

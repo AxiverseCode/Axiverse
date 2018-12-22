@@ -1,4 +1,4 @@
-﻿using Axiverse.Simulation;
+﻿using Axiverse.Interface.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Calibration
 {
-    public class EquiptmentComponent : Component
+    public class CalibrartionProcess : Process
     {
     }
 }

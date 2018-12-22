@@ -1,3 +1,9 @@
+### 12/6
+
+- Have server be the authority.
+- User can query what they have permission to access and control.
+- Client can then change context and modify what it has permissions to control.
+
 ### 7/9
 
 - Serialization

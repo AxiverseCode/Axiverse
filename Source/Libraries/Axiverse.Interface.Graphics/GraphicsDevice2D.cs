@@ -224,7 +224,7 @@ namespace Axiverse.Interface.Graphics
             DeviceContext.BeginDraw();
 
             DeviceContext.Transform = Matrix3x2.Identity;
-            window.DrawChildren(DrawContext);
+            window?.DrawChildren(DrawContext);
 
             var b = new RectangleF(50f, 50f, 100, 100);
             //DeviceContext.PushAxisAlignedClip(b, AntialiasMode.PerPrimitive);

@@ -40,19 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalibrationModule.cs" />
-    <Compile Include="ControllerComponent.cs" />
-    <Compile Include="ControllerProcessor.cs" />
-    <Compile Include="EquiptmentComponent.cs" />
-    <Compile Include="PilotingComponent.cs" />
-    <Compile Include="PilotingProcessor.cs" />
-    <Compile Include="PropulsionComponent.cs" />
+    <Compile Include="CalibrartionProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropulsionEmitter.cs" />
-    <Compile Include="PropulsionProcessor.cs" />
+    <Compile Include="Simulation\AgentEntity.cs" />
+    <Compile Include="Simulation\CalibrationUniverse.cs" />
+    <Compile Include="Simulation\Components\StructureComponent.cs" />
     <Compile Include="Simulation\StateProcessor.cs" />
+    <Compile Include="Simulation\UniverseEntity.cs" />
     <Compile Include="Simulation\UniverseProcessor.cs" />
-    <Compile Include="StructureComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Axiverse.Interface\Axiverse.Interface.csproj">

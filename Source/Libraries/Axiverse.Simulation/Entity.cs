@@ -101,11 +101,19 @@ namespace Axiverse.Simulation
             return $"{Name} @ { Spatial.Position }";
         }
 
+        /// <summary>
+        /// Invokes when a component is added.
+        /// </summary>
+        /// <param name="e"></param>
         protected internal void OnComponentAdded(ComponentEventArgs e)
         {
             ComponentAdded?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Invokes when a component is removed.
+        /// </summary>
+        /// <param name="e"></param>
         protected internal void OnComponentRemoved(ComponentEventArgs e)
         {
             ComponentRemoved?.Invoke(this, e);

@@ -14,6 +14,7 @@ namespace Axiverse.Simulation
     public enum ProcessorStage
     {
         None = 0,
+
         Critical = 1,
 
         Preprocessing = 1000,

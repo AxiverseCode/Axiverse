@@ -16,6 +16,8 @@ namespace Calibration
         [Bind]
         Engine engine;
 
+        int tick;
+
         [Inject]
         public Program(Library library)
         {
@@ -41,18 +43,9 @@ namespace Calibration
 
             var stream = entityClient.Stream();
 
-            engine.Advance += (s, e) => stream.RequestStream.WriteAsync(new ClientEvent
+            engine.Simulation.Stepped += (s, e) =>
             {
-                Entity = new Entity
-                {
-                    Position = new Vector3()
-                    {
-                        X = engine.Ship.Spatial.Position.X,
-                        Y = engine.Ship.Spatial.Position.Y,
-                        Z = engine.Ship.Spatial.Position.Z,
-                    }
-                }
-            });
+            };
             engine.Initialize();
             engine.Run();
 

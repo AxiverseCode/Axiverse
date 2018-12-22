@@ -84,5 +84,5 @@ namespace Axiverse.Interface.Audio
             return Console.KeyAvailable && Console.ReadKey(true).Key == key;
         }
     }
-    
+
 }

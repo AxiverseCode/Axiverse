@@ -52,8 +52,10 @@
     <Compile Include="Behaviors\Steering.cs" />
     <Compile Include="CollectorProcessor.cs" />
     <Compile Include="ComponentEventArgs.cs" />
+    <Compile Include="Components\CollectionComponent.cs" />
     <Compile Include="Components\HierarchicalComponentCollection.cs" />
     <Compile Include="EntityEventArgs.cs" />
+    <Compile Include="Escapement.cs" />
     <Compile Include="HierarchicalProcessor.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IProcessor.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Components\SpatialComponent.cs" />
     <Compile Include="Producers\StepTimeAttribute.cs" />
     <Compile Include="Universe.cs" />
+    <Compile Include="UniverseProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Axiverse.Mathematics\Axiverse.Mathematics.csproj">

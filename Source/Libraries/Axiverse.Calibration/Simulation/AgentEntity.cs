@@ -7,14 +7,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Calibration.Simulation
 {
-    class UniverseProcessor
+    public class AgentEntity : Entity
     {
-        // Invokes all the other processors
-        public Entity Universe { get; set; }
-
-        public void Process()
-        {
-
-        }
     }
 }
