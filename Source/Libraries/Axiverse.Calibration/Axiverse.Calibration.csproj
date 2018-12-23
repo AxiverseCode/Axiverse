@@ -11,6 +11,8 @@
     <AssemblyName>Axiverse.Calibration</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,10 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604" />
+    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Grpc.Core.1.17.1\lib\net45\Grpc.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX.Desktop, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,6 +82,10 @@
       <Project>{f00060a0-3a63-485c-929b-5f206ee743ef}</Project>
       <Name>Axiverse</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Services\Axiverse.Services.Proto\Axiverse.Services.Proto.csproj">
+      <Project>{D5ACDEBB-41EB-4286-B5E3-34506DAAA001}</Project>
+      <Name>Axiverse.Services.Proto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Interface.Assets\Axiverse.Interface.Assets.csproj">
       <Project>{CD0ED517-2595-413D-9822-2B33A7876842}</Project>
       <Name>Axiverse.Interface.Assets</Name>
@@ -80,6 +93,10 @@
     <ProjectReference Include="..\Axiverse.Interface.Graphics\Axiverse.Interface.Graphics.csproj">
       <Project>{CAB0BBC2-A6EB-4065-9E71-FD86746696C2}</Project>
       <Name>Axiverse.Interface.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Axiverse.Interface.Input\Axiverse.Interface.Input.csproj">
+      <Project>{C9160E27-003A-466B-BB08-A51435D509AA}</Project>
+      <Name>Axiverse.Interface.Input</Name>
     </ProjectReference>
     <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
       <Project>{4CED344E-8BAC-48CB-AC37-A2C4AD7FFE02}</Project>
@@ -92,6 +109,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\Grpc.Core.1.17.1\build\net45\Grpc.Core.targets" Condition="Exists('..\..\packages\Grpc.Core.1.17.1\build\net45\Grpc.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Grpc.Core.1.17.1\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Grpc.Core.1.17.1\build\net45\Grpc.Core.targets'))" />
+  </Target>
 </Project>

@@ -36,6 +36,8 @@ namespace Axiverse.Interface.Input
         public List<Source> Sources { get; set; } = new List<Source>();
         public List<Listener> Listeners { get; set; } = new List<Listener>();
 
+        public bool Enabled { get; set; }
+
         public Router()
         {
             directInput = new DirectInput();
@@ -54,7 +56,7 @@ namespace Axiverse.Interface.Input
         {
             foreach (var source in Sources)
             {
-                foreach (var signal in source.Poll())
+                foreach (var signal in source.Poll(Enabled))
                 {
                     foreach (var listener in Listeners)
                     {

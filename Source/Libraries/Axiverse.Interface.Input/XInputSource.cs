@@ -22,14 +22,14 @@ namespace Axiverse.Interface.Input
             Controller = new Controller(userIndex);
         }
 
-        public override Signal[] Poll()
+        public override Signal[] Poll(bool enabled)
         {
             List<Signal> signals = new List<Signal>();
 
             if (Controller.IsConnected)
             {
                 var state = Controller.GetState();
-                if (state.PacketNumber != State.PacketNumber)
+                if (enabled && state.PacketNumber != State.PacketNumber)
                 {
                     AxisSignal(XInputOffsets.LeftX, State.Gamepad.LeftThumbX, state.Gamepad.LeftThumbX, signals);
                     AxisSignal(XInputOffsets.LeftY, State.Gamepad.LeftThumbY, state.Gamepad.LeftThumbY, signals);

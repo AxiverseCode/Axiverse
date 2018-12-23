@@ -71,6 +71,11 @@ namespace Axiverse.Simulation
             return result;
         }
 
+        public bool TryGetEntity(Guid guid, out Entity entity)
+        {
+            return entities.TryGetValue(guid, out entity);
+        }
+
         protected void OnEntityAdded(Entity entity)
         {
             entity.ComponentAdded += OnComponentAdded;

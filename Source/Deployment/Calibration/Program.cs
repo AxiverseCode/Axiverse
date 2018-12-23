@@ -27,27 +27,6 @@ namespace Calibration
 
         public override void Execute(string[] args)
         {
-            Channel channel = new Channel("127.0.0.1:32000", ChannelCredentials.Insecure);
-            var client = new IdentityService.IdentityServiceClient(channel);
-            var entityClient = new EntityService.EntityServiceClient(channel);
-
-            var connecting = channel.ConnectAsync();
-            connecting.Wait(1000);
-            if (connecting.IsFaulted || !connecting.IsCompleted)
-            {
-                Console.ReadKey();
-            }
-
-
-            var response = client.GetIdentity(new GetIdentityRequest());
-            Console.WriteLine(response.Value);
-
-            var stream = entityClient.Stream();
-
-            engine.Simulation.Stepped += (s, e) =>
-            {
-            };
-
             var calibrationProcess = new CalibrartionProcess(engine);
             engine.Process = calibrationProcess;
 
@@ -55,7 +34,8 @@ namespace Calibration
             calibrationProcess.OnInitialize();
             engine.Run();
 
-            channel.ShutdownAsync().Wait();
+            calibrationProcess.OnDispose();
+
         }
 
         static void Main(string[] args)

@@ -73,13 +73,8 @@ namespace Axiverse.Interface.Engine
             Simulation = new Universe();
 
             Router = new Router();
-            Router.Listeners.Add(sixAxisListner);
-            Router.Listeners.Add(twoAxisListener);
             Injector.Bind<Universe>(Scene);
         }
-
-        SixAxisListener sixAxisListner = new SixAxisListener();
-        TwoAxisListener twoAxisListener = new TwoAxisListener();
 
         /// <summary>
         /// Initializes the engine.
@@ -91,6 +86,18 @@ namespace Axiverse.Interface.Engine
             {
                 ClientSize = new System.Drawing.Size(1600, 1200),
                 Text = "Axiverse | Hello Graphics",
+            };
+            Form.Resize += (e, sender) =>
+            {
+                resize = true;
+            };
+            Form.Deactivate += (e, sender) =>
+            {
+                Router.Enabled = false;
+            };
+            Form.Activated += (e, sender) =>
+            {
+                Router.Enabled = true;
             };
 
             // Init the rendering device
@@ -105,10 +112,6 @@ namespace Axiverse.Interface.Engine
             Presenter = new Presenter(Device, presenterDescription);
             Presenter.Initialize();
             Device2D = GraphicsDevice2D.Create(Device, Presenter);
-            Form.Resize += (e, sender) =>
-            {
-                resize = true;
-            };
 
             Compositor = new Compositor(Device, Presenter);
             Compositor.Device2D = Device2D;

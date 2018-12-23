@@ -38,6 +38,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604" />
     <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Grpc.Core.1.17.0\lib\net45\Grpc.Core.dll</HintPath>
     </Reference>
@@ -63,6 +64,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Interface\Axiverse.Interface.csproj">
+      <Project>{B4894EA0-719A-4D14-9024-00F7FCA0E81B}</Project>
+      <Name>Axiverse.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700D5AB7-622F-443E-AE55-D51556EC88BD}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
       <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
       <Name>Axiverse.Simulation</Name>

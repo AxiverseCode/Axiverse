@@ -59,6 +59,7 @@
     <Compile Include="AssetServiceGrpc.cs" />
     <Compile Include="ChatService.cs" />
     <Compile Include="ChatServiceGrpc.cs" />
+    <Compile Include="ProtoConverter.cs" />
     <Compile Include="EntityService.cs" />
     <Compile Include="EntityServiceGrpc.cs" />
     <Compile Include="IdentityService.cs" />
@@ -109,7 +110,12 @@
     <None Include="Generate.bat" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
+      <Project>{700d5ab7-622f-443e-ae55-d51556ec88bd}</Project>
+      <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>call $(ProjectDir)Generate.bat $(SolutionDir) $(ProjectDir)</PreBuildEvent>

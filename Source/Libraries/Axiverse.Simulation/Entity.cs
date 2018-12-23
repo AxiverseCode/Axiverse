@@ -88,6 +88,12 @@ namespace Axiverse.Simulation
             return entity;
         }
 
+        public T GetComponent<T>()
+            where T : Component
+        {
+            return Components.Get<T>();
+        }
+
         /// <summary>
         /// String representation of the entity.
         /// </summary>

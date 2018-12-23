@@ -24,33 +24,34 @@ namespace Axiverse.Services.Proto {
     static EntityServiceReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNFbnRpdHlTZXJ2aWNlLnByb3RvIl8KBkVudGl0eRIaCghwb3NpdGlvbhgB",
-            "IAEoCzIILlZlY3RvcjMSGgoIdmVsb2NpdHkYAiABKAsyCC5WZWN0b3IzEh0K",
-            "CHJvdGF0aW9uGAMgASgLMgsuUXVhdGVybmlvbiINCgtFbnRpdHlDbGFzcyIq",
-            "CgdWZWN0b3IzEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIi0K",
-            "ClF1YXRlcm5pb24SCQoBeBgBIAEoAhIJCgF5GAIgASgCEgkKAXoYAyABKAIi",
-            "JgoLQ2xpZW50RXZlbnQSFwoGZW50aXR5GAEgASgLMgcuRW50aXR5IigKC1Nl",
-            "cnZlckV2ZW50EhkKCGVudGl0aWVzGAEgAygLMgcuRW50aXR5IhEKD0dldFN0",
-            "YXRlUmVxdWVzdCIyChBHZXRTdGF0ZVJlc3BvbnNlEgwKBHRpbWUYASABKAIS",
-            "EAoIZW50aXRpZXMYAiABKAIiIwoTQ3JlYXRlRW50aXR5UmVxdWVzdBIMCgRu",
-            "YW1lGAEgASgJIiIKFENyZWF0ZUVudGl0eVJlc3BvbnNlEgoKAmlkGAEgASgJ",
-            "IiEKE0RlbGV0ZUVudGl0eVJlcXVlc3QSCgoCaWQYASABKAkiFgoURGVsZXRl",
-            "RW50aXR5UmVzcG9uc2UiHgoQR2V0RW50aXR5UmVxdWVzdBIKCgJpZBgBIAEo",
-            "CSITChFHZXRFbnRpdHlSZXNwb25zZTKYAgoNRW50aXR5U2VydmljZRIvCghH",
-            "ZXRTdGF0ZRIQLkdldFN0YXRlUmVxdWVzdBoRLkdldFN0YXRlUmVzcG9uc2US",
-            "OwoMQ3JlYXRlRW50aXR5EhQuQ3JlYXRlRW50aXR5UmVxdWVzdBoVLkNyZWF0",
-            "ZUVudGl0eVJlc3BvbnNlEjsKDERlbGV0ZUVudGl0eRIULkRlbGV0ZUVudGl0",
-            "eVJlcXVlc3QaFS5EZWxldGVFbnRpdHlSZXNwb25zZRIyCglHZXRFbnRpdHkS",
-            "ES5HZXRFbnRpdHlSZXF1ZXN0GhIuR2V0RW50aXR5UmVzcG9uc2USKAoGU3Ry",
-            "ZWFtEgwuQ2xpZW50RXZlbnQaDC5TZXJ2ZXJFdmVudCgBMAFCGqoCF0F4aXZl",
-            "cnNlLlNlcnZpY2VzLlByb3RvYgZwcm90bzM="));
+            "ChNFbnRpdHlTZXJ2aWNlLnByb3RvImsKBkVudGl0eRIKCgJpZBgBIAEoCRIa",
+            "Cghwb3NpdGlvbhgCIAEoCzIILlZlY3RvcjMSGgoIdmVsb2NpdHkYAyABKAsy",
+            "CC5WZWN0b3IzEh0KCHJvdGF0aW9uGAQgASgLMgsuUXVhdGVybmlvbiINCgtF",
+            "bnRpdHlDbGFzcyIqCgdWZWN0b3IzEgkKAXgYASABKAISCQoBeRgCIAEoAhIJ",
+            "CgF6GAMgASgCIjgKClF1YXRlcm5pb24SCQoBeBgBIAEoAhIJCgF5GAIgASgC",
+            "EgkKAXoYAyABKAISCQoBdxgEIAEoAiImCgtDbGllbnRFdmVudBIXCgZlbnRp",
+            "dHkYASABKAsyBy5FbnRpdHkiKAoLU2VydmVyRXZlbnQSGQoIZW50aXRpZXMY",
+            "ASADKAsyBy5FbnRpdHkiEQoPR2V0U3RhdGVSZXF1ZXN0IjIKEEdldFN0YXRl",
+            "UmVzcG9uc2USDAoEdGltZRgBIAEoAhIQCghlbnRpdGllcxgCIAEoAiIjChND",
+            "cmVhdGVFbnRpdHlSZXF1ZXN0EgwKBG5hbWUYASABKAkiIgoUQ3JlYXRlRW50",
+            "aXR5UmVzcG9uc2USCgoCaWQYASABKAkiIQoTRGVsZXRlRW50aXR5UmVxdWVz",
+            "dBIKCgJpZBgBIAEoCSIWChREZWxldGVFbnRpdHlSZXNwb25zZSIeChBHZXRF",
+            "bnRpdHlSZXF1ZXN0EgoKAmlkGAEgASgJIhMKEUdldEVudGl0eVJlc3BvbnNl",
+            "MpgCCg1FbnRpdHlTZXJ2aWNlEi8KCEdldFN0YXRlEhAuR2V0U3RhdGVSZXF1",
+            "ZXN0GhEuR2V0U3RhdGVSZXNwb25zZRI7CgxDcmVhdGVFbnRpdHkSFC5DcmVh",
+            "dGVFbnRpdHlSZXF1ZXN0GhUuQ3JlYXRlRW50aXR5UmVzcG9uc2USOwoMRGVs",
+            "ZXRlRW50aXR5EhQuRGVsZXRlRW50aXR5UmVxdWVzdBoVLkRlbGV0ZUVudGl0",
+            "eVJlc3BvbnNlEjIKCUdldEVudGl0eRIRLkdldEVudGl0eVJlcXVlc3QaEi5H",
+            "ZXRFbnRpdHlSZXNwb25zZRIoCgZTdHJlYW0SDC5DbGllbnRFdmVudBoMLlNl",
+            "cnZlckV2ZW50KAEwAUIaqgIXQXhpdmVyc2UuU2VydmljZXMuUHJvdG9iBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, new[]{ "Position", "Velocity", "Rotation" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, new[]{ "Id", "Position", "Velocity", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.EntityClass), global::Axiverse.Services.Proto.EntityClass.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Vector3), global::Axiverse.Services.Proto.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Quaternion), global::Axiverse.Services.Proto.Quaternion.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Quaternion), global::Axiverse.Services.Proto.Quaternion.Parser, new[]{ "X", "Y", "Z", "W" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ClientEvent), global::Axiverse.Services.Proto.ClientEvent.Parser, new[]{ "Entity" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.ServerEvent), global::Axiverse.Services.Proto.ServerEvent.Parser, new[]{ "Entities" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.GetStateRequest), global::Axiverse.Services.Proto.GetStateRequest.Parser, null, null, null, null),
@@ -92,6 +93,7 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Entity(Entity other) : this() {
+      id_ = other.id_;
       position_ = other.position_ != null ? other.position_.Clone() : null;
       velocity_ = other.velocity_ != null ? other.velocity_.Clone() : null;
       rotation_ = other.rotation_ != null ? other.rotation_.Clone() : null;
@@ -103,8 +105,19 @@ namespace Axiverse.Services.Proto {
       return new Entity(this);
     }
 
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private string id_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Id {
+      get { return id_; }
+      set {
+        id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "position" field.</summary>
-    public const int PositionFieldNumber = 1;
+    public const int PositionFieldNumber = 2;
     private global::Axiverse.Services.Proto.Vector3 position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Axiverse.Services.Proto.Vector3 Position {
@@ -115,7 +128,7 @@ namespace Axiverse.Services.Proto {
     }
 
     /// <summary>Field number for the "velocity" field.</summary>
-    public const int VelocityFieldNumber = 2;
+    public const int VelocityFieldNumber = 3;
     private global::Axiverse.Services.Proto.Vector3 velocity_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Axiverse.Services.Proto.Vector3 Velocity {
@@ -126,7 +139,7 @@ namespace Axiverse.Services.Proto {
     }
 
     /// <summary>Field number for the "rotation" field.</summary>
-    public const int RotationFieldNumber = 3;
+    public const int RotationFieldNumber = 4;
     private global::Axiverse.Services.Proto.Quaternion rotation_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Axiverse.Services.Proto.Quaternion Rotation {
@@ -149,6 +162,7 @@ namespace Axiverse.Services.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Id != other.Id) return false;
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Velocity, other.Velocity)) return false;
       if (!object.Equals(Rotation, other.Rotation)) return false;
@@ -158,6 +172,7 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Id.Length != 0) hash ^= Id.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
       if (velocity_ != null) hash ^= Velocity.GetHashCode();
       if (rotation_ != null) hash ^= Rotation.GetHashCode();
@@ -174,16 +189,20 @@ namespace Axiverse.Services.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (position_ != null) {
+      if (Id.Length != 0) {
         output.WriteRawTag(10);
+        output.WriteString(Id);
+      }
+      if (position_ != null) {
+        output.WriteRawTag(18);
         output.WriteMessage(Position);
       }
       if (velocity_ != null) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteMessage(Velocity);
       }
       if (rotation_ != null) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteMessage(Rotation);
       }
       if (_unknownFields != null) {
@@ -194,6 +213,9 @@ namespace Axiverse.Services.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Id.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
+      }
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
       }
@@ -213,6 +235,9 @@ namespace Axiverse.Services.Proto {
     public void MergeFrom(Entity other) {
       if (other == null) {
         return;
+      }
+      if (other.Id.Length != 0) {
+        Id = other.Id;
       }
       if (other.position_ != null) {
         if (position_ == null) {
@@ -244,20 +269,24 @@ namespace Axiverse.Services.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            Id = input.ReadString();
+            break;
+          }
+          case 18: {
             if (position_ == null) {
               position_ = new global::Axiverse.Services.Proto.Vector3();
             }
             input.ReadMessage(position_);
             break;
           }
-          case 18: {
+          case 26: {
             if (velocity_ == null) {
               velocity_ = new global::Axiverse.Services.Proto.Vector3();
             }
             input.ReadMessage(velocity_);
             break;
           }
-          case 26: {
+          case 34: {
             if (rotation_ == null) {
               rotation_ = new global::Axiverse.Services.Proto.Quaternion();
             }
@@ -584,6 +613,7 @@ namespace Axiverse.Services.Proto {
       x_ = other.x_;
       y_ = other.y_;
       z_ = other.z_;
+      w_ = other.w_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -617,14 +647,25 @@ namespace Axiverse.Services.Proto {
     /// <summary>Field number for the "z" field.</summary>
     public const int ZFieldNumber = 3;
     private float z_;
-    /// <summary>
-    /// w is inferred from a normalized quaternion
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public float Z {
       get { return z_; }
       set {
         z_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "w" field.</summary>
+    public const int WFieldNumber = 4;
+    private float w_;
+    /// <summary>
+    /// w is inferred from a normalized quaternion
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float W {
+      get { return w_; }
+      set {
+        w_ = value;
       }
     }
 
@@ -644,6 +685,7 @@ namespace Axiverse.Services.Proto {
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(W, other.W)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -653,6 +695,7 @@ namespace Axiverse.Services.Proto {
       if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
       if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
       if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
+      if (W != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(W);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -678,6 +721,10 @@ namespace Axiverse.Services.Proto {
         output.WriteRawTag(29);
         output.WriteFloat(Z);
       }
+      if (W != 0F) {
+        output.WriteRawTag(37);
+        output.WriteFloat(W);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -693,6 +740,9 @@ namespace Axiverse.Services.Proto {
         size += 1 + 4;
       }
       if (Z != 0F) {
+        size += 1 + 4;
+      }
+      if (W != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -715,6 +765,9 @@ namespace Axiverse.Services.Proto {
       if (other.Z != 0F) {
         Z = other.Z;
       }
+      if (other.W != 0F) {
+        W = other.W;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -736,6 +789,10 @@ namespace Axiverse.Services.Proto {
           }
           case 29: {
             Z = input.ReadFloat();
+            break;
+          }
+          case 37: {
+            W = input.ReadFloat();
             break;
           }
         }

@@ -36,12 +36,18 @@ namespace Axiverse.Interface.Input
             Joystick.Acquire();
         }
 
-        public override Signal[] Poll()
+        public override Signal[] Poll(bool enabled)
         {
             try
             {
                 Joystick.Poll();
                 var data = Joystick.GetBufferedData();
+
+                if (!enabled)
+                {
+                    return new Signal[0];
+                }
+
                 return data.Select(u =>
                 {
                     return new Signal()

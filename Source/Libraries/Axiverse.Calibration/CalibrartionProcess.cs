@@ -2,6 +2,7 @@
 using Axiverse.Interface.Engine;
 using Axiverse.Interface.Graphics;
 using Axiverse.Interface.Graphics.Generic;
+using Axiverse.Interface.Input;
 using Axiverse.Interface.Rendering;
 using Axiverse.Interface.Scenes;
 using Axiverse.Interface.Windows;
@@ -9,6 +10,7 @@ using Axiverse.Physics;
 using Axiverse.Resources;
 using Axiverse.Simulation;
 using Axiverse.Simulation.Behaviors;
+using Grpc.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +41,43 @@ namespace Axiverse.Calibration
 
         public Entity Camera { get; set; }
 
+        public Channel channel;
+
+
+        SixAxisListener sixAxisListner = new SixAxisListener();
+        TwoAxisListener twoAxisListener = new TwoAxisListener();
+        DirectControlComponent controller;
+
+        Services.Proto.IdentityService.IdentityServiceClient identityClient;
+        Services.Proto.EntityService.EntityServiceClient entityClient;
+        AsyncDuplexStreamingCall<Services.Proto.ClientEvent, Services.Proto.ServerEvent> stream;
+        Task<bool> advance;
+
+        Texture texture;
+        Texture uvGrid;
+
         public override void OnInitialize()
         {
+            Engine.Router.Listeners.Add(sixAxisListner);
+            Engine.Router.Listeners.Add(twoAxisListener);
+
+            channel = new Channel("127.0.0.1:32000", ChannelCredentials.Insecure);
+            identityClient = new Services.Proto.IdentityService.IdentityServiceClient(channel);
+            entityClient = new Services.Proto.EntityService.EntityServiceClient(channel);
+
+            var connecting = channel.ConnectAsync();
+            connecting.Wait(1000);
+            if (connecting.IsFaulted || !connecting.IsCompleted)
+            {
+                Console.ReadKey();
+            }
+
+            var response = identityClient.GetIdentity(new Services.Proto.GetIdentityRequest());
+            Console.WriteLine(response.Value);
+
+            stream = entityClient.Stream();
+            advance = stream.ResponseStream.MoveNext();
+
             Engine.Scene.Add(new TransformPhysicsProcessor());
             Engine.Scene.Add(new TransformProcessor());
             Engine.Scene.Add(new CameraProcessor());
@@ -74,8 +111,8 @@ namespace Axiverse.Calibration
             });
 
 
-            var texture = Texture.Load(Device, @".\Resources\Textures\Placeholder Grid.jpg");
-            var uvGrid = Texture.Load(Device, @".\Resources\Textures\UV Grid.png");
+            texture = Texture.Load(Device, @".\Resources\Textures\Placeholder Grid.jpg");
+            uvGrid = Texture.Load(Device, @".\Resources\Textures\UV Grid.png");
             var skymap = Texture.Load(Device, @".\Resources\Textures\NASA Starmap 4k.jpg");
 
             // Lets create some resources
@@ -106,7 +143,7 @@ namespace Axiverse.Calibration
                     1.0f * Engine.Form.ClientSize.Width / Engine.Form.ClientSize.Height,
                     0.5f,
                     2000.0f),
-                Mode = CameraMode.Targeted,
+                Mode = CameraMode.Forward,
             });
             var cameraTransform = cameraEntity.Components.Add(new TransformComponent
             {
@@ -124,32 +161,10 @@ namespace Axiverse.Calibration
                 PanEnabled = false,
                 RotateEnabled = true,
                 ZoomEnabled = true,
-                CameraPosition = Vector3.BackwardRH * 10,
+                CameraPosition = Vector3.BackwardRH * 15,
                 Up = Vector3.Up,
                 Screen = new Rectangle(0, 0, Engine.Form.ClientSize.Width, Engine.Form.ClientSize.Height)
             };
-
-
-            var entity1 = new Entity();
-            Scene.Add(entity1);
-            entity1.Components.Add(new TransformComponent());
-            entity1.Components.Add(new RenderableComponent()
-            {
-                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value }
-            });
-            entity1.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
-
-            var entity2 = new Entity();
-            Scene.Add(entity2);
-            entity2.Components.Add(new TransformComponent());
-            entity2.Components.Add(new RenderableComponent
-            {
-                Mesh = new Mesh
-                {
-                    Draw = Cache.Load<MeshDraw>("memory:cube").Value
-                }
-            });
-            entity2.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
             var shipEntity = new Entity("ship");
             Scene.Add(shipEntity);
@@ -169,7 +184,7 @@ namespace Axiverse.Calibration
             //body.AngularDampening *= 0.99f;
             body.LinearPosition = Vector3.ForwardLH * 10;
             shipEntity.Components.Add(new PhysicsComponent(body));
-            var controller = shipEntity.Components.Add(new DirectControlComponent());
+            controller = shipEntity.Components.Add(new DirectControlComponent());
 
             //body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
 
@@ -198,6 +213,22 @@ namespace Axiverse.Calibration
                 Scene.Add(bloid);
                 flock.Add(bloid);
             }
+
+            Engine.Simulation.Stepped += (s, e) =>
+            {
+                var tc = Ship.GetComponent<TransformComponent>();
+
+                Console.WriteLine("Emitting " + tc.Translation);
+                stream.RequestStream.WriteAsync(new Services.Proto.ClientEvent
+                {
+                    Entity = new Services.Proto.Entity
+                    {
+                        Id = Ship.Identifier.ToString(),
+                        Position = ProtoConverter.Convert(tc.Translation),
+                        Rotation = ProtoConverter.Convert(tc.Rotation),
+                    }
+                });
+            };
         }
 
         private void Window_MouseWheel(object sender, MouseMoveEventArgs e)
@@ -205,7 +236,7 @@ namespace Axiverse.Calibration
             Trackball.OnMouseWheel(e.DeltaZ);
         }
 
-        private void Window_MouseUp(object sender, MouseEventArgs e)
+        private void Window_MouseUp(object sender, Interface.Windows.MouseEventArgs e)
         {
             Trackball.OnMouseUp();
         }
@@ -213,10 +244,10 @@ namespace Axiverse.Calibration
         private void Window_MouseMove(object sender, MouseMoveEventArgs e)
         {
             Trackball.OnMouseMove(new Vector2(e.X, e.Y));
-            System.Diagnostics.Debug.WriteLine(new Vector2(e.X, e.Y));
+            //System.Diagnostics.Debug.WriteLine(new Vector2(e.X, e.Y));
         }
 
-        private void Window_MouseDown(object sender, MouseEventArgs e)
+        private void Window_MouseDown(object sender, Interface.Windows.MouseEventArgs e)
         {
             Trackball.OnMouseDown(e.Button, new Vector2(e.X, e.Y));
         }
@@ -224,10 +255,80 @@ namespace Axiverse.Calibration
         public override void OnFrame()
         {
             base.OnFrame();
-            Trackball.Update();
-            Camera.Components.Get<CameraComponent>().Target = Trackball.Target;
-            Camera.Components.Get<CameraComponent>().up = Trackball.Up;
-            Camera.Components.Get<TransformComponent>().Translation = Trackball.CameraPosition;
+
+            var maximumVelocity = Vector3.One;
+            var maximumAngle = Vector3.One / 6.28f;
+
+            var cameraTransform = Camera.Components.Get<TransformComponent>();
+            var cameraComponent = Camera.Components.Get<CameraComponent>();
+            //Trackball.Update();
+            //cameraComponent.Target = Trackball.Target;
+            //cameraComponent.up = Trackball.Up;
+            //Camera.Components.Get<TransformComponent>().Translation = Trackball.CameraPosition;
+
+            Engine.Router.Poll();
+            {
+
+                var mappedLinear = new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y);
+                var mappedAngular = new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0);
+                controller.Translational = mappedLinear;
+                controller.Steering = mappedAngular;
+
+                var velocity = cameraTransform.Rotation.Transform(
+                    new Vector3(sixAxisListner.Translation.X, -sixAxisListner.Translation.Z, sixAxisListner.Translation.Y)) * maximumVelocity;
+                var angular = new Vector3(sixAxisListner.Rotation.Y, -sixAxisListner.Rotation.Z, sixAxisListner.Rotation.X) * maximumAngle;
+                sixAxisListner.Acknowledge();
+
+                cameraTransform.Translation += velocity;
+                cameraTransform.Rotation *= Quaternion.FromEuler(angular);
+            }
+
+            while (advance.IsCompleted)
+            {
+                var hasNext = advance.Result;
+                advance = stream.ResponseStream.MoveNext();
+                if (hasNext)
+                {
+                    var current = stream.ResponseStream.Current;
+
+                    //System.Diagnostics.Debug.WriteLine(current);
+
+                    foreach (var protoEntity in current.Entities)
+                    {
+                        var id = Guid.Parse(protoEntity.Id);
+                        if (id != Ship.Identifier)
+                        {
+                            // Add or update.               
+                            if (!Engine.Scene.TryGetEntity(id, out var entity))
+                            {
+                                entity = new Entity(id);
+                                Engine.Scene.Add(entity);
+
+                                entity.Components.Add(new TransformComponent
+                                {
+                                    Scaling = new Vector3(10, 10, 10)
+                                });
+                                entity.Components.Add(new RenderableComponent()
+                                {
+                                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
+                                });
+                                entity.Components.Get<RenderableComponent>().Mesh.Bindings.Add(uvGrid);
+                            }
+
+                            var tc = entity.GetComponent<TransformComponent>();
+                            tc.Translation = ProtoConverter.Convert(protoEntity.Position);
+                            tc.Rotation = ProtoConverter.Convert(protoEntity.Rotation);
+                            Console.WriteLine("Receiving " + tc.Translation);
+                        }
+                    }
+                }
+            }
+        }
+
+        public override void OnDispose()
+        {
+            channel.ShutdownAsync().Wait();
+            base.OnDispose();
         }
 
         public void LoadCube(GraphicsDevice device)

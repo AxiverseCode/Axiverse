@@ -8,6 +8,6 @@ namespace Axiverse.Interface.Input
 {
     public abstract class Source
     {
-        public abstract Signal[] Poll();
+        public abstract Signal[] Poll(bool enabled);
     }
 }
