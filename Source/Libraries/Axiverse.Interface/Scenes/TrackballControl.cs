@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Axiverse.Interface.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface.Scenes
 {
-    class TrackballControl
+    public class TrackballControl
     {
         // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/TrackballControls.js
 
@@ -38,7 +39,7 @@ namespace Axiverse.Interface.Scenes
         /// <summary>
         /// Gets or sets the zoom speed;
         /// </summary>
-        public float ZoomSpeed { get; set; } = 1.2f;
+        public float ZoomSpeed { get; set; } = 1.2f / 180;
 
         /// <summary>
         /// Gets or sets the pan speed;
@@ -73,12 +74,12 @@ namespace Axiverse.Interface.Scenes
         /// <summary>
         /// The minimum distance for zooming.
         /// </summary>
-        public float MinDistance { get; set; }
+        public float MinDistance { get; set; } = 1;
 
         /// <summary>
         /// The maximum distance for zooming.
         /// </summary>
-        public float MaxDistance { get; set; }
+        public float MaxDistance { get; set; } = 1000f;
 
 
         private Vector3 target;
@@ -86,7 +87,7 @@ namespace Axiverse.Interface.Scenes
         private Vector3 lastPosition;
         private State state = State.None;
         private State previousState = State.None;
-        private Vector3 eye;
+        private Vector3 eye; // eye relative to target
         private Vector2 movePrevious;
         private Vector2 moveCurrent;
         private Vector3 lastAxis;
@@ -101,6 +102,24 @@ namespace Axiverse.Interface.Scenes
         private Vector3 objectPosition;
         private Vector3 objectUpDirection;
 
+        public Vector3 CameraPosition
+        {
+            get => objectPosition;
+            set => objectPosition = value;
+        }
+
+        public Vector3 Target
+        {
+            get => target;
+            set => target = value;
+        }
+
+        public Vector3 Up
+        {
+            get => objectUpDirection;
+            set => objectUpDirection = value;
+        }
+
         void HandlResize(Rectangle screen)
         {
             this.Screen = screen;
@@ -114,12 +133,14 @@ namespace Axiverse.Interface.Scenes
         Vector2 GetMouseOnCircle(Vector2 page) =>
             new Vector2(
                 (page.X - Screen.Width / 2 - Screen.Left) / (Screen.Width / 2),
-                Screen.Height + 2 * (Screen.Top + page.Y) / Screen.Width);
+                (Screen.Height + 2 * (Screen.Top - page.Y)) / Screen.Width);
 
         void RotateCamera()
         {
-            Vector3 moveDirection = new Vector3(moveCurrent.X - movePrevious.X, moveCurrent.Y - movePrevious.Y, 0);
-            float angle = moveDirection.Length();
+            //Vector3 moveDirection = new Vector3(moveCurrent.X - movePrevious.X, moveCurrent.Y - movePrevious.Y, 0);
+            //float angle = moveDirection.Length();
+            float angle = new Vector2(moveCurrent.X - movePrevious.X, moveCurrent.Y - movePrevious.Y).Length();
+            System.Diagnostics.Debug.WriteLine(moveCurrent);
 
             if (angle != 0)
             {
@@ -129,7 +150,10 @@ namespace Axiverse.Interface.Scenes
                 Vector3 objectUp = this.objectUpDirection.Normal();
                 Vector3 objectSideways = (objectUp % eyeDirection).Normal();
 
-                moveDirection = objectUp + objectSideways;
+                objectUp.SetLength(moveCurrent.Y - movePrevious.Y);
+                objectSideways.SetLength(moveCurrent.X - movePrevious.X);
+
+                Vector3 moveDirection = objectUp + objectSideways;
                 Vector3 axis = (moveDirection % eyeDirection).Normal();
 
                 angle *= RotateSpeed;
@@ -187,7 +211,7 @@ namespace Axiverse.Interface.Scenes
 
             if (mouseChange != Vector2.Zero)
             {
-                 mouseChange *= eye.Length() * PanSpeed;
+                mouseChange *= eye.Length() * PanSpeed;
                 Vector3 pan = (eye % objectUpDirection).OfLength(mouseChange.X);
                 pan += objectUpDirection.OfLength(mouseChange.Y);
 
@@ -223,7 +247,7 @@ namespace Axiverse.Interface.Scenes
             }
         }
 
-        void Update()
+        public void Update()
         {
             eye = objectPosition - target;
 
@@ -253,13 +277,13 @@ namespace Axiverse.Interface.Scenes
             }
         }
 
-        void Reset()
+        public void Reset()
         {
             state = State.None;
             previousState = State.None;
         }
 
-        void OnKeyDown(char key)
+        public void OnKeyDown(char key)
         {
             if (!Enabled)
             {
@@ -288,7 +312,7 @@ namespace Axiverse.Interface.Scenes
             }
         }
 
-        void OnKeyUp()
+        public void OnKeyUp()
         {
             if (!Enabled)
             {
@@ -299,7 +323,7 @@ namespace Axiverse.Interface.Scenes
             //window.addeventlistener 'keydown'
         }
 
-        void OnMouseDown(int button, Vector2 page)
+        public void OnMouseDown(MouseButtons button, Vector2 page)
         {
             if (!Enabled)
             {
@@ -335,7 +359,7 @@ namespace Axiverse.Interface.Scenes
             //_this.dispatchEvent(startEvent);
         }
 
-        void OnMouseMove(Vector2 page)
+        public void OnMouseMove(Vector2 page)
         {
             if (!Enabled)
             {
@@ -359,7 +383,7 @@ namespace Axiverse.Interface.Scenes
             }
         }
 
-        void MouseUp()
+        public void OnMouseUp()
         {
             if (!Enabled)
             {
@@ -374,7 +398,7 @@ namespace Axiverse.Interface.Scenes
 
         }
 
-        void OnMouseWheel(float delta)
+        public void OnMouseWheel(float delta)
         {
             if (!Enabled || !ZoomEnabled)
             {

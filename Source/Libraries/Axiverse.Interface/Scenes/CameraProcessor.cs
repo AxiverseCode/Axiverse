@@ -47,7 +47,8 @@ namespace Axiverse.Interface.Scenes
                 case CameraMode.Oriented:
                     break;
                 case CameraMode.Targeted:
-                    camera.View = Matrix4.LookAtRH(transform.Translation, camera.Target, up);
+                    camera.View = Matrix4.LookAtRH(transform.Translation, camera.Target,
+                        (camera.up.HasValue) ? camera.up.Value : up);
                     break;
                 default:
                     break;

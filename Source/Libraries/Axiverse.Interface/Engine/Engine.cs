@@ -139,6 +139,8 @@ namespace Axiverse.Interface.Engine
                     // Step and run processors.
                     FloatingPoint.ThrowOnSevere = true;
 
+                    Process?.OnFrame();
+
                     // Advance simulation.
                     if (SimulationEscapement.Advance(deltaTick))
                     {

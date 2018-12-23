@@ -30,11 +30,14 @@ namespace Axiverse.Calibration
         }
 
         public Entity Ship { get; set; }
+        public TrackballControl Trackball { get; set; }
 
         public CalibrartionProcess(Engine engine)
         {
             Engine = engine;
         }
+
+        public Entity Camera { get; set; }
 
         public override void OnInitialize()
         {
@@ -45,6 +48,10 @@ namespace Axiverse.Calibration
             Engine.Scene.Add(new DirectControlProcessor());
 
             Window = new Window();
+            Window.MouseDown += Window_MouseDown;
+            Window.MouseMove += Window_MouseMove;
+            Window.MouseUp += Window_MouseUp;
+            Window.MouseWheel += Window_MouseWheel;
             Window.Bounds = new Rectangle(0, 0, Engine.Presenter.Description.Width, Engine.Presenter.Description.Height);
             Window.Bind(Engine.Form);
             Control.DefaultFont = new Font("Open Sans", 16, FontWeight.Normal);
@@ -99,7 +106,7 @@ namespace Axiverse.Calibration
                     1.0f * Engine.Form.ClientSize.Width / Engine.Form.ClientSize.Height,
                     0.5f,
                     2000.0f),
-                Mode = CameraMode.Forward
+                Mode = CameraMode.Targeted,
             });
             var cameraTransform = cameraEntity.Components.Add(new TransformComponent
             {
@@ -108,7 +115,19 @@ namespace Axiverse.Calibration
             });
             cameraTransform.Children.Add(sky);
             Scene.Add(cameraEntity);
+            Camera = cameraEntity;
             Engine.Camera = cameraComponent;
+
+            Trackball = new TrackballControl
+            {
+                Enabled = true,
+                PanEnabled = false,
+                RotateEnabled = true,
+                ZoomEnabled = true,
+                CameraPosition = Vector3.BackwardRH * 10,
+                Up = Vector3.Up,
+                Screen = new Rectangle(0, 0, Engine.Form.ClientSize.Width, Engine.Form.ClientSize.Height)
+            };
 
 
             var entity1 = new Entity();
@@ -125,7 +144,10 @@ namespace Axiverse.Calibration
             entity2.Components.Add(new TransformComponent());
             entity2.Components.Add(new RenderableComponent
             {
-                Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:cube").Value }
+                Mesh = new Mesh
+                {
+                    Draw = Cache.Load<MeshDraw>("memory:cube").Value
+                }
             });
             entity2.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
 
@@ -178,9 +200,34 @@ namespace Axiverse.Calibration
             }
         }
 
+        private void Window_MouseWheel(object sender, MouseMoveEventArgs e)
+        {
+            Trackball.OnMouseWheel(e.DeltaZ);
+        }
+
+        private void Window_MouseUp(object sender, MouseEventArgs e)
+        {
+            Trackball.OnMouseUp();
+        }
+
+        private void Window_MouseMove(object sender, MouseMoveEventArgs e)
+        {
+            Trackball.OnMouseMove(new Vector2(e.X, e.Y));
+            System.Diagnostics.Debug.WriteLine(new Vector2(e.X, e.Y));
+        }
+
+        private void Window_MouseDown(object sender, MouseEventArgs e)
+        {
+            Trackball.OnMouseDown(e.Button, new Vector2(e.X, e.Y));
+        }
+
         public override void OnFrame()
         {
             base.OnFrame();
+            Trackball.Update();
+            Camera.Components.Get<CameraComponent>().Target = Trackball.Target;
+            Camera.Components.Get<CameraComponent>().up = Trackball.Up;
+            Camera.Components.Get<TransformComponent>().Translation = Trackball.CameraPosition;
         }
 
         public void LoadCube(GraphicsDevice device)

@@ -21,6 +21,7 @@ namespace Axiverse.Interface.Scenes
         public Vector3? previousPosition;
         public Vector3 previousForward;
         public Vector3 previousUp;
+        public Vector3? up;
     }
 
     public enum CameraMode
@@ -28,5 +29,6 @@ namespace Axiverse.Interface.Scenes
         Forward,
         Oriented,
         Targeted,
+        Manual,
     }
 }
