@@ -13,6 +13,8 @@ message Entity {
 	Vector3 velocity = 3;
 
 	Quaternion rotation = 4;
+
+	string class = 5;
 }
 
 message EntityClass {

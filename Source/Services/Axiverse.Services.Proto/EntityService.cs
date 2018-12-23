@@ -24,31 +24,31 @@ namespace Axiverse.Services.Proto {
     static EntityServiceReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNFbnRpdHlTZXJ2aWNlLnByb3RvImsKBkVudGl0eRIKCgJpZBgBIAEoCRIa",
+            "ChNFbnRpdHlTZXJ2aWNlLnByb3RvInoKBkVudGl0eRIKCgJpZBgBIAEoCRIa",
             "Cghwb3NpdGlvbhgCIAEoCzIILlZlY3RvcjMSGgoIdmVsb2NpdHkYAyABKAsy",
-            "CC5WZWN0b3IzEh0KCHJvdGF0aW9uGAQgASgLMgsuUXVhdGVybmlvbiINCgtF",
-            "bnRpdHlDbGFzcyIqCgdWZWN0b3IzEgkKAXgYASABKAISCQoBeRgCIAEoAhIJ",
-            "CgF6GAMgASgCIjgKClF1YXRlcm5pb24SCQoBeBgBIAEoAhIJCgF5GAIgASgC",
-            "EgkKAXoYAyABKAISCQoBdxgEIAEoAiImCgtDbGllbnRFdmVudBIXCgZlbnRp",
-            "dHkYASABKAsyBy5FbnRpdHkiKAoLU2VydmVyRXZlbnQSGQoIZW50aXRpZXMY",
-            "ASADKAsyBy5FbnRpdHkiEQoPR2V0U3RhdGVSZXF1ZXN0IjIKEEdldFN0YXRl",
-            "UmVzcG9uc2USDAoEdGltZRgBIAEoAhIQCghlbnRpdGllcxgCIAEoAiIjChND",
-            "cmVhdGVFbnRpdHlSZXF1ZXN0EgwKBG5hbWUYASABKAkiIgoUQ3JlYXRlRW50",
-            "aXR5UmVzcG9uc2USCgoCaWQYASABKAkiIQoTRGVsZXRlRW50aXR5UmVxdWVz",
-            "dBIKCgJpZBgBIAEoCSIWChREZWxldGVFbnRpdHlSZXNwb25zZSIeChBHZXRF",
-            "bnRpdHlSZXF1ZXN0EgoKAmlkGAEgASgJIhMKEUdldEVudGl0eVJlc3BvbnNl",
-            "MpgCCg1FbnRpdHlTZXJ2aWNlEi8KCEdldFN0YXRlEhAuR2V0U3RhdGVSZXF1",
-            "ZXN0GhEuR2V0U3RhdGVSZXNwb25zZRI7CgxDcmVhdGVFbnRpdHkSFC5DcmVh",
-            "dGVFbnRpdHlSZXF1ZXN0GhUuQ3JlYXRlRW50aXR5UmVzcG9uc2USOwoMRGVs",
-            "ZXRlRW50aXR5EhQuRGVsZXRlRW50aXR5UmVxdWVzdBoVLkRlbGV0ZUVudGl0",
-            "eVJlc3BvbnNlEjIKCUdldEVudGl0eRIRLkdldEVudGl0eVJlcXVlc3QaEi5H",
-            "ZXRFbnRpdHlSZXNwb25zZRIoCgZTdHJlYW0SDC5DbGllbnRFdmVudBoMLlNl",
-            "cnZlckV2ZW50KAEwAUIaqgIXQXhpdmVyc2UuU2VydmljZXMuUHJvdG9iBnBy",
-            "b3RvMw=="));
+            "CC5WZWN0b3IzEh0KCHJvdGF0aW9uGAQgASgLMgsuUXVhdGVybmlvbhINCgVj",
+            "bGFzcxgFIAEoCSINCgtFbnRpdHlDbGFzcyIqCgdWZWN0b3IzEgkKAXgYASAB",
+            "KAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIjgKClF1YXRlcm5pb24SCQoBeBgB",
+            "IAEoAhIJCgF5GAIgASgCEgkKAXoYAyABKAISCQoBdxgEIAEoAiImCgtDbGll",
+            "bnRFdmVudBIXCgZlbnRpdHkYASABKAsyBy5FbnRpdHkiKAoLU2VydmVyRXZl",
+            "bnQSGQoIZW50aXRpZXMYASADKAsyBy5FbnRpdHkiEQoPR2V0U3RhdGVSZXF1",
+            "ZXN0IjIKEEdldFN0YXRlUmVzcG9uc2USDAoEdGltZRgBIAEoAhIQCghlbnRp",
+            "dGllcxgCIAEoAiIjChNDcmVhdGVFbnRpdHlSZXF1ZXN0EgwKBG5hbWUYASAB",
+            "KAkiIgoUQ3JlYXRlRW50aXR5UmVzcG9uc2USCgoCaWQYASABKAkiIQoTRGVs",
+            "ZXRlRW50aXR5UmVxdWVzdBIKCgJpZBgBIAEoCSIWChREZWxldGVFbnRpdHlS",
+            "ZXNwb25zZSIeChBHZXRFbnRpdHlSZXF1ZXN0EgoKAmlkGAEgASgJIhMKEUdl",
+            "dEVudGl0eVJlc3BvbnNlMpgCCg1FbnRpdHlTZXJ2aWNlEi8KCEdldFN0YXRl",
+            "EhAuR2V0U3RhdGVSZXF1ZXN0GhEuR2V0U3RhdGVSZXNwb25zZRI7CgxDcmVh",
+            "dGVFbnRpdHkSFC5DcmVhdGVFbnRpdHlSZXF1ZXN0GhUuQ3JlYXRlRW50aXR5",
+            "UmVzcG9uc2USOwoMRGVsZXRlRW50aXR5EhQuRGVsZXRlRW50aXR5UmVxdWVz",
+            "dBoVLkRlbGV0ZUVudGl0eVJlc3BvbnNlEjIKCUdldEVudGl0eRIRLkdldEVu",
+            "dGl0eVJlcXVlc3QaEi5HZXRFbnRpdHlSZXNwb25zZRIoCgZTdHJlYW0SDC5D",
+            "bGllbnRFdmVudBoMLlNlcnZlckV2ZW50KAEwAUIaqgIXQXhpdmVyc2UuU2Vy",
+            "dmljZXMuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, new[]{ "Id", "Position", "Velocity", "Rotation" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Entity), global::Axiverse.Services.Proto.Entity.Parser, new[]{ "Id", "Position", "Velocity", "Rotation", "Class" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.EntityClass), global::Axiverse.Services.Proto.EntityClass.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Vector3), global::Axiverse.Services.Proto.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Axiverse.Services.Proto.Quaternion), global::Axiverse.Services.Proto.Quaternion.Parser, new[]{ "X", "Y", "Z", "W" }, null, null, null),
@@ -97,6 +97,7 @@ namespace Axiverse.Services.Proto {
       position_ = other.position_ != null ? other.position_.Clone() : null;
       velocity_ = other.velocity_ != null ? other.velocity_.Clone() : null;
       rotation_ = other.rotation_ != null ? other.rotation_.Clone() : null;
+      class_ = other.class_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -149,6 +150,17 @@ namespace Axiverse.Services.Proto {
       }
     }
 
+    /// <summary>Field number for the "class" field.</summary>
+    public const int ClassFieldNumber = 5;
+    private string class_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Class {
+      get { return class_; }
+      set {
+        class_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Entity);
@@ -166,6 +178,7 @@ namespace Axiverse.Services.Proto {
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Velocity, other.Velocity)) return false;
       if (!object.Equals(Rotation, other.Rotation)) return false;
+      if (Class != other.Class) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -176,6 +189,7 @@ namespace Axiverse.Services.Proto {
       if (position_ != null) hash ^= Position.GetHashCode();
       if (velocity_ != null) hash ^= Velocity.GetHashCode();
       if (rotation_ != null) hash ^= Rotation.GetHashCode();
+      if (Class.Length != 0) hash ^= Class.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -205,6 +219,10 @@ namespace Axiverse.Services.Proto {
         output.WriteRawTag(34);
         output.WriteMessage(Rotation);
       }
+      if (Class.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Class);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -224,6 +242,9 @@ namespace Axiverse.Services.Proto {
       }
       if (rotation_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Rotation);
+      }
+      if (Class.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Class);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -256,6 +277,9 @@ namespace Axiverse.Services.Proto {
           rotation_ = new global::Axiverse.Services.Proto.Quaternion();
         }
         Rotation.MergeFrom(other.Rotation);
+      }
+      if (other.Class.Length != 0) {
+        Class = other.Class;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -291,6 +315,10 @@ namespace Axiverse.Services.Proto {
               rotation_ = new global::Axiverse.Services.Proto.Quaternion();
             }
             input.ReadMessage(rotation_);
+            break;
+          }
+          case 42: {
+            Class = input.ReadString();
             break;
           }
         }

@@ -180,52 +180,25 @@ namespace Axiverse.Calibration
             shipEntity.Components.Get<RenderableComponent>().Mesh.Bindings.Add(texture);
             Ship = shipEntity;
             var body = new Body();
-            //body.LinearDampening *= 0.99f;
-            //body.AngularDampening *= 0.99f;
+            body.LinearDampening *= 0.99f;
+            body.AngularDampening *= 0.99f;
             body.LinearPosition = Vector3.ForwardLH * 10;
             shipEntity.Components.Add(new PhysicsComponent(body));
             controller = shipEntity.Components.Add(new DirectControlComponent());
 
-            //body.ApplyTorqueImpulse(Vector3.UnitY * 0.1f);
-
-
-            List<Entity> flock = new List<Entity>();
-            for (int i = 0; i < 10; i++)
-            {
-                var bloid = new Entity();
-                bloid.Components.Add(new TransformComponent
-                {
-                    Scaling = new Vector3(0.2f, 0.2f, 0.2f)
-                });
-                bloid.Components.Add(new BehaviorComponent());
-                bloid.Components.Add(new RenderableComponent()
-                {
-                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:drone").Value }
-                });
-                bloid.Components.Get<RenderableComponent>().Mesh.Bindings.Add(uvGrid);
-                bloid.Components.Add(new PhysicsComponent(new Body
-                {
-                    LinearPosition = Functions.Random.NextVector3(-10, 10),
-                    LinearVelocity = Functions.Random.NextVector3(-10, 10),
-                    AngularPosition = Functions.Random.NextQuaternion()
-                }));
-
-                Scene.Add(bloid);
-                flock.Add(bloid);
-            }
 
             Engine.Simulation.Stepped += (s, e) =>
             {
-                var tc = Ship.GetComponent<TransformComponent>();
+                var pc = Ship.GetComponent<PhysicsComponent>();
 
-                Console.WriteLine("Emitting " + tc.Translation);
                 stream.RequestStream.WriteAsync(new Services.Proto.ClientEvent
                 {
                     Entity = new Services.Proto.Entity
                     {
                         Id = Ship.Identifier.ToString(),
-                        Position = ProtoConverter.Convert(tc.Translation),
-                        Rotation = ProtoConverter.Convert(tc.Rotation),
+                        Position = ProtoConverter.Convert(pc.Body.LinearPosition),
+                        Rotation = ProtoConverter.Convert(pc.Body.AngularPosition),
+                        Velocity = ProtoConverter.Convert(pc.Body.LinearVelocity)
                     }
                 });
             };
@@ -304,21 +277,24 @@ namespace Axiverse.Calibration
                                 entity = new Entity(id);
                                 Engine.Scene.Add(entity);
 
+                                var isAi = protoEntity.Class == "ai";
+
                                 entity.Components.Add(new TransformComponent
                                 {
-                                    Scaling = new Vector3(10, 10, 10)
+                                    Scaling = new Vector3(isAi ? 0.2f : 10)
                                 });
                                 entity.Components.Add(new RenderableComponent()
                                 {
-                                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>("memory:ship").Value }
+                                    Mesh = new Mesh { Draw = Cache.Load<MeshDraw>(isAi ? "memory:drone" : "memory:ship").Value }
                                 });
+                                entity.Components.Add(new PhysicsComponent(new Body()));
                                 entity.Components.Get<RenderableComponent>().Mesh.Bindings.Add(uvGrid);
                             }
 
-                            var tc = entity.GetComponent<TransformComponent>();
-                            tc.Translation = ProtoConverter.Convert(protoEntity.Position);
-                            tc.Rotation = ProtoConverter.Convert(protoEntity.Rotation);
-                            Console.WriteLine("Receiving " + tc.Translation);
+                            var pc = entity.GetComponent<PhysicsComponent>();
+                            pc.Body.LinearPosition = ProtoConverter.Convert(protoEntity.Position);
+                            pc.Body.AngularPosition = ProtoConverter.Convert(protoEntity.Rotation);
+                            pc.Body.LinearVelocity = ProtoConverter.Convert(protoEntity.Velocity);
                         }
                     }
                 }

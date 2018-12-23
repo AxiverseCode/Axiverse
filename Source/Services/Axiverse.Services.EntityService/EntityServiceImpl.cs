@@ -10,6 +10,8 @@ using Grpc.Core;
 using System.Collections.Concurrent;
 using SimulationEntity = Axiverse.Simulation.Entity;
 using Axiverse.Interface.Scenes;
+using Axiverse.Physics;
+using Axiverse.Simulation.Behaviors;
 
 namespace Axiverse.Services.EntityService
 {
@@ -24,6 +26,8 @@ namespace Axiverse.Services.EntityService
         public EntityServiceImpl()
         {
             universe = new Universe();
+            universe.Add(new BehaviorProcessor());
+
             runner = new Runner();
             runner.Universe = universe;
 
@@ -34,12 +38,15 @@ namespace Axiverse.Services.EntityService
 
                 foreach (var entity in universe.Entities)
                 {
-                    var tc = entity.GetComponent<TransformComponent>();
+                    var pc = entity.GetComponent<PhysicsComponent>();
+                    var ec = entity.GetComponent<EntityComponent>();
                     se.Entities.Add(new Proto.Entity
                     {
                         Id = entity.Identifier.ToString(),
-                        Position = ProtoConverter.Convert(tc.Translation),
-                        Rotation = ProtoConverter.Convert(tc.Rotation),
+                        Position = ProtoConverter.Convert(pc.Body.LinearPosition),
+                        Velocity = ProtoConverter.Convert(pc.Body.LinearVelocity),
+                        Rotation = ProtoConverter.Convert(pc.Body.AngularPosition),
+                        Class = ec?.Class ?? ""
                     });
                 }
 
@@ -51,6 +58,25 @@ namespace Axiverse.Services.EntityService
                     writer.Value.WriteAsync(se);
                 }
             };
+
+            for (int i = 0; i < 10; i++)
+            {
+                var bloid = new SimulationEntity();
+                bloid.Components.Add(new TransformComponent
+                {
+                    Scaling = new Vector3(0.2f, 0.2f, 0.2f)
+                });
+                bloid.Components.Add(new BehaviorComponent());
+                bloid.Components.Add(new PhysicsComponent(new Body
+                {
+                    LinearPosition = Functions.Random.NextVector3(-10, 10),
+                    LinearVelocity = Functions.Random.NextVector3(-10, 10),
+                    AngularPosition = Functions.Random.NextQuaternion()
+                }));
+                bloid.Components.Add(new EntityComponent { Class = "ai" });
+
+                universe.Add(bloid);
+            }
         }
 
         public override async Task Stream(
@@ -69,12 +95,15 @@ namespace Axiverse.Services.EntityService
                 if (!universe.TryGetEntity(id, out var entity))
                 {
                     entity = new SimulationEntity(id);
-                    entity.Components.Add(new TransformComponent());
+                    entity.Components.Add(new EntityComponent());
+                    entity.Components.Add(new PhysicsComponent(new Body()));
                     universe.Add(entity);
                 }
 
-                entity.GetComponent<TransformComponent>().Translation = ProtoConverter.Convert(current.Entity.Position);
-                entity.GetComponent<TransformComponent>().Rotation = ProtoConverter.Convert(current.Entity.Rotation);
+                var pc = entity.GetComponent<PhysicsComponent>();
+                pc.Body.LinearPosition = ProtoConverter.Convert(current.Entity.Position);
+                pc.Body.LinearVelocity = ProtoConverter.Convert(current.Entity.Velocity);
+                pc.Body.AngularPosition = ProtoConverter.Convert(current.Entity.Rotation);
             }
 
             writers.TryRemove(guid, out var unused);

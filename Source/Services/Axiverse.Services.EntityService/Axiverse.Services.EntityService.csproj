@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityComponent.cs" />
     <Compile Include="EntityServiceImpl.cs" />
     <Compile Include="EntityServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +72,10 @@
     <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700D5AB7-622F-443E-AE55-D51556EC88BD}</Project>
       <Name>Axiverse.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Physics\Axiverse.Physics.csproj">
+      <Project>{8509BDC3-C3BE-424D-A027-C7B50AFC5BFA}</Project>
+      <Name>Axiverse.Physics</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse.Simulation\Axiverse.Simulation.csproj">
       <Project>{c4e9d638-21f4-4451-b9aa-362b7bfbdc98}</Project>
