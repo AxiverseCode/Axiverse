@@ -129,13 +129,12 @@ namespace Axiverse.Interface.Graphics
             Height = bitmap.Height;
             Depth = 1;
             Dimensions = 2;
-            MipLevels = (short)(Math.Floor(Math.Log(Math.Min(Width, Height), 2)));
-
+            MipLevels = (short)Math.Floor(Math.Log(Math.Min(Width, Height), 2));
+            // MipLevels = 1;
 
             // create resources
 
             var imageFormat = Format.B8G8R8A8_UNorm;
-            double levels = Math.Log(Math.Min(Width, Height), 2) - 1;
             var resourceDescription =
                 ResourceDescription.Texture2D(imageFormat, Width, Height, mipLevels: MipLevels);
 
@@ -151,8 +150,7 @@ namespace Axiverse.Interface.Graphics
                 resourceDescription,
                 ResourceStates.GenericRead);
 
-            // copy into upload buffer
-
+            // Copy into upload buffer.
             BitmapData data = bitmap.LockBits(
                 new Rectangle(0, 0, Width, Height),
                 ImageLockMode.ReadOnly,
@@ -172,7 +170,7 @@ namespace Axiverse.Interface.Graphics
 
             bitmap.UnlockBits(data);
 
-            // Generate mipmaps on CPU
+            // Generate mipmaps on CPU.
             for (int i = 1; i < MipLevels; i++)
             {
                 int mipWidth = Width / (1 << i);
@@ -199,24 +197,9 @@ namespace Axiverse.Interface.Graphics
                 mipMap.Dispose();
             }
 
-
-
             bitmap.Dispose();
 
-
             Device.UploadQueue.Enqueue(this);
-            //ShaderResourceViewDescription;
-            //ShaderResourceViewDescription = new ShaderResourceViewDescription
-            //{
-            //    Shader4ComponentMapping = 5768,
-            //    //Shader4ComponentMapping = D3DXUtilities.DefaultComponentMapping(),
-            //    Format = imageFormat,
-            //    Dimension = ShaderResourceViewDimension.Texture2D,
-            //    Texture2D = { MipLevels = 1 },
-            //};
-
-            // queue upload job from
-            // Renderer.ResourcePipeline.Resources.Add(this);
         }
 
         /// <summary>

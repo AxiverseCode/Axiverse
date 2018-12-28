@@ -11,5 +11,7 @@ namespace Axiverse.Interface.Windows
         public VerticalAlign VerticalAlignment { get; set; }
 
         public HorizontalAlign HorizontalAlignment { get; set; }
+
+        public WordWrap WordWrap { get; set; }
     }
 }

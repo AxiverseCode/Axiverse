@@ -88,6 +88,11 @@ namespace Axiverse.Simulation
             return entity;
         }
 
+        /// <summary>
+        /// Gets a component based by type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T GetComponent<T>()
             where T : Component
         {

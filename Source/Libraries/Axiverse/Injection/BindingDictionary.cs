@@ -72,11 +72,23 @@ namespace Axiverse.Injection
             return (T)bindings[key];
         }
 
+        /// <summary>
+        /// Gets the element with the typed keys.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Get<T>()
         {
             return (T)bindings[Key.From<T>()];
         }
 
+        /// <summary>
+        /// Tries to get the element or returns a default value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="default"></param>
+        /// <returns></returns>
         public T Or<T>(Key key, T @default)
         {
             if (TryGetValue(key, out var value))
@@ -86,6 +98,12 @@ namespace Axiverse.Injection
             return @default;
         }
 
+        /// <summary>
+        /// Tries to get the element or returns the default value
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public T OrDefault<T>(Key key) where T : class
         {
             if (TryGetValue(key, out var value))

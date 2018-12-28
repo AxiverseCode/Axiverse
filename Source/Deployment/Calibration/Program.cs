@@ -17,8 +17,6 @@ namespace Calibration
         [Bind]
         Engine engine;
 
-        int tick;
-
         [Inject]
         public Program(Library library)
         {

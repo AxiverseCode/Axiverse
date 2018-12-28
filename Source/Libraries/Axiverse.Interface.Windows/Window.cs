@@ -20,7 +20,7 @@ namespace Axiverse.Interface.Windows
 
         public Window()
         {
-
+            Window = this;
         }
 
         public void Select(Control control)
@@ -30,7 +30,8 @@ namespace Axiverse.Interface.Windows
             if (SelectedControl != control)
             {
                 SelectedControl?.SetSelection(false);
-                control.Selected = true;
+                control.SetSelection(true);
+                SelectedControl = control;
             }
         }
 
@@ -38,8 +39,18 @@ namespace Axiverse.Interface.Windows
         {
             form.MouseMove += (sender, e) => OnMouseMove(e.X, e.Y);
             form.MouseWheel += (sender, e) => OnMouseScroll(e.Delta);
-            form.MouseDown += (sender, e) => OnMouseDown(new MouseEventArgs(e.X, e.Y, (MouseButtons)((int)e.Button >> 20)));
-            form.MouseUp += (sender, e) => OnMouseUp(new MouseEventArgs(e.X, e.Y, (MouseButtons)((int)e.Button >> 20)));
+            form.MouseDown +=
+                (sender, e) => OnMouseDown(
+                    new MouseEventArgs(e.X, e.Y, (MouseButtons)((int)e.Button >> 20)));
+            form.MouseUp +=
+                (sender, e) => OnMouseUp(
+                    new MouseEventArgs(e.X, e.Y, (MouseButtons)((int)e.Button >> 20)));
+
+
+            form.KeyDown += (sender, e) => OnKeyDown((Keys)e.KeyData);
+            form.KeyUp += (sender, e) => OnKeyUp((Keys)e.KeyData);
+            form.KeyPress += (sender, e) => OnKeyPress(e.KeyChar);
+
             form.Resize += (sender, e) => Size = new Vector2(form.Width, form.Height);
             
             Width = form.Width;
@@ -54,6 +65,31 @@ namespace Axiverse.Interface.Windows
         public void InvokeKeyboard()
         {
 
+        }
+
+        protected override void OnControlAdded(object sender, EventArgs e)
+        {
+            base.OnControlAdded(sender, e);
+        }
+
+        protected override void OnControlRemoved(object sender, EventArgs e)
+        {
+            base.OnControlRemoved(sender, e);
+        }
+
+        protected void OnKeyDown(Keys keyData)
+        {
+            SelectedControl?.OnKeyDown(this, new KeyEventArgs(keyData));
+        }
+
+        protected void OnKeyUp(Keys keyData)
+        {
+            SelectedControl?.OnKeyUp(this, new KeyEventArgs(keyData));
+        }
+
+        protected void OnKeyPress(char keyChar)
+        {
+            SelectedControl?.OnKeyPress(this, new KeyEventArgs(keyChar));
         }
 
         protected void OnMouseMove(float x, float y)

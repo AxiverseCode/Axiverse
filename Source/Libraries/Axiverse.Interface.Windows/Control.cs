@@ -32,7 +32,7 @@ namespace Axiverse.Interface.Windows
             //BackgroundColor = new Color(1, 1, 1, 1);
             //ForegroundColor = new Color(0, 0, 0, 1);
             Text = "Hello World";
-            Name = $"Control {++s_controlCount}";
+            Name = $"{GetType().Name} #{++s_controlCount}";
         }
         
         public override string ToString()

@@ -109,6 +109,10 @@ namespace Axiverse.Calibration
             {
                 Location = new Vector2(10, 50),
             });
+            control.Children.Add(new TextBox()
+            {
+                Location = new Vector2(10, 100),
+            });
 
 
             texture = Texture.Load(Device, @".\Resources\Textures\Placeholder Grid.jpg");
@@ -139,7 +143,7 @@ namespace Axiverse.Calibration
             var cameraEntity = new Entity("camera");
             var cameraComponent = cameraEntity.Components.Add(new CameraComponent
             {
-                Projection = Matrix4.PerspectiveFovRH(Functions.DegreesToRadians(60.0f),
+                Projection = Matrix4.PerspectiveFovRH(Functions.ToRadians(60.0f),
                     1.0f * Engine.Form.ClientSize.Width / Engine.Form.ClientSize.Height,
                     0.5f,
                     2000.0f),

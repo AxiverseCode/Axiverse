@@ -141,6 +141,7 @@ namespace Axiverse.Interface.Graphics
         protected TextFormat Format(Font font, TextLayout layout)
         {
             var format = QueryFont(font);
+            format.WordWrapping = WordWrapping.NoWrap;
 
             switch (layout.HorizontalAlignment)
             {
@@ -165,6 +166,16 @@ namespace Axiverse.Interface.Graphics
                     break;
                 case VerticalAlign.Trailing:
                     format.ParagraphAlignment = ParagraphAlignment.Far;
+                    break;
+            }
+
+            switch (layout.WordWrap)
+            {
+                case WordWrap.Wrap:
+                    format.WordWrapping = WordWrapping.Wrap;
+                    break;
+                case WordWrap.NoWrap:
+                    format.WordWrapping = WordWrapping.NoWrap;
                     break;
             }
 

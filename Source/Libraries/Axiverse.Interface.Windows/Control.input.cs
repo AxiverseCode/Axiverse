@@ -41,6 +41,11 @@ namespace Axiverse.Interface.Windows
         protected internal virtual void OnMouseDown(object sender, MouseEventArgs e)
         {
             MouseDown?.Invoke(sender, e);
+
+            if (Selectable)
+            {
+                Selected = true;
+            }
         }
 
         protected internal virtual void OnMouseUp(object sender, MouseEventArgs e)
@@ -66,6 +71,25 @@ namespace Axiverse.Interface.Windows
         protected internal virtual void OnMouseWheel(object sender, MouseMoveEventArgs e)
         {
             MouseWheel?.Invoke(sender, e);
+        }
+
+        public event EventHandler<KeyEventArgs> KeyDown;
+        public event EventHandler<KeyEventArgs> KeyUp;
+        public event EventHandler<KeyEventArgs> KeyPress;
+
+        protected internal virtual void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            KeyDown?.Invoke(sender, e);
+        }
+
+        protected internal virtual void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            KeyUp?.Invoke(sender, e);
+        }
+
+        protected internal virtual void OnKeyPress(object sender, KeyEventArgs e)
+        {
+            KeyPress?.Invoke(sender, e);
         }
     }
 }

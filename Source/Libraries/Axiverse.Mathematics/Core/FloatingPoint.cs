@@ -110,6 +110,10 @@ namespace Axiverse
             set => InterruptFlags = (value) ? (InterruptFlags & ~EM_INEXACT) : (InterruptFlags | EM_INEXACT);
         }
 
+        /// <summary>
+        /// Gets or sets whether to throw on severe errors including invalid, overflow, underflow,
+        /// and divide by zero.
+        /// </summary>
         public static bool ThrowOnSevere
         {
             get => (InterruptFlags & EM_DEFAULT) == EM_DEFAULT;

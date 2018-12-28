@@ -49,11 +49,21 @@ namespace Axiverse
             return Math.Cos(value);
         }
 
+        /// <summary>
+        /// Calculates the arccosine function of the value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static float Acos(float value)
         {
             return (float)Math.Acos(value);
         }
 
+        /// <summary>
+        /// Calculates the arccosine function of the value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static double Acos(double value)
         {
             return Math.Acos(value);
@@ -124,7 +134,22 @@ namespace Axiverse
             result.Z = Clamp(value.Z, minimum.Z, maximum.Z);
         }
 
-        public static float DegreesToRadians(float degrees)
+        /// <summary>
+        /// Converts radians to degrees.
+        /// </summary>
+        /// <param name="radians"></param>
+        /// <returns></returns>
+        public static float ToDegrees(float radians)
+        {
+            return radians * RadiansToDegreesRatio;
+        }
+
+        /// <summary>
+        /// Converts degrees to radians.
+        /// </summary>
+        /// <param name="degrees"></param>
+        /// <returns></returns>
+        public static float ToRadians(float degrees)
         {
             return degrees * DegreesToRadiansRatio;
         }
@@ -144,8 +169,19 @@ namespace Axiverse
         /// </summary>
         public static readonly float RadiansToDegreesRatio = 57.2958f;
 
+        /// <summary>
+        /// The ratio of diameter to circumference of a circle.
+        /// </summary>
         public static readonly float Pi = (float)Math.PI;
 
+        /// <summary>
+        /// The ratio or radius to circumference of a circle.
+        /// </summary>
+        public static readonly float Tau = (float)(2 * Math.PI);
+
+        /// <summary>
+        /// The epsilon value to determine equivalence.
+        /// </summary>
         public static readonly float ZeroEpsilon = 1e-10f;
 
         [StructLayout(LayoutKind.Explicit)]
@@ -167,11 +203,24 @@ namespace Axiverse
             return 0.703952253f * c.Float * (2.38924456f - f * c.Float * c.Float);
         }
 
+        /// <summary>
+        /// Returns a number with the ab
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="sign"></param>
+        /// <returns></returns>
         public static float CopySign(float value, float sign)
         {
             return sign < 0 && value > 0 ? -value : value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="epsillon"></param>
+        /// <returns></returns>
         public static bool Equals(IEnumerable<float> a, IEnumerable<float> b, float epsillon)
         {
             return a.Zip(b, (i, j) => Math.Abs(j - i) <= epsillon).All(v => v);
