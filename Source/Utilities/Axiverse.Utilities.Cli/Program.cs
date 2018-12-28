@@ -31,26 +31,26 @@ namespace Axiverse.Utilities.Cli
             var client = new ChatService.ChatServiceClient(channel);
 
             Console.WriteLine("listening");
-            using (var call = client.Listen())
-            {
-                var receiverTask = Task.Run(async () =>
-                {
-                    while (await call.ResponseStream.MoveNext())
-                    {
-                        var message = call.ResponseStream.Current;
-                        Console.WriteLine(message);
-                    }
-                });
+            //using (var call = client.Listen())
+            //{
+            //    var receiverTask = Task.Run(async () =>
+            //    {
+            //        while (await call.ResponseStream.MoveNext())
+            //        {
+            //            var message = call.ResponseStream.Current;
+            //            Console.WriteLine(message);
+            //        }
+            //    });
 
-                string nm = "";
-                do
-                {
-                    nm = Console.ReadLine();
-                    client.SendMessage(new SendMessageRequest { Message = nm });
-                }
-                while (nm != "");
-                call.RequestStream.WriteAsync(new ListenRequest { Command = "end" });
-            }
+            //    string nm = "";
+            //    do
+            //    {
+            //        nm = Console.ReadLine();
+            //        client.SendMessage(new SendMessageRequest { Message = nm });
+            //    }
+            //    while (nm != "");
+            //    call.RequestStream.WriteAsync(new ListenRequest { Command = "end" });
+            //}
 
             // axicli identity login
             // axicli chat [channel] [message ...]

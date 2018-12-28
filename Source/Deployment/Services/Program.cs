@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    //[Dependency(typeof(ChatServiceModule))]
+    [Dependency(typeof(ChatServiceModule))]
     [Dependency(typeof(IdentityServiceModule))]
     [Dependency(typeof(EntityServiceModule))]
     //[Dependency(typeof(ServerModule))]

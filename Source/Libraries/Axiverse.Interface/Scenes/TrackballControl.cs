@@ -92,6 +92,8 @@ namespace Axiverse.Interface.Scenes
         private Vector2 moveCurrent;
         private Vector3 lastAxis;
         private float lastAngle;
+        public Quaternion lastRotation;
+        public Vector2 lastRotationVector;
         private Vector2 zoomStart;
         private Vector2 zoomEnd;
         private float touchZoomDistanceStart = 0;
@@ -150,8 +152,11 @@ namespace Axiverse.Interface.Scenes
                 Vector3 objectUp = this.objectUpDirection.Normal();
                 Vector3 objectSideways = (objectUp % eyeDirection).Normal();
 
-                objectUp.SetLength(moveCurrent.Y - movePrevious.Y);
-                objectSideways.SetLength(moveCurrent.X - movePrevious.X);
+                float deltaY = moveCurrent.Y - movePrevious.Y;
+                float deltaX = moveCurrent.X - movePrevious.X;
+
+                objectUp.SetLength(deltaY);
+                objectSideways.SetLength(deltaX);
 
                 Vector3 moveDirection = objectUp + objectSideways;
                 Vector3 axis = (moveDirection % eyeDirection).Normal();
@@ -162,6 +167,8 @@ namespace Axiverse.Interface.Scenes
                 eye = quaternion.Transform(eye);
                 this.objectUpDirection = quaternion.Transform(this.objectUpDirection);
 
+                lastRotation = quaternion;
+                lastRotationVector = new Vector2(deltaX, deltaY);
                 lastAxis = axis;
                 lastAngle = angle;
             }
@@ -171,6 +178,7 @@ namespace Axiverse.Interface.Scenes
                 eye = this.objectPosition - target;
                 Quaternion quaternion = Quaternion.FromAxisAngle(lastAxis, lastAngle);
                 eye = quaternion.Transform(eye);
+                lastRotation = quaternion;
                 this.objectUpDirection = quaternion.Transform(this.objectUpDirection);
             }
             movePrevious = moveCurrent;
@@ -250,6 +258,7 @@ namespace Axiverse.Interface.Scenes
         public void Update()
         {
             eye = objectPosition - target;
+            lastRotation = Quaternion.Identity;
 
             if (RotateEnabled)
             {

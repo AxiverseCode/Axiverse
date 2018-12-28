@@ -64,9 +64,9 @@ namespace Axiverse.Interface.Windows
             };
 
             var rectangle = new Rectangle(0, 0, Width, Height);
-            var rectangle2 = new Rectangle(0.5f, 0.5f, Width - 1, Height - 1);
+            var innerRectangle = new Rectangle(0.5f, 0.5f, Width - 1, Height - 1);
             compositor.FillRoundedRectangle(rectangle, new Vector2(3), BackgroundColor);
-            compositor.DrawRoundedRectangle(rectangle2, new Vector2(2), ForegroundColor);
+            compositor.DrawRoundedRectangle(innerRectangle, new Vector2(2), ForegroundColor);
             compositor.DrawText(Text, Font, layout, rectangle, ForegroundColor);
         }
     }

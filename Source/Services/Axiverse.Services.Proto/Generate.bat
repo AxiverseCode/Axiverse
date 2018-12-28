@@ -8,6 +8,7 @@ echo Generating Protos
 	%1\Proto\Admin\IdentityService.proto ^
 	%1\Proto\Infrastructure\MetricService.proto ^
 	%1\Proto\AssetService.proto ^
+	%1\Proto\ChatService.proto ^
 	%1\Proto\EntityService.proto ^
 	%1\Proto\MarketService.proto ^
 	%1\Proto\ModelService.proto ^

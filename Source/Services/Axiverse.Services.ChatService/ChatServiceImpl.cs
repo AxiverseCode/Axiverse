@@ -19,7 +19,7 @@ namespace Axiverse.Services.ChatService
 
         public override Task<SendMessageResponse> SendMessage(SendMessageRequest request, ServerCallContext context)
         {
-            Console.WriteLine("received " + request.Message);
+            Console.WriteLine("received " + request.Message); 
             foreach(var v in b)
             {
                 v.Value.WriteAsync(new ListenResponse { Message = new ChatMessage { Message = request.Message } });
@@ -28,24 +28,19 @@ namespace Axiverse.Services.ChatService
             
         }
 
-        public override async Task Listen(IAsyncStreamReader<ListenRequest> requestStream, IServerStreamWriter<ListenResponse> responseStream, ServerCallContext context)
+        public override Task<JoinChannelResponse> JoinChannel(JoinChannelRequest request, ServerCallContext context)
         {
-            Console.WriteLine("new sub");
+            return base.JoinChannel(request, context);
+        }
 
-            string id = Guid.NewGuid().ToString();
-            b.AddOrUpdate(id, responseStream, (k, v) => v);
+        public override Task<LeaveChannelResponse> LeaveChannel(LeaveChannelRequest request, ServerCallContext context)
+        {
+            return base.LeaveChannel(request, context);
+        }
 
-            await responseStream.WriteAsync(new ListenResponse { Message = new ChatMessage { Message = "Hello World" } });
-            while (await requestStream.MoveNext())
-            {
-                if (requestStream.Current.Command == "end")
-                {
-                    break;
-                }
-            }
-
-            b.TryRemove(id, out var vv);
-            Console.WriteLine("exit sub");
+        public override Task Listen(ListenRequest request, IServerStreamWriter<ListenResponse> responseStream, ServerCallContext context)
+        {
+            return base.Listen(request, responseStream, context);
         }
     }
 }

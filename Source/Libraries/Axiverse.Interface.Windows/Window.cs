@@ -79,17 +79,17 @@ namespace Axiverse.Interface.Windows
 
         protected void OnKeyDown(Keys keyData)
         {
-            SelectedControl?.OnKeyDown(this, new KeyEventArgs(keyData));
+            (SelectedControl ?? this).OnKeyDown(this, new KeyEventArgs(keyData));
         }
 
         protected void OnKeyUp(Keys keyData)
         {
-            SelectedControl?.OnKeyUp(this, new KeyEventArgs(keyData));
+            (SelectedControl ?? this).OnKeyUp(this, new KeyEventArgs(keyData));
         }
 
         protected void OnKeyPress(char keyChar)
         {
-            SelectedControl?.OnKeyPress(this, new KeyEventArgs(keyChar));
+            (SelectedControl ?? this).OnKeyPress(this, new KeyEventArgs(keyChar));
         }
 
         protected void OnMouseMove(float x, float y)

@@ -91,6 +91,10 @@ namespace Axiverse.Calibration
             Window.MouseWheel += Window_MouseWheel;
             Window.Bounds = new Rectangle(0, 0, Engine.Presenter.Description.Width, Engine.Presenter.Description.Height);
             Window.Bind(Engine.Form);
+
+            Window.KeyDown += Window_KeyDown;
+            Window.KeyUp += Window_KeyUp;
+
             Control.DefaultFont = new Font("Open Sans", 16, FontWeight.Normal);
 
             var control = new Dialog();
@@ -208,6 +212,46 @@ namespace Axiverse.Calibration
             };
         }
 
+        private Vector2 keyVector;
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Keys.Left:
+                    keyVector.X -= 1;
+                    break;
+                case Keys.Right:
+                    keyVector.X += 1;
+                    break;
+                case Keys.Up:
+                    keyVector.Y -= 1;
+                    break;
+                case Keys.Down:
+                    keyVector.Y += 1;
+                    break;
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Keys.Left:
+                    keyVector.X += 1;
+                    break;
+                case Keys.Right:
+                    keyVector.X -= 1;
+                    break;
+                case Keys.Up:
+                    keyVector.Y += 1;
+                    break;
+                case Keys.Down:
+                    keyVector.Y -= 1;
+                    break;
+            }
+        }
+
         private void Window_MouseWheel(object sender, MouseMoveEventArgs e)
         {
             Trackball.OnMouseWheel(e.DeltaZ);
@@ -238,8 +282,11 @@ namespace Axiverse.Calibration
 
             var cameraTransform = Camera.Components.Get<TransformComponent>();
             var cameraComponent = Camera.Components.Get<CameraComponent>();
-            //Trackball.Update();
-            //cameraComponent.Target = Trackball.Target;
+            Trackball.Target = cameraTransform.Translation;
+            Trackball.Update();
+            cameraTransform.Translation = Trackball.Target;
+            //cameraTransform.Rotation *= Trackball.lastRotation;
+            
             //cameraComponent.up = Trackball.Up;
             //Camera.Components.Get<TransformComponent>().Translation = Trackball.CameraPosition;
 
@@ -248,6 +295,8 @@ namespace Axiverse.Calibration
 
                 var mappedLinear = new Vector3(twoAxisListener.Position.X, 0, -twoAxisListener.Position.Y);
                 var mappedAngular = new Vector3(-twoAxisListener.Position2.Y, -twoAxisListener.Position2.X, 0);
+                mappedLinear += new Vector3(-keyVector.X, 0, -keyVector.Y);
+                mappedAngular += new Vector3(Trackball.lastRotationVector.Y * 10, -Trackball.lastRotationVector.X * 10, 0);
                 controller.Translational = mappedLinear;
                 controller.Steering = mappedAngular;
 
