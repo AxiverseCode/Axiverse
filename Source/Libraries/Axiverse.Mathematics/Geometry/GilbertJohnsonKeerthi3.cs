@@ -24,16 +24,22 @@ namespace Axiverse.Mathematics.Geometry
     /// </remarks>
     public class GilbertJohnsonKeerthi3
     {
+        public static bool Collide(IEnumerable<Vector3> former, IEnumerable<Vector3> latter)
+        {
+            var collider = new GilbertJohnsonKeerthi3();
+            return collider.CollideInternal(former, latter);
+        }
+
         private const int Iterations = 50;
 
-        Vector3 A;
-        Vector3 B;
-        Vector3 C;
-        Vector3 D;
+        private Vector3 A;
+        private Vector3 B;
+        private Vector3 C;
+        private Vector3 D;
+        private int simplexCount;
 
-        int simplexCount;
 
-        public bool Collide(IEnumerable<Vector3> former, IEnumerable<Vector3> latter)
+        private bool CollideInternal(IEnumerable<Vector3> former, IEnumerable<Vector3> latter)
         {
             Vector3 direction = Vector3.One;
 
@@ -227,8 +233,8 @@ namespace Axiverse.Mathematics.Geometry
             simplexCount = 3;
             return false;
         }
-
-        public Vector3 Support(IEnumerable<Vector3> a, IEnumerable<Vector3> b, ref Vector3 direction)
+        
+        private Vector3 Support(IEnumerable<Vector3> a, IEnumerable<Vector3> b, ref Vector3 direction)
         {
             Vector3 formerPoint = Vector3.Zero; // getFurthestPointInDirection(dir)
             Vector3 latterPoint = Vector3.Zero; // getFutherstPointInDirection(-dir)

@@ -58,6 +58,7 @@
     <Compile Include="ChatServiceImpl.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ChatServiceModule.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,20 +12,18 @@ namespace Axiverse.Services.ChatService
 {
     public class ChatServiceImpl : Proto.ChatService.ChatServiceBase
     {
-        ManualResetEvent received = new ManualResetEvent(false);
-        ConcurrentDictionary<string, IServerStreamWriter<ListenResponse>> b =  new ConcurrentDictionary<string, IServerStreamWriter<ListenResponse>>();
-        // Channels
-        // Clients
+        ConcurrentDictionary<string, Client> clients;
 
         public override Task<SendMessageResponse> SendMessage(SendMessageRequest request, ServerCallContext context)
         {
-            Console.WriteLine("received " + request.Message); 
-            foreach(var v in b)
+            var message = new Message();
+            foreach (var client in clients.Values)
             {
-                v.Value.WriteAsync(new ListenResponse { Message = new ChatMessage { Message = request.Message } });
+                client.Queue.Enqueue(message);
+                client.Trigger.Set();
             }
+
             return Task.FromResult(new SendMessageResponse());
-            
         }
 
         public override Task<JoinChannelResponse> JoinChannel(JoinChannelRequest request, ServerCallContext context)
@@ -38,9 +36,36 @@ namespace Axiverse.Services.ChatService
             return base.LeaveChannel(request, context);
         }
 
-        public override Task Listen(ListenRequest request, IServerStreamWriter<ListenResponse> responseStream, ServerCallContext context)
+        public override async Task Listen(ListenRequest request, IServerStreamWriter<ListenResponse> responseStream, ServerCallContext context)
         {
-            return base.Listen(request, responseStream, context);
+            var client = new Client();
+
+            var connected = true;
+            do
+            {
+                try
+                {
+                    await client.Trigger.WaitAsync();
+                    while (client.Queue.TryDequeue(out var message))
+                    {
+                        var messageProto = new ChatMessage
+                        {
+                            Message = message.Text,
+                        };
+
+                        await responseStream.WriteAsync(new ListenResponse
+                        {
+                            Message = messageProto
+                        });
+                    }
+                    client.Trigger.Reset();
+                }
+                catch (Exception)
+                {
+                    connected = false;
+                }
+            }
+            while (connected);
         }
     }
 }
