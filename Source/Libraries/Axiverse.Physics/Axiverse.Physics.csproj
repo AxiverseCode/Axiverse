@@ -55,6 +55,7 @@
     <Compile Include="Collision\CollisionDispatcher.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\OctreeFilter.cs" />
+    <Compile Include="Fluids\Simulator.cs" />
     <Compile Include="Shapes\IBoundedBody.cs" />
     <Compile Include="Collision\Manifold.cs" />
     <Compile Include="Collision\SeparatingAxisCollider.cs" />

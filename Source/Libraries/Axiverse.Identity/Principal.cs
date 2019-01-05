@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Konscious.Security.Cryptography;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,26 +10,70 @@ namespace Axiverse.Identity
 {
     public class Principal
     {
+        private static RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
+
+        public static Argon2i CreateCrypt(byte[] key, byte[] salt, byte[] associatedData)
+        {
+            var argon = new Argon2i(key)
+            {
+                DegreeOfParallelism = 2,
+                Salt = salt,
+                MemorySize = 8192,
+                Iterations = 2,
+                AssociatedData = associatedData,
+            };
+            return argon;
+        }
+
+        private byte[] hash;
+        private byte[] salt;
+
         /// <summary>
         /// Gets the identifier of this principal.
         /// </summary>
         public Guid Identifier { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
         /// Gets the display name of this principal.
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets the usage of this principal.
         /// </summary>
-        public String Usage { get; set; }
+        public string Usage { get; set; }
 
-
-
-        public Proxy CreateProxy(string password)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        public Principal(string email, string password)
         {
-            throw new NotImplementedException();
+            Identifier = Guid.NewGuid();
+            Email = email;
+            random.GetBytes(salt = new byte[64]);
+
+            using (var argon = CreateCrypt(Encoding.UTF8.GetBytes(password), salt, Identifier.ToByteArray()))
+            {
+                hash = argon.GetBytes(128);
+            }
+
+            Console.WriteLine("Hashed: " + new System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary(hash).ToString());
+        }
+
+        public bool Verify(string password)
+        {
+            using (var argon = CreateCrypt(Encoding.UTF8.GetBytes(password), salt, Identifier.ToByteArray()))
+            {
+                var computedHash = argon.GetBytes(128);
+                return hash.SequenceEqual(computedHash);
+            }
         }
 
         // attributes

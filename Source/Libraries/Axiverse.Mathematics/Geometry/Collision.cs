@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.Geometry
 {
+    // http://www.realtimerendering.com/intersections.html
     public static class Collision
     {
         public static bool SweptSphereSphere(float ra, Vector3 A0, Vector3 A1, float rb, Vector3 B0, Vector3 B1, out float u0, out float u1)
@@ -33,6 +34,7 @@ namespace Axiverse.Mathematics.Geometry
             // u coefficient
 
             float c = AB.Dot(AB) - rab * rab;
+
             // constant term
             // check if they're currently overlapping
             if (AB.Dot(AB) <= rab * rab)

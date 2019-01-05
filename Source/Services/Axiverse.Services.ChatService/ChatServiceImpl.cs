@@ -12,11 +12,13 @@ namespace Axiverse.Services.ChatService
 {
     public class ChatServiceImpl : Proto.ChatService.ChatServiceBase
     {
-        ConcurrentDictionary<string, Client> clients;
+        ConcurrentDictionary<string, Client> clients = new ConcurrentDictionary<string, Client>();
 
         public override Task<SendMessageResponse> SendMessage(SendMessageRequest request, ServerCallContext context)
         {
             var message = new Message();
+            message.Text = request.Message;
+            
             foreach (var client in clients.Values)
             {
                 client.Queue.Enqueue(message);
@@ -39,6 +41,8 @@ namespace Axiverse.Services.ChatService
         public override async Task Listen(ListenRequest request, IServerStreamWriter<ListenResponse> responseStream, ServerCallContext context)
         {
             var client = new Client();
+            client.Session = request.SessionToken;
+            clients.TryAdd(client.Session, client);
 
             var connected = true;
             do
@@ -51,6 +55,7 @@ namespace Axiverse.Services.ChatService
                         var messageProto = new ChatMessage
                         {
                             Message = message.Text,
+                            Channel = " ",
                         };
 
                         await responseStream.WriteAsync(new ListenResponse
@@ -60,12 +65,14 @@ namespace Axiverse.Services.ChatService
                     }
                     client.Trigger.Reset();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     connected = false;
                 }
             }
             while (connected);
+
+            clients.TryRemove(client.Session, out client);
         }
     }
 }

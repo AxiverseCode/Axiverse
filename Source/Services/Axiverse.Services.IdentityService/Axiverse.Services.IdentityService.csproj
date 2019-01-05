@@ -137,14 +137,18 @@
     <Compile Include="IdentityServiceModule.cs" />
     <Compile Include="IdentityServiceImpl.cs" />
     <Compile Include="IdentityStore.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Axiverse.Identity\Axiverse.Identity.csproj">
+      <Project>{4925A907-0AD8-4818-9DF7-F7F85F391C40}</Project>
+      <Name>Axiverse.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse\Axiverse.csproj">
       <Project>{F00060A0-3A63-485C-929B-5F206EE743EF}</Project>
       <Name>Axiverse</Name>

@@ -14,43 +14,56 @@ namespace Axiverse.Utilities.Cli
         static void Main(string[] args)
         {
             string host = "localhost";
-            host = "34.229.211.196";
+            //host = "34.229.211.196";
 
-            Channel idc = new Channel(host + ":32000", ChannelCredentials.Insecure);
-            var id = new IdentityService.IdentityServiceClient(idc);
+            Channel channel = new Channel(host + ":32000", ChannelCredentials.Insecure);
+
+
+            var id = new IdentityService.IdentityServiceClient(channel);
 
             Console.WriteLine("Key:");
             var k = Console.ReadLine();
             Console.WriteLine("Password:");
             var v = Console.ReadLine();
 
-            var validate = id.ValidateIdentity(new ValidateIdentityRequest { Key = k, Passcode = v });
-            Console.WriteLine(validate);
+            try
+            {
+                var register = id.CreateIdentity(new CreateIdentityRequest { Email = k, Passcode = v });
+            }
+            catch (RpcException)
+            {
+                Console.WriteLine("Already exists.");
+            }
 
-            Channel channel = new Channel(host + ":32002", ChannelCredentials.Insecure);
+            var authorization = id.ValidateIdentity(new ValidateIdentityRequest { Key = k, Passcode = v });
+            Console.WriteLine(authorization);
+            
+
             var client = new ChatService.ChatServiceClient(channel);
 
             Console.WriteLine("listening");
-            //using (var call = client.Listen())
-            //{
-            //    var receiverTask = Task.Run(async () =>
-            //    {
-            //        while (await call.ResponseStream.MoveNext())
-            //        {
-            //            var message = call.ResponseStream.Current;
-            //            Console.WriteLine(message);
-            //        }
-            //    });
+            using (var call = client.Listen(new ListenRequest() { SessionToken = Guid.NewGuid().ToString()}))
+            {
+                var receiverTask = Task.Run(async () =>
+                {
+                    while (await call.ResponseStream.MoveNext())
+                    {
+                        var message = call.ResponseStream.Current;
+                        Console.WriteLine(message);
+                    }
+                });
 
-            //    string nm = "";
-            //    do
-            //    {
-            //        nm = Console.ReadLine();
-            //        client.SendMessage(new SendMessageRequest { Message = nm });
-            //    }
-            //    while (nm != "");
-            //    call.RequestStream.WriteAsync(new ListenRequest { Command = "end" });
-            //}
+                string newMessage;
+                do
+                {
+                    newMessage = Console.ReadLine();
+                    client.SendMessage(new SendMessageRequest {
+                        Message = newMessage,
+                        SessionToken = authorization.SessionToken
+                    });
+                }
+                while (!string.IsNullOrEmpty(newMessage));
+            }
 
             // axicli identity login
             // axicli chat [channel] [message ...]

@@ -86,13 +86,14 @@ namespace Axiverse.Services.EntityService
         {
             var guid = Guid.NewGuid();
             writers.TryAdd(guid, responseStream);
+            SimulationEntity entity = null;
 
             while (await requestStream.MoveNext())
             {
                 var current = requestStream.Current;
 
                 var id = Guid.Parse(current.Entity.Id);
-                if (!universe.TryGetEntity(id, out var entity))
+                if (!universe.TryGetEntity(id, out entity))
                 {
                     entity = new SimulationEntity(id);
                     entity.Components.Add(new EntityComponent());
@@ -106,6 +107,10 @@ namespace Axiverse.Services.EntityService
                 pc.Body.AngularPosition = ProtoConverter.Convert(current.Entity.Rotation);
             }
 
+            if (entity != null)
+            {
+                universe.Remove(entity);
+            }
             writers.TryRemove(guid, out var unused);
         }
     }

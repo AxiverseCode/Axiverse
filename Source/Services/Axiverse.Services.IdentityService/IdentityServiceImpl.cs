@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Axiverse.Identity;
 using Axiverse.Services.Proto;
 using Grpc.Core;
 
@@ -12,32 +12,21 @@ namespace Axiverse.Services.IdentityService
 {
     public class IdentityServiceImpl : Proto.IdentityService.IdentityServiceBase
     {
-        private ConcurrentDictionary<string, Identity> users = new ConcurrentDictionary<string, Identity>();
+        private readonly Registry registry;
 
-        public override Task<ValidateIdentityResponse> ValidateIdentity(ValidateIdentityRequest request, ServerCallContext context)
+        public IdentityServiceImpl(Registry registry)
         {
-            Console.WriteLine("Validating Identity");
+            this.registry = registry;
+        }
 
-            if (users.TryGetValue(request.Key, out var identity))
+        public override async Task<ValidateIdentityResponse> ValidateIdentity(ValidateIdentityRequest request, ServerCallContext context)
+        {
+            var authorization = registry.Authorize(request.Key, request.Passcode);
+            if (authorization != null)
             {
-                if (identity.Verify(request.Passcode))
-                {
-                    // passed, assign session
-                    return Task.FromResult(new ValidateIdentityResponse { SessionToken = "pass" });
-                }
-                else
-                {
-                    return Task.FromResult(new ValidateIdentityResponse { SessionToken = "invalid" });
-                }
+                return new ValidateIdentityResponse { SessionToken = authorization.Key };
             }
-
-            identity = new Identity(request.Key, request.Passcode);
-            if (users.TryAdd(request.Key, identity))
-            {
-                return Task.FromResult(new ValidateIdentityResponse { SessionToken = "created" });
-            }
-
-            return Task.FromResult(new ValidateIdentityResponse { SessionToken = "server error" });
+            throw new RpcException(new Status(StatusCode.PermissionDenied, "Key and password pair invalid."));
         }
 
         public override Task<GetIdentityResponse> GetIdentity(GetIdentityRequest request, ServerCallContext context)
@@ -47,6 +36,11 @@ namespace Axiverse.Services.IdentityService
 
         public override Task<CreateIdentityResponse> CreateIdentity(CreateIdentityRequest request, ServerCallContext context)
         {
+            if (registry.Register(request.Email, request.Passcode) == null)
+            {
+                throw new RpcException(new Status(StatusCode.AlreadyExists, "Already exists."));
+
+            }
             return Task.FromResult(new CreateIdentityResponse());
         }
 
