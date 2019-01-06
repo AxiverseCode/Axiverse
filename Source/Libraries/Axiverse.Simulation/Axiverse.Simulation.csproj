@@ -61,6 +61,16 @@
     <Compile Include="IProcessor.cs" />
     <Compile Include="PhysicsProcessor.cs" />
     <Compile Include="ProcessorStage.cs" />
+    <Compile Include="Scenes\CameraComponent.cs" />
+    <Compile Include="Scenes\CameraProcessor.cs" />
+    <Compile Include="Scenes\DirectControlComponent.cs" />
+    <Compile Include="Scenes\DirectControlProcessor.cs" />
+    <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="Scenes\SceneView.cs" />
+    <Compile Include="Scenes\TransformComponent.cs" />
+    <Compile Include="Scenes\TransformInheritance.cs" />
+    <Compile Include="Scenes\TransformPhysicsProcessor.cs" />
+    <Compile Include="Scenes\TransformProcessor.cs" />
     <Compile Include="SimulationContext.cs" />
     <Compile Include="Components\HierarchicalComponent.cs" />
     <Compile Include="Components\NavigationComponent.cs" />

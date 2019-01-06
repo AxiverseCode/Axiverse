@@ -81,19 +81,9 @@
     <Compile Include="Rendering\RenderContext.cs" />
     <Compile Include="Rendering\RenderModel.cs" />
     <Compile Include="Rendering\RenderObject.cs" />
-    <Compile Include="Scenes\CameraComponent.cs" />
-    <Compile Include="Scenes\CameraProcessor.cs" />
-    <Compile Include="Scenes\DirectControlComponent.cs" />
-    <Compile Include="Scenes\DirectControlProcessor.cs" />
     <Compile Include="Scenes\ModelComponent.cs" />
     <Compile Include="Scenes\RenderableComponent.cs" />
-    <Compile Include="Scenes\Scene.cs" />
-    <Compile Include="Scenes\SceneView.cs" />
     <Compile Include="Scenes\TrackballControl.cs" />
-    <Compile Include="Scenes\TransformComponent.cs" />
-    <Compile Include="Scenes\TransformInheritance.cs" />
-    <Compile Include="Scenes\TransformPhysicsProcessor.cs" />
-    <Compile Include="Scenes\TransformProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Axiverse.Interface.Assets\Axiverse.Interface.Assets.csproj">

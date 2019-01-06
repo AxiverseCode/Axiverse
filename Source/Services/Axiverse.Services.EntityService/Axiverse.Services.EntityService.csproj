@@ -65,10 +65,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Axiverse.Interface\Axiverse.Interface.csproj">
-      <Project>{B4894EA0-719A-4D14-9024-00F7FCA0E81B}</Project>
-      <Name>Axiverse.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Axiverse.Mathematics\Axiverse.Mathematics.csproj">
       <Project>{700D5AB7-622F-443E-AE55-D51556EC88BD}</Project>
       <Name>Axiverse.Mathematics</Name>

@@ -17,10 +17,6 @@ message Entity {
 	string class = 5;
 }
 
-message EntityClass {
-
-}
-
 service EntityService {
 
 	rpc GetState(GetStateRequest) returns (GetStateResponse);
@@ -54,7 +50,59 @@ message ClientEvent {
 }
 
 message ServerEvent {
+
 	repeated Entity entities = 1;
+
+	// Spatial events.
+	repeated SpatialEvent spatial = 2;
+
+	// Change events.
+	repeated ChangeEvent change = 3;
+
+	// An event regarding the spatial parameters of an entity.
+	message SpatialEvent {
+		// The id of the entity.
+		string id = 1;
+
+		// The linear position.
+		Vector3 linearPosition = 2;
+
+		// The linear acceleration.
+		Vector3 linearAcceleartion = 3;
+
+		// The angular position.
+		Quaternion angularPosition = 4;
+
+		// The angular acceleration
+		Vector3 angularAcceleration = 5;
+	}
+
+	// An event regarding a change in the entity.
+	message ChangeEvent {
+		// The types of change.
+		enum ChangeType {
+			// Unknown default event.
+			Unknown = 0;
+
+			// An entity has entered the scope.
+			Enter = 1;
+
+			// An entity has left the scope.
+			Leave = 2;
+
+			// An entity was destroyed.
+			Destroy = 3;
+		}
+
+		// The id of the entity.
+		string id = 1;
+
+		// The type of change.
+		ChangeType type = 2;
+
+		// The parameters of change.
+		string value = 3;
+	}
 }
 
 message GetStateRequest {

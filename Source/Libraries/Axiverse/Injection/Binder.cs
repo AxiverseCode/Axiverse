@@ -22,6 +22,38 @@ namespace Axiverse.Injection
         /// <param name="bindings"></param>
         /// <param name="forceAll"></param>
         public static void Bind<T>(ref T obj, IBindingProvider bindings, bool forceAll = false)
+            where T : class
+        {
+            var type = obj.GetType();
+            var propertyEntires = GetBindingProperties(type, forceAll);
+            foreach (var propertyEntry in propertyEntires)
+            {
+                propertyEntry.Value.SetValue(obj, bindings[propertyEntry.Key]);
+            }
+            
+            var fieldEntries = GetBindingFields(type, forceAll);
+            foreach (var fieldEntry in fieldEntries)
+            {
+                fieldEntry.Value.SetValue(obj, bindings[fieldEntry.Key]);
+            }
+        }
+
+        /// <summary>
+        /// Binds the fields and properties on a struct.
+        /// 
+        /// By default, fields with the <see cref="BindAttribute"/> applied will be set. This
+        /// includes readonly fields. If <paramref name="forceAll"/> is set then all public fields
+        /// will be bound from the injector.
+        /// </summary>
+        /// <remarks>
+        /// This has to be separated out because mono doesn't support this otherwise it could be
+        /// used for classes as well.
+        /// </remarks>
+        /// <param name="obj"></param>
+        /// <param name="bindings"></param>
+        /// <param name="forceAll"></param>
+        public static void BindDirect<T>(ref T obj, IBindingProvider bindings, bool forceAll = false)
+            where T : struct
         {
             var type = obj.GetType();
             var propertyEntires = GetBindingProperties(type, forceAll);

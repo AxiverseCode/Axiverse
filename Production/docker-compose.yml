@@ -5,31 +5,11 @@ services:
     build:
       context: ../Source
       dockerfile: ../Production/build.dockerfile
-  # Chat Service
-  chat:
+  # Services
+  services:
     build:
       context: ../Source
-      dockerfile: ../Production/service-chat.dockerfile
-    env_file:
-      - axiverse.env
-    ports:
-      - "32002:32002"
-    restart: always
-  # Entity Service
-  entity:
-    build:
-      context: ../Source
-      dockerfile: ../Production/service-entity.dockerfile
-    env_file:
-      - axiverse.env
-    ports:
-      - "32001:32001"
-    restart: always
-  # Identity Service
-  identity:
-    build:
-      context: ../Source
-      dockerfile: ../Production/service-identity.dockerfile
+      dockerfile: ../Production/services.dockerfile
     env_file:
       - axiverse.env
     ports:

@@ -12,7 +12,7 @@ namespace Axiverse.Services
     {
         protected override void Initialize()
         {
-            string portVariable = Environment.GetEnvironmentVariable("AXI_SERVICE_PORT");
+            string portVariable = Environment.GetEnvironmentVariable("AXI_SERVICES_PORT");
             Console.WriteLine("Services port environment variable: {0}", portVariable);
             if (!int.TryParse(portVariable, out var port))
             {
