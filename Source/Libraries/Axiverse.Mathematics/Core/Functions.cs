@@ -10,6 +10,19 @@ namespace Axiverse
     public static class Functions
     {
         /// <summary>
+        /// Calculates the absolute value of the value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Vector3 Abs(Vector3 value)
+        {
+            return new Vector3(
+                Math.Abs(value.X),
+                Math.Abs(value.Y),
+                Math.Abs(value.Z));
+        }
+
+        /// <summary>
         /// Calculates the sine function of the value.
         /// </summary>
         /// <param name="value"></param>
@@ -79,6 +92,20 @@ namespace Axiverse
             return (float)Math.Sqrt(value);
         }
 
+   
+        /// <summary>
+        /// Calculates the square root of the value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Vector3 Sqrt(Vector3 value)
+        {
+            return new Vector3(
+                Sqrt(value.X),
+                Sqrt(value.Y),
+                Sqrt(value.Z));
+        }
+
         /// <summary>
         /// Calculates the square root of the value.
         /// </summary>
@@ -99,6 +126,23 @@ namespace Axiverse
         public static float Clamp(float value, float minimum, float maximum)
         {
             return Math.Max(minimum, Math.Min(value, maximum));
+        }
+
+        /// <summary>
+        /// Clamps each component of the value between the corresponding component of the minimum
+        /// and maximum.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        /// <returns></returns>
+        public static Vector3 Clamp(Vector3 value, float minimum, float maximum)
+        {
+            var x = Clamp(value.X, minimum, maximum);
+            var y = Clamp(value.Y, minimum, maximum);
+            var z = Clamp(value.Z, minimum, maximum);
+
+            return new Vector3(x, y, z);
         }
 
         /// <summary>
