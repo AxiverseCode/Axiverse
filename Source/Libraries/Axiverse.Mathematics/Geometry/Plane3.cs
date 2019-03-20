@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace Axiverse.Mathematics
 {
     /// <summary>
-    /// 
+    /// A 3d Plane.
     /// Ax + By + Cz + D = 0;
     /// </summary>
-    class Plane3
+    public class Plane3
     {
         public float A;
 

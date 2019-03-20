@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics
 {
-    class Box3
+    public struct Box3
     {
         Vector3 Extents;
 
