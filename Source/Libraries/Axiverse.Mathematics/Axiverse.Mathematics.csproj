@@ -60,8 +60,12 @@
     <Compile Include="Geometry\Collision.cs" />
     <Compile Include="Geometry\GilbertJohnsonKeerthi2.cs" />
     <Compile Include="Geometry\GilbertJohnsonKeerthi3.cs" />
+    <Compile Include="Geometry\Hexahedron3.cs" />
+    <Compile Include="Geometry\Line2.cs" />
     <Compile Include="Geometry\Line3.cs" />
     <Compile Include="Geometry\Plane3.cs" />
+    <Compile Include="Geometry\Ray2.cs" />
+    <Compile Include="Geometry\Segment2.cs" />
     <Compile Include="Geometry\Segment3.cs" />
     <Compile Include="Geometry\Tetrahedron3.cs" />
     <Compile Include="Geometry\Triangle3.cs" />

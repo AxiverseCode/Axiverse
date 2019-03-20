@@ -21,6 +21,11 @@ namespace Axiverse.Mathematics
         /// </summary>
         public Vector3 Direction;
 
+        /// <summary>
+        /// Constructs a three-dimensional ray.
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="direction"></param>
         public Ray3(Vector3 origin, Vector3 direction)
         {
             Origin = origin;
