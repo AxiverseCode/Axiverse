@@ -43,12 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Boolean3.cs" />
-    <Compile Include="Bounds.cs" />
+    <Compile Include="Core\Boolean3.cs" />
+    <Compile Include="Core\Bounds.cs" />
     <Compile Include="Core\Bounds2.cs" />
     <Compile Include="Core\Operators.cs" />
     <Compile Include="Core\Bounds3.cs" />
-    <Compile Include="Complex.cs" />
+    <Compile Include="Core\Complex.cs" />
     <Compile Include="Core\FloatingPoint.cs" />
     <Compile Include="Core\MathematicsExtensions.cs" />
     <Compile Include="Core\Matrix4.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Geometry\Triangle3.cs" />
     <Compile Include="Graphs\Edge.cs" />
     <Compile Include="Graphs\Node.cs" />
-    <Compile Include="Polynomial.cs" />
+    <Compile Include="Core\Polynomial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Quaternion.cs" />
     <Compile Include="Geometry\Ray3.cs" />
@@ -85,11 +85,11 @@
     <Compile Include="Geometry\Sphere3.cs" />
     <Compile Include="Core\Transform3.cs" />
     <Compile Include="Core\Trilean.cs" />
-    <Compile Include="Trilean3.cs" />
+    <Compile Include="Core\Trilean3.cs" />
     <Compile Include="Core\Vector2.cs" />
     <Compile Include="Core\Vector3.cs" />
     <Compile Include="Core\Vector4.cs" />
-    <Compile Include="Viewport.cs" />
+    <Compile Include="Geometry\Viewport.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
