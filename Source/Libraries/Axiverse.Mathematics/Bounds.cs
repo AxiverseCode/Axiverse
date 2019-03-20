@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Axiverse.Mathematics
+namespace Axiverse
 {
     /// <summary>
     /// Represents a boundary.

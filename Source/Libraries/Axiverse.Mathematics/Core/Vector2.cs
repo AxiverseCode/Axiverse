@@ -377,6 +377,16 @@ namespace Axiverse
             return new Vector2(a * b.X, a * b.Y);
         }
 
+        public static Vector2 operator /(float a, Vector2 b)
+        {
+            return new Vector2(a / b.X, a / b.Y);
+        }
+
+        public static Vector2 operator /(Vector2 b, float a)
+        {
+            return new Vector2(a / b.X, a / b.Y);
+        }
+
         public static bool operator ==(Vector2 former, Vector2 latter)
         {
             return (former.X == latter.X) && (former.Y == latter.Y);
@@ -388,6 +398,42 @@ namespace Axiverse
         }
 
         #endregion
+
+        public static Vector2 Minimum(Vector2 former, Vector2 latter)
+        {
+            return new Vector2(
+                Math.Min(former.X, latter.X),
+                Math.Min(former.Y, latter.Y)
+                );
+        }
+
+        public static Vector2 Minimum(IEnumerable<Vector2> vectors)
+        {
+            var minimum = PositiveInfinity;
+            foreach (var vector in vectors)
+            {
+                minimum = Minimum(minimum, vector);
+            }
+            return minimum;
+        }
+
+        public static Vector2 Maximum(Vector2 former, Vector2 latter)
+        {
+            return new Vector2(
+                Math.Max(former.X, latter.X),
+                Math.Max(former.Y, latter.Y)
+                );
+        }
+
+        public static Vector2 Maximum(IEnumerable<Vector2> vectors)
+        {
+            var maximum = PositiveInfinity;
+            foreach (var vector in vectors)
+            {
+                maximum = Maximum(maximum, vector);
+            }
+            return maximum;
+        }
 
         #region Static Methods - Conversion
 

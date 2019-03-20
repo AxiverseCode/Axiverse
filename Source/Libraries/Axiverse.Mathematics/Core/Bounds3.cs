@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Axiverse.Mathematics;
+using System;
 using System.Collections.Generic;
 
-namespace Axiverse.Mathematics
+namespace Axiverse
 {
     /// <summary>
     /// A 3-dimmensional axis aligned bounding box.

@@ -935,33 +935,57 @@ namespace Axiverse
             return Cross(a, b);
         }
 
-        //public static Boolean3 operator >(Vector3 left, Vector3 right)
-        //{
-        //    return new Boolean3(left.X > right.X,
-        //                        left.Y > right.Y,
-        //                        left.Z > right.Z);
-        //}
+        /// <summary>
+        /// Component greater than.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Boolean3 operator >(Vector3 left, Vector3 right)
+        {
+            return new Boolean3(left.X > right.X,
+                                left.Y > right.Y,
+                                left.Z > right.Z);
+        }
 
-        //public static Boolean3 operator <(Vector3 left, Vector3 right)
-        //{
-        //    return new Boolean3(left.X < right.X,
-        //                        left.Y < right.Y,
-        //                        left.Z < right.Z);
-        //}
+        /// <summary>
+        /// Component less than.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Boolean3 operator <(Vector3 left, Vector3 right)
+        {
+            return new Boolean3(left.X < right.X,
+                                left.Y < right.Y,
+                                left.Z < right.Z);
+        }
 
-        //public static Boolean3 operator >=(Vector3 left, Vector3 right)
-        //{
-        //    return new Boolean3(left.X >= right.X,
-        //                        left.Y >= right.Y,
-        //                        left.Z >= right.Z);
-        //}
+        /// <summary>
+        /// Component greater than or equal to.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Boolean3 operator >=(Vector3 left, Vector3 right)
+        {
+            return new Boolean3(left.X >= right.X,
+                                left.Y >= right.Y,
+                                left.Z >= right.Z);
+        }
 
-        //public static Boolean3 operator <=(Vector3 left, Vector3 right)
-        //{
-        //    return new Boolean3(left.X <= right.X,
-        //                        left.Y <= right.Y,
-        //                        left.Z <= right.Z);
-        //}
+        /// <summary>
+        /// Component less than or equal too.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Boolean3 operator <=(Vector3 left, Vector3 right)
+        {
+            return new Boolean3(left.X <= right.X,
+                                left.Y <= right.Y,
+                                left.Z <= right.Z);
+        }
 
         #endregion
 

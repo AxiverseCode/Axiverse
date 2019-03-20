@@ -1,4 +1,4 @@
-﻿namespace Axiverse.Mathematics
+﻿namespace Axiverse
 {
     /// <summary>
     /// Represents a three-dimensional boolean.
