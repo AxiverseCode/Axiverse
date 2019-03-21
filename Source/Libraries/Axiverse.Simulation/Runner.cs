@@ -58,7 +58,7 @@ namespace Axiverse.Simulation
                 float dt = Factor * Interval / 1000f;
 
                 Frame++;
-                Console.WriteLine("Frame " + Frame);
+                // Console.WriteLine("Frame " + Frame);
                 Universe.Step(dt);
                 Time += dt;
 
@@ -69,12 +69,12 @@ namespace Axiverse.Simulation
 
                 if (delayTime > 0)
                 {
-                    Console.WriteLine("- Capacity: " + (1f - (float)delayTime / Interval));
+                    // Console.WriteLine("- Capacity: " + (1f - (float)delayTime / Interval));
                     await Task.Delay(delayTime);
                 }
                 else
                 {
-                    Console.WriteLine("- Time overflow: " + -delayTime);
+                    // Console.WriteLine("- Time overflow: " + -delayTime);
                 }
             }
 

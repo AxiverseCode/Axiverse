@@ -4,7 +4,7 @@
 # aws ecr get-login --no-include-email --region us-east-1
 # docker login
 
-docker build -t production_build -f .\build.dockerfile ..\Source
+docker build -t axi-build -f .\build.dockerfile ..\Source
 
 docker build -t calibrate-services-dev -f .\services.dockerfile .
 docker tag calibrate-services-dev:latest 214054665271.dkr.ecr.us-east-1.amazonaws.com/calibrate-services-dev:latest

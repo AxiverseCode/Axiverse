@@ -50,7 +50,7 @@ namespace Axiverse.Services.EntityService
                     });
                 }
 
-                Console.WriteLine("Emitting " + se.Entities.Count);
+                // Console.WriteLine("Emitting " + se.Entities.Count);
 
 
                 foreach (var writer in writers)

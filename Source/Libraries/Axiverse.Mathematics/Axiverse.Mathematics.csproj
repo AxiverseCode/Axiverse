@@ -66,6 +66,7 @@
     <Compile Include="Geometry\Plane3.cs" />
     <Compile Include="Geometry\Ray2.cs" />
     <Compile Include="Geometry\Segment2.cs" />
+    <Compile Include="Geometry\PyramidFrustum3.cs" />
     <Compile Include="Geometry\Segment3.cs" />
     <Compile Include="Geometry\Tetrahedron3.cs" />
     <Compile Include="Geometry\Triangle3.cs" />

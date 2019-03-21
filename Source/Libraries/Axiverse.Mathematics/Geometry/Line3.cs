@@ -32,7 +32,8 @@ namespace Axiverse.Mathematics
             Origin = origin;
         }
 
-        public static bool TryFindClosestPoint(Line3 former, Line3 latter, out Vector3 formerPoint, out Vector3 latterPoint)
+        public static bool TryFindClosestPoint(
+            Line3 former, Line3 latter, out Vector3 formerPoint, out Vector3 latterPoint)
         {
             Vector3 cross = Vector3.Cross(former.Direction, latter.Direction);
             float length = cross.Length();

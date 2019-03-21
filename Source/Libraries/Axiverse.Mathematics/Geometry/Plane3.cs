@@ -22,6 +22,32 @@ namespace Axiverse.Mathematics
 
         public Vector3 Normal => new Vector3(A, B, C);
 
+        public float this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0: return A;
+                    case 1: return B;
+                    case 2: return C;
+                    case 3: return D;
+                    default: throw new ArgumentOutOfRangeException();
+                }
+            }
+            set
+            {
+                switch (index)
+                {
+                    case 0: A = value; break;
+                    case 1: B = value; break;
+                    case 2: C = value; break;
+                    case 3: D = value; break;
+                    default: throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
         public Plane3(float a, float b, float c, float d)
         {
             A = a;

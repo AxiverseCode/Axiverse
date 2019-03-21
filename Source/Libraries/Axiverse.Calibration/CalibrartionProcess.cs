@@ -61,8 +61,8 @@ namespace Axiverse.Calibration
             Engine.Router.Listeners.Add(sixAxisListner);
             Engine.Router.Listeners.Add(twoAxisListener);
 
-            string port = "3.85.4.22";
-            //string port = "127.0.0.1";
+            //string port = "3.85.4.22";
+            string port = "127.0.0.1";
             channel = new Channel($"{port}:32000", ChannelCredentials.Insecure);
             identityClient = new Services.Proto.IdentityService.IdentityServiceClient(channel);
             entityClient = new Services.Proto.EntityService.EntityServiceClient(channel);
