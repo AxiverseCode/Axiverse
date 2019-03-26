@@ -46,6 +46,8 @@
     <Compile Include="Core\Boolean3.cs" />
     <Compile Include="Core\Bounds.cs" />
     <Compile Include="Core\Bounds2.cs" />
+    <Compile Include="Core\Index3.cs" />
+    <Compile Include="Core\Index4.cs" />
     <Compile Include="Core\Operators.cs" />
     <Compile Include="Core\Bounds3.cs" />
     <Compile Include="Core\Complex.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Core\Functions.cs" />
     <Compile Include="Core\Matrix3.cs" />
+    <Compile Include="Drawing\Rgba.cs" />
     <Compile Include="Geometry\Box3.cs" />
     <Compile Include="Geometry\Collision.cs" />
     <Compile Include="Geometry\GilbertJohnsonKeerthi2.cs" />

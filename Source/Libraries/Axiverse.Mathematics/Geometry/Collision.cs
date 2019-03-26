@@ -6,9 +6,26 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.Geometry
 {
-    // http://www.realtimerendering.com/intersections.html
+    /// <summary>
+    /// Collisions
+    /// </summary>
+    /// <remarks>
+    /// http://www.realtimerendering.com/intersections.html
+    /// </remarks>
     public static class Collision
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ra"></param>
+        /// <param name="A0"></param>
+        /// <param name="A1"></param>
+        /// <param name="rb"></param>
+        /// <param name="B0"></param>
+        /// <param name="B1"></param>
+        /// <param name="u0"></param>
+        /// <param name="u1"></param>
+        /// <returns></returns>
         public static bool SweptSphereSphere(float ra, Vector3 A0, Vector3 A1, float rb, Vector3 B0, Vector3 B1, out float u0, out float u1)
         {
             // http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php?page=2

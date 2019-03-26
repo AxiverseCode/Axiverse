@@ -64,13 +64,7 @@ namespace Axiverse.Resources
             return File.OpenRead(GetPath(path));
 
         }
-
-
-
-
-
-
-
+        
         protected string GetPath(string path)
         {
             return Path.Combine(BasePath, path);

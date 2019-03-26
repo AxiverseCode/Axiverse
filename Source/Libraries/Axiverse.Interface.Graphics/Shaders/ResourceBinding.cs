@@ -112,7 +112,8 @@ namespace Axiverse.Interface.Graphics.Shaders
 
         public void Apply(IBindingProvider bindings, IntPtr data)
         {
-            if (bindings.TryGetValue(Key, out var structure))
+            var structure = bindings[Key];
+            if (structure != null)
             {
                 // No deletion of old data because we only allow value types.
                 Marshal.StructureToPtr(structure, data + Offset, false);
