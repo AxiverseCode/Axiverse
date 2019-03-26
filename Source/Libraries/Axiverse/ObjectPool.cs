@@ -1,8 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
 using System.Collections.Concurrent;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Axiverse
 {
@@ -37,11 +35,15 @@ namespace Axiverse
             return Create();
         }
 
-        public ObjectPool()
-        {
+        /// <summary>
+        /// Constructs an object pool.
+        /// </summary>
+        public ObjectPool() { }
 
-        }
-
+        /// <summary>
+        /// Constructs an object pool with the given activator function.
+        /// </summary>
+        /// <param name="activator"></param>
         public ObjectPool(Func<T> activator)
         {
             Activator = activator;
