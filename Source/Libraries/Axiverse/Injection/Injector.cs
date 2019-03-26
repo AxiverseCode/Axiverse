@@ -3,14 +3,17 @@ using System.Diagnostics.Contracts;
 
 namespace Axiverse.Injection
 {
-    public class Injector
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Injector : IBindingProvider
     {
-        public BindingDictionary Bindings { get; } = new BindingDictionary();
+        private BindingDictionary Bindings { get; } = new BindingDictionary();
         
         /// <summary>
-        /// Gets or sets whether injects should automatically cascade into creating other injects.
+        /// Gets or sets whether absent keys should be automatically activated.
         /// </summary>
-        public bool Cascade { get; set; }
+        public bool Activate { get; set; }
 
         /// <summary>
         /// Gets or sets a fallback injector to use if a binding is not found in this injector.
@@ -25,32 +28,65 @@ namespace Axiverse.Injection
             Bind(this);
         }
 
+        /// <summary>
+        /// Binds the specified value using the default typed binding.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
         public void Bind<T>(T value)
         {
             Bindings.Add(value);
         }
 
+        /// <summary>
+        /// Binds the specified value using the given key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Bind(Key key, object value)
         {
             Bindings.Add(key, value);
         }
 
+        /// <summary>
+        /// Binds the specified value using the given name.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
         public void Bind<T>(string name, T value)
         {
             Bindings.Add(Key.From(typeof(T), name), value);
         }
 
+        /// <summary>
+        /// Resolves a binding using the default typed key.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Resolve<T>()
         {
             return (T)Resolve(Key.From(typeof(T)));
         }
 
+        /// <summary>
+        /// Resolves a binding using the given key. The type of the key must match the templated
+        /// type of the method.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public T Resolve<T>(Key key)
         {
             Contract.Requires<InvalidCastException>(typeof(T).IsAssignableFrom(key.Type));
             return (T)Resolve(key);
         }
 
+        /// <summary>
+        /// Resolves a binding using the given key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public object Resolve(Key key)
         {
             // Try resolving from bound objects.
@@ -67,14 +103,22 @@ namespace Axiverse.Injection
             }
 
             // If cascade is enabled try to inject the type.
-            if (Cascade)
+            if (Activate)
             {
-                // TODO(axiverse): install on arbitrary key?
-                // return Inject(key.Type);
+                var constructed = Binder.Activate(key.Type, this);
+                Bind(key, constructed);
+                return constructed;
             }
 
             return null;
         }
+
+        /// <summary>
+        /// Resolves the key.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        object IBindingProvider.this[Key key] => Resolve(key);
 
         /// <summary>
         /// Gets the global injector for the application.

@@ -34,14 +34,14 @@ namespace Axiverse.Modules
 
         protected T Bind<T>()
         {
-            var value = Binder.Activate<T>(Injector.Bindings);
+            var value = Binder.Activate<T>(Injector);
             Injector.Bind(Key.From(typeof(T)), value);
             return value;
         }
 
         protected T Activate<T>()
         {
-            return Binder.Activate<T>(Injector.Bindings);
+            return Binder.Activate<T>(Injector);
         }
     }
 }

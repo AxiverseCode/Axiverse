@@ -52,7 +52,6 @@
     <Compile Include="Collections\TrackedList.cs" />
     <Compile Include="DisposableObjectPool.cs" />
     <Compile Include="Injection\BindAttribute.cs" />
-    <Compile Include="Injection\BindingHierarchy.cs" />
     <Compile Include="Injection\IBindingProvider.cs" />
     <Compile Include="Injection\InjectAttribute.cs" />
     <Compile Include="Injection\Injector.cs" />

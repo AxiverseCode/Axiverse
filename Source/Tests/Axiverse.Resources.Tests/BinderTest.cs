@@ -17,6 +17,8 @@ namespace Axiverse.Resources.Tests
         public void SetUp()
         {
             injector = new Injector();
+            injector.Activate = false;
+
             injector.Bind("public field", "public-field");
             injector.Bind("protected field", "protected-field");
             injector.Bind("private field", "private-field");
@@ -32,7 +34,7 @@ namespace Axiverse.Resources.Tests
         {
             var value = new BindingTester();
 
-            Binder.Bind(ref value, injector.Bindings);
+            Binder.Bind(ref value, injector);
 
             Assert.AreEqual("public-field", value.BoundPublicField);
             Assert.AreEqual("protected-field", value.BoundProtectedField);
@@ -46,7 +48,7 @@ namespace Axiverse.Resources.Tests
         [Test]
         public void Activate()
         {
-            var value = Binder.Activate<ActivationTester>(injector.Bindings);
+            var value = Binder.Activate<ActivationTester>(injector);
 
             Assert.IsTrue(value.Constructed);
             Assert.IsNull(value.PublicField);

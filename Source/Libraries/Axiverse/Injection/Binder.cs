@@ -113,7 +113,8 @@ namespace Axiverse.Injection
         }
 
         /// <summary>
-        /// Gets the constructor to use for activation.
+        /// Gets the constructor to use for activation. This is either the sole constructor with
+        /// the <see cref="InjectAttribute"/> or the default constructor.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>

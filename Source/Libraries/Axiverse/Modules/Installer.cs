@@ -50,7 +50,7 @@ namespace Axiverse.Modules
                 Install(dependency);
             }
 
-            var module = Injection.Binder.Activate(type, Injector.Bindings) as Module;
+            var module = Injection.Binder.Activate(type, Injector) as Module;
             module.Injector = Injector;
             module.Initialize();
 
