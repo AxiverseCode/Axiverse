@@ -11,7 +11,8 @@ namespace Axiverse.Injection
         private BindingDictionary Bindings { get; } = new BindingDictionary();
         
         /// <summary>
-        /// Gets or sets whether absent keys should be automatically activated.
+        /// Gets or sets whether absent keys should be automatically activated. Will only activate
+        /// simple typed keys and won't activate named or attributed keys.
         /// </summary>
         public bool Activate { get; set; }
 
@@ -102,8 +103,8 @@ namespace Axiverse.Injection
                 return binding;
             }
 
-            // If cascade is enabled try to inject the type.
-            if (Activate)
+            // If cascade is enabled try to inject the type. Must be just a typed key.
+            if (Activate && key.GetType() == typeof(Key))
             {
                 var constructed = Binder.Activate(key.Type, this);
                 Bind(key, constructed);

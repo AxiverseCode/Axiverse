@@ -33,11 +33,13 @@ namespace Axiverse.Injection
         }
 
         /// <summary>
-        /// Constructs a <see cref="SyntheticKey"/> with the given display name.
+        /// Constructs a <see cref="SyntheticKey"/> with the given display name. Different unique
+        /// <see cref="SyntheticKey"/>s can have the same name. It has no effect on injection and
+        /// is used purely for developmental purposes.
         /// </summary>
         /// <param name="type"></param>
         /// <param name="name"></param>
-        protected internal SyntheticKey(Type type, String name) : this(type)
+        protected internal SyntheticKey(Type type, string name) : this(type)
         {
             Name = name;
         }
