@@ -59,6 +59,14 @@
     <Compile Include="Library.cs" />
     <Compile Include="Deprecated\Mount.cs" />
     <Compile Include="MemoryStore.cs" />
+    <Compile Include="New\Buffer.cs" />
+    <Compile Include="New\Directory.cs" />
+    <Compile Include="New\IDeserializer.cs" />
+    <Compile Include="New\IMount.cs" />
+    <Compile Include="New\ITypeDeserializer.cs" />
+    <Compile Include="New\Library.cs" />
+    <Compile Include="New\TypeDeserializer.cs" />
+    <Compile Include="New\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceModule.cs" />
     <Compile Include="StoreCollection.cs" />

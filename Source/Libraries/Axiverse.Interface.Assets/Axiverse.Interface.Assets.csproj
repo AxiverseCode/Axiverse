@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="M3\M3Deserializer.cs" />
+    <Compile Include="M3\M3Module.cs" />
     <Compile Include="Models\WavefrontObjLoader.cs" />
     <Compile Include="Models\WavefrontObjMesh.cs" />
-    <Compile Include="Module.cs" />
+    <Compile Include="AssetsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

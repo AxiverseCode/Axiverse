@@ -8,7 +8,7 @@ using Axiverse.Interface.Assets.Models;
 
 namespace Axiverse.Interface.Assets
 {
-    public class Module : Modules.Module
+    public class AssetsModule : Modules.Module
     {
         protected override void Initialize()
         {

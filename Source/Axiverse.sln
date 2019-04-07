@@ -104,6 +104,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Deployment\Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Services", "Services\Axiverse.Services\Axiverse.Services.csproj", "{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiverse.Interface2", "Libraries\Axiverse.Interface2\Axiverse.Interface2.csproj", "{643DE5B3-D035-45BF-9483-4C63ECFC5863}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -262,6 +264,10 @@ Global
 		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{643DE5B3-D035-45BF-9483-4C63ECFC5863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643DE5B3-D035-45BF-9483-4C63ECFC5863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643DE5B3-D035-45BF-9483-4C63ECFC5863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643DE5B3-D035-45BF-9483-4C63ECFC5863}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -307,6 +313,7 @@ Global
 		{675E2A2F-3115-436D-B4D0-B5D80CC04553} = {927FED4B-50ED-4FFB-A790-5624F5519777}
 		{C85E1444-83D0-4120-A789-7671D5C8A560} = {30F4E4F2-CBE5-461F-99BE-ECD77E691898}
 		{F63C4B60-A3AE-4C54-910C-A46FD2D1A409} = {E0C0FCA7-0649-4401-847A-46F2D5104DB9}
+		{643DE5B3-D035-45BF-9483-4C63ECFC5863} = {AAE6C854-9031-4394-9995-EE38B6088F37}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA2998DE-E2E3-44CE-8F1A-AF68572B3E0D}
