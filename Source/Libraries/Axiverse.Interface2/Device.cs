@@ -27,8 +27,8 @@ namespace Axiverse.Interface2
         private DepthStencilView depthStencilView;
 
         private RasterizerState rasterizerState;
-        private BlendState blendState;
-        private DepthStencilState depthStencilState;
+        public BlendState blendState;
+        public DepthStencilState depthStencilState;
         private SamplerState samplerState;
 
         public RenderForm View { get; set; }
@@ -44,7 +44,7 @@ namespace Axiverse.Interface2
                 BufferCount = 1,//buffer count
                 ModeDescription =
                     new ModeDescription(View.ClientSize.Width, View.ClientSize.Height,
-                        new Rational(60, 1), Format.R8G8B8A8_UNorm),
+                        new Rational(60, 1), Format.B8G8R8A8_UNorm),
                 IsWindowed = true,
                 OutputHandle = View.Handle,
                 SampleDescription = new SampleDescription(1, 0),
@@ -77,6 +77,7 @@ namespace Axiverse.Interface2
             {
                 Utilities.Dispose(ref rasterizerState);
                 RasterizerStateDescription rasterDescription = RasterizerStateDescription.Default();
+                rasterDescription.CullMode = CullMode.None;
                 rasterizerState = new RasterizerState(NativeDevice, rasterDescription);
                 NativeDeviceContext.Rasterizer.State = rasterizerState;
             }
@@ -118,6 +119,16 @@ namespace Axiverse.Interface2
             Resize();
         }
 
+        public void SetBlendState(BlendState blendState)
+        {
+            NativeDeviceContext.OutputMerger.SetBlendState(blendState);
+        }
+
+        public void SetDepthStencil(DepthStencilState depthStencilState)
+        {
+            NativeDeviceContext.OutputMerger.SetDepthStencilState(depthStencilState);
+        }
+
         public void Start()
         {
             if (ResizeBuffers)
@@ -138,7 +149,7 @@ namespace Axiverse.Interface2
                 return;
 
             // Resize the backbuffer
-            swapChain.ResizeBuffers(1, View.ClientSize.Width, View.ClientSize.Height, Format.R8G8B8A8_UNorm, SwapChainFlags.None);
+            swapChain.ResizeBuffers(1, View.ClientSize.Width, View.ClientSize.Height, Format.B8G8R8A8_UNorm, SwapChainFlags.None);
 
             // Get the backbuffer from the swapchain
             var backBufferTexture = swapChain.GetBackBuffer<Texture2D11>(0);

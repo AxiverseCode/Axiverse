@@ -15,17 +15,23 @@ namespace Axiverse.Interface2
         public Device Device { get; set; }
         public VertexShader VertexShader { get; set; }
         public PixelShader PixelShader { get; set; }
+        public GeometryShader GeometryShader { get; set; }
         public InputLayout Layout { get; set; }
 
-        public Shader(Device device, string path, string vertexEntry, string pixelEntry, InputElement[] elements)
+        public Shader(Device device, string path, string vertexEntry, string pixelEntry, InputElement[] elements, string geometryEntry = null)
         {
             Device = device;
             var vsBytecode = ShaderBytecode.CompileFromFile(path, vertexEntry, "vs_5_0");
             VertexShader = new VertexShader(device.NativeDevice, vsBytecode);
 
+            if (geometryEntry != null)
+            {
+                var gsBytecode = ShaderBytecode.CompileFromFile(path, geometryEntry, "gs_5_0");
+                GeometryShader = new GeometryShader(device.NativeDevice, gsBytecode);
+            }
+
             var psBytecode = ShaderBytecode.CompileFromFile(path, pixelEntry, "ps_5_0");
             PixelShader = new PixelShader(device.NativeDevice, psBytecode);
-
 
             var signature = ShaderSignature.GetInputSignature(vsBytecode);
             Layout = new InputLayout(device.NativeDevice, signature, elements);
@@ -39,7 +45,7 @@ namespace Axiverse.Interface2
             Device.NativeDeviceContext.InputAssembler.InputLayout = Layout;
             Device.NativeDeviceContext.VertexShader.Set(VertexShader);
             Device.NativeDeviceContext.PixelShader.Set(PixelShader);
-            Device.NativeDeviceContext.GeometryShader.Set(null);
+            Device.NativeDeviceContext.GeometryShader.Set(GeometryShader);
             Device.NativeDeviceContext.DomainShader.Set(null);
             Device.NativeDeviceContext.HullShader.Set(null);
         }
@@ -59,6 +65,7 @@ namespace Axiverse.Interface2
         public void Dispose()
         {
             VertexShader?.Dispose();
+            GeometryShader?.Dispose();
             PixelShader?.Dispose();
             Layout?.Dispose();
         }

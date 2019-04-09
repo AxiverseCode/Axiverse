@@ -22,6 +22,22 @@ namespace Axiverse
                 Math.Abs(value.Z));
         }
 
+        public static Vector3 Pow(Vector3 value, float exponent)
+        {
+            return new Vector3(
+                (float)Math.Pow(value.X, exponent),
+                (float)Math.Pow(value.Y, exponent),
+                (float)Math.Pow(value.Z, exponent));
+        }
+
+        public static Vector3 Pow(Vector3 value, Vector3 exponent)
+        {
+            return new Vector3(
+                (float)Math.Pow(value.X, exponent.X),
+                (float)Math.Pow(value.Y, exponent.Y),
+                (float)Math.Pow(value.Z, exponent.Z));
+        }
+
         /// <summary>
         /// Calculates the sine function of the value.
         /// </summary>

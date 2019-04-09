@@ -29,8 +29,8 @@ namespace Axiverse.Physics
         private Vector3 angularFactor = Vector3.One;
 
         // artificial factor at which velocities are attenuated
-        private Vector3 linearDampening = Vector3.One;
-        private Vector3 angularDampening = Vector3.One;
+        private Vector3 linearDamping = Vector3.Zero;
+        private Vector3 angularDamping = Vector3.Zero;
 
         private float mass = 1; // not used in calc
         private float inverseMass = 1;
@@ -43,7 +43,7 @@ namespace Axiverse.Physics
         private Shape collisionShape;
 
         /// <summary>
-        /// Gets or sets the linear position of the body.
+        /// Gets or sets the linear position of the body in global frame.
         /// </summary>
         public Vector3 LinearPosition
         {
@@ -52,7 +52,7 @@ namespace Axiverse.Physics
         }
 
         /// <summary>
-        /// Gets or sets the angular position of the body.
+        /// Gets or sets the angular position of the body in global frame.
         /// </summary>
         public Quaternion AngularPosition
         {
@@ -61,7 +61,7 @@ namespace Axiverse.Physics
         }
 
         /// <summary>
-        /// Gets or sets the linear velocity of the body.
+        /// Gets or sets the linear velocity of the body in global frame.
         /// </summary>
         public Vector3 LinearVelocity
         {
@@ -70,7 +70,7 @@ namespace Axiverse.Physics
         }
 
         /// <summary>
-        /// Gets or sets the angular velociety of the body.
+        /// Gets or sets the angular velociety of the body in global frame.
         /// </summary>
         public Vector3 AngularVelocity
         {
@@ -83,8 +83,8 @@ namespace Axiverse.Physics
         /// </summary>
         public Vector3 LinearDampening
         {
-            get => linearDampening;
-            set => linearDampening = value;
+            get => linearDamping;
+            set => linearDamping = value;
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace Axiverse.Physics
         /// </summary>
         public Vector3 AngularDampening
         {
-            get => angularDampening;
-            set => angularDampening = value;
+            get => angularDamping;
+            set => angularDamping = value;
         }
         /// <summary>
         /// Gets or sets the mass of the body.
@@ -163,9 +163,8 @@ namespace Axiverse.Physics
             // angular
             angularVelocity += Matrix3.Transform(inverseInertiaTensorWorld, totalTorque) * delta;
 
-            // dampening
-            linearVelocity = linearVelocity * linearDampening;
-            angularVelocity = angularVelocity * angularDampening;
+            // damping
+            ApplyDamping(delta);
         }
 
         /// <summary>
@@ -202,6 +201,17 @@ namespace Axiverse.Physics
             angularPosition = (deltaOrientation * angularPosition).Normal();
 
             Requires.IsNotNaN(AngularPosition);
+        }
+
+        /// <summary>
+        /// Applies damping to velocities.
+        /// </summary>
+        /// <param name="delta"></param>
+        private void ApplyDamping(float delta)
+        {
+            // damping
+            linearVelocity = linearVelocity * Functions.Pow(Vector3.One - linearDamping, delta);
+            angularVelocity = angularVelocity * Functions.Pow(Vector3.One - angularDamping, delta);
         }
 
         /// <summary>
@@ -329,15 +339,28 @@ namespace Axiverse.Physics
         }
 
         /// <summary>
-        /// Applies a force at a local position on the body. Can cause linear and/or angular
+        /// Applies a force at a global position on the body. Can cause linear and/or angular
         /// changes.
         /// </summary>
         /// <param name="globalForce"></param>
         /// <param name="relativeGlobalPosition"></param>
-        public void AccumulateForce(Vector3 globalForce, Vector3 relativeGlobalPosition)
+        public void AccumulateGlobalForce(Vector3 globalForce, Vector3 relativeGlobalPosition)
         {
             AccumulateGlobalCentralForce(globalForce);
             AccumulateGlobalTorque(relativeGlobalPosition % globalForce * linearFactor);
+        }
+
+        /// <summary>
+        /// Applies a force at a local position on the body. Can cause linear and/or angular
+        /// changes.
+        /// </summary>
+        /// <param name="localForce"></param>
+        /// <param name="relativeLocalPosition"></param>
+        public void AccumulateLocalForce(Vector3 localForce, Vector3 relativeLocalPosition)
+        {
+            AccumulateGlobalForce(
+                AngularPosition.Transform(localForce),
+                AngularPosition.Transform(relativeLocalPosition));
         }
 
         /// <summary>
@@ -391,11 +414,19 @@ namespace Axiverse.Physics
             return inverseMass + Vector3.Dot(normal, v);
         }
 
+        /// <summary>
+        /// Calculates the bounds of the body.
+        /// </summary>
+        /// <returns></returns>
         public Bounds3 CalculateBounds()
         {
             return CollisionShape.CalculateBounds(Matrix4.Transformation(Vector3.One, AngularPosition, LinearPosition));
         }
 
+        /// <summary>
+        /// Gets a string representation of the body.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Body 𝑥:{LinearPosition}, ω:{AngularPosition}";

@@ -10,14 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Texture2D11 = SharpDX.Direct3D11.Texture2D;
+using Device2D = SharpDX.Direct2D1.Device;
+using Factory2D = SharpDX.Direct2D1.Factory1;
+using DeviceGI = SharpDX.DXGI.Device;
 
 namespace Axiverse.Interface2
 {
     public class Canvas : IDisposable
     {
         public Device Device { get; }
+        public Device2D NativeDevice { get; set; }
+        public Factory2D NativeFactory { get; set; }
+        public DeviceContext NativeDeviceContext { get; set; }
 
-        public RenderTarget RenderTarget { get; set; }
+        public Bitmap1 Target { get; set; }
         public TextFormat TextFormat { get; set; }
         public SolidColorBrush Brush { get; set; }
 
@@ -32,6 +38,14 @@ namespace Axiverse.Interface2
         internal Canvas(Device device)
         {
             Device = device;
+
+            NativeFactory = new SharpDX.Direct2D1.Factory1(SharpDX.Direct2D1.FactoryType.SingleThreaded, DebugLevel.Information);
+
+            using (var dxgiDevice = device.NativeDevice.QueryInterface<DeviceGI>())
+                NativeDevice = new Device2D(NativeFactory, dxgiDevice);
+
+            NativeDeviceContext = new DeviceContext(NativeDevice, DeviceContextOptions.None);
+
         }
 
 
@@ -40,7 +54,7 @@ namespace Axiverse.Interface2
         /// </summary>
         public void Begin()
         {
-            RenderTarget.BeginDraw();
+            NativeDeviceContext.BeginDraw();
         }
 
         /// <summary>
@@ -48,7 +62,7 @@ namespace Axiverse.Interface2
         /// </summary>
         public void End()
         {
-            RenderTarget.EndDraw();
+            NativeDeviceContext.EndDraw();
         }
 
         /// <summary>
@@ -57,13 +71,15 @@ namespace Axiverse.Interface2
         /// <param name="backBuffer">BackBuffer</param>
         internal void UpdateResources(Texture2D11 backBuffer)
         {
+            using (var surface2D = backBuffer.QueryInterface<Surface>())
+            {
 
-            var factory2D = new SharpDX.Direct2D1.Factory();
-            var surface2D = backBuffer.QueryInterface<Surface>();
-            RenderTarget = new RenderTarget(factory2D, surface2D, 
-                new RenderTargetProperties(new PixelFormat(Format.Unknown, SharpDX.Direct2D1.AlphaMode.Premultiplied)));
-            surface2D.Dispose();
-            factory2D.Dispose();
+                var dpi = NativeFactory.DesktopDpi;
+                Target = new Bitmap1(NativeDeviceContext, surface2D,
+                    new BitmapProperties1(new PixelFormat(
+                        Format.Unknown, SharpDX.Direct2D1.AlphaMode.Premultiplied), dpi.Height, dpi.Width, BitmapOptions.CannotDraw | BitmapOptions.Target));
+                NativeDeviceContext.Target = Target;
+            }
 
             InitializeFont();
         }
@@ -75,7 +91,7 @@ namespace Axiverse.Interface2
                 TextAlignment = TextAlignment.Leading,
                 ParagraphAlignment = ParagraphAlignment.Near
             };
-            Brush = new SolidColorBrush(RenderTarget, fontColor);
+            Brush = new SolidColorBrush(NativeDeviceContext, fontColor);
             factoryWrite.Dispose();
         }
 
@@ -89,7 +105,15 @@ namespace Axiverse.Interface2
         /// <param name="height">Max heigh</param>
         public void DrawString(string text, int x, int y, int width = 800, int height = 600)
         {
-            RenderTarget.DrawText(text, TextFormat, new RawRectangleF(x, y, width, height), Brush);
+            NativeDeviceContext.DrawText(text, TextFormat, new RawRectangleF(x, y, width, height), Brush);
+        }
+
+        public void DrawImage(Image2D image, Vector2 location)
+        {
+            var previous = NativeDeviceContext.Transform;
+            NativeDeviceContext.Transform = Matrix3x2.Multiply(NativeDeviceContext.Transform, Matrix3x2.Translation(new SharpDX.Vector2(location.X, location.Y)));
+            NativeDeviceContext.DrawBitmap(image.nativeBitmap, 1.0f, BitmapInterpolationMode.Linear);
+            NativeDeviceContext.Transform = previous;
         }
 
         /// <summary>
@@ -97,12 +121,13 @@ namespace Axiverse.Interface2
         /// </summary>
         public void Dispose()
         {
+            NativeDeviceContext.Target = null;
             TextFormat?.Dispose();
             TextFormat = null;
             Brush?.Dispose();
             Brush = null;
-            RenderTarget?.Dispose();
-            RenderTarget = null;
+            Target?.Dispose();
+            Target = null;
         }
     }
 }
