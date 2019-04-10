@@ -12,6 +12,7 @@ namespace Axiverse.Interface2.Assets
     public class WavefrontObjLoader
     {
         public List<Vertex> VertexList;
+        public List<VertexNormal> NormalList;
         public List<Face> FaceList;
         public List<TextureVertex> TextureList;
 
@@ -23,6 +24,7 @@ namespace Axiverse.Interface2.Assets
         public WavefrontObjLoader()
         {
             VertexList = new List<Vertex>();
+            NormalList = new List<VertexNormal>();
             FaceList = new List<Face>();
             TextureList = new List<TextureVertex>();
         }
@@ -69,6 +71,10 @@ namespace Axiverse.Interface2.Assets
                         v.Index = VertexList.Count();
                         break;
                     case "vn":
+                        VertexNormal vn = new VertexNormal();
+                        vn.LoadFromStringArray(parts);
+                        NormalList.Add(vn);
+                        vn.Index = NormalList.Count();
                         break;
                     case "s":
                         break;
@@ -145,6 +151,54 @@ namespace Axiverse.Interface2.Assets
                 return string.Format("v {0} {1} {2}", X, Y, Z);
             }
         }
+        public class VertexNormal : IType
+        {
+            public const int MinimumDataLength = 4;
+            public const string Prefix = "vn";
+
+            public double X { get; set; }
+
+            public double Y { get; set; }
+
+            public double Z { get; set; }
+
+            public int Index { get; set; }
+
+            public Vector3 Vector;
+
+            public void LoadFromStringArray(string[] data)
+            {
+                if (data.Length < MinimumDataLength)
+                    throw new ArgumentException("Input array must be of minimum length " + MinimumDataLength, "data");
+
+                if (!data[0].ToLower().Equals(Prefix))
+                    throw new ArgumentException("Data prefix must be '" + Prefix + "'", "data");
+
+                bool success;
+
+                double x, y, z;
+
+                success = double.TryParse(data[1], NumberStyles.Any, CultureInfo.InvariantCulture, out x);
+                if (!success) throw new ArgumentException("Could not parse X parameter as double");
+
+                success = double.TryParse(data[2], NumberStyles.Any, CultureInfo.InvariantCulture, out y);
+                if (!success) throw new ArgumentException("Could not parse Y parameter as double");
+
+                success = double.TryParse(data[3], NumberStyles.Any, CultureInfo.InvariantCulture, out z);
+                if (!success) throw new ArgumentException("Could not parse Z parameter as double");
+
+                X = x;
+                Y = y;
+                Z = z;
+
+                Vector = new Vector3((float)x, (float)y, (float)z);
+            }
+
+            public override string ToString()
+            {
+                return string.Format("vn {0} {1} {2}", X, Y, Z);
+            }
+        }
 
         public class Face : IType
         {
@@ -153,6 +207,7 @@ namespace Axiverse.Interface2.Assets
 
             public string UseMtl { get; set; }
             public int[] VertexIndexList { get; set; }
+            public int[] NormalVertexIndexList { get; set; }
             public int[] TextureVertexIndexList { get; set; }
 
             public void LoadFromStringArray(string[] data)
@@ -165,6 +220,7 @@ namespace Axiverse.Interface2.Assets
 
                 int vcount = data.Count() - 1;
                 VertexIndexList = new int[vcount];
+                NormalVertexIndexList = new int[vcount];
                 TextureVertexIndexList = new int[vcount];
 
                 bool success;
@@ -184,6 +240,15 @@ namespace Axiverse.Interface2.Assets
                         if (success)
                         {
                             TextureVertexIndexList[i] = vindex;
+                        }
+                    }
+
+                    if (parts.Count() > 2)
+                    {
+                        success = int.TryParse(parts[2], NumberStyles.Any, CultureInfo.InvariantCulture, out vindex);
+                        if (success)
+                        {
+                            NormalVertexIndexList[i] = vindex;
                         }
                     }
                 }

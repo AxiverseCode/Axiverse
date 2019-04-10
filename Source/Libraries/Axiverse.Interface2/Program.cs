@@ -29,7 +29,6 @@ namespace Axiverse.Interface2
         }
 
         public static Stopwatch watch = new Stopwatch();
-        static int frame = 0;
 
         static Matrix4 Convert (Matrix m)
         {
@@ -61,6 +60,7 @@ namespace Axiverse.Interface2
                 Matrix4 wvp = new Matrix4();
                 float ratio = (float)form.ClientRectangle.Width / form.ClientRectangle.Height;
                 Matrix projection = Matrix.PerspectiveFovLH(3.14F / 3.0F, ratio, 1, 1000);
+                Axiverse.Vector3 camera = new Axiverse.Vector3(0, -10, -50);
                 Matrix view = Matrix.LookAtLH(new Vector3(0, -10, -50), new Vector3(), Vector3.UnitY);
 
                 form.MouseMove += (s, e) =>
@@ -110,6 +110,7 @@ namespace Axiverse.Interface2
 
                 Shader particleShader = new Shader(device, "../../Particles.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements, "GS");
                 Constants constants = new Constants();
+                var pbr = new Pbr(device);
 
                 Entity shipEntity;
                 entities.Add(shipEntity = new Entity() {
@@ -158,13 +159,13 @@ namespace Axiverse.Interface2
                     device.NativeDeviceContext.PixelShader.SetShaderResource(0, texture);
 
                     //apply shader
-                    shader.Apply();
-
+                    //shader.Apply();
                     //draw mesh
                     foreach (var entity in entities)
                     {
                         entity.Update(dt / 10f);
 
+                        pbr.Setup(Convert(entity.Mesh.Transform * entity.Transform * world), Convert(view), Convert(projection), camera);
 
                         if (ray.Distance(entity.Body.LinearPosition) < 1)
                         {
@@ -174,6 +175,11 @@ namespace Axiverse.Interface2
                         device.UpdateData(buffer, constants);
 
                         entity.Mesh.Draw();
+
+                        shader.Apply();
+                        device.NativeDeviceContext.VertexShader.SetConstantBuffer(0, buffer);
+                        device.NativeDeviceContext.GeometryShader.SetConstantBuffer(0, buffer);
+                        device.NativeDeviceContext.PixelShader.SetShaderResource(0, texture);
 
                         constants.color = Vector4.Zero;
                         constants.worldViewProj = entity.Transform * worldViewProjection;
@@ -214,7 +220,6 @@ namespace Axiverse.Interface2
 
                     device.Canvas.Begin();
                     {
-                        frame++;
                         while (frametime.Count > 20)
                         {
                             frametime.Dequeue();

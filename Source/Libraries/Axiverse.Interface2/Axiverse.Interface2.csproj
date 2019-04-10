@@ -77,6 +77,7 @@
     <Compile Include="Image2D.cs" />
     <Compile Include="Mesh.cs" />
     <Compile Include="Particles.cs" />
+    <Compile Include="Pbr.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shader.cs" />
@@ -108,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Particles.hlsl" />
+    <Content Include="Pbr.hlsl" />
     <Content Include="Ribbon.hlsl" />
     <Content Include="Shader.hlsl" />
   </ItemGroup>

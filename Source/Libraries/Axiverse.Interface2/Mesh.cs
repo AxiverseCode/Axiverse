@@ -92,12 +92,22 @@ namespace Axiverse.Interface2
         public struct ColoredTexturedVertex
         {
             public Vector3 Position;
+            public Vector3 Normal;
             public Vector4 Color;
             public Vector2 Texture;
 
             public ColoredTexturedVertex(Vector3 position, Vector4 color, Vector2 texture)
             {
                 Position = position;
+                Normal = Vector3.Zero;
+                Color = color;
+                Texture = texture;
+            }
+
+            public ColoredTexturedVertex(Vector3 position, Vector3 normal, Vector4 color, Vector2 texture)
+            {
+                Position = position;
+                Normal = normal;
                 Color = color;
                 Texture = texture;
             }
@@ -105,8 +115,9 @@ namespace Axiverse.Interface2
             public static readonly int Stride = Utilities.SizeOf<ColoredTexturedVertex>();
             public static readonly InputElement[] Elements = new InputElement[] {
                     new InputElement("POSITION", 0, Format.R32G32B32_Float, 0, 0),
-                    new InputElement("COLOR", 0, Format.R32G32B32A32_Float, 12, 0),
-                    new InputElement("TEXCOORD", 0, Format.R32G32_Float, 28, 0)
+                    new InputElement("NORMAL", 0, Format.R32G32B32_Float, 12, 0),
+                    new InputElement("COLOR", 0, Format.R32G32B32A32_Float, 24, 0),
+                    new InputElement("TEXCOORD", 0, Format.R32G32_Float, 40, 0)
                 };
         }
 
@@ -262,19 +273,20 @@ namespace Axiverse.Interface2
             foreach (var face in loader.FaceList)
             {
                 var v = face.VertexIndexList;
+                var n = face.NormalVertexIndexList;
                 var t = face.TextureVertexIndexList;
 
-                vertices[i + 0] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
-                vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[1] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[1] - 1].Vector };
-                vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
+                vertices[i + 0] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Normal = loader.NormalList[n[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
+                vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[1] - 1].Vector, Normal = loader.NormalList[n[1] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[1] - 1].Vector };
+                vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Normal = loader.NormalList[n[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
 
                 i += 3;
 
                 if (v.Length == 4)
                 {
-                    vertices[i + 0] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
-                    vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[3] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[3] - 1].Vector };
-                    vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
+                    vertices[i + 0] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Normal = loader.NormalList[n[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
+                    vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[3] - 1].Vector, Normal = loader.NormalList[n[3] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[3] - 1].Vector };
+                    vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Normal = loader.NormalList[n[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
 
                     i += 3;
                 }
