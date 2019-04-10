@@ -570,11 +570,11 @@ namespace Axiverse
 
         public static Vector4 Transform(Vector4 vector, Matrix4 matrix)
         {
-            Transform(out var result, ref vector, ref matrix);
+            Transform(ref vector, ref matrix, out var result);
             return result;
         }
 
-        public static void Transform(out Vector4 result, ref Vector4 vector, ref Matrix4 matrix)
+        public static void Transform(ref Vector4 vector, ref Matrix4 matrix, out Vector4 result)
         {
             result = new Vector4(
                 (vector.X * matrix.M11) + (vector.Y * matrix.M21) + (vector.Z * matrix.M31) + (vector.W * matrix.M41),
@@ -585,7 +585,7 @@ namespace Axiverse
 
         public static Vector4 Transform(Matrix4 matrix, Vector4 vector)
         {
-            TransposedTransform(out var result, ref vector, ref matrix);
+            TransposedTransform(ref vector, ref matrix, out var result);
             return result;
         }
 
@@ -603,7 +603,7 @@ namespace Axiverse
                 (vector.X * matrix.M13) + (vector.Y * matrix.M23) + (vector.Z * matrix.M33) + (matrix.M43));
         }
 
-        public static void TransposedTransform(out Vector4 result, ref Vector4 vector, ref Matrix4 matrix)
+        public static void TransposedTransform( ref Vector4 vector, ref Matrix4 matrix, out Vector4 result)
         {
             result = new Vector4(
                 (vector.X * matrix.M11) + (vector.Y * matrix.M12) + (vector.Z * matrix.M13) + (vector.W * matrix.M14),
@@ -684,7 +684,7 @@ namespace Axiverse
         /// <returns></returns>
         public static Vector4 operator *(Vector4 vector, Matrix4 matrix)
         {
-            Transform(out var result, ref vector, ref matrix);
+            Transform(ref vector, ref matrix, out var result);
             return result;
         }
 
@@ -697,7 +697,7 @@ namespace Axiverse
         public static Vector3 operator *(Vector3 vector, Matrix4 matrix)
         {
             var vector4 = new Vector4(vector, 1.0f);
-            Transform(out var result, ref vector4, ref matrix);
+            Transform(ref vector4, ref matrix, out var result);
             return new Vector3(result.X, result.Y, result.Z);
         }
 

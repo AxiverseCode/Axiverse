@@ -32,10 +32,22 @@ namespace Axiverse.Mathematics
             Direction = direction;
         }
 
-        public static Ray3 FromScreen(int x, int y, Viewport viewport, Matrix4 worldViewProjection)
+        public override string ToString()
         {
-            var near = new Vector3(x, y, 0);
-            var far = new Vector3(x, y, 1);
+            return $"Origin { Origin }, Direction { Direction }";
+        }
+
+        public float Distance(Vector3 point)
+        {
+            float distance = Vector3.Distance(Origin, point);
+            float angle = Vector3.Angle(Direction, point - Origin);
+            return distance * Functions.Sin(angle);
+        }
+
+        public static Ray3 FromScreen(float x, float y, Viewport viewport, Matrix4 worldViewProjection)
+        {
+            var near = new Vector3(x, y, viewport.Near);
+            var far = new Vector3(x, y, viewport.Far);
 
             near = Vector3.Unproject(
                 near,

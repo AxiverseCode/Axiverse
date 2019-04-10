@@ -10,11 +10,16 @@ namespace Axiverse.Interface2
 {
     using Vector3 = SharpDX.Vector3;
 
-    public class Entity
+    public class Entity : IDisposable
     {
         public Body Body { get; set; } = new Body();
         public Mesh Mesh { get; set; }
         public Matrix Transform { get; set; } = Matrix.Identity;
+
+        public virtual void Dispose()
+        {
+
+        }
 
         public virtual void Update(float delta)
         {

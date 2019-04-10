@@ -712,9 +712,19 @@ namespace Axiverse
             return (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
         }
 
+        public static float Angle(Vector3 left, Vector3 right)
+        {
+            return Angle(ref left, ref right);
+        }
+
+        public static float Angle(ref Vector3 left, ref Vector3 right)
+        {
+            return Functions.Acos(Dot(left, right) / (left.Length() * right.Length()));
+        }
+
         public static float Distance(Vector3 left, Vector3 right)
         {
-            return Distance(left, right);
+            return Distance(ref left, ref right);
         }
 
         public static float Distance(ref Vector3 left, ref Vector3 right)
@@ -830,15 +840,18 @@ namespace Axiverse
 
         public static void Unproject(ref Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, ref Matrix4 worldViewProjection, out Vector3 result)
         {
-            Vector3 v = new Vector3();
+            Vector4 v = new Vector4();
             Matrix4 matrix = new Matrix4();
             Matrix4.Inverse(ref worldViewProjection, out matrix);
 
             v.X = (((vector.X - x) / width) * 2.0f) - 1.0f;
             v.Y = -((((vector.Y - y) / height) * 2.0f) - 1.0f);
             v.Z = (vector.Z - minZ) / (maxZ - minZ);
+            v.W = 1;
 
-            Matrix4.Transform(ref v, ref matrix, out result);
+            Matrix4.Transform(ref v, ref matrix, out v);
+
+            result = new Vector3(v.X / v.W, v.Y / v.W, v.Z / v.W);
         }
 
         public static Vector3 Unproject(Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, Matrix4 worldViewProjection)

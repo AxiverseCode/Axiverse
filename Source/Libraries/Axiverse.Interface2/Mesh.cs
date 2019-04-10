@@ -12,7 +12,7 @@ using Buffer11 = SharpDX.Direct3D11.Buffer;
 
 namespace Axiverse.Interface2
 {
-    public class Mesh
+    public class Mesh : IDisposable
     {
         private ColoredTexturedVertex[] dynamic;
         public ColoredTexturedVertex[] Dynamic => dynamic;
@@ -54,6 +54,14 @@ namespace Axiverse.Interface2
         {
             Device = device;
         }
+
+        public void Dispose()
+        {
+            VertexBuffer.Dispose();
+            IndexBuffer.Dispose();
+        }
+
+
 
         /// <summary>
         /// Create a quad for Multiple Render Target

@@ -1,6 +1,9 @@
 ﻿cbuffer data :register(b0)
 {
 	float4x4 worldViewProj;
+	float4x4 worldView;
+	float4x4 proj;
+	float4 color;
 };
 
 struct VS_IN
@@ -14,6 +17,7 @@ struct PS_IN
 {
 	float4 position : SV_POSITION;
 	float4 color : COLOR;
+	float4 add : COLOR1;
 	float2 texcoord : TEXCOORD;
 };
 
@@ -32,6 +36,7 @@ PS_IN VS(VS_IN input)
 
 	output.position = mul(worldViewProj, input.position);
 	output.color = input.color;
+	output.add = color;
 	output.texcoord = input.texcoord;
 	
 	return output;
@@ -39,5 +44,5 @@ PS_IN VS(VS_IN input)
 
 float4 PS(PS_IN input) : SV_Target
 {
-	return textureMap.Sample(textureSampler, input.texcoord) * input.color;
+	return textureMap.Sample(textureSampler, input.texcoord) * input.color + input.add;
 }

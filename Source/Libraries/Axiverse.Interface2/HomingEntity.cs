@@ -29,7 +29,13 @@ namespace Axiverse.Interface2
                 var g = 1 - a;
                 var b = Math.Max(1 - a * 2, 0);
                 ParticleMesh.Dynamic[i].Color = new Vector4(r, g, b, 1);
+                ParticleMesh.Dynamic[i].Texture = new Vector2(1, 2);
             }
+        }
+
+        public override void Dispose()
+        {
+            ParticleMesh.Dispose();
         }
 
         public override void Update(float delta)
