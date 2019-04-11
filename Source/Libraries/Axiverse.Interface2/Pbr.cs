@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace Axiverse.Interface2
 {
     public class Pbr
     {
+        [StructLayout(LayoutKind.Sequential)]
         public struct VsData
         {
             public Matrix4 proj;
@@ -20,17 +22,19 @@ namespace Axiverse.Interface2
             public float unused;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
         public struct PsData
         {
             public Vector4 color;
+            public Vector3 lightVector;
             public Vector3 position;
             public float p0;
             public Vector3 direction;
             public float p1;
-            public Vector3 lightVector;
             public float intensity;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
         public struct PsData2
         {
             Vector4 test;
@@ -57,7 +61,7 @@ namespace Axiverse.Interface2
             this.device = device;
             bufferVs1 = device.CreateBuffer<VsData>();
             bufferPs1 = device.CreateBuffer<PsData>();
-            bufferPs1 = device.CreateBuffer<PsData2>();
+            bufferPs2 = device.CreateBuffer<PsData2>();
 
             albedo = Texture.CreateTextureFromBitmap(device, "../../pbr/albedo.jpg");
             normal = Texture.CreateTextureFromBitmap(device, "../../pbr/normal.jpg");
@@ -67,6 +71,10 @@ namespace Axiverse.Interface2
             alpha = Texture.CreateTextureFromBitmap(device, "../../pbr/alpha.jpg");
             ao = Texture.CreateTextureFromBitmap(device, "../../pbr/ambientocclusion.jpg");
             shader = new Shader(device, "../../Pbr.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements);
+
+            psData1.color = new Vector4(1, 0.7f, 0.5f, 1);
+            psData1.lightVector = new Vector3(0.5f, -0.5f, 0).Normal();
+            psData1.intensity = 3;
         }
 
         public void Setup(Matrix4 world, Matrix4 view, Matrix4 proj, Vector3 camera)
@@ -80,7 +88,8 @@ namespace Axiverse.Interface2
             //vsData1.proj = world * view * proj;
             device.UpdateData(bufferVs1, vsData1);
 
-            psData1.direction = new Vector3(0, 0.2f, -1).Normal();
+            psData1.direction = new Vector3(0, 1, 1).Normal();
+            //psData1.lightVector = psData1.direction;
             device.UpdateData(bufferPs1, psData1);
 
             device.NativeDeviceContext.VertexShader.SetConstantBuffer(0, bufferVs1);
@@ -89,6 +98,12 @@ namespace Axiverse.Interface2
             device.NativeDeviceContext.PixelShader.SetConstantBuffer(1, bufferPs2);
 
             device.NativeDeviceContext.PixelShader.SetShaderResource(0, albedo);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(1, normal);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(2, height);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(3, roughness);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(4, metallic);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(5, alpha);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(6, ao);
         }
     }
 }

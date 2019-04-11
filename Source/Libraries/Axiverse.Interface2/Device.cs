@@ -111,6 +111,12 @@ namespace Axiverse.Interface2
             {
                 NativeDeviceContext.Rasterizer.State = rasterizerState;
                 NativeDeviceContext.PixelShader.SetSampler(0, samplerState);
+                NativeDeviceContext.PixelShader.SetSampler(1, samplerState);
+                NativeDeviceContext.PixelShader.SetSampler(2, samplerState);
+                NativeDeviceContext.PixelShader.SetSampler(3, samplerState);
+                NativeDeviceContext.PixelShader.SetSampler(4, samplerState);
+                NativeDeviceContext.PixelShader.SetSampler(5, samplerState);
+                NativeDeviceContext.PixelShader.SetSampler(6, samplerState);
                 NativeDeviceContext.OutputMerger.SetBlendState(blendState);
                 NativeDeviceContext.OutputMerger.SetDepthStencilState(depthStencilState);
             }
