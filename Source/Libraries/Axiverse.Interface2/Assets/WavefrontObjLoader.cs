@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface2.Assets
 {
-
     public class WavefrontObjLoader
     {
         public List<Vertex> VertexList;

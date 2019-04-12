@@ -50,6 +50,8 @@
     <Compile Include="Mesh.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Space.cs" />
+    <Compile Include="Vertex.cs" />
+    <Compile Include="WavefrontObj.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
