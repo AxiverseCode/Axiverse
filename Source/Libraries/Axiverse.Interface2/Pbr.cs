@@ -27,11 +27,11 @@ namespace Axiverse.Interface2
         {
             public Vector4 color;
             public Vector3 lightVector;
+            public float intensity;
             public Vector3 position;
             public float p0;
             public Vector3 direction;
             public float p1;
-            public float intensity;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -73,11 +73,13 @@ namespace Axiverse.Interface2
             shader = new Shader(device, "../../Pbr.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements);
 
             psData1.color = new Vector4(1, 0.7f, 0.5f, 1);
+            psData1.color = new Vector4(1, 1f, 1f, 1);
             psData1.lightVector = new Vector3(0.5f, -0.5f, 0).Normal();
-            psData1.intensity = 3;
+            psData1.lightVector = new Vector3(-1, 0, 0);
+            psData1.intensity = 0.6f;
         }
 
-        public void Setup(Matrix4 world, Matrix4 view, Matrix4 proj, Vector3 camera)
+        public void Setup(Matrix4 world, Matrix4 view, Matrix4 proj, Vector3 camera, float t)
         {
             shader.Apply();
 
@@ -88,7 +90,8 @@ namespace Axiverse.Interface2
             //vsData1.proj = world * view * proj;
             device.UpdateData(bufferVs1, vsData1);
 
-            psData1.direction = new Vector3(0, 1, 1).Normal();
+            //psData1.direction = new Vector3(0, 1, 1).Normal();
+            psData1.lightVector = new Vector3(Functions.Sin(t), -0.1f, Functions.Cos(t)).Normal();
             //psData1.lightVector = psData1.direction;
             device.UpdateData(bufferPs1, psData1);
 

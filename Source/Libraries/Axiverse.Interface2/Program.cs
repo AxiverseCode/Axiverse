@@ -38,6 +38,12 @@ namespace Axiverse.Interface2
                 m.M31, m.M32, m.M33, m.M34,
                 m.M41, m.M42, m.M43, m.M44
                 );
+            //return new Matrix4(
+            //    m.M11, m.M21, m.M31, m.M41,
+            //    m.M12, m.M22, m.M32, m.M42,
+            //    m.M13, m.M23, m.M33, m.M43,
+            //    m.M14, m.M24, m.M34, m.M44
+            //    );
         }
 
         static void Main(string[] args)
@@ -57,24 +63,59 @@ namespace Axiverse.Interface2
                     Near = 1,
                     Far = 1000,
                 };
+
+
                 Matrix4 wvp = new Matrix4();
                 float ratio = (float)form.ClientRectangle.Width / form.ClientRectangle.Height;
                 Matrix projection = Matrix.PerspectiveFovLH(3.14F / 3.0F, ratio, 1, 1000);
-                Axiverse.Vector3 camera = new Axiverse.Vector3(0, -10, -50);
-                Matrix view = Matrix.LookAtLH(new Vector3(0, -10, -50), new Vector3(), Vector3.UnitY);
+                Matrix view;
 
-                form.MouseMove += (s, e) =>
-                {
-                    mouse = new Vector2(e.X, e.Y);
-                };
+                TrackballControl control = new TrackballControl();
+                control.CameraPosition = new Axiverse.Vector3(0, 0, -50);
+                control.ZoomEnabled = true;
+                control.RotateEnabled = true;
+                control.Screen = new Rectangle(0, 0, vp.Width, vp.Height);
+                control.Enabled = true;
+                control.Up = new Axiverse.Vector3(0, 1, 0);
+
                 form.Resize += (s, e) =>
                 {
                     vp.Width = form.ClientRectangle.Width;
                     vp.Height = form.ClientRectangle.Height;
                     ratio = (float)form.ClientRectangle.Width / form.ClientRectangle.Height;
                     projection = Matrix.PerspectiveFovLH(3.14F / 3.0F, ratio, 1, 1000);
+                    control.Screen = new Rectangle(0, 0, vp.Width, vp.Height);
                 };
-
+                form.MouseDown += (s, e) =>
+                {
+                    TrackballControl.State state;
+                    switch(e.Button)
+                    {
+                        case System.Windows.Forms.MouseButtons.Left:
+                            state = TrackballControl.State.Rotate;
+                            break;
+                        case System.Windows.Forms.MouseButtons.Right:
+                            state = TrackballControl.State.Zoom;
+                            break;
+                        default:
+                            state = TrackballControl.State.None;
+                            break;
+                    }
+                    control.OnMouseDown(state, new Vector2(vp.Width - e.X, e.Y));
+                };
+                form.MouseUp += (s, e) =>
+                {
+                    control.OnMouseUp();
+                };
+                form.MouseWheel += (s, e) =>
+                {
+                    control.OnMouseWheel(e.Delta / 6f);
+                };
+                form.MouseMove += (s, e) =>
+                {
+                    mouse = new Vector2(e.X, e.Y);
+                    control.OnMouseMove(new Vector2(vp.Width - e.X, e.Y));
+                };
 
 
 
@@ -101,6 +142,8 @@ namespace Axiverse.Interface2
                 Mesh missile = Mesh.LoadMesh(device, "../../Missile.obj");
                 missile.Transform = Matrix.Translation(0, -1, 0) * Matrix.Scaling(0.5f, 4, 0.5f);
                 Mesh rayMesh = Mesh.CreateDynamic(device, 20);
+                Mesh sphereMesh = Mesh.CreateSphere(device);
+                sphereMesh.Transform = Matrix.Translation(10, 0, 0);
 
                 Shader shader = new Shader(device, "../../Shader.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements);
                 Buffer11 buffer = device.CreateBuffer<Constants>();
@@ -145,8 +188,10 @@ namespace Axiverse.Interface2
                     device.Clear(Color.Black);
 
                     //Set matrices
-                    Matrix world = Matrix.RotationY(watch.ElapsedMilliseconds / 1000.0F / 10);
-                    //world = Matrix.Identity;
+                    control.Update();
+                    Matrix world = Matrix.Identity;
+                    view = Matrix.LookAtLH(new Vector3(control.CameraPosition.X, control.CameraPosition.Y, control.CameraPosition.Z),
+                        new Vector3(control.Up.X, control.Up.Y, control.Up.Z), Vector3.UnitY);
                     Matrix worldViewProjection = world * view * projection;
                     wvp = Convert(worldViewProjection);
                     ray = Mathematics.Ray3.FromScreen(mouse.X, mouse.Y, vp, wvp);
@@ -160,12 +205,16 @@ namespace Axiverse.Interface2
 
                     //apply shader
                     //shader.Apply();
+
+                    pbr.Setup(Convert(sphereMesh.Transform * world), Convert(view), Convert(projection), control.CameraPosition, current);
+                    sphereMesh.Draw();
+
                     //draw mesh
                     foreach (var entity in entities)
                     {
                         entity.Update(dt / 10f);
 
-                        pbr.Setup(Convert(entity.Mesh.Transform * entity.Transform * world), Convert(view), Convert(projection), camera);
+                        pbr.Setup(Convert(entity.Mesh.Transform * entity.Transform * world), Convert(view), Convert(projection), control.CameraPosition, current);
 
                         if (ray.Distance(entity.Body.LinearPosition) < 1)
                         {

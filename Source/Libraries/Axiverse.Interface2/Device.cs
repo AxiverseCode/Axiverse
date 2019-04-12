@@ -77,7 +77,7 @@ namespace Axiverse.Interface2
             {
                 Utilities.Dispose(ref rasterizerState);
                 RasterizerStateDescription rasterDescription = RasterizerStateDescription.Default();
-                rasterDescription.CullMode = CullMode.None;
+                //rasterDescription.CullMode = CullMode.Back;
                 rasterizerState = new RasterizerState(NativeDevice, rasterDescription);
                 NativeDeviceContext.Rasterizer.State = rasterizerState;
             }

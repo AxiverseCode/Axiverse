@@ -50,10 +50,10 @@ void GS(point GS_INPUT input[1], inout TriangleStream<PS_INPUT> outputStream)
 	PS_INPUT vertices[4];
 	float s = input[0].texcoord.x / 2;
 	float t = input[0].texcoord.y / 2;
-	float4 a = float4(-s, -t, 0, 0);
-	float4 b = float4(+s, -t, 0, 0);
-	float4 c = float4(-s, +t, 0, 0);
-	float4 d = float4(+s, +t, 0, 0);
+	float4 a = float4(-s, +t, 0, 0);
+	float4 b = float4(+s, +t, 0, 0);
+	float4 c = float4(-s, -t, 0, 0);
+	float4 d = float4(+s, -t, 0, 0);
 
 	vertices[0].color = input[0].color;
 	vertices[1].color = input[0].color;
@@ -61,8 +61,8 @@ void GS(point GS_INPUT input[1], inout TriangleStream<PS_INPUT> outputStream)
 	vertices[3].color = input[0].color;
 
 	vertices[0].texcoord = float2(0, 0);
-	vertices[1].texcoord = float2(0, 1);
-	vertices[2].texcoord = float2(1, 0);
+	vertices[1].texcoord = float2(1, 0);
+	vertices[2].texcoord = float2(0, 1);
 	vertices[3].texcoord = float2(1, 1);
 
 	vertices[0].position = mul(proj, input[0].position + a);

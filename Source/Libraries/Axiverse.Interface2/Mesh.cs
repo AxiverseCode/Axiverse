@@ -192,6 +192,87 @@ namespace Axiverse.Interface2
             Device.NativeDeviceContext.UnmapSubresource(VertexBuffer, 0);
         }
 
+        public static Mesh CreateSphere(Device device)
+        {
+            float diameter = 30;
+            int tessellation = 10;
+
+            if (tessellation < 3) throw new ArgumentOutOfRangeException("tessellation", "Must be >= 3");
+
+            int verticalSegments = tessellation;
+            int horizontalSegments = tessellation * 2;
+
+            var vertices = new ColoredTexturedVertex[(verticalSegments + 1) * (horizontalSegments + 1)];
+            var indices = new int[(verticalSegments) * (horizontalSegments + 1) * 6];
+
+            float radius = diameter / 2;
+
+            int vertexCount = 0;
+            // Create rings of vertices at progressively higher latitudes.
+            for (int i = 0; i <= verticalSegments; i++)
+            {
+                float v = 1.0f - (float)i / verticalSegments;
+
+                var latitude = (float)((i * Math.PI / verticalSegments) - Math.PI / 2.0);
+                var dy = (float)Math.Sin(latitude);
+                var dxz = (float)Math.Cos(latitude);
+
+                // Create a single ring of vertices at this latitude.
+                for (int j = 0; j <= horizontalSegments; j++)
+                {
+                    float u = (float)j / horizontalSegments;
+
+                    var longitude = (float)(j * 2.0 * Math.PI / horizontalSegments);
+                    var dx = (float)Math.Sin(longitude);
+                    var dz = (float)Math.Cos(longitude);
+
+                    dx *= dxz;
+                    dz *= dxz;
+
+                    var normal = new Vector3(dx, dy, dz);
+                    var textureCoordinate = new Vector2(u, v);
+
+                    vertices[vertexCount++] = new ColoredTexturedVertex(normal * radius, normal, Vector4.One, textureCoordinate);
+                }
+            }
+
+            // Fill the index buffer with triangles joining each pair of latitude rings.
+            int stride = horizontalSegments + 1;
+
+            int indexCount = 0;
+            for (int i = 0; i < verticalSegments; i++)
+            {
+                for (int j = 0; j <= horizontalSegments; j++)
+                {
+                    int nextI = i + 1;
+                    int nextJ = (j + 1) % stride;
+
+                    //indices[indexCount++] = (i * stride + j);
+                    //indices[indexCount++] = (nextI * stride + j);
+                    //indices[indexCount++] = (i * stride + nextJ);
+
+                    //indices[indexCount++] = (i * stride + nextJ);
+                    //indices[indexCount++] = (nextI * stride + j);
+                    //indices[indexCount++] = (nextI * stride + nextJ);
+                    indices[indexCount++] = (i * stride + j);
+                    indices[indexCount++] = (i * stride + nextJ);
+                    indices[indexCount++] = (nextI * stride + j);
+
+                    indices[indexCount++] = (nextI * stride + j);
+                    indices[indexCount++] = (i * stride + nextJ);
+                    indices[indexCount++] = (nextI * stride + nextJ);
+                }
+            }
+
+            Mesh mesh = new Mesh(device);
+            mesh.VertexBuffer = Buffer11.Create<ColoredTexturedVertex>(device.NativeDevice, BindFlags.VertexBuffer, vertices.ToArray());
+            mesh.IndexBuffer = Buffer11.Create(device.NativeDevice, BindFlags.IndexBuffer, indices.ToArray());
+            mesh.VertexSize = Utilities.SizeOf<ColoredTexturedVertex>();
+
+            mesh.IndexCount = indices.Count();
+
+            return mesh;
+        }
         public static Mesh CreateCube(Device device)
         {
             // Indices
@@ -277,16 +358,16 @@ namespace Axiverse.Interface2
                 var t = face.TextureVertexIndexList;
 
                 vertices[i + 0] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Normal = loader.NormalList[n[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
-                vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[1] - 1].Vector, Normal = loader.NormalList[n[1] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[1] - 1].Vector };
-                vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Normal = loader.NormalList[n[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
+                vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[1] - 1].Vector, Normal = loader.NormalList[n[1] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[1] - 1].Vector };
+                vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Normal = loader.NormalList[n[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
 
                 i += 3;
 
                 if (v.Length == 4)
                 {
                     vertices[i + 0] = new ColoredTexturedVertex { Position = loader.VertexList[v[2] - 1].Vector, Normal = loader.NormalList[n[2] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[2] - 1].Vector };
-                    vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[3] - 1].Vector, Normal = loader.NormalList[n[3] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[3] - 1].Vector };
-                    vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Normal = loader.NormalList[n[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
+                    vertices[i + 1] = new ColoredTexturedVertex { Position = loader.VertexList[v[3] - 1].Vector, Normal = loader.NormalList[n[3] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[3] - 1].Vector };
+                    vertices[i + 2] = new ColoredTexturedVertex { Position = loader.VertexList[v[0] - 1].Vector, Normal = loader.NormalList[n[0] - 1].Vector, Color = new Vector4(1, 1, 1, 1), Texture = loader.TextureList[t[0] - 1].Vector };
 
                     i += 3;
                 }

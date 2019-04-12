@@ -83,6 +83,7 @@
     <Compile Include="Shader.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Texture2D.cs" />
+    <Compile Include="TrackballControls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
