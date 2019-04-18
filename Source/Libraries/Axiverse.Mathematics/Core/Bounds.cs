@@ -5,7 +5,7 @@ namespace Axiverse
     /// <summary>
     /// Represents a boundary.
     /// </summary>
-    public class Bounds
+    public struct Bounds
     {
         /// <summary>
         /// The minimum value of the bounding box.

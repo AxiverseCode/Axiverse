@@ -236,8 +236,8 @@ namespace Axiverse.Mathematics.Geometry
         
         private Vector3 Support(IEnumerable<Vector3> a, IEnumerable<Vector3> b, ref Vector3 direction)
         {
-            Vector3 formerPoint = Vector3.Zero; // getFurthestPointInDirection(dir)
-            Vector3 latterPoint = Vector3.Zero; // getFutherstPointInDirection(-dir)
+            Vector3 formerPoint = Vector3.Zero; // GetFurthestPointInDirection(dir)
+            Vector3 latterPoint = Vector3.Zero; // GetFutherstPointInDirection(-dir)
 
             Vector3 minkowskiDifference = formerPoint - latterPoint;
             return minkowskiDifference;

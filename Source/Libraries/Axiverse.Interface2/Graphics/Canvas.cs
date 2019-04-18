@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Texture2D11 = SharpDX.Direct3D11.Texture2D;
 using Device2D = SharpDX.Direct2D1.Device;
 using Factory2D = SharpDX.Direct2D1.Factory1;
+using FactoryWrite = SharpDX.DirectWrite.Factory;
 using DeviceGI = SharpDX.DXGI.Device;
 
 namespace Axiverse.Interface2
@@ -22,6 +23,7 @@ namespace Axiverse.Interface2
         public Device2D NativeDevice { get; set; }
         public Factory2D NativeFactory { get; set; }
         public DeviceContext NativeDeviceContext { get; set; }
+        public FactoryWrite NativeFactoryWrite { get; set; }
 
         public Bitmap1 Target { get; set; }
         public TextFormat TextFormat { get; set; }
@@ -86,13 +88,12 @@ namespace Axiverse.Interface2
 
         private void InitializeFont()
         {
-            var factoryWrite = new SharpDX.DirectWrite.Factory();
-            TextFormat = new TextFormat(factoryWrite, fontName, fontSize) {
+            NativeFactoryWrite = new SharpDX.DirectWrite.Factory();
+            TextFormat = new TextFormat(NativeFactoryWrite, fontName, fontSize) {
                 TextAlignment = TextAlignment.Leading,
                 ParagraphAlignment = ParagraphAlignment.Near
             };
             Brush = new SolidColorBrush(NativeDeviceContext, fontColor);
-            factoryWrite.Dispose();
         }
 
         /// <summary>
@@ -103,7 +104,7 @@ namespace Axiverse.Interface2
         /// <param name="y">Top position</param>
         /// <param name="width">Max width</param>
         /// <param name="height">Max heigh</param>
-        public void DrawString(string text, int x, int y, int width = 800, int height = 600)
+        public void DrawString(string text, float x, float y, float width = 800, float height = 600)
         {
             NativeDeviceContext.DrawText(text, TextFormat, new RawRectangleF(x, y, width, height), Brush);
         }

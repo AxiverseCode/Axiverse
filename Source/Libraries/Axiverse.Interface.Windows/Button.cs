@@ -60,8 +60,8 @@ namespace Axiverse.Interface.Windows
 
             var rectangle = new Rectangle(0, 0, Width, Height);
             var rectangle2 = new Rectangle(0.5f, 0.5f, Width - 1, Height - 1);
-            compositor.FillRoundedRectangle(rectangle, new Vector2(3), color);
-            compositor.DrawRoundedRectangle(rectangle2, new Vector2(2), new Color(1, 1, 1, 0.2f));
+            compositor.FillRoundedRectangle(rectangle, new Vector2(4), color);
+            //compositor.DrawRoundedRectangle(rectangle2, new Vector2(3), new Color(1, 1, 1, 0.2f));
             compositor.DrawText(Text, Font, layout, rectangle, ForegroundColor);
         }
 

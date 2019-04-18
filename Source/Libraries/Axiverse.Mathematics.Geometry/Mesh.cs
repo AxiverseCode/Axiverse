@@ -7,29 +7,30 @@ using System.Threading.Tasks;
 namespace Axiverse.Mathematics.Geometry
 {
     /// <summary>
-    /// 
+    /// Mesh.
     /// </summary>
     /// <remarks>
     /// http://www.gradientspace.com/tutorials/dmesh3
     /// </remarks>
     public class Mesh
     {
-
-        public List<Index4> Quadrilaterals { get; }
-
-        public List<Index3> Triangles { get; }
-
-        public List<Vertex> Vertices { get; }
-
-        public Mesh()
-        {
-            Vertices = new List<Vertex>();
-            Triangles = new List<Index3>();
-            Quadrilaterals = new List<Index4>();
-        }
+        /// <summary>
+        /// Gets a list of quadrilateral faces of the mesh.
+        /// </summary>
+        public List<Index4> Quadrilaterals { get; } = new List<Index4>();
 
         /// <summary>
-        /// Calculates normals based on 
+        /// Gets a list of triangle faces of the mesh.
+        /// </summary>
+        public List<Index3> Triangles { get; } = new List<Index3>();
+
+        /// <summary>
+        /// Gets a list of vertices of the mesh.
+        /// </summary>
+        public List<Vertex> Vertices { get; } = new List<Vertex>();
+
+        /// <summary>
+        /// Calculates normals based on texture vertices.
         /// </summary>
         public void CalculateNormals()
         {
@@ -62,6 +63,16 @@ namespace Axiverse.Mathematics.Geometry
                 vertex.Tangent = tangent;
                 vertex.Binormal = binormal;
                 Vertices[triangle.C] = vertex;
+            }
+        }
+
+        public void ApplyTransform(Matrix4 transformation)
+        {
+            for (int i = 0; i < Vertices.Count; i++)
+            {
+                var vertex = Vertices[i];
+                Matrix4.Transform(ref vertex.Position, ref transformation, out vertex.Position);
+                Vertices[i] = vertex;
             }
         }
 

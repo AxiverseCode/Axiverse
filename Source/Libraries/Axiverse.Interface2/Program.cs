@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Axiverse.Interface.Windows;
 using Axiverse.Physics;
 using SharpDX;
 using SharpDX.Direct3D11;
@@ -16,6 +17,7 @@ using Buffer11 = SharpDX.Direct3D11.Buffer;
 namespace Axiverse.Interface2
 {
     using Vector3 = SharpDX.Vector3;
+    using Color = SharpDX.Color;
 
     class Program
     {
@@ -38,12 +40,6 @@ namespace Axiverse.Interface2
                 m.M31, m.M32, m.M33, m.M34,
                 m.M41, m.M42, m.M43, m.M44
                 );
-            //return new Matrix4(
-            //    m.M11, m.M21, m.M31, m.M41,
-            //    m.M12, m.M22, m.M32, m.M42,
-            //    m.M13, m.M23, m.M33, m.M43,
-            //    m.M14, m.M24, m.M34, m.M44
-            //    );
         }
 
         static void Main(string[] args)
@@ -53,7 +49,33 @@ namespace Axiverse.Interface2
 
             using (var form = new RenderForm() { ClientSize = new System.Drawing.Size(500,500)})
             using (var device = new Device(form))
+            using (var drawContext = new CanvasContext(device.Canvas))
             {
+                form.Text = "Axiverse Engine";
+                var overlay = new Interface.Chrome(form);
+                overlay.Controls.Add(new Interface.Control()
+                {
+                    Size = new Vector2(200, 100)
+                });
+                overlay.Controls[0].Children.Add(new Interface.Button());
+                overlay.Controls.Add(new Interface.Slider()
+                {
+                    Position = new Vector2(10, 300),
+                    Size = new Vector2(200, 40),
+                    Text = "Hello World",
+                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
+                    Forecolor = new Color(1f),
+                });
+
+                Window window = new Window();
+                window.Bind(form);
+                window.Children.Add(new Button()
+                {
+                    Bounds = new Rectangle(10, 150, 120, 40),
+                    Text = "Hello World",
+                    BackgroundColor = new Axiverse.Interface.Windows.Color(1, 0, 0, 0.3f),
+                });
+
                 Vector2 mouse = new Vector2();
                 Mathematics.Ray3 ray = new Mathematics.Ray3();
                 Mathematics.Viewport vp = new Mathematics.Viewport()
@@ -89,7 +111,7 @@ namespace Axiverse.Interface2
                 form.MouseDown += (s, e) =>
                 {
                     TrackballControl.State state;
-                    switch(e.Button)
+                    switch (e.Button)
                     {
                         case System.Windows.Forms.MouseButtons.Left:
                             state = TrackballControl.State.Rotate;
@@ -156,12 +178,13 @@ namespace Axiverse.Interface2
                 var pbr = new Pbr(device);
 
                 Entity shipEntity;
-                entities.Add(shipEntity = new Entity() {
+                entities.Add(shipEntity = new Entity()
+                {
                     Mesh = mesh,
                 });
                 shipEntity.Body.LinearPosition = new Axiverse.Vector3(0, 10, 0);
 
-                
+
                 for (int i = 0; i < 10; i++)
                 {
                     HomingEntity missileEntity;
@@ -274,6 +297,7 @@ namespace Axiverse.Interface2
                             frametime.Dequeue();
                         }
 
+                        window.DrawChildren(drawContext);
                         device.Canvas.DrawString(1 / frametime.Average() + " fps ", 10, 10);
 
 
@@ -282,8 +306,10 @@ namespace Axiverse.Interface2
                         device.Canvas.DrawString("Oriented Velocity: " + relative.LinearVelocity.ToString(2), 10, 30);
                         device.Canvas.DrawString("Local Angular:" + relative.AngularVelocity.ToString(2), 10, 50);
                         device.Canvas.DrawString("Position:" + target.Body.LinearPosition.ToString(2), 10, 70);
-                        device.Canvas.DrawString("Mouse:" + mouse.ToString() + " " +  ray.ToString(), 10, 100);
+                        device.Canvas.DrawString("Mouse:" + mouse.ToString() + " " + ray.ToString(), 10, 100);
                         device.Canvas.DrawImage(image, new Vector2(10, 100));
+
+                        overlay.Draw(device.Canvas.NativeDeviceContext);
 
                         device.Canvas.End();
                     }

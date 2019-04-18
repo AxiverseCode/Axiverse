@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface2
+namespace Axiverse.Interface2.Models
 {
-    class Texture2D
+    public struct PositionTexture
     {
+        public Vector3 Position;
+        public Vector2 Texture;
     }
 }

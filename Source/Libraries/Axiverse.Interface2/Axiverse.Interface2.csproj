@@ -52,6 +52,9 @@
     <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
     </Reference>
@@ -70,19 +73,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\WavefrontObjLoader.cs" />
-    <Compile Include="Canvas.cs" />
-    <Compile Include="Device.cs" />
+    <Compile Include="Graphics\Canvas.cs" />
+    <Compile Include="Graphics\Device.cs" />
+    <Compile Include="Graphics\CanvasContext.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="HomingEntity.cs" />
-    <Compile Include="Image2D.cs" />
+    <Compile Include="Graphics\Image2D.cs" />
+    <Compile Include="Input\AxisEventArgs.cs" />
+    <Compile Include="Input\BindingEventArgs.cs" />
+    <Compile Include="Input\Bridge.cs" />
+    <Compile Include="Input\ButtonEventArgs.cs" />
+    <Compile Include="Input\DirectInputSource.cs" />
+    <Compile Include="Input\FormSource.cs" />
+    <Compile Include="Input\IInputSource.cs" />
+    <Compile Include="Input\JoypadEventArgs.cs" />
+    <Compile Include="Input\KeyboardEventArgs.cs" />
+    <Compile Include="Input\Mapper.cs" />
+    <Compile Include="Input\MidiEventArgs.cs" />
+    <Compile Include="Input\MouseEventArgs.cs" />
+    <Compile Include="Interface\Button.cs" />
+    <Compile Include="Interface\Control.cs" />
+    <Compile Include="Interface\ControlCollection.cs" />
+    <Compile Include="Interface\Label.cs" />
+    <Compile Include="Interface\MouseEventArgs.cs" />
+    <Compile Include="Interface\Chrome.cs" />
+    <Compile Include="Interface\Slider.cs" />
     <Compile Include="Mesh.cs" />
-    <Compile Include="Particles.cs" />
-    <Compile Include="Pbr.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\PositionTexture.cs" />
+    <Compile Include="Graphics\Shaders\Particles.cs" />
+    <Compile Include="Graphics\Shaders\Pbr.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shader.cs" />
-    <Compile Include="Texture.cs" />
-    <Compile Include="Texture2D.cs" />
+    <Compile Include="Graphics\Shaders\Shader.cs" />
+    <Compile Include="Graphics\Texture.cs" />
+    <Compile Include="Graphics\Texture2D.cs" />
     <Compile Include="TrackballControls.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +117,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
+      <Project>{4ced344e-8bac-48cb-ac37-a2c4ad7ffe02}</Project>
+      <Name>Axiverse.Interface.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Mathematics.Geometry\Axiverse.Mathematics.Geometry.csproj">
       <Project>{bd10941e-997a-450b-9d91-392ff39b9f9f}</Project>
       <Name>Axiverse.Mathematics.Geometry</Name>
@@ -114,5 +144,6 @@
     <Content Include="Ribbon.hlsl" />
     <Content Include="Shader.hlsl" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
