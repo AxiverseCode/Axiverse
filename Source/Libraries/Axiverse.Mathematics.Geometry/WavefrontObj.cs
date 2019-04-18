@@ -21,13 +21,14 @@ namespace Axiverse.Mathematics.Geometry
         {
             StreamReader reader = new StreamReader(stream);
 
-            List<Vector3> vertices = default;
-            List<Vector3> normals = default;
-            List<Vector2> textures = default;
+            List<Vector3> vertices = new List<Vector3>();
+            List<Vector3> normals = new List<Vector3>();
+            List<Vector2> textures = new List<Vector2>();
 
-            List<Index3[]> faces = default;
-            HashSet<Index3> indices = default;
+            List<Index3[]> faces = new List<Index3[]>();
+            HashSet<Index3> indices = new HashSet<Index3>();
 
+            // Read the obj file.
             int lineNumber = 0;
             while (!reader.EndOfStream)
             {
@@ -53,11 +54,11 @@ namespace Axiverse.Mathematics.Geometry
             }
 
             Mesh mesh = new Mesh();
-            Dictionary<Index3, int> indexMapping = default;
 
+            // Look for unique mappings.
+            Dictionary<Index3, int> indexMapping = new Dictionary<Index3, int>();
             foreach (var index in indices)
             {
-                indexMapping[index] = mesh.Vertices.Count;
                 Vertex vertex = default;
 
                 if (index.A >= 0)
@@ -74,8 +75,13 @@ namespace Axiverse.Mathematics.Geometry
                 {
                     vertex.Normal = normals[index.C];
                 }
+
+                // Save the index of the mapping and add the vertex.
+                indexMapping[index] = mesh.Vertices.Count;
+                mesh.Vertices.Add(vertex);
             }
 
+            // Create the faces.
             foreach (var face in faces)
             {
                 if (face.Length == 3)

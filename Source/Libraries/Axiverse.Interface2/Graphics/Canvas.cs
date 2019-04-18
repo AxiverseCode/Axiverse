@@ -51,8 +51,8 @@ namespace Axiverse.Interface2
 
             NativeDeviceContext = new DeviceContext(NativeDevice, DeviceContextOptions.None);
 
+            InitializeFont();
             Brush = new SolidColorBrush(NativeDeviceContext, default(Color4));
-
         }
 
         public TextFormat GetTextFormat(Font font)
@@ -95,7 +95,6 @@ namespace Axiverse.Interface2
         {
             using (var surface2D = backBuffer.QueryInterface<Surface>())
             {
-
                 var dpi = NativeFactory.DesktopDpi;
                 Target = new Bitmap1(NativeDeviceContext, surface2D,
                     new BitmapProperties1(new PixelFormat(
@@ -103,7 +102,13 @@ namespace Axiverse.Interface2
                 NativeDeviceContext.Target = Target;
             }
 
-            InitializeFont();
+        }
+
+        internal void Release()
+        {
+            NativeDeviceContext.Target = null;
+            Target?.Dispose();
+            Target = null;
         }
 
         private void InitializeFont()
@@ -144,15 +149,13 @@ namespace Axiverse.Interface2
         /// </summary>
         public void Dispose()
         {
-            NativeDeviceContext.Target = null;
-
-            foreach (var textLayout in TextFormats.Values)
+            foreach (var textFormat in TextFormats.Values)
             {
-                textLayout.Dispose();
+                textFormat.Dispose();
             }
+            TextFormats.Clear();
 
-            Brush.Dispose();
-
+            Brush?.Dispose();
 
             TextFormat?.Dispose();
             TextFormat = null;
@@ -160,6 +163,16 @@ namespace Axiverse.Interface2
             Brush = null;
             Target?.Dispose();
             Target = null;
+
+            NativeDeviceContext.Target = null;
+            NativeDeviceContext?.Dispose();
+            NativeDeviceContext = null;
+            NativeDevice?.Dispose();
+            NativeDevice = null;
+            NativeFactory?.Dispose();
+            NativeFactory = null;
+            NativeFactoryWrite?.Dispose();
+            NativeFactoryWrite = null;
         }
     }
 }

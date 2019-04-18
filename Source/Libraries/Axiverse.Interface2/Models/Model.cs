@@ -41,7 +41,19 @@ namespace Axiverse.Interface2.Models
             foreach (var segment in Segments)
             {
                 shader.Prepare(this, segment);
-                Device.NativeDeviceContext.DrawIndexed(segment.Count, segment.Offset, 0);
+                Device.NativeDeviceContext.DrawIndexed(segment.Count * 3, segment.Offset * 3, 0);
+            }
+        }
+
+        public void DrawRaw()
+        {
+            Device.NativeDeviceContext.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
+            Device.NativeDeviceContext.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(VertexBuffer, Stride, 0));
+            Device.NativeDeviceContext.InputAssembler.SetIndexBuffer(IndexBuffer, Format.R32_UInt, 0);
+
+            foreach (var segment in Segments)
+            {
+                Device.NativeDeviceContext.DrawIndexed(segment.Count * 3, segment.Offset * 3, 0);
             }
         }
 

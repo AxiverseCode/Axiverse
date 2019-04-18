@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Axiverse.Interface.Windows;
+using Axiverse.Interface2.Models;
 using Axiverse.Physics;
 using SharpDX;
 using SharpDX.Direct3D11;
@@ -165,6 +166,9 @@ namespace Axiverse.Interface2
                 var depthStencilState = new DepthStencilState(device.NativeDevice, dsdesc);
 
                 Mesh axis = Mesh.CreateAxis(device);
+                var mmesh = Mathematics.Geometry.WavefrontObj.Load("../../Model.obj");
+                Model model = Model.FromMesh(device, mmesh);
+                mmesh = null;
 
                 Mesh mesh = Mesh.LoadMesh(device, "../../Model.obj");
                 mesh.Transform = Matrix.Scaling(50);
@@ -188,6 +192,7 @@ namespace Axiverse.Interface2
                 entities.Add(shipEntity = new Entity()
                 {
                     Mesh = mesh,
+                    Model = model,
                 });
                 shipEntity.Body.LinearPosition = new Axiverse.Vector3(0, 10, 0);
 
@@ -253,7 +258,14 @@ namespace Axiverse.Interface2
                         constants.worldViewProj = entity.Mesh.Transform * entity.Transform * worldViewProjection;
                         device.UpdateData(buffer, constants);
 
-                        entity.Mesh.Draw();
+                        if (entity.Model == null)
+                        {
+                            entity.Mesh.Draw();
+                        }
+                        else
+                        {
+                            entity.Model.DrawRaw();
+                        }
 
                         shader.Apply();
                         device.NativeDeviceContext.VertexShader.SetConstantBuffer(0, buffer);

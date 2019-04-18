@@ -14,6 +14,7 @@ namespace Axiverse.Interface2
     {
         public Body Body { get; set; } = new Body();
         public Mesh Mesh { get; set; }
+        public Models.Model Model { get; set; }
         public Matrix Transform { get; set; } = Matrix.Identity;
 
         public virtual void Dispose()

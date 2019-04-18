@@ -80,6 +80,7 @@
     <Compile Include="Animations\IntervalAnimation.cs" />
     <Compile Include="Assets\WavefrontObjLoader.cs" />
     <Compile Include="Graphics\Canvas.cs" />
+    <Compile Include="Graphics\Compositor.cs" />
     <Compile Include="Graphics\ConversionExtensions.cs" />
     <Compile Include="Graphics\Device.cs" />
     <Compile Include="Entity.cs" />

@@ -146,7 +146,7 @@ namespace Axiverse.Interface2
         private void Resize()
         {
             // Dispose all previous allocated resources
-            Canvas.Dispose();
+            Canvas.Release();
             Utilities.Dispose(ref backBufferView);
             Utilities.Dispose(ref depthStencilView);
 
