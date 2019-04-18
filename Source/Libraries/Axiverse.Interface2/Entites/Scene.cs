@@ -8,5 +8,7 @@ namespace Axiverse.Interface2.Entites
 {
     public class Scene
     {
+
+
     }
 }

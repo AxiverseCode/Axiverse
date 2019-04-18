@@ -79,6 +79,11 @@
     <Compile Include="Animations\IAnimation.cs" />
     <Compile Include="Animations\IntervalAnimation.cs" />
     <Compile Include="Assets\WavefrontObjLoader.cs" />
+    <Compile Include="Entites\Camera.cs" />
+    <Compile Include="Entites\Component.cs" />
+    <Compile Include="Entites\Entity.cs" />
+    <Compile Include="Entites\Scene.cs" />
+    <Compile Include="Entites\Transform.cs" />
     <Compile Include="Graphics\Canvas.cs" />
     <Compile Include="Graphics\Compositor.cs" />
     <Compile Include="Graphics\ConversionExtensions.cs" />
