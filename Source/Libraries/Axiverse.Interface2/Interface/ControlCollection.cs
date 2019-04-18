@@ -64,11 +64,11 @@ namespace Axiverse.Interface2.Interface
             if (control != null)
             {
                 item.Parent = control;
-                item.Overlay = control.Overlay;
+                item.Chrome = control.Chrome;
             }
             else if (overlay != null)
             {
-                item.Overlay = overlay;
+                item.Chrome = overlay;
             }
             else
             {
@@ -79,7 +79,7 @@ namespace Axiverse.Interface2.Interface
         private void Unregister(Control item)
         {
             item.Parent = null;
-            item.Overlay = null;
+            item.Chrome = null;
         }
 
         public IEnumerator<Control> GetEnumerator()

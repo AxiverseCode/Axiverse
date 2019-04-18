@@ -72,10 +72,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\AnimationEventArgs.cs" />
+    <Compile Include="Animations\Animator.cs" />
+    <Compile Include="Animations\ContinuousAnimation.cs" />
+    <Compile Include="Animations\DelayAnimation.cs" />
+    <Compile Include="Animations\IAnimation.cs" />
+    <Compile Include="Animations\IntervalAnimation.cs" />
     <Compile Include="Assets\WavefrontObjLoader.cs" />
     <Compile Include="Graphics\Canvas.cs" />
+    <Compile Include="Graphics\ConversionExtensions.cs" />
     <Compile Include="Graphics\Device.cs" />
-    <Compile Include="Graphics\CanvasContext.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="HomingEntity.cs" />
     <Compile Include="Graphics\Image2D.cs" />
@@ -92,11 +98,18 @@
     <Compile Include="Input\MidiEventArgs.cs" />
     <Compile Include="Input\MouseEventArgs.cs" />
     <Compile Include="Interface\Button.cs" />
+    <Compile Include="Interface\ContextMenu.cs" />
     <Compile Include="Interface\Control.cs" />
     <Compile Include="Interface\ControlCollection.cs" />
+    <Compile Include="Interface\Font.cs" />
     <Compile Include="Interface\Label.cs" />
+    <Compile Include="Interface\Menu.cs" />
+    <Compile Include="Interface\MenuItem.cs" />
+    <Compile Include="Interface\MenuItemCollection.cs" />
     <Compile Include="Interface\MouseEventArgs.cs" />
     <Compile Include="Interface\Chrome.cs" />
+    <Compile Include="Interface\Overlay.cs" />
+    <Compile Include="Interface\ContextPanel.cs" />
     <Compile Include="Interface\Slider.cs" />
     <Compile Include="Mesh.cs" />
     <Compile Include="Models\Material.cs" />

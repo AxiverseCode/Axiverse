@@ -266,7 +266,7 @@ float4 PS(VS_OUT input) : SV_Target
 		//light.lightVector = -light.lightVector;
 	}
 
-	diffuse += 0.1;
+	diffuse += 0.01;
 
 	// Shadow computation
 

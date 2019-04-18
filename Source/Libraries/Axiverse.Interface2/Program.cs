@@ -49,15 +49,31 @@ namespace Axiverse.Interface2
 
             using (var form = new RenderForm() { ClientSize = new System.Drawing.Size(500,500)})
             using (var device = new Device(form))
-            using (var drawContext = new CanvasContext(device.Canvas))
             {
                 form.Text = "Axiverse Engine";
                 var overlay = new Interface.Chrome(form);
-                overlay.Controls.Add(new Interface.Control()
+                var menu = new Interface.Menu()
                 {
-                    Size = new Vector2(200, 100)
-                });
-                overlay.Controls[0].Children.Add(new Interface.Button());
+                    Position = new Vector2(),
+                    Backcolor = new Color(0.2f, 0.2f, 0.2f, 0.8f),
+                    Forecolor = Color.White,
+                    Size = new Vector2(9000, 40)
+                };
+                menu.Items.Add(new Interface.MenuItem("File"));
+                menu.Items[0].Children.Add(new Interface.MenuItem("New"));
+                menu.Items[0].Children.Add(new Interface.MenuItem("Open"));
+                menu.Items[0].Children.Add(new Interface.MenuItem("Save"));
+                menu.Items[0].Children.Add(new Interface.MenuItem("Exit"));
+                menu.Items.Add(new Interface.MenuItem("Edit"));
+                menu.Items[1].Children.Add(new Interface.MenuItem("Cut"));
+                menu.Items[1].Children.Add(new Interface.MenuItem("Copy"));
+                menu.Items[1].Children.Add(new Interface.MenuItem("Paste"));
+                menu.Items.Add(new Interface.MenuItem("View"));
+                menu.Items.Add(new Interface.MenuItem("Window"));
+                menu.Items.Add(new Interface.MenuItem("Help"));
+                menu.Items[4].Children.Add(new Interface.MenuItem("About"));
+
+                overlay.Controls.Add(menu);
                 overlay.Controls.Add(new Interface.Slider()
                 {
                     Position = new Vector2(10, 300),
@@ -65,15 +81,6 @@ namespace Axiverse.Interface2
                     Text = "Hello World",
                     Backcolor = new Color(0.1f, 0.1f, 0.1f),
                     Forecolor = new Color(1f),
-                });
-
-                Window window = new Window();
-                window.Bind(form);
-                window.Children.Add(new Button()
-                {
-                    Bounds = new Rectangle(10, 150, 120, 40),
-                    Text = "Hello World",
-                    BackgroundColor = new Axiverse.Interface.Windows.Color(1, 0, 0, 0.3f),
                 });
 
                 Vector2 mouse = new Vector2();
@@ -297,19 +304,19 @@ namespace Axiverse.Interface2
                             frametime.Dequeue();
                         }
 
-                        window.DrawChildren(drawContext);
-                        device.Canvas.DrawString(1 / frametime.Average() + " fps ", 10, 10);
+                        device.Canvas.DrawString(1 / frametime.Average() + " fps ", 10, 60);
 
 
                         var target = entities[1];
                         var relative = RelativeFrame.FromBody(target.Body);
-                        device.Canvas.DrawString("Oriented Velocity: " + relative.LinearVelocity.ToString(2), 10, 30);
-                        device.Canvas.DrawString("Local Angular:" + relative.AngularVelocity.ToString(2), 10, 50);
-                        device.Canvas.DrawString("Position:" + target.Body.LinearPosition.ToString(2), 10, 70);
-                        device.Canvas.DrawString("Mouse:" + mouse.ToString() + " " + ray.ToString(), 10, 100);
-                        device.Canvas.DrawImage(image, new Vector2(10, 100));
+                        device.Canvas.DrawString("Oriented Velocity: " + relative.LinearVelocity.ToString(2), 10, 130);
+                        device.Canvas.DrawString("Local Angular:" + relative.AngularVelocity.ToString(2), 10, 150);
+                        device.Canvas.DrawString("Position:" + target.Body.LinearPosition.ToString(2), 10, 170);
+                        device.Canvas.DrawString("Mouse:" + mouse.ToString() + " " + ray.ToString(), 10, 200);
+                        device.Canvas.DrawImage(image, new Vector2(10, 300));
 
-                        overlay.Draw(device.Canvas.NativeDeviceContext);
+                        overlay.Update(dt);
+                        overlay.Draw(device.Canvas);
 
                         device.Canvas.End();
                     }

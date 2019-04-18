@@ -14,6 +14,7 @@ using Device2D = SharpDX.Direct2D1.Device;
 using Factory2D = SharpDX.Direct2D1.Factory1;
 using FactoryWrite = SharpDX.DirectWrite.Factory;
 using DeviceGI = SharpDX.DXGI.Device;
+using Font = Axiverse.Interface2.Interface.Font;
 
 namespace Axiverse.Interface2
 {
@@ -25,9 +26,11 @@ namespace Axiverse.Interface2
         public DeviceContext NativeDeviceContext { get; set; }
         public FactoryWrite NativeFactoryWrite { get; set; }
 
+        public Dictionary<Font, TextFormat> TextFormats { get; } = new Dictionary<Font, TextFormat>();
+        public SolidColorBrush Brush { get; set; }
+
         public Bitmap1 Target { get; set; }
         public TextFormat TextFormat { get; set; }
-        public SolidColorBrush Brush { get; set; }
 
         private string fontName = "Calibri";
         private int fontSize = 14;
@@ -48,8 +51,25 @@ namespace Axiverse.Interface2
 
             NativeDeviceContext = new DeviceContext(NativeDevice, DeviceContextOptions.None);
 
+            Brush = new SolidColorBrush(NativeDeviceContext, default(Color4));
+
         }
 
+        public TextFormat GetTextFormat(Font font)
+        {
+            if (!TextFormats.TryGetValue(font, out var format))
+            {
+                format = new TextFormat(NativeFactoryWrite, font.FontFamily, font.Size);
+                TextFormats.Add(font, format);
+            }
+            return format;
+        }
+
+        public SolidColorBrush GetBrush(Color4 color)
+        {
+            Brush.Color = color;
+            return Brush;
+        }
 
         /// <summary>
         /// Begin a 2D drawing session
@@ -88,11 +108,12 @@ namespace Axiverse.Interface2
 
         private void InitializeFont()
         {
-            NativeFactoryWrite = new SharpDX.DirectWrite.Factory();
+            NativeFactoryWrite = new FactoryWrite();
             TextFormat = new TextFormat(NativeFactoryWrite, fontName, fontSize) {
                 TextAlignment = TextAlignment.Leading,
                 ParagraphAlignment = ParagraphAlignment.Near
             };
+
             Brush = new SolidColorBrush(NativeDeviceContext, fontColor);
         }
 
@@ -106,7 +127,8 @@ namespace Axiverse.Interface2
         /// <param name="height">Max heigh</param>
         public void DrawString(string text, float x, float y, float width = 800, float height = 600)
         {
-            NativeDeviceContext.DrawText(text, TextFormat, new RawRectangleF(x, y, width, height), Brush);
+            var brush = GetBrush(Color.White);
+            NativeDeviceContext.DrawText(text, TextFormat, new RawRectangleF(x, y, width, height), brush);
         }
 
         public void DrawImage(Image2D image, Vector2 location)
@@ -123,6 +145,15 @@ namespace Axiverse.Interface2
         public void Dispose()
         {
             NativeDeviceContext.Target = null;
+
+            foreach (var textLayout in TextFormats.Values)
+            {
+                textLayout.Dispose();
+            }
+
+            Brush.Dispose();
+
+
             TextFormat?.Dispose();
             TextFormat = null;
             Brush?.Dispose();

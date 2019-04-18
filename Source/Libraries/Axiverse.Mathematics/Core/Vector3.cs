@@ -1030,7 +1030,7 @@ namespace Axiverse
 
         #endregion
 
-
+        #region Constants
 
         public static readonly Vector3 Up = new Vector3(0, 1, 0);
         public static readonly Vector3 Down = new Vector3(0, -1, 0);
@@ -1066,5 +1066,7 @@ namespace Axiverse
 
         /// <summary>The positive infinity vector.</summary>
         public static readonly Vector3 PositiveInfinity = new Vector3(float.PositiveInfinity);
+
+        #endregion
     }
 }
