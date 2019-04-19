@@ -59,6 +59,7 @@
     <Compile Include="Core\Functions.cs" />
     <Compile Include="Core\Matrix3.cs" />
     <Compile Include="Drawing\Rgba.cs" />
+    <Compile Include="Fixed\Int128.cs" />
     <Compile Include="Fixed\Int48Frac16.cs" />
     <Compile Include="Geometry\Box3.cs" />
     <Compile Include="Geometry\Collision.cs" />

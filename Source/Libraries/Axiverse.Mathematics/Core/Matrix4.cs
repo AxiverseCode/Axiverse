@@ -223,6 +223,16 @@ namespace Axiverse
             M41 = m41; M42 = m42; M43 = m43; M44 = m44;
         }
 
+        public Matrix4(Matrix3 value)
+        {
+            M11 = value.M11; M12 = value.M12; M13 = value.M13;
+            M21 = value.M21; M22 = value.M22; M23 = value.M23;
+            M31 = value.M31; M32 = value.M32; M33 = value.M33;
+
+            M14 = M24 = M34 = M43 = M42 = M41 = 0;
+            M44 = 1;
+        }
+
         #endregion
 
         #region Instance Methods
@@ -898,6 +908,31 @@ namespace Axiverse
                 Translation(-scalingCenter) * Transpose(scalingRotationMatrix) * Scaling(scaling) * scalingRotationMatrix * Translation(scalingCenter) *
                 Translation(-rotationCenter) * Rotation(rotation) * Translation(rotationCenter) *
                 Translation(translation);
+        }
+
+        public static Matrix4 Transformation(Vector3 scaling, Matrix3 rotation, Vector3 translation)
+        {
+            Transformation(ref scaling, ref rotation, ref translation, out var result);
+            return result;
+        }
+
+        public static void Transformation(
+            ref Vector3 scaling,
+            ref Matrix3 rotation,
+            ref Vector3 translation,
+            out Matrix4 result
+           )
+        {
+            result.M11 = rotation.M11 * scaling.X; result.M12 = rotation.M12; result.M13 = rotation.M13;
+            result.M21 = rotation.M21; result.M22 = rotation.M22 * scaling.Y; result.M23 = rotation.M23;
+            result.M31 = rotation.M31; result.M32 = rotation.M32; result.M33 = rotation.M33 * scaling.Z;
+
+            result.M41 = translation.X;
+            result.M42 = translation.Y;
+            result.M43 = translation.Z;
+
+            result.M14 = result.M24 = result.M34 = 0;
+            result.M44 = 1;
         }
 
         #endregion

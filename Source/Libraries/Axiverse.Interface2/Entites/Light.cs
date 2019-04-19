@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface2.Graphics
+namespace Axiverse.Interface2.Entites
 {
-    class Compositor
+    public class Light : Component
     {
+        public Vector4 Color;
+        public int Intensity;
     }
 }

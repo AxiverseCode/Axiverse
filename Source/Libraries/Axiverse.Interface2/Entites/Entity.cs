@@ -11,5 +11,25 @@ namespace Axiverse.Interface2.Entites
     {
         public Transform Transform { get; set; }
         public Model Model { get; set; }
+
+        public Dictionary<Type, Component> Components { get; } = new Dictionary<Type, Component>();
+
+        public Entity()
+        {
+            Transform = new Transform();
+            Add(Transform);
+        }
+
+        public void Add<T>(T component) where T: Component
+        {
+            component.Entity = this;
+            Components.Add(typeof(T), component);
+        }
+
+        public T Get<T>() where T: Component
+        {
+            Components.TryGetValue(typeof(T), out var value);
+            return (T)value;
+        }
     }
 }

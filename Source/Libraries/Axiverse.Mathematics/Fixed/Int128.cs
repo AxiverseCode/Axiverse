@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface2.Entites
+namespace Axiverse.Mathematics.Fixed
 {
-    public class Component
+    public struct Int128
     {
-        public Entity Entity { get; internal set; }
     }
 }
