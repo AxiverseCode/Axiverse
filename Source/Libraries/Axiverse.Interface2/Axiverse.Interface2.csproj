@@ -92,7 +92,7 @@
     <Compile Include="Engine\Compositor.cs" />
     <Compile Include="Graphics\ConversionExtensions.cs" />
     <Compile Include="Graphics\Device.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Entity2.cs" />
     <Compile Include="Engine\Renderer.cs" />
     <Compile Include="HomingEntity.cs" />
     <Compile Include="Graphics\Image2D.cs" />

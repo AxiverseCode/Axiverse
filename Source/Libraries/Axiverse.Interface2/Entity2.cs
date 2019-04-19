@@ -10,7 +10,7 @@ namespace Axiverse.Interface2
 {
     using Vector3 = SharpDX.Vector3;
 
-    public class Entity : IDisposable
+    public class Entity2 : IDisposable
     {
         public Body Body { get; set; } = new Body();
         public Mesh Mesh { get; set; }

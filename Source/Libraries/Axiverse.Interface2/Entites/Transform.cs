@@ -9,13 +9,13 @@ namespace Axiverse.Interface2.Entites
     public class Transform : Component
     {
         public Transform Parent { get; set; }
-        public List<Transform> Children { get; set; }
+        public List<Transform> Children { get; } = new List<Transform>();
 
         public Matrix4 Composite;
         public Matrix4 Transformation;
 
-        public Vector3 Scaling;
-        public Matrix3 Rotation;
+        public Vector3 Scaling = Vector3.One;
+        public Matrix3 Rotation = Matrix3.Identity;
         public Vector3 Translation;
 
         public void ComputeTransforms()

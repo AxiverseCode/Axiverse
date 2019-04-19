@@ -11,7 +11,7 @@ namespace Axiverse.Interface2
     using DxVector3 = SharpDX.Vector3;
     using DxQuaternion = SharpDX.Quaternion;
 
-    public class HomingEntity : Entity
+    public class HomingEntity : Entity2
     {
         public List<Body> Particles { get; } = new List<Body>();
         public Mesh ParticleMesh;

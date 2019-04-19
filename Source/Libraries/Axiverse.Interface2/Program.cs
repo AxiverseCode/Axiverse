@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Axiverse.Interface.Windows;
+using Axiverse.Interface2.Engine;
+using Axiverse.Interface2.Entites;
 using Axiverse.Interface2.Models;
 using Axiverse.Physics;
 using SharpDX;
@@ -46,10 +48,11 @@ namespace Axiverse.Interface2
         static void Main(string[] args)
         {
             Queue<float> frametime = new Queue<float>();
-            List<Entity> entities = new List<Entity>();
+            List<Entity2> entities = new List<Entity2>();
 
             using (var form = new RenderForm() { ClientSize = new System.Drawing.Size(500,500)})
             using (var device = new Device(form))
+            using (var renderer = new PhysicallyBasedRenderer(device))
             {
                 form.Text = "Axiverse Engine";
                 var overlay = new Interface.Chrome(form);
@@ -99,6 +102,46 @@ namespace Axiverse.Interface2
                 float ratio = (float)form.ClientRectangle.Width / form.ClientRectangle.Height;
                 Matrix projection = Matrix.PerspectiveFovLH(3.14F / 3.0F, ratio, 1, 1000);
                 Matrix view;
+
+
+                var compositor = new Compositor();
+                var scene = new Scene();
+
+                var material = new Material()
+                {
+                    Albedo = Texture2D.FromFile(device, "../../pbr/albedo.jpg"),
+                    Normal = Texture2D.FromFile(device, "../../pbr/normal.jpg"),
+                    Roughness = Texture2D.FromFile(device, "../../pbr/roughness.jpg"),
+                    Specular = Texture2D.FromFile(device, "../../pbr/metallic.jpg"),
+                };
+                var shipModel = Model.FromMesh(device, Mathematics.Geometry.WavefrontObj.Load("../../Model.obj"));
+                shipModel.Materials.Add(material);
+
+                Camera camera;
+                {
+                    var entity = new Entity();
+                    camera = new Camera()
+                    {
+                        View = Matrix4.Identity,
+                        Projection = Convert(projection),
+                    };
+                    entity.Add(camera);
+                    scene.Entities.Add(entity);
+                }
+
+                {
+                    var entity = new Entity();
+                    var renderable = new Renderable()
+                    {
+                        Model = shipModel,
+                        Renderer = renderer,
+                    };
+                    entity.Add(renderable);
+                    entity.Transform.Scaling = new Axiverse.Vector3(55);
+                    scene.Entities.Add(entity);
+                }
+
+
 
                 TrackballControl control = new TrackballControl();
                 control.CameraPosition = new Axiverse.Vector3(0, 0, -50);
@@ -166,9 +209,6 @@ namespace Axiverse.Interface2
                 var depthStencilState = new DepthStencilState(device.NativeDevice, dsdesc);
 
                 Mesh axis = Mesh.CreateAxis(device);
-                var mmesh = Mathematics.Geometry.WavefrontObj.Load("../../Model.obj");
-                Model model = Model.FromMesh(device, mmesh);
-                mmesh = null;
 
                 Mesh mesh = Mesh.LoadMesh(device, "../../Model.obj");
                 mesh.Transform = Matrix.Scaling(50);
@@ -188,11 +228,11 @@ namespace Axiverse.Interface2
                 Constants constants = new Constants();
                 var pbr = new Pbr(device);
 
-                Entity shipEntity;
-                entities.Add(shipEntity = new Entity()
+                Entity2 shipEntity;
+                entities.Add(shipEntity = new Entity2()
                 {
                     Mesh = mesh,
-                    Model = model,
+                    Model = shipModel,
                 });
                 shipEntity.Body.LinearPosition = new Axiverse.Vector3(0, 10, 0);
 
@@ -230,6 +270,9 @@ namespace Axiverse.Interface2
                     Matrix worldViewProjection = world * view * projection;
                     wvp = Convert(worldViewProjection);
                     ray = Mathematics.Ray3.FromScreen(mouse.X, mouse.Y, vp, wvp);
+
+                    camera.Position = control.CameraPosition;
+                    camera.View = Convert(view);
 
                     //update constant buffer
 
@@ -308,6 +351,10 @@ namespace Axiverse.Interface2
                     device.SetBlendState(device.blendState);
                     device.SetDepthStencil(device.depthStencilState);
 
+
+
+
+                    compositor.Draw(scene);
 
                     device.Canvas.Begin();
                     {

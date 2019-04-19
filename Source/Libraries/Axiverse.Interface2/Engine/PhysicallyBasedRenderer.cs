@@ -28,13 +28,22 @@ namespace Axiverse.Interface2.Engine
             bufferVs1 = device.CreateBuffer<VsData>();
             bufferPs1 = device.CreateBuffer<PsData>();
             bufferPs2 = device.CreateBuffer<PsData2>();
-            shader = new Shader(device, "../../Pbr.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements);
+            shader = new Shader(device, "../../Pbr.hlsl", vertexEntry: "VS", pixelEntry: "PS");
 
             psData1.color = new Vector4(1, 0.7f, 0.5f, 1);
             psData1.color = new Vector4(1, 1f, 1f, 1);
             psData1.lightVector = new Vector3(0.5f, -0.5f, 0).Normal();
             psData1.lightVector = new Vector3(-1, 0, 0);
             psData1.intensity = 0.6f;
+        }
+
+        public override void Dispose()
+        {
+            bufferVs1.Dispose();
+            bufferPs1.Dispose();
+            bufferPs2.Dispose();
+
+            shader.Dispose();
         }
 
         public override void Render(Renderable renderable, CompositingContext context)
@@ -45,7 +54,7 @@ namespace Axiverse.Interface2.Engine
             var material = model.Materials[0];
             var camera = context.Camera;
 
-            shader.Apply();
+            shader.Apply(model.InputLayout);
 
             vsData1.world = transform.Composite;
             vsData1.view = camera.View;
@@ -71,10 +80,8 @@ namespace Axiverse.Interface2.Engine
             device.NativeDeviceContext.PixelShader.SetShaderResource(4, material.Specular.NativeResourceView);
             device.NativeDeviceContext.PixelShader.SetShaderResource(5, null); // alpha
             device.NativeDeviceContext.PixelShader.SetShaderResource(6, null); // ao
-        }
 
-        public void Setup(Matrix4 world, Matrix4 view, Matrix4 proj, Vector3 camera, float t)
-        {
+            model.Draw(shader);
         }
 
         [StructLayout(LayoutKind.Sequential)]
