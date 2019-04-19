@@ -78,8 +78,8 @@ namespace Axiverse.Interface2.Engine
             device.NativeDeviceContext.PixelShader.SetShaderResource(2, null); // height
             device.NativeDeviceContext.PixelShader.SetShaderResource(3, material.Roughness.NativeResourceView);
             device.NativeDeviceContext.PixelShader.SetShaderResource(4, material.Specular.NativeResourceView);
-            device.NativeDeviceContext.PixelShader.SetShaderResource(5, null); // alpha
-            device.NativeDeviceContext.PixelShader.SetShaderResource(6, null); // ao
+            device.NativeDeviceContext.PixelShader.SetShaderResource(5, material.Alpha.NativeResourceView); // alpha
+            device.NativeDeviceContext.PixelShader.SetShaderResource(6, material.Occlusion.NativeResourceView); // ao
 
             model.Draw(shader);
         }

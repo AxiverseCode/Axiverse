@@ -64,6 +64,7 @@ namespace Axiverse.Interface2.Models
             value.Stride = Vertex.Stride;
 
             mesh.Triangulate();
+            mesh.CalculateNormals();
             var vertices = new Vertex[mesh.Vertices.Count];
 
             for (int i = 0; i < mesh.Vertices.Count; i++)
@@ -117,8 +118,8 @@ namespace Axiverse.Interface2.Models
             public Vector3 Normal;
             public Vector3 Tangent;
             public Vector3 Binormal;
-            public Vector2 Texture;
             public Vector4 Color;
+            public Vector2 Texture;
 
             public Vertex(
                 Vector3 position,

@@ -60,6 +60,7 @@ namespace Axiverse.Mathematics.Geometry
             foreach (var index in indices)
             {
                 Vertex vertex = default;
+                vertex.Color = new Vector4(1, 1, 1, 1);
 
                 if (index.A >= 0)
                 {

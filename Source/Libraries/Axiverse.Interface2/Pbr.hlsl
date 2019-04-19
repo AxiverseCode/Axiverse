@@ -272,6 +272,7 @@ float4 PS(VS_OUT input) : SV_Target
 
 	// Color composition
 	float3 color = (material.albedo.rgb * diffuse.rgb + specular) * occlusion;
+	//color.xy = input.uv;
 	//color = specular;
 	return float4(RestoreGamma(color), material.albedo.a);
 }

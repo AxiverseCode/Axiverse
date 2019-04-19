@@ -113,6 +113,8 @@ namespace Axiverse.Interface2
                     Normal = Texture2D.FromFile(device, "../../pbr/normal.jpg"),
                     Roughness = Texture2D.FromFile(device, "../../pbr/roughness.jpg"),
                     Specular = Texture2D.FromFile(device, "../../pbr/metallic.jpg"),
+                    Alpha = Texture2D.FromFile(device, "../../pbr/alpha.jpg"),
+                    Occlusion = Texture2D.FromFile(device, "../../pbr/ambientocclusion.jpg"),
                 };
                 var shipModel = Model.FromMesh(device, Mathematics.Geometry.WavefrontObj.Load("../../Model.obj"));
                 shipModel.Materials.Add(material);
