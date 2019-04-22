@@ -81,6 +81,7 @@
     <Compile Include="Assets\WavefrontObjLoader.cs" />
     <Compile Include="Engine\CompositingContext.cs" />
     <Compile Include="Engine\PhysicallyBasedRenderer.cs" />
+    <Compile Include="Engine\SkyboxRenderer.cs" />
     <Compile Include="Entites\Camera.cs" />
     <Compile Include="Entites\Component.cs" />
     <Compile Include="Entites\Entity.cs" />
@@ -167,6 +168,7 @@
     <Content Include="Pbr.hlsl" />
     <Content Include="Ribbon.hlsl" />
     <Content Include="Shader.hlsl" />
+    <Content Include="Skybox.hlsl" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

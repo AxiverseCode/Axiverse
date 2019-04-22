@@ -9,14 +9,11 @@ namespace Axiverse.Interface2.Engine
 {
     public class Compositor
     {
-        public void Draw(Scene scene)
+        public void Draw(Scene scene, float dt)
         {
             var context = new CompositingContext();
-
-            // Look for camera.
-            var cameras = scene.GetComponents<Camera>();
-            Requires.That(cameras.Count == 1);
-            context.Camera = cameras[0];
+            context.Time += dt;
+            context.DeltaTime = dt;
 
             // Cascade all transforms.
             var transforms = scene.GetComponents<Transform>();
@@ -27,6 +24,13 @@ namespace Axiverse.Interface2.Engine
                     transform.ComputeTransforms();
                 }
             }
+
+            // Look for camera.
+            var cameras = scene.GetComponents<Camera>();
+            Requires.That(cameras.Count == 1);
+            context.Camera = cameras[0];
+            context.Camera.Update(); // Update
+
 
             // Gather all lights.
             var lights = scene.GetComponents<Light>();

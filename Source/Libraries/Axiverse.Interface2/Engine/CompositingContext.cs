@@ -9,7 +9,15 @@ namespace Axiverse.Interface2.Engine
 {
     public class CompositingContext
     {
+        public float Time;
+        public float DeltaTime;
+
         public Camera Camera { get; set; }
         public List<Light> Lights { get; set; }
+
+        public Light[] ClosestLights(Vector3 position)
+        {
+            return (Lights.Count == 0) ? new Light[0] : new Light[] { Lights[0] };
+        }
     }
 }

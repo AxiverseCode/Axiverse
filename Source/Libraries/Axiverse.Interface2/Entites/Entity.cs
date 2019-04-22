@@ -9,6 +9,7 @@ namespace Axiverse.Interface2.Entites
 {
     public class Entity
     {
+        public Scene Scene { get; internal set; }
         public Transform Transform { get; set; }
         public Model Model { get; set; }
 

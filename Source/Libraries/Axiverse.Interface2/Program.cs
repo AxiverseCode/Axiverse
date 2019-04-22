@@ -48,11 +48,11 @@ namespace Axiverse.Interface2
         static void Main(string[] args)
         {
             Queue<float> frametime = new Queue<float>();
-            List<Entity2> entities = new List<Entity2>();
 
             using (var form = new RenderForm() { ClientSize = new System.Drawing.Size(500,500)})
             using (var device = new Device(form))
             using (var renderer = new PhysicallyBasedRenderer(device))
+            using (var skyRenderer = new SkyboxRenderer(device))
             {
                 form.Text = "Axiverse Engine";
                 var overlay = new Interface.Chrome(form);
@@ -104,6 +104,16 @@ namespace Axiverse.Interface2
                 Matrix view;
 
 
+                var skyBox = Texture2D.FromFile(device,
+                    "../../skybox/right.jpg",
+                    "../../skybox/left.jpg",
+                    "../../skybox/top.jpg",
+                    "../../skybox/bottom.jpg",
+                    "../../skybox/front.jpg",
+                    "../../skybox/back.jpg");
+                renderer.skybox = skyBox;
+                skyRenderer.skybox = skyBox;
+
                 var compositor = new Compositor();
                 var scene = new Scene();
 
@@ -112,12 +122,17 @@ namespace Axiverse.Interface2
                     Albedo = Texture2D.FromFile(device, "../../pbr/albedo.jpg"),
                     Normal = Texture2D.FromFile(device, "../../pbr/normal.jpg"),
                     Roughness = Texture2D.FromFile(device, "../../pbr/roughness.jpg"),
+                    Height = Texture2D.FromFile(device, "../../pbr/height.jpg"),
                     Specular = Texture2D.FromFile(device, "../../pbr/metallic.jpg"),
                     Alpha = Texture2D.FromFile(device, "../../pbr/alpha.jpg"),
                     Occlusion = Texture2D.FromFile(device, "../../pbr/ambientocclusion.jpg"),
                 };
                 var shipModel = Model.FromMesh(device, Mathematics.Geometry.WavefrontObj.Load("../../Model.obj"));
                 shipModel.Materials.Add(material);
+                var boxModel = Model.FromMesh(device, Mathematics.Geometry.Mesh.CreateCube().Invert().CalculateNormals());
+                boxModel.Materials.Add(material);
+                var sphereModel = Model.FromMesh(device, Mathematics.Geometry.Mesh.CreateSphere(10, 20).CalculateNormals());
+                sphereModel.Materials.Add(material);
 
                 Camera camera;
                 {
@@ -128,6 +143,26 @@ namespace Axiverse.Interface2
                         Projection = Convert(projection),
                     };
                     entity.Add(camera);
+                    var renderable = new Renderable()
+                    {
+                        Model = boxModel,
+                        //Model = shipModel,
+                        Renderer = skyRenderer,
+                    };
+                    entity.Add(renderable);
+                    //entity.Transform.Scaling = new Axiverse.Vector3(55);
+                    scene.Entities.Add(entity);
+                }
+
+                {
+                    var entity = new Entity();
+                    var renderable = new Renderable()
+                    {
+                        Model = sphereModel, //boxModel, //shipModel,
+                        Renderer = renderer,
+                    };
+                    entity.Add(renderable);
+                    //entity.Transform.Scaling = new Axiverse.Vector3(55);
                     scene.Entities.Add(entity);
                 }
 
@@ -139,8 +174,36 @@ namespace Axiverse.Interface2
                         Renderer = renderer,
                     };
                     entity.Add(renderable);
-                    entity.Transform.Scaling = new Axiverse.Vector3(55);
+                    entity.Transform.Scaling = new Axiverse.Vector3(40);
+                    entity.Transform.Translation = new Axiverse.Vector3(-30, 0, 0);
                     scene.Entities.Add(entity);
+                }
+
+                {
+                    var entity = new Entity();
+                    var renderable = new Renderable()
+                    {
+                        Model = shipModel,
+                        Renderer = renderer,
+                    };
+                    entity.Add(renderable);
+                    entity.Transform.Scaling = new Axiverse.Vector3(40);
+                    entity.Transform.Translation = new Axiverse.Vector3(0, -30, 0);
+                    scene.Entities.Add(entity);
+                }
+
+                Entity lightEntity;
+                {
+                    var entity = new Entity();
+                    var light = new Light()
+                    {
+                        Color = new Vector4(0.6f, 0.9f, 0.8f, 1),
+                        Intensity = 1,
+                    };
+                    entity.Add(light);
+                    entity.Transform.Translation = new Axiverse.Vector3(4, 5, 6);
+                    scene.Entities.Add(entity);
+                    lightEntity = entity;
                 }
 
 
@@ -160,6 +223,7 @@ namespace Axiverse.Interface2
                     ratio = (float)form.ClientRectangle.Width / form.ClientRectangle.Height;
                     projection = Matrix.PerspectiveFovLH(3.14F / 3.0F, ratio, 1, 1000);
                     control.Screen = new Rectangle(0, 0, vp.Width, vp.Height);
+                    camera.Projection = Convert(projection);
                 };
                 form.MouseDown += (s, e) =>
                 {
@@ -193,63 +257,6 @@ namespace Axiverse.Interface2
                 };
 
 
-
-                BlendStateDescription description = BlendStateDescription.Default();
-                description.RenderTarget[0].IsBlendEnabled = true;
-                description.RenderTarget[0].BlendOperation = BlendOperation.Add;
-                description.RenderTarget[0].SourceAlphaBlend = BlendOption.One;
-                description.RenderTarget[0].DestinationAlphaBlend = BlendOption.One;
-                description.RenderTarget[0].SourceBlend = BlendOption.SourceAlpha;
-                description.RenderTarget[0].DestinationBlend = BlendOption.SourceAlpha;
-                var blendState = new BlendState(device.NativeDevice, description);
-
-
-                DepthStencilStateDescription dsdesc = DepthStencilStateDescription.Default();
-                dsdesc.DepthComparison = Comparison.Less;
-                dsdesc.DepthWriteMask = DepthWriteMask.Zero;
-                dsdesc.IsDepthEnabled = true;
-                var depthStencilState = new DepthStencilState(device.NativeDevice, dsdesc);
-
-                Mesh axis = Mesh.CreateAxis(device);
-
-                Mesh mesh = Mesh.LoadMesh(device, "../../Model.obj");
-                mesh.Transform = Matrix.Scaling(50);
-                Mesh missile = Mesh.LoadMesh(device, "../../Missile.obj");
-                missile.Transform = Matrix.Translation(0, -1, 0) * Matrix.Scaling(0.5f, 4, 0.5f);
-                Mesh rayMesh = Mesh.CreateDynamic(device, 20);
-                Mesh sphereMesh = Mesh.CreateSphere(device);
-                sphereMesh.Transform = Matrix.Translation(10, 0, 0);
-
-                Shader shader = new Shader(device, "../../Shader.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements);
-                Buffer11 buffer = device.CreateBuffer<Constants>();
-                Image2D image = Image2D.LoadFromFile("../../Weapon1.png", device.Canvas);
-                ShaderResourceView texture = Texture.CreateTextureFromBitmap(device, "../../Texture.png");
-                ShaderResourceView particleTex = Texture.CreateTextureFromBitmap(device, "../../Particle.png");
-
-                Shader particleShader = new Shader(device, "../../Particles.hlsl", "VS", "PS", Mesh.ColoredTexturedVertex.Elements, "GS");
-                Constants constants = new Constants();
-                var pbr = new Pbr(device);
-
-                Entity2 shipEntity;
-                entities.Add(shipEntity = new Entity2()
-                {
-                    Mesh = mesh,
-                    Model = shipModel,
-                });
-                shipEntity.Body.LinearPosition = new Axiverse.Vector3(0, 10, 0);
-
-
-                for (int i = 0; i < 10; i++)
-                {
-                    HomingEntity missileEntity;
-                    entities.Add(missileEntity = new HomingEntity(device)
-                    {
-                        Mesh = missile,
-                    });
-                    missileEntity.Body.LinearPosition = new Axiverse.Vector3(0, 1, 0);
-                    missileEntity.Body.AngularPosition = Functions.Random.NextQuaternion();
-                }
-
                 watch.Start();
                 float previous = watch.ElapsedMilliseconds / 1000f;
                 RenderLoop.Run(form, () =>
@@ -257,15 +264,11 @@ namespace Axiverse.Interface2
                     float current = watch.ElapsedMilliseconds / 1000f;
                     float dt = current - previous;
                     frametime.Enqueue(dt);
+                    control.Update();
 
                     device.Start();
-
-                    //clear color
-                    //device.Clear(Color.DarkGray);
                     device.Clear(Color.Black);
 
-                    //Set matrices
-                    control.Update();
                     Matrix world = Matrix.Identity;
                     view = Matrix.LookAtLH(new Vector3(control.CameraPosition.X, control.CameraPosition.Y, control.CameraPosition.Z),
                         new Vector3(control.Up.X, control.Up.Y, control.Up.Z), Vector3.UnitY);
@@ -276,87 +279,8 @@ namespace Axiverse.Interface2
                     camera.Position = control.CameraPosition;
                     camera.View = Convert(view);
 
-                    //update constant buffer
-
-                    //pass constant buffer to shader
-                    device.NativeDeviceContext.VertexShader.SetConstantBuffer(0, buffer);
-                    device.NativeDeviceContext.GeometryShader.SetConstantBuffer(0, buffer);
-                    device.NativeDeviceContext.PixelShader.SetShaderResource(0, texture);
-
-                    //apply shader
-                    //shader.Apply();
-
-                    pbr.Setup(Convert(sphereMesh.Transform * world), Convert(view), Convert(projection), control.CameraPosition, current);
-                    sphereMesh.Draw();
-
-                    //draw mesh
-                    foreach (var entity in entities)
-                    {
-                        entity.Update(dt / 10f);
-
-                        pbr.Setup(Convert(entity.Mesh.Transform * entity.Transform * world), Convert(view), Convert(projection), control.CameraPosition, current);
-
-                        if (ray.Distance(entity.Body.LinearPosition) < 1)
-                        {
-                            constants.color = Vector4.One;
-                        }
-                        constants.worldViewProj = entity.Mesh.Transform * entity.Transform * worldViewProjection;
-                        device.UpdateData(buffer, constants);
-
-                        if (entity.Model == null)
-                        {
-                            entity.Mesh.Draw();
-                        }
-                        else
-                        {
-                            entity.Model.DrawRaw();
-                        }
-
-                        shader.Apply();
-                        device.NativeDeviceContext.VertexShader.SetConstantBuffer(0, buffer);
-                        device.NativeDeviceContext.GeometryShader.SetConstantBuffer(0, buffer);
-                        device.NativeDeviceContext.PixelShader.SetShaderResource(0, texture);
-
-                        constants.color = Vector4.Zero;
-                        constants.worldViewProj = entity.Transform * worldViewProjection;
-                        device.UpdateData(buffer, constants);
-                        axis.DrawLines();
-                    }
-
-                    constants.worldViewProj = worldViewProjection;
-                    constants.worldView = world * view;
-                    constants.proj = projection;
-                    device.UpdateData(buffer, constants);
-                    axis.DrawLines();
-
-                    device.NativeDeviceContext.PixelShader.SetShaderResource(0, particleTex);
-                    device.SetBlendState(blendState);
-                    device.SetDepthStencil(depthStencilState);
-                    particleShader.Apply();
-                    foreach (var entity in entities)
-                    {
-                        if (entity is HomingEntity homing)
-                        {
-                            homing.ParticleMesh.DrawPoints();
-                        }
-                    }
-
-                    for (int i = 0; i < rayMesh.Dynamic.Length; i++)
-                    {
-                        rayMesh.Dynamic[i].Color = Vector4.One;
-                        rayMesh.Dynamic[i].Texture = new Vector2(0.01f, 0.01f);
-                        rayMesh.Dynamic[i].Position = ray.Origin + ray.Direction * (i / 5f);
-                    }
-                    rayMesh.UpdateDynamic();
-                    rayMesh.DrawPoints();
-
-                    device.SetBlendState(device.blendState);
-                    device.SetDepthStencil(device.depthStencilState);
-
-
-
-
-                    compositor.Draw(scene);
+                    lightEntity.Transform.Translation = new Axiverse.Vector3(Functions.Sin(current), -1f, Functions.Cos(current)) * 10;
+                    compositor.Draw(scene, dt);
 
                     device.Canvas.Begin();
                     {
@@ -367,14 +291,11 @@ namespace Axiverse.Interface2
 
                         device.Canvas.DrawString(1 / frametime.Average() + " fps ", 10, 60);
 
-
-                        var target = entities[1];
-                        var relative = RelativeFrame.FromBody(target.Body);
-                        device.Canvas.DrawString("Oriented Velocity: " + relative.LinearVelocity.ToString(2), 10, 130);
-                        device.Canvas.DrawString("Local Angular:" + relative.AngularVelocity.ToString(2), 10, 150);
-                        device.Canvas.DrawString("Position:" + target.Body.LinearPosition.ToString(2), 10, 170);
+                        //var relative = RelativeFrame.FromBody(target.Body);
+                        //device.Canvas.DrawString("Oriented Velocity: " + relative.LinearVelocity.ToString(2), 10, 130);
+                        //device.Canvas.DrawString("Local Angular:" + relative.AngularVelocity.ToString(2), 10, 150);
+                        //device.Canvas.DrawString("Position:" + target.Body.LinearPosition.ToString(2), 10, 170);
                         device.Canvas.DrawString("Mouse:" + mouse.ToString() + " " + ray.ToString(), 10, 200);
-                        device.Canvas.DrawImage(image, new Vector2(10, 300));
 
                         overlay.Update(dt);
                         overlay.Draw(device.Canvas);
@@ -385,20 +306,6 @@ namespace Axiverse.Interface2
                     device.Present();
                     previous = current;
                 });
-
-                foreach (var entity in entities)
-                {
-                    entity.Dispose();
-                }
-
-                texture.Dispose();
-                particleTex.Dispose();
-                particleShader.Dispose();
-                shader.Dispose();
-                image.nativeBitmap.Dispose();
-                buffer.Dispose();
-                mesh.Dispose();
-                missile.Dispose();
             }
         }
     }

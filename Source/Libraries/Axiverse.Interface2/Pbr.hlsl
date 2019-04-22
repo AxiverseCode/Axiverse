@@ -13,6 +13,8 @@ struct VS_IN
 {
 	float4 position : POSITION;
 	float3 normal : NORMAL;
+	float3 tangent   : TANGENT;
+	float3 binormal : BINORMAL;
 	float4 color : COLOR;
 	float2 texcoord : TEXCOORD;
 };
@@ -24,8 +26,7 @@ struct VS_OUT
 	float4 position : POSITION;
 	float3 normal : NORMAL;
 	float2 uv : TEXCOORD;
-	float3 binormal : BINORMAL;
-	float3 tangent : TANGENT;
+	float3x3 basis : BASIS;
 	float3 color : COLOR;
 	float4 shadowCoord : SHADOW_POSITION;
 };
@@ -34,10 +35,11 @@ struct VS_OUT
 Texture2D albedoMap : register(t0);
 Texture2D normalMap : register(t1);
 Texture2D heightMap : register(t2);
-Texture2D roughnessMap : register(t2);
+Texture2D roughnessMap : register(t3);
 Texture2D metallicMap : register(t4);
 Texture2D alphaMap : register(t5);
 Texture2D occlusionMap : register(t6);
+TextureCube environmentMap : register(t7);
 
 SamplerState textureSampler
 {
@@ -59,6 +61,16 @@ VS_OUT VS(in VS_IN input)
 	output.normal = mul(wsTransform, input.normal);
 	//output.binormal = mul(input.normal, wsTransform);
 	//output.tangent = mul(input.normal, wsTransform);
+
+	//float3x3 TBN = float3x3(normalize(input.tangent), normalize(input.binormal), normalize(input.normal));
+	float3x3 TBN = float3x3(input.tangent, input.binormal, input.normal);
+	output.basis = mul(wsTransform, transpose(TBN));
+	//output.basis = transpose(output.basis);
+	//output.basis[0] = normalize(output.basis[0]);
+	//output.basis[1] = normalize(output.basis[1]);
+	//output.basis[2] = normalize(output.basis[2]);
+	//output.basis = transpose(output.basis);
+
 	output.uv = input.texcoord;
 	output.color = float3(1.0f, 1.0f, 1.0f);
 	output.shadowCoord = float4(0.0f, 0.0f, 0.0f, 0.0f); // output.shadowCoord = mul(output.position, depthBias);
@@ -165,21 +177,21 @@ float DistributionGGX(float3 N, float3 H, float a)
 float3 GGX(Properties properties, Light light, Material material, float3 eye)
 {
 	float3 h = normalize(light.lightVector + eye);
-	//float NdotH = saturate(dot(properties.normal, h));
+	float NdotH = saturate(dot(properties.normal, h));
 
 	float rough2 = max(material.roughness * material.roughness, 2.0e-3f); // capped so spec highlights don't disappear
-	//float rough4 = rough2 * rough2;
+	float rough4 = rough2 * rough2;
 
-	//float d = (NdotH * rough4 - NdotH) * NdotH + 1.0f;
-	//float D = rough4 / (PI * (d * d));
-	float D = DistributionGGX(-properties.normal, h, material.roughness) * 4;
+	float d = (NdotH * rough4 - NdotH) * NdotH + 1.0f;
+	float D = rough4 / (PI * (d * d));
+	//float D = DistributionGGX(-properties.normal, h, material.roughness);
 
 	// Fresnel
-	float3 h2 = normalize(-light.lightVector + eye);
+	//float3 h2 = normalize(-light.lightVector + eye);
 	float3 reflectivity = material.specular;
 	float fresnel = 1.0;
 	float NdotL = saturate(dot(properties.normal, -light.lightVector));
-	float LdotH = saturate(dot(-light.lightVector, h2));
+	float LdotH = saturate(dot(-light.lightVector, h));
 	float NdotV = saturate(dot(properties.normal, eye));
 	float3 F = reflectivity + (fresnel - fresnel * reflectivity) * exp2((-5.55473f * LdotH - 6.98316f) * LdotH);
 
@@ -201,6 +213,35 @@ float Diffuse(Properties properties, Light light, Material material, float3 eye)
 float3 Specular(Properties properties, Light light, Material material, float3 eye)
 {
 	return GGX(properties, light, material, eye);
+}
+
+//float3 RadianceIBLIntegration(float NdotV, float roughness, float3 specular)
+//{
+//	float2 preintegratedFG = u_PreintegratedFG.Sample(AnisoClamp, float2(roughness, 1.0f - NdotV)).rg;
+//	return specular * preintegratedFG.r + preintegratedFG.g;
+//}
+
+float3 IBL(Properties properties, Material material, float3 eye)
+{
+	// Note: Currently this function assumes a cube texture resolution of 1024x1024
+	float NdotV = max(dot(properties.normal, eye), 0.0f);
+
+	float3 reflectionVector = normalize(reflect(-eye, properties.normal));
+	float smoothness = 1.0f - material.roughness;
+	float mipLevel = (1.0f - smoothness * smoothness) * 10.0f;
+	//float4 cs = environmentMap.SampleLevel(environmentMapSampler, reflectionVector, mipLevel);
+	float4 cs = environmentMap.Sample(textureSampler, reflectionVector);
+	float3 result = pow(cs.xyz, GAMMA);// *RadianceIBLIntegration(NdotV, material.roughness, material.specular);
+	//result = reflectionVector / 2 + 0.5;
+	//result = properties.normal / 2 + 0.5;
+
+	float3 diffuseDominantDirection = properties.normal;
+	float diffuseLowMip = 9.6;
+	//float3 diffuseImageLighting = u_EnvironmentMap.SampleLevel(environmentMapSampler, diffuseDominantDirection, diffuseLowMip).rgb;
+	float3 diffuseImageLighting = environmentMap.Sample(textureSampler, diffuseDominantDirection).rgb;
+	diffuseImageLighting = pow(diffuseImageLighting, GAMMA);
+
+	return result + diffuseImageLighting * material.albedo.rgb;
 }
 
 float4 GammaCorrectTexture(Texture2D t, SamplerState s, float2 uv)
@@ -225,22 +266,25 @@ float4 PS(VS_OUT input) : SV_Target
 	Properties properties;
 	properties.position = input.position.xyz;
 	properties.uv = input.uv;
-	properties.normal = input.normal;
-	properties.binormal = input.binormal;
-	properties.tangent = input.tangent;
+	properties.normal = normalize(input.normal);
+	//properties.binormal = input.binormal;
+	//properties.tangent = input.tangent;
 
 	Material material;
 	material.albedo = GammaCorrectTexture(albedoMap, textureSampler, input.uv);
 	material.albedo.a = alphaMap.Sample(textureSampler, input.uv).r;
 	material.specular = metallicMap.Sample(textureSampler, input.uv).r * material.albedo.rgb;
 	material.roughness = roughnessMap.Sample(textureSampler, input.uv).r;
-	material.normal = normalMap.Sample(textureSampler, input.uv).rgb;
-	material.normal = normalize(material.normal);
+	material.roughness = heightMap.Sample(textureSampler, input.uv).r;
+	material.normal = normalize(normalMap.Sample(textureSampler, input.uv).rgb * 2 - 1);
+	properties.normal = normalize(mul(input.basis, material.normal));
 
 	float height = heightMap.Sample(textureSampler, input.uv).r;
 	float occlusion = occlusionMap.Sample(textureSampler, input.uv).r;
 
 	float3 eye = normalize(input.cameraPosition - properties.position);
+
+	// TODO: rotate normals?
 
 	// Accumulators
 	float4 diffuse = (float4)0;
@@ -252,27 +296,27 @@ float4 PS(VS_OUT input) : SV_Target
 	{
 		Light light = lights[i];
 		light.lightVector *= -1; // Convert to outbound light vector
+		light.lightVector = normalize(light.position - properties.position);
 
 		float NdotL = saturate(dot(properties.normal, light.lightVector));
-		//NdotL = 1;
 
 		// Diffuse Calculation
 		diffuse += NdotL * Diffuse(properties, light, material, eye) * light.color * light.intensity;
-		// Specular Calculation
-		//NdotL = 1;
-		specular += NdotL * Specular(properties, light, material, eye) * light.color.xyz * light.intensity;
-		
-		//light.intensity /= 2.0;
-		//light.lightVector = -light.lightVector;
-	}
 
-	diffuse += 0.01;
+		// Specular Calculation
+		specular += NdotL * Specular(properties, light, material, eye) * light.color.rgb * light.intensity;
+
+		//diffuse = material.roughness;
+	}
 
 	// Shadow computation
 
 	// Color composition
-	float3 color = (material.albedo.rgb * diffuse.rgb + specular) * occlusion;
-	//color.xy = input.uv;
-	//color = specular;
-	return float4(RestoreGamma(color), material.albedo.a);
+	float3 ibl = IBL(properties, material, eye);
+	float3 color = (material.albedo.rgb * diffuse.rgb + specular + ibl) * occlusion;
+	color = RestoreGamma(color);
+	//color = properties.normal / 2 + 0.5;
+	//color = input.basis[0] / 2 + 0.5;
+	//color.rgb = float3(input.uv, 0);
+	return float4(color, material.albedo.a);
 }

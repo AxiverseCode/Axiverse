@@ -21,6 +21,7 @@ namespace Axiverse.Interface2.Engine
         public VsData vsData1;
         public PsData psData1;
         public PsData2 psData2;
+        public Texture2D skybox;
 
         public PhysicallyBasedRenderer(Device device)
         {
@@ -56,17 +57,29 @@ namespace Axiverse.Interface2.Engine
 
             shader.Apply(model.InputLayout);
 
-            vsData1.world = transform.Composite;
-            vsData1.view = camera.View;
-            vsData1.proj = camera.Projection;
-            vsData1.camera = camera.Position;
-            //vsData1.proj = world * view * proj;
-            device.UpdateData(bufferVs1, vsData1);
+            // Update general data.
+            {
+                vsData1.world = transform.Composite;
+                vsData1.view = camera.View;
+                vsData1.proj = camera.Projection;
+                vsData1.camera = camera.Position;
+                //vsData1.proj = world * view * proj;
+                device.UpdateData(bufferVs1, vsData1);
+            }
 
-            psData1.direction = new Vector3(0, 1, 1).Normal();
-            //psData1.lightVector = new Vector3(Functions.Sin(t), -0.1f, Functions.Cos(t)).Normal();
-            //psData1.lightVector = psData1.direction;
-            device.UpdateData(bufferPs1, psData1);
+            // Update light data.
+            {
+                var lights = context.ClosestLights(transform.Origin);
+                var light = lights[0];
+                var lightPosition = light.Entity.Transform.Origin;
+                var direction = transform.Origin - lightPosition;
+
+                psData1.direction = direction.Normal();
+                psData1.color = light.Color;
+                psData1.lightVector = psData1.direction;
+                psData1.position = lightPosition;
+                device.UpdateData(bufferPs1, psData1);
+            }
 
             device.NativeDeviceContext.VertexShader.SetConstantBuffer(0, bufferVs1);
 
@@ -75,11 +88,12 @@ namespace Axiverse.Interface2.Engine
 
             device.NativeDeviceContext.PixelShader.SetShaderResource(0, material.Albedo.NativeResourceView);
             device.NativeDeviceContext.PixelShader.SetShaderResource(1, material.Normal.NativeResourceView);
-            device.NativeDeviceContext.PixelShader.SetShaderResource(2, null); // height
+            device.NativeDeviceContext.PixelShader.SetShaderResource(2, material.Height.NativeResourceView); // height
             device.NativeDeviceContext.PixelShader.SetShaderResource(3, material.Roughness.NativeResourceView);
             device.NativeDeviceContext.PixelShader.SetShaderResource(4, material.Specular.NativeResourceView);
             device.NativeDeviceContext.PixelShader.SetShaderResource(5, material.Alpha.NativeResourceView); // alpha
             device.NativeDeviceContext.PixelShader.SetShaderResource(6, material.Occlusion.NativeResourceView); // ao
+            device.NativeDeviceContext.PixelShader.SetShaderResource(7, skybox.NativeResourceView); // ao
 
             model.Draw(shader);
         }

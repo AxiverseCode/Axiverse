@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Interface2.Entites
 {
-    public class Component
+    public abstract class Component
     {
         public Entity Entity { get; internal set; }
     }

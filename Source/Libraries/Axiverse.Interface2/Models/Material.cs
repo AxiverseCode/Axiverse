@@ -14,5 +14,6 @@ namespace Axiverse.Interface2.Models
         public Texture2D Specular { get; set; }
         public Texture2D Alpha { get; set; }
         public Texture2D Occlusion { get; set; }
+        public Texture2D Height { get; set; }
     }
 }

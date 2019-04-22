@@ -64,5 +64,10 @@ namespace Axiverse.Mathematics.Geometry
             Texture = texture;
             Color = color;
         }
+
+        public override string ToString()
+        {
+            return Tangent.ToString();
+        }
     }
 }

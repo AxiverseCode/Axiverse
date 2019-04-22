@@ -10,6 +10,7 @@ namespace Axiverse.Interface2.Entites
     {
         public Transform Parent { get; set; }
         public List<Transform> Children { get; } = new List<Transform>();
+        public Vector3 Origin { get; private set; }
 
         public Matrix4 Composite;
         public Matrix4 Transformation;
@@ -22,6 +23,7 @@ namespace Axiverse.Interface2.Entites
         {
             Matrix4.Transformation(ref Scaling, ref Rotation, ref Translation, out Transformation);
             Composite = (Parent == null) ? Transformation : Transformation * Parent.Composite;
+            Origin = Matrix4.Transform(default(Vector3), Composite);
 
             foreach (var child in Children)
             {
