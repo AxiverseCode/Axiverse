@@ -22,7 +22,7 @@ namespace Axiverse.Interface2.Interface
             }
         }
 
-        public TreeItemCollection Children { get; } = new TreeItemCollection();
+        public TreeItemCollection Children { get; }
 
         public bool Expanded { get; set; }
 
@@ -39,6 +39,7 @@ namespace Axiverse.Interface2.Interface
 
         public TreeItem(string text)
         {
+            Children = new TreeItemCollection(this);
             Text = text;
         }
     }

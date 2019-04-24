@@ -746,6 +746,29 @@ namespace Axiverse
         #endregion
 
         /// <summary>
+        /// Created a left handed projection matrix.
+        /// </summary>
+        /// <param name="fov">Field of view in the y direction, in radians.</param>
+        /// <param name="aspect">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        public static Matrix4 PerspectiveFovLH(float fov, float aspect, float znear, float zfar)
+        {
+            float yScale = (float)(1.0f / Math.Tan(fov * 0.5f));
+            float q = zfar / (zfar - znear);
+
+            var result = new Matrix4
+            {
+                M11 = yScale / aspect,
+                M22 = yScale,
+                M33 = q,
+                M34 = 1.0f,
+                M43 = -q * znear
+            };
+            return result;
+        }
+
+        /// <summary>
         /// Created a right handed projection matrix.
         /// </summary>
         /// <param name="fov">Field of view in the y direction, in radians.</param>
@@ -769,12 +792,40 @@ namespace Axiverse
         }
 
         /// <summary>
+        /// Creates a left-handed, look-at matrix.
+        /// </summary>
+        /// <param name="eye">The position of the viewer's eye.</param>
+        /// <param name="target">The camera look-at target.</param>
+        /// <param name="up">The camera's up vector.</param>
+        public static Matrix4 LookAtLH(Vector3 eye, Vector3 target, Vector3 up)
+        {
+            Vector3 xaxis, yaxis, zaxis;
+            Vector3.Subtract(out zaxis, ref target, ref eye); zaxis.Normalize();
+            Vector3.Cross(ref up, ref zaxis, out xaxis); xaxis.Normalize();
+            Vector3.Cross(ref zaxis, ref xaxis, out yaxis);
+
+            var result = Matrix4.Identity;
+            result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
+            result.M12 = yaxis.X; result.M22 = yaxis.Y; result.M32 = yaxis.Z;
+            result.M13 = zaxis.X; result.M23 = zaxis.Y; result.M33 = zaxis.Z;
+
+            result.M41 = Vector3.Dot(ref xaxis, ref eye);
+            result.M42 = Vector3.Dot(ref yaxis, ref eye);
+            result.M43 = Vector3.Dot(ref zaxis, ref eye);
+
+            result.M41 = -result.M41;
+            result.M42 = -result.M42;
+            result.M43 = -result.M43;
+
+            return result;
+        }
+
+        /// <summary>
         /// Creates a right-handed, look-at matrix.
         /// </summary>
         /// <param name="eye">The position of the viewer's eye.</param>
         /// <param name="target">The camera look-at target.</param>
         /// <param name="up">The camera's up vector.</param>
-        /// <param name="result">When the method completes, contains the created look-at matrix.</param>
         public static Matrix4 LookAtRH(Vector3 eye, Vector3 target, Vector3 up)
         {
             Vector3 xaxis, yaxis, zaxis;

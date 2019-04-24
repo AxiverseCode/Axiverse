@@ -84,7 +84,7 @@
     <Compile Include="Assets\WavefrontObjLoader.cs" />
     <Compile Include="Engine\Clock.cs" />
     <Compile Include="Engine\CompositingContext.cs" />
-    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\CoreEngine.cs" />
     <Compile Include="Engine\EngineProcess.cs" />
     <Compile Include="Engine\PhysicallyBasedRenderer.cs" />
     <Compile Include="Engine\SkyboxRenderer.cs" />

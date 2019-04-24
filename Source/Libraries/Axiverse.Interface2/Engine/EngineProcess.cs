@@ -10,11 +10,14 @@ namespace Axiverse.Interface2.Engine
 {
     public abstract class EngineProcess
     {
+        public CoreEngine Engine { get; }
+
         public Scene Scene { get; set; }
         public Chrome Chrome { get; set; }
 
-        public EngineProcess()
+        public EngineProcess(CoreEngine engine)
         {
+            Engine = engine;
             Scene = new Scene();
             Chrome = new Chrome();
         }
@@ -49,12 +52,12 @@ namespace Axiverse.Interface2.Engine
 
         }
 
-        protected internal virtual void OnEnter(Engine engine)
+        protected internal virtual void OnEnter(CoreEngine engine)
         {
 
         }
 
-        protected internal virtual void OnLeave(Engine engine)
+        protected internal virtual void OnLeave(CoreEngine engine)
         {
 
         }

@@ -17,7 +17,7 @@ namespace Axiverse.Interface2.Entites
 
         public ComponentCollection Components { get; }
 
-        public Entity(string name)
+        private Entity(string name)
         {
             Components = new ComponentCollection(this);
             Name = name;

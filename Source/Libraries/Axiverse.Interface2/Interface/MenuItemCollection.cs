@@ -10,6 +10,19 @@ namespace Axiverse.Interface2.Interface
 {
     public class MenuItemCollection : TrackedList<MenuItem>
     {
+        public void Add(string text)
+        {
+            Add(new MenuItem(text));
+        }
+
+        public void AddRange(params string[] collection)
+        {
+            foreach (var item in collection)
+            {
+                Add(item);
+            }
+        }
+
         protected override void OnItemAdded(MenuItem item)
         {
 

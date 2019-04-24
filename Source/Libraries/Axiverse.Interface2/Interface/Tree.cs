@@ -19,7 +19,7 @@ namespace Axiverse.Interface2.Interface
 
         public Tree()
         {
-            Items = new TreeItemCollection();
+            Items = new TreeItemCollection(this);
             Forecolor = Color.White;
         }
 
@@ -152,14 +152,14 @@ namespace Axiverse.Interface2.Interface
             return false;
         }
 
-        protected internal void OnItemAdded()
+        internal void HandleItemAdded(object sender, EventArgs e)
         {
-
+            CalculateMetrics();
         }
 
-        protected internal void OnItemRemoved()
+        internal void HandleItemRemoved(object sender, EventArgs e)
         {
-
+            CalculateMetrics();
         }
 
         private class TreeItemProperties

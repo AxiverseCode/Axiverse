@@ -8,7 +8,7 @@ namespace Axiverse.Interface2.Interface
 {
     public class MenuItem
     {
-        public MenuItemCollection Children { get; } = new MenuItemCollection();
+        public MenuItemCollection Children { get; }
 
         private string text;
         public string Text
@@ -23,7 +23,13 @@ namespace Axiverse.Interface2.Interface
 
         public MenuItem(string text)
         {
+            Children = new MenuItemCollection();
             Text = text;
+        }
+
+        protected internal void OnClick(EventArgs args)
+        {
+            Clicked?.Invoke(this, args);
         }
 
         public event EventHandler Clicked;

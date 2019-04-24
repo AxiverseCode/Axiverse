@@ -10,7 +10,7 @@ namespace Axiverse.Interface2.Engine
     /// <summary>
     /// Engine which holds references.
     /// </summary>
-    public class Engine : IDisposable
+    public class CoreEngine : IDisposable
     {
         public Device Device { get; }
         public Compositor Compositor { get; }
@@ -30,7 +30,7 @@ namespace Axiverse.Interface2.Engine
 
         public Clock Clock { get; } = new Clock();
 
-        public Engine()
+        public CoreEngine()
         {
             Form = new RenderForm() { ClientSize = new System.Drawing.Size(800, 800) };
             Device = new Device(Form);
@@ -49,7 +49,7 @@ namespace Axiverse.Interface2.Engine
                 if (Process != null)
                 {
                     Process.Update(Clock);
-                    //Compositor.Draw(Process.Scene, Clock.FrameTime);
+                    Compositor.Draw(Process.Scene, Clock.FrameTime);
 
                     if (Process.Chrome != null)
                     {
