@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fixed\UInt64_Test.cs" />
     <Compile Include="Geometry\Bounds3Test.cs" />
     <Compile Include="Matrix4Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axiverse.Mathematics.Fixed
 {
-    public struct Int128
+    public struct UInt128
     {
-        private ulong A;
-        private ulong B;
     }
 }

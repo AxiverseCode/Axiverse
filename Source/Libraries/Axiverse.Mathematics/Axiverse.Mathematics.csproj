@@ -59,8 +59,13 @@
     <Compile Include="Core\Functions.cs" />
     <Compile Include="Core\Matrix3.cs" />
     <Compile Include="Drawing\Rgba.cs" />
+    <Compile Include="Fixed\FixedPoint.cs" />
     <Compile Include="Fixed\Int128.cs" />
-    <Compile Include="Fixed\Int48Frac16.cs" />
+    <Compile Include="Fixed\Int256.cs" />
+    <Compile Include="Fixed\Int64Frac16.cs" />
+    <Compile Include="Fixed\UInt128.cs" />
+    <Compile Include="Fixed\Uint256.cs" />
+    <Compile Include="Fixed\UInt64_.cs" />
     <Compile Include="Geometry\Box3.cs" />
     <Compile Include="Geometry\Collision.cs" />
     <Compile Include="Geometry\GilbertJohnsonKeerthi2.cs" />
