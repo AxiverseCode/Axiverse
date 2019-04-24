@@ -44,12 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Algorithms.cs" />
+    <Compile Include="Collections\CachedDictionary.cs" />
     <Compile Include="Collections\CascadingDictionary.cs" />
     <Compile Include="Collections\CollectionChangedAction.cs" />
     <Compile Include="Collections\CollectionChangedEventArgs.cs" />
     <Compile Include="Collections\EmptyList.cs" />
     <Compile Include="Collections\Extensions.cs" />
     <Compile Include="Collections\ItemList.cs" />
+    <Compile Include="Collections\TrackedDictionary.cs" />
     <Compile Include="Collections\TrackedList.cs" />
     <Compile Include="DisposableObjectPool.cs" />
     <Compile Include="Injection\BindAttribute.cs" />

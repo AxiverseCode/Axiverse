@@ -9,14 +9,22 @@ namespace Axiverse.Interface2.Entites
 {
     public class Entity
     {
+        public string Name { get; set; }
+
         public Scene Scene { get; internal set; }
+
         public Transform Transform { get; set; }
-        public Model Model { get; set; }
 
         public Dictionary<Type, Component> Components { get; } = new Dictionary<Type, Component>();
 
-        public Entity()
+        public Entity() : this("")
         {
+
+        }
+
+        public Entity(string name)
+        {
+            Name = name;
             Transform = new Transform();
             Add(Transform);
         }
@@ -32,5 +40,8 @@ namespace Axiverse.Interface2.Entites
             Components.TryGetValue(typeof(T), out var value);
             return (T)value;
         }
+
+        public event ComponentEventHandler ComponentAdded;
+        public event ComponentEventHandler ComponentRemoved;
     }
 }

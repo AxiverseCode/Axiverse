@@ -22,5 +22,30 @@ namespace Axiverse.Interface2.Entites
             }
             return list;
         }
+
+        protected void OnEntityAdded()
+        {
+
+        }
+
+        protected void OnEntityRemoved()
+        {
+
+        }
+
+        protected void OnComponentAdded()
+        {
+
+        }
+
+        protected void OnComponentRemoved()
+        {
+
+        }
+
+        public event EntityEventHandler EntityAdded;
+        public event EntityEventHandler EntityRemoved;
+        public event ComponentEventHandler ComponentAdded;
+        public event ComponentEventHandler ComponentRemoved;
     }
 }

@@ -61,8 +61,11 @@
     <Compile Include="Drawing\Rgba.cs" />
     <Compile Include="Fixed\FixedPoint.cs" />
     <Compile Include="Fixed\Int128.cs" />
+    <Compile Include="Fixed\Int128Frac32.cs" />
     <Compile Include="Fixed\Int256.cs" />
+    <Compile Include="Fixed\Int32Frac16.cs" />
     <Compile Include="Fixed\Int64Frac16.cs" />
+    <Compile Include="Fixed\Int64Frac32.cs" />
     <Compile Include="Fixed\UInt128.cs" />
     <Compile Include="Fixed\Uint256.cs" />
     <Compile Include="Fixed\UInt64_.cs" />

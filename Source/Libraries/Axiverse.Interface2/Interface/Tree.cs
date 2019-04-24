@@ -61,9 +61,12 @@ namespace Axiverse.Interface2.Interface
                 }
 
                 context.brush.Color = Forecolor;
-                var rect = new RectangleF(context.indent * context.indentWidth + 30,
-                    context.offset++ * context.lineHeight, Width, context.lineHeight);
-                context.canvas.NativeDeviceContext.DrawText(item.Text, context.format, rect, context.brush);
+                if (item.Text != null)
+                {
+                    var rect = new RectangleF(context.indent * context.indentWidth + 30,
+                        context.offset++ * context.lineHeight, Width, context.lineHeight);
+                    context.canvas.NativeDeviceContext.DrawText(item.Text, context.format, rect, context.brush);
+                }
 
 
                 if (item.Expanded && item.Children.Count > 0)

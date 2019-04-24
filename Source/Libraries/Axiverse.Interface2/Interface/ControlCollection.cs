@@ -4,25 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Axiverse.Collections;
 
 namespace Axiverse.Interface2.Interface
 {
-    public class ControlCollection : IEnumerable<Control>
+    public class ControlCollection : TrackedList<Control>
     {
         private readonly Control control;
         private readonly Chrome overlay;
-        private readonly List<Control> items = new List<Control>();
         
-        public Control this[int index]
-        {
-            get
-            {
-                return items[index];
-            }
-        }
-
-        public int Count => items.Count;
-
         public ControlCollection(Control control)
         {
             this.control = control;
@@ -33,33 +23,7 @@ namespace Axiverse.Interface2.Interface
             this.overlay = overlay;
         }
 
-        public void Add(Control item)
-        {
-            if (items.Contains(control))
-            {
-                return;
-            }
-
-            if (item.Parent != null)
-            {
-                item.Parent.Children.Remove(item);
-            }
-
-            items.Add(item);
-            Register(item);
-        }
-
-        public bool Remove(Control item)
-        {
-            if (items.Remove(item))
-            {
-                Unregister(item);
-                return true;
-            }
-            return false;
-        }
-
-        private void Register(Control item)
+        protected override void OnItemAdded(Control item)
         {
             if (control != null)
             {
@@ -76,20 +40,10 @@ namespace Axiverse.Interface2.Interface
             }
         }
 
-        private void Unregister(Control item)
+        protected override void OnItemRemoved(Control item)
         {
             item.Parent = null;
             item.Chrome = null;
-        }
-
-        public IEnumerator<Control> GetEnumerator()
-        {
-            return ((IEnumerable<Control>)items).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

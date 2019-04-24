@@ -49,7 +49,7 @@ namespace Axiverse.Interface2
         {
             Queue<float> frametime = new Queue<float>();
 
-            using (var form = new RenderForm() { ClientSize = new System.Drawing.Size(500,500)})
+            using (var form = new RenderForm() { ClientSize = new System.Drawing.Size(800,800)})
             using (var device = new Device(form))
             using (var renderer = new PhysicallyBasedRenderer(device))
             using (var skyRenderer = new SkyboxRenderer(device))
@@ -134,6 +134,7 @@ namespace Axiverse.Interface2
                 var compositor = new Compositor();
                 var scene = new Scene();
 
+
                 var material = new Material()
                 {
                     Albedo = Texture2D.FromFile(device, "../../pbr/albedo.jpg"),
@@ -165,7 +166,7 @@ namespace Axiverse.Interface2
 
                 Camera camera;
                 {
-                    var entity = new Entity();
+                    var entity = new Entity("Camera");
                     camera = new Camera()
                     {
                         View = Matrix4.Identity,
@@ -184,7 +185,7 @@ namespace Axiverse.Interface2
                 }
 
                 {
-                    var entity = new Entity();
+                    var entity = new Entity("Box");
                     var renderable = new Renderable()
                     {
                         Model = box2Model, //shipModel,
@@ -196,7 +197,7 @@ namespace Axiverse.Interface2
                 }
 
                 {
-                    var entity = new Entity();
+                    var entity = new Entity("Ship 1");
                     var renderable = new Renderable()
                     {
                         Model = shipModel,
@@ -209,7 +210,7 @@ namespace Axiverse.Interface2
                 }
 
                 {
-                    var entity = new Entity();
+                    var entity = new Entity("Ship 2");
                     var renderable = new Renderable()
                     {
                         Model = shipModel,
@@ -223,7 +224,7 @@ namespace Axiverse.Interface2
 
                 Entity lightEntity;
                 {
-                    var entity = new Entity();
+                    var entity = new Entity("Point Light");
                     var light = new Light()
                     {
                         Color = new Vector4(0.6f, 0.9f, 0.8f, 1),
@@ -235,6 +236,15 @@ namespace Axiverse.Interface2
                     lightEntity = entity;
                 }
 
+
+                var entityTree = new Interface.Custom.EntityComponentTree(scene)
+                {
+                    Position = new Vector2(10, 500),
+                    Size = new Vector2(160, 300),
+                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
+                };
+                entityTree.CalculateMetrics();
+                chrome.Controls.Add(entityTree);
 
 
                 TrackballControl control = new TrackballControl();

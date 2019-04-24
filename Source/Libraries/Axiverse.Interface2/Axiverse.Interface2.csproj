@@ -84,7 +84,11 @@
     <Compile Include="Engine\SkyboxRenderer.cs" />
     <Compile Include="Entites\Camera.cs" />
     <Compile Include="Entites\Component.cs" />
+    <Compile Include="Entites\ComponentCollection.cs" />
+    <Compile Include="Entites\ComponentEventArgs.cs" />
+    <Compile Include="Entites\ComponentObserver.cs" />
     <Compile Include="Entites\Entity.cs" />
+    <Compile Include="Entites\EntityEventArgs.cs" />
     <Compile Include="Entites\Light.cs" />
     <Compile Include="Entites\Renderable.cs" />
     <Compile Include="Entites\Scene.cs" />
@@ -113,6 +117,7 @@
     <Compile Include="Interface\ContextMenu.cs" />
     <Compile Include="Interface\Control.cs" />
     <Compile Include="Interface\ControlCollection.cs" />
+    <Compile Include="Interface\Custom\EntityComponentTree.cs" />
     <Compile Include="Interface\Font.cs" />
     <Compile Include="Interface\Label.cs" />
     <Compile Include="Interface\Menu.cs" />
