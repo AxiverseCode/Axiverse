@@ -29,25 +29,22 @@ namespace Axiverse.Interface2.Interface
             base.OnDraw(canvas);
             var context = canvas.NativeDeviceContext;
 
-            using (var factory = new Factory())
-            using (var brush = new SolidColorBrush(context, Forecolor))
-            using (var format = new TextFormat(factory, "Calibri", 20))
-            {
-                format.ParagraphAlignment = ParagraphAlignment.Center;
-                format.TextAlignment = TextAlignment.Leading;
+            var brush = canvas.GetBrush(Forecolor);
+            var format = canvas.GetTextFormat(Font);
+            format.ParagraphAlignment = ParagraphAlignment.Center;
+            format.TextAlignment = TextAlignment.Leading;
 
-                for (int i = 0; i < Items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
+            {
+                var rect = new RectangleF(Margin, Margin + 40 * i, Size.X - Margin * 2, 40);
+                if (selectedItem == i)
                 {
-                    var rect = new RectangleF(Margin, Margin + 40 * i, Size.X - Margin * 2, 40);
-                    if (selectedItem == i)
-                    {
-                        brush.Color = new Color(0, 85, 221);
-                        context.FillRectangle(rect, brush);
-                        brush.Color = Forecolor;
-                    }
-                    rect.X += 10; rect.Width -= 20;
-                    context.DrawText(Items[i].Text ?? "", format, rect, brush);
+                    brush.Color = new Color(0, 85, 221);
+                    context.FillRectangle(rect, brush);
+                    brush.Color = Forecolor;
                 }
+                rect.X += 10; rect.Width -= 20;
+                context.DrawText(Items[i].Text ?? "", format, rect, brush);
             }
         }
 

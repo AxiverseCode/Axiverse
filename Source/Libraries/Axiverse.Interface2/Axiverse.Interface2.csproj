@@ -122,7 +122,12 @@
     <Compile Include="Interface\Chrome.cs" />
     <Compile Include="Interface\Overlay.cs" />
     <Compile Include="Interface\ContextPanel.cs" />
+    <Compile Include="Interface\Scroller.cs" />
     <Compile Include="Interface\Slider.cs" />
+    <Compile Include="Interface\TextInput.cs" />
+    <Compile Include="Interface\Tree.cs" />
+    <Compile Include="Interface\TreeItem.cs" />
+    <Compile Include="Interface\TreeItemCollection.cs" />
     <Compile Include="Mesh.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\Model.cs" />

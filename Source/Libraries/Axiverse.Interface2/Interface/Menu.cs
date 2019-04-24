@@ -30,27 +30,26 @@ namespace Axiverse.Interface2.Interface
         protected override void OnDraw(Canvas canvas)
         {
             base.OnDraw(canvas);
-            using (var format = new TextFormat(canvas.NativeFactoryWrite, "Calibri", 20))
-            using (var brush = new SolidColorBrush(canvas.NativeDeviceContext, Forecolor))
+            var format = canvas.GetTextFormat(Font);
+            var brush = canvas.GetBrush(Forecolor);
+
+            format.ParagraphAlignment = ParagraphAlignment.Center;
+            format.TextAlignment = TextAlignment.Center;
+
+            for (int i = 0; i < Items.Count; i++)
             {
-                format.ParagraphAlignment = ParagraphAlignment.Center;
-                format.TextAlignment = TextAlignment.Center;
+                var item = Items[i];
+                var metric = metrics[item];
+                var rect = new RectangleF(metric.Position.X, metric.Position.Y, metric.Size.X, metric.Size.Y);
 
-                for (int i = 0; i < Items.Count; i++)
+                if (i == hover)
                 {
-                    var item = Items[i];
-                    var metric = metrics[item];
-                    var rect = new RectangleF(metric.Position.X, metric.Position.Y, metric.Size.X, metric.Size.Y);
-
-                    if (i == hover)
-                    {
-                        brush.Color = new Color(0, 85, 221);
-                        canvas.NativeDeviceContext.FillRectangle(rect, brush);
-                        brush.Color = Forecolor;
-                    }
-
-                    canvas.NativeDeviceContext.DrawText(item.Text ?? "", format, rect, brush);
+                    brush.Color = new Color(0, 85, 221);
+                    canvas.NativeDeviceContext.FillRectangle(rect, brush);
+                    brush.Color = Forecolor;
                 }
+
+                canvas.NativeDeviceContext.DrawText(item.Text ?? "", format, rect, brush);
             }
         }
 

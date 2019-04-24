@@ -88,11 +88,11 @@ namespace Axiverse.Interface2.Engine
 
             device.NativeDeviceContext.PixelShader.SetShaderResource(0, material.Albedo.NativeResourceView);
             device.NativeDeviceContext.PixelShader.SetShaderResource(1, material.Normal.NativeResourceView);
-            device.NativeDeviceContext.PixelShader.SetShaderResource(2, material.Height.NativeResourceView); // height
-            device.NativeDeviceContext.PixelShader.SetShaderResource(3, material.Roughness.NativeResourceView);
-            device.NativeDeviceContext.PixelShader.SetShaderResource(4, material.Specular.NativeResourceView);
-            device.NativeDeviceContext.PixelShader.SetShaderResource(5, material.Alpha.NativeResourceView); // alpha
-            device.NativeDeviceContext.PixelShader.SetShaderResource(6, material.Occlusion.NativeResourceView); // ao
+            device.NativeDeviceContext.PixelShader.SetShaderResource(2, material.Height?.NativeResourceView); // height
+            device.NativeDeviceContext.PixelShader.SetShaderResource(3, material.Roughness?.NativeResourceView);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(4, material.Specular?.NativeResourceView);
+            device.NativeDeviceContext.PixelShader.SetShaderResource(5, material.Alpha?.NativeResourceView); // alpha
+            device.NativeDeviceContext.PixelShader.SetShaderResource(6, material.Occlusion?.NativeResourceView); // ao
             device.NativeDeviceContext.PixelShader.SetShaderResource(7, skybox.NativeResourceView); // ao
 
             model.Draw(shader);

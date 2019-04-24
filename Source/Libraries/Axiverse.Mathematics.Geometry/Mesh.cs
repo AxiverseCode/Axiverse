@@ -43,7 +43,7 @@ namespace Axiverse.Mathematics.Geometry
                 Vector2 deltaTex1 = Vertices[triangle.B].Texture - Vertices[triangle.A].Texture;
                 Vector2 deltaTex2 = Vertices[triangle.C].Texture - Vertices[triangle.A].Texture;
 
-                float r = 1.0f / (deltaTex1.X * deltaTex2.Y - deltaTex1.Y * deltaTex2.X);
+                float r = -1.0f / (deltaTex1.X * deltaTex2.Y - deltaTex1.Y * deltaTex2.X);
                 Vector3 tangent = (deltaPos1 * deltaTex2.Y - deltaPos2 * deltaTex1.Y) * r;
                 Vector3 binormal = (deltaPos2 * deltaTex1.X - deltaPos1 * deltaTex2.X) * r;
                 tangent.Normalize();

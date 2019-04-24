@@ -55,7 +55,7 @@ namespace Axiverse.Interface2
             using (var skyRenderer = new SkyboxRenderer(device))
             {
                 form.Text = "Axiverse Engine";
-                var overlay = new Interface.Chrome(form);
+                var chrome = new Interface.Chrome(form);
                 var menu = new Interface.Menu()
                 {
                     Position = new Vector2(),
@@ -77,15 +77,32 @@ namespace Axiverse.Interface2
                 menu.Items.Add(new Interface.MenuItem("Help"));
                 menu.Items[4].Children.Add(new Interface.MenuItem("About"));
 
-                overlay.Controls.Add(menu);
-                overlay.Controls.Add(new Interface.Slider()
+                chrome.Controls.Add(menu);
+                chrome.Controls.Add(new Interface.Slider()
                 {
-                    Position = new Vector2(10, 300),
+                    Position = new Vector2(10, 400),
                     Size = new Vector2(200, 40),
                     Text = "Hello World",
                     Backcolor = new Color(0.1f, 0.1f, 0.1f),
                     Forecolor = new Color(1f),
                 });
+
+                var tree = new Interface.Tree()
+                {
+                    Position = new Vector2(200, 80),
+                    Size = new Vector2(160, 300),
+                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
+
+                };
+                tree.Items.Add(new Interface.TreeItem("Entity 0"));
+                tree.Items.Add(new Interface.TreeItem("Entity 1"));
+                tree.Items.Add(new Interface.TreeItem("Entity 2"));
+                tree.Items[1].Children.Add(new Interface.TreeItem("Entity 1.a"));
+                tree.Items[1].Children.Add(new Interface.TreeItem("Entity 1.b"));
+                tree.Items[1].Children[1].Children.Add(new Interface.TreeItem("Entity 1.b.i"));
+                tree.Items[1].Children[1].Children.Add(new Interface.TreeItem("Entity 1.b.ii"));
+                tree.CalculateMetrics();
+                chrome.Controls.Add(tree);
 
                 Vector2 mouse = new Vector2();
                 Mathematics.Ray3 ray = new Mathematics.Ray3();
@@ -130,9 +147,21 @@ namespace Axiverse.Interface2
                 var shipModel = Model.FromMesh(device, Mathematics.Geometry.WavefrontObj.Load("../../Model.obj"));
                 shipModel.Materials.Add(material);
                 var boxModel = Model.FromMesh(device, Mathematics.Geometry.Mesh.CreateCube().Invert().CalculateNormals());
-                boxModel.Materials.Add(material);
+                var box2Model = Model.FromMesh(device, Mathematics.Geometry.Mesh.CreateCube().CalculateNormals());
+
+
+                var material2 = new Material
+                {
+                    Albedo = Texture2D.FromFile(device, "../../pbr/grimy-metal-albedo.png"),
+                    Normal = Texture2D.FromFile(device, "../../pbr/grimy-metal-normal-ogl.png"),
+                    Roughness = Texture2D.FromFile(device, "../../pbr/grimy-metal-metalness.png"),
+                    Specular = Texture2D.FromFile(device, "../../pbr/grimy-metal-metalness.png"),
+                    Alpha = null,
+                    Occlusion = null,
+                };
                 var sphereModel = Model.FromMesh(device, Mathematics.Geometry.Mesh.CreateSphere(10, 20).CalculateNormals());
-                sphereModel.Materials.Add(material);
+                sphereModel.Materials.Add(material2);
+                box2Model.Materials.Add(material2);
 
                 Camera camera;
                 {
@@ -158,7 +187,7 @@ namespace Axiverse.Interface2
                     var entity = new Entity();
                     var renderable = new Renderable()
                     {
-                        Model = sphereModel, //boxModel, //shipModel,
+                        Model = box2Model, //shipModel,
                         Renderer = renderer,
                     };
                     entity.Add(renderable);
@@ -297,8 +326,8 @@ namespace Axiverse.Interface2
                         //device.Canvas.DrawString("Position:" + target.Body.LinearPosition.ToString(2), 10, 170);
                         device.Canvas.DrawString("Mouse:" + mouse.ToString() + " " + ray.ToString(), 10, 200);
 
-                        overlay.Update(dt);
-                        overlay.Draw(device.Canvas);
+                        chrome.Update(dt);
+                        chrome.Draw(device.Canvas);
 
                         device.Canvas.End();
                     }

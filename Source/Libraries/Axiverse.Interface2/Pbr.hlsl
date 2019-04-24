@@ -43,7 +43,8 @@ TextureCube environmentMap : register(t7);
 
 SamplerState textureSampler
 {
-	Filter = MIN_MAG_MIP_LINEAR;
+	//Filter = MIN_MAG_MIP_LINEAR;
+	Filter = ANISOTROPIC;
 	AddressU = Wrap;
 	AddressV = Wrap;
 };
@@ -228,17 +229,17 @@ float3 IBL(Properties properties, Material material, float3 eye)
 
 	float3 reflectionVector = normalize(reflect(-eye, properties.normal));
 	float smoothness = 1.0f - material.roughness;
-	float mipLevel = (1.0f - smoothness * smoothness) * 10.0f;
-	//float4 cs = environmentMap.SampleLevel(environmentMapSampler, reflectionVector, mipLevel);
-	float4 cs = environmentMap.Sample(textureSampler, reflectionVector);
-	float3 result = pow(cs.xyz, GAMMA);// *RadianceIBLIntegration(NdotV, material.roughness, material.specular);
+	float mipLevel = (1.0f - smoothness * smoothness) * 11.0f;
+	float4 cs = environmentMap.SampleLevel(textureSampler, reflectionVector, mipLevel);
+	//float4 cs = environmentMap.Sample(textureSampler, reflectionVector);
+	float3 result = pow(cs.xyz, GAMMA) * material.specular; // RadianceIBLIntegration(NdotV, material.roughness, material.specular);
 	//result = reflectionVector / 2 + 0.5;
 	//result = properties.normal / 2 + 0.5;
 
 	float3 diffuseDominantDirection = properties.normal;
 	float diffuseLowMip = 9.6;
-	//float3 diffuseImageLighting = u_EnvironmentMap.SampleLevel(environmentMapSampler, diffuseDominantDirection, diffuseLowMip).rgb;
-	float3 diffuseImageLighting = environmentMap.Sample(textureSampler, diffuseDominantDirection).rgb;
+	float3 diffuseImageLighting = environmentMap.SampleLevel(textureSampler, diffuseDominantDirection, diffuseLowMip).rgb;
+	//float3 diffuseImageLighting = environmentMap.Sample(textureSampler, diffuseDominantDirection).rgb;
 	diffuseImageLighting = pow(diffuseImageLighting, GAMMA);
 
 	return result + diffuseImageLighting * material.albedo.rgb;
@@ -275,12 +276,12 @@ float4 PS(VS_OUT input) : SV_Target
 	material.albedo.a = alphaMap.Sample(textureSampler, input.uv).r;
 	material.specular = metallicMap.Sample(textureSampler, input.uv).r * material.albedo.rgb;
 	material.roughness = roughnessMap.Sample(textureSampler, input.uv).r;
-	material.roughness = heightMap.Sample(textureSampler, input.uv).r;
+	//material.roughness = 1 - heightMap.Sample(textureSampler, input.uv).r;
 	material.normal = normalize(normalMap.Sample(textureSampler, input.uv).rgb * 2 - 1);
 	properties.normal = normalize(mul(input.basis, material.normal));
 
 	float height = heightMap.Sample(textureSampler, input.uv).r;
-	float occlusion = occlusionMap.Sample(textureSampler, input.uv).r;
+	float2 occlusion = occlusionMap.Sample(textureSampler, input.uv).ra;
 
 	float3 eye = normalize(input.cameraPosition - properties.position);
 
@@ -313,7 +314,7 @@ float4 PS(VS_OUT input) : SV_Target
 
 	// Color composition
 	float3 ibl = IBL(properties, material, eye);
-	float3 color = (material.albedo.rgb * diffuse.rgb + specular + ibl) * occlusion;
+	float3 color = (material.albedo.rgb * diffuse.rgb + specular + ibl) * (occlusion.x * occlusion.y +  (1 - occlusion.y));
 	color = RestoreGamma(color);
 	//color = properties.normal / 2 + 0.5;
 	//color = input.basis[0] / 2 + 0.5;

@@ -81,6 +81,7 @@
     <Compile Include="Producers\PartialAttribute.cs" />
     <Compile Include="Producers\ProducesAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Revision.cs" />
     <Compile Include="Severity.cs" />
     <Compile Include="Symbol.cs" />
     <Compile Include="Threading\AsyncAutoResetEvent.cs" />
