@@ -45,7 +45,6 @@ namespace Axiverse.Interface2.Engine
             }
 
             // Render them.
-
         }
     }
 }

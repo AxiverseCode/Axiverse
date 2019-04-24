@@ -29,13 +29,13 @@ namespace Axiverse.Simulation.Components
             Add(component);
         }
 
-        public override void OnItemAdded(T item)
+        protected override void OnItemAdded(T item)
         {
             Requires.IsNull(item.Parent);
             item.Parent = Component;
         }
 
-        public override void OnItemRemoved(T item)
+        protected override void OnItemRemoved(T item)
         {
             item.Parent = null;
         }

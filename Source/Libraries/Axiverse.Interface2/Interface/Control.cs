@@ -9,6 +9,8 @@ using Axiverse.Mathematics.Drawing;
 
 namespace Axiverse.Interface2.Interface
 {
+    using Color = SharpDX.Color;
+
     public class Control
     {
         #region Properties
