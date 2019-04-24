@@ -103,7 +103,7 @@ namespace Axiverse.Interface2
                 tree.Items[1].Children[1].Children.Add(new Interface.TreeItem("Entity 1.b.ii"));
                 tree.CalculateMetrics();
                 chrome.Controls.Add(tree);
-
+                
                 Vector2 mouse = new Vector2();
                 Mathematics.Ray3 ray = new Mathematics.Ray3();
                 Mathematics.Viewport vp = new Mathematics.Viewport()
@@ -134,6 +134,13 @@ namespace Axiverse.Interface2
                 var compositor = new Compositor();
                 var scene = new Scene();
 
+                var entityTree = new Interface.Custom.EntityComponentTree(scene)
+                {
+                    Position = new Vector2(10, 500),
+                    Size = new Vector2(160, 300),
+                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
+                };
+                chrome.Controls.Add(entityTree);
 
                 var material = new Material()
                 {
@@ -165,36 +172,18 @@ namespace Axiverse.Interface2
                 box2Model.Materials.Add(material2);
 
                 Camera camera;
-                {
-                    var entity = new Entity("Camera");
-                    camera = new Camera()
+                scene.Entities.Add(new Entity("Camera")
+                    .Add(camera = new Camera()
                     {
                         View = Matrix4.Identity,
                         Projection = Convert(projection),
-                    };
-                    entity.Add(camera);
-                    var renderable = new Renderable()
+                    })
+                    .Add(new Renderable()
                     {
                         Model = boxModel,
                         //Model = shipModel,
                         Renderer = skyRenderer,
-                    };
-                    entity.Add(renderable);
-                    //entity.Transform.Scaling = new Axiverse.Vector3(55);
-                    scene.Entities.Add(entity);
-                }
-
-                {
-                    var entity = new Entity("Box");
-                    var renderable = new Renderable()
-                    {
-                        Model = box2Model, //shipModel,
-                        Renderer = renderer,
-                    };
-                    entity.Add(renderable);
-                    //entity.Transform.Scaling = new Axiverse.Vector3(55);
-                    scene.Entities.Add(entity);
-                }
+                    }));
 
                 {
                     var entity = new Entity("Ship 1");
@@ -204,7 +193,20 @@ namespace Axiverse.Interface2
                         Renderer = renderer,
                     };
                     entity.Add(renderable);
-                    entity.Transform.Scaling = new Axiverse.Vector3(40);
+                    entity.Transform.Scaling = new Axiverse.Vector3(55);
+                    scene.Entities.Add(entity);
+                }
+
+                {
+                    var entity = new Entity("Box");
+                    var renderable = new Renderable()
+                    {
+                        //Model = shipModel,
+                        Model = box2Model, //shipModel,
+                        Renderer = renderer,
+                    };
+                    entity.Add(renderable);
+                    //entity.Transform.Scaling = new Axiverse.Vector3(40);
                     entity.Transform.Translation = new Axiverse.Vector3(-30, 0, 0);
                     scene.Entities.Add(entity);
                 }
@@ -237,15 +239,8 @@ namespace Axiverse.Interface2
                 }
 
 
-                var entityTree = new Interface.Custom.EntityComponentTree(scene)
-                {
-                    Position = new Vector2(10, 500),
-                    Size = new Vector2(160, 300),
-                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
-                };
-                entityTree.CalculateMetrics();
-                chrome.Controls.Add(entityTree);
 
+                entityTree.CalculateMetrics();
 
                 TrackballControl control = new TrackballControl();
                 control.CameraPosition = new Axiverse.Vector3(0, 0, -50);

@@ -8,7 +8,12 @@ namespace Axiverse.Interface2.Entites
 {
     public class Scene
     {
-        public List<Entity> Entities { get; } = new List<Entity>();
+        public EntityCollection Entities { get; }
+
+        public Scene()
+        {
+            Entities = new EntityCollection(this); 
+        }
 
         public List<T> GetComponents<T>() where T : Component
         {
@@ -23,24 +28,38 @@ namespace Axiverse.Interface2.Entites
             return list;
         }
 
-        protected void OnEntityAdded()
+        protected internal void OnEntityAdded(EntityEventArgs args)
         {
-
+            args.Entity.ComponentAdded += HandleComponentAdded;
+            args.Entity.ComponentRemoved += HandleComponentRemoved;
+            EntityAdded?.Invoke(this, args);
         }
 
-        protected void OnEntityRemoved()
+        protected internal void OnEntityRemoved(EntityEventArgs args)
         {
-
+            args.Entity.ComponentAdded -= HandleComponentAdded;
+            args.Entity.ComponentRemoved -= HandleComponentRemoved;
+            EntityRemoved?.Invoke(this, args);
         }
 
-        protected void OnComponentAdded()
+        protected internal void OnComponentAdded(ComponentEventArgs args)
         {
-
+            ComponentAdded?.Invoke(this, args);
         }
 
-        protected void OnComponentRemoved()
+        protected internal void OnComponentRemoved(ComponentEventArgs args)
         {
+            ComponentRemoved?.Invoke(this, args);
+        }
 
+        private void HandleComponentRemoved(object sender, ComponentEventArgs args)
+        {
+            OnComponentAdded(args);
+        }
+
+        private void HandleComponentAdded(object sender, ComponentEventArgs args)
+        {
+            OnComponentRemoved(args);
         }
 
         public event EntityEventHandler EntityAdded;

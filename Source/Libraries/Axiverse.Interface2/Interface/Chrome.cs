@@ -19,15 +19,30 @@ namespace Axiverse.Interface2.Interface
         private List<Overlay> Overlays { get; } = new List<Overlay>();
         private List<Registration> Registrations { get; } = new List<Registration>();
 
-        public Chrome(Form form)
+        public Chrome()
         {
             Controls = new ControlCollection(this);
+        }
 
+        public Chrome(Form form)
+        {
+            Attach(form);
+        }
+
+        public void Attach(Form form)
+        {
             form.MouseMove += HandleMouseMove;
             form.MouseDown += HandleMouseDown;
             form.MouseUp += HandleMouseUp;
             form.MouseWheel += HandleMouseWheel;
-            
+        }
+
+        public void Detach(Form form)
+        {
+            form.MouseMove -= HandleMouseMove;
+            form.MouseDown -= HandleMouseDown;
+            form.MouseUp -= HandleMouseUp;
+            form.MouseWheel -= HandleMouseWheel;
         }
 
         public void Update(float deltaTime)

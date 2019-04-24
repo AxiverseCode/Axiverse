@@ -15,7 +15,6 @@ namespace Axiverse.Interface2.Interface
 
         }
 
-
         protected internal override void OnMouseEnter(MouseEventArgs e)
         {
 

@@ -38,7 +38,6 @@ namespace Axiverse.Interface2.Interface
 
 
             DrawItems(Items, ref context);
-
         }
 
         private void DrawItems(TreeItemCollection items, ref DrawContext context)
@@ -149,8 +148,18 @@ namespace Axiverse.Interface2.Interface
                     return true;
                 }
             }
-            property = default(TreeItemProperties);
+            property = default;
             return false;
+        }
+
+        protected internal void OnItemAdded()
+        {
+
+        }
+
+        protected internal void OnItemRemoved()
+        {
+
         }
 
         private class TreeItemProperties

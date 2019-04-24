@@ -10,5 +10,6 @@ namespace Axiverse.Interface2.Interface
 {
     public class TreeItemCollection : TrackedList<TreeItem>
     {
+
     }
 }

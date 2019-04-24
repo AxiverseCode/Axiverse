@@ -8,16 +8,19 @@ namespace Axiverse.Interface2.Entites
 {
     public class ComponentEventArgs : EventArgs
     {
+        public Type Binding { get; }
         public Component Component { get; }
         public Entity Entity { get; }
 
-        public ComponentEventArgs(Component component) : this(component.Entity, component)
+        public ComponentEventArgs(Type binding, Component component)
+            : this(binding, component, component.Entity)
         {
 
         }
 
-        public ComponentEventArgs(Entity entity, Component component)
+        public ComponentEventArgs(Type binding, Component component, Entity entity)
         {
+            Binding = binding;
             Entity = entity;
             Component = component;
         }
