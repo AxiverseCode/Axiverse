@@ -149,13 +149,21 @@
     <Compile Include="Graphics\Shaders\Particles.cs" />
     <Compile Include="Graphics\Shaders\Pbr.cs" />
     <Compile Include="Network\NetworkTimeProtocol.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="ProgramEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Shaders\Shader.cs" />
     <Compile Include="Graphics\Texture.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
-    <Compile Include="Simulation\Simulation.cs" />
+    <Compile Include="Simulation\Agent.cs" />
+    <Compile Include="Simulation\Emitter.cs" />
+    <Compile Include="Simulation\LogicStage.cs" />
+    <Compile Include="Simulation\Operation.cs" />
+    <Compile Include="Simulation\Physical.cs" />
+    <Compile Include="Simulation\PhysicsStage.cs" />
+    <Compile Include="Simulation\Sensor.cs" />
+    <Compile Include="Simulation\SensorStage.cs" />
+    <Compile Include="Simulation\Simulator.cs" />
+    <Compile Include="Simulation\Stage.cs" />
     <Compile Include="TrackballControls.cs" />
   </ItemGroup>
   <ItemGroup>

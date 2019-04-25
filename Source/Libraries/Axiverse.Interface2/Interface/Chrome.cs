@@ -142,7 +142,12 @@ namespace Axiverse.Interface2.Interface
 
         private void HandleMouseWheel(object sender, NativeMouseEventArgs e)
         {
-
+            if (hover != null)
+            {
+                var point = new Vector2(e.X, e.Y);
+                var z = (float)e.Delta / SystemInformation.MouseWheelScrollDelta;
+                hover.OnMouseScroll(new MouseEventArgs(hover.FindLocalPoint(point), new Vector3(z: z)));
+            }
         }
 
         private void HandleMouseUp(object sender, NativeMouseEventArgs e)

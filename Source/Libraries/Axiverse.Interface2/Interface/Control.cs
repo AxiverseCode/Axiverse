@@ -252,6 +252,8 @@ namespace Axiverse.Interface2.Interface
 
         protected internal virtual void OnMouseUp(MouseEventArgs e) { }
 
+        protected internal virtual void OnMouseScroll(MouseEventArgs e) { }
+
         protected internal virtual void OnMouseMove(MouseEventArgs e) { }
 
         protected internal virtual void OnMouseEnter(MouseEventArgs e) { }

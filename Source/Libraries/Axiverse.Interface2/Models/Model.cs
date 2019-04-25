@@ -11,7 +11,6 @@ using Buffer11 = SharpDX.Direct3D11.Buffer;
 
 namespace Axiverse.Interface2.Models
 {
-    using static Axiverse.Interface2.Mesh;
     using Mesh = Axiverse.Mathematics.Geometry.Mesh;
 
     public class Model : IDisposable

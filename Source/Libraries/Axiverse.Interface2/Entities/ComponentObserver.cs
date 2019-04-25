@@ -14,6 +14,9 @@ namespace Axiverse.Interface2.Entities
 
         public ComponentObserver(Scene scene, params Type[] bindings)
         {
+            Scene = scene;
+            Bindings = bindings;
+
             scene.ComponentAdded += HandleComponentAdded;
             scene.ComponentRemoved += HandleComponentRemoved;
             scene.EntityAdded += HandleEntityAdded;
@@ -38,9 +41,26 @@ namespace Axiverse.Interface2.Entities
             }
         }
 
+        protected void OnEntityAdded(EntityEventArgs args)
+        {
+            EntityAdded?.Invoke(this, args);
+        }
+
+        protected void OnEntityRemoved(EntityEventArgs args)
+        {
+            EntityRemoved?.Invoke(this, args);
+        }
+
+        public event EntityEventHandler EntityAdded;
+        public event EntityEventHandler EntityRemoved;
+
         private void HandleEntityRemoved(object sender, EntityEventArgs args)
         {
-            Entities.Remove(args.Entity);
+            var removed = Entities.Remove(args.Entity);
+            if (removed)
+            {
+                OnEntityRemoved(args);
+            }
         }
 
         private void HandleEntityAdded(object sender, EntityEventArgs args)
@@ -54,6 +74,7 @@ namespace Axiverse.Interface2.Entities
             }
 
             Entities.Add(args.Entity);
+            OnEntityAdded(args);
         }
 
         private void HandleComponentRemoved(object sender, ComponentEventArgs args)

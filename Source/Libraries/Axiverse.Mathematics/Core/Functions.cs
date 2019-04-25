@@ -133,6 +133,16 @@ namespace Axiverse
         }
 
         /// <summary>
+        /// Saturates a value between 0 and 1.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float Saturate(float value)
+        {
+            return Clamp(value, 0f, 1f);
+        }
+
+        /// <summary>
         /// Clamps the value between the maximum and minimum.
         /// </summary>
         /// <param name="value"></param>
@@ -192,6 +202,32 @@ namespace Axiverse
             result.X = Clamp(value.X, minimum.X, maximum.X);
             result.Y = Clamp(value.Y, minimum.Y, maximum.Y);
             result.Z = Clamp(value.Z, minimum.Z, maximum.Z);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lower"></param>
+        /// <param name="upper"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static float SmoothStep(float lower, float upper, float x)
+        {
+            x = Clamp((x - lower) / (upper - lower), 0f, 1f);
+            return x * x * (3 - 2 * x);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lower"></param>
+        /// <param name="upper"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static float SmootherStep(float lower, float upper, float x)
+        {
+            x = Clamp((x - lower) / (upper - lower), 0f, 1f);
+            return x * x * x * (x * (x * 6 - 15) + 10);
         }
 
         /// <summary>

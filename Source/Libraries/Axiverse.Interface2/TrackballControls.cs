@@ -123,6 +123,43 @@ namespace Axiverse.Interface2
             set => objectUpDirection = value;
         }
 
+        public void Bind(Form form)
+        {
+            form.Resize += (s, e) =>
+            {
+                HandlResize(new Rectangle(0, 0, form.ClientSize.Width, form.ClientSize.Height));
+            };
+            form.MouseDown += (s, e) =>
+            {
+                TrackballControl.State state;
+                switch (e.Button)
+                {
+                    case System.Windows.Forms.MouseButtons.Left:
+                        state = TrackballControl.State.Rotate;
+                        break;
+                    case System.Windows.Forms.MouseButtons.Right:
+                        state = TrackballControl.State.Zoom;
+                        break;
+                    default:
+                        state = TrackballControl.State.None;
+                        break;
+                }
+                OnMouseDown(state, new Vector2(Screen.Width - e.X, e.Y));
+            };
+            form.MouseUp += (s, e) =>
+            {
+                OnMouseUp();
+            };
+            form.MouseWheel += (s, e) =>
+            {
+                OnMouseWheel(e.Delta / 6f);
+            };
+            form.MouseMove += (s, e) =>
+            {
+                OnMouseMove(new Vector2(Screen.Width - e.X, e.Y));
+            };
+        }
+
         void HandlResize(Rectangle screen)
         {
             this.Screen = screen;

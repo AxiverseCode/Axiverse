@@ -127,7 +127,7 @@ namespace Axiverse.Mathematics.Geometry
             }
         }
 
-        public static Mesh CreateCube()
+        public static Mesh CreateCube(float side = 1f)
         {
             // Indices
             int[] indices = new int[]
@@ -140,54 +140,46 @@ namespace Axiverse.Mathematics.Geometry
                 20,21,22,20,22,23
             };
 
+            var h = side / 2f;  
 
             // Vertices
             Vertex[] vertices = new[]
             {
                 // TOP
-                new Vertex(new Vector3(-1, 1, 1), color: new Vector4(0, 1, 0, 0), texture: new Vector2(1, 1)),
-                new Vertex(new Vector3(1, 1, 1), color: new Vector4(0, 1, 0, 0), texture: new Vector2(0, 1)),
-                new Vertex(new Vector3(1, 1, -1), color: new Vector4(0, 1, 0, 0), texture: new Vector2(0, 0)),
-                new Vertex(new Vector3(-1, 1, -1), color: new Vector4(0, 1, 0, 0), texture: new Vector2(1, 0)), 
+                new Vertex(new Vector3(-h, h, h), color: new Vector4(0, 1, 0, 1), texture: new Vector2(1, 1)),
+                new Vertex(new Vector3(h, h, h), color: new Vector4(0, 1, 0, 1), texture: new Vector2(0, 1)),
+                new Vertex(new Vector3(h, h, -h), color: new Vector4(0, 1, 0, 1), texture: new Vector2(0, 0)),
+                new Vertex(new Vector3(-h, h, -h), color: new Vector4(0, 1, 0, 1), texture: new Vector2(1, 0)), 
                 // BOTTOM
-                new Vertex(new Vector3(-1, -1, 1), color: new Vector4(1, 0, 1, 1), texture: new Vector2(1, 1)),
-                new Vertex(new Vector3(1, -1, 1), color: new Vector4(1, 0, 1, 1), texture: new Vector2(0, 1)),
-                new Vertex(new Vector3(1, -1, -1), color: new Vector4(1, 0, 1, 1), texture: new Vector2(0, 0)),
-                new Vertex(new Vector3(-1, -1, -1), color: new Vector4(1, 0, 1, 1), texture: new Vector2(1, 0)), 
+                new Vertex(new Vector3(-h, -h, h), color: new Vector4(1, 0, 1, 1), texture: new Vector2(1, 1)),
+                new Vertex(new Vector3(h, -h, h), color: new Vector4(1, 0, 1, 1), texture: new Vector2(0, 1)),
+                new Vertex(new Vector3(h, -h, -h), color: new Vector4(1, 0, 1, 1), texture: new Vector2(0, 0)),
+                new Vertex(new Vector3(-h, -h, -h), color: new Vector4(1, 0, 1, 1), texture: new Vector2(1, 0)), 
                 // LEFT
-                new Vertex(new Vector3(-1, -1, 1), color: new Vector4(1, 0, 0, 1), texture: new Vector2(0, 1)),
-                new Vertex(new Vector3(-1, 1, 1), color: new Vector4(1, 0, 0, 1), texture: new Vector2(0, 0)),
-                new Vertex(new Vector3(-1, 1, -1), color: new Vector4(1, 0, 0, 1), texture: new Vector2(1, 0)),
-                new Vertex(new Vector3(-1, -1, -1), color: new Vector4(1, 0, 0, 1), texture: new Vector2(1, 1)), 
+                new Vertex(new Vector3(-h, -h, h), color: new Vector4(1, 0, 0, 1), texture: new Vector2(0, 1)),
+                new Vertex(new Vector3(-h, h, h), color: new Vector4(1, 0, 0, 1), texture: new Vector2(0, 0)),
+                new Vertex(new Vector3(-h, h, -h), color: new Vector4(1, 0, 0, 1), texture: new Vector2(1, 0)),
+                new Vertex(new Vector3(-h, -h, -h), color: new Vector4(1, 0, 0, 1), texture: new Vector2(1, 1)), 
                 // RIGHT
-                new Vertex(new Vector3(1, -1, 1), color: new Vector4(1, 1, 0, 1), texture: new Vector2(1, 1)),
-                new Vertex(new Vector3(1, 1, 1), color: new Vector4(1, 1, 0, 1), texture: new Vector2(1, 0)),
-                new Vertex(new Vector3(1, 1, -1), color: new Vector4(1, 1, 0, 1), texture: new Vector2(0, 0)),
-                new Vertex(new Vector3(1, -1, -1), color: new Vector4(1, 1, 0, 1), texture: new Vector2(0, 1)), 
+                new Vertex(new Vector3(h, -h, h), color: new Vector4(1, 1, 0, 1), texture: new Vector2(1, 1)),
+                new Vertex(new Vector3(h, h, h), color: new Vector4(1, 1, 0, 1), texture: new Vector2(1, 0)),
+                new Vertex(new Vector3(h, h, -h), color: new Vector4(1, 1, 0, 1), texture: new Vector2(0, 0)),
+                new Vertex(new Vector3(h, -h, -h), color: new Vector4(1, 1, 0, 1), texture: new Vector2(0, 1)), 
                 // FRONT
-                new Vertex(new Vector3(-1, 1, 1), color: new Vector4(0, 1, 1, 1), texture: new Vector2(1, 0)),
-                new Vertex(new Vector3(1, 1, 1), color: new Vector4(0, 1, 1, 1), texture: new Vector2(0, 0)),
-                new Vertex(new Vector3(1, -1, 1), color: new Vector4(0, 1, 1, 1), texture: new Vector2(0, 1)),
-                new Vertex(new Vector3(-1, -1, 1), color: new Vector4(0, 1, 1, 1), texture: new Vector2(1, 1)), 
+                new Vertex(new Vector3(-h, h, h), color: new Vector4(0, 1, 1, 1), texture: new Vector2(1, 0)),
+                new Vertex(new Vector3(h, h, h), color: new Vector4(0, 1, 1, 1), texture: new Vector2(0, 0)),
+                new Vertex(new Vector3(h, -h, h), color: new Vector4(0, 1, 1, 1), texture: new Vector2(0, 1)),
+                new Vertex(new Vector3(-h, -h, h), color: new Vector4(0, 1, 1, 1), texture: new Vector2(1, 1)), 
                 // BACK
-                new Vertex(new Vector3(-1, 1, -1), color: new Vector4(0, 0, 1, 1), texture: new Vector2(0, 0)),
-                new Vertex(new Vector3(1, 1, -1), color: new Vector4(0, 0, 1, 1), texture: new Vector2(1, 0)),
-                new Vertex(new Vector3(1, -1, -1), color: new Vector4(0, 0, 1, 1), texture: new Vector2(1, 1)),
-                new Vertex(new Vector3(-1, -1, -1), color: new Vector4(0, 0, 1, 1), texture: new Vector2(0, 1))
+                new Vertex(new Vector3(-h, h, -h), color: new Vector4(0, 0, 1, 1), texture: new Vector2(0, 0)),
+                new Vertex(new Vector3(h, h, -h), color: new Vector4(0, 0, 1, 1), texture: new Vector2(1, 0)),
+                new Vertex(new Vector3(h, -h, -h), color: new Vector4(0, 0, 1, 1), texture: new Vector2(1, 1)),
+                new Vertex(new Vector3(-h, -h, -h), color: new Vector4(0, 0, 1, 1), texture: new Vector2(0, 1))
             };
 
             var mesh = new Mesh();
             mesh.Vertices.AddRange(vertices);
-
-            for (int i = 0; i < indices.Length; i += 3)
-            {
-                mesh.Triangles.Add(new Index3()
-                {
-                    A = indices[i],
-                    B = indices[i + 1],
-                    C = indices[i + 2],
-                });
-            }
+            mesh.SetIndices(indices);
 
             return mesh;
         }

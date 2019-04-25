@@ -7,6 +7,7 @@ using Axiverse.Interface2.Engine;
 using Axiverse.Interface2.Entities;
 using Axiverse.Interface2.Interface;
 using Axiverse.Interface2.Models;
+using Axiverse.Interface2.Simulation;
 using SharpDX;
 
 namespace Axiverse.Interface2
@@ -19,16 +20,61 @@ namespace Axiverse.Interface2
         SkyboxRenderer sbr;
         Matrix4 projection;
         Matrix4 view;
+        Camera camera;
+        TrackballControl control;
+
+        public Simulator Simulator { get; private set; } = new Simulator();
 
         public ProgramEngine(CoreEngine engine) : base(engine)
         {
             pbr = new PhysicallyBasedRenderer(engine.Device);
             sbr = new SkyboxRenderer(engine.Device);
+            control = new TrackballControl
+            {
+                CameraPosition = new Vector3(0, 0, -50),
+                ZoomEnabled = true,
+                RotateEnabled = true,
+                Screen = new Rectangle(0, 0, engine.Form.ClientSize.Width, engine.Form.ClientSize.Height),
+                Enabled = true,
+                Up = new Vector3(0, 1, 0)
+            };
 
+            control.Bind(engine.Form);
+            engine.Form.Resize += HandleResize;
+            HandleResize(null, null);
+
+            Simulator.Scene = Scene;
+
+            // Inputs
+            Simulator.Stages.Add(new SensorStage(Scene));
+
+            // Process
+            Simulator.Stages.Add(new LogicStage(Scene));
+
+            // Outputs
+            Simulator.Stages.Add(new PhysicsStage(Scene));
+        }
+
+        private void HandleResize(object sender, EventArgs e)
+        {
             float ratio = (float)Engine.Form.ClientRectangle.Width / Engine.Form.ClientRectangle.Height;
             projection = Matrix4.PerspectiveFovLH(3.14F / 3.0F, ratio, 1, 1000);
-            view = Matrix4.LookAtLH(new Vector3(0, 0, -30),
+            view = Matrix4.LookAtLH(new Vector3(0, 0, -90),
                 new Vector3(0, 1, 0), Vector3.UnitY);
+            if (camera != null)
+            {
+                camera.Projection = projection;
+                camera.View = view;
+            }
+        }
+
+        protected override void OnUpdate(Clock clock)
+        {
+            Simulator.Update(clock);
+            control.Update();
+            view = Matrix4.LookAtLH(control.CameraPosition, control.Target, control.Up);
+            camera.View = view;
+            camera.Position = control.CameraPosition;
         }
 
         protected internal override void OnEnter(Engine.CoreEngine engine)
@@ -48,8 +94,8 @@ namespace Axiverse.Interface2
 
             var entityTree = new Interface.Custom.EntityComponentTree(Scene)
             {
-                Position = new Vector2(10, 500),
-                Size = new Vector2(160, 300),
+                Position = new Vector2(10, 100),
+                Size = new Vector2(200, 400),
             };
             Chrome.Controls.Add(entityTree);
 
@@ -75,12 +121,17 @@ namespace Axiverse.Interface2
                 Alpha = Texture2D.FromFile(Engine.Device, "../../pbr/alpha.jpg"),
                 Occlusion = Texture2D.FromFile(Engine.Device, "../../pbr/ambientocclusion.jpg"),
             };
+            material.Roughness = material.Height;
+            material.Specular = material.Normal;
+
             var shipModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Model.obj"));
             shipModel.Materials.Add(material);
+            var missileModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Missile.obj"));
+            missileModel.Materials.Add(material);
             var boxModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.Mesh.CreateCube().Invert().CalculateNormals());
 
             Scene.Entities.Add(new Entity("Camera")
-                .Add(new Camera
+                .Add(camera = new Camera
                 {
                     View = view,
                     Projection = projection,
@@ -100,7 +151,8 @@ namespace Axiverse.Interface2
                 {
                     Model = shipModel,
                     Renderer = pbr,
-                }));
+                })
+                .Add(new Physical()));
 
             Scene.Entities.Add(new Entity("Point Light",
                 new Transform
@@ -112,18 +164,29 @@ namespace Axiverse.Interface2
                     Color = new Vector4(0.6f, 0.9f, 0.8f, 1),
                     Intensity = 1,
                 }));
+
+            for (int i = 0; i < 100; i++)
+            {
+                Physical p;
+                Scene.Entities.Add(new Entity("Missile " + (i + 1),
+                    new Transform
+                    {
+                        Scaling = new Axiverse.Vector3(0.2f, 1, 0.2f),
+                    })
+                    .Add(new Renderable()
+                    {
+                        Model = missileModel,
+                        Renderer = pbr,
+                    })
+                    .Add(new Agent())
+                    .Add(p = new Physical()));
+                p.Body.AngularPosition = Functions.Random.NextQuaternion();
+            }
         }
 
         static void Main(string[] args)
         {
-            for (int i = 0; i < 20; i++)
-            {
-                var n = Network.NetworkTimeProtocol.GetNetworkTime();
-                var l = DateTime.Now;
-                var nn = n.Second * 1000 + n.Millisecond;
-                var ll = l.Second * 1000 + l.Millisecond;
-                Console.WriteLine(ll - nn);
-            }
+            // Network.NetworkTimeProtocol.Test();
 
             using (var engine = new Engine.CoreEngine())
             {

@@ -974,9 +974,12 @@ namespace Axiverse
             out Matrix4 result
            )
         {
-            result.M11 = rotation.M11 * scaling.X; result.M12 = rotation.M12; result.M13 = rotation.M13;
-            result.M21 = rotation.M21; result.M22 = rotation.M22 * scaling.Y; result.M23 = rotation.M23;
-            result.M31 = rotation.M31; result.M32 = rotation.M32; result.M33 = rotation.M33 * scaling.Z;
+            var sx = scaling.X;
+            var sy = scaling.Y;
+            var sz = scaling.Z;
+            result.M11 = rotation.M11 * sx; result.M12 = rotation.M12 * sx; result.M13 = rotation.M13 * sx;
+            result.M21 = rotation.M21 * sy; result.M22 = rotation.M22 * sy; result.M23 = rotation.M23 * sy;
+            result.M31 = rotation.M31 * sz; result.M32 = rotation.M32 * sz; result.M33 = rotation.M33 * sz;
 
             result.M41 = translation.X;
             result.M42 = translation.Y;

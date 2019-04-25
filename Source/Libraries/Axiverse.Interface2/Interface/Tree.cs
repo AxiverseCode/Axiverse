@@ -18,15 +18,20 @@ namespace Axiverse.Interface2.Interface
         private TreeItemProperties hover;
         private bool checkHover;
         public Color Color { get; set; } = InterfaceColors.ControlHover;
+        private Scroller scroller;
 
         public Tree()
         {
             Items = new TreeItemCollection(this);
+            scroller = new Scroller(this);
         }
 
         protected override void OnDraw(Canvas canvas)
         {
             base.OnDraw(canvas);
+
+            var transform = canvas.NativeDeviceContext.Transform;
+            canvas.NativeDeviceContext.Transform *= Matrix3x2.Translation(0, -scroller.Offset);
 
             var context = new DrawContext();
             context.lineHeight = 26;
@@ -39,6 +44,9 @@ namespace Axiverse.Interface2.Interface
 
 
             DrawItems(Items, ref context);
+
+            canvas.NativeDeviceContext.Transform = transform;
+            scroller.Draw(Size, canvas);
         }
 
         private void DrawItems(TreeItemCollection items, ref DrawContext context)
@@ -86,6 +94,10 @@ namespace Axiverse.Interface2.Interface
 
             properties.Clear();
             CalculateMetrics(Items, ref context);
+
+            scroller.Range = context.offset++ * context.lineHeight;
+            scroller.Length = Height;
+            scroller.Update();
         }
 
         private void CalculateMetrics(TreeItemCollection items, ref DrawContext context)
@@ -119,24 +131,33 @@ namespace Axiverse.Interface2.Interface
 
         protected internal override void OnMouseMove(MouseEventArgs e)
         {
-            if (TryFindItem(e.Position, out var prop))
+            var position = scroller.ToScrollSpace(e.Position);
+            if (TryFindItem(position, out var prop))
             {
                 hover = prop;
-                checkHover = prop.selectBounds.Contains(e.Position.X, e.Position.Y);
+                checkHover = prop.selectBounds.Contains(position.X, position.Y);
             }
         }
 
         protected internal override void OnMouseDown(MouseEventArgs e)
         {
-            if (TryFindItem(e.Position, out var prop))
+            var position = scroller.ToScrollSpace(e.Position);
+            if (TryFindItem(position, out var prop))
             {
-                if (prop.selectBounds.Contains(e.Position.X, e.Position.Y))
+                if (prop.selectBounds.Contains(position.X, position.Y))
                 {
                     prop.item.Expanded = !prop.item.Expanded;
                     CalculateMetrics();
                 }
             }
             base.OnMouseDown(e);
+        }
+
+        protected internal override void OnMouseScroll(MouseEventArgs e)
+        {
+            base.OnMouseScroll(e);
+            scroller.Scroll(e.Movement.Z * 26);
+            OnMouseMove(e);
         }
 
         private bool TryFindItem(Vector2 point, out TreeItemProperties property)

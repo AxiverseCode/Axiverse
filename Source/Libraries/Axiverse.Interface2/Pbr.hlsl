@@ -274,7 +274,7 @@ float4 PS(VS_OUT input) : SV_Target
 	Material material;
 	material.albedo = GammaCorrectTexture(albedoMap, textureSampler, input.uv);
 	material.albedo.a = alphaMap.Sample(textureSampler, input.uv).r;
-	material.specular = metallicMap.Sample(textureSampler, input.uv).r * material.albedo.rgb;
+	material.specular = metallicMap.Sample(textureSampler, input.uv).rgb;// *material.albedo.rgb;
 	material.roughness = roughnessMap.Sample(textureSampler, input.uv).r;
 	//material.roughness = 1 - heightMap.Sample(textureSampler, input.uv).r;
 	material.normal = normalize(normalMap.Sample(textureSampler, input.uv).rgb * 2 - 1);
