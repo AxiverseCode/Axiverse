@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface2.Entites
+namespace Axiverse.Interface2.Entities
 {
-    public abstract class Component
+    public class Light : Component
     {
-        public Entity Entity { get; internal set; }
+        public Vector4 Color;
+        public int Intensity;
     }
 }

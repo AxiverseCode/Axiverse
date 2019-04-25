@@ -41,7 +41,7 @@ namespace Axiverse.Interface2.Interface
                 var rect = new RectangleF(Margin, Margin + 40 * i, Size.X - Margin * 2, 40);
                 if (selectedItem == i)
                 {
-                    brush.Color = new Color(0, 85, 221).ToRawColor4();
+                    brush.Color = InterfaceColors.ControlHover.ToRawColor4();
                     context.FillRectangle(rect, brush);
                     brush.Color = Forecolor.ToRawColor4();
                 }

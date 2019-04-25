@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Axiverse.Interface2.Entites;
+using Axiverse.Interface2.Entities;
 using Axiverse.Interface2.Interface;
 
 namespace Axiverse.Interface2.Engine

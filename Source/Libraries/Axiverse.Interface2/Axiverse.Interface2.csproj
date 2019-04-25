@@ -88,18 +88,18 @@
     <Compile Include="Engine\EngineProcess.cs" />
     <Compile Include="Engine\PhysicallyBasedRenderer.cs" />
     <Compile Include="Engine\SkyboxRenderer.cs" />
-    <Compile Include="Entites\Camera.cs" />
-    <Compile Include="Entites\Component.cs" />
-    <Compile Include="Entites\ComponentCollection.cs" />
-    <Compile Include="Entites\ComponentEventArgs.cs" />
-    <Compile Include="Entites\ComponentObserver.cs" />
-    <Compile Include="Entites\Entity.cs" />
-    <Compile Include="Entites\EntityCollection.cs" />
-    <Compile Include="Entites\EntityEventArgs.cs" />
-    <Compile Include="Entites\Light.cs" />
-    <Compile Include="Entites\Renderable.cs" />
-    <Compile Include="Entites\Scene.cs" />
-    <Compile Include="Entites\Transform.cs" />
+    <Compile Include="Entities\Camera.cs" />
+    <Compile Include="Entities\Component.cs" />
+    <Compile Include="Entities\ComponentCollection.cs" />
+    <Compile Include="Entities\ComponentEventArgs.cs" />
+    <Compile Include="Entities\ComponentObserver.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\EntityCollection.cs" />
+    <Compile Include="Entities\EntityEventArgs.cs" />
+    <Compile Include="Entities\Light.cs" />
+    <Compile Include="Entities\Renderable.cs" />
+    <Compile Include="Entities\Scene.cs" />
+    <Compile Include="Entities\Transform.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Graphics\Canvas.cs" />
     <Compile Include="Engine\Compositor.cs" />
@@ -148,12 +148,14 @@
     <Compile Include="Models\PositionTexture.cs" />
     <Compile Include="Graphics\Shaders\Particles.cs" />
     <Compile Include="Graphics\Shaders\Pbr.cs" />
+    <Compile Include="Network\NetworkTimeProtocol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Shaders\Shader.cs" />
     <Compile Include="Graphics\Texture.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
+    <Compile Include="Simulation\Simulation.cs" />
     <Compile Include="TrackballControls.cs" />
   </ItemGroup>
   <ItemGroup>

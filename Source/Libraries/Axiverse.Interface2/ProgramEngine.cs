@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Axiverse.Interface2.Engine;
-using Axiverse.Interface2.Entites;
+using Axiverse.Interface2.Entities;
 using Axiverse.Interface2.Interface;
 using Axiverse.Interface2.Models;
 using SharpDX;
@@ -116,6 +116,15 @@ namespace Axiverse.Interface2
 
         static void Main(string[] args)
         {
+            for (int i = 0; i < 20; i++)
+            {
+                var n = Network.NetworkTimeProtocol.GetNetworkTime();
+                var l = DateTime.Now;
+                var nn = n.Second * 1000 + n.Millisecond;
+                var ll = l.Second * 1000 + l.Millisecond;
+                Console.WriteLine(ll - nn);
+            }
+
             using (var engine = new Engine.CoreEngine())
             {
                 engine.Process = new ProgramEngine(engine);

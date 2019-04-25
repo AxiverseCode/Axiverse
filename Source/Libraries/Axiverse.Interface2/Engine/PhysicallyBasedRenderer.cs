@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Buffer11 = SharpDX.Direct3D11.Buffer;
-using Axiverse.Interface2.Entites;
+using Axiverse.Interface2.Entities;
 
 namespace Axiverse.Interface2.Engine
 {

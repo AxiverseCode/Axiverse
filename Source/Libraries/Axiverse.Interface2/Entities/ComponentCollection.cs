@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Axiverse.Collections;
 
-namespace Axiverse.Interface2.Entites
+namespace Axiverse.Interface2.Entities
 {
     public class ComponentCollection : TrackedDictionary<Type, Component>
     {

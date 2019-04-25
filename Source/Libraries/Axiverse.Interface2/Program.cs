@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Axiverse.Interface.Windows;
 using Axiverse.Interface2.Engine;
-using Axiverse.Interface2.Entites;
+using Axiverse.Interface2.Entities;
 using Axiverse.Interface2.Models;
 using Axiverse.Physics;
 using SharpDX;

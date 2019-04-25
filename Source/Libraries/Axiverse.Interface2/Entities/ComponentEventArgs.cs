@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axiverse.Interface2.Entites
+namespace Axiverse.Interface2.Entities
 {
     public class ComponentEventArgs : EventArgs
     {
