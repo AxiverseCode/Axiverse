@@ -10,6 +10,8 @@ using Factory = SharpDX.DirectWrite.Factory;
 
 namespace Axiverse.Interface2.Interface
 {
+    using Color = Axiverse.Mathematics.Drawing.Color;
+
     public class ContextMenu : ContextPanel
     {
         const float Margin = 5;
@@ -39,9 +41,9 @@ namespace Axiverse.Interface2.Interface
                 var rect = new RectangleF(Margin, Margin + 40 * i, Size.X - Margin * 2, 40);
                 if (selectedItem == i)
                 {
-                    brush.Color = new Color(0, 85, 221);
+                    brush.Color = new Color(0, 85, 221).ToRawColor4();
                     context.FillRectangle(rect, brush);
-                    brush.Color = Forecolor;
+                    brush.Color = Forecolor.ToRawColor4();
                 }
                 rect.X += 10; rect.Width -= 20;
                 context.DrawText(Items[i].Text ?? "", format, rect, brush);

@@ -8,6 +8,8 @@ using SharpDX.Direct2D1;
 
 namespace Axiverse.Interface2.Interface
 {
+    using Color = Axiverse.Mathematics.Drawing.Color;
+
     public class Overlay : Control
     {
         public override void Draw(Canvas canvas)

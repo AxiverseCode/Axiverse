@@ -10,6 +10,8 @@ using Factory = SharpDX.DirectWrite.Factory;
 
 namespace Axiverse.Interface2.Interface
 {
+    using Color = Axiverse.Mathematics.Drawing.Color;
+
     public class Slider : Control
     {
         public Color Color { get; set; } = new Color(0, 85, 221);
@@ -36,7 +38,7 @@ namespace Axiverse.Interface2.Interface
             rect.Width -= border * 2;
 
             format.ParagraphAlignment = ParagraphAlignment.Center;
-            brush.Color = Forecolor;
+            brush.Color = Forecolor.ToRawColor4();
 
             format.TextAlignment = TextAlignment.Leading;
             context.DrawText(Text, format, rect, brush);

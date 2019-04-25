@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using SharpDX;
 using SharpDX.Direct2D1;
 using Axiverse.Mathematics.Drawing;
+using Axiverse.Interface2;
 
 namespace Axiverse.Interface2.Interface
 {
-    using Color = SharpDX.Color;
+    using Color = Axiverse.Mathematics.Drawing.Color;
 
     public class Control
     {
@@ -134,12 +135,12 @@ namespace Axiverse.Interface2.Interface
         /// <summary>
         /// Gets or sets the forecolor of the control.
         /// </summary>
-        public Color Forecolor { get; set; } = new Color(0, 0, 0);
+        public Color Forecolor { get; set; } = InterfaceColors.ControlForeground;
 
         /// <summary>
         /// Gets or sets the backcolor of the control.
         /// </summary>
-        public Color Backcolor { get; set; } = Color.Transparent;
+        public Color Backcolor { get; set; } = InterfaceColors.ControlBackground;
 
         /// <summary>
         /// Gets or sets if the control is visible.
@@ -237,12 +238,12 @@ namespace Axiverse.Interface2.Interface
             {
                 if (Backcolor.A != 255)
                 {
-                    var brush = canvas.GetBrush(Backcolor);
+                    var brush = canvas.GetBrush(Backcolor.ToRawColor4());
                     context.FillRectangle(new RectangleF(0, 0, Size.X, Size.Y), brush);
                 }
                 else
                 {
-                    context.Clear(Backcolor);
+                    context.Clear(Backcolor.ToRawColor4());
                 }
             }
          }

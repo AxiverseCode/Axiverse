@@ -9,18 +9,19 @@ using SharpDX.DirectWrite;
 
 namespace Axiverse.Interface2.Interface
 {
+    using Color = Axiverse.Mathematics.Drawing.Color;
+
     public class Tree : Control
     {
         public TreeItemCollection Items { get; }
         private Dictionary<TreeItem, TreeItemProperties> properties = new Dictionary<TreeItem, TreeItemProperties>();
         private TreeItemProperties hover;
         private bool checkHover;
-        public Color Color { get; set; } = new Color(0, 85, 221);
+        public Color Color { get; set; } = InterfaceColors.ControlHover;
 
         public Tree()
         {
             Items = new TreeItemCollection(this);
-            Forecolor = Color.White;
         }
 
         protected override void OnDraw(Canvas canvas)
@@ -46,9 +47,9 @@ namespace Axiverse.Interface2.Interface
             {
                 if (hover?.item == item)
                 {
-                    context.brush.Color = Color;
+                    context.brush.Color = Color.ToRawColor4();
                     context.canvas.NativeDeviceContext.FillRectangle(hover.bounds, context.brush);
-                    context.brush.Color = checkHover ? Backcolor : Forecolor;
+                    context.brush.Color = (checkHover ? Backcolor : Forecolor).ToRawColor4();
                 }
 
                 if (item.Children.Count > 0)
@@ -59,7 +60,7 @@ namespace Axiverse.Interface2.Interface
                     context.canvas.NativeDeviceContext.FillRectangle(select, context.brush);
                 }
 
-                context.brush.Color = Forecolor;
+                context.brush.Color = Forecolor.ToRawColor4();
                 if (item.Text != null)
                 {
                     var rect = new RectangleF(context.indent * context.indentWidth + 30,

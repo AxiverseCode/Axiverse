@@ -9,6 +9,8 @@ using SharpDX.DirectWrite;
 
 namespace Axiverse.Interface2.Interface
 {
+    using Color = Axiverse.Mathematics.Drawing.Color;
+
     public class Menu : Control
     {
         public MenuItemCollection Items { get; }
@@ -22,8 +24,6 @@ namespace Axiverse.Interface2.Interface
         {
             Items = new Collection(this);
             Children.Add(menu);
-            menu.Backcolor = new Color(0.1f, 0.1f, 0.1f, 0.9f);
-            menu.Forecolor = Color.White;
             menu.Visible = false;
         }
 
@@ -44,9 +44,9 @@ namespace Axiverse.Interface2.Interface
 
                 if (i == hover)
                 {
-                    brush.Color = new Color(0, 85, 221);
+                    brush.Color = InterfaceColors.ControlHover.ToRawColor4();
                     canvas.NativeDeviceContext.FillRectangle(rect, brush);
-                    brush.Color = Forecolor;
+                    brush.Color = Forecolor.ToRawColor4();
                 }
 
                 canvas.NativeDeviceContext.DrawText(item.Text ?? "", format, rect, brush);

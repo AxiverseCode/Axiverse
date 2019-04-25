@@ -8,25 +8,53 @@ namespace Axiverse.Mathematics.Drawing
 {
     public class KnownColor
     {
+        private Color color;
+
+        /// <summary>
+        /// Gets the name of the <see cref="KnownColor"/>.
+        /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Gets if the <see cref="KnownColor"/> is a static value.
+        /// </summary>
         public bool IsStatic { get; }
 
-        public Color Color { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="Color"/> value of the <see cref="KnownColor"/>.
+        /// </summary>
+        public Color Color {
+            get => color;
+            set
+            {
+                if (IsStatic)
+                {
+                    throw new InvalidOperationException("Static color.");
+                }
+                color = value.ToAuthoritative();
+            }
+        }
 
-        private KnownColor(string name, bool isStatic, Color value)
+        private KnownColor(string name, bool isStatic, Color initialColor)
         {
             Name = name;
             IsStatic = isStatic;
-            Color = value;
+            color = initialColor.ToAuthoritative();
         }
 
-        public static KnownColor CreateStatic(string name, Color value)
+        public static KnownColor OfConstant(string name, Color initialColor)
         {
-            if (value.Template != null)
-            {
-                throw new ArgumentException();
-            }
-            return new KnownColor(name, true, value);
+            return new KnownColor(name, true, initialColor);
+        }
+
+        public static KnownColor OfName(string name)
+        {
+            return new KnownColor(name, false, Color.Magenta);
+        }
+
+        public static KnownColor OfName(string name, Color initialColor)
+        {
+            return new KnownColor(name, false, initialColor);
         }
     }
 }

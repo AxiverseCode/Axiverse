@@ -11,6 +11,8 @@ using SharpDX;
 
 namespace Axiverse.Interface2
 {
+    using Color = Axiverse.Mathematics.Drawing.Color;
+
     class ProgramEngine : EngineProcess
     {
         PhysicallyBasedRenderer pbr;
@@ -36,8 +38,6 @@ namespace Axiverse.Interface2
             var menu = new Interface.Menu()
             {
                 Position = new Vector2(),
-                Backcolor = new Color(0.2f, 0.2f, 0.2f, 0.8f),
-                Forecolor = Color.White,
                 Size = new Vector2(9000, 40)
             };
             menu.Items.AddRange("File", "Edit", "View", "Window", "Help");
@@ -50,7 +50,6 @@ namespace Axiverse.Interface2
             {
                 Position = new Vector2(10, 500),
                 Size = new Vector2(160, 300),
-                Backcolor = new Color(0.1f, 0.1f, 0.1f),
             };
             Chrome.Controls.Add(entityTree);
 

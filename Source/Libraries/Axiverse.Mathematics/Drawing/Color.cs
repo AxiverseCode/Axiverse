@@ -65,6 +65,8 @@ namespace Axiverse.Mathematics.Drawing
             }
         }
 
+        public bool IsAuthoritative => Template == null || Template.IsStatic;
+
         public KnownColor Template { get; }
 
         public Color(KnownColor template)
@@ -89,6 +91,11 @@ namespace Axiverse.Mathematics.Drawing
 
         }
 
+        public Color(float gray, float a = 1f) : this(gray, gray, gray)
+        {
+
+        }
+
         public Color(float r, float g, float b, float a = 1f)
         {
             this.r = r;
@@ -96,6 +103,30 @@ namespace Axiverse.Mathematics.Drawing
             this.b = b;
             this.a = a;
             this.Template = null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Color color &&
+                (color.Template == Template ||
+                (color.r == r && color.g == g && color.b == b && color.a == a));
+        }
+
+        public static Color FromRgb(int rgb)
+        {
+            byte r = (byte)(rgb >> 16);
+            byte g = (byte)(rgb >> 8);
+            byte b = (byte)(rgb >> 0);
+            return new Color(r, g, b);
+        }
+
+        public static Color FromRgba(uint rgba)
+        {
+            byte r = (byte)(rgba >> 24);
+            byte g = (byte)(rgba >> 16);
+            byte b = (byte)(rgba >> 8);
+            byte a = (byte)(rgba >> 0);
+            return new Color(r, g, b, a);
         }
 
         public static Color FromBgra(uint bgra)
@@ -117,6 +148,16 @@ namespace Axiverse.Mathematics.Drawing
             return new Color(value.R, value.G, value.B, value.A);
         }
 
+        public static bool operator ==(Color left, Color right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Color left, Color right)
+        {
+            return !(left == right);
+        }
+
         private static float ToFloat(byte value)
         {
             return value / 255f;
@@ -133,10 +174,42 @@ namespace Axiverse.Mathematics.Drawing
             return (byte)(value < 0 ? 0 : value > 255 ? 255 : value);
         }
 
-        private static Color NameColor(string name, uint value)
+        public static Color OfConstant(string name, uint value)
         {
-            var known = KnownColor.CreateStatic(name, FromBgra(value));
+            var known = KnownColor.OfConstant(name, FromBgra(value));
             return new Color(known);
+        }
+
+        public static Color OfName(string name, int value)
+        {
+            var known = KnownColor.OfName(name, FromRgb(value));
+            return new Color(known);
+        }
+
+
+
+        public Color ToAuthoritative()
+        {
+            if (IsAuthoritative)
+            {
+                return this;
+            }
+            return new Color(R, G, B, A);
+        }
+
+        public override int GetHashCode()
+        {
+            if (!IsAuthoritative)
+            {
+                return Template.GetHashCode();
+            }
+
+            var hashCode = -490236692;
+            hashCode = hashCode * -1521134295 + r.GetHashCode();
+            hashCode = hashCode * -1521134295 + g.GetHashCode();
+            hashCode = hashCode * -1521134295 + b.GetHashCode();
+            hashCode = hashCode * -1521134295 + a.GetHashCode();
+            return hashCode;
         }
     }
 }

@@ -20,7 +20,7 @@ using Buffer11 = SharpDX.Direct3D11.Buffer;
 namespace Axiverse.Interface2
 {
     using Vector3 = SharpDX.Vector3;
-    using Color = SharpDX.Color;
+    using Color = Axiverse.Mathematics.Drawing.Color;
 
     class Program
     {
@@ -59,8 +59,6 @@ namespace Axiverse.Interface2
                 var menu = new Interface.Menu()
                 {
                     Position = new Vector2(),
-                    Backcolor = new Color(0.2f, 0.2f, 0.2f, 0.8f),
-                    Forecolor = Color.White,
                     Size = new Vector2(9000, 40)
                 };
                 menu.Items.Add(new Interface.MenuItem("File"));
@@ -83,15 +81,12 @@ namespace Axiverse.Interface2
                     Position = new Vector2(10, 400),
                     Size = new Vector2(200, 40),
                     Text = "Hello World",
-                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
-                    Forecolor = new Color(1f),
                 });
 
                 var tree = new Interface.Tree()
                 {
                     Position = new Vector2(200, 80),
                     Size = new Vector2(160, 300),
-                    Backcolor = new Color(0.1f, 0.1f, 0.1f),
 
                 };
                 tree.Items.Add(new Interface.TreeItem("Entity 0"));
@@ -301,7 +296,7 @@ namespace Axiverse.Interface2
                     control.Update();
 
                     device.Start();
-                    device.Clear(Color.Black);
+                    device.Clear(Color.Black.ToRawColor4());
 
                     Matrix world = Matrix.Identity;
                     view = Matrix.LookAtLH(new Vector3(control.CameraPosition.X, control.CameraPosition.Y, control.CameraPosition.Z),

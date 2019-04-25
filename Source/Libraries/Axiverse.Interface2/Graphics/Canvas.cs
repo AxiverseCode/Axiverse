@@ -71,6 +71,12 @@ namespace Axiverse.Interface2
             return Brush;
         }
 
+        public SolidColorBrush GetBrush(Axiverse.Mathematics.Drawing.Color color)
+        {
+            Brush.Color = color.ToRawColor4();
+            return Brush;
+        }
+
         /// <summary>
         /// Begin a 2D drawing session
         /// </summary>
