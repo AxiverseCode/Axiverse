@@ -112,6 +112,24 @@ namespace Axiverse.Mathematics.Drawing
                 (color.r == r && color.g == g && color.b == b && color.a == a));
         }
 
+        public uint ToBgra()
+        {
+            // Argb in little endian
+            uint value = ToByte(b);
+            value |= (uint)ToByte(g) << 8;
+            value |= (uint)ToByte(r) << 16;
+            value |= (uint)ToByte(a) << 24;
+            return value;
+        }
+        public uint ToArgb()
+        {
+            uint value = ToByte(a);
+            value |= (uint)ToByte(r) << 8;
+            value |= (uint)ToByte(g) << 16;
+            value |= (uint)ToByte(b) << 24;
+            return value;
+        }
+
         public static Color FromRgb(int rgb)
         {
             byte r = (byte)(rgb >> 16);

@@ -50,6 +50,14 @@ namespace Axiverse.Interface2.Interface
             }
         }
 
+        protected internal override void OnMouseDown(MouseEventArgs e)
+        {
+            if (selectedItem >= 0)
+            {
+                Items[selectedItem].OnClick(e);
+            }
+        }
+
         protected internal override void OnMouseMove(MouseEventArgs e)
         {
             selectedItem = (int)((e.Position.Y - Margin) / 40);

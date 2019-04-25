@@ -88,6 +88,7 @@ namespace Axiverse.Interface2
             };
             menu.Items.AddRange("File", "Edit", "View", "Window", "Help");
             menu.Items[0].Children.AddRange("New", "Open", "Save", "Exit");
+            menu.Items[0].Children[3].Clicked += (s, e) => engine.Form.Close();
             menu.Items[1].Children.AddRange("Cut", "Copy", "Paste");
             menu.Items[4].Children.AddRange("About");
             Chrome.Controls.Add(menu);
@@ -122,13 +123,27 @@ namespace Axiverse.Interface2
                 Occlusion = Texture2D.FromFile(Engine.Device, "../../pbr/ambientocclusion.jpg"),
             };
             material.Roughness = material.Height;
-            material.Specular = material.Normal;
+            //material.Specular = material.Normal;
+
+            var aMaterial = new Material()
+            {
+                Albedo = Texture2D.FromColor(Engine.Device, Color.Gray),
+                Normal = Texture2D.FromColor(Engine.Device, new Color(0.5f, 1f, 0.5f)),
+                Roughness = Texture2D.FromColor(Engine.Device, new Color(0.8f)),
+                Specular = Texture2D.FromColor(Engine.Device, new Color(0.2f)),
+                Occlusion = Texture2D.FromColor(Engine.Device, Color.White),
+            };
 
             var shipModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Model.obj"));
             shipModel.Materials.Add(material);
             var missileModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Missile.obj"));
             missileModel.Materials.Add(material);
             var boxModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.Mesh.CreateCube().Invert().CalculateNormals());
+
+            var rock1 = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Rock1.obj"));
+            rock1.Materials.Add(aMaterial);
+            var rock2 = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Rock2.obj"));
+            rock2.Materials.Add(aMaterial);
 
             Scene.Entities.Add(new Entity("Camera")
                 .Add(camera = new Camera
@@ -145,11 +160,11 @@ namespace Axiverse.Interface2
             Scene.Entities.Add(new Entity("Ship 1",
                 new Transform
                 {
-                    Scaling = new Axiverse.Vector3(30),
+                    Scaling = new Axiverse.Vector3(5),
                 })
                 .Add(new Renderable()
                 {
-                    Model = shipModel,
+                    Model = rock2,
                     Renderer = pbr,
                 })
                 .Add(new Physical()));
@@ -157,11 +172,11 @@ namespace Axiverse.Interface2
             Scene.Entities.Add(new Entity("Point Light",
                 new Transform
                 {
-                    Scaling = new Axiverse.Vector3(4, 5, 6),
+                    Translation = new Axiverse.Vector3(4, 50, 6),
                 })
                 .Add(new Light()
                 {
-                    Color = new Vector4(0.6f, 0.9f, 0.8f, 1),
+                    Color = new Vector4(1f, 1),
                     Intensity = 1,
                 }));
 

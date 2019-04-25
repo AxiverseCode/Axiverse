@@ -48,6 +48,7 @@ namespace Axiverse.Mathematics.Geometry
                 Vector3 binormal = (deltaPos2 * deltaTex1.X - deltaPos1 * deltaTex2.X) * r;
                 tangent.Normalize();
                 binormal.Normalize();
+                var normal = deltaPos1 % deltaPos2;
 
                 if (float.IsNaN(tangent.X))
                 {
@@ -60,16 +61,19 @@ namespace Axiverse.Mathematics.Geometry
                 vertex = Vertices[triangle.A];
                 vertex.Tangent = tangent;
                 vertex.Binormal = binormal;
+                vertex.Normal = (vertex.Normal == Vector3.Zero) ? normal : vertex.Normal;
                 Vertices[triangle.A] = vertex;
 
                 vertex = Vertices[triangle.B];
                 vertex.Tangent = tangent;
                 vertex.Binormal = binormal;
+                vertex.Normal = (vertex.Normal == Vector3.Zero) ? normal : vertex.Normal;
                 Vertices[triangle.B] = vertex;
 
                 vertex = Vertices[triangle.C];
                 vertex.Tangent = tangent;
                 vertex.Binormal = binormal;
+                vertex.Normal = (vertex.Normal == Vector3.Zero) ? normal : vertex.Normal;
                 Vertices[triangle.C] = vertex;
             }
 
