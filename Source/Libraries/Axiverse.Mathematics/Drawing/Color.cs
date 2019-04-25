@@ -112,38 +112,41 @@ namespace Axiverse.Mathematics.Drawing
                 (color.r == r && color.g == g && color.b == b && color.a == a));
         }
 
+        //public uint ToBgra()
+        //{
+        //    // Argb in little endian
+        //    uint value = ToByte(b);
+        //    value |= (uint)ToByte(g) << 8;
+        //    value |= (uint)ToByte(r) << 16;
+        //    value |= (uint)ToByte(a) << 24;
+        //    return value;
+        //}
         public uint ToBgra()
         {
-            // Argb in little endian
-            uint value = ToByte(b);
+            uint value;
+            value = ToByte(b);
             value |= (uint)ToByte(g) << 8;
             value |= (uint)ToByte(r) << 16;
             value |= (uint)ToByte(a) << 24;
             return value;
         }
+
         public uint ToArgb()
         {
-            uint value = ToByte(a);
-            value |= (uint)ToByte(r) << 8;
-            value |= (uint)ToByte(g) << 16;
-            value |= (uint)ToByte(b) << 24;
+            uint value;
+            value = ToByte(b);
+            value |= (uint)ToByte(g) << 8;
+            value |= (uint)ToByte(r) << 16;
+            value |= (uint)ToByte(a) << 24;
             return value;
         }
 
-        public static Color FromRgb(int rgb)
+        public static Color FromArgb(uint rgba)
         {
-            byte r = (byte)(rgb >> 16);
-            byte g = (byte)(rgb >> 8);
-            byte b = (byte)(rgb >> 0);
-            return new Color(r, g, b);
-        }
-
-        public static Color FromRgba(uint rgba)
-        {
-            byte r = (byte)(rgba >> 24);
-            byte g = (byte)(rgba >> 16);
-            byte b = (byte)(rgba >> 8);
-            byte a = (byte)(rgba >> 0);
+            byte a = (byte)(rgba >> 24);
+            byte r = (byte)(rgba >> 16);
+            byte g = (byte)(rgba >> 8);
+            byte b = (byte)(rgba >> 0);
             return new Color(r, g, b, a);
         }
 
@@ -164,6 +167,11 @@ namespace Axiverse.Mathematics.Drawing
         public static implicit operator Color(Rgba32 value)
         {
             return new Color(value.R, value.G, value.B, value.A);
+        }
+
+        public static implicit operator Vector4(Color color)
+        {
+            return new Vector4(color.r, color.G, color.B, color.A);
         }
 
         public static bool operator ==(Color left, Color right)
@@ -194,13 +202,13 @@ namespace Axiverse.Mathematics.Drawing
 
         public static Color OfConstant(string name, uint value)
         {
-            var known = KnownColor.OfConstant(name, FromBgra(value));
+            var known = KnownColor.OfConstant(name, FromArgb(value));
             return new Color(known);
         }
 
-        public static Color OfName(string name, int value)
+        public static Color OfName(string name, uint value)
         {
-            var known = KnownColor.OfName(name, FromRgb(value));
+            var known = KnownColor.OfName(name, FromArgb(value));
             return new Color(known);
         }
 

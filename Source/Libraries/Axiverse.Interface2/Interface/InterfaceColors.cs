@@ -9,10 +9,10 @@ namespace Axiverse.Interface2.Interface
 {
     public static class InterfaceColors
     {
-        public static readonly Color ControlBackground = Color.OfName("ControlBackground", 0x212121);
-        public static readonly Color ControlForeground = Color.OfName("ControlForeground", 0xfafafa);
+        public static readonly Color ControlBackground = Color.OfName("ControlBackground", 0xff212121);
+        public static readonly Color ControlForeground = Color.OfName("ControlForeground", 0xfffafafa);
 
-        public static readonly Color ControlHover = Color.OfName("ControlForeground", 0x29b6f6);
-        public static readonly Color ControlSelect = Color.OfName("ControlForeground", 0x03a9f4);
+        public static readonly Color ControlHover = Color.OfName("ControlForeground", 0xff29b6f6);
+        public static readonly Color ControlSelect = Color.OfName("ControlForeground", 0xff03a9f4);
     }
 }

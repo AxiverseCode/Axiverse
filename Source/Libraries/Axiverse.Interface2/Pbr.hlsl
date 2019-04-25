@@ -313,6 +313,7 @@ float4 PS(VS_OUT input) : SV_Target
 	// Shadow computation
 
 	// Color composition
+	//float3 ibl = (float3)0;
 	float3 ibl = IBL(properties, material, eye);
 	float3 color = (material.albedo.rgb * diffuse.rgb + specular + ibl) * (occlusion.x * occlusion.y +  (1 - occlusion.y));
 	color = RestoreGamma(color);

@@ -172,10 +172,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Axiverse.Interface.Windows\Axiverse.Interface.Windows.csproj">
-      <Project>{4ced344e-8bac-48cb-ac37-a2c4ad7ffe02}</Project>
-      <Name>Axiverse.Interface.Windows</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Axiverse.Mathematics.Geometry\Axiverse.Mathematics.Geometry.csproj">
       <Project>{bd10941e-997a-450b-9d91-392ff39b9f9f}</Project>
       <Name>Axiverse.Mathematics.Geometry</Name>

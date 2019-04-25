@@ -125,12 +125,16 @@ namespace Axiverse.Interface2
             material.Roughness = material.Height;
             //material.Specular = material.Normal;
 
+            Color red = Color.Red;
+            Color green = Color.Green;
+
             var aMaterial = new Material()
             {
-                Albedo = Texture2D.FromColor(Engine.Device, Color.Gray),
+                //Albedo = Texture2D.FromColor(Engine.Device, Color.Red),
+                Albedo = Texture2D.FromColor(Engine.Device, new Color(0.5f)),
                 Normal = Texture2D.FromColor(Engine.Device, new Color(0.5f, 1f, 0.5f)),
-                Roughness = Texture2D.FromColor(Engine.Device, new Color(0.8f)),
-                Specular = Texture2D.FromColor(Engine.Device, new Color(0.2f)),
+                Roughness = Texture2D.FromColor(Engine.Device, new Color(1f)),
+                Specular = Texture2D.FromColor(Engine.Device, new Color(0.1f)),
                 Occlusion = Texture2D.FromColor(Engine.Device, Color.White),
             };
 
@@ -176,7 +180,7 @@ namespace Axiverse.Interface2
                 })
                 .Add(new Light()
                 {
-                    Color = new Vector4(1f, 1),
+                    Color = Color.White,
                     Intensity = 1,
                 }));
 

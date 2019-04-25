@@ -43,7 +43,7 @@ namespace Axiverse.Interface2
                 SampleDescription = new SampleDescription(1, 0)
             };
 
-            uint bgra = color.ToBgra();
+            uint bgra = color.ToArgb();
             GCHandle gc = GCHandle.Alloc(bgra, GCHandleType.Pinned);
             DataRectangle rect = new DataRectangle(gc.AddrOfPinnedObject(), sizeof(uint));
             var buffer = new Texture2D11(device.NativeDevice, textureDesc, rect);
