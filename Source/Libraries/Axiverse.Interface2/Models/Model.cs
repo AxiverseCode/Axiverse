@@ -62,8 +62,8 @@ namespace Axiverse.Interface2.Models
             value.InputLayout = Vertex.Elements;
             value.Stride = Vertex.Stride;
 
-            mesh.Triangulate();
-            mesh.CalculateNormals();
+            //mesh.Triangulate();
+            //mesh.CalculateNormals();
             var vertices = new Vertex[mesh.Vertices.Count];
 
             for (int i = 0; i < mesh.Vertices.Count; i++)

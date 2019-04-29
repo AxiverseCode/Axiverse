@@ -149,6 +149,7 @@
     <Compile Include="Graphics\Shaders\Particles.cs" />
     <Compile Include="Graphics\Shaders\Pbr.cs" />
     <Compile Include="Network\NetworkTimeProtocol.cs" />
+    <Compile Include="Network\RoutingInterface.cs" />
     <Compile Include="ProgramEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Graphics\Shaders\Shader.cs" />

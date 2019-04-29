@@ -9,7 +9,7 @@ namespace Axiverse.Mathematics.Geometry
     /// <summary>
     /// A camera.
     /// </summary>
-    public class Camera
+    public class Cameras
     {
         private Matrix4 view;
         private Matrix4 projection;

@@ -62,6 +62,13 @@ namespace Axiverse
         /// <returns></returns>
         public bool Contains(Vector3 vector) => Contains(ref this, ref vector);
 
+        public bool Contains(Bounds3 bounds) => Contains(ref this, ref bounds);
+
+        public override string ToString()
+        {
+            return $"⌊{Minimum.X}, {Minimum.Y}, {Minimum.Z}⌋ ⌈{Maximum.X}, {Maximum.Y}, {Maximum.Z}⌉";
+        }
+
         /// <summary>
         /// Determines if the specified bounds intersects with this Bounds3 structure.
         /// </summary>
@@ -78,9 +85,8 @@ namespace Axiverse
         public static Bounds3 FromVectors(Vector3 left, Vector3 right)
         {
             return new Bounds3(
-                Math.Min(left.X, right.X), Math.Max(left.X, right.X),
-                Math.Min(left.Y, right.Y), Math.Max(left.Y, right.Y),
-                Math.Min(left.Z, right.Z), Math.Max(left.Z, right.Z));
+                Math.Min(left.X, right.X), Math.Min(left.Y, right.Y), Math.Min(left.Z, right.Z),
+                Math.Max(left.X, right.X), Math.Max(left.Y, right.Y), Math.Max(left.Z, right.Z));
         }
 
         /// <summary>
@@ -133,6 +139,26 @@ namespace Axiverse
                 (vector.X >= bounds.Minimum.X && vector.X <= bounds.Maximum.X) &&
                 (vector.Y >= bounds.Minimum.Y && vector.Y <= bounds.Maximum.Y) &&
                 (vector.Z >= bounds.Minimum.Z && vector.Z <= bounds.Maximum.Z);
+        }
+
+        public static bool Contains(ref Bounds3 container, ref Bounds3 bounds)
+        {
+            return
+                (bounds.Minimum.X >= container.Minimum.X && bounds.Maximum.X <= container.Maximum.X) &&
+                (bounds.Minimum.Y >= container.Minimum.Y && bounds.Maximum.Y <= container.Maximum.Y) &&
+                (bounds.Minimum.Z >= container.Minimum.Z && bounds.Maximum.Z <= container.Maximum.Z);
+        }
+
+        public static Bounds3 Expand(Bounds3 bounds, float scale, Vector3 center)
+        {
+            var minimum = (bounds.Minimum - center) * scale + center;
+            var maximum = (bounds.Maximum - center) * scale + center;
+            return new Bounds3(minimum, maximum);
+        }
+
+        public static Bounds3 ExpandFromOrigin(Bounds3 bounds, float scale)
+        {
+            return new Bounds3(bounds.Minimum * scale, bounds.Maximum * scale);
         }
 
         /// <summary>

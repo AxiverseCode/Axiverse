@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -12,7 +13,7 @@ namespace Axiverse
     /// <summary>
     /// Logging class
     /// </summary>
-    public sealed class Logger
+    public static class Logger
     {
         /// <summary>
         /// Logs an error value.
@@ -20,7 +21,7 @@ namespace Axiverse
         /// <param name="value"></param>
         /// <param name="filePath"></param>
         /// <param name="lineNumber"></param>
-        public void LogError(
+        public static void LogError(
             object value,
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
@@ -35,7 +36,7 @@ namespace Axiverse
         /// <param name="message"></param>
         /// <param name="filePath"></param>
         /// <param name="lineNumber"></param>
-        public void LogError(
+        public static void LogError(
             string message,
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
@@ -51,7 +52,7 @@ namespace Axiverse
         /// <param name="value"></param>
         /// <param name="filePath"></param>
         /// <param name="lineNumber"></param>
-        public void LogErrorIf(
+        public static void LogErrorIf(
             bool condition,
             object value,
             [CallerFilePath] string filePath = "",
@@ -71,7 +72,7 @@ namespace Axiverse
         /// <param name="message"></param>
         /// <param name="filePath"></param>
         /// <param name="lineNumber"></param>
-        public void LogErrorIf(
+        public static void LogErrorIf(
             bool condition,
             string message,
             [CallerFilePath] string filePath = "",
@@ -83,8 +84,8 @@ namespace Axiverse
                 Log(message, Severity.Error, frame, filePath, lineNumber);
             }
         }
-        
-        private void Log(
+
+        private static void Log(
             string message,
             Severity severity,
             StackFrame frame,
@@ -95,8 +96,9 @@ namespace Axiverse
             var className = method.DeclaringType.Name;
             var methodName = method.Name;
 
-            var log = $"{message}\n\t{className}.{methodName} @ {filePath}:{lineNumber}";
-            Debug.WriteLine(log);
+            var fileName = Path.GetFileName(filePath);
+            var log = $"{className}.{methodName} @ {fileName}:{lineNumber}\n\t{message}";
+            Console.WriteLine(log);
         }
     }
 }

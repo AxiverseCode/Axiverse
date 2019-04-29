@@ -8,6 +8,7 @@ using Axiverse.Interface2.Entities;
 using Axiverse.Interface2.Interface;
 using Axiverse.Interface2.Models;
 using Axiverse.Interface2.Simulation;
+using Axiverse.Mathematics.Geometry;
 using SharpDX;
 
 namespace Axiverse.Interface2
@@ -131,10 +132,10 @@ namespace Axiverse.Interface2
             var aMaterial = new Material()
             {
                 //Albedo = Texture2D.FromColor(Engine.Device, Color.Red),
-                Albedo = Texture2D.FromColor(Engine.Device, new Color(0.5f)),
+                Albedo = Texture2D.FromColor(Engine.Device, new Color(0.7038f, 0.27048f, 0.0828f, 1f)),
                 Normal = Texture2D.FromColor(Engine.Device, new Color(0.5f, 1f, 0.5f)),
-                Roughness = Texture2D.FromColor(Engine.Device, new Color(1f)),
-                Specular = Texture2D.FromColor(Engine.Device, new Color(0.1f)),
+                Roughness = Texture2D.FromColor(Engine.Device, new Color(0.2f)),
+                Specular = Texture2D.FromColor(Engine.Device, new Color(0.256777f, 0.137622f, 0.086014f, 1)),
                 Occlusion = Texture2D.FromColor(Engine.Device, Color.White),
             };
 
@@ -142,7 +143,7 @@ namespace Axiverse.Interface2
             shipModel.Materials.Add(material);
             var missileModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Missile.obj"));
             missileModel.Materials.Add(material);
-            var boxModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.Mesh.CreateCube().Invert().CalculateNormals());
+            var boxModel = Model.FromMesh(Engine.Device, Mathematics.Geometry.Mesh.CreateCube().Invert());
 
             var rock1 = Model.FromMesh(Engine.Device, Mathematics.Geometry.WavefrontObj.Load("../../Rock1.obj"));
             rock1.Materials.Add(aMaterial);
@@ -205,6 +206,20 @@ namespace Axiverse.Interface2
 
         static void Main(string[] args)
         {
+            for (int j = 0; j < 50; j++)
+            {
+
+                var octree = new BoundingOctree<object>();
+
+                for (int i = 0; i < 1000; i++)
+                {
+                    var bounds = Bounds3.FromVectors(Functions.Random.NextVector3(-1000, 1000), Functions.Random.NextVector3(-1000, 1000));
+                    octree.Add(bounds, i);
+                }
+
+                Logger.LogError(octree);
+            }
+
             // Network.NetworkTimeProtocol.Test();
 
             using (var engine = new Engine.CoreEngine())

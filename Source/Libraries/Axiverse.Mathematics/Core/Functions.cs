@@ -22,6 +22,11 @@ namespace Axiverse
                 Math.Abs(value.Z));
         }
 
+        public static float Pow(float value, float exponent)
+        {
+            return (float)Math.Pow(value, exponent);
+        }
+
         public static Vector3 Pow(Vector3 value, float exponent)
         {
             return new Vector3(
@@ -132,6 +137,16 @@ namespace Axiverse
             return Math.Sqrt(value);
         }
 
+        public static float Log(float value, float logBase)
+        {
+            return (float)Math.Log(value, logBase);
+        }
+
+        public static float Log2(float value)
+        {
+            return (float)Math.Log(value, 2.0);
+        }
+
         /// <summary>
         /// Saturates a value between 0 and 1.
         /// </summary>
@@ -140,6 +155,65 @@ namespace Axiverse
         public static float Saturate(float value)
         {
             return Clamp(value, 0f, 1f);
+        }
+
+        /// <summary>
+        /// Returns the component with the maximum value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float MaximumComponent(Vector2 value)
+        {
+            return Math.Max(value.X, value.Y);
+        }
+
+        /// <summary>
+        /// Returns the component with the maximum value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float MaximumComponent(Vector3 value)
+        {
+            return Math.Max(Math.Max(value.X, value.Y), value.Z);
+        }
+
+        /// <summary>
+        /// Returns the component with the maximum value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float MaximumComponent(Vector4 value)
+        {
+            return Math.Max(Math.Max(Math.Max(value.X, value.Y), value.Z), value.W);
+        }
+        /// <summary>
+        /// Returns the component with the Minimum value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float MinimumComponent(Vector2 value)
+        {
+            return Math.Min(value.X, value.Y);
+        }
+
+        /// <summary>
+        /// Returns the component with the Minimum value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float MinimumComponent(Vector3 value)
+        {
+            return Math.Min(Math.Min(value.X, value.Y), value.Z);
+        }
+
+        /// <summary>
+        /// Returns the component with the Minimum value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float MinimumComponent(Vector4 value)
+        {
+            return Math.Min(Math.Min(Math.Min(value.X, value.Y), value.Z), value.W);
         }
 
         /// <summary>

@@ -13,6 +13,11 @@ namespace Axiverse.Interface2.Engine
 {
     public class PhysicallyBasedRenderer : Renderer
     {
+        public static float RoughnessFromShininess(float shininess)
+        {
+            return Functions.Sqrt(2 / (shininess + 2));
+        }
+
         public Device device;
         public Shader shader;
         public Buffer11 bufferVs1;
@@ -22,6 +27,8 @@ namespace Axiverse.Interface2.Engine
         public PsData psData1;
         public PsData2 psData2;
         public Texture2D skybox;
+
+        // http://www.barradeau.com/nicoptere/dump/materials.html
 
         public PhysicallyBasedRenderer(Device device)
         {

@@ -46,7 +46,7 @@ namespace Axiverse.Mathematics.Geometry
                     case "v": vertices.Add(ParseVector3(segments, lineNumber)); break;
                     case "vt": textures.Add(ParseVector2(segments, lineNumber)); break;
                     case "vn": normals.Add(ParseVector3(segments, lineNumber)); break;
-                    case "f": faces.AddRange(ParseFace(segments, indices, lineNumber)); break;
+                    case "f": faces.Add(ParseFace(segments, indices, lineNumber)); break;
                     case "#":
                     default:
                         break;
@@ -54,6 +54,19 @@ namespace Axiverse.Mathematics.Geometry
             }
 
             Mesh mesh = new Mesh();
+            Func<Index3, int> addVertex = index =>
+            {
+                Vertex vertex = new Vertex
+                {
+                    Color = new Vector4(1, 1, 1, 1),
+                    Position = (index.A >= 0) ? vertices[index.A] : default,
+                    Texture = (index.B >= 0) ? textures[index.B] : default,
+                    Normal = (index.C >= 0) ? normals[index.C] : default
+                };
+
+                mesh.Vertices.Add(vertex);
+                return mesh.Vertices.Count - 1;
+            };
 
             if (optimize)
             {
@@ -61,98 +74,41 @@ namespace Axiverse.Mathematics.Geometry
                 Dictionary<Index3, int> indexMapping = new Dictionary<Index3, int>();
                 foreach (var index in indices)
                 {
-                    Vertex vertex = default;
-                    vertex.Color = new Vector4(1, 1, 1, 1);
-
-                    if (index.A >= 0)
-                    {
-                        vertex.Position = vertices[index.A];
-                    }
-
-                    if (index.B >= 0)
-                    {
-                        vertex.Texture = textures[index.B];
-                    }
-
-                    if (index.C >= 0)
-                    {
-                        vertex.Normal = normals[index.C];
-                    }
-
                     // Save the index of the mapping and add the vertex.
-                    indexMapping[index] = mesh.Vertices.Count;
-                    mesh.Vertices.Add(vertex);
+                    indexMapping[index] = addVertex(index);
                 }
 
-                // Create the faces.
+                // Create the faces by triangulation.
                 foreach (var face in faces)
                 {
-                    if (face.Length == 3)
+                    for (int i = 0; i < face.Length - 2; i++)
                     {
                         mesh.Triangles.Add(new Index3
                         {
                             A = indexMapping[face[0]],
-                            B = indexMapping[face[1]],
-                            C = indexMapping[face[2]]
-                        });
-                    }
-                    else
-                    {
-                        mesh.Quadrilaterals.Add(new Index4
-                        {
-                            A = indexMapping[face[0]],
-                            B = indexMapping[face[1]],
-                            C = indexMapping[face[2]],
-                            D = indexMapping[face[3]]
+                            B = indexMapping[face[i + 1]],
+                            C = indexMapping[face[i + 2]]
                         });
                     }
                 }
             }
             else
             {
-                Func<Index3, int> add = i =>
-                {
-                    Vertex vertex = default;
-                    vertex.Color = new Vector4(1, 1, 1, 1);
-
-                    if (i.A >= 0)
-                    {
-                        vertex.Position = vertices[i.A];
-                    }
-
-                    if (i.B >= 0)
-                    {
-                        vertex.Texture = textures[i.B];
-                    }
-
-                    if (i.C >= 0)
-                    {
-                        vertex.Normal = normals[i.C];
-                    }
-
-                    mesh.Vertices.Add(vertex);
-                    return mesh.Vertices.Count - 1;
-                };
-                // Create the faces.
                 foreach (var face in faces)
                 {
-                    if (face.Length == 3)
+                    int offset = mesh.Vertices.Count;
+                    for (int i = 0; i < face.Length; i++)
+                    {
+                        addVertex(face[i]);
+                    }
+
+                    for (int i = 0; i < face.Length - 2; i++)
                     {
                         mesh.Triangles.Add(new Index3
                         {
-                            A = add(face[0]),
-                            B = add(face[1]),
-                            C = add(face[2]),
-                        });
-                    }
-                    else
-                    {
-                        mesh.Quadrilaterals.Add(new Index4
-                        {
-                            A = add(face[0]),
-                            B = add(face[1]),
-                            C = add(face[2]),
-                            D = add(face[3]),
+                            A = offset,
+                            B = offset + i + 1,
+                            C = offset + i + 2
                         });
                     }
                 }
@@ -177,28 +133,17 @@ namespace Axiverse.Mathematics.Geometry
                 ReadFloat(segments[3], "Z", lineNumber));
         }
 
-        private static Index3[][] ParseFace(string[] segments, HashSet<Index3> indices, int lineNumber)
+        private static Index3[] ParseFace(string[] segments, HashSet<Index3> indices, int lineNumber)
         {
             Index3[] faceIndices = new Index3[segments.Length - 1];
+
             for (int i = 0; i < faceIndices.Length; i++)
             {
                 faceIndices[i] = NormalizeIndex(segments[i + 1], i, lineNumber);
                 indices.Add(faceIndices[i]);
             }
 
-            if (segments.Length > 3 && segments.Length <= 4)
-            {
-                // Single triangle or quad.
-                return new Index3[][] { faceIndices };
-            }
-
-            // Higher order polygon. Must triangulate.
-            var triangles = new Index3[faceIndices.Length - 2][];
-            for (int i = 0; i < triangles.Length; i++)
-            {
-                triangles[i] = new Index3[] { faceIndices[0], faceIndices[i + 1], faceIndices[i + 2] };
-            }
-            return triangles;
+            return faceIndices;
         }
 
         private static Index3 NormalizeIndex(string index, int indexNumber, int lineNumber)
@@ -219,7 +164,7 @@ namespace Axiverse.Mathematics.Geometry
             }
 
             if (segments.Length <= 2 ||
-                (segments[2] == "" && !int.TryParse(segments[2], out value.C)))
+                (segments[2] != "" && !int.TryParse(segments[2], out value.C)))
             {
                 throw new ArgumentException($"Could not parse normal on for index {indexNumber} line {lineNumber}");
             }

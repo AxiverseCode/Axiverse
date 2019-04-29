@@ -38,17 +38,30 @@
             set => value = default(T);
         }
 
-        public Matrix<T> Multiply(Matrix<T> A, Matrix<T> B)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// The number of columns of <paramref name="left"/> must be the same as the number of rows
+        /// of <paramref name="right"/>.
+        /// </remarks>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns>
+        /// The resulting matrix with the same number of rows as <paramref name="left"/> and the same
+        /// number of columns as <paramref name="right"/>.
+        /// </returns>
+        public Matrix<T> Multiply(Matrix<T> left, Matrix<T> right)
         {
             Matrix<T> C = null;
 
-            for (int i = 0; i < A.Rows; i++)
+            for (int i = 0; i < left.Rows; i++)
             {
-                for (int k = 0; k < B.Columns; k++)
+                for (int k = 0; k < right.Columns; k++)
                 {
-                    for (int j = 0; j < A.Rows; j++)
+                    for (int j = 0; j < left.Rows; j++)
                     {
-                        C[i, j] = Operators.Add(C[i, j], Operators.Multiply(A[i, k], B[k, j]));
+                        C[i, j] = Operators.Add(C[i, j], Operators.Multiply(left[i, k], right[k, j]));
                     }
                 }
             }
