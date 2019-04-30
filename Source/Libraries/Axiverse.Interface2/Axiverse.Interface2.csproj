@@ -81,11 +81,13 @@
     <Compile Include="Animations\DelayAnimation.cs" />
     <Compile Include="Animations\IAnimation.cs" />
     <Compile Include="Animations\IntervalAnimation.cs" />
+    <Compile Include="Assets\Loader.cs" />
     <Compile Include="Assets\WavefrontObjLoader.cs" />
     <Compile Include="Engine\Clock.cs" />
     <Compile Include="Engine\CompositingContext.cs" />
     <Compile Include="Engine\CoreEngine.cs" />
     <Compile Include="Engine\EngineProcess.cs" />
+    <Compile Include="Engine\PhysicallyBasedMaterial.cs" />
     <Compile Include="Engine\PhysicallyBasedRenderer.cs" />
     <Compile Include="Engine\SkyboxRenderer.cs" />
     <Compile Include="Entities\Camera.cs" />
@@ -136,7 +138,7 @@
     <Compile Include="Interface\Chrome.cs" />
     <Compile Include="Interface\Overlay.cs" />
     <Compile Include="Interface\ContextPanel.cs" />
-    <Compile Include="Interface\Scroller.cs" />
+    <Compile Include="Interface\Patterns\Scroller.cs" />
     <Compile Include="Interface\Slider.cs" />
     <Compile Include="Interface\TextInput.cs" />
     <Compile Include="Interface\Tree.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="Graphics\Shaders\Particles.cs" />
     <Compile Include="Graphics\Shaders\Pbr.cs" />
     <Compile Include="Network\NetworkTimeProtocol.cs" />
+    <Compile Include="Network\Packet.cs" />
     <Compile Include="Network\RoutingInterface.cs" />
     <Compile Include="ProgramEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

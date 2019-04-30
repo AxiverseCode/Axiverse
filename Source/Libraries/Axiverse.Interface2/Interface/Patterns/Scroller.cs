@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpDX;
 
-namespace Axiverse.Interface2.Interface
+namespace Axiverse.Interface2.Interface.Patterns
 {
     public class Scroller
     {
