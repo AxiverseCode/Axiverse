@@ -14,6 +14,9 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(express.static(path.join(__dirname, "static")));
 app.use(express.static(path.join(__dirname, "../../dist")));
 
+app.use('/api', api);
+
+/*
 import {ValidateIdentityRequest} from '../../proto/Admin/IdentityService_pb';
 import {IdentityServiceClient} from '../../proto/Admin/IdentityService_grpc_pb';
 import grpc from 'grpc';
@@ -27,7 +30,6 @@ dns.resolve(IDENTITY_SERVICE, (err, records) => {
     IDENTITY_SERVICE = records[0];
 })
 
-app.use('/api', api);
 
 app.get("/test", (req, res, next) => {
     console.log('creating client ' + IDENTITY_SERVICE + ':32000');
@@ -47,5 +49,5 @@ app.get("/test", (req, res, next) => {
         res.send(response.getSession());
     });
 });
-
+*/
 export default app;
