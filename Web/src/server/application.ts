@@ -1,8 +1,11 @@
 import express from "express";
 import path from "path";
 import api from "./api"
+import Storage from './storage';
+
 // Create Express server
 const app = express();
+const storage = new Storage();
 
 // Express configuration
 app.set("port", process.env.WEB_SERVER_PORT || 8080);
