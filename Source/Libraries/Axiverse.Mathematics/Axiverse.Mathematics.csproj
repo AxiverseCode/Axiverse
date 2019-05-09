@@ -48,8 +48,7 @@
     <Compile Include="Core\Boolean3.cs" />
     <Compile Include="Core\Bounds.cs" />
     <Compile Include="Core\Bounds2.cs" />
-    <Compile Include="Core\half.cs" />
-    <Compile Include="Core\HalfHelper.cs" />
+    <Compile Include="Serialization\Half.cs" />
     <Compile Include="Core\Index3.cs" />
     <Compile Include="Core\Index4.cs" />
     <Compile Include="Core\Operators.cs" />
